@@ -19,10 +19,11 @@ section {
     height: 100vh;
 }
 #left-menu{
-    max-width: 250px;
+    max-width: 40%;
     height: 100%;
     /* background-color: rgba(73, 69, 69, 0.932); */
     background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+    font-size: 0.8rem;
 }
 #left-menu a {
     text-decoration: none;
