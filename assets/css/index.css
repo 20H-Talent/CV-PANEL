@@ -1,15 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
 .main-header .nav-link {
   height: 3.5rem;
 }
 
 table#users-table {
   width: 100%;
+  font-family: Source Sans Pro, Arial, serif;
 }
 
-table#users-table tbody tr > td:first-child img {
-  border-radius: 50%;
+table#users-table thead {
+  position: relative;
+}
+table#users-table thead tr:first-child th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin: 0;
+  border: 0;
+}
+
+.table-wrapper-scroll-y {
   display: block;
-  width: 60%;
-  height: auto;
-  margin: 0 auto;
+  max-height: 600px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
