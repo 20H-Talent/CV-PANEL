@@ -4,148 +4,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/adminlte.min.css">
+    <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <title>CV - PANEL</title>
-
 </head>
-
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link"><img width=150px src="images/logo-curriculum-connections.png"
-                            alt=""></a>
-                </li>
-
-            </ul>
-
-            <!-- SEARCH FORM -->
-            <!-- <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form> -->
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-
-                <!-- Notifications Dropdown Menu -->
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i class="fa fa-th-large"></i></a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-
-    <!-- LATERAL MENU -->
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
-            <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-            <i class="fa fa-heart"></i>
-            <span class="brand-text font-weight-light">Menu Admin</span>
+<header>
+    <!-- Just an image -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="images/logo-curriculum-connections.png" width="100" height="30" alt="">
         </a>
+    </nav>
+</header>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
-                    <i class="fa fa-copyright"></i>
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">By DACY TEAM</a>
-                </div>
-            </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
-                            <i class="nav-icon fa fa-users"></i>
-                            <p>
-                                List Users
-                                <span class="right badge badge-danger">New</span>
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
-                            <i class="nav-icon fa fa-user-plus"></i>
-                            <p>
-                                Add User
-                                <span class="right badge badge-danger">New</span>
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-sign-out"></i>
-                            <p>
-                                Logout
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/charts/chartjs.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>ChartJS</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Flot</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/charts/inline.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Inline</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
-    <div class="content-wrapper">
+<script src="js/plugins/jquery.dataTables.min.js"></script>
+<script src="js/plugins/dataTables.bootstrap4.min.js"></script>
+<script src="js/index.js"></script>
 
-    </div>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <!-- Bootstrap 4 -->
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="js/adminlte.min.js"></script>
 </body>
 
 </html>
