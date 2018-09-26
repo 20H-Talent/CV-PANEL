@@ -1,3 +1,15 @@
 .main-header .nav-link {
-    height: 3.5rem;
+  height: 3.5rem;
+}
+
+table#users-table {
+  width: 100%;
+}
+
+table#users-table tbody tr > td:first-child img {
+  border-radius: 50%;
+  display: block;
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
 }
