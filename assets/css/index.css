@@ -1,1 +1,15 @@
+ * {
+     box-sizing: border-box;
+ }
+.col {
+    border: 1px solid black;
+    
+}
+.col-sm-2{
+    border: 1px solid black;
+    
+}
 
+main {
+    height: 100vh!important;
+}
