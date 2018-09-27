@@ -20,6 +20,7 @@ table#users-table thead tr:first-child th {
   z-index: 10;
   margin: 0;
   border: 0;
+  border-right: 1px solid rgba(216, 210, 210, 0.8);
 }
 
 .table-wrapper-scroll-y {
