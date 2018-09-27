@@ -91,6 +91,160 @@
                 <!-- Menu right -->
                 <div class="col-sm-2">
 
+                
+                <!-- Menu right -->
+                <div id="right-menu" class="col-sm-4 bg-info">
+                    <h2>Search for: </h2>
+                    <ul class="d-flex flex-wrap justify-content-between flex-column pl-0">
+                        <li class="mb-2">
+                            <a class="btn" data-toggle="collapse" href="#name_user" role="button" aria-expanded="false" aria-controls="name_user">Name</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="btn" data-toggle="collapse" href="#last_name_user" role="button" aria-expanded="false" aria-controls="last_name_user">Last Name</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="btn" data-toggle="collapse" href="#age_user" role="button" aria-expanded="false" aria-controls="age_user">Age</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="btn" data-toggle="collapse" href="#experience" role="button" aria-expanded="false" aria-controls="experience">Years of experience</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="btn" data-toggle="collapse" href="#languages" role="button" aria-expanded="false" aria-controls="languages">Languages</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="btn" data-toggle="collapse" href="#skills" role="button" aria-expanded="false" aria-controls="skills">Skills</a>
+                        </li>
+                    </ul>
+
+
+                    <form>
+                        <div id="name_user" class="form-group collapse">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Insert name">
+                            <small class="text-muted">
+                                Must be 3-15 characters long.
+                            </small>
+                        </div>
+                        <div id="last_name_user" class="form-group collapse">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name">
+                        </div>
+                        <div id="age_user" class="form-group collapse">
+                            <label for="age-range">Age</label>
+                            <input type="range" min="16" max="90" class="custom-range" id="age-range">
+                            <p id="age"></p>
+                        </div>
+                        <div id="experience" class="form-group collapse">
+                            <label for="exp-years">Years of experience</label>
+                            <input type="number" min="1" class="form-control" id="exp-years" placeholder="Insert experience">
+                        </div>
+                        
+                        <!-- ---------- lANGUAGES --------- -->
+                        <div id="languages" class="collapse">
+                            <div class="d-flex flex-wrap justify-content-between mb-5">
+                                <label class="d-flex w-100">Languages</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="english" class="custom-control-input" value="lang_english">
+                                    <label class="custom-control-label" for="english">English</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="spanish" class="custom-control-input" value="lang_spanish">
+                                    <label class="custom-control-label" for="spanish">Spanish</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="italian" class="custom-control-input" value="lang_italian">
+                                    <label class="custom-control-label" for="italian">Italian</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="french" class="custom-control-input" value="lang_french">
+                                    <label class="custom-control-label" for="french">French</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="rumanian" class="custom-control-input" value="lang_rumanian">
+                                    <label class="custom-control-label" for="rumanian">Rumanian</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="african" class="custom-control-input" value="lang_african">
+                                    <label class="custom-control-label" for="african">African</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ---------- SKILLS --------- -->
+                        <div id="skills" class="collapse">
+                            <div class="d-flex flex-wrap mb-5">
+                                <label class="w-100 text-dark">Skills</label>
+                                <div class="col-12 d-flex flex-wrap justify-content-center mb-4 pt-0 pb-3 pl-0 pr-0">
+                                    <label class="w-100 text-center">Layout</label>
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="css" class="custom-control-input" value="skills_css">
+                                        <label class="custom-control-label" for="css">CSS</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="html" class="custom-control-input" value="skills_html">
+                                        <label class="custom-control-label" for="html">HTML</label>
+                                    </div>
+                                </div>
+                                <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 mr-auto pt-2 pb-2 bg-dark">
+                                    <label class="w-100">Languages</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="javascript" class="custom-control-input" value="skills_javascript">
+                                        <label class="custom-control-label" for="javascript">Javascript</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="php" class="custom-control-input" value="skills_php">
+                                        <label class="custom-control-label" for="php">PHP</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="python" class="custom-control-input" value="skills_python">
+                                        <label class="custom-control-label" for="python">Python</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="ruby" class="custom-control-input" value="skills_ruby">
+                                        <label class="custom-control-label" for="ruby">Ruby</label>
+                                    </div>
+                                    <div class="custom-control custom-radio w-100">
+                                        <input type="radio" id="c++" class="custom-control-input" value="skills_c++">
+                                        <label class="custom-control-label" for="c++">C++</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="java" class="custom-control-input" value="skills_java">
+                                        <label class="custom-control-label" for="java">Java</label>
+                                    </div>
+                                </div>
+                                <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 pt-2 pb-2 bg-dark">
+                                    <label class="w-100">Frameworks</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="django" class="custom-control-input" value="skills_django">
+                                        <label class="custom-control-label" for="django">Django</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="ruby-rails" name="skills" class="custom-control-input" value="skills_ruby-rails">
+                                        <label class="custom-control-label" for="ruby-rails">Ruby on Rails</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="react" class="custom-control-input" value="skills_react">
+                                        <label class="custom-control-label" for="react">React</label>
+                                    </div>    
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="angular" class="custom-control-input" value="skills_angular">
+                                        <label class="custom-control-label" for="angular">Angular</label>
+                                    </div> 
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="vue" class="custom-control-input" value="skills_vue">
+                                        <label class="custom-control-label" for="vue">Vue</label>
+                                    </div> 
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="laravel" class="custom-control-input" value="skills_laravel">
+                                        <label class="custom-control-label" for="laravel">Laravel</label>
+                                    </div>
+                                </div>                                       
+                            </div>
+                        </div>
+                        
+    
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

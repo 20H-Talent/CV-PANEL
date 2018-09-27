@@ -64,3 +64,43 @@ ul div[class*="border-dark"] {
   width: 80%;
   margin: auto;
 }
+ul div[class*='border-dark']{
+    width: 80%;
+    margin: auto;
+}
+
+/* ----------- LATERAL RIGHT MENU ----------- */
+#languages label {
+    font-size: 1rem;
+}
+#languages div label{
+    font-size: 0.8rem;
+}
+#skills label {
+    font-size: 1rem;
+    color: white
+}
+#skills div label{
+    font-size: 0.8rem;
+}
+#right-menu{
+    max-width: 40%;
+    height: 100%;
+    /* background-color: rgba(73, 69, 69, 0.932); */
+    /* background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%); */
+    font-size: 0.8rem;
+}
+#right-menu a {
+    text-decoration: none;
+    color: white;
+    display: list-item;
+    background-color: purple;
+    font-size: 0.7rem;
+}
+#right-menu li {
+    list-style: none;
+    /* text-align: center; */
+}
+#right-menu input {
+    font-size: 0.6rem;
+}
