@@ -17,3 +17,11 @@
 .invalid {
     color: rgb(231, 78, 78);
 }
+
+.custom-control {
+    display: inline-block !important;
+}
+
+.custom-radio {
+    padding-left: 1.5rem;
+}

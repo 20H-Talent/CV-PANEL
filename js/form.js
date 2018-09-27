@@ -34,63 +34,60 @@
 //     document.getElementById("demo").innerHTML = "Input OK";
 //   }
 // }
+// function validate() {
+//   var firstname = document.getElementById("firstname");
+//   var surname = document.getElementById("surname");
+//   var age = document.getElementById("age");
+//   var email = document.getElementById("email");
+//   var telephone = document.getElementById("tel");
+//   if (firstname.length === 0) {
+//     return alert("invalis");
+//   }
+// }
+
+// function notEmpty(elem, helperMsg) {
+//   if (elem.value.length == 0) {
+//     alert(helperMsg);
+//     elem.focus();
+//     return false;
+//   }
+
+//   return true;
+// }
+
+// function validAge(elem, helperMsg) {
+//   var age = elem.value;
+
+//   if (age <= 0 || age > 100) {
+//     alert(helperMsg);
+//     return false;
+//   }
+
+//   return true;
+// }
+
+// function emailValid(elem, helperMsg) {
+//   var atpos = elem.value.indexOf("@");
+//   var dotpos = elem.value.lastIndexOf(".");
+
+//   if (atpos < 0 || dotpos < 0) {
+//     alert(helperMsg);
+//     return false;
+//   }
+
+//   return true;
+// }
+
+// function GenerateJSON(event) {
+//   event.preventDefault();
+//   event.stopPropagation();
+//   alert("Estoy en el generate JSON");
+// }
 function validate() {
-  var firstname = document.getElementById("firstname");
-  var surname = document.getElementById("surname");
-  var age = document.getElementById("age");
-  var email = document.getElementById("email");
-
-  if (notEmpty(firstname, "ENTER USERNAME")) {
-    if (notEmpty(surname, "ENTER SURNAME")) {
-      if (notEmpty(age, "ENTER AGE")) {
-        if (validAge(age, "AGE MUST BE A NUMERIC VALUE")) {
-          if (notEmpty(email, "ENTER EMAIL")) {
-            if (emailValid(email, "ENTER A PROPER EMAIL ADDRESS")) {
-              return emailValid();
-            }
-          }
-        }
-      }
-    }
+  var remember = document.getElementById("available");
+  if (remember.checked) {
+    alert("The checkbox is checked");
+  } else {
+    alert("The checkbox is not checked");
   }
-  return false;
-}
-
-function notEmpty(elem, helperMsg) {
-  if (elem.value.length == 0) {
-    alert(helperMsg);
-    elem.focus();
-    return false;
-  }
-
-  return true;
-}
-
-function validAge(elem, helperMsg) {
-  var age = elem.value;
-
-  if (age <= 0 || age > 100) {
-    alert(helperMsg);
-    return false;
-  }
-
-  return true;
-}
-
-function emailValid(elem, helperMsg) {
-  var atpos = elem.value.indexOf("@");
-  var dotpos = elem.value.lastIndexOf(".");
-
-  if (atpos < 0 || dotpos < 0) {
-    alert(helperMsg);
-    return false;
-  }
-
-  return true;
-}
-
-function GenerateJSON(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  alert("Estoy en el generate JSON");
 }
