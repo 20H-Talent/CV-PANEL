@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,24 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
 
     <title>Registration Form</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
-    <link href="form-validation.css" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/form.css">
     <script src="js/form.js"></script>
 </head>
 
 <body class="bg-light">
-
     <div class="container">
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+            <img class="d-block mx-auto mb-4" src="images/logo-curriculum-connections.png" alt="" width="170" height="60">
             <h2>Add user</h2>
             <p class="lead">Please take your time to fill out all the fields.Thank you!</p>
         </div>
@@ -36,10 +37,12 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
+                            <input type="text" class="form-control" id="id1" type="number" min="100" max="300" required>
+                            <p id="demo"></p>
+                            <!-- <div class="invalid-feedback">
+
                                 Valid first name is required.
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lastName">Last name</label>
@@ -72,10 +75,12 @@
                     </div>
                     <div class="col-md-3 mb-3 age" id="age-required">
                         <label for="cc-expiration">Age</label>
-                        <input type="number" class="form-control" id="cc-expiration" placeholder="" required>
-                        <div class="invalid-feedback">
+                        <input class="form-control" id="id1" type="number" min="100" max="300" required placeholder="" required>
+                        <!-- <div class="invalid-feedback">
                             Age required
-                        </div>
+                        </div> -->
+                        <p id="demo"></p>
+                        <button onclick="myFunction()">OK</button>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label gender" id="gender-required">Gender</label>
@@ -107,21 +112,7 @@
 
 
                     <div class="row">
-                        <div id="widget">
-                            <form>
-                                Region&raquo; <select onchange="set_country(this,country,city_state)" size="1" name="region">
-                                    <option value="" selected="selected">SELECT REGION</option>
-                                    <option value=""></option>
-                                    <script type="text/javascript">
-                                        setRegions(this);
-                                    </script>
-                                </select>
-                                Country&raquo; <select name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
-                                City/State&raquo; <select name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
-                            </form>
-                            <div id="txtregion"></div>
-                            <div id="txtplacename"></div>
-                        </div>
+
                         <div class="col-md-5 mb-3">
                             <label for="country">Country</label>
                             <select class="custom-select d-block w-100" name="Country" id="country" required>
@@ -379,7 +370,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="state">State</label>
+                            <label for="state">City</label>
                             <select class="custom-select d-block w-100" id="state" required>
                                 <option value="">Choose...</option>
                                 <option>California</option>
@@ -465,7 +456,7 @@
                     <div class="row ">
                         <div class="col-md-6 mb-3 ">
                             <label for="cc-name ">Telephone</label>
-                            <input type="text " class="form-control " id="cc-name " placeholder=" " required>
+                            <input type="text " class="form-control " id="cc-name " placeholder="required " required>
 
                             <div class="invalid-feedback ">
                                 Telephone required
@@ -477,20 +468,19 @@
 
 
                     </div>
-                    <div class="custom-file ">
-                        <input type="file " class="custom-file-input " id="customFileLang " lang="es ">
-                        <label class="custom-file-label " for="customFileLang ">Seleccionar Archivo</label>
-                    </div>
+
                     <hr class="mb-4 ">
 
-                    <button class="btn btn-primary btn-lg btn-block " type="submit ">Continue to checkout</button>
+                    <button class="btn btn-primary btn-lg btn-block " id="sendButton" onClick="generateJSON(this)">Continue
+                        to checkout
+                    </button>
 
                 </form>
             </div>
         </div>
 
         <footer class="my-5 pt-5 text-muted text-center text-small ">
-            <p class="mb-1 ">&copy; 2017-2018 Company Name</p>
+            <p class="mb-1 ">&copy;2018 Curiculum Connections</p>
 
         </footer>
     </div>
@@ -498,15 +488,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <link rel="stylesheet " href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
-                            " integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO " crossorigin="anonymous ">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
-        crossorigin="anonymous "></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js "><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js "></script>
-    <script src="../../dist/js/bootstrap.min.js "></script>
-    <script src="../../assets/js/vendor/holder.min.js "></script>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function () {
                 'use strict';
@@ -527,13 +515,8 @@
                     });
                 }, false);
             })();
-    </script>
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
-        crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 "
-        crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js " integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy "
-        crossorigin="anonymous "></script> -->
+    </script> -->
+
 </body>
 
 </html>
