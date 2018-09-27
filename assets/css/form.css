@@ -1,0 +1,52 @@
+#age-required {
+    padding: 0 !important;
+}
+
+#gender-required {
+    padding: 0 !important;
+}
+
+#gender-required1 {
+    padding: 0 !important;
+}
+
+.valid {
+    color: #0B7866;
+}
+
+.invalid {
+    color: rgb(231, 78, 78);
+}
+
+.custom-control {
+    display: inline-block !important;
+}
+
+.custom-radio {
+    padding-left: 1.5rem;
+}
+
+nav {
+    background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
+}
+
+.py-5 {
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 60%, #fff), linear-gradient(70deg, #dbedff 32%, #ebfff0);
+}
+
+input[type="text"], input[type="email"], input[type="number"], input[type="tel"], textarea, select {
+    background: rgb(221, 217, 217) !important;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    background-color: #e6f0f0 !important;
+    color: #33393d;
+}
+
+input::placeholder {
+    color: #9ea1a3;
+    font-size: 1em;
+
+    /* font-family: fantasy; */
+    font-style: italic;
+    text-align: right;
+}
