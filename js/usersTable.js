@@ -28,7 +28,7 @@ const UsersTable = (function() {
             <td>${id}</td>
             <td>${name}</td>
             <td>${username}</td>
-            <td>${email}</td>
+            <td><a href="mailto:${email}">${email}</a></td>
             <td>${phone}</td>
            </tr>`);
       });
