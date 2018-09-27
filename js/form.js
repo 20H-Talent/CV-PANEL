@@ -5,9 +5,9 @@ function myFunction() {
       var divMain = document.createElement("div");
       divMain.className = "col-lg-2";
       var ul = document.createElement("ul");
-      ul.className = " list-group-flush";
+      ul.className = " btn-group";
       var li = document.createElement("li");
-      li.className = "list-group-item";
+      li.className = "btn-secondary";
       ul.appendChild(li);
 
       li.innerHTML =
