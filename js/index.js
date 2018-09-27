@@ -45,3 +45,11 @@ for(sidebarItem of sidebarItems){
         this.className += " sidebar-position";        
     });
 };
+
+
+// --------------- LATERAL RIGHT MENU ----------
+let range = document.querySelector('#age-range');
+let age = document.querySelector('#age');
+range.addEventListener('click', function(event){
+    age.innerHTML = range.value;
+});

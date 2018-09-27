@@ -31,95 +31,133 @@
         <div class="container-fluid wrapper">
             <!-- menu left -->
             <div class="row">
-                <div class="col">
-                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-                        
-                    <!-- LO QUE ESTABA -->
-                    <!-- <div id="mySidenavLeft" class="sidenavleft">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a href="#">aaaaa</a>
-                        <a href="#">bbbbb</a>
-                        <a href="#">ccccc</a>
-                        <a href="#">ddddd</a>
-                        <a href="#">eeeee</a>
-                    </div> -->
-
-                    <!-- LO MIO -->
-                    <!-- LATERAL LEFT MENU -->
-                    <section>
-                        <div id="left-menu" class="pt-5 pb-5">
-                            <ul class="pl-0 w-100">
-                                <li class="sidebar-position mb-3 rounded">
-                                    <a href="#" class="p-1 pl-3">
-                                        <i class="fa fa-users mr-2"></i>List Users
-                                    </a>
-                                </li>
-                                <div class="border-bottom border-dark mt-4 mb-3"></div>
-                                <li class="mb-3 rounded">
-                                    <a href="#" class="p-1 pl-3">
-                                        <i class="fa fa-user-plus mr-2"></i>Add User
-                                    </a>
-                                </li>
-                                <div class="border-bottom border-dark mt-4 mb-3"></div>
-                                <li class="rounded w-100">
-                                    <a href="#" class="p-1 pl-3">
-                                        <i class="fa fa-sign-out-alt mr-2"></i>Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                </div>
-                <!-- Table users -->
-                <div class="col ">
-                    <div class="table-responsive">
-                        <table id="users-table" class="table table-bordered table-hover dataTables" role="grid">
-                            <thead>
-                                <tr scope="row">
-                                    <th>Avatar</th>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr scope="row"></tr>
-                            </tbody>
-                            <tfoot>
-                                <tr scope="row">
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-
-
-
-                </div>
+                
                 <!-- Menu right -->
-                <div class=" col-sm-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi doloribus, illum alias neque labore eligendi recusandae maiores
-                    qui atque cumque iure eveniet mollitia reiciendis non, doloremque facilis nobis est ab voluptas, velit
-                    iusto! Ad, exercitationem! Quis, harum nesciunt quos distinctio dolor at, molestias voluptas accusamus
-                    similique aliquam inventore sed officiis incidunt qui, nihil placeat accusantium tempore consectetur
-                    praesentium itaque! Illo et ipsam sit repellat iusto! Aperiam suscipit aliquam dolorem, sapiente voluptatum
-                    voluptates animi nostrum maiores commodi quos repellat incidunt dolorum dignissimos illo consequatur
-                    deserunt distinctio magni ducimus vero quidem quae. Est eveniet numquam culpa modi aut dicta ipsam minima
-                    aliquid hic voluptatem ipsa magni at laudantium deserunt earum deleniti doloribus praesentium, accusamus
-                    eligendi ducimus suscipit! Reprehenderit cum dolorum eaque, nobis maxime rerum totam sed ipsum? Provident
-                    dignissimos pariatur quos nostrum tempore, rem perferendis, sequi animi quas ducimus corporis ab? Aut
-                    unde quam assumenda dicta labore quia optio accusamus quos. Quisquam a voluptas reiciendis dolorum aspernatur
-                    quia vero assumenda tenetur porro quod cum id, dolorem libero debitis consectetur deleniti mollitia,
-                    quis nihil, laudantium recusandae blanditiis maxime necessitatibus odio. Suscipit placeat deserunt facilis
-                    sit molestiae laborum eaque, repudiandae facere quo? Nam unde neque culpa odio illo fugit quod quo perspiciatis
-                    saepe et.
+                <div class=" col-sm-4">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Insert name">
+                            <small class="text-muted">
+                                Must be 3-15 characters long.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="age-range">Age</label>
+                            <input type="range" min="16" max="90" class="custom-range" id="age-range">
+                            <p id="age"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exp-years">Years of experience</label>
+                            <input type="number" min="1" class="form-control" id="exp-years" placeholder="Insert experience">
+                        </div>
+                        
+                        <!-- ---------- lANGUAGES --------- -->
+                        <div id="languages" class="d-flex flex-wrap justify-content-between mb-5">
+                            <label class="d-flex w-100">Languages</label>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="english" class="custom-control-input" value="lang_english">
+                                <label class="custom-control-label" for="english">English</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="spanish" class="custom-control-input" value="lang_spanish">
+                                <label class="custom-control-label" for="spanish">Spanish</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="italian" class="custom-control-input" value="lang_italian">
+                                <label class="custom-control-label" for="italian">Italian</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="french" class="custom-control-input" value="lang_french">
+                                <label class="custom-control-label" for="french">French</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="rumanian" class="custom-control-input" value="lang_rumanian">
+                                <label class="custom-control-label" for="rumanian">Rumanian</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="african" class="custom-control-input" value="lang_african">
+                                <label class="custom-control-label" for="african">African</label>
+                            </div>
+                        </div>
+                        <!-- ---------- SKILLS --------- -->
+                        <div id="skills" class="d-flex flex-wrap mb-5">
+                            <label class="w-100 text-dark">Skills</label>
+                            <div class="col-12 d-flex flex-wrap justify-content-center mb-4 pt-0 pb-3 pl-0 pr-0 bg-dark">
+                                <label class="w-100 bg-warning text-center">Layout</label>
+                                <div class="custom-control custom-radio mr-3">
+                                    <input type="radio" id="css" class="custom-control-input" value="skills_css">
+                                    <label class="custom-control-label" for="css">CSS</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="html" class="custom-control-input" value="skills_html">
+                                    <label class="custom-control-label" for="html">HTML</label>
+                                </div>
+                            </div>
+                            <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 mr-auto pt-2 pb-2 bg-dark">
+                                <label class="w-100">Languages</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="javascript" class="custom-control-input" value="skills_javascript">
+                                    <label class="custom-control-label" for="javascript">Javascript</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="php" class="custom-control-input" value="skills_php">
+                                    <label class="custom-control-label" for="php">PHP</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="python" class="custom-control-input" value="skills_python">
+                                    <label class="custom-control-label" for="python">Python</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="ruby" class="custom-control-input" value="skills_ruby">
+                                    <label class="custom-control-label" for="ruby">Ruby</label>
+                                </div>
+                                <div class="custom-control custom-radio w-100">
+                                    <input type="radio" id="c++" class="custom-control-input" value="skills_c++">
+                                    <label class="custom-control-label" for="c++">C++</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="java" class="custom-control-input" value="skills_java">
+                                    <label class="custom-control-label" for="java">Java</label>
+                                </div>
+                            </div>
+                            <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 pt-2 pb-2 bg-dark">
+                                <label class="w-100">Frameworks</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="django" class="custom-control-input" value="skills_django">
+                                    <label class="custom-control-label" for="django">Django</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="ruby-rails" name="skills" class="custom-control-input" value="skills_ruby-rails">
+                                    <label class="custom-control-label" for="ruby-rails">Ruby on Rails</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="react" class="custom-control-input" value="skills_react">
+                                    <label class="custom-control-label" for="react">React</label>
+                                </div>    
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="angular" class="custom-control-input" value="skills_angular">
+                                    <label class="custom-control-label" for="angular">Angular</label>
+                                </div> 
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="vue" class="custom-control-input" value="skills_vue">
+                                    <label class="custom-control-label" for="vue">Vue</label>
+                                </div> 
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="laravel" class="custom-control-input" value="skills_laravel">
+                                    <label class="custom-control-label" for="laravel">Laravel</label>
+                                </div>
+                            </div>                                       
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-            </div>s
+            </div>
         </div>
     </main>
     <footer>

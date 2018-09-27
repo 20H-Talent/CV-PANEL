@@ -48,3 +48,21 @@ ul div[class*='border-dark']{
     width: 80%;
     margin: auto;
 }
+
+/* ----------- LATERAL RIGHT MENU ----------- */
+form {
+    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+}
+#languages label {
+    font-size: 1rem;
+}
+#languages div label{
+    font-size: 0.8rem;
+}
+#skills label {
+    font-size: 1rem;
+    color: white
+}
+#skills div label{
+    font-size: 0.8rem;
+}
