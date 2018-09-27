@@ -50,3 +50,11 @@ input::placeholder {
     font-style: italic;
     text-align: right;
 }
+
+li {
+    list-style: none;
+}
+
+.btn-secondary {
+    border-radius: 5px;
+}
