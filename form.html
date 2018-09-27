@@ -38,19 +38,20 @@
             <div class="row">
                 <div class="col-md-12 order-md-1">
                     <h4 class="mb-3">Add User</h4>
-                    <form id="teamo" action="getform.php" method="get" class="needs-validation">
+                    <div id="renderize" class="d-inline"></div>
+                    <form id="alertform" action="getform.php" method="get" class="needs-validation">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">First name</label>
-                                <input type="text" name="firstName" class="form-control" pattern="[A-Za-z]{3,15}" id="firstName" placeholder="required" value=""
+                                <label for="FirstName">First name</label>
+                                <input type="text" name="FirstName" class="form-control" pattern="[A-Za-z]{3,15}" id="FirstName" placeholder="required" value=""
                                     required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="lastName">Last name</label>
-                                <input type="text" name="lastName" class="form-control" id="lastName" minlength="5" maxlength="40" pattern="[A-Za-z0-9]+"
+                                <label for="LastName">Last name</label>
+                                <input type="text" name="LastName" class="form-control" id="LastName" minlength="5" maxlength="40" pattern="[A-Za-z0-9]+"
                                     placeholder="required" value="" required>
                                 <div class="invalid-feedback">
                                     Valid last name is required.
@@ -59,12 +60,12 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="username">Username</label>
+                            <label for="Username">Username</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input name="Username" minlength="5" maxlength="15" type="text" class="form-control" id="username" placeholder="Username"
+                                <input name="Username" minlength="5" maxlength="15" type="text" class="form-control" id="Username" placeholder="Username"
                                     required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
@@ -371,8 +372,8 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="state">City</label>
-                                <input name="State" class="custom-select d-block w-100" pattern="[A-Za-z0-9]+" type="text" id="state" placeholder="required">
+                                <label for="city">City</label>
+                                <input name="city" class="custom-select d-block w-100" pattern="[A-Za-z0-9]+" type="text" id="city" placeholder="required">
                                 <div class="invalid-feedback">
                                     Please provide a valid state.
                                 </div>
@@ -442,52 +443,60 @@
                         </div>
                         <hr class="mb-4">
 
-
-                        <h4 class="mb-3 ">Languages</h4>
+                        <div id="output"></div>
+                        <h4 class="mb-3 ">Languages <small> (press ctrl to choose more languages)</small></h4>
                         <div class="form-group">
-                            <select name="Languages" type=file class="custom-select" multiple required>
-                                <option value="">Open this select menu</option>
-                                <option value="1">English</option>
-                                <option value="2">Spanish</option>
-                                <option value="3">Romanian</option>
-                                <option value="4">French</option>
-                                <option value="5">German</option>
-                                <option value="6">Italian</option>
-                                <option value="7">Turkish</option>
+                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select" name="Languages" type=file multiple
+                                required>
+                                <option value="Afrikan">Afrikan</option>
+                                <option value="English">English</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Romanian">Romanian</option>
+                                <option value="Romanian">Romanian</option>
+                                <option value="French">French</option>
+                                <option value="German">German</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Turkish">Turkish</option>
                             </select>
-                            <div class="invalid-feedback">Example invalid custom select feedback</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-6 mb-3 ">
-                                <label for="cc-name ">Telephone</label>
-                                <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control"
-                                    pattern=".{3,15}" id="tel" placeholder="required" required>
-                                <div class="invalid-feedback ">
-                                    Telephone required
-                                </div>
+                            <button class=" btn btn-primary" type="button" onclick="showChoices()">
+                                Submit
+                            </button>
+                            </fieldset>
+                    </form>
+                    <div id="output">
+                    </div>
+                    <div class="invalid-feedback">Example invalid custom select feedback</div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-6 mb-3 ">
+                            <label for="cc-name ">Telephone</label>
+                            <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control"
+                                pattern=".{3,15}" id="tel" placeholder="required" required>
+                            <div class="invalid-feedback ">
+                                Telephone required
                             </div>
                         </div>
-                        <h4 class="mb-3">Are you available for an interview in the near future?</h4>
+                    </div>
+                    <h4 class="mb-3">Are you available for an interview in the near future?</h4>
 
-                        <div class="d-block my-3 d-block">
-                            <div class=" custom-radio ">
-                                <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input">
-                                <label class="custom-control-label" for="available">Yes</label>
-                            </div>
-                            <div class=" custom-radio ">
-                                <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
-                                <label class="custom-control-label" for="Radiobutton1">No</label>
-                            </div>
-                            <div class=" custom-radio ">
-                                <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
-                                <label class="custom-control-label" for="Radiobutton2">I have a job right now,but i want
-                                    to stay on the market</label>
-                            </div>
+                    <div class="d-block my-3 d-block">
+                        <div class=" custom-radio ">
+                            <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input">
+                            <label class="custom-control-label" for="available">Yes</label>
                         </div>
-                        <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="myFunction()" type="submit">Continue to
-                            checkout
-                        </button>
+                        <div class=" custom-radio ">
+                            <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
+                            <label class="custom-control-label" for="Radiobutton1">No</label>
+                        </div>
+                        <div class=" custom-radio ">
+                            <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
+                            <label class="custom-control-label" for="Radiobutton2">I have a job right now,but i want to stay
+                                on the market</label>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" onclick="myFunction()" type="submit">Continue to checkout
+                    </button>
                     </form>
                 </div>
             </div>
