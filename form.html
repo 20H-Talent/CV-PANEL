@@ -30,7 +30,7 @@
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="images/logo-curriculum-connections.png" alt="" width="170" height="60">
             <h2>Add User Form</h2>
-            <p class="lead">Please take your time to fill this fields with attencion.</p>
+            <p class="lead" id="alerts">Please take your time to fill this fields with attencion.</p>
         </div>
     </header>
     <main>
@@ -38,19 +38,20 @@
             <div class="row">
                 <div class="col-md-12 order-md-1">
                     <h4 class="mb-3">Add User</h4>
-                    <form action="getform.php" method="get" class="needs-validation">
+                    <form id="teamo" action="getform.php" method="get" class="needs-validation">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control" pattern="[A-Za-z]{3,15}" id="firstName" placeholder="required" value="" required>
+                                <input type="text" name="firstName" class="form-control" pattern="[A-Za-z]{3,15}" id="firstName" placeholder="required" value=""
+                                    required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" id="lastName" minlength="5" maxlength="40" pattern="[A-Za-z0-9]+" placeholder="required"
-                                    value="" required>
+                                <input type="text" name="lastName" class="form-control" id="lastName" minlength="5" maxlength="40" pattern="[A-Za-z0-9]+"
+                                    placeholder="required" value="" required>
                                 <div class="invalid-feedback">
                                     Valid last name is required.
                                 </div>
@@ -63,7 +64,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input minlength="5" maxlength="15" type="text" class="form-control" id="username" placeholder="Username" required>
+                                <input name="Username" minlength="5" maxlength="15" type="text" class="form-control" id="username" placeholder="Username"
+                                    required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -71,15 +73,15 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" pattern="[A-Za-z]{3,20}" class="form-control" id="email" placeholder="you@example.com">
+                            <label for="email">Email <span class="text-muted"></span></label>
+                            <input name="Email" type="email" pattern="[A-Za-z]{3,20}" class="form-control" required id="email" placeholder="you@example.com">
                             <div class="invalid-feedback">
                                 Please enter a valid email address for shipping updates.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3 age" id="age-required">
                             <label for="age">Age</label>
-                            <input class="form-control" id="age" type="number" pattern=".{1,3}" placeholder="required" required>
+                            <input name="Age" class="form-control" id="age" type="number" pattern=".{1,3}" placeholder="required" required>
                             <div class="invalid-feedback">
                                 Age required
                             </div>
@@ -88,15 +90,15 @@
                             <label class="col-sm-3 control-label gender" id="gender-required">Gender</label>
                             <div class="d-block my-3 d-inline-block">
                                 <div class="custom-control custom-radio">
-                                    <input id="male" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <input id="male" name="Gender" type="radio" class="custom-control-input" required>
                                     <label class="custom-control-label" for="male">Male</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input id="female" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <input id="female" name="Gender" type="radio" class="custom-control-input" required>
                                     <label class="custom-control-label" for="female">Female</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input id="other" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <input id="other" name="Gender" type="radio" class="custom-control-input" required>
                                     <label class="custom-control-label" for="other">Other</label>
                                 </div>
                             </div>
@@ -104,7 +106,7 @@
 
                         <div class="mb-3">
                             <label for="address">Address</label>
-                            <input type="" pattern=".{1,30}" class="form-control" id="address" placeholder="1234 Main St" required>
+                            <input name="Adress" type="" pattern=".{1,30}" class="form-control" id="address" placeholder="1234 Main St" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -115,7 +117,7 @@
                         <div class="row">
                             <div class="col-md-5 mb-3">
                                 <label for="country">Country</label>
-                                <select class="custom-select d-block w-100" id="country" required>
+                                <select name="Country" class="custom-select d-block w-100" id="country" required>
                                     <option value="" selected="selected">Select Country</option>
                                     <option value="United States">United States</option>
                                     <option value="United Kingdom">United Kingdom</option>
@@ -370,14 +372,15 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="state">City</label>
-                                <input class="custom-select d-block w-100" pattern="[A-Za-z0-9]+" type="text" id="state" placeholder="required" required>
+                                <input name="State" class="custom-select d-block w-100" pattern="[A-Za-z0-9]+" type="text" id="state" placeholder="required"
+                                    required>
                                 <div class="invalid-feedback">
                                     Please provide a valid state.
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="zip">Zip</label>
-                                <input type="postal-code" class="form-control" id="zip" placeholder=" required" required>
+                                <input name="Zip" type="postal-code" class="form-control" id="zip" placeholder=" required" required>
                                 <div class="invalid-feedback">
                                     Zip code required.
                                 </div>
@@ -389,19 +392,19 @@
 
                             <!-- Default inline 1-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline1">
+                                <input name="css" type="checkbox" class="custom-control-input" id="defaultInline1">
                                 <label class="custom-control-label" for="defaultInline1">CSS</label>
                             </div>
 
                             <!-- Default inline 2-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline2">
+                                <input name="javascript" type="checkbox" class="custom-control-input" id="defaultInline2">
                                 <label class="custom-control-label" for="defaultInline2">JAVASCRIPT</label>
                             </div>
 
                             <!-- Default inline 3-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline3">
+                                <input name="php" type="checkbox" class="custom-control-input" id="defaultInline3">
                                 <label class="custom-control-label" for="defaultInline3">PHP</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
@@ -409,31 +412,31 @@
                                 <label class="custom-control-label" for="defaultInline4">SASS</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline5">
+                                <input name="PYTHON" type="checkbox" class="custom-control-input" id="defaultInline5">
                                 <label class="custom-control-label" for="defaultInline5">PYTHON</label>
                             </div><br> <br>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline6">
+                                <input name="RUBY" type="checkbox" class="custom-control-input" id="defaultInline6">
                                 <label class="custom-control-label" for="defaultInline6">RUBY</label>
                             </div>
 
                             <!-- Default inline 2-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline7">
+                                <input name="PERL" type="checkbox" class="custom-control-input" id="defaultInline7">
                                 <label class="custom-control-label" for="defaultInline7">PERL</label>
                             </div>
 
                             <!-- Default inline 3-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline8">
+                                <input name="JAVA" type="checkbox" class="custom-control-input" id="defaultInline8">
                                 <label class="custom-control-label" for="defaultInline8"> JAVA</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline9">
+                                <input name="C++" type="checkbox" class="custom-control-input" id="defaultInline9">
                                 <label class="custom-control-label" for="defaultInline9"> C++ </label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline10">
+                                <input name="GO" type="checkbox" class="custom-control-input" id="defaultInline10">
                                 <label class="custom-control-label" for="defaultInline10">GO</label>
                             </div>
 
@@ -443,7 +446,7 @@
 
                         <h4 class="mb-3 ">Languages</h4>
                         <div class="form-group">
-                            <select type=file class="custom-select" multiple required>
+                            <select name="Languages" type=file class="custom-select" multiple required>
                                 <option value="">Open this select menu</option>
                                 <option value="1">English</option>
                                 <option value="2">Spanish</option>
@@ -458,8 +461,8 @@
                         <div class="row ">
                             <div class="col-md-6 mb-3 ">
                                 <label for="cc-name ">Telephone</label>
-                                <input type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control" pattern=".{3,15}"
-                                    id="tel" placeholder="required" required>
+                                <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control"
+                                    pattern=".{3,15}" id="tel" placeholder="required" required>
                                 <div class="invalid-feedback ">
                                     Telephone required
                                 </div>
@@ -469,21 +472,23 @@
 
                         <div class="d-block my-3 d-block">
                             <div class=" custom-radio ">
-                                <input id="available" onchange="validate()" name="available" type="radio" class="custom-control-input" required>
+                                <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input" required>
                                 <label class="custom-control-label" for="available">Yes</label>
                             </div>
                             <div class=" custom-radio ">
-                                <input id="available1" name="available" type="radio" class="custom-control-input" required>
-                                <label class="custom-control-label" for="available1">No</label>
+                                <input id="available1" name="Radiobutton" type="radio" class="custom-control-input" required>
+                                <label class="custom-control-label" for="Radiobutton1">No</label>
                             </div>
                             <div class=" custom-radio ">
-                                <input id="available2" name="available" type="radio" class="custom-control-input" required>
-                                <label class="custom-control-label" for="available2">I have a job right now,but i want to
-                                    stay on the market</label>
+                                <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input" required>
+                                <label class="custom-control-label" for="Radiobutton2">I have a job right now,but i want
+                                    to stay on the market</label>
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                        <button class="btn btn-primary btn-lg btn-block" onclick="myFunction()" type="submit">Continue to
+                            checkout
+                        </button>
                     </form>
                 </div>
             </div>
