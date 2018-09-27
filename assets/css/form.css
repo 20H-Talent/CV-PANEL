@@ -41,3 +41,12 @@ input[type="text"], input[type="email"], input[type="number"], input[type="tel"]
     background-color: #e6f0f0 !important;
     color: #33393d;
 }
+
+input::placeholder {
+    color: #9ea1a3;
+    font-size: 1em;
+
+    /* font-family: fantasy; */
+    font-style: italic;
+    text-align: right;
+}
