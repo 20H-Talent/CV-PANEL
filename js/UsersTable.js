@@ -3,8 +3,9 @@
  * It's built based on the Singleton pattern
  * IMPORTANT: Functions where the name  starts with _ are private
  * Source: https://addyosmani.com/resources/essentialjsdesignpatterns/book/
- * @return {function} getInstance - Return the UsersTable instance initialized
- *                                   and ready to be used as single access point.
+ *
+ * Return the UsersTable instance initialized  and ready to be used as single access point.
+ * @return {function} getInstance
  */
 const UsersTable = (function() {
   let instance;
@@ -28,10 +29,14 @@ const UsersTable = (function() {
      * @param {function} callback - Callback that triggers when the localStorage is ready
      */
     function _setupLocalStorage(callback) {
+      console.log(callback);
       if (!localStorage.getItem("users-list")) {
-        usersData = _getUsersData();
-        localStorage.setItem("users-list", JSON.stringify(usersData));
-        return callback(usersData);
+        $.getJSON(getUsersURL, function(usersData) {
+          localStorage.setItem("users-list", JSON.stringify(usersData));
+          return callback(usersData);
+        }).fail(function(err) {
+          throw new Error(err);
+        });
       }
       return callback();
     }
@@ -55,28 +60,14 @@ const UsersTable = (function() {
       }
     }
 
-    /** Setup the table with users data when the instance is initialized
+    /** Display table with  the users data when the instance is initialized
      * @function initTable
      * @public
      * @param {array} data - Array of JSON data
      */
-    function initTable(data = null) {
-      const usersData = data || JSON.parse(localStorage.getItem("users-list"));
-      usersData.forEach(user => {
-        _appendBodyData(user);
-      });
-    }
-
-    /** GET Request to retrieve users data in .json format
-     * @function _getUsersData
-     * @private
-     */
-    function _getUsersData() {
-      $.getJSON(getUsersURL, function(usersData) {
-        return usersData;
-      }).fail(function(err) {
-        throw new Error(err);
-      });
+    function initTable(usersData) {
+      let users = usersData || JSON.parse(localStorage.getItem("users-list"));
+      users.forEach(user => _appendBodyData(user));
     }
 
     /**
