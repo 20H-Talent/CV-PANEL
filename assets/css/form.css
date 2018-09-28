@@ -34,7 +34,7 @@ nav {
     background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 60%, #fff), linear-gradient(70deg, #dbedff 32%, #ebfff0);
 }
 
-input[type="text"], input[type="email"], input[type="number"], input[type="tel"], textarea, select {
+input[type="text"], input[type="email"], input[type="number"], input[type="tel"], input[type="address"], textarea, select {
     background: rgb(221, 217, 217) !important;
     border: 1px solid #ced4da;
     border-radius: .25rem;

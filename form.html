@@ -25,8 +25,6 @@
                 <img src="images/logo-curriculum-connections.png" width="120" height="40" alt="">
             </a>
         </nav>
-
-
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="images/logo-curriculum-connections.png" alt="" width="170" height="60">
             <h2>Add User Form</h2>
@@ -107,7 +105,7 @@
 
                         <div class="mb-3">
                             <label for="address">Address</label>
-                            <input name="Adress" type="" pattern=".{1,30}" class="form-control" id="address" placeholder="1234 Main St">
+                            <input name="Adress" type="address" pattern=".{1,30}" class="form-control" id="address" placeholder="1234 Main St">
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -380,7 +378,7 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="zip">Zip</label>
-                                <input name="Zip" type="postal-code" class="form-control" id="zip" placeholder=" required" required>
+                                <input name="Zip" type="number" class="form-control" pattern="[A-Za-z0-9]+" id="Zip" placeholder=" required" required>
                                 <div class="invalid-feedback">
                                     Zip code required.
                                 </div>
@@ -392,61 +390,61 @@
 
                             <!-- Default inline 1-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="css" type="checkbox" class="custom-control-input" id="defaultInline1">
-                                <label class="custom-control-label" for="defaultInline1">CSS</label>
+                                <input name="css" type="checkbox" class="custom-control-input" id="css">
+                                <label class="custom-control-label" for="css">CSS</label>
                             </div>
 
                             <!-- Default inline 2-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="javascript" type="checkbox" class="custom-control-input" id="defaultInline2">
-                                <label class="custom-control-label" for="defaultInline2">JAVASCRIPT</label>
+                                <input name="javascript" type="checkbox" class="custom-control-input" id="javascript">
+                                <label class="custom-control-label" for="javascript">JAVASCRIPT</label>
                             </div>
 
                             <!-- Default inline 3-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="php" type="checkbox" class="custom-control-input" id="defaultInline3">
-                                <label class="custom-control-label" for="defaultInline3">PHP</label>
+                                <input name="php" type="checkbox" class="custom-control-input" id="php">
+                                <label class="custom-control-label" for="php">PHP</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="defaultInline4">
-                                <label class="custom-control-label" for="defaultInline4">SASS</label>
+                                <input type="checkbox" class="custom-control-input" id="sass">
+                                <label class="custom-control-label" for="sass">SASS</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="PYTHON" type="checkbox" class="custom-control-input" id="defaultInline5">
-                                <label class="custom-control-label" for="defaultInline5">PYTHON</label>
+                                <input name="PYTHON" type="checkbox" class="custom-control-input" id="PHYTON">
+                                <label class="custom-control-label" for="PHYTON">PYTHON</label>
                             </div><br> <br>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="RUBY" type="checkbox" class="custom-control-input" id="defaultInline6">
-                                <label class="custom-control-label" for="defaultInline6">RUBY</label>
+                                <input name="RUBY" type="checkbox" class="custom-control-input" id="ruby">
+                                <label class="custom-control-label" for="ruby">RUBY</label>
                             </div>
 
                             <!-- Default inline 2-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="PERL" type="checkbox" class="custom-control-input" id="defaultInline7">
-                                <label class="custom-control-label" for="defaultInline7">PERL</label>
+                                <input name="PERL" type="checkbox" class="custom-control-input" id="PERL">
+                                <label class="custom-control-label" for="PERL">PERL</label>
                             </div>
 
                             <!-- Default inline 3-->
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="JAVA" type="checkbox" class="custom-control-input" id="defaultInline8">
-                                <label class="custom-control-label" for="defaultInline8"> JAVA</label>
+                                <input name="JAVA" type="checkbox" class="custom-control-input" id="JAVA">
+                                <label class="custom-control-label" for="JAVA"> JAVA</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="C++" type="checkbox" class="custom-control-input" id="defaultInline9">
-                                <label class="custom-control-label" for="defaultInline9"> C++ </label>
+                                <input name="C++" type="checkbox" class="custom-control-input" id="C++">
+                                <label class="custom-control-label" for="C++"> C++ </label>
                             </div>
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input name="GO" type="checkbox" class="custom-control-input" id="defaultInline10">
-                                <label class="custom-control-label" for="defaultInline10">GO</label>
+                                <input name="GO" type="checkbox" class="custom-control-input" id="GO">
+                                <label class="custom-control-label" for="GO">GO</label>
                             </div>
 
                         </div>
                         <hr class="mb-4">
 
                         <div id="output"></div>
-                        <h4 class="mb-3 ">Languages <small> (press ctrl to choose more languages)</small></h4>
+                        <h4 class="mb-3 ">Languages</h4> <small> (press ctrl to choose more languages)</small>
                         <div class="form-group">
-                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select" name="Languages" type=file multiple
+                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select" name="selLanguage" type=file multiple
                                 required>
                                 <option value="Afrikan">Afrikan</option>
                                 <option value="English">English</option>
