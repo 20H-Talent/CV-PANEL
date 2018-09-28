@@ -19,7 +19,7 @@ const UsersTable = (function() {
     const table = $(".table-responsive > table#users-table");
     const tableBody = table.find("tbody");
     //RESOURCE ENDPOINT
-    const getUsersURL = `${window.location.origin}/data/users.json`;
+    const getUsersURL = `${window.location.origin}/CV-PANEL/data/users.json`;
 
     _setupLocalStorage(initTable);
 
