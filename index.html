@@ -33,56 +33,85 @@
             <div class="row">
                 
                 <!-- Menu right -->
-                <div id="right-menu" class="col-sm-4 bg-info">
-                    <h2>Search for: </h2>
-                    <ul class="d-flex flex-wrap justify-content-between flex-column pl-0">
-                        <li class="mb-2">
-                            <a class="btn" data-toggle="collapse" href="#name_user" role="button" aria-expanded="false" aria-controls="name_user">Name</a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="btn" data-toggle="collapse" href="#last_name_user" role="button" aria-expanded="false" aria-controls="last_name_user">Last Name</a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="btn" data-toggle="collapse" href="#age_user" role="button" aria-expanded="false" aria-controls="age_user">Age</a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="btn" data-toggle="collapse" href="#experience" role="button" aria-expanded="false" aria-controls="experience">Years of experience</a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="btn" data-toggle="collapse" href="#languages" role="button" aria-expanded="false" aria-controls="languages">Languages</a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="btn" data-toggle="collapse" href="#skills" role="button" aria-expanded="false" aria-controls="skills">Skills</a>
-                        </li>
-                    </ul>
-
-
+                <div id="right-menu" class="col-sm-3 bg-info p-0">
+                    <h4 class="badge-pill text-white text-center w-100 mt-3">Search for: </h4>
+                    <div class="mt-4 mb-4">
+                        <ul class="pl-0 w-100">
+                            <li class="sidebar-position mb-3 rounded">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#name_user" role="button" aria-expanded="false" aria-controls="name_user">
+                                    <i class="fas fa-fingerprint fa-2x mr-2"></i>Name
+                                </a>
+                            </li>
+                            <li class="border-bottom border-dark mt-4 mb-3">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#last_name_user" role="button" aria-expanded="false" aria-controls="last_name_user">
+                                    <i class="fas fa-font fa-2x mr-2"></i>Last Name
+                                </a>
+                            </li>
+                            <li class="border-bottom border-dark mt-4 mb-3">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#genre" role="button" aria-expanded="false" aria-controls="genre">
+                                    <i class="fas fa-venus-mars fa-2x mr-2"></i>Genre
+                                </a>
+                            </li>
+                            <li class="border-bottom border-dark mt-4 mb-3">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#age_user" role="button" aria-expanded="false" aria-controls="age_user">
+                                    <i class="fas fa-child fa-2x mr-2"></i>Age
+                                </a>
+                            </li>
+                            <li class="border-bottom border-dark mt-4 mb-3">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#experience" role="button" aria-expanded="false" aria-controls="experience">
+                                    <i class="fa fa-calendar-alt fa-2x mr-2"></i>Years of experience
+                                </a>
+                            </li>
+                            <li class="border-bottom border-dark mt-4 mb-3">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#languages" role="button" aria-expanded="false" aria-controls="languages">
+                                    <i class="fas fa-globe-americas fa-2x mr-2"></i>Languages
+                                </a>
+                            </li>
+                            <li class="border-bottom border-dark mt-4 mb-3">
+                                <a class="p-2 pl-3" data-toggle="collapse" href="#skills" role="button" aria-expanded="false" aria-controls="skills">
+                                    <i class="fas fa-robot fa-2x mr-2"></i>Skills
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                     <form>
-                        <div id="name_user" class="form-group collapse">
-                            <label for="name">Name</label>
+                        <div id="name_user" class="form-group collapse p-2">
+                            <label for="name" class="badge-pill bg-dark text-white text-center w-100">Name</label>
                             <input type="text" class="form-control" id="name" placeholder="Insert name">
                             <small class="text-muted">
                                 Must be 3-15 characters long.
                             </small>
                         </div>
-                        <div id="last_name_user" class="form-group collapse">
-                            <label for="last-name">Last Name</label>
+                        <div id="last_name_user" class="form-group collapse p-2">
+                            <label for="last-name" class="badge-pill bg-dark text-white text-center w-100">Last Name</label>
                             <input type="text" class="form-control" id="last-name" placeholder="Insert last name">
                         </div>
-                        <div id="age_user" class="form-group collapse">
-                            <label for="age-range">Age</label>
+                        <div id="genre" class="form-group collapse p-2">
+                            <label class="badge-pill bg-dark text-white text-center w-100">Genre</label>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="genre_female" class="custom-control-input" value="genre_female_user" name="test">
+                                <label class="custom-control-label ml-5" for="genre_female">Female</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="genre_male" class="custom-control-input" value="genre_male_user" name="test">
+                                <label class="custom-control-label ml-5" for="genre_male">Male</label>
+                            </div>
+                        </div>
+                        <div id="age_user" class="form-group collapse p-2">
+                            <label for="age-range" class="badge-pill bg-dark text-white text-center w-100">Age</label>
                             <input type="range" min="16" max="90" class="custom-range" id="age-range">
                             <p id="age"></p>
                         </div>
-                        <div id="experience" class="form-group collapse">
-                            <label for="exp-years">Years of experience</label>
+                        <div id="experience" class="form-group collapse p-2">
+                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100">Years of experience</label>
                             <input type="number" min="1" class="form-control" id="exp-years" placeholder="Insert experience">
                         </div>
                         
                         <!-- ---------- lANGUAGES --------- -->
-                        <div id="languages" class="collapse">
+                        <div id="languages" class="form-group collapse p-2">
                             <div class="d-flex flex-wrap justify-content-between mb-5">
-                                <label class="d-flex w-100">Languages</label>
+                                <label class="badge-pill bg-dark text-white text-center w-100">Languages</label>
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="english" class="custom-control-input" value="lang_english">
                                     <label class="custom-control-label" for="english">English</label>
@@ -111,9 +140,9 @@
                         </div>
                         
                         <!-- ---------- SKILLS --------- -->
-                        <div id="skills" class="collapse">
+                        <div id="skills" class="form-group collapse p-2">
                             <div class="d-flex flex-wrap mb-5">
-                                <label class="w-100 text-dark">Skills</label>
+                                <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
                                 <div class="col-12 d-flex flex-wrap justify-content-center mb-4 pt-0 pb-3 pl-0 pr-0">
                                     <label class="w-100 text-center">Layout</label>
                                     <div class="custom-control custom-radio mr-3">
@@ -182,8 +211,9 @@
                             </div>
                         </div>
                         
-    
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="d-flex justify-content-center mb-4">
+                            <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill"><i class="fas fa-check-circle fa-4x"></i></button>
+                        </div>
                     </form>
                 </div>
             </div>

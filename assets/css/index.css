@@ -16,71 +16,94 @@ table#users-table tbody tr > td:first-child img {
 
 /* LATERAL LEFT MENU */
 section {
-    height: 100vh;
+  height: 100vh;
 }
-#left-menu{
-    max-width: 40%;
-    height: 100%;
-    /* background-color: rgba(73, 69, 69, 0.932); */
-    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
-    font-size: 0.8rem;
+#left-menu {
+  max-width: 40%;
+  height: 100%;
+  /* background-color: rgba(73, 69, 69, 0.932); */
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+  font-size: 0.8rem;
 }
 #left-menu a {
-    text-decoration: none;
-    color: white;
-    display: list-item;
+  text-decoration: none;
+  color: white;
+  display: list-item;
 }
 #left-menu li {
-    list-style: none;
-    /* text-align: center; */
+  list-style: none;
+  /* text-align: center; */
 }
 #left-menu li:hover {
-    background-color: rgb(85, 9, 85);
-    border-bottom: 1px solid white;
+  background-color: rgb(85, 9, 85);
+  border-bottom: 1px solid white;
 }
 .sidebar-position {
-    background-color:purple;
+  background-color: purple;
 }
 #left-menu li:active {
-    background-color: rgb(209, 91, 209);
+  background-color: rgb(209, 91, 209);
 }
-ul div[class*='border-dark']{
-    width: 80%;
-    margin: auto;
+ul div[class*="border-dark"] {
+  width: 80%;
+  margin: auto;
 }
 
 /* ----------- LATERAL RIGHT MENU ----------- */
 #languages label {
-    font-size: 1rem;
+  font-size: 1rem;
 }
-#languages div label{
-    font-size: 0.8rem;
+#languages div label {
+  font-size: 0.8rem;
 }
 #skills label {
-    font-size: 1rem;
-    color: white
+  font-size: 1rem;
+  color: white;
 }
-#skills div label{
-    font-size: 0.8rem;
+#skills div label {
+  font-size: 0.8rem;
 }
-#right-menu{
-    max-width: 40%;
-    height: 100%;
-    /* background-color: rgba(73, 69, 69, 0.932); */
-    /* background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%); */
-    font-size: 0.8rem;
+#right-menu {
+  max-width: 40%;
+  height: 100%;
+  /* background-color: rgba(73, 69, 69, 0.932); */
+  background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+  font-size: 0.8rem;
+}
+#right-menu li:hover {
+  background-color: rgb(85, 9, 85);
+  border-bottom: 1px solid white;
+}
+#right-menu li:active {
+  background-color: rgb(209, 91, 209);
+}
+#right-menu h4 {
+  background-color: rgb(49, 27, 70);
 }
 #right-menu a {
-    text-decoration: none;
-    color: white;
-    display: list-item;
-    background-color: purple;
-    font-size: 0.7rem;
+  text-decoration: none;
+  color: white;
+  display: list-item;
+  /* background-color: purple; */
+  font-size: 0.7rem;
 }
 #right-menu li {
-    list-style: none;
-    /* text-align: center; */
+  list-style: none;
+  /* text-align: center; */
 }
 #right-menu input {
-    font-size: 0.6rem;
+  font-size: 0.6rem;
+}
+#name_user,
+#last_name_user,
+#genre,
+#age_user,
+#experience,
+#languages,
+#skills {
+  background-color: rgba(114, 78, 173, 0.596);
+  border: 1px solid black;
+}
+#submit_search {
+  background-color: none;
 }
