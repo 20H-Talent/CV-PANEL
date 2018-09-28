@@ -10,6 +10,9 @@ for (sidebarItem of sidebarItems) {
     this.className += " sidebar-position";
   });
 }
+function openNewWindow() {
+    open("form.html");
+}
 
 // --------------- LATERAL RIGHT MENU ----------
 let range = document.querySelector('#age-range');
