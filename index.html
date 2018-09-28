@@ -31,51 +31,56 @@
     </header>
     <main>
         <div class="container-fluid wrapper">
-            <!-- menu left -->
             <div class="row">
-                <div class="col">
-                    <div>
-                        <div id="mySidenavLeft" class="sidenavleft">
-                            <a href="javascript:void(0)" class="openbtnleft"><span style="font-size:30px;cursor:pointer"
-                                    onclick="openNavLeft()">&#9776;</span>
-                            </a>
-                            <a href="javascript:void(0)" class="closebtnleft" onclick="closeNavLeft()">&times;</a>
-                            <a href="#">aaaaa</a>
-                            <a href="#">bbbbb</a>
-                            <a href="#">ccccc</a>
-                            <a href="#">ddddd</a>
-                        </div>
-                        <!-- <div>
-                        Use any element to open the sidenav 
-                            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-                        </div> -->
-                        <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-                        <div id="main-left">
-                            ...
-                        </div>
+                <!-- Menu left -->
+                <div class="col-sm-">
+                    <div id="mySidenavLeft" class="sidenavleft">
+                        <a href="javascript:void(0)" class="openbtnleft"><span style="font-size:30px;cursor:pointer"
+                                onclick="openNavLeft()">&#9776;</span>
+                        </a>
+                        <a href="javascript:void(0)" class="closebtnleft" onclick="closeNavLeft()">&times;</a>
+                        <a href="#">aaaaa</a>
+                        <a href="#">bbbbb</a>
+                        <a href="#">ccccc</a>
+                        <a href="#">ddddd</a>
+                    </div>
+                    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+                    <div id="main-left">
+                        <span>1 of 3</span>
                     </div>
                 </div>
                 <!-- Table users -->
                 <div class="col">
-                    2 of 3
+                    <div id="main">
+                        <!-- Here we must put the table  -->
+                        <div class="jumbotron container-fluid">
+                            <h1 class="display-4">Hello, world!</h1>
+                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling
+                                extra attention to featured content or information.</p>
+                            <hr class="my-4">
+                            <p>It uses utility classes for typography and spacing to space content out within the
+                                larger container.</p>
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                        </div>
+                    </div>
                 </div>
                 <!-- Menu right -->
-                <div class="col">
-                    <div>
-                        <div id="mySidenavRight" class="sidenavright">
-                                <a href="javascript:void(0)" id="openBtnRight" class="openbtnright"><span style="font-size:30px;cursor:pointer"
-                                        onclick="openNavRight()">&#9776;</span>
-                                </a>
-                                <a href="javascript:void(0)" id="closeBtnRight" class="closebtnright" onclick="closeNavRight()">&times;</a>
-                                <a href="#">aaaaa</a>
-                                <a href="#">bbbbb</a>
-                                <a href="#">ccccc</a>
-                                <a href="#">ddddd</a>
-                            </div>
-                            <div id="main-right">
-                                    ...
-                            </div>
-                    </div>        
+                <div class="col-sm-">
+                    <div id="mySidenavRight" class="sidenavright">
+                        <a href="javascript:void(0)" class="openbtnright"><span style="font-size:30px;cursor:pointer"
+                                onclick="openNavRight()">&#9776;</span>
+                        </a>
+                        <a href="javascript:void(0)" class="closebtnright" onclick="closeNavRight()">&times;</a>
+                        <a href="#">aaaaa</a>
+                        <a href="#">bbbbb</a>
+                        <a href="#">ccccc</a>
+                        <a href="#">ddddd</a>
+                    </div>
+                    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+                    <div id="main-right">
+                        <span>3 of 3</span>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -1,4 +1,18 @@
 /***************************/
+/*      Border colums      */
+/***************************/
+*, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.col {
+    border: #111 solid 2px;
+}
+
+
+/***************************/
 /*       LEFT SIDE        */
 /***************************/
 .sidenavleft {
@@ -22,6 +36,7 @@
     color: #818181;
     display: block;
     transition: 0.3s;
+    margin-left: 50px;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -29,15 +44,15 @@
     color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
+/* Position and style the CLOSE button (left side bar, top right corner) */
 .sidenavleft .closebtnleft {
     position: absolute;
     top: 50px;
     right: 0;
     font-size: 36px;
-    /* margin-left: 50px; */
+    /* margin-right: 50px; */
 }
-
+/* Position and style the OPEN button (left side bar, top right corner) */
 .sidenavleft .openbtnleft {
     position: absolute;
     top: 0;
@@ -66,10 +81,10 @@
 /* The side navigation menu */
 .sidenavright {
     height: 100%; /* 100% Full-height */
-    width: 40px; /* 0 width - change this with JavaScript */
+    width: 40px; /*0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     /*z-index: 1; /* Stay on top */
-    /*top: 0; /* Stay at the top */
+    /* top: 0; Stay at the top */
     right: 0;
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
@@ -85,6 +100,7 @@
     color: #818181;
     display: block;
     transition: 0.3s;
+    margin-left: 50px;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -92,16 +108,15 @@
     color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
+/* Position and style the CLOSE button (right side bar, top left corner) */
 .sidenavright .closebtnright {
     position: absolute;
     top: 50px;
     left: -25px;
-    /* right: 200px; */
     font-size: 36px;
     margin-left: 0;
 }
-
+/* Position and style the OPEN button (right side bar, top left corner) */
 .sidenavright .openbtnright {
     position: absolute;
     top: 0;
@@ -121,5 +136,3 @@
     .sidenavright {padding-top: 15px;}
     .sidenavright a {font-size: 18px;}
 }
-
-
