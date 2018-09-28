@@ -7,7 +7,7 @@
 }
 
 .navbar {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 table#users-table {
@@ -25,6 +25,7 @@ table#users-table thead tr:first-child th {
   margin: 0;
   border: 0;
   border-right: 1px solid rgba(216, 210, 210, 0.8);
+  background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 .table-wrapper-scroll-y {
@@ -69,7 +70,6 @@ ul div[class*="border-dark"] {
   margin: auto;
 }
 
-
 /* ----------- LATERAL RIGHT MENU ----------- */
 #languages label {
   font-size: 1rem;
@@ -88,7 +88,7 @@ ul div[class*="border-dark"] {
   max-width: 40%;
   height: 100%;
   /* background-color: rgba(73, 69, 69, 0.932); */
-  background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
   font-size: 0.8rem;
 }
 #right-menu li:hover {

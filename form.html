@@ -14,6 +14,7 @@
         crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/css/index.css">
     <script defer src="js/form.js"></script>
 
 </head>
@@ -50,7 +51,7 @@
                         <div id="left-menu" class="pt-5 pb-5">
                             <ul class="pl-0 w-100">
                                 <li class="sidebar-position mb-3 rounded">
-                                    <a href="#" class="p-1 pl-3">
+                                    <a href="/" class="p-1 pl-3">
                                         <i class="fa fa-users mr-2"></i>List Users
                                     </a>
                                 </li>
@@ -82,16 +83,17 @@
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
                                                 <label for="FirstName">First name</label>
-                                                <input type="text" name="FirstName" class="form-control " pattern="[a-zA-Z0-9\s]+" id="FirstName" placeholder="required"
-                                                    value="" required>
+                                                <input type="text" name="FirstName" class="form-control " pattern="[a-zA-Z0-9\s]+"
+                                                    id="FirstName" placeholder="required" value="" required>
                                                 <div class="invalid-feedback">
                                                     Valid first name is required.
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-4">
                                                 <label for="LastName">Last name</label>
-                                                <input type="text" name="LastName" class="form-control" id="LastName" minlength="5" maxlength="40" pattern="[a-zA-Z0-9\s]+"
-                                                    placeholder="required" value="" required>
+                                                <input type="text" name="LastName" class="form-control" id="LastName"
+                                                    minlength="5" maxlength="40" pattern="[a-zA-Z0-9\s]+" placeholder="required"
+                                                    value="" required>
                                                 <div class="invalid-feedback">
                                                     Valid last name is required.
                                                 </div>
@@ -102,7 +104,8 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">@</span>
                                                     </div>
-                                                    <input name="Username" minlength="5" maxlength="15" type="text" class="form-control" id="Username" placeholder="Username"
+                                                    <input name="Username" minlength="5" maxlength="15" type="text"
+                                                        class="form-control" id="Username" placeholder="Username"
                                                         required>
                                                     <div class="invalid-feedback" style="width: 100%;">
                                                         Your username is required.
@@ -115,7 +118,8 @@
 
                                         <div class="mb-3">
                                             <label for="email">Email <span class="text-muted"></span></label>
-                                            <input name="Email" type="email" pattern="[A-Za-z]{3,20}" class="form-control" required id="email" placeholder="you@example.com">
+                                            <input name="Email" type="email" pattern="[A-Za-z]{3,20}" class="form-control"
+                                                required id="email" placeholder="you@example.com">
                                             <div class="invalid-feedback">
                                                 Please enter a valid email address for shipping updates.
                                             </div>
@@ -123,7 +127,8 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3 age" id="age-required">
                                                 <label for="age">Age</label>
-                                                <input name="Age" class="form-control" id="age" type="number" pattern=".{1,3}" placeholder="required" required>
+                                                <input name="Age" class="form-control" id="age" type="number" pattern=".{1,3}"
+                                                    placeholder="required" required>
                                                 <div class="invalid-feedback">
                                                     Age required
                                                 </div>
@@ -149,15 +154,17 @@
                                         <div class="row ">
                                             <div class="col-md-6 mb-3 ">
                                                 <label for="cc-name ">Telephone</label>
-                                                <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control"
-                                                    pattern=".{3,15}" id="tel" placeholder="required" required>
+                                                <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido."
+                                                    class="form-control" pattern=".{3,15}" id="tel" placeholder="required"
+                                                    required>
                                                 <div class="invalid-feedback ">
                                                     Telephone required
                                                 </div>
                                             </div>
                                             <div class="mb-6 col-md-6 ">
                                                 <label for="address">Address</label>
-                                                <input name="Adress" type="address" pattern=".{1,30}" class="form-control" id="address" placeholder="1234 Main St">
+                                                <input name="Adress" type="address" pattern=".{1,30}" class="form-control"
+                                                    id="address" placeholder="1234 Main St">
                                                 <div class="invalid-feedback">
                                                     Please enter your shipping address.
                                                 </div>
@@ -170,7 +177,8 @@
                                         <div class="row">
                                             <div class="col-md-5 mb-3">
                                                 <label for="country">Country</label>
-                                                <select name="Country" class="custom-select d-block w-100" id="country" required>
+                                                <select name="Country" class="custom-select d-block w-100" id="country"
+                                                    required>
                                                     <option value="" selected="selected">Select Country</option>
                                                     <option value="United States">United States</option>
                                                     <option value="United Kingdom">United Kingdom</option>
@@ -204,7 +212,8 @@
                                                     <option value="Botswana">Botswana</option>
                                                     <option value="Bouvet Island">Bouvet Island</option>
                                                     <option value="Brazil">Brazil</option>
-                                                    <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                                    <option value="British Indian Ocean Territory">British Indian Ocean
+                                                        Territory</option>
                                                     <option value="Brunei Darussalam">Brunei Darussalam</option>
                                                     <option value="Bulgaria">Bulgaria</option>
                                                     <option value="Burkina Faso">Burkina Faso</option>
@@ -223,7 +232,8 @@
                                                     <option value="Colombia">Colombia</option>
                                                     <option value="Comoros">Comoros</option>
                                                     <option value="Congo">Congo</option>
-                                                    <option value="Congo, The Democratic Republic of The">Congo, The Democratic
+                                                    <option value="Congo, The Democratic Republic of The">Congo, The
+                                                        Democratic
                                                         Republic of The</option>
                                                     <option value="Cook Islands">Cook Islands</option>
                                                     <option value="Costa Rica">Costa Rica</option>
@@ -243,14 +253,16 @@
                                                     <option value="Eritrea">Eritrea</option>
                                                     <option value="Estonia">Estonia</option>
                                                     <option value="Ethiopia">Ethiopia</option>
-                                                    <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                                                    <option value="Falkland Islands (Malvinas)">Falkland Islands
+                                                        (Malvinas)</option>
                                                     <option value="Faroe Islands">Faroe Islands</option>
                                                     <option value="Fiji">Fiji</option>
                                                     <option value="Finland">Finland</option>
                                                     <option value="France">France</option>
                                                     <option value="French Guiana">French Guiana</option>
                                                     <option value="French Polynesia">French Polynesia</option>
-                                                    <option value="French Southern Territories">French Southern Territories</option>
+                                                    <option value="French Southern Territories">French Southern
+                                                        Territories</option>
                                                     <option value="Gabon">Gabon</option>
                                                     <option value="Gambia">Gambia</option>
                                                     <option value="Georgia">Georgia</option>
@@ -267,10 +279,12 @@
                                                     <option value="Guinea-bissau">Guinea-bissau</option>
                                                     <option value="Guyana">Guyana</option>
                                                     <option value="Haiti">Haiti</option>
-                                                    <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald
+                                                    <option value="Heard Island and Mcdonald Islands">Heard Island and
+                                                        Mcdonald
                                                         Islands
                                                     </option>
-                                                    <option value="Holy See (Vatican City State)">Holy See (Vatican City
+                                                    <option value="Holy See (Vatican City State)">Holy See (Vatican
+                                                        City
                                                         State)
                                                     </option>
                                                     <option value="Honduras">Honduras</option>
@@ -290,13 +304,15 @@
                                                     <option value="Kazakhstan">Kazakhstan</option>
                                                     <option value="Kenya">Kenya</option>
                                                     <option value="Kiribati">Kiribati</option>
-                                                    <option value="Korea, Democratic People's Republic of">Korea, Democratic
+                                                    <option value="Korea, Democratic People's Republic of">Korea,
+                                                        Democratic
                                                         People's Republic of
                                                     </option>
                                                     <option value="Korea, Republic of">Korea, Republic of</option>
                                                     <option value="Kuwait">Kuwait</option>
                                                     <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                                    <option value="Lao People's Democratic Republic">Lao People's Democratic
+                                                    <option value="Lao People's Democratic Republic">Lao People's
+                                                        Democratic
                                                         Republic
                                                     </option>
                                                     <option value="Latvia">Latvia</option>
@@ -322,7 +338,8 @@
                                                     <option value="Mauritius">Mauritius</option>
                                                     <option value="Mayotte">Mayotte</option>
                                                     <option value="Mexico">Mexico</option>
-                                                    <option value="Micronesia, Federated States of">Micronesia, Federated
+                                                    <option value="Micronesia, Federated States of">Micronesia,
+                                                        Federated
                                                         States of</option>
                                                     <option value="Moldova, Republic of">Moldova, Republic of</option>
                                                     <option value="Monaco">Monaco</option>
@@ -348,7 +365,8 @@
                                                     <option value="Oman">Oman</option>
                                                     <option value="Pakistan">Pakistan</option>
                                                     <option value="Palau">Palau</option>
-                                                    <option value="Palestinian Territory, Occupied">Palestinian Territory,
+                                                    <option value="Palestinian Territory, Occupied">Palestinian
+                                                        Territory,
                                                         Occupied
                                                     </option>
                                                     <option value="Panama">Panama</option>
@@ -369,7 +387,8 @@
                                                     <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
                                                     <option value="Saint Lucia">Saint Lucia</option>
                                                     <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
-                                                    <option value="Saint Vincent and The Grenadines">Saint Vincent and The
+                                                    <option value="Saint Vincent and The Grenadines">Saint Vincent and
+                                                        The
                                                         Grenadines
                                                     </option>
                                                     <option value="Samoa">Samoa</option>
@@ -386,7 +405,8 @@
                                                     <option value="Solomon Islands">Solomon Islands</option>
                                                     <option value="Somalia">Somalia</option>
                                                     <option value="South Africa">South Africa</option>
-                                                    <option value="South Georgia and The South Sandwich Islands">South Georgia
+                                                    <option value="South Georgia and The South Sandwich Islands">South
+                                                        Georgia
                                                         and The South Sandwich Islands</option>
                                                     <option value="Spain">Spain</option>
                                                     <option value="Sri Lanka">Sri Lanka</option>
@@ -399,7 +419,8 @@
                                                     <option value="Syrian Arab Republic">Syrian Arab Republic</option>
                                                     <option value="Taiwan, Province of China">Taiwan, Province of China</option>
                                                     <option value="Tajikistan">Tajikistan</option>
-                                                    <option value="Tanzania, United Republic of">Tanzania, United Republic
+                                                    <option value="Tanzania, United Republic of">Tanzania, United
+                                                        Republic
                                                         of
                                                     </option>
                                                     <option value="Thailand">Thailand</option>
@@ -418,7 +439,8 @@
                                                     <option value="United Arab Emirates">United Arab Emirates</option>
                                                     <option value="United Kingdom">United Kingdom</option>
                                                     <option value="United States">United States</option>
-                                                    <option value="United States Minor Outlying Islands">United States Minor
+                                                    <option value="United States Minor Outlying Islands">United States
+                                                        Minor
                                                         Outlying Islands</option>
                                                     <option value="Uruguay">Uruguay</option>
                                                     <option value="Uzbekistan">Uzbekistan</option>
@@ -439,14 +461,16 @@
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label for="city">City</label>
-                                                <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]+" type="text" id="city" placeholder="required">
+                                                <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]+"
+                                                    type="text" id="city" placeholder="required">
                                                 <div class="invalid-feedback">
                                                     Please provide a valid state.
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="zip">Zip</label>
-                                                <input name="Zip" type="number" class="form-control" pattern="[a-zA-Z0-9\s]+" id="Zip" placeholder=" required" required>
+                                                <input name="Zip" type="number" class="form-control" pattern="[a-zA-Z0-9\s]+"
+                                                    id="Zip" placeholder=" required" required>
                                                 <div class="invalid-feedback">
                                                     Zip code required.
                                                 </div>
@@ -464,7 +488,8 @@
 
                                             <!-- Default inline 2-->
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="javascript" type="checkbox" class="custom-control-input" id="javascript">
+                                                <input name="javascript" type="checkbox" class="custom-control-input"
+                                                    id="javascript">
                                                 <label class="custom-control-label" for="javascript">JAVASCRIPT</label>
                                             </div>
 
@@ -512,8 +537,8 @@
                                         <div id="output"></div>
                                         <h4 class="mb-3 ">Languages</h4> <small> (press ctrl to choose more languages)</small>
                                         <div class="form-group">
-                                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select" name="selLanguage" type="file"
-                                                required>
+                                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select"
+                                                name="selLanguage" type="file" required>
                                                 <option value="Afrikan">Afrikan</option>
                                                 <option value="English">English</option>
                                                 <option value="Spanish">Spanish</option>
@@ -536,7 +561,8 @@
 
                                         <div class="d-block my-3 d-block">
                                             <div class=" custom-radio ">
-                                                <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input">
+                                                <input id="available" onchange="validate()" name="Radiobutton" type="radio"
+                                                    class="custom-control-input">
                                                 <label class="custom-control-label" for="available">Yes</label>
                                             </div>
                                             <div class=" custom-radio ">
@@ -545,7 +571,8 @@
                                             </div>
                                             <div class=" custom-radio ">
                                                 <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
-                                                <label class="custom-control-label" for="Radiobutton2">I have a job right
+                                                <label class="custom-control-label" for="Radiobutton2">I have a job
+                                                    right
                                                     now,but i want to stay on the market</label>
                                             </div>
                                         </div>
@@ -558,206 +585,216 @@
                             </div>
                     </main>
 
-                    </div>
+                </div>
+                <!-- Menu right -->
+                <div class="col-sm-2">
+
+
                     <!-- Menu right -->
-                    <div class="col-sm-2">
+                    <div id="right-menu" class="bg-info p-0">
+                        <h4 class="badge-pill text-white text-center w-100 mt-3">Search for: </h4>
+                        <div class="mt-4 mb-4">
+                            <ul class="pl-0 w-100">
+                                <li class="sidebar-position mb-3 rounded">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#name_user" role="button"
+                                        aria-expanded="false" aria-controls="name_user">
+                                        <i class="fas fa-fingerprint fa-2x mr-2"></i>Name
+                                    </a>
+                                </li>
+                                <li class="border-bottom border-dark mt-4 mb-3">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#last_name_user" role="button"
+                                        aria-expanded="false" aria-controls="last_name_user">
+                                        <i class="fas fa-font fa-2x mr-2"></i>Last Name
+                                    </a>
+                                </li>
+                                <li class="border-bottom border-dark mt-4 mb-3">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#genre" role="button"
+                                        aria-expanded="false" aria-controls="genre">
+                                        <i class="fas fa-venus-mars fa-2x mr-2"></i>Genre
+                                    </a>
+                                </li>
+                                <li class="border-bottom border-dark mt-4 mb-3">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#age_user" role="button"
+                                        aria-expanded="false" aria-controls="age_user">
+                                        <i class="fas fa-child fa-2x mr-2"></i>Age
+                                    </a>
+                                </li>
+                                <li class="border-bottom border-dark mt-4 mb-3">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#experience" role="button"
+                                        aria-expanded="false" aria-controls="experience">
+                                        <i class="fa fa-calendar-alt fa-2x mr-2"></i>Years of experience
+                                    </a>
+                                </li>
+                                <li class="border-bottom border-dark mt-4 mb-3">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#languages" role="button"
+                                        aria-expanded="false" aria-controls="languages">
+                                        <i class="fas fa-globe-americas fa-2x mr-2"></i>Languages
+                                    </a>
+                                </li>
+                                <li class="border-bottom border-dark mt-4 mb-3">
+                                    <a class="p-2 pl-3" data-toggle="collapse" href="#skills" role="button"
+                                        aria-expanded="false" aria-controls="skills">
+                                        <i class="fas fa-robot fa-2x mr-2"></i>Skills
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
-
-                        <!-- Menu right -->
-                        <div id="right-menu" class="bg-info p-0">
-                            <h4 class="badge-pill text-white text-center w-100 mt-3">Search for: </h4>
-                            <div class="mt-4 mb-4">
-                                <ul class="pl-0 w-100">
-                                    <li class="sidebar-position mb-3 rounded">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#name_user" role="button" aria-expanded="false" aria-controls="name_user">
-                                            <i class="fas fa-fingerprint fa-2x mr-2"></i>Name
-                                        </a>
-                                    </li>
-                                    <li class="border-bottom border-dark mt-4 mb-3">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#last_name_user" role="button" aria-expanded="false" aria-controls="last_name_user">
-                                            <i class="fas fa-font fa-2x mr-2"></i>Last Name
-                                        </a>
-                                    </li>
-                                    <li class="border-bottom border-dark mt-4 mb-3">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#genre" role="button" aria-expanded="false" aria-controls="genre">
-                                            <i class="fas fa-venus-mars fa-2x mr-2"></i>Genre
-                                        </a>
-                                    </li>
-                                    <li class="border-bottom border-dark mt-4 mb-3">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#age_user" role="button" aria-expanded="false" aria-controls="age_user">
-                                            <i class="fas fa-child fa-2x mr-2"></i>Age
-                                        </a>
-                                    </li>
-                                    <li class="border-bottom border-dark mt-4 mb-3">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#experience" role="button" aria-expanded="false" aria-controls="experience">
-                                            <i class="fa fa-calendar-alt fa-2x mr-2"></i>Years of experience
-                                        </a>
-                                    </li>
-                                    <li class="border-bottom border-dark mt-4 mb-3">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#languages" role="button" aria-expanded="false" aria-controls="languages">
-                                            <i class="fas fa-globe-americas fa-2x mr-2"></i>Languages
-                                        </a>
-                                    </li>
-                                    <li class="border-bottom border-dark mt-4 mb-3">
-                                        <a class="p-2 pl-3" data-toggle="collapse" href="#skills" role="button" aria-expanded="false" aria-controls="skills">
-                                            <i class="fas fa-robot fa-2x mr-2"></i>Skills
-                                        </a>
-                                    </li>
-                                </ul>
+                        <form>
+                            <div id="name_user" class="form-group collapse text-white p-2">
+                                <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Insert name">
+                                <small>
+                                    Must be 3-15 characters long.
+                                </small>
+                            </div>
+                            <div id="last_name_user" class="form-group collapse p-2">
+                                <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
+                                    Name
+                                </label>
+                                <input type="text" class="form-control" id="last-name" placeholder="Insert last name">
+                            </div>
+                            <div id="genre" class="form-group collapse text-white p-2">
+                                <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
+                                <div class="border bg-dark d-flex justify-content-around p-2">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="genre_female" class="custom-control-input" value="genre_female_user"
+                                            name="test">
+                                        <label class="custom-control-label" for="genre_female">Female</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="genre_male" class="custom-control-input" value="genre_male_user"
+                                            name="test">
+                                        <label class="custom-control-label" for="genre_male">Male</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="age_user" class="form-group collapse text-white p-2">
+                                <label for="age-range" class="badge-pill bg-dark text-white text-center w-100 mb-3">Age</label>
+                                <input type="range" min="16" max="90" class="custom-range d-inline-flex" id="age-range">
+                                <p id="age" class="d-inline-flex ml-1"></p>
+                            </div>
+                            <div id="experience" class="form-group collapse p-2">
+                                <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
+                                    of experience</label>
+                                <input type="number" min="1" max="70" class="form-control" id="exp-years" placeholder="Insert experience">
                             </div>
 
-                            <form>
-                                <div id="name_user" class="form-group collapse text-white p-2">
-                                    <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Insert name">
-                                    <small>
-                                        Must be 3-15 characters long.
-                                    </small>
-                                </div>
-                                <div id="last_name_user" class="form-group collapse p-2">
-                                    <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
-                                        Name
-                                    </label>
-                                    <input type="text" class="form-control" id="last-name" placeholder="Insert last name">
-                                </div>
-                                <div id="genre" class="form-group collapse text-white p-2">
-                                    <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
-                                    <div class="border bg-dark d-flex justify-content-around p-2">
+                            <!-- ---------- lANGUAGES --------- -->
+                            <div id="languages" class="form-group collapse p-2">
+                                <div class="text-white mb-2">
+                                    <label class="badge-pill bg-dark text-center w-100">Languages</label>
+                                    <div class="bg-dark border d-flex flex-wrap justify-content-between mt-2 p-2">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="genre_female" class="custom-control-input" value="genre_female_user" name="test">
-                                            <label class="custom-control-label" for="genre_female">Female</label>
+                                            <input type="radio" id="english" class="custom-control-input" value="lang_english">
+                                            <label class="custom-control-label" for="english">English</label>
                                         </div>
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="genre_male" class="custom-control-input" value="genre_male_user" name="test">
-                                            <label class="custom-control-label" for="genre_male">Male</label>
+                                            <input type="radio" id="spanish" class="custom-control-input" value="lang_spanish">
+                                            <label class="custom-control-label" for="spanish">Spanish</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="italian" class="custom-control-input" value="lang_italian">
+                                            <label class="custom-control-label" for="italian">Italian</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="french" class="custom-control-input" value="lang_french">
+                                            <label class="custom-control-label" for="french">French</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="rumanian" class="custom-control-input" value="lang_rumanian">
+                                            <label class="custom-control-label" for="rumanian">Rumanian</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="african" class="custom-control-input" value="lang_african">
+                                            <label class="custom-control-label" for="african">African</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="age_user" class="form-group collapse text-white p-2">
-                                    <label for="age-range" class="badge-pill bg-dark text-white text-center w-100 mb-3">Age</label>
-                                    <input type="range" min="16" max="90" class="custom-range d-inline-flex" id="age-range">
-                                    <p id="age" class="d-inline-flex ml-1"></p>
-                                </div>
-                                <div id="experience" class="form-group collapse p-2">
-                                    <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
-                                        of experience</label>
-                                    <input type="number" min="1" max="70" class="form-control" id="exp-years" placeholder="Insert experience">
-                                </div>
+                            </div>
 
-                                <!-- ---------- lANGUAGES --------- -->
-                                <div id="languages" class="form-group collapse p-2">
-                                    <div class="text-white mb-2">
-                                        <label class="badge-pill bg-dark text-center w-100">Languages</label>
-                                        <div class="bg-dark border d-flex flex-wrap justify-content-between mt-2 p-2">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="english" class="custom-control-input" value="lang_english">
-                                                <label class="custom-control-label" for="english">English</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="spanish" class="custom-control-input" value="lang_spanish">
-                                                <label class="custom-control-label" for="spanish">Spanish</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="italian" class="custom-control-input" value="lang_italian">
-                                                <label class="custom-control-label" for="italian">Italian</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="french" class="custom-control-input" value="lang_french">
-                                                <label class="custom-control-label" for="french">French</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="rumanian" class="custom-control-input" value="lang_rumanian">
-                                                <label class="custom-control-label" for="rumanian">Rumanian</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="african" class="custom-control-input" value="lang_african">
-                                                <label class="custom-control-label" for="african">African</label>
-                                            </div>
+                            <!-- ---------- SKILLS --------- -->
+                            <div id="skills" class="form-group collapse p-2">
+                                <div class="d-flex flex-wrap mb-5">
+                                    <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
+                                    <div class="col-12 d-flex flex-wrap justify-content-center border bg-dark mt-2 mb-4 pt-2 pb-3 pl-0 pr-0">
+                                        <label class="w-100 text-center">Layout</label>
+                                        <div class="custom-control custom-radio mr-3">
+                                            <input type="radio" id="css" class="custom-control-input" value="skills_css">
+                                            <label class="custom-control-label" for="css">CSS</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="html" class="custom-control-input" value="skills_html">
+                                            <label class="custom-control-label" for="html">HTML</label>
+                                        </div>
+                                    </div>
+                                    <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 mr-auto pt-2 pb-2 bg-dark">
+                                        <label class="w-100">Languages</label>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="javascript" class="custom-control-input" value="skills_javascript">
+                                            <label class="custom-control-label" for="javascript">Javascript</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="php" class="custom-control-input" value="skills_php">
+                                            <label class="custom-control-label" for="php">PHP</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="python" class="custom-control-input" value="skills_python">
+                                            <label class="custom-control-label" for="python">Python</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="ruby" class="custom-control-input" value="skills_ruby">
+                                            <label class="custom-control-label" for="ruby">Ruby</label>
+                                        </div>
+                                        <div class="custom-control custom-radio w-100">
+                                            <input type="radio" id="c++" class="custom-control-input" value="skills_c++">
+                                            <label class="custom-control-label" for="c++">C++</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="java" class="custom-control-input" value="skills_java">
+                                            <label class="custom-control-label" for="java">Java</label>
+                                        </div>
+                                    </div>
+                                    <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 pt-2 pb-2 bg-dark">
+                                        <label class="w-100">Frameworks</label>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="django" class="custom-control-input" value="skills_django">
+                                            <label class="custom-control-label" for="django">Django</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="ruby-rails" name="skills" class="custom-control-input"
+                                                value="skills_ruby-rails">
+                                            <label class="custom-control-label" for="ruby-rails">Ruby on Rails</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="react" class="custom-control-input" value="skills_react">
+                                            <label class="custom-control-label" for="react">React</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="angular" class="custom-control-input" value="skills_angular">
+                                            <label class="custom-control-label" for="angular">Angular</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="vue" class="custom-control-input" value="skills_vue">
+                                            <label class="custom-control-label" for="vue">Vue</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="laravel" class="custom-control-input" value="skills_laravel">
+                                            <label class="custom-control-label" for="laravel">Laravel</label>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- ---------- SKILLS --------- -->
-                                <div id="skills" class="form-group collapse p-2">
-                                    <div class="d-flex flex-wrap mb-5">
-                                        <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
-                                        <div class="col-12 d-flex flex-wrap justify-content-center border bg-dark mt-2 mb-4 pt-2 pb-3 pl-0 pr-0">
-                                            <label class="w-100 text-center">Layout</label>
-                                            <div class="custom-control custom-radio mr-3">
-                                                <input type="radio" id="css" class="custom-control-input" value="skills_css">
-                                                <label class="custom-control-label" for="css">CSS</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="html" class="custom-control-input" value="skills_html">
-                                                <label class="custom-control-label" for="html">HTML</label>
-                                            </div>
-                                        </div>
-                                        <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 mr-auto pt-2 pb-2 bg-dark">
-                                            <label class="w-100">Languages</label>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="javascript" class="custom-control-input" value="skills_javascript">
-                                                <label class="custom-control-label" for="javascript">Javascript</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="php" class="custom-control-input" value="skills_php">
-                                                <label class="custom-control-label" for="php">PHP</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="python" class="custom-control-input" value="skills_python">
-                                                <label class="custom-control-label" for="python">Python</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="ruby" class="custom-control-input" value="skills_ruby">
-                                                <label class="custom-control-label" for="ruby">Ruby</label>
-                                            </div>
-                                            <div class="custom-control custom-radio w-100">
-                                                <input type="radio" id="c++" class="custom-control-input" value="skills_c++">
-                                                <label class="custom-control-label" for="c++">C++</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="java" class="custom-control-input" value="skills_java">
-                                                <label class="custom-control-label" for="java">Java</label>
-                                            </div>
-                                        </div>
-                                        <div class="border col-5 d-flex flex-wrap justify-content-between mb-4 pt-2 pb-2 bg-dark">
-                                            <label class="w-100">Frameworks</label>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="django" class="custom-control-input" value="skills_django">
-                                                <label class="custom-control-label" for="django">Django</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="ruby-rails" name="skills" class="custom-control-input" value="skills_ruby-rails">
-                                                <label class="custom-control-label" for="ruby-rails">Ruby on Rails</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="react" class="custom-control-input" value="skills_react">
-                                                <label class="custom-control-label" for="react">React</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="angular" class="custom-control-input" value="skills_angular">
-                                                <label class="custom-control-label" for="angular">Angular</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="vue" class="custom-control-input" value="skills_vue">
-                                                <label class="custom-control-label" for="vue">Vue</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="laravel" class="custom-control-input" value="skills_laravel">
-                                                <label class="custom-control-label" for="laravel">Laravel</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-center mb-4">
-                                    <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill"><i
-                                            class="fas fa-check-circle fa-4x"></i></button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="d-flex justify-content-center mb-4">
+                                <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill"><i
+                                        class="fas fa-check-circle fa-4x"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
