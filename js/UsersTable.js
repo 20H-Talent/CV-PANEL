@@ -19,11 +19,7 @@ const UsersTable = (function() {
     const table = $(".table-responsive > table#users-table");
     const tableBody = table.find("tbody");
     //RESOURCE ENDPOINT
-<<<<<<< HEAD
-    const getUsersURL = `${window.location.origin}/CV-PANEL/data/users.json`;
-=======
     const getUsersURL = `https://rawgit.com/20H-Talent/CV-Panel/develop/data/users.json`;
->>>>>>> develop
 
     _setupLocalStorage(initTable);
 
