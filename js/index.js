@@ -43,7 +43,7 @@ function navLeft(event){
     let icon = event.target;
     if(icon.classList.toggle('active')){
         document.getElementById("mySidenavLeft").style.width = "250px";
-        document.getElementById("main-left").style.marginLeft = "210px";
+        document.getElementById("main-left").style.marginLeft = "220px";
     }else{
         document.getElementById("mySidenavLeft").style.width = "40px";
         document.getElementById("main-left").style.marginLeft = "0";
@@ -61,7 +61,7 @@ function navRight(event){
     let icon = event.target;
     if(icon.classList.toggle('active')){
         document.getElementById("mySidenavRight").style.width = "250px";
-        document.getElementById("main-right").style.marginRight = "250px";
+        document.getElementById("main-right").style.marginRight = "220px";
     }else{
         document.getElementById("mySidenavRight").style.width = "40px";
         document.getElementById("main-right").style.marginRight= "0";

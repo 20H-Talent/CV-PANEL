@@ -19,7 +19,7 @@
     left: 0;
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
+    /* padding-top: 60px; Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
@@ -40,13 +40,13 @@
 }
 
 /* Position and style the CLOSE button (left side bar, top right corner) */
-.sidenav-left .closebtn-left {
+/* .sidenav-left .closebtn-left {
     position: absolute;
     top: 50px;
     right: 0;
     font-size: 36px;
     /* margin-right: 50px; */
-}
+/* }  */
 /* Position and style the OPEN button (left side bar, top right corner) */
 .sidenav-left .openbtn-left {
     position: absolute;
@@ -59,12 +59,12 @@
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main-left {
     transition: margin-left .5s;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav-left {padding-top: 15px;}
+    /* .sidenav-left {padding-top: 15px;} */
     .sidenav-left a {font-size: 18px;}
 }
 
@@ -103,13 +103,13 @@
 }
 
 /* Position and style the CLOSE button (right side bar, top left corner) */
-.sidenav-right .closebtn-right {
+/* .sidenav-right .closebtn-right {
     position: absolute;
     top: 50px;
     left: -25px;
     font-size: 36px;
     margin-left: 0;
-}
+} */
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
     position: absolute;
@@ -122,7 +122,9 @@
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main-right {
     transition: margin-right .5s;
-    padding: 20px;
+    /* padding: 20px; */
+    /* z-index: 100px;
+    position: absolute; */
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
