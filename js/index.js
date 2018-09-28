@@ -41,6 +41,11 @@ $(document).ready(function() {
 function openNavLeft() {
   document.getElementById("mySidenavLeft").style.width = "250px";
   document.getElementById("main-left").style.marginLeft = "250px";
+
+  // var iconOpenLeft = document.querySelector('#open-icon-left');
+  // var iconCloseLeft = document.querySelector('#close-icon-left');
+  // iconOpen.classList.replace('open', 'close');
+  // iconClose.classList.replace('close', 'open');
 }
 
 /* Set the width of the side navigation to 40px and the left margin of the page content to 40px */

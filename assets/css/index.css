@@ -11,15 +11,10 @@
     border: #111 solid 2px;
 } */
 
-/* To disable other classes*/
-.hidden {
-    display: none;
-}
-
 /***************************/
 /*       LEFT SIDE        */
 /***************************/
-.sidenavleft {
+.sidenav-left {
     height: 100%; /* 100% Full-height */
     width: 40px; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -33,7 +28,7 @@
 }
 
 /* The navigation menu links */
-.sidenavleft a {
+.sidenav-left a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -44,12 +39,12 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenavleft a:hover {
+.sidenav-left a:hover {
     color: #f1f1f1;
 }
 
 /* Position and style the CLOSE button (left side bar, top right corner) */
-.sidenavleft .closebtnleft {
+.sidenav-left .closebtn-left {
     position: absolute;
     top: 50px;
     right: 0;
@@ -57,7 +52,7 @@
     /* margin-right: 50px; */
 }
 /* Position and style the OPEN button (left side bar, top right corner) */
-.sidenavleft .openbtnleft {
+.sidenav-left .openbtn-left {
     position: absolute;
     top: 0;
     right: 0;
@@ -73,8 +68,8 @@
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenavleft {padding-top: 15px;}
-    .sidenavleft a {font-size: 18px;}
+    .sidenav-left {padding-top: 15px;}
+    .sidenav-left a {font-size: 18px;}
 }
 
 
@@ -83,7 +78,7 @@
 /***************************/
 
 /* The side navigation menu */
-.sidenavright {
+.sidenav-right {
     height: 100%; /* 100% Full-height */
     width: 40px; /*0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -97,7 +92,7 @@
 }
 
 /* The navigation menu links */
-.sidenavright a {
+.sidenav-right a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -108,12 +103,12 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenavright a:hover {
+.sidenav-right a:hover {
     color: #f1f1f1;
 }
 
 /* Position and style the CLOSE button (right side bar, top left corner) */
-.sidenavright .closebtnright {
+.sidenav-right .closebtn-right {
     position: absolute;
     top: 50px;
     left: -25px;
@@ -121,7 +116,7 @@
     margin-left: 0;
 }
 /* Position and style the OPEN button (right side bar, top left corner) */
-.sidenavright .openbtnright {
+.sidenav-right .openbtn-right {
     position: absolute;
     top: 0;
     left: -25px;
@@ -137,6 +132,15 @@
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenavright {padding-top: 15px;}
-    .sidenavright a {font-size: 18px;}
+    .sidenav-right {padding-top: 15px;}
+    .sidenav-right a {font-size: 18px;}
 }
+
+.open {
+    display: inline-block;
+}
+.close {
+    display: none;
+}
+
+
