@@ -6,6 +6,10 @@
   height: 3.5rem;
 }
 
+.navbar {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+}
+
 table#users-table {
   width: 100%;
   font-family: Source Sans Pro, Arial, serif;
