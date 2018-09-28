@@ -1,72 +1,38 @@
-$(document).ready(function() {
-  const usersDataURL = `${window.location.origin}/data/users.json`;
-
-  $("#users-table").DataTable({
-    responsive: true,
-    stateSave: true,
-    paging: false,
-    searching: false,
-    deferRender: true,
-    scrollY: 1000,
-    scroller: {
-      loadingIndicator: true
-    },
-    scrollCollapse: true,
-    ajax: {
-      url: usersDataURL,
-      type: "GET",
-      dataType: "json",
-      dataSrc: ""
-    },
-    columns: [
-      {
-        data: "thumbnail",
-        render: function(data, type, row, meta) {
-          return `<img src="${data}" alt="${data}" />`;
-        }
-      },
-      { data: "name" },
-      { data: "username" },
-      { data: "email" },
-      { data: "phone" }
-    ]
-  });
-});
-
-
 /*******************************
  *  LEFT SIDE BAR 
  *******************************/
 
-function openNavLeft() {
-  document.getElementById("mySidenavLeft").style.width = "250px";
-  document.getElementById("main-left").style.marginLeft = "250px";
+let iconOpenLeft = document.querySelector('#open-icon-left');
+iconOpenLeft.addEventListener('click', navLeft);
 
-  // var iconOpenLeft = document.querySelector('#open-icon-left');
-  // var iconCloseLeft = document.querySelector('#close-icon-left');
-  // iconOpen.classList.replace('open', 'close');
-  // iconClose.classList.replace('close', 'open');
-}
-
-/* Set the width of the side navigation to 40px and the left margin of the page content to 40px */
-function closeNavLeft() {
-  document.getElementById("mySidenavLeft").style.width = "40px";
-  document.getElementById("main-left").style.marginLeft = "0";
+function navLeft(event){
+    let icon = event.target;
+    if(icon.classList.toggle('active')){
+        document.getElementById("mySidenavLeft").style.width = "250px";
+        document.getElementById("main-left").style.marginLeft = "250px";
+    }else{
+        document.getElementById("mySidenavLeft").style.width = "40px";
+        document.getElementById("main-left").style.marginLeft = "0";
+    }
 }
 
 /*******************************
  *  RIGHT SIDE BAR 
  *******************************/
 
-function openNavRight() {
-  document.getElementById("mySidenavRight").style.width = "250px";
-  document.getElementById("main-right").style.marginRight = "250px";
+let iconOpenRight = document.querySelector('#open-icon-right');
+iconOpenRight.addEventListener('click', navRight);
+
+function navRight(event){
+    let icon = event.target;
+    if(icon.classList.toggle('active')){
+        document.getElementById("mySidenavRight").style.width = "250px";
+        document.getElementById("main-right").style.marginRight = "250px";
+    }else{
+        document.getElementById("mySidenavRight").style.width = "40px";
+        document.getElementById("main-right").style.marginRight= "0";
+    }
 }
 
-/* Set the width of the side navigation to 40px and the right margin of the page content to 40px */
-function closeNavRight() {
-  document.getElementById("mySidenavRight").style.width = "40px";
-  document.getElementById("main-right").style.marginRight = "0";
-}
 
 

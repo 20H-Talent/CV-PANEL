@@ -7,10 +7,6 @@
     box-sizing: border-box;
 }
 
-/* .col, .col-sm- {
-    border: #111 solid 2px;
-} */
-
 /***************************/
 /*       LEFT SIDE        */
 /***************************/
@@ -71,7 +67,6 @@
     .sidenav-left {padding-top: 15px;}
     .sidenav-left a {font-size: 18px;}
 }
-
 
 /***************************/
 /*       RIGHT SIDE        */
@@ -135,12 +130,4 @@
     .sidenav-right {padding-top: 15px;}
     .sidenav-right a {font-size: 18px;}
 }
-
-/* .open {
-    display: inline-block;
-}
-.close {
-    display: none;
-} */
-
 
