@@ -94,6 +94,9 @@ ul div[class*="border-dark"] {
 #right-menu input {
   font-size: 0.6rem;
 }
+#age_user #age-range {
+  width: 90%;
+}
 #name_user,
 #last_name_user,
 #genre,
