@@ -14,7 +14,7 @@
         crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="assets/css/form.css">
-    <script src="js/form.js"></script>
+    <script defer src="js/form.js"></script>
 
 </head>
 
@@ -41,15 +41,15 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="FirstName">First name</label>
-                                <input type="text" name="FirstName" class="form-control" pattern="[A-Za-z]{3,15}" id="FirstName" placeholder="required" value=""
-                                    required>
+                                <input type="text" name="FirstName" class="form-control " pattern="[a-zA-Z0-9\s]+" id="FirstName" placeholder="required"
+                                    value="" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="LastName">Last name</label>
-                                <input type="text" name="LastName" class="form-control" id="LastName" minlength="5" maxlength="40" pattern="[A-Za-z0-9]+"
+                                <input type="text" name="LastName" class="form-control" id="LastName" minlength="5" maxlength="40" pattern="[a-zA-Z0-9\s]+"
                                     placeholder="required" value="" required>
                                 <div class="invalid-feedback">
                                     Valid last name is required.
@@ -371,14 +371,14 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="city">City</label>
-                                <input name="city" class="custom-select d-block w-100" pattern="[A-Za-z0-9]+" type="text" id="city" placeholder="required">
+                                <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]+" type="text" id="city" placeholder="required">
                                 <div class="invalid-feedback">
                                     Please provide a valid state.
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="zip">Zip</label>
-                                <input name="Zip" type="number" class="form-control" pattern="[A-Za-z0-9]+" id="Zip" placeholder=" required" required>
+                                <input name="Zip" type="number" class="form-control" pattern="[a-zA-Z0-9\s]+" id="Zip" placeholder=" required" required>
                                 <div class="invalid-feedback">
                                     Zip code required.
                                 </div>
@@ -444,7 +444,7 @@
                         <div id="output"></div>
                         <h4 class="mb-3 ">Languages</h4> <small> (press ctrl to choose more languages)</small>
                         <div class="form-group">
-                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select" name="selLanguage" type=file multiple
+                            <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select" name="selLanguage" type="file"
                                 required>
                                 <option value="Afrikan">Afrikan</option>
                                 <option value="English">English</option>
@@ -459,42 +459,41 @@
                             <button class=" btn btn-primary" type="button" onclick="showChoices()">
                                 Submit
                             </button>
-                            </fieldset>
-                    </form>
-                    <div id="output">
-                    </div>
-                    <div class="invalid-feedback">Example invalid custom select feedback</div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-md-6 mb-3 ">
-                            <label for="cc-name ">Telephone</label>
-                            <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control"
-                                pattern=".{3,15}" id="tel" placeholder="required" required>
-                            <div class="invalid-feedback ">
-                                Telephone required
+                            <button type="button" class=" btn btn-primary" onclick="reset()" value="Reset">Reset</button>
+                            <div id="output"> </div>
+                            <div class="invalid-feedback">Example invalid custom select feedback</div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-6 mb-3 ">
+                                <label for="cc-name ">Telephone</label>
+                                <input name="Telephone" type="tel" x-moz-errormessage="Por favor, especifique un numero de telefono válido." class="form-control"
+                                    pattern=".{3,15}" id="tel" placeholder="required" required>
+                                <div class="invalid-feedback ">
+                                    Telephone required
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <h4 class="mb-3">Are you available for an interview in the near future?</h4>
+                        <h4 class="mb-3">Are you available for an interview in the near future?</h4>
 
-                    <div class="d-block my-3 d-block">
-                        <div class=" custom-radio ">
-                            <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input">
-                            <label class="custom-control-label" for="available">Yes</label>
+                        <div class="d-block my-3 d-block">
+                            <div class=" custom-radio ">
+                                <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input">
+                                <label class="custom-control-label" for="available">Yes</label>
+                            </div>
+                            <div class=" custom-radio ">
+                                <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
+                                <label class="custom-control-label" for="Radiobutton1">No</label>
+                            </div>
+                            <div class=" custom-radio ">
+                                <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
+                                <label class="custom-control-label" for="Radiobutton2">I have a job right now,but i want
+                                    to stay on the market</label>
+                            </div>
                         </div>
-                        <div class=" custom-radio ">
-                            <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
-                            <label class="custom-control-label" for="Radiobutton1">No</label>
-                        </div>
-                        <div class=" custom-radio ">
-                            <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
-                            <label class="custom-control-label" for="Radiobutton2">I have a job right now,but i want to stay
-                                on the market</label>
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="myFunction()" type="submit">Continue to checkout
-                    </button>
+                        <hr class="mb-4">
+                        <button class="btn btn-primary btn-lg btn-block" onclick="myFunction()" type="submit">Continue to
+                            checkout
+                        </button>
                     </form>
                 </div>
             </div>
@@ -532,6 +531,7 @@
                 }, false);
             })();
     </script> -->
+
 </body>
 
 </html>

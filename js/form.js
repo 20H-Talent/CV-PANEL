@@ -1,14 +1,15 @@
 function myFunction() {
-  document.getElementById("renderize").innerHTML = "";
+  var renderize = document.getElementById("renderize");
+  renderize.innerHTML = "";
   var form = document.getElementById("alertform");
   for (i = 0; i < form.elements.length; i++) {
     if (!form.elements[i].checkValidity()) {
       var divMain = document.createElement("div");
       divMain.className = "col-lg-2";
       var ul = document.createElement("ul");
-      ul.className = " badge badge-warning";
+      ul.className = " badge badge-danger";
       var li = document.createElement("li");
-      li.className = "badge-warning";
+      li.className = "badge-danger";
       ul.appendChild(li);
 
       li.innerHTML =
@@ -19,8 +20,8 @@ function myFunction() {
     }
   }
 }
-myFunction();
-//from multi-select.html
+
+//from multi-select
 function showChoices() {
   //retrieve data
   var selLanguage = document.getElementById("selLanguage");
@@ -30,7 +31,7 @@ function showChoices() {
   //step through options
   for (i = 0; i < selLanguage.length; i++) {
     //examine current option
-    currentOption = selLanguage[i];
+    var currentOption = selLanguage[i];
     //print it if it has been selected
     if (currentOption.selected == true) {
       result += " <li>" + currentOption.value + "</li>";
@@ -41,4 +42,10 @@ function showChoices() {
   output = document.getElementById("output");
   output.innerHTML = result;
 } // end showChoices
-myFunction();
+
+function reset() {
+  var output = document.getElementById("output");
+  output.innerHTML = "";
+  var select = document.getElementById("selLanguage");
+  select.reset();
+}
