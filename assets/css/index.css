@@ -7,10 +7,14 @@
     box-sizing: border-box;
 }
 
-.col {
+/* .col, .col-sm- {
     border: #111 solid 2px;
-}
+} */
 
+/* To disable other classes*/
+.hidden {
+    display: none;
+}
 
 /***************************/
 /*       LEFT SIDE        */

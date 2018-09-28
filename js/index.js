@@ -46,7 +46,7 @@ function openNavLeft() {
 /* Set the width of the side navigation to 40px and the left margin of the page content to 40px */
 function closeNavLeft() {
   document.getElementById("mySidenavLeft").style.width = "40px";
-  document.getElementById("main-left").style.marginLeft = "40px";
+  document.getElementById("main-left").style.marginLeft = "0";
 }
 
 /*******************************
@@ -61,5 +61,7 @@ function openNavRight() {
 /* Set the width of the side navigation to 40px and the right margin of the page content to 40px */
 function closeNavRight() {
   document.getElementById("mySidenavRight").style.width = "40px";
-  document.getElementById("main-right").style.marginRight = "40px";
+  document.getElementById("main-right").style.marginRight = "0";
 }
+
+
