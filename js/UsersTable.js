@@ -60,7 +60,7 @@ const UsersTable = (function() {
       }
     }
 
-    /** Display table with  the users data when the instance is initialized
+    /** Display table with the users data when the instance is initialized
      * @function initTable
      * @public
      * @param {array} data - Array of JSON data
