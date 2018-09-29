@@ -19,7 +19,7 @@ const UsersTable = (function() {
     const table = $(".table-responsive > table#users-table");
     const tableBody = table.find("tbody");
     //RESOURCE ENDPOINT
-    const getUsersURL = `https://rawgit.com/20H-Talent/CV-Panel/develop/data/users.json`;
+    const getUsersURL = `https://randomuser.me/api/?results=100&nat=ES`;
 
     _setupLocalStorage(initTable);
 
@@ -29,11 +29,13 @@ const UsersTable = (function() {
      * @param {function} callback - Callback that triggers when the localStorage is ready
      */
     function _setupLocalStorage(callback) {
-      console.log(callback);
       if (!localStorage.getItem("users-list")) {
         $.getJSON(getUsersURL, function(usersData) {
-          localStorage.setItem("users-list", JSON.stringify(usersData));
-          return callback(usersData);
+          localStorage.setItem(
+            "users-list",
+            JSON.stringify(usersData["results"])
+          );
+          return callback(usersData["results"]);
         }).fail(function(err) {
           throw new Error(err);
         });
@@ -77,14 +79,47 @@ const UsersTable = (function() {
      * @param {Object} user - User properties
      */
     function _appendBodyData(user) {
-      const { id, name, username, email, phone } = user;
+      const {
+        picture,
+        id,
+        email,
+        name,
+        location,
+        dob,
+        phone,
+        cell,
+        login,
+        registered
+      } = user;
+
+      let registeredDate = new Date(registered["date"]);
+
       tableBody.append(`
-        <tr scope="row" data-id="${id}">
-          <td>${id}</td>
-          <td>${name}</td>
-          <td>${username}</td>
-          <td><a href="mailto:${email}">${email}</a></td>
-          <td>${phone}</td>
+        <tr scope="row" data-id="${id.value}">
+            <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
+            <img src=${picture.medium} alt=${
+        name.first
+      } data-user=${email} /></td>
+            <td class="username">
+               <p>${name.first} ${name.last}</p>
+               <p><i class="fas fa-address-card"></i> <em>${
+                 login.username
+               }</em></p>
+
+            </td>
+            <td class="user-age">${dob.age}</td>
+            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
+            <td class="user-phone">
+              <a href="tel:${phone}"><i class="fas fa-phone"></i> ${phone}</a>
+              <a href="tel:${cell}"><i class="fas fa-mobile-alt"></i> ${cell}</a>
+            </td>
+            <td class="user-city">
+            <p><i class="fas fa-city"></i> ${location.city} ~ ${
+        location.postcode
+      }</p>
+            <p><i class="fas fa-map-marked"></i> ${location.street}</p>
+            </td>
+            <td class="user-registered">${registeredDate.toLocaleDateString()} ~ ${registeredDate.toLocaleTimeString()}</td>
          </tr>`);
     }
 
@@ -105,3 +140,17 @@ const UsersTable = (function() {
 })();
 
 const usersTable = UsersTable.getInstance();
+
+$("#userModal").on("show.bs.modal", function(e) {
+  const element = $(event.target);
+  const modal = $(this);
+  const user = JSON.parse(localStorage.getItem("users-list")).find(
+    user => user.email === element.data("user")
+  );
+  const fullName = `${user["name"]["first"].toUpperCase()} ${user["name"][
+    "last"
+  ].toUpperCase()}`;
+
+  modal.find(".modal-title").text(fullName);
+  modal.find("img").prop("src", user["picture"]["large"]);
+});
