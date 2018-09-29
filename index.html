@@ -20,10 +20,11 @@
 
     <header>
         <!-- Just an image -->
-        <nav class="navbar">
+        <nav class="navbar text-white">
             <a class="navbar-brand " href="#">
                 <img src="images/logo-curriculum-connections.png" width="120" height="40" alt="">
             </a>
+            <div id="div-navbar"></div>
         </nav>
     </header>
     <main>
@@ -39,7 +40,7 @@
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
                                     <ul class="pl-0 w-100">
-                                        <li class="sidebar-position mb-3 rounded">
+                                        <li id="list-users" class="sidebar-position mb-3 rounded">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-users mr-2" value="Click" onclick="switchVisible()"></i>
                                                 <span class="close">List Users</span>
@@ -561,7 +562,7 @@
                                         <option value="Italian">Italian</option>
                                         <option value="Turkish">Turkish</option>
                                     </select>
-                                    <button class=" btn btn-primary" type="button" onclick="showChoices()">
+                                    <button id="button-create-user" class="btn btn-primary" type="button" onclick="showChoices()">
                                         Submit
                                     </button>
                                     <button type="button" class=" btn btn-primary" onclick="reset()" value="Reset">Reset</button>
@@ -835,7 +836,7 @@
 
                                         <div class="d-flex justify-content-center mb-4">
                                             <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill"><i
-                                                    class="fas fa-check-circle fa-4x"></i></button>
+                                                class="fas fa-check-circle fa-4x"></i></button>
                                         </div>
                                     </form>
                                 </div>
