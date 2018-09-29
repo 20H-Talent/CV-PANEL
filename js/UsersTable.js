@@ -29,9 +29,9 @@ const UsersTable = (function() {
      * @param {function} callback - Callback that triggers when the localStorage is ready
      */
     function _setupLocalStorage(callback) {
-      if (!localStorage.getItem("users-list")) {
+      if (!sessionStorage.getItem("users-list")) {
         $.getJSON(getUsersURL, function(usersData) {
-          localStorage.setItem(
+          sessionStorage.setItem(
             "users-list",
             JSON.stringify(usersData["results"])
           );
@@ -50,7 +50,7 @@ const UsersTable = (function() {
      * @param {Array} data
      */
     function renderTable(filters = {}, data = null) {
-      let users = data || JSON.parse(localStorage.getItem("users-list"));
+      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
       if (Object.keys(filters).length > 0) {
         tableBody.empty();
         let usersFiltered = users
@@ -68,7 +68,7 @@ const UsersTable = (function() {
      * @param {array} data - Array of JSON data
      */
     function initTable(usersData) {
-      let users = usersData || JSON.parse(localStorage.getItem("users-list"));
+      let users = usersData || JSON.parse(sessionStorage.getItem("users-list"));
       users.forEach(user => _appendBodyData(user));
     }
 
@@ -124,7 +124,7 @@ const UsersTable = (function() {
     }
 
     function getUserByEmail(email) {
-      return JSON.parse(localStorage.getItem("users-list")).find(
+      return JSON.parse(sessionStorage.getItem("users-list")).find(
         user => user.email === email
       );
     }
