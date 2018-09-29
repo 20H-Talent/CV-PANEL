@@ -63,3 +63,15 @@ li {
     margin-top: 4rem !important;
     margin-bottom: 4rem !important;
 }
+
+#Div2 {
+    display: none;
+}
+
+body {
+    overflow: hidden;
+}
+
+.table-wrapper-scroll-y {
+    max-height: 900px;
+}
