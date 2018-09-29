@@ -273,6 +273,12 @@ tbody td.user-city i {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
+#userModal .modal-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 /* LATERAL LEFT MENU */
 section {
   height: 100vh;

@@ -123,9 +123,29 @@ const UsersTable = (function() {
          </tr>`);
     }
 
+    function getUserByEmail(email) {
+      return JSON.parse(localStorage.getItem("users-list")).find(
+        user => user.email === email
+      );
+    }
+
+    function buildUserFullname(name) {
+      const { first, last } = name;
+      const fullName =
+        first.charAt(0).toUpperCase() +
+        first.slice(1) +
+        " " +
+        last.charAt(0).toUpperCase() +
+        last.slice(1);
+
+      return fullName;
+    }
+
     return {
       initTable,
-      renderTable
+      renderTable,
+      getUserByEmail,
+      buildUserFullname
     };
   }
 
@@ -144,13 +164,23 @@ const usersTable = UsersTable.getInstance();
 $("#userModal").on("show.bs.modal", function(e) {
   const element = $(event.target);
   const modal = $(this);
-  const user = JSON.parse(localStorage.getItem("users-list")).find(
-    user => user.email === element.data("user")
-  );
-  const fullName = `${user["name"]["first"].toUpperCase()} ${user["name"][
-    "last"
-  ].toUpperCase()}`;
+  const user = usersTable.getUserByEmail(element.data("user"));
 
-  modal.find(".modal-title").text(fullName);
-  modal.find("img").prop("src", user["picture"]["large"]);
+  const {
+    picture,
+    id,
+    email,
+    name,
+    location,
+    dob,
+    phone,
+    cell,
+    login,
+    registered
+  } = user;
+
+  const fullName = usersTable.buildUserFullname(name);
+
+  modal.find(".modal-title").text(fullName + " ~ " + login.username);
+  modal.find(".modal-body img").prop("src", picture["large"]);
 });
