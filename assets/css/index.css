@@ -13,14 +13,18 @@
 .container-right {
     transition: width .5s;
 }
-
-
+.container-left {
+    margin-right: 40px;
+}
+/* .container-right {
+    margin-right: 45px;
+} */
 /***************************/
 /*       LEFT SIDE        */
 /***************************/
 .sidenav-left {
     height: 100%; /* 100% Full-height */
-    width: 45px; /* 0 width - change this with JavaScript */
+    width: 50px; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     /*z-index: 1; /* Stay on top */
     /*top: 0; /* Stay at the top */
@@ -29,6 +33,8 @@
     overflow-x: hidden; /* Disable horizontal scroll */
     /* padding-top: 60px; Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
+    overflow-y: hidden;
 }
 
 /* The navigation menu links */
@@ -39,7 +45,7 @@
     color: #818181;
     display: block;
     transition: 0.3s;
-    margin-left: 50px;
+    /* margin-left: 50px; */
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -92,6 +98,7 @@
     overflow-x: hidden; /* Disable horizontal scroll */
     /* padding-top: 30px; Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
 }
 
 /* The navigation menu links */
@@ -269,4 +276,12 @@ ul div[class*="border-dark"] {
 }
 #submit_search {
   background-color: none;
+}
+
+.open {
+    display: block;
+    display: inline;
+}
+.close {
+    display: none;
 }
