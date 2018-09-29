@@ -44,9 +44,17 @@ function navLeft(event){
     if(icon.classList.toggle('active')){
         document.getElementById("mySidenavLeft").style.width = "250px";
         document.getElementById("main-left").style.marginLeft = "220px";
+        document.querySelector(".container-left").style.width = "250px";
+        document.querySelector(".container-left").style.marginRight = "0px";
+
+        // document.querySelector(".col").style.paddingLeft = "500px";
     }else{
-        document.getElementById("mySidenavLeft").style.width = "40px";
+        document.getElementById("mySidenavLeft").style.width = "45px";
         document.getElementById("main-left").style.marginLeft = "0";
+        document.querySelector(".container-left").style.width = "45px";
+        document.querySelector(".container-left").style.marginRight = "0px";
+        
+        // document.querySelector(".col").style.paddingLeft = "500px";
     }
 }
 
@@ -60,11 +68,17 @@ iconOpenRight.addEventListener('click', navRight);
 function navRight(event){
     let icon = event.target;
     if(icon.classList.toggle('active')){
+        // document.getElementById("mySidenavRight").style.width = "250px";
+        // document.getElementById("main-right").style.marginRight = "220px";
         document.getElementById("mySidenavRight").style.width = "250px";
         document.getElementById("main-right").style.marginRight = "220px";
+        document.querySelector(".container-right").style.width = "250px";
     }else{
         document.getElementById("mySidenavRight").style.width = "40px";
         document.getElementById("main-right").style.marginRight= "0";
+
+        document.querySelector(".container-right").style.width = "40px";
+
     }
 }
 
