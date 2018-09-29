@@ -1,34 +1,33 @@
 #gender-required {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 #gender-required1 {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 .valid {
-  color: #0b7866;
+    color: #0b7866;
 }
 
 .invalid {
-  color: rgb(231, 78, 78);
+    color: rgb(231, 78, 78);
 }
 
 .custom-control {
-  display: inline-block !important;
+    display: inline-block !important;
 }
 
 .custom-radio {
-  padding-left: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 nav {
-  background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
+    background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 .py-5 {
-  background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 60%, #fff),
-    linear-gradient(70deg, #dbedff 32%, #ebfff0);
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 60%, #fff), linear-gradient(70deg, #dbedff 32%, #ebfff0);
 }
 
 input[type="text"],
@@ -38,44 +37,49 @@ input[type="tel"],
 input[type="address"],
 textarea,
 select {
-  background: rgb(221, 217, 217) !important;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  background-color: #e6f0f0 !important;
-  color: #33393d;
+    background: rgb(221, 217, 217) !important;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #e6f0f0 !important;
+    color: #33393d;
 }
 
 input::placeholder {
-  color: #9ea1a3;
-  font-size: 1em;
+    color: #9ea1a3;
+    font-size: 1em;
 
-  /* font-family: fantasy; */
-  font-style: italic;
-  text-align: right;
+    /* font-family: fantasy; */
+    font-style: italic;
+    text-align: right;
 }
 
 li {
-  list-style: none;
+    list-style: none;
 }
 
 .btn-secondary {
-  border-radius: 5px;
+    border-radius: 5px;
 }
 
 .custom-select[multiple],
 .custom-select[size]:not([size="1"]) {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .adduser {
-  margin-top: 4rem !important;
-  margin-bottom: 4rem !important;
+    margin-top: 4rem !important;
+    margin-bottom: 5rem !important;
 }
 
 #Div2 {
-  display: none;
+    display: none;
 }
 
 body {
-  overflow: hidden;
+    overflow: hidden;
+}
+
+.btn {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    color: white;
 }
