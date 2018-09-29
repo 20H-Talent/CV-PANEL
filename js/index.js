@@ -45,9 +45,13 @@ function navLeft(event) {
     // document.getElementById("mySidenavLeft").style.width = "250px";
     // document.getElementById("main-left").style.marginLeft = "220px";
     // document.querySelector(".container-left").style.width = "250px";
-    document.getElementById("mySidenavLeft").style.width = "250px";
+    document.getElementById("mySidenavLeft").style.width = "110px";
     document.getElementById("main-left").style.marginLeft = "220px";
-    document.querySelector(".container-left").style.width = "250px";
+    document.querySelector(".container-left").style.width = "110px";
+    document.querySelector(".container-left").style.marginRight = "0px";
+
+    // document.querySelector(".container-right").style.marginLeft = "0px";
+
     let spans = document.querySelectorAll("#left-menu span");
     // let leftAnchors = document.querySelectorAll('#left-menu a');
     // document.querySelector(".container-left").style.marginRight = "5px";
@@ -68,7 +72,7 @@ function navLeft(event) {
       .classList.replace("open", "close");
     document.querySelector("#left-menu a").style.marginLeft = "0px";
     let spans = document.querySelectorAll("#left-menu span");
-    let leftAnchors = document.querySelectorAll("#left-menu a");
+    // let leftAnchors = document.querySelectorAll("#left-menu a");
 
     for (span of spans) {
       // console.log(span);
@@ -97,13 +101,34 @@ function navRight(event) {
     document.getElementById("mySidenavRight").style.width = "250px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "250px";
+    document.querySelector(".container-right").style.marginLeft = "0px";
+    document.querySelector("#right-menu p").style.fontSize = "1rem";
+
+    let spans = document.querySelectorAll("#right-menu span");
+    // let leftAnchors = document.querySelectorAll('#left-menu a');
+    // document.querySelector(".container-left").style.marginRight = "5px";
+
+    for (span of spans) {
+      // console.log(span);
+      span.classList.replace("close", "open");
+    }
 
     // document.querySelector(".container-left").style.marginRight = "0px";
   } else {
-    document.getElementById("mySidenavRight").style.width = "40px";
+    document.getElementById("mySidenavRight").style.width = "70px";
     document.getElementById("main-right").style.marginRight = "0";
 
-    document.querySelector(".container-right").style.width = "40px";
+    document.querySelector(".container-right").style.width = "70px";
+    document.querySelector("#right-menu p").style.fontSize = "0.55rem";
+
     // document.querySelector(".container-left").style.marginRight = "0px";
+    let spans = document.querySelectorAll("#right-menu span");
+    // let leftAnchors = document.querySelectorAll("#left-menu a");
+
+    for (span of spans) {
+      // console.log(span);
+      span.classList.replace("open", "close");
+    }
+
   }
 }
