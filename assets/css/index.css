@@ -108,6 +108,8 @@ html {
 
   /* padding-top: 30px; Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+
 }
 
 /* The navigation menu links */
@@ -344,9 +346,6 @@ ul div[class*="border-dark"] {
 #right-menu {
   max-width: auto;
   height: 100%;
-
-  /* background-color: rgba(73, 69, 69, 0.932); */
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
   font-size: 0.8rem;
 }
 
@@ -417,4 +416,22 @@ body {
 .pt-2,
 .py-2 {
   padding-top: 4.5rem !important;
+}
+
+@media(max-width: 1366px) {
+    #Div1 {
+        width: 0px;
+    }
+    #mySidenavRight {
+        overflow-y: auto;
+    }
+    #mySidenavRight form {
+        position: relative;
+    }
+    #button_right {
+        height: 80px;
+    }
+    #submit_search {
+        height: 40%;
+    }
 }
