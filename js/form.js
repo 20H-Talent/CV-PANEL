@@ -46,7 +46,23 @@ function showChoices() {
     var currentOption = selLanguage[i];
     //print it if it has been selected
     if (currentOption.selected == true) {
-      result += " <li>" + currentOption.value + "</li>";
+      result +=
+        " <li>" +
+        currentOption.value +
+        "</li>" +
+        "</ul>" +
+        '<div class="input-group mb-3">' +
+        '<div class="input-group-prepend">' +
+        '<label class="input-group-text" for="inputGroupSelect01">Level</label>' +
+        "</div>" +
+        '<select name="Language level" class="custom-select" id="inputGroupSelect01"   required>' +
+        "<option selected>Choose one</option>" +
+        ' <option value="1">Basic</option>' +
+        ' <option value="2">Medium</option>' +
+        '<option value="3">Advanced</option>' +
+        '<option value="3">Native</option>' +
+        "</select>" +
+        "</div>";
     } // end if
   } // end for loop
   //finish off the list and print it out
