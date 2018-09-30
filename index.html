@@ -680,7 +680,8 @@
                                     <form id="advanced-search">
                                         <div id="name_user" class="form-group collapse text-white p-2">
                                             <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Insert name">
+                                            <input type="text" class="form-control" id="name" placeholder="Insert name"
+                                                name="firstname">
                                             <small>
                                                 Must be 3-15 characters long.
                                             </small>
@@ -689,19 +690,20 @@
                                             <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
                                                 Name
                                             </label>
-                                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name">
+                                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name"
+                                                name="lastname">
                                         </div>
                                         <div id="genre" class="form-group collapse text-white p-2">
                                             <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
                                             <div class="border bg-dark d-flex justify-content-around p-2">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="genre_female" class="custom-control-input"
-                                                        value="genre_female_user" name="test">
+                                                        value="female" name="gender">
                                                     <label class="custom-control-label" for="genre_female">Female</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="genre_male" class="custom-control-input"
-                                                        value="genre_male_user" name="test">
+                                                        value="male" name="gender">
                                                     <label class="custom-control-label" for="genre_male">Male</label>
                                                 </div>
                                             </div>

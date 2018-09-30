@@ -109,7 +109,6 @@ html {
   /* padding-top: 30px; Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
-
 }
 
 /* The navigation menu links */
@@ -293,7 +292,7 @@ tbody td.user-city i {
   width: 300px;
   height: 300px;
   z-index: 20;
-  transform: translate(240%, 22%);
+  transform: translate(210%, 22%);
   font-size: 1em;
 }
 
@@ -302,7 +301,7 @@ tbody td.user-city i {
   position: relative;
   width: 64px;
   height: 64px;
-  transform: translate(1250%, 100%);
+  transform: translate(1150%, 100%);
   z-index: 20;
 }
 .lds-ring div {
@@ -476,20 +475,20 @@ body {
   padding-top: 4.5rem !important;
 }
 
-@media(max-width: 1366px) {
-    #Div1 {
-        width: 0px;
-    }
-    #mySidenavRight {
-        overflow-y: auto;
-    }
-    #mySidenavRight form {
-        position: relative;
-    }
-    #button_right {
-        height: 80px;
-    }
-    #submit_search {
-        height: 40%;
-    }
+@media (max-width: 1366px) {
+  #Div1 {
+    width: 0px;
+  }
+  #mySidenavRight {
+    overflow-y: auto;
+  }
+  #mySidenavRight form {
+    position: relative;
+  }
+  #button_right {
+    height: 80px;
+  }
+  #submit_search {
+    height: 40%;
+  }
 }

@@ -35,49 +35,12 @@ const UsersTable = (function() {
             "users-list",
             JSON.stringify(usersData["results"])
           );
-          return callback(usersData["results"]);
+          callback(usersData["results"]);
         }).fail(function(err) {
           throw new Error(err);
         });
-      }
-      return callback();
-    }
-
-    /** Render again the table with specific conditions
-     * @function renderTable
-     * @public
-     * @param {Object} filters - Conditions to render again the table with filtered data
-     * @param {Array} data
-     */
-    function renderTable(filters = {}, data = null) {
-      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-      if (Object.keys(filters).length === 0) {
-        tableBody
-          .css("position", "relative")
-          .empty()
-          .html(
-            `
-            <div class="table-overlay">
-              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-              <pre>Searching for results...</pre>
-            </div>
-            `
-          );
-
-        let usersFiltered = users.filter(user => {
-          return user["name"]["first"].toLowerCase().includes("polla");
-        });
-        setTimeout(() => {
-          if (usersFiltered.length > 0) {
-            tableBody.css("position", "static").empty();
-            usersFiltered.map(user => _appendBodyData(user));
-          } else {
-            tableBody.find("div.table-overlay").empty()
-              .html(`<div class="alert alert-warning" role="alert">
-             No results found
-          </div>`);
-          }
-        }, 1000);
+      } else {
+        callback();
       }
     }
 
@@ -89,6 +52,56 @@ const UsersTable = (function() {
     function initTable(usersData) {
       let users = usersData || JSON.parse(sessionStorage.getItem("users-list"));
       users.forEach(user => _appendBodyData(user));
+    }
+
+    /** Render again the table with specific conditions
+     * @function renderTable
+     * @public
+     * @param {Object} filters - Conditions to render again the table with filtered data
+     * @param {Array} data
+     */
+    function renderTable(filters = {}, data = null) {
+      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
+      _showOverlay();
+
+      if (filters["gender"]) {
+        users = users.filter(
+          user => user["gender"] === filters["gender"].toLowerCase()
+        );
+      }
+      if (filters["firstname"] || filters["lastname"]) {
+        users = users.filter(user => {
+          return (
+            user["name"]["first"]
+              .toLowerCase()
+              .includes(filters["firstname"]) ||
+            user["name"]["last"].toLowerCase().includes(filters["lastname"])
+          );
+        });
+      }
+
+      setTimeout(() => {
+        if (users.length > 0) {
+          tableBody.css("position", "static").empty();
+          users.map(user => _appendBodyData(user));
+        } else {
+          tableBody.find("div.table-overlay").empty()
+            .html(`<div class="alert alert-warning" role="alert">
+             No results found
+          </div>`);
+        }
+      }, 1000);
+    }
+
+    /** Show the overlay when a change is produced on the table
+     * @function _showOverlay
+     * @private
+     */
+    function _showOverlay() {
+      tableBody.css("position", "relative").empty()
+        .html(`<div class="table-overlay">
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>`);
     }
 
     /**
@@ -142,12 +155,55 @@ const UsersTable = (function() {
          </tr>`);
     }
 
+    /**
+     * Get a user object by the email.
+     * @function getUserByEmail
+     * @public
+     * @param {string} email
+     * @return {object} User
+     */
     function getUserByEmail(email) {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
         user => user.email === email
       );
     }
 
+    /**
+     * Filter the inputs when the advanced search is used,
+     * only inputs that aren't empty or checked are allowed
+     * @function filterInputs
+     * @public
+     * @param {Array of jQuery objects} elements
+     * @return {object} filters
+     */
+    function filterInputs(elements) {
+      const filters = {};
+      elements
+        .filter((index, input) => {
+          const $input = $(input);
+          if (
+            $input.prop("type") === "radio" ||
+            $input.prop("type") === "checkbox"
+          ) {
+            return $input.prop("checked");
+          } else {
+            return $.trim($input.val()).length > 0;
+          }
+        })
+        .each((index, input) => {
+          const $input = $(input);
+          filters[$input.prop("name")] = $input.val();
+        });
+      return filters;
+    }
+
+    /**
+     * Join the firstname and the last name to build user fullname capitalized
+     * @function buildUserFullName
+     * @public
+     * @param {string} name
+     * @return {string} fullName
+     */
     function buildUserFullname(name) {
       const { first, last } = name;
       const fullName =
@@ -164,7 +220,8 @@ const UsersTable = (function() {
       initTable,
       renderTable,
       getUserByEmail,
-      buildUserFullname
+      buildUserFullname,
+      filterInputs
     };
   }
 
@@ -180,23 +237,20 @@ const UsersTable = (function() {
 
 const usersTable = UsersTable.getInstance();
 
+$("form#advanced-search").on("submit", function(e) {
+  e.preventDefault();
+  const filters = usersTable.filterInputs(
+    $(this).find("div.collapse.show input")
+  );
+  usersTable.renderTable(filters);
+});
+
 $("#userModal").on("show.bs.modal", function(e) {
   const element = $(event.target);
   const modal = $(this);
   const user = usersTable.getUserByEmail(element.data("user"));
 
-  const {
-    picture,
-    id,
-    email,
-    name,
-    location,
-    dob,
-    phone,
-    cell,
-    login,
-    registered
-  } = user;
+  const { picture, name, login } = user;
 
   const fullName = usersTable.buildUserFullname(name);
 
