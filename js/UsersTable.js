@@ -51,14 +51,33 @@ const UsersTable = (function() {
      */
     function renderTable(filters = {}, data = null) {
       let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-      if (Object.keys(filters).length > 0) {
-        tableBody.empty();
-        let usersFiltered = users
-          .filter(user => {
-            //TODO - THIS CONDITION IS FOR TESTING PURPOSES
-            return user["name"].toLowerCase().includes("er");
-          })
-          .map(user => _appendBodyData(user));
+      if (Object.keys(filters).length === 0) {
+        tableBody
+          .css("position", "relative")
+          .empty()
+          .html(
+            `
+            <div class="table-overlay">
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <pre>Searching for results...</pre>
+            </div>
+            `
+          );
+
+        let usersFiltered = users.filter(user => {
+          return user["name"]["first"].toLowerCase().includes("polla");
+        });
+        setTimeout(() => {
+          if (usersFiltered.length > 0) {
+            tableBody.css("position", "static").empty();
+            usersFiltered.map(user => _appendBodyData(user));
+          } else {
+            tableBody.find("div.table-overlay").empty()
+              .html(`<div class="alert alert-warning" role="alert">
+             No results found
+          </div>`);
+          }
+        }, 1000);
       }
     }
 
