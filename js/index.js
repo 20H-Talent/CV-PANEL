@@ -45,9 +45,9 @@ function navLeft(event) {
     // document.getElementById("mySidenavLeft").style.width = "250px";
     // document.getElementById("main-left").style.marginLeft = "220px";
     // document.querySelector(".container-left").style.width = "250px";
-    document.getElementById("mySidenavLeft").style.width = "110px";
-    document.getElementById("main-left").style.marginLeft = "220px";
-    document.querySelector(".container-left").style.width = "110px";
+    document.getElementById("mySidenavLeft").style.width = "270px";
+    document.getElementById("main-left").style.marginLeft = "270px";
+    document.querySelector(".container-left").style.width = "270px";
     document.querySelector(".container-left").style.marginRight = "0px";
 
     // document.querySelector(".container-right").style.marginLeft = "0px";
@@ -129,25 +129,30 @@ function navRight(event) {
       // console.log(span);
       span.classList.replace("open", "close");
     }
-
   }
 }
 // ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
-    // --- TO SEE LIST OF USERS ---
+// --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
-listUsers.addEventListener('click', function(){
-  document.querySelector('#div-navbar').innerHTML = '';
-  document.querySelector('#div-navbar').innerHTML = `Se ha listado los usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+listUsers.addEventListener("click", function() {
+  document.querySelector("#div-navbar").innerHTML = "";
+  document.querySelector(
+    "#div-navbar"
+  ).innerHTML = `Se ha listado los usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE CREATE USER ---
 let buttonCreateUser = document.querySelector("#button-create-user");
-buttonCreateUser.addEventListener('click', function(){
-  document.querySelector('#div-navbar').innerHTML = '';
-  document.querySelector('#div-navbar').innerHTML = `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+buttonCreateUser.addEventListener("click", function() {
+  document.querySelector("#div-navbar").innerHTML = "";
+  document.querySelector(
+    "#div-navbar"
+  ).innerHTML = `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
 let submitSearch = document.querySelector("#submit_search");
-submitSearch.addEventListener('click', function(){
-  document.querySelector('#div-navbar').innerHTML = '';
-  document.querySelector('#div-navbar').innerHTML = `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+submitSearch.addEventListener("click", function() {
+  document.querySelector("#div-navbar").innerHTML = "";
+  document.querySelector(
+    "#div-navbar"
+  ).innerHTML = `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
