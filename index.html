@@ -40,14 +40,14 @@
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
                                     <ul class="pl-0 w-100">
-                                        <li id="list-users" class="sidebar-position mb-3 rounded">
+                                        <li id="list-users" class="sidebar-position mb-3 rounded" onclick="switchVisible('Div1')">
                                             <a href="#" class="p-1 pl-2">
-                                                <i class="fa fa-users mr-2" value="Click" onclick="switchVisible()"></i>
+                                                <i class="fa fa-users mr-2" value="Click"></i>
                                                 <span class="close">List Users</span>
                                             </a>
                                         </li>
                                         <div class="border-bottom border-dark mt-4 mb-3"></div>
-                                        <li class="mb-3 rounded" value="Click" onclick="switchVisible()">
+                                        <li class="mb-3 rounded" value="Click" onclick="switchVisible('Div2')">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-user-plus mr-2"></i>
                                                 <span class="close">Add User</span>
@@ -103,8 +103,11 @@
                     <div id="main" class=" table-wrapper-scroll-y container col-md-10  h-100">
                         <!-- Here we must put the table  -->
                         <!-- Table users -->
-                        <div class="col  text-center">
-                            <h4 class="mb-3 adduser">Add User</h4>
+                        <div class="col ">
+                            <div class="mb-3 adduser text-center">
+
+                                <h4 class="mb-3 text-center">Add User</h4>
+                            </div>
                             <div id="renderize" class="d-inline"></div>
                             <form id="alertform" action="getform.php" method="get" class="needs-validation col-md-12 ">
                                 <div class="row">
@@ -118,9 +121,9 @@
                                     </div>
                                     <div class="col-md-4 mb-4">
                                         <label for="LastName">Last name</label>
-                                        <input type="text" name="LastName" class="form-control" id="LastName" minlength="5"
-                                            maxlength="40" pattern="[a-zA-Z0-9\s]+" placeholder="required" value=""
-                                            required>
+                                        <input type="text" name="LastName" class="form-control" id="LastName" pattern="[a-zA-Z0-9\s]+"
+                                            x-moz-errormessage="Por favor, no utilice tildes en el nombre." placeholder="required"
+                                            value="" required>
                                         <div class="invalid-feedback">
                                             Valid last name is required.
                                         </div>
@@ -141,8 +144,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="email">Email <span class="text-muted"></span></label>
-                                    <input name="Email" type="email" pattern="[A-Za-z]{3,20}" class="form-control"
-                                        required id="email" placeholder="you@example.com">
+                                    <input name="Email" type="email" class="form-control" required id="email"
+                                        placeholder="you@example.com">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
@@ -156,19 +159,22 @@
                                             Age required
                                         </div>
                                     </div>
-                                    <div class="form-group d-inline col-md-6">
+                                    <div class="form-group d-inline col-md-6 text-center">
                                         <label class="col-sm-3 control-label gender" id="gender-required">Gender</label>
                                         <div class="d-block my-3 d-inline-block">
                                             <div class="custom-control custom-radio">
-                                                <input id="male" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="male" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="male">Male</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input id="female" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="female" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="female">Female</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input id="other" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="other" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="other">Other</label>
                                             </div>
                                         </div>
@@ -492,7 +498,7 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <div class="custom-control custom-checkbox">
+                                <div class="custom-control custom-checkbox ">
                                     <h4 class="mb-3">Skills</h4>
 
                                     <!-- Default inline 1-->
@@ -563,10 +569,10 @@
                                         <option value="Italian">Italian</option>
                                         <option value="Turkish">Turkish</option>
                                     </select>
-                                    <button id="button-create-user" class="btn btn-primary" type="button" onclick="showChoices()">
+                                    <button id="button-create-user" class="btn" type="button" onclick="showChoices()">
                                         Submit
                                     </button>
-                                    <button type="button" class=" btn btn-primary" onclick="reset()" value="Reset">Reset</button>
+                                    <button type="button" class=" btn " onclick="reset()" value="Reset">Reset</button>
                                     <div id="output"> </div>
                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                 </div>
@@ -591,8 +597,8 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <button class="btn btn-primary btn-lg btn-block" onclick="myFunction()" type="submit">Continue
-                                    to checkout
+                                <button class="btn  btn-lg btn-block" onclick="formErrors()" type="submit">Continue to
+                                    checkout
                                 </button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -835,9 +841,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-center mb-4">
-                                            <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill"><i
-                                                    class="fas fa-check-circle fa-4x"></i></button>
+                                        <div id="button_right" class="d-flex justify-content-center mb-5">
+                                            <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill mt-3">
+                                                <i class="fa fa-check-circle fa-3x"></i>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
