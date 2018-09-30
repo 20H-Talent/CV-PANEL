@@ -1,5 +1,6 @@
-//******Looping trought the errors of the inputs and inner them in to a list****//
-
+/*******************************************************************
+ * Looping trought the errors of the inputs and inner them in to a list,if not valids ***
+ *******************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
   var renderize = document.getElementById("renderize");
@@ -14,20 +15,14 @@ function formErrors() {
       var divMain = document.createElement("div");
       //giving a class to the div of boostrap
       divMain.className = "col-lg-2";
-      //creating the ul inside the div where the errors will appear
       var ul = document.createElement("ul");
-      //giving a class to the div of boostrap
       ul.className = " badge badge-danger";
-      //creating the li inside the ul where the errors will appear
       var li = document.createElement("li");
-      //giving a class to the div of boostrap
       li.className = "badge-danger";
-      //inserting the li on the ul
       ul.appendChild(li);
       //the li  will appear as messages of error if the input is invalid
       li.innerHTML =
         form.elements[i].name + " : " + form.elements[i].validationMessage;
-      //inserting the ul inside div
       divMain.appendChild(ul);
       //inserting the div where the errors are in to the div rederize that already exists in html
       document.getElementById("renderize").appendChild(divMain);
@@ -36,7 +31,9 @@ function formErrors() {
   //finish off the list and print it out
 } // end formErrors
 
-//***from multi-select****//
+/*******************************************************************
+ *  Putting in a list the selected languages/multi-slect***
+ *******************************************************************/
 function showChoices() {
   //retrieve data
   var selLanguage = document.getElementById("selLanguage");
@@ -58,14 +55,19 @@ function showChoices() {
   output.innerHTML = result;
 } // end showChoices
 
+/*******************************************************************
+ * Cleaning the content of the div before calling the function again ***
+ *******************************************************************/
 function reset() {
-  //Cleaning the content of the div before calling the function again
   var output = document.getElementById("output");
   output.innerHTML = "";
   var select = document.getElementById("selLanguage");
   select.reset();
 }
-//****showing the form when clicking the add user and showing the table user when clinking the list user***//
+
+/*******************************************************************
+ *  Showing the form when clicking the add user and showing the table user when clinking the list user***
+ *******************************************************************/
 function switchVisible(visible) {
   // console.log("div1", document.getElementById("Div1").style.display);
   // console.log("div2", document.getElementById("Div2").style.display);
