@@ -49,14 +49,27 @@ function reset() {
   var select = document.getElementById("selLanguage");
   select.reset();
 }
-function switchVisible() {
-  if (document.getElementById("Div1")) {
-    if (document.getElementById("Div1").style.display == "none") {
+function switchVisible(visible) {
+  console.log("div1", document.getElementById("Div1").style.display);
+  console.log("div2", document.getElementById("Div2").style.display);
+  switch (visible) {
+    case "Div1":
       document.getElementById("Div1").style.display = "block";
       document.getElementById("Div2").style.display = "none";
-    } else {
+      break;
+    case "Div2":
       document.getElementById("Div1").style.display = "none";
       document.getElementById("Div2").style.display = "block";
-    }
+      break;
+    default:
+      break;
   }
+  // if (document.getElementById("Div1")) {
+  //   if (document.getElementById("Div1").style.display == "none") {
+  //     document.getElementById("Div1").style.display = "block";
+  //     document.getElementById("Div2").style.display = "none";
+  //   } else {
+  //     document.getElementById("Div1").style.display = "none";
+  //     document.getElementById("Div2").style.display = "block";
+  //   }
 }

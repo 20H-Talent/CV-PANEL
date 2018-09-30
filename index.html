@@ -40,14 +40,14 @@
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
                                     <ul class="pl-0 w-100">
-                                        <li id="list-users" class="sidebar-position mb-3 rounded">
+                                        <li id="list-users" class="sidebar-position mb-3 rounded" onclick="switchVisible('Div1')">
                                             <a href="#" class="p-1 pl-2">
-                                                <i class="fa fa-users mr-2" value="Click" onclick="switchVisible()"></i>
+                                                <i class="fa fa-users mr-2" value="Click"></i>
                                                 <span class="close">List Users</span>
                                             </a>
                                         </li>
                                         <div class="border-bottom border-dark mt-4 mb-3"></div>
-                                        <li class="mb-3 rounded" value="Click" onclick="switchVisible()">
+                                        <li class="mb-3 rounded" value="Click" onclick="switchVisible('Div2')">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-user-plus mr-2"></i>
                                                 <span class="close">Add User</span>
@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="col-md-4 mb-4">
                                         <label for="LastName">Last name</label>
-                                        <input type="text" name="LastName" class="form-control" id="LastName" minlength="5" maxlength="40" pattern="[a-zA-Z0-9\s]+"
+                                        <input type="text" name="LastName" class="form-control" id="LastName" pattern="[a-zA-Z0-9\s]+" x-moz-errormessage="Por favor, no utilice tildes en el nombre."
                                             placeholder="required" value="" required>
                                         <div class="invalid-feedback">
                                             Valid last name is required.
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="email">Email <span class="text-muted"></span></label>
-                                    <input name="Email" type="email" pattern="[A-Za-z]{3,20}" class="form-control" required id="email" placeholder="you@example.com">
+                                    <input name="Email" type="email" class="form-control" required id="email" placeholder="you@example.com">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
