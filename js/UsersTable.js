@@ -60,9 +60,10 @@ const UsersTable = (function() {
      * @param {Object} filters - Conditions to render again the table with filtered data
      * @param {Array} data
      */
-    function renderTable(filters = {}, data = null) {
+    function renderTable(inputsData = [], data = null) {
       let users = data || JSON.parse(sessionStorage.getItem("users-list"));
       _showOverlay();
+      const filters = _buildFilters(inputsData);
 
       if (filters["gender"]) {
         users = users.filter(
@@ -171,12 +172,12 @@ const UsersTable = (function() {
     /**
      * Filter the inputs when the advanced search is used,
      * only inputs that aren't empty or checked are allowed
-     * @function filterInputs
+     * @function buildFilters
      * @public
      * @param {Array of jQuery objects} elements
      * @return {object} filters
      */
-    function filterInputs(elements) {
+    function _buildFilters(elements) {
       const filters = {};
       elements
         .filter((index, input) => {
@@ -220,8 +221,7 @@ const UsersTable = (function() {
       initTable,
       renderTable,
       getUserByEmail,
-      buildUserFullname,
-      filterInputs
+      buildUserFullname
     };
   }
 
@@ -237,21 +237,20 @@ const UsersTable = (function() {
 
 const usersTable = UsersTable.getInstance();
 
+//Submit event for the form that handle the advanced search
 $("form#advanced-search").on("submit", function(e) {
   e.preventDefault();
-  const filters = usersTable.filterInputs(
-    $(this).find("div.collapse.show input")
-  );
-  usersTable.renderTable(filters);
+  //Build the filters object to render the table with the new results
+  const formInputs = $(this).find("div.collapse.show input");
+  usersTable.renderTable(formInputs);
 });
 
-$("#userModal").on("show.bs.modal", function(e) {
-  const element = $(event.target);
+$("#userModal").on("show.bs.modal", function(event) {
+  const element = $(event.relatedTarget);
   const modal = $(this);
   const user = usersTable.getUserByEmail(element.data("user"));
 
   const { picture, name, login } = user;
-
   const fullName = usersTable.buildUserFullname(name);
 
   modal.find(".modal-title").text(fullName + " ~ " + login.username);
