@@ -16,9 +16,9 @@ function formErrors() {
       //giving a class to the div of boostrap
       divMain.className = "col-lg-2";
       var ul = document.createElement("ul");
-      ul.className = " badge badge-danger";
+      ul.className = " badge  badge-danger";
       var li = document.createElement("li");
-      li.className = "badge-danger";
+      li.className = "badge-danger font-weight-light text-light";
       ul.appendChild(li);
       //the li  will appear as messages of error if the input is invalid
       li.innerHTML =
@@ -53,14 +53,14 @@ function showChoices() {
         "</ul>" +
         '<div class="input-group mb-3">' +
         '<div class="input-group-prepend">' +
-        '<label class="input-group-text" for="inputGroupSelect01">Level</label>' +
+        '<label class="input-group-text  text-light bg-primary" for="inputGroupSelect01">Level</label>' +
         "</div>" +
-        '<select name="Language level" class="custom-select" id="inputGroupSelect01"   required>' +
+        '<select name="inputGroupSelect01" class="custom-select" id="inputGroupSelect01"   required>' +
         "<option selected>Choose one</option>" +
-        ' <option value="1">Basic</option>' +
-        ' <option value="2">Medium</option>' +
-        '<option value="3">Advanced</option>' +
-        '<option value="3">Native</option>' +
+        ' <option value="Basic">Basic</option>' +
+        ' <option value="Medium">Medium</option>' +
+        '<option value="Advanced">Advanced</option>' +
+        '<option value="Native">Native</option>' +
         "</select>" +
         "</div>";
     } // end if
