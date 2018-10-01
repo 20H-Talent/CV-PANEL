@@ -449,7 +449,9 @@ ul div[class*="border-dark"] {
 #age_user #age-range {
     width: 90%;
 }
-
+#age_user {
+  height: 80px;
+}
 #name_user,
 #last_name_user,
 #genre,
