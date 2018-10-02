@@ -22,10 +22,10 @@
     <header>
         <!-- Just an image -->
         <nav class="navbar text-white">
-            <a class="navbar-brand " href="#">
+            <a class="navbar-brand" href="#">
                 <img src="images/logo-curriculum-connections.png" width="120" height="40" alt="">
             </a>
-            <div id="div-navbar"></div>
+            <div id="div-navbar" class="close position-relative alert alert-info" role="alert"></div>
         </nav>
     </header>
     <main>
@@ -548,7 +548,7 @@
                                         <option value="Italian">Italian</option>
                                         <option value="Turkish">Turkish</option>
                                     </select>
-                                    <button id="button-create-user" class="btn" type="button" onclick="showChoices()">
+                                    <button class="btn" type="button" onclick="showChoices()">
                                         Submit
                                     </button>
                                     <button type="button" class=" btn " onclick="reset()" value="Reset">Reset</button>
@@ -574,7 +574,7 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <button class="btn  btn-lg btn-block" onclick="formErrors()" type="submit">Continue to checkout
+                                <button id="button-create-user" class="btn  btn-lg btn-block" onclick="formErrors()" type="submit">Continue to checkout
                                 </button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -649,7 +649,7 @@
                                     <form id="advanced-search">
                                         <div id="name_user" class="form-group collapse text-white p-2">
                                             <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Insert name" name="firstname">
+                                            <input type="text" class="form-control" id="name" placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
                                             <small>
                                                 Must be 3-15 characters long.
                                             </small>
@@ -658,7 +658,7 @@
                                             <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
                                                 Name
                                             </label>
-                                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name" name="lastname">
+                                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
                                         </div>
                                         <div id="genre" class="form-group collapse text-white p-2">
                                             <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>

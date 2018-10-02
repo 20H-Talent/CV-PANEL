@@ -23,6 +23,19 @@ html {
 .container-right {
     margin-left: 60px;
 }
+/* ****************
+    HEADER 
+*******************/
+
+.alert-close {
+    position: fixed;
+    left: 97%;
+    top: 1%;
+    color: rgb(119, 36, 119);
+}
+#div-navbar {
+    right: 3%;
+}
 
 /***************************/
 /*       LEFT SIDE        */
@@ -506,4 +519,12 @@ body {
     #submit_search {
         height: 40%;
     }
+    .alert-close {
+        position: fixed;
+        left: 94.6%;
+        top: 1%;
+    }  
+    #div-navbar {
+        right: 5%;
+    }  
 }

@@ -134,25 +134,37 @@ function navRight(event) {
 // ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
 // --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
+let divNavBar = document.querySelector("#div-navbar");
+let pdivNavBar = document.querySelector("#div-navbar p");
+let alertClose = document.querySelector('.alert-close');
+function closeNavbar(){
+  divNavBar.classList.replace('open', 'close');
+}
 listUsers.addEventListener("click", function() {
-  document.querySelector("#div-navbar").innerHTML = "";
-  document.querySelector(
-    "#div-navbar"
-  ).innerHTML = `Se ha listado los usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+  divNavBar.classList.replace('close', 'open'); 
+  divNavBar.innerHTML = '';
+  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
+  <i class="far fa-times-circle"></i>
+  </button>`;
+  divNavBar.innerHTML += `Se ha listado usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;    
 });
 // --- TO SEE CREATE USER ---
 let buttonCreateUser = document.querySelector("#button-create-user");
 buttonCreateUser.addEventListener("click", function() {
-  document.querySelector("#div-navbar").innerHTML = "";
-  document.querySelector(
-    "#div-navbar"
-  ).innerHTML = `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+  divNavBar.classList.replace('close', 'open'); 
+  divNavBar.innerHTML = '';
+  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
+  <i class="far fa-times-circle"></i>
+  </button>`;
+  divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
 let submitSearch = document.querySelector("#submit_search");
 submitSearch.addEventListener("click", function() {
-  document.querySelector("#div-navbar").innerHTML = "";
-  document.querySelector(
-    "#div-navbar"
-  ).innerHTML = `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+  divNavBar.classList.replace('close', 'open'); 
+  divNavBar.innerHTML = '';
+  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
+  <i class="far fa-times-circle"></i>
+  </button>`;
+  divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`
 });
