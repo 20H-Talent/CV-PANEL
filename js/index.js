@@ -98,9 +98,9 @@ function navRight(event) {
   if (icon.classList.toggle("active")) {
     // document.getElementById("mySidenavRight").style.width = "250px";
     // document.getElementById("main-right").style.marginRight = "220px";
-    document.getElementById("mySidenavRight").style.width = "250px";
+    document.getElementById("mySidenavRight").style.width = "400px";
     document.getElementById("main-right").style.marginRight = "220px";
-    document.querySelector(".container-right").style.width = "250px";
+    document.querySelector(".container-right").style.width = "400px";
     document.querySelector(".container-right").style.marginLeft = "0px";
     document.querySelector("#right-menu p").style.fontSize = "1rem";
 
