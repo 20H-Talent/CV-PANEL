@@ -38,7 +38,7 @@ function showChoices() {
   //retrieve data
   var selLanguage = document.getElementById("selLanguage");
   //set up output string
-  var result = "<h2>Your Languages</h2>";
+  var result = "<h4>Your Languages</h4>";
   result += "<ul>";
   //step through options
   for (i = 0; i < selLanguage.length; i++) {
