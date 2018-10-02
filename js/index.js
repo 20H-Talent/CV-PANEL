@@ -45,9 +45,9 @@ function navLeft(event) {
     // document.getElementById("mySidenavLeft").style.width = "250px";
     // document.getElementById("main-left").style.marginLeft = "220px";
     // document.querySelector(".container-left").style.width = "250px";
-    document.getElementById("mySidenavLeft").style.width = "270px";
-    document.getElementById("main-left").style.marginLeft = "270px";
-    document.querySelector(".container-left").style.width = "270px";
+    document.getElementById("mySidenavLeft").style.width = "170px";
+    document.getElementById("main-left").style.marginLeft = "170px";
+    document.querySelector(".container-left").style.width = "170px";
     document.querySelector(".container-left").style.marginRight = "0px";
 
     // document.querySelector(".container-right").style.marginLeft = "0px";
@@ -98,9 +98,9 @@ function navRight(event) {
   if (icon.classList.toggle("active")) {
     // document.getElementById("mySidenavRight").style.width = "250px";
     // document.getElementById("main-right").style.marginRight = "220px";
-    document.getElementById("mySidenavRight").style.width = "400px";
+    document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
-    document.querySelector(".container-right").style.width = "400px";
+    document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
     document.querySelector("#right-menu p").style.fontSize = "1rem";
 
@@ -136,23 +136,23 @@ function navRight(event) {
 let listUsers = document.querySelector("#list-users");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
-let alertClose = document.querySelector('.alert-close');
-function closeNavbar(){
-  divNavBar.classList.replace('open', 'close');
+let alertClose = document.querySelector(".alert-close");
+function closeNavbar() {
+  divNavBar.classList.replace("open", "close");
 }
 listUsers.addEventListener("click", function() {
-  divNavBar.classList.replace('close', 'open'); 
-  divNavBar.innerHTML = '';
+  divNavBar.classList.replace("close", "open");
+  divNavBar.innerHTML = "";
   divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
   <i class="far fa-times-circle"></i>
   </button>`;
-  divNavBar.innerHTML += `Se ha listado usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;    
+  divNavBar.innerHTML += `Se ha listado usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE CREATE USER ---
 let buttonCreateUser = document.querySelector("#button-create-user");
 buttonCreateUser.addEventListener("click", function() {
-  divNavBar.classList.replace('close', 'open'); 
-  divNavBar.innerHTML = '';
+  divNavBar.classList.replace("close", "open");
+  divNavBar.innerHTML = "";
   divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
   <i class="far fa-times-circle"></i>
   </button>`;
@@ -161,10 +161,10 @@ buttonCreateUser.addEventListener("click", function() {
 // --- TO SEE SEARCH OF USERS ---
 let submitSearch = document.querySelector("#submit_search");
 submitSearch.addEventListener("click", function() {
-  divNavBar.classList.replace('close', 'open'); 
-  divNavBar.innerHTML = '';
+  divNavBar.classList.replace("close", "open");
+  divNavBar.innerHTML = "";
   divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
   <i class="far fa-times-circle"></i>
   </button>`;
-  divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`
+  divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
