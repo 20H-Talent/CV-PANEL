@@ -3,11 +3,19 @@
  *******************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
+
   var renderize = document.getElementById("renderize");
+  //Go back to initial value/display
+  document.getElementById("renderize").style.display = "block";
   renderize.innerHTML = "";
   //getting the form by id
   var form = document.getElementById("alertform");
   //looping trought the elements of the form
+  for (i = 0; i < form.elements.length; i++) {
+    if (!form.elements[i].checkValidity()) {
+      form.elements[i].className = "form-control";
+    }
+  }
   for (i = 0; i < form.elements.length; i++) {
     //if the elemnts of the form are not valids
     if (!form.elements[i].checkValidity()) {
@@ -23,11 +31,16 @@ function formErrors() {
       //the li  will appear as messages of error if the input is invalid
       li.innerHTML =
         form.elements[i].name + " : " + form.elements[i].validationMessage;
+      form.elements[i].className = "form-control borderafter";
       divMain.appendChild(ul);
       //inserting the div where the errors are in to the div rederize that already exists in html
       document.getElementById("renderize").appendChild(divMain);
     } // end if
-  } // end for loop
+  }
+  setTimeout(function() {
+    console.log("se ejecuta esto?");
+    document.getElementById("renderize").style.display = "none";
+  }, 3000); // end for loop
   //finish off the list and print it out
 } // end formErrors
 

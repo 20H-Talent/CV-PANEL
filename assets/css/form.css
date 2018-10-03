@@ -87,3 +87,8 @@ body {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
     color: white;
 }
+
+.borderafter {
+    border: 1px solid red !important;
+    border-radius: 5px;
+}
