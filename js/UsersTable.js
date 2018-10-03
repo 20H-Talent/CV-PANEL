@@ -31,11 +31,12 @@ const UsersTable = (function() {
     function _setupLocalStorage(callback) {
       if (!sessionStorage.getItem("users-list")) {
         $.getJSON(getUsersURL, function(usersData) {
+          usersWithExtraData = _appendExtraData(usersData["results"]);
           sessionStorage.setItem(
             "users-list",
-            JSON.stringify(usersData["results"])
+            JSON.stringify(usersWithExtraData)
           );
-          callback(usersData["results"]);
+          callback(usersWithExtraData);
         }).fail(function(err) {
           throw new Error(err);
         });
@@ -144,7 +145,12 @@ const UsersTable = (function() {
           <div class="card-body">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="card-buttons text-right">
-            <button class="btn btn-dark">Editar</button>
+                <button class="btn btn-dark" data-user=${email} data-toggle="modal" data-target="#userModal">
+                    <i class="far fa-eye"></i>
+                </button>
+                <button class="btn btn-dark">
+                    <i class="far fa-edit"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -239,6 +245,57 @@ const UsersTable = (function() {
     };
   }
 
+  function _appendExtraData(usersData) {
+    const skills = [
+      "html5",
+      "css3",
+      "javascript",
+      "php",
+      "ruby",
+      "perl",
+      "java",
+      "C++",
+      "go",
+      "sass",
+      "python"
+    ];
+
+    const languages = [
+      "Afrikan",
+      "English",
+      "Spanish",
+      "Romanian",
+      "French",
+      "German",
+      "Italian",
+      "Turkish"
+    ];
+
+    console.log("users data: ", usersData);
+    usersWithExtraData = usersData.map(user => {
+      user["skills"] = [];
+      user["languages"] = [];
+
+      const skillsNumber = Math.floor(Math.random() * skills.length);
+      const languagesNumber = Math.floor(Math.random() * languages.length);
+
+      for (let index = 0; index <= skillsNumber; index++) {
+        user["skills"].push(skills[Math.floor(Math.random() * skills.length)]);
+      }
+      for (let index = 0; index <= languagesNumber; index++) {
+        user["languages"].push(
+          languages[Math.floor(Math.random() * languages.length)]
+        );
+      }
+
+      console.log(user["skills"], user["languages"]);
+      user["skills"] = Array.from(new Set(user["skills"]));
+      user["languages"] = Array.from(new Set(user["languages"]));
+      return user;
+    });
+    console.log(usersWithExtraData);
+    return usersWithExtraData;
+  }
   return {
     getInstance: function() {
       if (!instance) {

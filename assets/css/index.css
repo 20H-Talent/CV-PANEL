@@ -476,6 +476,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
+    height: 100vh;
   }
   .user-card {
     max-width: 18rem;
