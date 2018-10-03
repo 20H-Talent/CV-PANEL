@@ -12,7 +12,7 @@ function formErrors() {
   var form = document.getElementById("alertform");
   //looping trought the elements of the form
   for (i = 0; i < form.elements.length; i++) {
-    if (form.elements[i].checkValidity()) {
+    if (!form.elements[i].checkValidity()) {
       form.elements[i].className = "form-control .custom-control";
     }
   }

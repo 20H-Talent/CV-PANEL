@@ -99,3 +99,19 @@ body {
     -moz-transition: opacity 2s ease-in-out;
     -webkit-transition: opacity 2s ease-in-out;
 }
+
+.mb-4 {
+    margin-top: 40px;
+    border-top: 4px solid black !important;
+    margin-bottom: 0.2rem !important;
+}
+
+.hr-2 {
+    margin-top: 0 !important;
+    border-top: 1px solid black !important;
+    margin-bottom: 3.5rem !important;
+}
+
+.mb-3 {
+    margin-top: 40px;
+}
