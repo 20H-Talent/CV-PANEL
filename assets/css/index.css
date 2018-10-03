@@ -235,7 +235,7 @@ tbody td.user-email {
 tbody td.user-email,
 tbody td.username,
 tbody td.user-city {
-  max-width: 279px !important;
+  max-width: 10%;
 }
 
 tbody td.user-age {
