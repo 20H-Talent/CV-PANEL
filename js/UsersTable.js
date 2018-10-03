@@ -126,13 +126,37 @@ const UsersTable = (function() {
       } = user;
 
       let registeredDate = new Date(registered["date"]);
+      let userFullName = buildUserFullname(name);
 
-      tableBody.append(`
+      if (window.innerWidth < 768) {
+        const cardContainer = $("div.card-container");
+        tableBody.closest("div.table-responsive").remove();
+
+        cardContainer.append(
+          `<div class="card user-card">
+           <div class="card-header d-flex flex-row align-items-center">
+              <img class="img-fluid mr-2" src=${picture.medium} alt="test"/>
+             <div class="card-username">
+                <p>${userFullName}</p>
+                <p>${login.username}</p>
+             </div>
+           </div>
+          <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="card-buttons text-right">
+            <button class="btn btn-dark">Editar</button>
+            </div>
+          </div>
+        </div>
+       `
+        );
+      } else {
+        tableBody.append(`
         <tr scope="row" data-id="${id.value}">
             <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
             <img class="img-fluid" src=${picture.thumbnail} alt=${
-        name.first
-      } /></td>
+          name.first
+        } /></td>
             <td class="username">
                <p>${name.first} ${name.last}</p>
             </td>
@@ -143,6 +167,7 @@ const UsersTable = (function() {
             </td>
             <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
          </tr>`);
+      }
     }
 
     /**

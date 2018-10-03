@@ -471,6 +471,31 @@ body {
   padding-top: 4.5rem !important;
 }
 
+@media screen and (max-width: 768px) {
+  .card-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .user-card {
+    max-width: 18rem;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .user-card img {
+    border-radius: 50%;
+  }
+
+  .user-card .card-username p {
+    margin: 0;
+  }
+
+  .user-card .card-username p:last-child {
+    font-style: italic;
+  }
+}
+
 @media screen and (max-width: 1070px) {
   table#users-table {
     font-size: 0.7em;
