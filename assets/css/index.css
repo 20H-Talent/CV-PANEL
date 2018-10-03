@@ -14,6 +14,7 @@ html {
 .container-left,
 .container-right {
     transition: width 0.5s;
+  
 }
 
 .container-left {
@@ -174,6 +175,14 @@ html {
     .sidenav-right a {
         font-size: 18px;
     }
+
+/* 
+    .container-right {
+        display: none;
+
+    } */
+
+
 }
 
 .main-header .nav-link {
@@ -527,4 +536,60 @@ body {
     #div-navbar {
         right: 5%;
     }  
+}
+
+
+/*
+* La recomendación dice que primero se hace el diseño móvil y luego el resto. 
+* Por como se han ido dando las tareas aquí ocurre al revés. Debemos decidir como proceder.
+*/
+
+/**
+* MEDIA QUERY TABLET 
+*/
+
+/* @media (min-width:768px){
+
+} */
+
+/**
+* MEDIA QUERY DESKTOP 
+*/
+
+/* @media (min-width:1024px){
+
+} */
+
+/**
+* MEDIA QUERY MOBILE
+*/
+
+@media (max-width: 425px){
+
+    .container-right {
+        display: none;
+    }
+
+    .container-left {  /*Funciona con el form pero no con la tabla*/
+        transition: width 0.5s;
+        z-index: 1;
+    }
+
+}
+
+/**
+* MEDIA QUERY TABLET 
+*/
+
+@media (max-width: 768px){
+
+    .container-right {
+        display: none;
+    }
+
+    .container-left {  /*Funciona con el form pero no con la tabla*/
+        transition: width 0.5s;
+        z-index: 1;
+    }
+
 }

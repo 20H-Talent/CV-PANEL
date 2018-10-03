@@ -87,6 +87,51 @@ function navLeft(event) {
 }
 
 /*******************************
+ *  LEFT SIDE BAR MOBILE
+ *******************************/
+/**
+ * como demonios cambio de escucha en función del ancho de la pantalla 
+ * 
+ * Recuerda cambiar la clase del evento.
+ */
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeft);//aquí cabeza.
+
+function navLeftMobile(event) {
+  let icon = event.target;
+  if (icon.classList.toggle("active")) {
+
+    document.getElementById("mySidenavLeft").style.width = "370px";
+    document.getElementById("main-left").style.marginLeft = "370px";
+    document.querySelector(".container-left").style.width = "370px";
+    document.querySelector(".container-left").style.marginRight = "0px";
+
+    let spans = document.querySelectorAll("#left-menu span");
+
+    for (span of spans) {
+      span.classList.replace("close", "open");
+    }
+    
+  } else {
+    document.getElementById("mySidenavLeft").style.width = "50px";
+    document.getElementById("main-left").style.marginLeft = "0";
+    document.querySelector(".container-left").style.width = "50px";
+    document
+      .querySelector("#left-menu span")
+      .classList.replace("open", "close");
+    document.querySelector("#left-menu a").style.marginLeft = "0px";
+
+    let spans = document.querySelectorAll("#left-menu span");
+
+    for (span of spans) {
+      span.classList.replace("open", "close");
+    }
+  }
+}
+
+
+
+/*******************************
  *  RIGHT SIDE BAR
  *******************************/
 
