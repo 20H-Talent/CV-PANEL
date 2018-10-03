@@ -123,7 +123,10 @@ const UsersTable = (function() {
         phone,
         cell,
         login,
-        registered
+        registered,
+        skills,
+        languages,
+        frameworks
       } = user;
 
       let registeredDate = new Date(registered["date"]);
@@ -143,16 +146,40 @@ const UsersTable = (function() {
              </div>
            </div>
           <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="card-buttons text-right">
-                <button class="btn btn-dark" data-user=${email} data-toggle="modal" data-target="#userModal">
-                    <i class="far fa-eye"></i>
-                </button>
-                <button class="btn btn-dark">
-                    <i class="far fa-edit"></i>
-              </button>
-            </div>
+          <div class="card-subtitle">Skills</div>
+          <p class="card-text">
+          ${skills
+            .map(
+              skill =>
+                `<span class="badge badge-secondary mr-1">${skill}</span>`
+            )
+            .join("")}
+        </p>
+        <div class="card-subtitle">Languages</div>
+            <p class="card-text">
+            ${languages
+              .map(
+                language =>
+                  `<span class="badge badge-secondary mr-1">${language}</span>`
+              )
+              .join("")}
+            </p>
+            <div class="card-subtitle">Frameworks</div>
+              ${frameworks
+                .map(
+                  framework =>
+                    `<span class="badge badge-secondary mr-1">${framework}</span>`
+                )
+                .join("")}
           </div>
+          <div class="card-footer card-buttons text-right">
+          <button class="btn btn-dark" data-user=${email} data-toggle="modal" data-target="#userModal">
+              <i class="far fa-eye"></i>
+          </button>
+          <button class="btn btn-dark">
+              <i class="far fa-edit"></i>
+        </button>
+      </div>
         </div>
        `
         );
@@ -271,31 +298,39 @@ const UsersTable = (function() {
       "Turkish"
     ];
 
-    console.log("users data: ", usersData);
+    const frameworks = [
+      "django",
+      "ruby on rails",
+      "react",
+      "angular",
+      "vue",
+      "laravel"
+    ];
+
     usersWithExtraData = usersData.map(user => {
-      user["skills"] = [];
-      user["languages"] = [];
+      let skillsGenerated = _generateExtraData(skills);
+      let languagesGenerated = _generateExtraData(languages);
+      let frameworksGenerated = _generateExtraData(frameworks);
 
-      const skillsNumber = Math.floor(Math.random() * skills.length);
-      const languagesNumber = Math.floor(Math.random() * languages.length);
+      user["skills"] = Array.from(skillsGenerated);
+      user["languages"] = Array.from(languagesGenerated);
+      user["frameworks"] = Array.from(frameworksGenerated);
 
-      for (let index = 0; index <= skillsNumber; index++) {
-        user["skills"].push(skills[Math.floor(Math.random() * skills.length)]);
-      }
-      for (let index = 0; index <= languagesNumber; index++) {
-        user["languages"].push(
-          languages[Math.floor(Math.random() * languages.length)]
-        );
-      }
-
-      console.log(user["skills"], user["languages"]);
-      user["skills"] = Array.from(new Set(user["skills"]));
-      user["languages"] = Array.from(new Set(user["languages"]));
       return user;
     });
-    console.log(usersWithExtraData);
+
     return usersWithExtraData;
   }
+
+  function _generateExtraData(data) {
+    const numberOfItems = Math.floor(Math.random() * data.length);
+    const extraData = [];
+    for (let index = 0; index <= numberOfItems; index++) {
+      extraData.push(data[Math.floor(Math.random() * data.length)]);
+    }
+    return new Set(extraData);
+  }
+
   return {
     getInstance: function() {
       if (!instance) {

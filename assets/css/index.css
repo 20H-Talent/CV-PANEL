@@ -479,7 +479,7 @@ body {
     height: 100vh;
   }
   .user-card {
-    max-width: 18rem;
+    width: 28rem;
     margin-right: 0.5em;
     margin-bottom: 0.5em;
   }
@@ -494,6 +494,25 @@ body {
 
   .user-card .card-username p:last-child {
     font-style: italic;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .card-container {
+    width: 100%;
+  }
+
+  .card-container img {
+    width: 50px;
+    height: auto;
+  }
+
+  .card-container .user-card {
+    font-size: 0.8em;
+  }
+
+  .card-container .user-card button {
+    font-size: 0.8em;
   }
 }
 
