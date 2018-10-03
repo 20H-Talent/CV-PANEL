@@ -109,9 +109,9 @@ body {
 .hr-2 {
     margin-top: 0 !important;
     border-top: 1px solid black !important;
-    margin-bottom: 3.5rem !important;
+    margin-bottom: 1.5rem !important;
 }
 
-.mb-3 {
-    margin-top: 40px;
-}
+/* .mb-3 {
+    margin-top: 20px;
+} */

@@ -8,12 +8,13 @@ function formErrors() {
   //Go back to initial value/display
   document.getElementById("renderize").style.display = "block";
   renderize.innerHTML = "";
+  document.getElementById("renderize").style.opacity = "100";
   //getting the form by id
   var form = document.getElementById("alertform");
   //looping trought the elements of the form
   for (i = 0; i < form.elements.length; i++) {
-    if (!form.elements[i].checkValidity()) {
-      form.elements[i].className = "form-control .custom-control";
+    if (form.elements[i].checkValidity()) {
+      form.elements[i].className = "form-control custom-control";
     }
   }
   for (i = 0; i < form.elements.length; i++) {
@@ -39,8 +40,9 @@ function formErrors() {
   }
   setTimeout(function() {
     console.log("se ejecuta esto?");
+    document.getElementById("renderize").style.opacity = "0";
     document.getElementById("renderize").style.display = "none";
-  }, 3000); // end for loop
+  }, 5000); // end for loop
   //finish off the list and print it out
 } // end formErrors
 
