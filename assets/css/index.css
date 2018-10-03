@@ -282,7 +282,7 @@ tbody td.user-city i {
 
 .table-wrapper-scroll-y {
     display: block;
-    max-height: 875px;
+    max-height: 100vh;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
