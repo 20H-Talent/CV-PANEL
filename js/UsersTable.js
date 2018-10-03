@@ -130,29 +130,18 @@ const UsersTable = (function() {
       tableBody.append(`
         <tr scope="row" data-id="${id.value}">
             <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
-            <img src=${picture.medium} alt=${
+            <img class="img-fluid" src=${picture.thumbnail} alt=${
         name.first
-      } data-user=${email} /></td>
+      } /></td>
             <td class="username">
                <p>${name.first} ${name.last}</p>
-               <p><i class="fas fa-address-card"></i> <em>${
-                 login.username
-               }</em></p>
-
             </td>
             <td class="user-age">${dob.age}</td>
             <td class="user-email"><a href="mailto:${email}">${email}</a></td>
-            <td class="user-phone">
-              <a href="tel:${phone}"><i class="fas fa-phone"></i> ${phone}</a>
-              <a href="tel:${cell}"><i class="fas fa-mobile-alt"></i> ${cell}</a>
-            </td>
             <td class="user-city">
-            <p><i class="fas fa-city"></i> ${location.city} ~ ${
-        location.postcode
-      }</p>
-            <p><i class="fas fa-map-marked"></i> ${location.street}</p>
+            <p><i class="fas fa-city"></i> ${location.city}</p>
             </td>
-            <td class="user-registered">${registeredDate.toLocaleDateString()} ~ ${registeredDate.toLocaleTimeString()}</td>
+            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
          </tr>`);
     }
 
