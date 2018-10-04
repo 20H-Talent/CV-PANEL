@@ -11,10 +11,11 @@ function formErrors() {
   document.getElementById("renderize").style.opacity = "100";
   //getting the form by id
   var form = document.getElementById("alertform");
+  var input = document.querySelectorAll("input[type=text]");
   //looping trought the elements of the form
-  for (i = 0; i < form.elements.length; i++) {
-    if (form.elements[i].checkValidity()) {
-      form.elements[i].className = "form-control custom-control";
+  for (i = 0; i < input.length; i++) {
+    if (input[i].checkValidity()) {
+      input[i].className = "form-control custom-control";
     }
   }
   for (i = 0; i < form.elements.length; i++) {
