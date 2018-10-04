@@ -97,6 +97,16 @@ html {
   /* padding: 20px; */
 }
 
+#users-table {
+  display: block;
+  width: 100%;
+  font-family: Source Sans Pro, Arial, serif;
+}
+
+.card-container > .user-card {
+  display: none;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   /* .sidenav-left {padding-top: 15px;} */
@@ -184,16 +194,11 @@ html {
   background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
-table#users-table {
-  width: 100%;
-  font-family: Source Sans Pro, Arial, serif;
-}
-
-table#users-table thead {
+#users-table thead {
   position: relative;
 }
 
-table#users-table thead tr:first-child th {
+#users-table thead tr:first-child th {
   position: sticky;
   top: 0;
   z-index: 10;
@@ -203,13 +208,13 @@ table#users-table thead tr:first-child th {
   background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }
 
-table#users-table tbody td:first-child {
+#users-table tbody td:first-child {
   text-align: center;
   padding: 0;
   cursor: pointer;
 }
 
-table#users-table tbody td:first-child > img {
+#users-table tbody td:first-child > img {
   border-radius: 50%;
   padding: 0.5em 0.5em 0 0.5em;
 }
@@ -230,12 +235,6 @@ tbody td.username p {
 
 tbody td.user-email {
   text-align: left;
-}
-
-tbody td.user-email,
-tbody td.username,
-tbody td.user-city {
-  max-width: 10%;
 }
 
 tbody td.user-age {
@@ -478,7 +477,9 @@ body {
     -ms-overflow-style: -ms-autohiding-scrollbar;
     height: 100vh;
   }
-  .user-card {
+
+  .card-container > .user-card {
+    display: block;
     width: 28rem;
     margin-right: 0.5em;
     margin-bottom: 0.5em;
@@ -494,6 +495,10 @@ body {
 
   .user-card .card-username p:last-child {
     font-style: italic;
+  }
+
+  #users-table {
+    display: none;
   }
 }
 
@@ -517,7 +522,7 @@ body {
 }
 
 @media screen and (max-width: 1070px) {
-  table#users-table {
+  #users-table {
     font-size: 0.7em;
   }
 }

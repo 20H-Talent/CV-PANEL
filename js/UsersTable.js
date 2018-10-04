@@ -16,8 +16,8 @@ const UsersTable = (function() {
    */
   function init() {
     //DOM active elements
-    const table = $(".table-responsive > table#users-table");
-    const tableBody = table.find("tbody");
+    const mainContainer = $("#data-column");
+
     //RESOURCE ENDPOINT
     const getUsersURL = `https://randomuser.me/api/?results=100&nat=ES`;
 
@@ -32,10 +32,12 @@ const UsersTable = (function() {
       if (!sessionStorage.getItem("users-list")) {
         $.getJSON(getUsersURL, function(usersData) {
           usersWithExtraData = _appendExtraData(usersData["results"]);
+
           sessionStorage.setItem(
             "users-list",
             JSON.stringify(usersWithExtraData)
           );
+
           callback(usersWithExtraData);
         }).fail(function(err) {
           throw new Error(err);
@@ -100,9 +102,13 @@ const UsersTable = (function() {
      * @private
      */
     function _showOverlay() {
-      tableBody.css("position", "relative").empty()
-        .html(`<div class="table-overlay">
-          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      const container =
+        window.innerWidth > 768
+          ? $("#users-table > table").find("tbody")
+          : mainContainer;
+
+      container.empty().html(`<div class="table-overlay">
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>`);
     }
 
@@ -120,8 +126,6 @@ const UsersTable = (function() {
         name,
         location,
         dob,
-        phone,
-        cell,
         login,
         registered,
         skills,
@@ -132,12 +136,26 @@ const UsersTable = (function() {
       let registeredDate = new Date(registered["date"]);
       let userFullName = buildUserFullname(name);
 
-      if (window.innerWidth < 768) {
-        const cardContainer = $("div.card-container");
-        tableBody.closest("div.table-responsive").remove();
+      const tableBody = mainContainer.find("#users-table  tbody");
+      tableBody.append(`
+        <tr scope="row" data-id="${id.value}">
+            <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
+            <img class="img-fluid" src=${picture.thumbnail} alt=${
+        name.first
+      } /></td>
+            <td class="username">
+               <p>${name.first} ${name.last}</p>
+            </td>
+            <td class="user-age">${dob.age}</td>
+            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
+            <td class="user-city">
+            <p><i class="fas fa-city"></i> ${location.city}</p>
+            </td>
+            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
+         </tr>`);
 
-        cardContainer.append(
-          `<div class="card user-card">
+      mainContainer.append(
+        `<div class="card user-card">
            <div class="card-header d-flex flex-row align-items-center">
               <img class="img-fluid mr-2" src=${picture.medium} alt="test"/>
              <div class="card-username">
@@ -182,25 +200,7 @@ const UsersTable = (function() {
       </div>
         </div>
        `
-        );
-      } else {
-        tableBody.append(`
-        <tr scope="row" data-id="${id.value}">
-            <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
-            <img class="img-fluid" src=${picture.thumbnail} alt=${
-          name.first
-        } /></td>
-            <td class="username">
-               <p>${name.first} ${name.last}</p>
-            </td>
-            <td class="user-age">${dob.age}</td>
-            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
-            <td class="user-city">
-            <p><i class="fas fa-city"></i> ${location.city}</p>
-            </td>
-            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
-         </tr>`);
-      }
+      );
     }
 
     /**
