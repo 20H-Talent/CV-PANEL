@@ -403,14 +403,13 @@ ul div[class*="border-dark"] {
 }
 
 /* ----------- LATERAL RIGHT MENU ----------- */
-#languages label {
-    font-size: 1rem;
-}
 
 #languages div label {
     font-size: 0.8rem;
 }
-
+#languages div div {
+   width: 70%;
+}
 #skills label {
     font-size: 1rem;
     color: white;
@@ -460,10 +459,17 @@ ul div[class*="border-dark"] {
 }
 
 #age_user #age-range {
-    width: 90%;
+    width: 60%;
+}
+#age_user #age {
+    padding-top: 0;
 }
 #age_user {
-  height: 80px;
+  height: 50px;
+}
+#genre div {
+    width: 70%;
+    /* background-color: red; */
 }
 #name_user,
 #last_name_user,
@@ -513,11 +519,11 @@ body {
     }
 
     #button_right {
-        height: 80px;
+        height: 65px;
     }
 
     #submit_search {
-        height: 40%;
+        height: 56%;
     }
     .alert-close {
         position: fixed;
