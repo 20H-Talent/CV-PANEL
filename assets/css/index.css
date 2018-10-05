@@ -538,28 +538,6 @@ body {
     }  
 }
 
-
-/*
-* La recomendación dice que primero se hace el diseño móvil y luego el resto. 
-* Por como se han ido dando las tareas aquí ocurre al revés. Debemos decidir como proceder.
-*/
-
-/**
-* MEDIA QUERY TABLET 
-*/
-
-/* @media (min-width:768px){
-
-} */
-
-/**
-* MEDIA QUERY DESKTOP 
-*/
-
-/* @media (min-width:1024px){
-
-} */
-
 /**
 * MEDIA QUERY MOBILE
 */
@@ -588,6 +566,7 @@ body {
     }
 
     .container-left {  /*Funciona con el form pero no con la tabla*/
+        position: absolute;
         transition: width 0.5s;
         z-index: 1;
     }
