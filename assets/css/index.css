@@ -46,12 +46,9 @@ html {
     height: 100%; /* 100% Full-height */
     width: 50px; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    /*z-index: 1; /* Stay on top */
-    /*top: 0; /* Stay at the top */
     left: 0;
     background-color: transparent;
     overflow-x: hidden; /* Disable horizontal scroll */
-    /* padding-top: 60px; Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 
     overflow-y: hidden;
@@ -62,12 +59,9 @@ html {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
 
-    /* font-size: 25px; */
     color: #818181;
     display: block;
     transition: 0.3s;
-
-    /* margin-left: 50px; */
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -75,14 +69,6 @@ html {
     color: #f1f1f1;
 }
 
-/* Position and style the CLOSE button (left side bar, top right corner) */
-/* .sidenav-left .closebtn-left {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    font-size: 36px;
-    /* margin-right: 50px; */
-/* }  */
 /* Position and style the OPEN button (left side bar, top right corner) */
 .sidenav-left .openbtn-left {
     position: absolute;
@@ -95,8 +81,6 @@ html {
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main-left {
     transition: margin-left 0.5s;
-
-    /* padding: 20px; */
 }
 
 #users-table {
@@ -111,7 +95,6 @@ html {
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    /* .sidenav-left {padding-top: 15px;} */
     .sidenav-left a {
         font-size: 18px;
     }
@@ -126,12 +109,9 @@ html {
     height: 100%; /* 100% Full-height */
     width: 70px; /*0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    /*z-index: 1; /* Stay on top */
-    /* top: 0; Stay at the top */
     right: 0;
     background-color: transparent;
 
-    /* padding-top: 30px; Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
@@ -141,12 +121,9 @@ html {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
 
-    /* font-size: 25px; */
     color: #818181;
     display: block;
     transition: 0.3s;
-
-    /* margin-left: 50px; */
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -154,20 +131,12 @@ html {
     color: #f1f1f1;
 }
 
-/* Position and style the CLOSE button (right side bar, top left corner) */
-/* .sidenav-right .closebtn-right {
-    position: absolute;
-    top: 50px;
-    left: -25px;
-    font-size: 36px;
-    margin-left: 0;
-} */
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
     position: absolute;
     top: 0;
     left: -25px;
-    font-size: 36px;
+    /* font-size: 36px; */
     margin-left: 0;
 }
 
@@ -360,7 +329,6 @@ section {
 #left-menu li {
     list-style: none;
 
-    /* text-align: center; */
 }
 
 #left-menu li:hover {
@@ -382,14 +350,13 @@ ul div[class*="border-dark"] {
 }
 
 /* ----------- LATERAL RIGHT MENU ----------- */
-#languages label {
-    font-size: 1rem;
-}
 
 #languages div label {
     font-size: 0.8rem;
 }
-
+#languages div div {
+   width: 70%;
+}
 #skills label {
     font-size: 1rem;
     color: white;
@@ -415,23 +382,25 @@ ul div[class*="border-dark"] {
     background-color: rgb(209, 91, 209);
 }
 
-#right-menu p {
-    padding-top: 60px;
-}
+/* #right-menu p {
+    padding-top: 30px;
+} */
+ #right-menu p {
+    margin-top: 20px;
+    opacity: 0;
+} 
+
 
 #right-menu a {
     text-decoration: none;
     color: white;
     display: list-item;
 
-    /* background-color: purple; */
     font-size: 0.7rem;
 }
 
 #right-menu li {
     list-style: none;
-
-    /* text-align: center; */
 }
 
 #right-menu input {
@@ -439,27 +408,37 @@ ul div[class*="border-dark"] {
 }
 
 #age_user #age-range {
-    width: 90%;
+    width: 60%;
+}
+#age_user #age {
+    padding-top: 0;
 }
 
 #age_user {
-    height: 80px;
+  height: 50px;
 }
-
-#name_user,
+#genre div {
+    width: 70%;
+    /* background-color: red; */
+}
+#button_right {
+    height: 70px;
+}
+/* #name_user,
 #last_name_user,
 #genre,
 #age_user,
 #experience,
 #languages,
 #skills {
-    background-color: rgba(114, 78, 173, 0.596);
+    background-color: rgba(114, 78, 173, 0.596); 
     border: 1px solid black;
-}
+} */
 
 #submit_search {
     background-color: none;
-    margin-bottom: 4rem !important;
+    /* margin-bottom: 4rem !important; */
+    height: 56%;
 }
 
 .open {
@@ -545,17 +524,11 @@ body {
     #mySidenavRight {
         overflow-y: auto;
     }
-
+    #mySidenavRight a {
+        z-index: 1;
+    }
     #mySidenavRight form {
         position: relative;
-    }
-
-    #button_right {
-        height: 80px;
-    }
-
-    #submit_search {
-        height: 40%;
     }
 
     .alert-close {
