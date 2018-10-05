@@ -126,7 +126,13 @@ function switchVisible(visible) {
 /**************************************************************************
  * Setting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
-function editForm(data) {
+function editForm(event) {
+  const element = $(event.currentTarget);
+  const property = element.is("tr")
+    ? element.data("id")
+    : element.data("email");
+  const data = usersTable.getUserByEmailOrID(property);
+
   document.getElementById("Username").value = data.login.username;
   document.getElementById("FirstName").value = data.name.first;
   document.getElementById("LastName").value = data.name.last;
