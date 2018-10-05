@@ -1,6 +1,6 @@
-/*******************************************************************
+/***************************************************************************************
  * Looping trought the errors of the inputs and inner them in to a list,if not valids ***
- *******************************************************************/
+ ***************************************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
 
@@ -89,9 +89,9 @@ function showChoices() {
   output.innerHTML = result;
 } // end showChoices
 
-/*******************************************************************
+/***********************************************************************
  * Cleaning the content of the div before calling the function again ***
- *******************************************************************/
+ ***********************************************************************/
 function reset() {
   var output = document.getElementById("output");
   output.innerHTML = "";
@@ -99,9 +99,9 @@ function reset() {
   select.reset();
 }
 
-/*******************************************************************
+/*********************************************************************************************************
  *  Showing the form when clicking the add user and showing the table user when clinking the list user***
- *******************************************************************/
+ *********************************************************************************************************/
 function switchVisible(visible) {
   // console.log("div1", document.getElementById("Div1").style.display);
   // console.log("div2", document.getElementById("Div2").style.display);
@@ -121,4 +121,35 @@ function switchVisible(visible) {
     default:
       break;
   }
+}
+
+/**************************************************************************
+ * Charging the values of the table and adding them in the inputs of the form on click***
+ **************************************************************************/
+function editForm(data) {
+  console.log("data", data);
+  var form = document.getElementById("alertform");
+  console.log("form", form);
+  document.getElementById("Username").value = data.login.username;
+  document.getElementById("FirstName").value = data.name.first;
+  document.getElementById("LastName").value = data.name.last;
+  document.getElementById("email").value = data.email;
+  document.getElementById("age1").value = data.dob.age;
+  document.getElementById("tel").value = data.phone;
+  document.getElementById("country").value = data.location.state;
+  document.getElementById("city").value = data.location.city;
+  document.getElementById("zip").value = data.location.postcode;
+  document.getElementById("address").value = data.location.street;
+  document.getElementById(data.gender).checked = true;
+
+  for (var i = 0; i < data.skills.length; i++) {
+    document.getElementById(data.skills[i] + "1").checked = true;
+  }
+  var lang = document.getElementById("selLanguage");
+  for (var i = 0; i < lang.options.length; i++) {
+    if (data.languages.indexOf(lang.options[i].value) > -1) {
+      lang.options[i].selected = true;
+    }
+  }
+  switchVisible("Div2");
 }
