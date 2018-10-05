@@ -599,3 +599,17 @@ body {
     }
 
 }
+
+/****************************************
+* Modal elements style.
+*****************************************/ 
+
+.item-modal {
+  display: inline-flex;
+  border-radius: 6px;
+  /* display: inline-block; */
+  background: #0399ff;
+  color: white;
+  padding: 5px 10px;
+  margin: 2px;
+}
