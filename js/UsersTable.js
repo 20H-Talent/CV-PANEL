@@ -67,6 +67,7 @@ const UsersTable = (function() {
       let users = data || JSON.parse(sessionStorage.getItem("users-list"));
       _showOverlay();
       const filters = _buildFilters(inputsData);
+      const tableBody = mainContainer.find("#users-table  tbody");
 
       if (filters["gender"]) {
         users = users.filter(
@@ -139,10 +140,10 @@ const UsersTable = (function() {
 
       tableBody.append(`
       <tr scope="row" data-id=${id.value}>
-        <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
-              <img class="img-fluid" src=${picture.thumbnail} alt=${
-        name.first
-      } /></td>
+        <td class="user-avatar" data-email=${email} data-toggle="modal" data-target="#userModal">
+              <img data-email=${email} class="img-fluid" src=${
+        picture.thumbnail
+      } alt=${name.first} /></td>
               <td class="username">
                 <p>${name.first} ${name.last}</p>
               </td>
@@ -378,7 +379,11 @@ $("#data-column")
 $("#userModal").on("show.bs.modal", function(event) {
   const element = $(event.relatedTarget);
   const modal = $(this);
-  const user = usersTable.getUserByEmailOrID(element.data("email"));
+  const user = usersTable.getUserByEmailOrID(
+    element.data("email")
+      ? element.data("email")
+      : $(event.currentTarget).data("email")
+  );
 
   const { picture, name, login } = user;
   const fullName = usersTable.buildUserFullname(name);
