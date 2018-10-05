@@ -136,26 +136,24 @@ const UsersTable = (function() {
       let registeredDate = new Date(registered["date"]);
       let userFullName = buildUserFullname(name);
       const tableBody = mainContainer.find("#users-table  tbody");
-      let tr = document.createElement("tr");
-      tr.innerHTML = `<td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
-            <img class="img-fluid" src=${picture.thumbnail} alt=${
+
+      tableBody.append(`
+      <tr scope="row" data-id=${id.value}>
+        <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
+              <img class="img-fluid" src=${picture.thumbnail} alt=${
         name.first
       } /></td>
-            <td class="username">
-               <p>${name.first} ${name.last}</p>
-            </td>
-            <td class="user-age">${dob.age}</td>
-            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
-            <td class="user-city">
-            <p><i class="fas fa-city"></i> ${location.city}</p>
-            </td>
-            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>`;
-      tr.setAttribute("data-id", id.value);
-      tr.setAttribute("scope", "row");
-      tr.onclick = function() {
-        editForm(user);
-      };
-      tableBody.append(tr);
+              <td class="username">
+                <p>${name.first} ${name.last}</p>
+              </td>
+              <td class="user-age">${dob.age}</td>
+              <td class="user-email"><a href="mailto:${email}">${email}</a></td>
+              <td class="user-city">
+              <p><i class="fas fa-city"></i> ${location.city}</p>
+              </td>
+              <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
+            </tr>
+            `);
 
       mainContainer.append(
         `<div class="card user-card">
@@ -194,10 +192,10 @@ const UsersTable = (function() {
                 .join("")}
           </div>
           <div class="card-footer card-buttons text-right">
-          <button class="btn btn-dark" data-user=${email} data-toggle="modal" data-target="#userModal">
+          <button class="btn btn-dark" data-email=${email} data-toggle="modal" data-target="#userModal">
               <i class="far fa-eye"></i>
           </button>
-          <button class="btn btn-dark">
+          <button class="btn btn-dark card-edit-button" data-email=${email}>
               <i class="far fa-edit"></i>
         </button>
       </div>
@@ -213,12 +211,26 @@ const UsersTable = (function() {
      * @param {string} email
      * @return {object} User
      */
-    function getUserByEmail(email) {
-      return JSON.parse(sessionStorage.getItem("users-list")).find(
-        user => user.email === email
-      );
+    function getUserByEmailOrID(value) {
+      if (value.includes("@")) {
+        return JSON.parse(sessionStorage.getItem("users-list")).find(
+          user => user.email === value
+        );
+      } else {
+        return JSON.parse(sessionStorage.getItem("users-list")).find(
+          user => user.id.value === value
+        );
+      }
     }
 
+    /**
+     * Get a user object by the email.
+     * @function getUserByEmail
+     * @public
+     * @param {string} email
+     * @return {object} User
+     */
+    function getUserById(id) {}
     /**
      * Filter the inputs when the advanced search is used,
      * only inputs that aren't empty or checked are allowed
@@ -267,71 +279,71 @@ const UsersTable = (function() {
       return fullName;
     }
 
+    function _appendExtraData(usersData) {
+      const skills = [
+        "html5",
+        "css3",
+        "javascript",
+        "php",
+        "ruby",
+        "perl",
+        "java",
+        "C++",
+        "go",
+        "sass",
+        "python"
+      ];
+
+      const languages = [
+        "Afrikan",
+        "English",
+        "Spanish",
+        "Romanian",
+        "French",
+        "German",
+        "Italian",
+        "Turkish"
+      ];
+
+      const frameworks = [
+        "django",
+        "ruby on rails",
+        "react",
+        "angular",
+        "vue",
+        "laravel"
+      ];
+
+      usersWithExtraData = usersData.map(user => {
+        let skillsGenerated = _generateExtraData(skills);
+        let languagesGenerated = _generateExtraData(languages);
+        let frameworksGenerated = _generateExtraData(frameworks);
+
+        user["skills"] = Array.from(skillsGenerated);
+        user["languages"] = Array.from(languagesGenerated);
+        user["frameworks"] = Array.from(frameworksGenerated);
+
+        return user;
+      });
+
+      return usersWithExtraData;
+    }
+
+    function _generateExtraData(data) {
+      const numberOfItems = Math.floor(Math.random() * data.length);
+      const extraData = [];
+      for (let index = 0; index <= numberOfItems; index++) {
+        extraData.push(data[Math.floor(Math.random() * data.length)]);
+      }
+      return new Set(extraData);
+    }
+
     return {
       initTable,
       renderTable,
-      getUserByEmail,
+      getUserByEmailOrID,
       buildUserFullname
     };
-  }
-
-  function _appendExtraData(usersData) {
-    const skills = [
-      "html5",
-      "css3",
-      "javascript",
-      "php",
-      "ruby",
-      "perl",
-      "java",
-      "C++",
-      "go",
-      "sass",
-      "python"
-    ];
-
-    const languages = [
-      "Afrikan",
-      "English",
-      "Spanish",
-      "Romanian",
-      "French",
-      "German",
-      "Italian",
-      "Turkish"
-    ];
-
-    const frameworks = [
-      "django",
-      "ruby on rails",
-      "react",
-      "angular",
-      "vue",
-      "laravel"
-    ];
-
-    usersWithExtraData = usersData.map(user => {
-      let skillsGenerated = _generateExtraData(skills);
-      let languagesGenerated = _generateExtraData(languages);
-      let frameworksGenerated = _generateExtraData(frameworks);
-
-      user["skills"] = Array.from(skillsGenerated);
-      user["languages"] = Array.from(languagesGenerated);
-      user["frameworks"] = Array.from(frameworksGenerated);
-
-      return user;
-    });
-
-    return usersWithExtraData;
-  }
-
-  function _generateExtraData(data) {
-    const numberOfItems = Math.floor(Math.random() * data.length);
-    const extraData = [];
-    for (let index = 0; index <= numberOfItems; index++) {
-      extraData.push(data[Math.floor(Math.random() * data.length)]);
-    }
-    return new Set(extraData);
   }
 
   return {
@@ -354,28 +366,36 @@ $("form#advanced-search").on("submit", function(e) {
   usersTable.renderTable(formInputs);
 });
 
+//This events triggers the editForm function
+$("#data-column > #users-table")
+  .find("tbody")
+  .on("click", "tr", editForm);
+
+$("#data-column")
+  .find(".user-card")
+  .on("click", "button.card-edit-button", editForm);
+
 $("#userModal").on("show.bs.modal", function(event) {
   const element = $(event.relatedTarget);
   const modal = $(this);
-  const user = usersTable.getUserByEmail(element.data("user"));
+  const user = usersTable.getUserByEmailOrID(element.data("email"));
 
   const { picture, name, login } = user;
   const fullName = usersTable.buildUserFullname(name);
 
   modal.find(".modal-title").text(fullName + " ~ " + login.username);
   modal.find(".modal-body img").prop("src", picture["large"]);
-  
+
   //Add info to the modal window. Shows the main information (FUll name, age, email) of the selected user.
- 
+
   modal.find("#infoUserModal-1").text("Full Name: " + fullName);
   modal.find("#infoUserModal-2").text("Age: " + user.dob.age);
   modal.find("#infoUserModal-3").text("Email: " + user.email);
   modal.find("#infoUserModal-4").text("Phone: " + user.phone);
-  modal.find("#infoUserModal-5").text("Post Code: "+ user.location.postcode);
+  modal.find("#infoUserModal-5").text("Post Code: " + user.location.postcode);
   modal.find("#infoUserModal-6").text("State: " + user.location.state);
   modal.find("#infoUserModal-7").text("City: " + user.location.city);
   modal.find("#infoUserModal-8").text("Street: " + user.location.street);
   modal.find("#infoUserModal-9").text("Skills: " + user.skills);
   modal.find("#infoUserModal-10").text("Languages: " + user.languages);
- 
 });
