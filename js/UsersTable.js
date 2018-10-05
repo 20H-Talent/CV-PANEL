@@ -364,4 +364,18 @@ $("#userModal").on("show.bs.modal", function(event) {
 
   modal.find(".modal-title").text(fullName + " ~ " + login.username);
   modal.find(".modal-body img").prop("src", picture["large"]);
+  
+  //Add info to the modal window. Shows the main information (FUll name, age, email) of the selected user.
+ 
+  modal.find("#infoUserModal-1").text("Full Name: " + fullName);
+  modal.find("#infoUserModal-2").text("Age: " + user.dob.age);
+  modal.find("#infoUserModal-3").text("Email: " + user.email);
+  modal.find("#infoUserModal-4").text("Phone: " + user.phone);
+  modal.find("#infoUserModal-5").text("Post Code: "+ user.location.postcode);
+  modal.find("#infoUserModal-6").text("State: " + user.location.state);
+  modal.find("#infoUserModal-7").text("City: " + user.location.city);
+  modal.find("#infoUserModal-8").text("Street: " + user.location.street);
+  modal.find("#infoUserModal-9").text("Skills: " + user.skills);
+  modal.find("#infoUserModal-10").text("Languages: " + user.languages);
+ 
 });
