@@ -437,6 +437,9 @@ ul div[class*="border-dark"] {
     width: 70%;
     /* background-color: red; */
 }
+#button_right {
+    height: 70px;
+}
 /* #name_user,
 #last_name_user,
 #genre,
@@ -450,7 +453,8 @@ ul div[class*="border-dark"] {
 
 #submit_search {
     background-color: none;
-    margin-bottom: 4rem !important;
+    /* margin-bottom: 4rem !important; */
+    height: 56%;
 }
 
 .open {
@@ -479,18 +483,13 @@ body {
     #mySidenavRight {
         overflow-y: auto;
     }
-
+    #mySidenavRight a {
+        z-index: 1;
+    }
     #mySidenavRight form {
         position: relative;
     }
 
-    #button_right {
-        height: 65px;
-    }
-
-    #submit_search {
-        height: 56%;
-    }
     .alert-close {
         position: fixed;
         left: 94.6%;
@@ -499,4 +498,5 @@ body {
     #div-navbar {
         right: 5%;
     }  
+
 }
