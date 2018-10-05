@@ -180,10 +180,18 @@ html {
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  /* .sidenav-right {padding-top: 15px;} */
-  .sidenav-right a {
-    font-size: 18px;
-  }
+    /* .sidenav-right {padding-top: 15px;} */
+    .sidenav-right a {
+        font-size: 18px;
+    }
+
+/* 
+    .container-right {
+        display: none;
+
+    } */
+
+
 }
 
 .main-header .nav-link {
@@ -555,4 +563,39 @@ body {
   #div-navbar {
     right: 5%;
   }
+}
+
+/**
+* MEDIA QUERY MOBILE
+*/
+
+@media (max-width: 425px){
+
+    .container-right {
+        display: none;
+    }
+
+    .container-left {  /*Funciona con el form pero no con la tabla*/
+        transition: width 0.5s;
+        z-index: 1;
+    }
+
+}
+
+/**
+* MEDIA QUERY TABLET 
+*/
+
+@media (max-width: 768px){
+
+    .container-right {
+        display: none;
+    }
+
+    .container-left {  /*Funciona con el form pero no con la tabla*/
+        position: absolute;
+        transition: width 0.5s;
+        z-index: 1;
+    }
+
 }
