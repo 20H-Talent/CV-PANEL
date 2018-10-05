@@ -96,24 +96,22 @@ iconOpenRight.addEventListener("click", navRight);
 function navRight(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-    // document.getElementById("mySidenavRight").style.width = "250px";
-    // document.getElementById("main-right").style.marginRight = "220px";
     document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
     document.querySelector("#right-menu p").style.fontSize = "1rem";
 
-    let spans = document.querySelectorAll("#right-menu span");
-    // let leftAnchors = document.querySelectorAll('#left-menu a');
-    // document.querySelector(".container-left").style.marginRight = "5px";
+    let selectedElements = document.querySelectorAll("#right-menu .close");
+    let divSelectedElements = document.querySelectorAll("#right-menu div.close");
 
-    for (span of spans) {
-      // console.log(span);
-      span.classList.replace("close", "open");
+    for (selectedElement of selectedElements) {
+      for(divSelectedElement of divSelectedElements){
+        divSelectedElement.classList.add('d-flex');
+      }
+      selectedElement.classList.replace("close", "open");
     }
 
-    // document.querySelector(".container-left").style.marginRight = "0px";
   } else {
     document.getElementById("mySidenavRight").style.width = "70px";
     document.getElementById("main-right").style.marginRight = "0";
@@ -121,13 +119,15 @@ function navRight(event) {
     document.querySelector(".container-right").style.width = "70px";
     document.querySelector("#right-menu p").style.fontSize = "0.55rem";
 
-    // document.querySelector(".container-left").style.marginRight = "0px";
-    let spans = document.querySelectorAll("#right-menu span");
-    // let leftAnchors = document.querySelectorAll("#left-menu a");
+    let selectedElements = document.querySelectorAll("#right-menu .open");
+    let divSelectedElements = document.querySelectorAll("#right-menu div.open");
 
-    for (span of spans) {
-      // console.log(span);
-      span.classList.replace("open", "close");
+
+    for (selectedElement of selectedElements) {
+      for(divSelectedElement of divSelectedElements){
+        divSelectedElement.classList.remove('d-flex');
+      }
+      selectedElement.classList.replace("open", "close");
     }
   }
 }
