@@ -96,32 +96,42 @@ iconOpenRight.addEventListener("click", navRight);
 function navRight(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
+    let pSearchFor = document.querySelector('#right-menu p');
+    let selectedElements = document.querySelectorAll("#right-menu .close");
+    let divSelectedElements = document.querySelectorAll("#right-menu div.close");
     document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
-    document.querySelector("#right-menu p").style.fontSize = "1rem";
 
-    let selectedElements = document.querySelectorAll("#right-menu .close");
-    let divSelectedElements = document.querySelectorAll("#right-menu div.close");
+    // to hide the paragraph 'Search for:' with transition.
+    pSearchFor.style.opacity = "1";
+    pSearchFor.style.fontSize = "1rem";
+    pSearchFor.style.transitionDuration = "0s";
+    pSearchFor.style.transitionDelay = '1s';
 
     for (selectedElement of selectedElements) {
       for(divSelectedElement of divSelectedElements){
         divSelectedElement.classList.add('d-flex');
       }
       selectedElement.classList.replace("close", "open");
+
     }
 
+
   } else {
-    document.getElementById("mySidenavRight").style.width = "70px";
-    document.getElementById("main-right").style.marginRight = "0";
-
-    document.querySelector(".container-right").style.width = "70px";
-    document.querySelector("#right-menu p").style.fontSize = "0.55rem";
-
+    let pSearchFor = document.querySelector('#right-menu p');
     let selectedElements = document.querySelectorAll("#right-menu .open");
     let divSelectedElements = document.querySelectorAll("#right-menu div.open");
+    document.getElementById("mySidenavRight").style.width = "70px";
+    document.getElementById("main-right").style.marginRight = "0";
+    document.querySelector(".container-right").style.width = "70px";
 
+    // to display the paragraph 'Search for:' with transition.
+    pSearchFor.style.opacity = "0";
+    pSearchFor.style.fontSize = "0.55rem";
+    pSearchFor.style.transitionDuration = "0s";
+    pSearchFor.style.transitionDelay = '0s';
 
     for (selectedElement of selectedElements) {
       for(divSelectedElement of divSelectedElements){

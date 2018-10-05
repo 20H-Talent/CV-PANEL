@@ -399,9 +399,14 @@ ul div[class*="border-dark"] {
     background-color: rgb(209, 91, 209);
 }
 
-#right-menu p {
+/* #right-menu p {
     padding-top: 30px;
-}
+} */
+ #right-menu p {
+    margin-top: 20px;
+    opacity: 0;
+} 
+
 
 #right-menu a {
     text-decoration: none;
