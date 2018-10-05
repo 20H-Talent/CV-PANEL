@@ -135,11 +135,9 @@ const UsersTable = (function() {
 
       let registeredDate = new Date(registered["date"]);
       let userFullName = buildUserFullname(name);
-
       const tableBody = mainContainer.find("#users-table  tbody");
-      tableBody.append(`
-        <tr scope="row" data-id="${id.value}">
-            <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
+      let tr = document.createElement("tr");
+      tr.innerHTML = `<td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
             <img class="img-fluid" src=${picture.thumbnail} alt=${
         name.first
       } /></td>
@@ -151,8 +149,13 @@ const UsersTable = (function() {
             <td class="user-city">
             <p><i class="fas fa-city"></i> ${location.city}</p>
             </td>
-            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
-         </tr>`);
+            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>`;
+      tr.setAttribute("data-id", id.value);
+      tr.setAttribute("scope", "row");
+      tr.onclick = function() {
+        editForm(user);
+      };
+      tableBody.append(tr);
 
       mainContainer.append(
         `<div class="card user-card">
