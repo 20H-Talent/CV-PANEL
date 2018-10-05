@@ -1,5 +1,9 @@
 #Div2 {
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #f3fafd;
     font-family: 'Crete Round', sans-serif;
+    max-height: 100vh;
 }
 
 #gender-required {
@@ -41,15 +45,15 @@ input[type="tel"],
 input[type="address"],
 textarea,
 select {
-    background: rgb(221, 217, 217) !important;
+    background: rgb(255, 254, 254) !important;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    background-color: #e6f0f0 !important;
-    color: #33393d;
+    background-color: #f7ffff !important;
+    color: #2f3031;
 }
 
 input::placeholder {
-    color: #9ea1a3;
+    color: #fafafa;
     font-size: 1em;
 
     /* font-family: fantasy; */
@@ -86,4 +90,55 @@ body {
 .btn {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
     color: white;
+}
+
+.borderafter {
+    border: 1px solid red !important;
+    border-radius: 5px;
+}
+
+#renderize {
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+    -moz-transition: opacity 2s ease-in-out;
+    -webkit-transition: opacity 2s ease-in-out;
+}
+
+.mb-4 {
+    margin-top: 40px;
+    border-top: 4px solid black !important;
+    margin-bottom: 0.2rem !important;
+}
+
+.hr-2 {
+    margin-top: 0 !important;
+    border-top: 1px solid black !important;
+    margin-bottom: 3.5rem !important;
+}
+
+/* .mb-3 {
+    margin-top: 20px;
+} */
+.asweome {
+    color: rgb(0, 0, 0) !important;
+}
+
+.asweome-address {
+    color: red;
+}
+
+.gen {
+    padding-left: 2.5rem;
+}
+
+.checkout {
+    margin-top: 50px;
+}
+
+.reset {
+    margin-bottom: 30px;
+}
+
+.langsel {
+    margin-top: 40px;
 }

@@ -3,9 +3,9 @@
 /***************************/
 *,
 html {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 /***************************/
@@ -13,64 +13,66 @@ html {
 /***************************/
 .container-left,
 .container-right {
-  transition: width 0.5s;
+    transition: width 0.5s;
 }
 
 .container-left {
-  margin-right: 40px;
+    margin-right: 40px;
 }
 
 .container-right {
-  margin-left: 60px;
+    margin-left: 60px;
 }
+
 /* ****************
     HEADER
 *******************/
 
 .alert-close {
-  position: fixed;
-  left: 97%;
-  top: 1%;
-  color: rgb(119, 36, 119);
+    position: fixed;
+    left: 97%;
+    top: 1%;
+    color: rgb(119, 36, 119);
 }
+
 #div-navbar {
-  right: 3%;
+    right: 3%;
 }
 
 /***************************/
 /*       LEFT SIDE        */
 /***************************/
 .sidenav-left {
-  height: 100%; /* 100% Full-height */
-  width: 50px; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  /*z-index: 1; /* Stay on top */
-  /*top: 0; /* Stay at the top */
-  left: 0;
-  background-color: transparent;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  /* padding-top: 60px; Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    height: 100%; /* 100% Full-height */
+    width: 50px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    /*z-index: 1; /* Stay on top */
+    /*top: 0; /* Stay at the top */
+    left: 0;
+    background-color: transparent;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    /* padding-top: 60px; Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 
-  overflow-y: hidden;
+    overflow-y: hidden;
 }
 
 /* The navigation menu links */
 .sidenav-left a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
 
-  /* font-size: 25px; */
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+    /* font-size: 25px; */
+    color: #818181;
+    display: block;
+    transition: 0.3s;
 
-  /* margin-left: 50px; */
+    /* margin-left: 50px; */
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav-left a:hover {
-  color: #f1f1f1;
+    color: #f1f1f1;
 }
 
 /* Position and style the CLOSE button (left side bar, top right corner) */
@@ -83,36 +85,36 @@ html {
 /* }  */
 /* Position and style the OPEN button (left side bar, top right corner) */
 .sidenav-left .openbtn-left {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 36px;
-  margin-left: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 36px;
+    margin-left: 50px;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main-left {
-  transition: margin-left 0.5s;
+    transition: margin-left 0.5s;
 
-  /* padding: 20px; */
+    /* padding: 20px; */
 }
 
 #users-table {
-  display: block;
-  width: 100%;
-  font-family: Source Sans Pro, Arial, serif;
+    display: block;
+    width: 100%;
+    font-family: Source Sans Pro, Arial, serif;
 }
 
 .card-container > .user-card {
-  display: none;
+    display: none;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  /* .sidenav-left {padding-top: 15px;} */
-  .sidenav-left a {
-    font-size: 18px;
-  }
+    /* .sidenav-left {padding-top: 15px;} */
+    .sidenav-left a {
+        font-size: 18px;
+    }
 }
 
 /***************************/
@@ -121,35 +123,35 @@ html {
 
 /* The side navigation menu */
 .sidenav-right {
-  height: 100%; /* 100% Full-height */
-  width: 70px; /*0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  /*z-index: 1; /* Stay on top */
-  /* top: 0; Stay at the top */
-  right: 0;
-  background-color: transparent;
+    height: 100%; /* 100% Full-height */
+    width: 70px; /*0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    /*z-index: 1; /* Stay on top */
+    /* top: 0; Stay at the top */
+    right: 0;
+    background-color: transparent;
 
-  /* padding-top: 30px; Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    /* padding-top: 30px; Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 /* The navigation menu links */
 .sidenav-right a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
 
-  /* font-size: 25px; */
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+    /* font-size: 25px; */
+    color: #818181;
+    display: block;
+    transition: 0.3s;
 
-  /* margin-left: 50px; */
+    /* margin-left: 50px; */
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav-right a:hover {
-  color: #f1f1f1;
+    color: #f1f1f1;
 }
 
 /* Position and style the CLOSE button (right side bar, top left corner) */
@@ -162,20 +164,20 @@ html {
 } */
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
-  position: absolute;
-  top: 0;
-  left: -25px;
-  font-size: 36px;
-  margin-left: 0;
+    position: absolute;
+    top: 0;
+    left: -25px;
+    font-size: 36px;
+    margin-left: 0;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main-right {
-  transition: margin-right 0.5s;
+    transition: margin-right 0.5s;
 
-  /* padding: 20px; */
-  /* z-index: 100px;
-        position: absolute; */
+    /* padding: 20px; */
+    /* z-index: 100px;
+          position: absolute; */
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -185,265 +187,265 @@ html {
         font-size: 18px;
     }
 
-/* 
-    .container-right {
-        display: none;
-
-    } */
-
-
+    /* 
+        .container-right {
+            display: none;
+    
+        } */
 }
 
 .main-header .nav-link {
-  height: 3.5rem;
+    height: 3.5rem;
 }
 
 .navbar {
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 #users-table thead {
-  position: relative;
+    position: relative;
 }
 
 #users-table thead tr:first-child th {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  margin: 0;
-  border: 0;
-  border-right: 1px solid rgba(216, 210, 210, 0.8);
-  background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin: 0;
+    border: 0;
+    border-right: 1px solid rgba(216, 210, 210, 0.8);
+    background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 #users-table tbody td:first-child {
-  text-align: center;
-  padding: 0;
-  cursor: pointer;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
 }
 
 #users-table tbody td:first-child > img {
-  border-radius: 50%;
-  padding: 0.5em 0.5em 0 0.5em;
+    border-radius: 50%;
+    padding: 0.5em 0.5em 0 0.5em;
 }
 
 tbody td.username {
-  font-family: Source Sans Pro, Arial, serif;
-  font-size: 1.1em;
-  text-transform: capitalize;
+    font-family: Source Sans Pro, Arial, serif;
+    font-size: 1.1em;
+    text-transform: capitalize;
 }
 
 tbody td.username i {
-  margin-right: 0.5em;
+    margin-right: 0.5em;
 }
 
 tbody td.username p {
-  margin-bottom: 0.1em;
+    margin-bottom: 0.1em;
 }
 
 tbody td.user-email {
-  text-align: left;
+    text-align: left;
 }
 
 tbody td.user-age {
-  font-size: 1.15em;
-  text-align: center;
+    font-size: 1.15em;
+    text-align: center;
 }
 
 tbody td.user-city {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 tbody td.user-city i {
-  margin-right: 0.5em;
-  font-size: 1.1em;
+    margin-right: 0.5em;
+    font-size: 1.1em;
 }
 
 .table-wrapper-scroll-y {
-  display: block;
-  max-height: 875px;
-  overflow-y: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+    display: block;
+    max-height: 100vh;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 #userModal .modal-body {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .table-overlay {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .table-overlay > pre {
-  display: block;
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  z-index: 20;
-  transform: translate(210%, 22%);
-  font-size: 1em;
+    display: block;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    z-index: 20;
+    transform: translate(210%, 22%);
+    font-size: 1em;
 }
 
 .lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-  transform: translate(1150%, 100%);
-  z-index: 20;
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    transform: translate(1150%, 100%);
+    z-index: 20;
 }
 
 .lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #fff;
-  border-radius: 50%;
-  left: 0;
-  right: 0;
-  margin-right: auto;
-  margin-left: auto;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: black transparent transparent transparent;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: black transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+    animation-delay: -0.45s;
 }
 
 .lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+    animation-delay: -0.3s;
 }
 
 .lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+    animation-delay: -0.15s;
 }
 
 @keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
 
-  100% {
-    transform: rotate(360deg);
-  }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* LATERAL LEFT MENU */
 section {
-  height: 100vh;
+    height: 100vh;
 }
 
 #left-menu {
-  max-width: 100%;
-  height: 100%;
+    max-width: 100%;
+    height: 100%;
 
-  /* background-color: rgba(73, 69, 69, 0.932); */
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
-  font-size: 0.8rem;
+    /* background-color: rgba(73, 69, 69, 0.932); */
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    font-size: 0.8rem;
 }
 
 #left-menu a {
-  text-decoration: none;
-  color: white;
-  display: list-item;
+    text-decoration: none;
+    color: white;
+    display: list-item;
 }
 
 #left-menu li {
-  list-style: none;
+    list-style: none;
 
-  /* text-align: center; */
+    /* text-align: center; */
 }
 
 #left-menu li:hover {
-  background-color: rgb(85, 9, 85);
-  border-bottom: 1px solid white;
+    background-color: rgb(85, 9, 85);
+    border-bottom: 1px solid white;
 }
 
 .sidebar-position {
-  background-color: purple;
+    background-color: purple;
 }
 
 #left-menu li:active {
-  background-color: rgb(209, 91, 209);
+    background-color: rgb(209, 91, 209);
 }
 
 ul div[class*="border-dark"] {
-  width: 80%;
-  margin: auto;
+    width: 80%;
+    margin: auto;
 }
 
 /* ----------- LATERAL RIGHT MENU ----------- */
 #languages label {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
 #languages div label {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 #skills label {
-  font-size: 1rem;
-  color: white;
+    font-size: 1rem;
+    color: white;
 }
 
 #skills div label {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 #right-menu {
-  max-width: auto;
-  height: 100%;
-  font-size: 0.8rem;
-  overflow-y: auto;
+    max-width: auto;
+    height: 100%;
+    font-size: 0.8rem;
+    overflow-y: auto;
 }
 
 #right-menu li:hover {
-  background-color: rgb(85, 9, 85);
-  border-bottom: 1px solid white;
+    background-color: rgb(85, 9, 85);
+    border-bottom: 1px solid white;
 }
 
 #right-menu li:active {
-  background-color: rgb(209, 91, 209);
+    background-color: rgb(209, 91, 209);
 }
 
 #right-menu p {
-  padding-top: 60px;
+    padding-top: 60px;
 }
 
 #right-menu a {
-  text-decoration: none;
-  color: white;
-  display: list-item;
+    text-decoration: none;
+    color: white;
+    display: list-item;
 
-  /* background-color: purple; */
-  font-size: 0.7rem;
+    /* background-color: purple; */
+    font-size: 0.7rem;
 }
 
 #right-menu li {
-  list-style: none;
+    list-style: none;
 
-  /* text-align: center; */
+    /* text-align: center; */
 }
 
 #right-menu input {
-  font-size: 0.6rem;
+    font-size: 0.6rem;
 }
 
 #age_user #age-range {
-  width: 90%;
+    width: 90%;
 }
+
 #age_user {
-  height: 80px;
+    height: 80px;
 }
+
 #name_user,
 #last_name_user,
 #genre,
@@ -451,151 +453,149 @@ ul div[class*="border-dark"] {
 #experience,
 #languages,
 #skills {
-  background-color: rgba(114, 78, 173, 0.596);
-  border: 1px solid black;
+    background-color: rgba(114, 78, 173, 0.596);
+    border: 1px solid black;
 }
 
 #submit_search {
-  background-color: none;
-  margin-bottom: 4rem !important;
+    background-color: none;
+    margin-bottom: 4rem !important;
 }
 
 .open {
-  display: block;
-  display: inline;
+    display: block;
+    display: inline;
 }
 
 .close {
-  display: none;
+    display: none;
 }
 
 body {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .pt-2,
 .py-2 {
-  padding-top: 4.5rem !important;
+    padding-top: 4.5rem !important;
 }
 
 @media screen and (max-width: 768px) {
-  .card-container {
-    overflow-y: auto;
-    overflow-x: hidden;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    height: 100vh;
-  }
+    .card-container {
+        overflow-y: auto;
+        overflow-x: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        height: 100vh;
+    }
 
-  .card-container > .user-card {
-    display: block;
-    width: 28rem;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
-  }
+    .card-container > .user-card {
+        display: block;
+        width: 28rem;
+        margin-right: 0.5em;
+        margin-bottom: 0.5em;
+    }
 
-  .user-card img {
-    border-radius: 50%;
-  }
+    .user-card img {
+        border-radius: 50%;
+    }
 
-  .user-card .card-username p {
-    margin: 0;
-  }
+    .user-card .card-username p {
+        margin: 0;
+    }
 
-  .user-card .card-username p:last-child {
-    font-style: italic;
-  }
+    .user-card .card-username p:last-child {
+        font-style: italic;
+    }
 
-  #users-table {
-    display: none;
-  }
+    #users-table {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 428px) {
-  .card-container {
-    width: 100%;
-  }
+    .card-container {
+        width: 100%;
+    }
 
-  .card-container img {
-    width: 50px;
-    height: auto;
-  }
+    .card-container img {
+        width: 50px;
+        height: auto;
+    }
 
-  .card-container .user-card {
-    font-size: 0.8em;
-  }
+    .card-container .user-card {
+        font-size: 0.8em;
+    }
 
-  .card-container .user-card button {
-    font-size: 0.8em;
-  }
+    .card-container .user-card button {
+        font-size: 0.8em;
+    }
 }
 
 @media screen and (max-width: 1070px) {
-  #users-table {
-    font-size: 0.7em;
-  }
+    #users-table {
+        font-size: 0.7em;
+    }
 }
 
 @media (max-width: 1366px) {
-  #Div1 {
-    width: 0px;
-  }
+    #Div1 {
+        width: 0px;
+    }
 
-  #mySidenavRight {
-    overflow-y: auto;
-  }
+    #mySidenavRight {
+        overflow-y: auto;
+    }
 
-  #mySidenavRight form {
-    position: relative;
-  }
+    #mySidenavRight form {
+        position: relative;
+    }
 
-  #button_right {
-    height: 80px;
-  }
+    #button_right {
+        height: 80px;
+    }
 
-  #submit_search {
-    height: 40%;
-  }
-  .alert-close {
-    position: fixed;
-    left: 94.6%;
-    top: 1%;
-  }
-  #div-navbar {
-    right: 5%;
-  }
+    #submit_search {
+        height: 40%;
+    }
+
+    .alert-close {
+        position: fixed;
+        left: 94.6%;
+        top: 1%;
+    }
+
+    #div-navbar {
+        right: 5%;
+    }
 }
 
 /**
 * MEDIA QUERY MOBILE
 */
 
-@media (max-width: 425px){
-
+@media (max-width: 425px) {
     .container-right {
         display: none;
     }
 
-    .container-left {  /*Funciona con el form pero no con la tabla*/
+    .container-left { /*Funciona con el form pero no con la tabla*/
         transition: width 0.5s;
         z-index: 1;
     }
-
 }
 
 /**
 * MEDIA QUERY TABLET 
 */
 
-@media (max-width: 768px){
-
+@media (max-width: 768px) {
     .container-right {
         display: none;
     }
 
-    .container-left {  /*Funciona con el form pero no con la tabla*/
+    .container-left { /*Funciona con el form pero no con la tabla*/
         position: absolute;
         transition: width 0.5s;
         z-index: 1;
     }
-
 }

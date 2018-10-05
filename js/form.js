@@ -3,11 +3,23 @@
  ***************************************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
+
   var renderize = document.getElementById("renderize");
+  //Go back to initial value/display
+  document.getElementById("renderize").style.display = "block";
   renderize.innerHTML = "";
+  document.getElementById("renderize").style.opacity = "100";
   //getting the form by id
   var form = document.getElementById("alertform");
+  var input = document.querySelectorAll(
+    "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone]"
+  );
   //looping trought the elements of the form
+  for (i = 0; i < input.length; i++) {
+    if (input[i].checkValidity()) {
+      input[i].className = "form-control custom-control";
+    }
+  }
   for (i = 0; i < form.elements.length; i++) {
     //if the elemnts of the form are not valids
     if (!form.elements[i].checkValidity()) {
@@ -23,11 +35,17 @@ function formErrors() {
       //the li  will appear as messages of error if the input is invalid
       li.innerHTML =
         form.elements[i].name + " : " + form.elements[i].validationMessage;
+      form.elements[i].className = "form-control borderafter";
       divMain.appendChild(ul);
       //inserting the div where the errors are in to the div rederize that already exists in html
       document.getElementById("renderize").appendChild(divMain);
     } // end if
-  } // end for loop
+  }
+  setTimeout(function() {
+    console.log("se ejecuta esto?");
+    document.getElementById("renderize").style.opacity = "0";
+    document.getElementById("renderize").style.display = "none";
+  }, 5000); // end for loop
   //finish off the list and print it out
 } // end formErrors
 
@@ -38,7 +56,7 @@ function showChoices() {
   //retrieve data
   var selLanguage = document.getElementById("selLanguage");
   //set up output string
-  var result = "<h2>Your Languages</h2>";
+  var result = "<h4>Your Languages</h4>";
   result += "<ul>";
   //step through options
   for (i = 0; i < selLanguage.length; i++) {
@@ -106,12 +124,9 @@ function switchVisible(visible) {
 }
 
 /**************************************************************************
- * Charging the values of the table and adding them in the inputs of the form on click***
+ * Setting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(data) {
-  console.log("data", data);
-  var form = document.getElementById("alertform");
-  console.log("form", form);
   document.getElementById("Username").value = data.login.username;
   document.getElementById("FirstName").value = data.name.first;
   document.getElementById("LastName").value = data.name.last;
@@ -129,6 +144,10 @@ function editForm(data) {
   }
   var lang = document.getElementById("selLanguage");
   for (var i = 0; i < lang.options.length; i++) {
+    // data.languages es un array con "languages" like ["Spanish","English"]
+    // indexOf está buscando dentro del array data.languages la posición del "lang.options[i].value" por ejemplo "English"
+    // ["Spanish","English"].indexOf("Spanish")
+    // entonces el resultado sería 1
     if (data.languages.indexOf(lang.options[i].value) > -1) {
       lang.options[i].selected = true;
     }
