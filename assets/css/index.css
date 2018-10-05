@@ -23,8 +23,9 @@ html {
 .container-right {
     margin-left: 60px;
 }
+
 /* ****************
-    HEADER 
+    HEADER
 *******************/
 
 .alert-close {
@@ -33,6 +34,7 @@ html {
     top: 1%;
     color: rgb(119, 36, 119);
 }
+
 #div-navbar {
     right: 3%;
 }
@@ -95,6 +97,16 @@ html {
     transition: margin-left 0.5s;
 
     /* padding: 20px; */
+}
+
+#users-table {
+    display: block;
+    width: 100%;
+    font-family: Source Sans Pro, Arial, serif;
+}
+
+.card-container > .user-card {
+    display: none;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -165,7 +177,7 @@ html {
 
     /* padding: 20px; */
     /* z-index: 100px;
-        position: absolute; */
+          position: absolute; */
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -184,16 +196,11 @@ html {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
-table#users-table {
-    width: 100%;
-    font-family: Source Sans Pro, Arial, serif;
-}
-
-table#users-table thead {
+#users-table thead {
     position: relative;
 }
 
-table#users-table thead tr:first-child th {
+#users-table thead tr:first-child th {
     position: sticky;
     top: 0;
     z-index: 10;
@@ -203,51 +210,15 @@ table#users-table thead tr:first-child th {
     background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }
 
-table#users-table tbody td:first-child {
+#users-table tbody td:first-child {
     text-align: center;
     padding: 0;
     cursor: pointer;
 }
 
-table#users-table tbody td:first-child > img {
+#users-table tbody td:first-child > img {
     border-radius: 50%;
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    transform: translateY(25%);
-}
-
-table#users-table tbody td.user-phone {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding-bottom: 0.95rem;
-}
-
-tbody td.user-phone a {
-    margin: 0.5em 0;
-}
-
-tbody td.user-phone i.fa-mobile-alt,
-tbody td.user-phone i.fa-phone {
-    margin-right: 0.5em;
-    font-size: 1.2em;
-}
-
-tbody td.user-phone i.fa-phone {
-    margin-right: 0.4em;
-    font-size: 1.2em;
-    color: black;
-}
-
-tbody td.user-phone i.fa-mobile-alt {
-    margin-right: 0.4em;
-    font-size: 1.2em;
-    color: green;
-    margin-right: 0.8em;
+    padding: 0.5em 0.5em 0 0.5em;
 }
 
 tbody td.username {
@@ -260,15 +231,17 @@ tbody td.username i {
     margin-right: 0.5em;
 }
 
+tbody td.username p {
+    margin-bottom: 0.1em;
+}
+
 tbody td.user-email {
     text-align: left;
-    vertical-align: middle;
 }
 
 tbody td.user-age {
     font-size: 1.15em;
-    transform: translateX(13%);
-    vertical-align: middle;
+    text-align: center;
 }
 
 tbody td.user-city {
@@ -462,9 +435,11 @@ ul div[class*="border-dark"] {
 #age_user #age-range {
     width: 90%;
 }
+
 #age_user {
-  height: 80px;
+    height: 80px;
 }
+
 #name_user,
 #last_name_user,
 #genre,
@@ -499,6 +474,63 @@ body {
     padding-top: 4.5rem !important;
 }
 
+@media screen and (max-width: 768px) {
+    .card-container {
+        overflow-y: auto;
+        overflow-x: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        height: 100vh;
+    }
+
+    .card-container > .user-card {
+        display: block;
+        width: 28rem;
+        margin-right: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
+    .user-card img {
+        border-radius: 50%;
+    }
+
+    .user-card .card-username p {
+        margin: 0;
+    }
+
+    .user-card .card-username p:last-child {
+        font-style: italic;
+    }
+
+    #users-table {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .card-container {
+        width: 100%;
+    }
+
+    .card-container img {
+        width: 50px;
+        height: auto;
+    }
+
+    .card-container .user-card {
+        font-size: 0.8em;
+    }
+
+    .card-container .user-card button {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 1070px) {
+    #users-table {
+        font-size: 0.7em;
+    }
+}
+
 @media (max-width: 1366px) {
     #Div1 {
         width: 0px;
@@ -519,12 +551,14 @@ body {
     #submit_search {
         height: 40%;
     }
+
     .alert-close {
         position: fixed;
         left: 94.6%;
         top: 1%;
-    }  
+    }
+
     #div-navbar {
         right: 5%;
-    }  
+    }
 }

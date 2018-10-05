@@ -1,6 +1,6 @@
-/*******************************************************************
+/***************************************************************************************
  * Looping trought the errors of the inputs and inner them in to a list,if not valids ***
- *******************************************************************/
+ ***************************************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
 
@@ -11,10 +11,13 @@ function formErrors() {
   document.getElementById("renderize").style.opacity = "100";
   //getting the form by id
   var form = document.getElementById("alertform");
+  var input = document.querySelectorAll(
+    "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone]"
+  );
   //looping trought the elements of the form
-  for (i = 0; i < form.elements.length; i++) {
-    if (form.elements[i].checkValidity()) {
-      form.elements[i].className = "form-control custom-control";
+  for (i = 0; i < input.length; i++) {
+    if (input[i].checkValidity()) {
+      input[i].className = "form-control custom-control";
     }
   }
   for (i = 0; i < form.elements.length; i++) {
@@ -86,9 +89,9 @@ function showChoices() {
   output.innerHTML = result;
 } // end showChoices
 
-/*******************************************************************
+/***********************************************************************
  * Cleaning the content of the div before calling the function again ***
- *******************************************************************/
+ ***********************************************************************/
 function reset() {
   var output = document.getElementById("output");
   output.innerHTML = "";
@@ -96,9 +99,9 @@ function reset() {
   select.reset();
 }
 
-/*******************************************************************
+/*********************************************************************************************************
  *  Showing the form when clicking the add user and showing the table user when clinking the list user***
- *******************************************************************/
+ *********************************************************************************************************/
 function switchVisible(visible) {
   // console.log("div1", document.getElementById("Div1").style.display);
   // console.log("div2", document.getElementById("Div2").style.display);
@@ -118,4 +121,36 @@ function switchVisible(visible) {
     default:
       break;
   }
+}
+
+/**************************************************************************
+ * Setting the values of the table and adding them in the inputs of the form on click***
+ **************************************************************************/
+function editForm(data) {
+  document.getElementById("Username").value = data.login.username;
+  document.getElementById("FirstName").value = data.name.first;
+  document.getElementById("LastName").value = data.name.last;
+  document.getElementById("email").value = data.email;
+  document.getElementById("age1").value = data.dob.age;
+  document.getElementById("tel").value = data.phone;
+  document.getElementById("country").value = data.location.state;
+  document.getElementById("city").value = data.location.city;
+  document.getElementById("zip").value = data.location.postcode;
+  document.getElementById("address").value = data.location.street;
+  document.getElementById(data.gender).checked = true;
+
+  for (var i = 0; i < data.skills.length; i++) {
+    document.getElementById(data.skills[i] + "1").checked = true;
+  }
+  var lang = document.getElementById("selLanguage");
+  for (var i = 0; i < lang.options.length; i++) {
+    // data.languages es un array con "languages" like ["Spanish","English"]
+    // indexOf está buscando dentro del array data.languages la posición del "lang.options[i].value" por ejemplo "English"
+    // ["Spanish","English"].indexOf("Spanish")
+    // entonces el resultado sería 1
+    if (data.languages.indexOf(lang.options[i].value) > -1) {
+      lang.options[i].selected = true;
+    }
+  }
+  switchVisible("Div2");
 }

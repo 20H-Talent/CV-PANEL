@@ -16,8 +16,8 @@ const UsersTable = (function() {
    */
   function init() {
     //DOM active elements
-    const table = $(".table-responsive > table#users-table");
-    const tableBody = table.find("tbody");
+    const mainContainer = $("#data-column");
+
     //RESOURCE ENDPOINT
     const getUsersURL = `https://randomuser.me/api/?results=100&nat=ES`;
 
@@ -31,11 +31,14 @@ const UsersTable = (function() {
     function _setupLocalStorage(callback) {
       if (!sessionStorage.getItem("users-list")) {
         $.getJSON(getUsersURL, function(usersData) {
+          usersWithExtraData = _appendExtraData(usersData["results"]);
+
           sessionStorage.setItem(
             "users-list",
-            JSON.stringify(usersData["results"])
+            JSON.stringify(usersWithExtraData)
           );
-          callback(usersData["results"]);
+
+          callback(usersWithExtraData);
         }).fail(function(err) {
           throw new Error(err);
         });
@@ -99,9 +102,13 @@ const UsersTable = (function() {
      * @private
      */
     function _showOverlay() {
-      tableBody.css("position", "relative").empty()
-        .html(`<div class="table-overlay">
-          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      const container =
+        window.innerWidth > 768
+          ? $("#users-table > table").find("tbody")
+          : mainContainer;
+
+      container.empty().html(`<div class="table-overlay">
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>`);
     }
 
@@ -119,41 +126,84 @@ const UsersTable = (function() {
         name,
         location,
         dob,
-        phone,
-        cell,
         login,
-        registered
+        registered,
+        skills,
+        languages,
+        frameworks
       } = user;
 
       let registeredDate = new Date(registered["date"]);
-
-      tableBody.append(`
-        <tr scope="row" data-id="${id.value}">
-            <td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
-            <img src=${picture.medium} alt=${
+      let userFullName = buildUserFullname(name);
+      const tableBody = mainContainer.find("#users-table  tbody");
+      let tr = document.createElement("tr");
+      tr.innerHTML = `<td class="user-avatar" data-user=${email} data-toggle="modal" data-target="#userModal">
+            <img class="img-fluid" src=${picture.thumbnail} alt=${
         name.first
-      } data-user=${email} /></td>
+      } /></td>
             <td class="username">
                <p>${name.first} ${name.last}</p>
-               <p><i class="fas fa-address-card"></i> <em>${
-                 login.username
-               }</em></p>
-
             </td>
             <td class="user-age">${dob.age}</td>
             <td class="user-email"><a href="mailto:${email}">${email}</a></td>
-            <td class="user-phone">
-              <a href="tel:${phone}"><i class="fas fa-phone"></i> ${phone}</a>
-              <a href="tel:${cell}"><i class="fas fa-mobile-alt"></i> ${cell}</a>
-            </td>
             <td class="user-city">
-            <p><i class="fas fa-city"></i> ${location.city} ~ ${
-        location.postcode
-      }</p>
-            <p><i class="fas fa-map-marked"></i> ${location.street}</p>
+            <p><i class="fas fa-city"></i> ${location.city}</p>
             </td>
-            <td class="user-registered">${registeredDate.toLocaleDateString()} ~ ${registeredDate.toLocaleTimeString()}</td>
-         </tr>`);
+            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>`;
+      tr.setAttribute("data-id", id.value);
+      tr.setAttribute("scope", "row");
+      tr.onclick = function() {
+        editForm(user);
+      };
+      tableBody.append(tr);
+
+      mainContainer.append(
+        `<div class="card user-card">
+           <div class="card-header d-flex flex-row align-items-center">
+              <img class="img-fluid mr-2" src=${picture.medium} alt="test"/>
+             <div class="card-username">
+                <p>${userFullName}</p>
+                <p>${login.username}</p>
+             </div>
+           </div>
+          <div class="card-body">
+          <div class="card-subtitle">Skills</div>
+          <p class="card-text">
+          ${skills
+            .map(
+              skill =>
+                `<span class="badge badge-secondary mr-1">${skill}</span>`
+            )
+            .join("")}
+        </p>
+        <div class="card-subtitle">Languages</div>
+            <p class="card-text">
+            ${languages
+              .map(
+                language =>
+                  `<span class="badge badge-secondary mr-1">${language}</span>`
+              )
+              .join("")}
+            </p>
+            <div class="card-subtitle">Frameworks</div>
+              ${frameworks
+                .map(
+                  framework =>
+                    `<span class="badge badge-secondary mr-1">${framework}</span>`
+                )
+                .join("")}
+          </div>
+          <div class="card-footer card-buttons text-right">
+          <button class="btn btn-dark" data-user=${email} data-toggle="modal" data-target="#userModal">
+              <i class="far fa-eye"></i>
+          </button>
+          <button class="btn btn-dark">
+              <i class="far fa-edit"></i>
+        </button>
+      </div>
+        </div>
+       `
+      );
     }
 
     /**
@@ -223,6 +273,65 @@ const UsersTable = (function() {
       getUserByEmail,
       buildUserFullname
     };
+  }
+
+  function _appendExtraData(usersData) {
+    const skills = [
+      "html5",
+      "css3",
+      "javascript",
+      "php",
+      "ruby",
+      "perl",
+      "java",
+      "C++",
+      "go",
+      "sass",
+      "python"
+    ];
+
+    const languages = [
+      "Afrikan",
+      "English",
+      "Spanish",
+      "Romanian",
+      "French",
+      "German",
+      "Italian",
+      "Turkish"
+    ];
+
+    const frameworks = [
+      "django",
+      "ruby on rails",
+      "react",
+      "angular",
+      "vue",
+      "laravel"
+    ];
+
+    usersWithExtraData = usersData.map(user => {
+      let skillsGenerated = _generateExtraData(skills);
+      let languagesGenerated = _generateExtraData(languages);
+      let frameworksGenerated = _generateExtraData(frameworks);
+
+      user["skills"] = Array.from(skillsGenerated);
+      user["languages"] = Array.from(languagesGenerated);
+      user["frameworks"] = Array.from(frameworksGenerated);
+
+      return user;
+    });
+
+    return usersWithExtraData;
+  }
+
+  function _generateExtraData(data) {
+    const numberOfItems = Math.floor(Math.random() * data.length);
+    const extraData = [];
+    for (let index = 0; index <= numberOfItems; index++) {
+      extraData.push(data[Math.floor(Math.random() * data.length)]);
+    }
+    return new Set(extraData);
   }
 
   return {
