@@ -365,6 +365,14 @@ ul div[class*="border-dark"] {
 #skills div label {
     font-size: 0.8rem;
 }
+#right-menu input {
+    width: 85%;
+    font-size: 1rem;
+}
+#right-menu span {
+    height: 38px;
+}
+
 
 #right-menu {
     max-width: auto;
@@ -403,9 +411,6 @@ ul div[class*="border-dark"] {
     list-style: none;
 }
 
-#right-menu input {
-    font-size: 0.6rem;
-}
 
 #age_user #age-range {
     width: 60%;
