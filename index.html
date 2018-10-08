@@ -373,12 +373,12 @@
                         <div id="mySidenavRight" class="sidenav-right">
                             <a href="javascript:void(0)" class="openbtn-right pt-0 pb-0">
                                 <span style="font-size:20px;cursor:pointer; color:black" id="open-icon-right" class="open"><i
-                                        class="fa fa-bars"></i></span>
+                                        class="fa fa-search"></i></span>
                             </a>
 
                             <!-- Menu right -->
-                            <section>
-                                <div id="right-menu" class="p-0">
+                            <section class="close">
+                                <div id="right-menu" class="p-0 mt-4">
                                     <p class="text-white text-center w-100">Search for: </p>
                                    
                                     <form id="advanced-search">
@@ -387,9 +387,9 @@
                                                 <div id="name_user" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
                                                     <!-- <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label> -->
                                                     <i class="fas fa-fingerprint fa-2x mr-2"></i>
-                                                    <input type="text" class="close form-control w-50" id="name"
+                                                    <input type="text" class="form-control w-50" id="name"
                                                         placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
-                                                    <small class="close text-center text-white w-100">
+                                                    <small class="text-center text-white w-100">
                                                         Must be written in lowercase.
                                                     </small>
                                                 </div>
@@ -400,7 +400,7 @@
                                                         Name
                                                     </label> -->
                                                     <i class="fas fa-font fa-2x mr-2"></i>
-                                                    <input type="text" class="close form-control w-50" id="last-name"
+                                                    <input type="text" class="form-control w-50" id="last-name"
                                                         placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
                                                     <small class="close text-center text-white w-100">
                                                         Must be written in lowercase.
@@ -411,8 +411,8 @@
                                                 <div id="genre" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
                                                     <!-- <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label> -->
                                                     <i class="fas fa-venus-mars fa-2x mr-2"></i>
-                                                    <div class="close border bg-dark text-white p-2">
-                                                        <div class="close custom-control custom-radio text-center">
+                                                    <div class="d-flex border bg-dark text-white p-2">
+                                                        <div class="custom-control custom-radio text-center">
                                                             <input type="radio" id="genre_female" class="custom-control-input"
                                                                 value="female" name="gender">
                                                             <label class="custom-control-label" for="genre_female">Female</label>
@@ -428,8 +428,8 @@
                                             <li class="rounded">
                                                 <div id="age_user" class="text-white form-group mb-2 d-flex justify-content-center p-2">
                                                     <i class="fas fa-child fa-2x mr-2"></i>
-                                                    <label for="age-range" class="close badge-pill bg-dark text-white text-center mr-2 mt-1">Age</label>
-                                                    <input type="range" min="16" max="90" class="close custom-range" id="age-range">
+                                                    <label for="age-range" class="badge-pill bg-dark text-white text-center mr-2 mt-1">Age</label>
+                                                    <input type="range" min="16" max="90" class="custom-range" id="age-range">
                                                     <p id="age" class="d-inline-flex ml-1 text-white mt-1"></p>
                                                 </div>
                                             </li>
@@ -438,7 +438,7 @@
                                                     <!-- <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
                                                         of experience</label> -->
                                                     <i class="fa fa-calendar-alt fa-2x mr-2"></i>
-                                                    <input type="number" min="1" max="70" class="close form-control w-50"
+                                                    <input type="number" min="1" max="70" class="form-control w-50"
                                                         id="exp-years" placeholder="Insert years of experience">
                                                 </div>
                                             </li>
@@ -446,8 +446,8 @@
                                                 <!-- ********* lANGUAGES *********** -->
                                                 <div id="languages" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
                                                     <i class="fas fa-globe-americas fa-2x mr-2"></i>
-                                                    <label class="close badge-pill bg-dark text-center text-white">Languages</label>
-                                                    <div class="close text-white mb-2">
+                                                    <label class="badge-pill bg-dark text-center text-white">Languages</label>
+                                                    <div class="text-white mb-2">
                                                         <div class="bg-dark border d-flex flex-wrap align-items-center justify-content-center mt-2 p-2 w-100">
                                                             <div class="custom-control custom-radio col-4">
                                                                 <input type="radio" id="english" class="custom-control-input w-50"
@@ -487,8 +487,8 @@
                                                 <!-- ******** SKILLS ********** -->
                                                 <div id="skills" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
                                                     <i class="fas fa-robot fa-2x mr-2"></i>
-                                                    <label class="close badge-pill bg-dark text-white text-center">Skills</label>
-                                                    <div class="close flex-wrap">
+                                                    <label class="badge-pill bg-dark text-white text-center">Skills</label>
+                                                    <div class="d-flex flex-wrap">
                                                         <div class="col-12 d-flex flex-wrap justify-content-center border bg-dark mt-2 mb-3 pt-1 pb-2 pl-0 pr-0">
                                                             <label class="w-100 text-center">Layout</label>
                                                             <div class="custom-control custom-radio mr-3">
