@@ -11,14 +11,14 @@ function formErrors() {
   document.getElementById("renderize").style.opacity = "100";
   //getting the form by id
   var form = document.getElementById("alertform");
-  var input = document.querySelectorAll(
+  var input = form.querySelectorAll(
     "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone]"
   );
   //looping trought the elements of the form
   for (i = 0; i < input.length; i++) {
     if (input[i].checkValidity()) {
-      // input[i].className = "form-control custom-control";
-      input[i].className = "form-control close";
+      input[i].className = "form-control custom-control";
+      // input[i].className = "form-control close";
     }
   }
   for (i = 0; i < form.elements.length; i++) {
