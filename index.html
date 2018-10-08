@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -102,16 +102,16 @@
                             <div class="mb-3 adduser text-center">
                                 <h4 class="mb-3 text-center"><i class="fas fa-user-edit"></i>Add User</h4>
                             </div>
-                            <input id="hidden-input" autofocus type="hidden">
+
                             <div id="renderize"></div>
                             <hr class="mb-4">
                             <hr class=" hr-2">
-                            <form id="alertform" action="" method="post" class="needs-validation col-md-12 ">
+                            <form id="alertform" action="get" method="post" class="needs-validation col-md-12 ">
                                 <div class="form-group row has-success">
-                                    <label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">First Name</label>
+                                    <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
+                                            <span class="input-group-text" id="inputGroup-sizing"><i class="fas asweome fa-user-tie"></i></span>
                                             <input type="text" name="FirstName" class="form-control " minlength="3" maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName"
                                                 placeholder="required" value="" required>
                                         </div>
@@ -119,13 +119,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row has-success">
-                                    <label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">Last Name</label>
+                                    <label for="LastName" class="col-sm-2 col-form-label">Last Name</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-user-tie"></i></i></span>
+                                            <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
                                             <input type="text" name="LastName" class="form-control" id="LastName" minlength="3" maxlength="15" pattern="[a-zA-Z0-9\s]+"
-                                                title="Last name must have 3-15 characters long" x-moz-errormessage="Por favor, no utilice tildes en el nombre."
-                                                placeholder="required" value="" required>
+                                                title="Last name must have 3-15 characters long" placeholder="required" value=""
+                                                required>
                                         </div>
 
 
@@ -135,9 +135,9 @@
                                     <label for="Username" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-users"></i></span>
+                                            <span class="input-group-text" id="inputfault"><i class="fas asweome fa-users"></i></span>
 
-                                            <input name="Username" minlength="5" maxlength="15" pattern="[a-zA-Z\s]+" type="text" class="form-control" id="Username"
+                                            <input name="Username" minlength="5" maxlength="25" pattern="[a-zA-Z0-9\s]+" type="text" class="form-control" id="Username"
                                                 placeholder="Username" required>
                                         </div>
 
@@ -145,11 +145,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row has-success">
-                                    <label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">Email</label>
+                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-at"></i></span>
-                                            <input type="email" class="form-control form-control-success" id="email" placeholder="name@example.com" required>
+                                            <span class="input-group-text" id="in-sizing-default"><i class="fas asweome fa-at"></i></span>
+                                            <input type="email" name="Email" class="form-control form-control-success" id="email" placeholder="name@example.com" required>
 
                                         </div>
 
@@ -160,7 +160,7 @@
                                     <label for="tel" class="col-sm-2 col-form-label">Telephone</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-phone-square"></i></span>
+                                            <span class="input-group-text" id="inputizing-default"><i class="fas asweome fa-phone-square"></i></span>
                                             <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}" id="tel" placeholder="required" required>
                                         </div>
 
@@ -171,8 +171,8 @@
                                     <label for="address" class="col-sm-2 col-form-label">Address</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome-address fa-map-marker-alt"></i></i></span>
-                                            <input name="Adress" type="address" pattern=".{1,30}" class="form-control" id="address" placeholder="1234 Main St" required>
+                                            <span class="input-group-text" id="inpudefault"><i class="fas asweome-address fa-map-marker-alt"></i></span>
+                                            <input name="Adress" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
                                         </div>
 
                                     </div>
@@ -183,9 +183,9 @@
                                     <label for="country" class="col-sm-2 col-form-label">Country</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-globe-americas"></i></span>
+                                            <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
                                             <input name="Country" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]+" type="text" placeholder="required" required
-                                                id="country" required>
+                                                id="country">
                                         </div>
 
                                     </div>
@@ -195,7 +195,7 @@
                                     <label for="city" class="col-sm-2 col-form-label">City</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-city"></i></span>
+                                            <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
                                             <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]" type="text" id="city" placeholder="required"
                                                 required>
                                         </div>
@@ -206,8 +206,8 @@
                                     <label for="zip" class="col-sm-2 col-form-label">Zip</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-envelope-open-text"></i></span>
-                                            <input name="Zip" type="number" class="form-control" pattern="[a-zA-Z0-9\s]+" id="zip" placeholder=" required" required>
+                                            <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
+                                            <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+" id="zip" placeholder=" required" required>
                                         </div>
 
                                     </div>
@@ -217,8 +217,8 @@
                                     <label for="age1" class="col-sm-2 col-form-label">Age</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input name="Age" class="form-control" id="age1" type="number" pattern=".{1,3}" placeholder="required" required>
+                                            <span class="input-group-text" id="Group-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
+                                            <input name="Age" class="form-control" id="age1" type="number" placeholder="required" required>
                                         </div>
 
 
@@ -230,7 +230,7 @@
 
 
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa mr-2"></i></span>
+                                            <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa mr-2"></i></span>
                                             <div class="custom-control gen custom-radio">
                                                 <input id="male" name="Gender" type="radio" class="custom-control-input">
                                                 <label class="custom-control-label" for="male">Male</label>
@@ -306,8 +306,7 @@
 
                                 <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
                                 <div class="form-group">
-                                    <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" type="file"
-                                        required>
+                                    <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" required>
                                         <option value="Afrikan">Afrikan</option>
                                         <option value="English">English</option>
                                         <option value="Spanish">Spanish</option>
@@ -567,7 +566,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img class="user-avatar img-fluid" alt="" />
+                    <!-- <img class="user-avatar img-fluid" alt="" /> -->
                     <div id="infoUserModal">
                         <!--
                         User Info should appear here.
