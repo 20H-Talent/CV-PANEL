@@ -18,6 +18,7 @@ function formErrors() {
   for (i = 0; i < input.length; i++) {
     if (input[i].checkValidity()) {
       input[i].className = "form-control custom-control";
+      // input[i].className = "form-control close";
     }
   }
   for (i = 0; i < form.elements.length; i++) {
