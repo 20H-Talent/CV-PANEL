@@ -351,12 +351,6 @@ ul div[class*="border-dark"] {
 
 /* ----------- LATERAL RIGHT MENU ----------- */
 
-#languages div label {
-    font-size: 0.8rem;
-}
-#languages div div {
-   width: 70%;
-}
 #skills label {
     font-size: 0.9rem;
 }
@@ -365,15 +359,9 @@ ul div[class*="border-dark"] {
     font-size: 0.8rem;
 }
 #right-menu input {
-    /* width: 85%; */
     font-size: 1rem;
 }
-#right-menu span {
-    height: 38px;
-}
-/* #right-menu label[class*='badge-pill'] {
-    text-decoration: underline;
-} */
+
 #right-menu label[class*='font-italic'] {
     font-size: 0.9rem;
     text-decoration: underline;
