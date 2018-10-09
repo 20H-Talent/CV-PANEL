@@ -23,7 +23,7 @@
         <!-- Just an image -->
         <nav class="navbar text-white">
             <a class="navbar-brand" href="#">
-                <img src="images/logo-curriculum-connections.png" width="120" height="40" alt="">
+                <img src="assets/images/logo-curriculum-connections.png" width="120" height="40" alt="">
             </a>
             <div id="div-navbar" class="close position-relative alert alert-info" role="alert"></div>
         </nav>
@@ -70,20 +70,20 @@
                 </div>
                 <!-- Table of users -->
                 <div class="col p-0" id="Div1">
-                    <div id="main">
+                    <div id="main" class="main-container">
                         <!-- Here we must put the table  -->
                         <!-- Table of users -->
-                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center card-container mt-4">
+                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center mt-4">
                             <div id="users-table" class="table-responsive table-wrapper-scroll-y mt-4">
                                 <table class="table table-bordered table-hover" role="grid">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>Avatar</th>
-                                            <th>Full name</th>
-                                            <th>Age</th>
-                                            <th>Email</th>
-                                            <th>State - City</th>
-                                            <th>Registered</th>
+                                            <th><i class="far fa-user-circle"></i><span> Avatar </span></th>
+                                            <th><i class="far fa-id-card"></i><span> Full name</span></th>
+                                            <th><i class="far fa-envelope"></i><span> Email</span></th>
+                                            <th><i class="fas fa-city"></i><span> State - City</span></th>
+                                            <th><i class="far fa-clock"></i><span> Registered</span></th>
+                                            <th><i class="fas fa-cogs"></i><span> Options</span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,6 +91,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div id="card-container"></div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +229,6 @@
                                     <label class="col-sm-2 control-label gender" id="gender">Gender</label>
                                     <div class="col-sm-10">
 
-
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa mr-2"></i></span>
                                             <div class="custom-control gen custom-radio">
@@ -304,9 +304,8 @@
                                     </div>
                                 </div>
 
-
-                                <div class="form-group langsel">
-                                    <h4 class="mb-3 ">Languages</h4> <small> (press ctrl to choose more languages)</small>
+                                <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
+                                <div class="form-group">
                                     <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" required>
                                         <option value="Afrikan">Afrikan</option>
                                         <option value="English">English</option>
@@ -567,7 +566,7 @@
         </div>
     </main>
 
-    <!-- Modal -->
+
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -578,21 +577,71 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- <img class="user-avatar img-fluid" alt="" /> -->
-                    <div id="infoUserModal">
-                        <!--
-                        User Info should appear here.
-                    -->
-                        <span id="infoUserModal-1" class="badge badge-secondary mr-1">Full Name: </span>
-                        <span id="infoUserModal-2" class="badge badge-secondary mr-1">Age: </span>
-                        <span id="infoUserModal-3" class="badge badge-secondary mr-1">Email: </span>
-                        <span id="infoUserModal-4" class="badge badge-secondary mr-1">Phone: </span>
-                        <span id="infoUserModal-5" class="badge badge-secondary mr-1">Post Code: </span>
-                        <span id="infoUserModal-6" class="badge badge-secondary mr-1">State: </span>
-                        <span id="infoUserModal-7" class="badge badge-secondary mr-1">City: </span>
-                        <span id="infoUserModal-8" class="badge badge-secondary mr-1">Street: </span>
-                        <span id="infoUserModal-9" class="badge badge-secondary mr-1">Skills: </span>
-                        <span id="infoUserModal-10" class="badge badge-secondary mr-1">Languages: </span>
+                    <div class="d-flex">
+                        <img class="user-avatar img-fluid flex-grow-2" width="128" height="128" alt="user-avatar" />
+                        <div id="infoUser" class="flex-grow-1">
+                            <ul class="list-group">
+                                <li class="list-group-item birthday">
+                                    <i class="fas fa-birthday-cake mr-3 "></i>
+                                </li>
+                                <li class="list-group-item phones">
+                                    <i class="fas fa-phone mr-3"></i>
+                                    <i class="fas fa-mobile-alt mx-3"></i>
+                                </li>
+                                <li class="list-group-item address">
+                                    <i class="fas fa-map-marked mr-3"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="my-2 modal-collapse-container d-flex justify-content-around flex-column-sm flex-wrap w-100">
+                        <div id="languages" class="user-collapse-info mb-2">
+                            <div class="card">
+                                <div class="card-header" id="languages-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo" aria-expanded="true" aria-controls="languagesInfo">
+                                            Languages
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="languagesInfo" class="collapse" aria-labelledby="languages-info" data-parent="#languages">
+                                <div class="card-body card-body d-flex justify-content-around flex-wrap">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="skills" class="user-collapse-info">
+                            <div class="card">
+                                <div class="card-header" id="skills-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo" aria-expanded="true" aria-controls="skillsInfo">
+                                            Skills
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="skillsInfo" class="collapse" aria-labelledby="skills-info" data-parent="#skills">
+                                <div class="card-body d-flex justify-content-around flex-wrap">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="frameworks" class="user-collapse-info">
+                            <div class="card">
+                                <div class="card-header" id="frameworks-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#frameworksInfo" aria-expanded="true" aria-controls="frameworksInfo">
+                                            Frameworks
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="frameworksInfo" class="collapse" aria-labelledby="frameworks-info" data-parent="#frameworks">
+                                <div class="card-body card-body d-flex justify-content-around flex-wrap">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -601,6 +650,9 @@
             </div>
         </div>
     </div>
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

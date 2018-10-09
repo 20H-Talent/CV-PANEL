@@ -129,42 +129,34 @@ function switchVisible(visible) {
  **************************************************************************/
 function editForm(event) {
   const element = $(event.currentTarget);
-  const property = element.is("tr")
-    ? element.data("id")
-    : element.data("email");
+  const property = element.data("id");
 
-  if (event.target.tagName !== "IMG") {
-    const data = usersTable.getUserByEmailOrID(property);
+  const data = usersTable.getUserByEmailOrID(property);
 
-    $("#Username").val(data.login.username);
-    $("#FirstName").val(data.name.first);
-    $("#LastName").val(data.name.last);
-    $("#email").val(data.email);
-    $("#age1").val(data.dob.age);
-    $("#tel").val(data.phone);
-    $("#country").val(data.location.state);
-    $("#city").val(data.location.city);
-    $("#zip").val(data.location.postcode);
-    $("#address").val(data.location.street);
-    document.getElementById(data.gender).checked = true;
+  $("#Username").val(data.login.username);
+  $("#FirstName").val(data.name.first);
+  $("#LastName").val(data.name.last);
+  $("#email").val(data.email);
+  $("#age1").val(data.dob.age);
+  $("#tel").val(data.phone);
+  $("#country").val(data.location.state);
+  $("#city").val(data.location.city);
+  $("#zip").val(data.location.postcode);
+  $("#address").val(data.location.street);
+  document.getElementById(data.gender).checked = true;
 
-    for (var i = 0; i < data.skills.length; i++) {
-      document.getElementById(data.skills[i] + "1").checked = true;
-    }
-    var lang = document.getElementById("selLanguage");
-    for (var i = 0; i < lang.options.length; i++) {
-      // data.languages es un array con "languages" like ["Spanish","English"]
-      // indexOf está buscando dentro del array data.languages la posición del "lang.options[i].value" por ejemplo "English"
-      // ["Spanish","English"].indexOf("Spanish")
-      // entonces el resultado sería 1
-      if (data.languages.indexOf(lang.options[i].value) > -1) {
-        lang.options[i].selected = true;
-      }
-    }
-    switchVisible("Div2");
-  } else {
-    $("#userModal")
-      .data("email", property)
-      .modal("show");
+  for (var i = 0; i < data.skills.length; i++) {
+    document.getElementById(data.skills[i] + "1").checked = true;
   }
+  var lang = document.getElementById("selLanguage");
+  for (var i = 0; i < lang.options.length; i++) {
+    // data.languages es un array con "languages" like ["Spanish","English"]
+    // indexOf está buscando dentro del array data.languages la posición del "lang.options[i].value" por ejemplo "English"
+    // ["Spanish","English"].indexOf("Spanish")
+    // entonces el resultado sería 1
+    if (data.languages.indexOf(lang.options[i].value) > -1) {
+      lang.options[i].selected = true;
+    }
+  }
+  switchVisible("Div2");
 }
