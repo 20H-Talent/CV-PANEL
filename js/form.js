@@ -130,7 +130,7 @@ function switchVisible(visible) {
 function editForm(event) {
   const element = $(event.currentTarget);
   const property = element.data("id");
-  console.log(element, property);
+
   const data = usersTable.getUserByEmailOrID(property);
 
   document.getElementById("Username").value = data.login.username;

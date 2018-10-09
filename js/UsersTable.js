@@ -170,7 +170,9 @@ const Table = (function() {
            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
            <td class="options text-center">
                   <button type="button" class=" my-2 btn btn-outline-success btn-sm"
-                    data-email=${email} data-toggle="modal" data-target="#userModal" title="View user">
+                    data-id=${
+                      id.value
+                    } data-toggle="modal" data-target="#userModal" title="View user">
                        <i class="far fa-eye"></i>
                   </button>
                   <button type="button" class="my-2 btn btn-outline-primary btn-sm edit" data-id=${
@@ -469,7 +471,8 @@ $("div.main-container").on("click", "button.delete", function(e) {
 $("#userModal").on("show.bs.modal", function(event) {
   const element = $(event.relatedTarget);
   const modal = $(this);
-  const user = usersTable.getUserByEmailOrID(element.data("email"));
+  console.log(element, element.data("id"));
+  const user = usersTable.getUserByEmailOrID(element.data("id"));
 
   const { picture, name, login, dob, phone, cell, location } = user;
   const fullName = usersTable.buildUserFullname(name);
