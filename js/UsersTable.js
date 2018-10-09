@@ -381,10 +381,6 @@ const Table = (function() {
       if (tableBody.children("tr").length > 0) {
         tableBody.find(`tr[data-id=${id}]`).remove();
       } else {
-        console.log(
-          `#card-container > .user-card[data-id=${id}]`,
-          mainContainer.find(`#card-container > .user-card[data-id=${id}]`)
-        );
         mainContainer
           .find(`#card-container > .user-card[data-id=${id}]`)
           .remove();
@@ -471,7 +467,6 @@ $("div.main-container").on("click", "button.delete", function(e) {
 $("#userModal").on("show.bs.modal", function(event) {
   const element = $(event.relatedTarget);
   const modal = $(this);
-  console.log(element, element.data("id"));
   const user = usersTable.getUserByEmailOrID(element.data("id"));
 
   const { picture, name, login, dob, phone, cell, location } = user;
