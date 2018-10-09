@@ -45,8 +45,13 @@ for (sidebarItem of sidebarItems2) {
  *  LEFT SIDE DESKTOP
  *******************************/
 
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeft);
+
+// $(window).on('tounchstart', navLeft);
+
 let iconOpenLeft = document.querySelector("#open-icon-left");
-iconOpenLeft.addEventListener("click", navLeft);
+iconOpenLeft.addEventListener("touchstart", navLeft);
 
 function navLeft(event) {
   let icon = event.target;
@@ -62,8 +67,8 @@ function navLeft(event) {
       span.classList.replace("close", "open");
     }
      // Muestra el botón de busqueda.
-     let searchBtn = document.getElementById("search-btn");
-     searchBtn.classList.replace("close", "open");
+    //  let searchBtn = document.getElementById("search-btn");
+    //  searchBtn.classList.replace("close", "open");
    
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
@@ -80,8 +85,8 @@ function navLeft(event) {
     }
 
     //oculta el botón de busqueda.
-    searchBtn = document.getElementById("search-btn");
-    searchBtn.classList.replace("open", "close");
+    // searchBtn = document.getElementById("search-btn");
+    // searchBtn.classList.replace("open", "close");
 
   }
 }
@@ -92,37 +97,37 @@ function navLeft(event) {
 
 // $('body').resize( navLeftMobile );
 
-function navLeftMobile(event) {
-  let icon = event.target;
-  if (icon.classList.toggle("active")) {
+// function navLeftMobile(event) {
+//   let icon = event.target;
+//   if (icon.classList.toggle("active")) {
 
-    document.getElementById("mySidenavLeft").style.width = "375px";
-    document.getElementById("main-left").style.marginLeft = "375px";
-    document.querySelector(".container-left").style.width = "375px";
-    document.querySelector(".container-left").style.marginRight = "0px";
+//     document.getElementById("mySidenavLeft").style.width = "75%";
+//     document.getElementById("main-left").style.marginLeft = "75%";
+//     document.querySelector(".container-left").style.width = "75%";
+//     document.querySelector(".container-left").style.marginRight = "0px";
 
-    let spans = document.querySelectorAll("#left-menu span");
+//     let spans = document.querySelectorAll("#left-menu span");
 
-    for (span of spans) {
-      span.classList.replace("close", "open");
-    }
+//     for (span of spans) {
+//       span.classList.replace("close", "open");
+//     }
     
-  } else {
-    document.getElementById("mySidenavLeft").style.width = "50px";
-    document.getElementById("main-left").style.marginLeft = "0";
-    document.querySelector(".container-left").style.width = "50px";
-    document
-      .querySelector("#left-menu span")
-      .classList.replace("open", "close");
-    document.querySelector("#left-menu a").style.marginLeft = "0px";
+//   } else {
+//     document.getElementById("mySidenavLeft").style.width = "0";
+//     document.getElementById("main-left").style.marginLeft = "0";
+//     document.querySelector(".container-left").style.width = "0";
+//     document
+//       .querySelector("#left-menu span")
+//       .classList.replace("open", "close");
+//     document.querySelector("#left-menu a").style.marginLeft = "0px";
 
-    let spans = document.querySelectorAll("#left-menu span");
+//     let spans = document.querySelectorAll("#left-menu span");
 
-    for (span of spans) {
-      span.classList.replace("open", "close");
-    }
-  }
-}
+//     for (span of spans) {
+//       span.classList.replace("open", "close");
+//     }
+//   }
+// }
 
 
 
