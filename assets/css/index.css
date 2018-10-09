@@ -358,19 +358,25 @@ ul div[class*="border-dark"] {
    width: 70%;
 }
 #skills label {
-    font-size: 1rem;
-    color: white;
+    font-size: 0.9rem;
 }
 
 #skills div label {
     font-size: 0.8rem;
 }
 #right-menu input {
-    width: 85%;
+    /* width: 85%; */
     font-size: 1rem;
 }
 #right-menu span {
     height: 38px;
+}
+/* #right-menu label[class*='badge-pill'] {
+    text-decoration: underline;
+} */
+#right-menu label[class*='font-italic'] {
+    font-size: 0.9rem;
+    text-decoration: underline;
 }
 
 
@@ -411,17 +417,20 @@ ul div[class*="border-dark"] {
     list-style: none;
 }
 
-
-#age_user #age-range {
-    width: 60%;
-}
-#age_user #age {
+ 
+#age_user #age-range,
+#experience #exp-years {
+    width: 90%;
+} 
+#age_user #age,
+#experience #range {
     padding-top: 0;
+    opacity: 1;
 }
 
-#age_user {
+/* #age_user {
   height: 50px;
-}
+} */
 #genre div {
     width: 70%;
     /* background-color: red; */

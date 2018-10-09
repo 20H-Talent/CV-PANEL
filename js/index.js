@@ -12,10 +12,18 @@ function openNewWindow() {
 }
 
 // --------------- LATERAL RIGHT MENU ----------
-let range = document.querySelector("#age-range");
+let rangeAge = document.querySelector("#age-range");
 let age = document.querySelector("#age");
-range.addEventListener("click", function(event) {
-  age.innerHTML = range.value;
+let rangeExp = document.querySelector("#exp-years");
+let experience = document.querySelector("#range");
+
+// to set age of user next to input age-range
+rangeAge.addEventListener("click", function(event) {
+  age.innerHTML = rangeAge.value;
+});
+// to set experience of user next to input exp-years
+rangeExp.addEventListener("click", function(event) {
+  experience.innerHTML = rangeExp.value;
 });
 
 let sidebarItems2 = document.querySelectorAll("#right-menu li");
