@@ -21,7 +21,7 @@ html {
 }
 
 .container-right {
-    margin-left: 60px;
+    margin-left: 19px;
 }
 
 /* ****************
@@ -107,13 +107,13 @@ html {
 /* The side navigation menu */
 .sidenav-right {
     height: 100%; /* 100% Full-height */
-    width: 70px; /*0 width - change this with JavaScript */
+    width: 34px; /*0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     right: 0;
     background-color: transparent;
 
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    /* background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%); */
 }
 
 /* The navigation menu links */
@@ -134,7 +134,7 @@ html {
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
     position: absolute;
-    top: 0;
+    top: 15px;
     left: -25px;
     /* font-size: 36px; */
     margin-left: 0;
@@ -367,7 +367,6 @@ ul div[class*="border-dark"] {
     text-decoration: underline;
 }
 
-
 #right-menu {
     max-width: auto;
     height: 100%;
@@ -384,10 +383,7 @@ ul div[class*="border-dark"] {
     background-color: rgb(209, 91, 209);
 }
 
-/* #right-menu p {
-    padding-top: 30px;
-} */
- #right-menu p {
+#right-menu p {
     margin-top: 20px;
     opacity: 0;
 } 

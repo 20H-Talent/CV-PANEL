@@ -123,15 +123,13 @@ function navRight(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
     let pSearchFor = document.querySelector('#right-menu p');
-    // let selectedElements = document.querySelectorAll("#right-menu .close");
-    // let divSelectedElements = document.querySelectorAll("#right-menu div.close");
     let selectedElement = document.querySelector("#main-right .close");
-    console.log(selectedElement);
 
     document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
+    document.querySelector('#mySidenavRight').style.background = 'linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)';
 
     // to hide the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "1";
@@ -139,24 +137,17 @@ function navRight(event) {
     pSearchFor.style.transitionDuration = "0s";
     pSearchFor.style.transitionDelay = '1s';
 
-    // for (selectedElement of selectedElements) {
-    //   for(divSelectedElement of divSelectedElements){
-    //     divSelectedElement.classList.add('d-flex');
-    //   }
-    //   selectedElement.classList.replace("close", "open");
-
-    // }
     selectedElement.classList.replace("close", "open");
 
   } else {
     let pSearchFor = document.querySelector('#right-menu p');
-    // let selectedElements = document.querySelectorAll("#right-menu .open");
     let selectedElement = document.querySelector("#main-right section");
-    // let divSelectedElements = document.querySelectorAll("#right-menu div.open");
-    document.getElementById("mySidenavRight").style.width = "70px";
+    document.getElementById("mySidenavRight").style.width = "34px";
     document.getElementById("main-right").style.marginRight = "0";
-    document.querySelector(".container-right").style.width = "70px";
+    document.querySelector(".container-right").style.width = "0px";
+    document.querySelector(".container-right").style.marginLeft = "19px";
     document.querySelector("#right-menu p").style.fontSize = "0.55rem";
+    document.querySelector('#mySidenavRight').style.background = 'transparent';
 
 
     // to display the paragraph 'Search for:' with transition.
@@ -165,12 +156,6 @@ function navRight(event) {
     pSearchFor.style.transitionDuration = "0s";
     pSearchFor.style.transitionDelay = '0s';
 
-    // for (selectedElement of selectedElements) {
-    //   for(divSelectedElement of divSelectedElements){
-    //     divSelectedElement.classList.remove('d-flex');
-    //   }
-    //   selectedElement.classList.replace("open", "close");
-    // }
     selectedElement.classList.replace("open", "close");
 
   }
