@@ -95,6 +95,8 @@ html {
 /*Search button. Only display on mobile devices.*/
 #search-btn{
     display: none;
+    width: 90%;
+    margin: 5%;
 }
 
 
@@ -161,12 +163,6 @@ html {
     .sidenav-right a {
         font-size: 18px;
     }
-
-    /* 
-        .container-right {
-            display: none;
-    
-        } */
 }
 
 .main-header .nav-link {
@@ -430,16 +426,6 @@ ul div[class*="border-dark"] {
 #button_right {
     height: 70px;
 }
-/* #name_user,
-#last_name_user,
-#genre,
-#age_user,
-#experience,
-#languages,
-#skills {
-    background-color: rgba(114, 78, 173, 0.596); 
-    border: 1px solid black;
-} */
 
 #submit_search {
     background-color: none;
@@ -560,24 +546,15 @@ body {
     .container-left { 
         transition: width 0.5s;
         z-index: 1;
-        /* Estado inicial de la barra izquierda 
-        a partir de aquí es para ocultar la barra..*/
-        /* width: 0; 
-        margin-right: 0; */
+       
     }
-    /* #main-left{
-        margin-Left: 0;
-    }
-    #mySidenavLeft{
-        width: 0;
-    } */
+  
 
     #search-btn{
         display: block;
         width: 90%;
         margin: 5%;
     }
-
 }
 
 /**
@@ -593,6 +570,12 @@ body {
         position: absolute;
         transition: width 0.5s;
         z-index: 1;
+    }
+
+    #search-btn{
+        display: block;
+        width: 90%;
+        margin: 5%;
     }
 
 }
