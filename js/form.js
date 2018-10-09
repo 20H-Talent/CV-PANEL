@@ -136,17 +136,17 @@ function editForm(event) {
   if (event.target.tagName !== "IMG") {
     const data = usersTable.getUserByEmailOrID(property);
 
-    document.getElementById("Username").value = data.login.username;
-    document.getElementById("FirstName").value = data.name.first;
-    document.getElementById("LastName").value = data.name.last;
-    document.getElementById("email").value = data.email;
-    document.getElementById("age1").value = data.dob.age;
-    document.getElementById("tel").value = data.phone;
-    document.getElementById("country").value = data.location.state;
-    document.getElementById("city").value = data.location.city;
-    document.getElementById("zip").value = data.location.postcode;
-    document.getElementById("address").value = data.location.street;
-    document.getElementById(data.gender).checked = true;
+    $("#Username").val(data.login.username);
+    $("#FirstName").val(data.name.first);
+    $("#LastName").val(data.name.last);
+    $("#email").val(data.email);
+    $("#age1").val(data.dob.age);
+    $("#tel").val(data.phone);
+    $("#country").val(data.location.state);
+    $("#city").val(data.location.city);
+    $("#zip").val(data.location.postcode);
+    $("#address").val(data.location.street);
+    $(data.gender).checked = true;
 
     for (var i = 0; i < data.skills.length; i++) {
       document.getElementById(data.skills[i] + "1").checked = true;
