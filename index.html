@@ -173,7 +173,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inpudefault"><i class="fas asweome-address fa-map-marker-alt"></i></span>
-                                            <input name="Adress" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                                            <input name="Adress" type="text" minlength="5" maxlength="25" pattern="^[a-zA-Z0-9]+$" class="form-control" id="address"
+                                                placeholder="1234 Main St" required>
                                         </div>
 
                                     </div>
@@ -185,8 +186,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
-                                            <input name="Country" class="custom-select d-block w-100" pattern="^[a-zA-Z]+$" type="text" placeholder="required" required
-                                                id="country">
+                                            <input name="Country" class="custom-select d-block w-100" minlength="5" maxlength="25" pattern="^[a-zA-Z]+$" type="text"
+                                                placeholder="required" required id="country">
                                         </div>
 
                                     </div>
@@ -197,7 +198,7 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
-                                            <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z\s]" type="text" id="city" placeholder="required"
+                                            <input name="city" class="custom-select d-block w-100" pattern="^[a-zA-Z]+$" type="text" id="city" placeholder="required"
                                                 required>
                                         </div>
 
@@ -214,12 +215,17 @@
                                     </div>
                                 </div>
                                 <hr>
+
                                 <div class="form-group row has-success" id="age-required">
                                     <label for="age1" class="col-sm-2 col-form-label">Age</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="Group-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input name="Age" class="form-control" id="age1" type="number" placeholder="required" required>
+                                            <input name="date" class="form-control" id="datebirth" type="date" placeholder="required" required>
+                                            <input name="Age" class="form-control" id="age1" type="number">
+                                            <input name="test" class="form-control" id="test" type="number" placeholder="test">
+
+                                            <span id="ageSpan"></span>
                                         </div>
 
 
@@ -318,10 +324,10 @@
                                     </select>
                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                 </div>
-                                <button class="btn reset" type="button" onclick="showChoices()">
+                                <button class="btn reset btn-custom" type="button" onclick="showChoices()">
                                     Select languages
                                 </button>
-                                <button type="button" class=" btn reset " onclick="reset()" value="Reset">Reset</button>
+                                <button type="button" class=" btn-custom btn reset " onclick="reset()" value="Reset">Reset</button>
                                 <div id="output"></div>
 
 
@@ -354,7 +360,7 @@
 
                                 </div>
 
-                                <button id="button-create-user" class="btn checkout  btn-lg btn-block" onclick="formErrors()" type="submit">Save</button>
+                                <button id="button-create-user" class="btn checkout  btn-custom btn-lg btn-block" onclick="formErrors()" type="submit">Save</button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
                                 <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>
@@ -660,7 +666,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="js/form.js"></script>
     <script src="js/UsersTable.js"></script>
     <script src="js/index.js"></script>

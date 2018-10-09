@@ -160,3 +160,17 @@ function editForm(event) {
   }
   switchVisible("Div2");
 }
+
+//var dateBirthday = $("#datebirth").val();
+
+//var years = moment().diff(dateBirthday$, "years");
+//Math.floor(moment(new Date()).diff(moment("02/26/1978","MM/DD/YYYY"),'years',true)));
+//var years = moment().diff(moment(dateBirthday, "DD-MM-YYYY"), "years");
+
+//document.getElementById("test").innerHTML = years;
+
+$("#datebirth").on("click", function(event) {
+  event.stopPropagation();
+  var dateBirthday = $("#datebirth").val();
+  console.log("dateBirthday", dateBirthday);
+});
