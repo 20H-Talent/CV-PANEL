@@ -304,8 +304,9 @@
                                     </div>
                                 </div>
 
-                                <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
-                                <div class="form-group">
+
+                                <div class="form-group langsel">
+                                    <h4 class="mb-3 ">Languages</h4> <small> (press ctrl to choose more languages)</small>
                                     <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" required>
                                         <option value="Afrikan">Afrikan</option>
                                         <option value="English">English</option>
@@ -319,13 +320,14 @@
                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                 </div>
                                 <button class="btn reset" type="button" onclick="showChoices()">
-                                    Continue
+                                    Select languages
                                 </button>
                                 <button type="button" class=" btn reset " onclick="reset()" value="Reset">Reset</button>
                                 <div id="output"></div>
-                                <h4 class="mb-3">Are you available for an interview in the near future?</h4>
 
-                                <div class="d-block my-3 d-block custom-controls-stacked">
+
+                                <div class="d-block my-3 d-block custom-controls-stacked langsel">
+                                    <h4 class="mb-3">Are you available for an interview in the near future?</h4>
                                     <div class=" custom-radio ">
                                         <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input">
                                         <label class="custom-control-label" for="available">Yes</label>
@@ -334,16 +336,22 @@
                                         <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
                                         <label class="custom-control-label" for="Radiobutton1">No</label>
                                     </div>
-                                    <div class=" custom-radio ">
-                                        <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
-                                        <label class="custom-control-label" for="Radiobutton2">I have a job right now,but
-                                            i want to stay on the market</label>
+                                </div>
+                                <div id="upload-curriculum" class="form-row langsel">
+                                    <div class="col">
+                                        <label for="exampleFormControlFile1"> <strong>Upload Curriculum</strong> </label>
+                                        <input type="file" class="form-control-file fileupload" id="exampleFormControlFile1">
                                     </div>
+
+
+                                    <div class="col" id="upload-carta">
+                                        <label for="exampleFormControlFile2"><strong>Upload your application letter</strong></label>
+                                        <input type="file" class="form-control-file  fileupload" id="exampleFormControlFile2">
+                                    </div>
+
                                 </div>
 
-                                <button id="button-create-user" class="btn checkout  btn-lg btn-block" onclick="formErrors()" type="submit">Continue
-                                    to checkout
-                                </button>
+                                <button id="button-create-user" class="btn checkout  btn-lg btn-block" onclick="formErrors()" type="submit">Save</button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
                                 <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>
