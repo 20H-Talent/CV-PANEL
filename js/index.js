@@ -70,13 +70,16 @@ function navLeft(event) {
 
 $('body').resize( navLeftMobile );
 
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeftMobile);
+
 function navLeftMobile(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
 
-    document.getElementById("mySidenavLeft").style.width = "370px";
-    document.getElementById("main-left").style.marginLeft = "370px";
-    document.querySelector(".container-left").style.width = "370px";
+    document.getElementById("mySidenavLeft").style.width = "375px";
+    document.getElementById("main-left").style.marginLeft = "375px";
+    document.querySelector(".container-left").style.width = "375px";
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
