@@ -117,7 +117,7 @@ const Table = (function() {
       const tableBody = mainTable.find("tbody");
       const cardContainer = mainContainer.find("div#card-container");
 
-      if (browserWidth > 768 && tableBody.children("tr").length === 0) {
+      if (browserWidth > 868 && tableBody.children("tr").length === 0) {
         const usersData =
           users || JSON.parse(sessionStorage.getItem("users-list"));
 
@@ -125,7 +125,7 @@ const Table = (function() {
         mainTable.show();
         usersData.forEach(user => _appendRowData(tableBody, user));
       } else if (
-        browserWidth < 768 &&
+        browserWidth < 868 &&
         cardContainer.children(".user-card").length === 0
       ) {
         const usersData =
