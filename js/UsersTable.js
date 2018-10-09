@@ -63,7 +63,7 @@ const Table = (function() {
       if (browserWidth > 768) {
         const tableBody = mainContainer.find("#users-table tbody");
         users.forEach(user => _appendRowData(tableBody, user));
-        _showOverlay(false);
+        //_showOverlay(false);
       } else {
         mainContainer
           .find("#users-table")
@@ -413,6 +413,35 @@ const Table = (function() {
       apiRequest(apiURL, renderDataOnResize);
     }
 
+    /** Render again the table with specific conditions
+     * @function renderTable
+     * @public
+     * @param {Object} filters - Conditions to render again the table with filtered data
+     * @param {Array} data
+     */
+    function renderTable(inputsData = [], data = null) {
+      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
+      _showOverlay(true);
+      const filters = _buildFilters(inputsData);
+      const tableBody = mainContainer.find("#users-tabletbody");
+
+      if (filters["gender"]) {
+        users = users.filter(
+          user => user["gender"] === filters["gender"].toLowerCase()
+        );
+      }
+      if (filters["firstname"] || filters["lastname"]) {
+        users = users.filter(user => {
+          return (
+            user["name"]["first"]
+              .toLowerCase()
+              .includes(filters["firstname"]) ||
+            user["name"]["last"].toLowerCase().includes(filters["lastname"])
+          );
+        });
+      }
+    }
+
     function _showOverlay(show) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
@@ -552,6 +581,6 @@ function appendTechSkills(container, user) {
 $("form#advanced-search").on("submit", function(e) {
   e.preventDefault();
   //Build the filters object to render the table with the new results
-  const formInputs = $(this).find("div.collapse.show input");
+  const formInputs = $(this).find("input");
   usersTable.renderTable(formInputs);
 });
