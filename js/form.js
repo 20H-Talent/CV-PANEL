@@ -146,7 +146,7 @@ function editForm(event) {
     $("#city").val(data.location.city);
     $("#zip").val(data.location.postcode);
     $("#address").val(data.location.street);
-    $(data.gender).checked = true;
+    document.getElementById(data.gender).checked = true;
 
     for (var i = 0; i < data.skills.length; i++) {
       document.getElementById(data.skills[i] + "1").checked = true;
