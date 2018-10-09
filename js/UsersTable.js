@@ -36,6 +36,7 @@ const Table = (function() {
     }
 
     function apiRequest(url, callback) {
+      _showOverlay(true);
       $.getJSON(url, function(response) {
         if (!response["error"]) {
           usersWithExtraData = _appendExtraData(response["results"]);
@@ -46,6 +47,7 @@ const Table = (function() {
           callback(usersWithExtraData, window.innerWidth);
         }
       }).fail(function(err) {
+        _showOverlay(false);
         throw new Error(err);
       });
     }
@@ -61,6 +63,7 @@ const Table = (function() {
       if (browserWidth > 768) {
         const tableBody = mainContainer.find("#users-table tbody");
         users.forEach(user => _appendRowData(tableBody, user));
+        _showOverlay(false);
       } else {
         mainContainer
           .find("#users-table")
@@ -69,6 +72,7 @@ const Table = (function() {
           .empty();
         let cardContainer = mainContainer.find("div#card-container");
         users.forEach(user => _appendCardData(cardContainer, user));
+        _showOverlay(false);
       }
     }
 
@@ -407,6 +411,20 @@ const Table = (function() {
 
       const apiURL = setupApiURL(paramsObject);
       apiRequest(apiURL, renderDataOnResize);
+    }
+
+    function _showOverlay(show) {
+      const mainTable = mainContainer.find("#users-table");
+      const tableBody = mainTable.find("tbody");
+      const cardContainer = mainContainer.find("div#card-container");
+
+      let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
+
+      if (show) {
+        overlayContainer.append(`<div class="loading">Loading&#8230;</div>`);
+      } else {
+        overlayContainer.find("div.loading").remove();
+      }
     }
 
     return {
