@@ -63,7 +63,6 @@ const Table = (function() {
       if (browserWidth > 768) {
         const tableBody = mainContainer.find("#users-table tbody");
         users.forEach(user => _appendRowData(tableBody, user));
-        //_showOverlay(false);
       } else {
         mainContainer
           .find("#users-table")
@@ -72,8 +71,8 @@ const Table = (function() {
           .empty();
         let cardContainer = mainContainer.find("div#card-container");
         users.forEach(user => _appendCardData(cardContainer, user));
-        _showOverlay(false);
       }
+      _showOverlay(false);
     }
 
     /**
