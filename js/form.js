@@ -142,6 +142,7 @@ function editForm(event) {
     data.name.last.charAt(0).toUpperCase() + data.name.last.slice(1)
   );
   $("#email").val(data.email);
+  console.log("dara", data);
   $("#age1").val(data.dob.age + " years old ");
   $("#tel").val(data.phone);
   $("#country").val(data.location.state);
@@ -163,6 +164,17 @@ function editForm(event) {
       lang.options[i].selected = true;
     }
   }
+  // var skillUser = document.getElementById("skill");
+  // var inpskill = skillUser.querySelectorAll("input");
+  // for (var i = 0; i < inpskill.length; i++) {
+  //   inpskill[i].checked = false;
+  // }
+  // var lang = document.getElementById("selLanguage");
+  // //var inpLang = lang.querySelectorAll("option");
+  // for (var i = 0; i < inpskill.length; i++) {
+  //   inpskill[i].checked = false;
+  // }
+
   switchVisible("Div2");
 }
 /**************************************************************************
