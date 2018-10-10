@@ -21,7 +21,7 @@ html {
 }
 
 .container-right {
-    margin-left: 19px;
+    margin-left: 30px;
 }
 
 /* ****************
@@ -113,7 +113,7 @@ html {
     background-color: transparent;
 
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    /* background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%); */
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 /* The navigation menu links */
