@@ -519,20 +519,10 @@ ul div[class*="border-dark"] {
 #button_right {
   height: 70px;
 }
-/* #name_user,
-#last_name_user,
-#genre,
-#age_user,
-#experience,
-#languages,
-#skills {
-    background-color: rgba(114, 78, 173, 0.596);
-    border: 1px solid black;
-} */
 
 #submit_search {
-  background-color: none;
   /* margin-bottom: 4rem !important; */
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
   height: 56%;
 }
 
