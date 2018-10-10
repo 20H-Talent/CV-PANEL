@@ -59,7 +59,8 @@
                                                 <span class="close">Logout</span>
                                             </a>
                                         </li>
-                                        <li id="search-btn" class="mb-3 rounded w-100"> <!-- llamar al index.html del menú derecho-->
+                                        <li id="search-btn" class="mb-3 rounded w-100">
+                                            <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-search mr-2"></i>
                                                 <span class="close">Search</span>
@@ -107,10 +108,11 @@
                         <!-- Table users -->
                         <div class="col ">
                             <div class="mb-3 adduser text-center">
-                                <h4 class="mb-3 text-center"><i class="fas fa-user-edit"></i>Add User</h4>
+                                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i></i>Add User /<i class="fas fa-user-edit"></i>
+                                    Edit User</h4>
                             </div>
 
-                            <div id="renderize"></div>
+                            <div id="renderize" class="alert  alert-dismissible fade show" role="alert"></div>
                             <hr class="mb-4">
                             <hr class=" hr-2">
                             <form id="alertform" action="get" method="post" class="needs-validation col-md-12 ">
@@ -119,9 +121,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input type="text" name="FirstName" class="form-control " minlength="3"
-                                                maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName" placeholder="required"
-                                                value="" required>
+                                            <input type="text" name="FirstName" class="form-control " minlength="3" maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName"
+                                                placeholder="required" value="" required>
                                         </div>
 
                                     </div>
@@ -131,9 +132,9 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input type="text" name="LastName" class="form-control" id="LastName"
-                                                minlength="3" maxlength="15" pattern="[a-zA-Z0-9\s]+" title="Last name must have 3-15 characters long"
-                                                placeholder="required" value="" required>
+                                            <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName" pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+"
+                                                title="Last name must have 3-15 characters long" placeholder="required" value=""
+                                                required>
                                         </div>
 
 
@@ -145,9 +146,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputfault"><i class="fas asweome fa-users"></i></span>
 
-                                            <input name="Username" minlength="5" maxlength="25" pattern="[a-zA-Z0-9\s]+"
-                                                type="text" class="form-control" id="Username" placeholder="Username"
-                                                required>
+                                            <input lang="es-ES" name="Username" pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+" type="text" class="form-control" id="Username"
+                                                placeholder="Username" required>
                                         </div>
 
 
@@ -158,8 +158,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="in-sizing-default"><i class="fas asweome fa-at"></i></span>
-                                            <input type="email" name="Email" class="form-control form-control-success"
-                                                id="email" placeholder="name@example.com" required>
+                                            <input lang="es-ES" type="email" name="Email" class="form-control form-control-success" id="email" placeholder="name@example.com"
+                                                required>
 
                                         </div>
 
@@ -171,8 +171,7 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputizing-default"><i class="fas asweome fa-phone-square"></i></span>
-                                            <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}"
-                                                id="tel" placeholder="required" required>
+                                            <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}" id="tel" placeholder="required" required>
                                         </div>
 
                                     </div>
@@ -183,8 +182,7 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inpudefault"><i class="fas asweome-address fa-map-marker-alt"></i></span>
-                                            <input name="Adress" type="text" class="form-control" id="address"
-                                                placeholder="1234 Main St" required>
+                                            <input lang="es-ES" name="Adress" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
                                         </div>
 
                                     </div>
@@ -196,8 +194,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
-                                            <input name="Country" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]+"
-                                                type="text" placeholder="required" required id="country">
+                                            <input lang="es-ES" name="Country" class="custom-select d-block w-100" pattern=".{3,25}" pattern="^[a-zA-Z]+$" type="text"
+                                                placeholder="required" required id="country">
                                         </div>
 
                                     </div>
@@ -208,8 +206,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
-                                            <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]"
-                                                type="text" id="city" placeholder="required" required>
+                                            <input lang="es-ES" name="city" class="custom-select d-block w-100" pattern=".{3,25}" type="text" id="city" placeholder="required"
+                                                required>
                                         </div>
 
                                     </div>
@@ -219,20 +217,26 @@
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
-                                            <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+"
-                                                id="zip" placeholder=" required" required>
+                                            <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+" id="zip" placeholder=" required" required>
                                         </div>
 
                                     </div>
                                 </div>
-                                <hr>
+
                                 <div class="form-group row has-success" id="age-required">
+                                    <!-- <label for="datebirth" class="col-sm-2 col-form-label">Birthday date</label> -->
                                     <label for="age1" class="col-sm-2 col-form-label">Age</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="Group-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input name="Age" class="form-control" id="age1" type="number" placeholder="required"
-                                                required>
+                                            <span class="input-group-text" id="Group-s"><i class="fas asweome fa-user-tie"></i></span>
+
+                                            <!-- <input name="date" class="form-control" value="" id="datebirth" type="date"> -->
+
+                                            <input name="Age" class="form-control" value="" id="age1" type="text">
+
+                                            <!-- <span class="col-sm-6 alert-dark" name="test" id="test"></span> -->
+
+
                                         </div>
 
 
@@ -257,7 +261,7 @@
 
                                     </div>
                                 </div>
-
+                                <hr>
                                 <div class="custom-control custom-checkbox " id="skill">
                                     <h4 class="mb-3 langsel">Skills</h4>
 
@@ -319,8 +323,7 @@
 
                                 <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
                                 <div class="form-group">
-                                    <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12"
-                                        name="selLanguage" required>
+                                    <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" required>
                                         <option value="Afrikan">Afrikan</option>
                                         <option value="English">English</option>
                                         <option value="Spanish">Spanish</option>
@@ -332,35 +335,44 @@
                                     </select>
                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                 </div>
-                                <button class="btn reset" type="button" onclick="showChoices()">
-                                    Continue
+                                <button class="btn reset btn-custom" type="button" onclick="showChoices()">
+                                    Select languages
                                 </button>
-                                <button type="button" class=" btn reset " onclick="reset()" value="Reset">Reset</button>
+                                <button type="button" class=" btn-custom btn reset " onclick="reset()" value="Reset">Reset</button>
                                 <div id="output"></div>
-                                <h4 class="mb-3">Are you available for an interview in the near future?</h4>
-
-                                <div class="d-block my-3 d-block custom-controls-stacked">
+                                <div class="d-block my-3 d-block custom-controls-stacked langsel">
+                                    <h4 class="mb-3">Are you available for an interview in the near future?</h4>
                                     <div class=" custom-radio ">
-                                        <input id="available" onchange="validate()" name="Radiobutton" type="radio"
-                                            class="custom-control-input">
+
+                                        <input id="available" name="Radiobutton" type="radio" class="custom-control-input">
                                         <label class="custom-control-label" for="available">Yes</label>
                                     </div>
                                     <div class=" custom-radio ">
+
                                         <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
                                         <label class="custom-control-label" for="Radiobutton1">No</label>
                                     </div>
-                                    <div class=" custom-radio ">
-                                        <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
-                                        <label class="custom-control-label" for="Radiobutton2">I have a job right
-                                            now,but
-                                            i want to stay on the market</label>
+                                </div>
+                                <div class="form-group">
+                                    <h4></h4>
+                                    <label for="exampleFormControlTextarea1"><strong>Additional informacion about you?</strong></label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                                <div id="upload-curriculum" class="form-row langsel">
+                                    <div class="col">
+                                        <label for="exampleFormControlFile1"> <strong>Upload Curriculum</strong> </label>
+                                        <input type="file" class="form-control-file fileupload" id="exampleFormControlFile1">
                                     </div>
+
+
+                                    <div class="col" id="upload-carta">
+                                        <label for="exampleFormControlFile2"><strong>Upload your application letter</strong></label>
+                                        <input type="file" class="form-control-file  fileupload" id="exampleFormControlFile2">
+                                    </div>
+
                                 </div>
 
-                                <button id="button-create-user" class="btn checkout  btn-lg btn-block" onclick="formErrors()"
-                                    type="submit">Continue
-                                    to checkout
-                                </button>
+                                <button id="button-create-user" class="btn checkout  btn-custom btn-lg btn-block" onclick="formErrors()" type="submit">Save</button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
                                 <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>
@@ -389,34 +401,30 @@
                                     <form id="advanced-search">
                                         <div id="name_user" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
                                             <!-- <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label> -->
-                                            <input type="text" class="form-control" id="name"
-                                            placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
+                                            <input type="text" class="form-control" id="name" placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
                                             <small class="text-center text-white w-100">
                                                 Must be written in lowercase.
                                             </small>
                                         </div>
-                                    
+
                                         <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
                                             <!-- <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
                                                 Name
                                             </label> -->
-                                            <input type="text" class="form-control" id="last-name"
-                                                placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
+                                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
                                             <small class="text-center text-white w-100">
                                                 Must be written in lowercase.
                                             </small>
                                         </div>
-                                    
+
                                         <div id="genre" class="text-white form-group bg-dark m-2 p-2 d-flex justify-content-center align-items-center flex-wrap border">
                                             <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
                                             <div class="custom-control custom-radio text-center w-50">
-                                                <input type="radio" id="genre_female" class="custom-control-input"
-                                                    value="female" name="gender">
+                                                <input type="radio" id="genre_female" class="custom-control-input" value="female" name="gender">
                                                 <label class="custom-control-label" for="genre_female">Female</label>
                                             </div>
                                             <div class="custom-control custom-radio text-center w-50">
-                                                <input type="radio" id="genre_male" class="custom-control-input"
-                                                    value="male" name="gender">
+                                                <input type="radio" id="genre_male" class="custom-control-input" value="male" name="gender">
                                                 <label class="custom-control-label" for="genre_male">Male</label>
                                             </div>
                                         </div>
@@ -426,132 +434,112 @@
                                             <p id="age" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
                                         </div>
                                         <div id="experience" class="text-white form-group m-2 p-2 bg-dark border">
-                                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years of experience</label> 
+                                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
+                                                of experience</label>
                                             <input type="range" min="0" max="30" class="custom-range" id="exp-years">
                                             <p id="range" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
                                         </div>
-                                    
+
                                         <!-- ********* lANGUAGES *********** -->
                                         <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
                                             <label class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</label>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="english" class="custom-control-input w-50"
-                                                    name="lang_english" value=0>
+                                                <input type="radio" id="english" class="custom-control-input w-50" name="lang_english" value=0>
                                                 <label class="custom-control-label" for="english">English</label>
                                             </div>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="spanish" class="custom-control-input w-50"
-                                                    name="lang_spanish" value=0>
+                                                <input type="radio" id="spanish" class="custom-control-input w-50" name="lang_spanish" value=0>
                                                 <label class="custom-control-label" for="spanish">Spanish</label>
                                             </div>
                                             <div class="custom-control custom-radio col-3">
-                                                <input type="radio" id="italian" class="custom-control-input w-50"
-                                                    name="lang_italian" value=0>
+                                                <input type="radio" id="italian" class="custom-control-input w-50" name="lang_italian" value=0>
                                                 <label class="custom-control-label" for="italian">Italian</label>
                                             </div>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="french" class="custom-control-input w-50"
-                                                    name="lang_french" value=0>
+                                                <input type="radio" id="french" class="custom-control-input w-50" name="lang_french" value=0>
                                                 <label class="custom-control-label" for="french">French</label>
                                             </div>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="rumanian" class="custom-control-input w-50"
-                                                    name="lang_rumanian" value=0>
+                                                <input type="radio" id="rumanian" class="custom-control-input w-50" name="lang_rumanian" value=0>
                                                 <label class="custom-control-label" for="rumanian">Rumanian</label>
                                             </div>
                                             <div class="custom-control custom-radio col-3">
-                                                <input type="radio" id="african" class="custom-control-input w-50"
-                                                    name="lang_african" value=0>
+                                                <input type="radio" id="african" class="custom-control-input w-50" name="lang_african" value=0>
                                                 <label class="custom-control-label" for="african">African</label>
                                             </div>
                                         </div>
-                                    
+
                                         <!-- ******** SKILLS ********** -->
                                         <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
                                             <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
                                             <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
                                                 <label class="w-100 text-center font-italic">Layout</label>
                                                 <div class="custom-control custom-radio mr-3">
-                                                    <input type="radio" id="css" class="custom-control-input"
-                                                        value=0 name="skills_css">
+                                                    <input type="radio" id="css" class="custom-control-input" value=0 name="skills_css">
                                                     <label class="custom-control-label" for="css">CSS</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="html" class="custom-control-input"
-                                                        value=0 name="skills_html">
+                                                    <input type="radio" id="html" class="custom-control-input" value=0 name="skills_html">
                                                     <label class="custom-control-label" for="html">HTML</label>
                                                 </div>
                                             </div>
                                             <div class="col-5 d-flex flex-column mr-auto p-0 bg-dark">
                                                 <label class="w-100 text-center font-italic">Languages</label>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="javascript" class="custom-control-input"
-                                                        value=0 name="skills_javascript">
+                                                    <input type="radio" id="javascript" class="custom-control-input" value=0 name="skills_javascript">
                                                     <label class="custom-control-label" for="javascript">Javascript</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="php" class="custom-control-input"
-                                                        value=0 name="skills_php">
+                                                    <input type="radio" id="php" class="custom-control-input" value=0 name="skills_php">
                                                     <label class="custom-control-label" for="php">PHP</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="python" class="custom-control-input"
-                                                        value=0 name="skills_python">
+                                                    <input type="radio" id="python" class="custom-control-input" value=0 name="skills_python">
                                                     <label class="custom-control-label" for="python">Python</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="ruby" class="custom-control-input"
-                                                        value=0 name="skills_ruby">
+                                                    <input type="radio" id="ruby" class="custom-control-input" value=0 name="skills_ruby">
                                                     <label class="custom-control-label" for="ruby">Ruby</label>
                                                 </div>
                                                 <div class="custom-control custom-radio w-100">
-                                                    <input type="radio" id="c++" class="custom-control-input"
-                                                        value=0 name="skills_c++">
+                                                    <input type="radio" id="c++" class="custom-control-input" value=0 name="skills_c++">
                                                     <label class="custom-control-label" for="c++">C++</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="java" class="custom-control-input"
-                                                        value=0 name="skills_java">
+                                                    <input type="radio" id="java" class="custom-control-input" value=0 name="skills_java">
                                                     <label class="custom-control-label" for="java">Java</label>
                                                 </div>
                                             </div>
                                             <div class="col-6 d-flex flex-column p-0 bg-dark">
                                                 <label class="w-100 text-center font-italic">Frameworks</label>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="django" class="custom-control-input"
-                                                        value=0 name="skills_django">
+                                                    <input type="radio" id="django" class="custom-control-input" value=0 name="skills_django">
                                                     <label class="custom-control-label" for="django">Django</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="ruby-rails" name="skills" class="custom-control-input"
-                                                        value=0 name="skills_ruby-rails">
-                                                    <label class="custom-control-label" for="ruby-rails">Ruby
-                                                        on Rails
+                                                    <input type="radio" id="ruby-rails" name="skills" class="custom-control-input" value=0 name="skills_ruby-rails">
+                                                    <label class="custom-control-label" for="ruby-rails">Ruby on Rails
                                                     </label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="react" class="custom-control-input"
-                                                        value=0 name="skills_react">
+                                                    <input type="radio" id="react" class="custom-control-input" value=0 name="skills_react">
                                                     <label class="custom-control-label" for="react">React</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="angular" class="custom-control-input"
-                                                        value=0 name="skills_angular">
+                                                    <input type="radio" id="angular" class="custom-control-input" value=0 name="skills_angular">
                                                     <label class="custom-control-label" for="angular">Angular</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="vue" class="custom-control-input"
-                                                        value=0 name="skills_vue">
+                                                    <input type="radio" id="vue" class="custom-control-input" value=0 name="skills_vue">
                                                     <label class="custom-control-label" for="vue">Vue</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="laravel" class="custom-control-input"
-                                                        value=0 name="skills_laravel">
+                                                    <input type="radio" id="laravel" class="custom-control-input" value=0 name="skills_laravel">
                                                     <label class="custom-control-label" for="laravel">Laravel</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                         <div id="button_right" class="d-flex justify-content-center mb-5">
                                             <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill">
                                                 <i class="fa fa-check-circle fa-3x "></i>
@@ -601,8 +589,7 @@
                             <div class="card">
                                 <div class="card-header" id="languages-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo"
-                                            aria-expanded="true" aria-controls="languagesInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo" aria-expanded="true" aria-controls="languagesInfo">
                                             Languages
                                         </button>
                                     </h5>
@@ -617,8 +604,7 @@
                             <div class="card">
                                 <div class="card-header" id="skills-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo"
-                                            aria-expanded="true" aria-controls="skillsInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo" aria-expanded="true" aria-controls="skillsInfo">
                                             Skills
                                         </button>
                                     </h5>
@@ -634,8 +620,7 @@
                             <div class="card">
                                 <div class="card-header" id="frameworks-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#frameworksInfo"
-                                            aria-expanded="true" aria-controls="frameworksInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#frameworksInfo" aria-expanded="true" aria-controls="frameworksInfo">
                                             Frameworks
                                         </button>
                                     </h5>
@@ -665,7 +650,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="js/form.js"></script>
     <script src="js/UsersTable.js"></script>
     <script src="js/index.js"></script>

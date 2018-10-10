@@ -3,7 +3,6 @@
  ***************************************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
-
   var renderize = document.getElementById("renderize");
   //Go back to initial value/display
   document.getElementById("renderize").style.display = "block";
@@ -123,28 +122,42 @@ function switchVisible(visible) {
       break;
   }
 }
-
 /**************************************************************************
- * Setting the values of the table and adding them in the inputs of the form on click***
+ * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(event) {
   const element = $(event.currentTarget);
   const property = element.data("id");
 
   const data = usersTable.getUserByEmailOrID(property);
-
-  document.getElementById("Username").value = data.login.username;
-  document.getElementById("FirstName").value = data.name.first;
-  document.getElementById("LastName").value = data.name.last;
-  document.getElementById("email").value = data.email;
-  document.getElementById("age1").value = data.dob.age;
-  document.getElementById("tel").value = data.phone;
-  document.getElementById("country").value = data.location.state;
-  document.getElementById("city").value = data.location.city;
-  document.getElementById("zip").value = data.location.postcode;
-  document.getElementById("address").value = data.location.street;
+  // empting the checkboxes when editing another user
+  var skillUser = document.getElementById("skill");
+  var inpskill = skillUser.querySelectorAll("input");
+  for (var i = 0; i < inpskill.length; i++) {
+    inpskill[i].checked = false;
+  }
+  // empting the checkboxes when editing another user
+  var lang = document.getElementById("selLanguage");
+  //var inpLang = lang.querySelectorAll("option");
+  for (var i = 0; i < lang.options.length; i++) {
+    lang.options[i].selected = false;
+  }
+  $("#Username").val(data.login.username);
+  $("#FirstName").val(
+    data.name.first.charAt(0).toUpperCase() + data.name.first.slice(1)
+  );
+  $("#LastName").val(
+    data.name.last.charAt(0).toUpperCase() + data.name.last.slice(1)
+  );
+  $("#email").val(data.email);
+  console.log("dara", data);
+  $("#age1").val(data.dob.age + " years old ");
+  $("#tel").val(data.phone);
+  $("#country").val(data.location.state);
+  $("#city").val(data.location.city);
+  $("#zip").val(data.location.postcode);
+  $("#address").val(data.location.street);
   document.getElementById(data.gender).checked = true;
-
   for (var i = 0; i < data.skills.length; i++) {
     document.getElementById(data.skills[i] + "1").checked = true;
   }
@@ -160,3 +173,12 @@ function editForm(event) {
   }
   switchVisible("Div2");
 }
+/**************************************************************************
+ * Selecting the day birth and putting the years of the user in a span***
+ **************************************************************************/
+// $("#datebirth").on("mouseenter mouseleave", function(event) {
+//   event.stopPropagation();
+//   var valor = $(this).val();
+//   var years = moment().diff(valor, "years");
+//   var testing = $("#test").html(years + " years old");
+// });

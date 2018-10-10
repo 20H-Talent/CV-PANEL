@@ -40,29 +40,27 @@ for (sidebarItem of sidebarItems2) {
  *******************************/
 // El ancho de la barra izquierda es igual para la tablet y para el escritorio, solo cambia para el móvil.
 changeScreen();
-$(window).on('resize', function(){
-	// var windowSize = $(window).width(); 
-    changeScreen();
+$(window).on("resize", function() {
+  // var windowSize = $(window).width();
+  changeScreen();
 });
 
-function changeScreen (){
-  var windowSize = $(window).width(); 
-  if (windowSize > 425){
-    console.log('Desktop');
+function changeScreen() {
+  var windowSize = $(window).width();
+  if (windowSize > 425) {
+    console.log("Desktop");
     // let iconOpenLeft = document.querySelector("#open-icon-left");
     // iconOpenLeft.addEventListener("click", navLeft);
     $("#open-icon-left").on("click", navLeft);
     $("#left-menu").on("touchmove", navLeft);
     //$('#main-left').on('click', navLeft);
-   
-} else { 
-  console.log('Mobile');
+  } else {
+    console.log("Mobile");
     // let iconOpenLeft = document.querySelector("#open-icon-left");
     // iconOpenLeft.addEventListener("click", navLeftMobile);
     $("#open-icon-left").on("click", navLeftMobile);
     $("#left-menu").on("touchmove", navLeftMobile);
-} 
-
+  }
 }
 
 /*******************************
@@ -83,7 +81,7 @@ function navLeft(event) {
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
-  
+
     for (span of spans) {
       span.classList.replace("close", "open");
     }
@@ -103,7 +101,6 @@ function navLeft(event) {
   }
 }
 
-
 /*******************************
  *  LEFT SIDE BAR MOBILE
  *******************************/
@@ -116,7 +113,6 @@ function navLeft(event) {
 function navLeftMobile(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-
     document.getElementById("mySidenavLeft").style.width = "90%";
     document.getElementById("main-left").style.marginLeft = "90%";
     document.querySelector(".container-left").style.width = "90%";
@@ -127,7 +123,6 @@ function navLeftMobile(event) {
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-    
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -155,42 +150,40 @@ iconOpenRight.addEventListener("click", navRight);
 function navRight(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-    let pSearchFor = document.querySelector('#right-menu p');
+    let pSearchFor = document.querySelector("#right-menu p");
     let selectedElement = document.querySelector("#main-right .close");
 
     document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
-    document.querySelector('#mySidenavRight').style.background = 'linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)';
+    document.querySelector("#mySidenavRight").style.background =
+      "linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)";
 
     // to hide the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "1";
     pSearchFor.style.fontSize = "1rem";
     pSearchFor.style.transitionDuration = "0s";
-    pSearchFor.style.transitionDelay = '1s';
+    pSearchFor.style.transitionDelay = "1s";
 
     selectedElement.classList.replace("close", "open");
-
   } else {
-    let pSearchFor = document.querySelector('#right-menu p');
+    let pSearchFor = document.querySelector("#right-menu p");
     let selectedElement = document.querySelector("#main-right section");
     document.getElementById("mySidenavRight").style.width = "34px";
     document.getElementById("main-right").style.marginRight = "0";
     document.querySelector(".container-right").style.width = "0px";
     document.querySelector(".container-right").style.marginLeft = "19px";
     document.querySelector("#right-menu p").style.fontSize = "0.55rem";
-    document.querySelector('#mySidenavRight').style.background = 'transparent';
-
+    document.querySelector("#mySidenavRight").style.background = "transparent";
 
     // to display the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "0";
     pSearchFor.style.fontSize = "0.55rem";
     pSearchFor.style.transitionDuration = "0s";
-    pSearchFor.style.transitionDelay = '0s';
+    pSearchFor.style.transitionDelay = "0s";
 
     selectedElement.classList.replace("open", "close");
-
   }
 }
 // ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
