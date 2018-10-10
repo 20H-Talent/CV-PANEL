@@ -32,14 +32,22 @@ for (sidebarItem of sidebarItems2) {
  *******************************/
 // El ancho de la barra izquierda es igual para la tablet y para el escritorio, solo cambia para el móvil.
 
-// $(window).on('resize', function(){
-// 	var windowSize = $(window).width(); 
-//     if (windowSize < 426){
-//     	navLeftMobile();
-//     } else { 
-//     	navLeft();
-//     } 
-// });
+$(window).on('resize', function(){
+	var windowSize = $(window).width(); 
+    if (windowSize > 425){
+
+        // let iconOpenLeft = document.querySelector("#open-icon-left");
+        // iconOpenLeft.addEventListener("click", navLeft);
+        $("#open-icon-left").on("click", navLeft);
+        $("#left-menu").on("touchmove", navLeft);
+      
+    } else { 
+        // let iconOpenLeft = document.querySelector("#open-icon-left");
+        // iconOpenLeft.addEventListener("click", navLeftMobile);
+        $("#open-icon-left").on("click", navLeftMobile);
+        $("#left-menu").on("touchmove", navLeftMobile);
+    } 
+});
 
 /*******************************
  *  LEFT SIDE DESKTOP
@@ -48,10 +56,7 @@ for (sidebarItem of sidebarItems2) {
 // let iconOpenLeft = document.querySelector("#open-icon-left");
 // iconOpenLeft.addEventListener("click", navLeft);
 
-// $(window).on('tounchstart', navLeft);
-
-let iconOpenLeft = document.querySelector("#open-icon-left");
-iconOpenLeft.addEventListener("touchstart", navLeft);
+// $("#left-menu").on("touchmove", navLeft);
 
 function navLeft(event) {
   let icon = event.target;
@@ -66,10 +71,6 @@ function navLeft(event) {
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-     // Muestra el botón de busqueda.
-    //  let searchBtn = document.getElementById("search-btn");
-    //  searchBtn.classList.replace("close", "open");
-   
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -83,53 +84,50 @@ function navLeft(event) {
     for (span of spans) {
       span.classList.replace("open", "close");
     }
-
-    //oculta el botón de busqueda.
-    // searchBtn = document.getElementById("search-btn");
-    // searchBtn.classList.replace("open", "close");
-
   }
 }
+
 
 /*******************************
  *  LEFT SIDE BAR MOBILE
  *******************************/
 
-// $('body').resize( navLeftMobile );
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeftMobile);
 
-// function navLeftMobile(event) {
-//   let icon = event.target;
-//   if (icon.classList.toggle("active")) {
+// $("#left-menu").on("touchmove", navLeftMobile);
 
-//     document.getElementById("mySidenavLeft").style.width = "75%";
-//     document.getElementById("main-left").style.marginLeft = "75%";
-//     document.querySelector(".container-left").style.width = "75%";
-//     document.querySelector(".container-left").style.marginRight = "0px";
+function navLeftMobile(event) {
+  let icon = event.target;
+  if (icon.classList.toggle("active")) {
 
-//     let spans = document.querySelectorAll("#left-menu span");
+    document.getElementById("mySidenavLeft").style.width = "90%";
+    document.getElementById("main-left").style.marginLeft = "90%";
+    document.querySelector(".container-left").style.width = "90%";
+    document.querySelector(".container-left").style.marginRight = "0px";
 
-//     for (span of spans) {
-//       span.classList.replace("close", "open");
-//     }
+    let spans = document.querySelectorAll("#left-menu span");
+
+    for (span of spans) {
+      span.classList.replace("close", "open");
+    }
     
-//   } else {
-//     document.getElementById("mySidenavLeft").style.width = "0";
-//     document.getElementById("main-left").style.marginLeft = "0";
-//     document.querySelector(".container-left").style.width = "0";
-//     document
-//       .querySelector("#left-menu span")
-//       .classList.replace("open", "close");
-//     document.querySelector("#left-menu a").style.marginLeft = "0px";
+  } else {
+    document.getElementById("mySidenavLeft").style.width = "50px";
+    document.getElementById("main-left").style.marginLeft = "0";
+    document.querySelector(".container-left").style.width = "50px";
+    document
+      .querySelector("#left-menu span")
+      .classList.replace("open", "close");
+    document.querySelector("#left-menu a").style.marginLeft = "0px";
 
-//     let spans = document.querySelectorAll("#left-menu span");
+    let spans = document.querySelectorAll("#left-menu span");
 
-//     for (span of spans) {
-//       span.classList.replace("open", "close");
-//     }
-//   }
-// }
-
-
+    for (span of spans) {
+      span.classList.replace("open", "close");
+    }
+  }
+}
 
 /*******************************
  *  RIGHT SIDE BAR
