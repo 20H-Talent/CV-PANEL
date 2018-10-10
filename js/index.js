@@ -35,42 +35,43 @@ for (sidebarItem of sidebarItems2) {
   });
 }
 
-/*******************************
+/************************************************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
- *******************************/
-// El ancho de la barra izquierda es igual para la tablet y para el escritorio, solo cambia para el móvil.
+ ************************************************************/
 changeScreen();
-$(window).on('resize', function(){
-	// var windowSize = $(window).width(); 
-    changeScreen();
+
+$(window).on('resize', function() {
+  changeScreen();
 });
+
+/***************************************************************
+ * CONTROL LISTENERS
+ * Function to check the screen size and set elements listeners.
+ ***************************************************************/
 
 function changeScreen (){
   var windowSize = $(window).width(); 
   if (windowSize > 425){
     console.log('Desktop');
-    // let iconOpenLeft = document.querySelector("#open-icon-left");
-    // iconOpenLeft.addEventListener("click", navLeft);
     $("#open-icon-left").on("click", navLeft);
-    $("#left-menu").on("touchmove", navLeft);
-    //$('#main-left').on('click', navLeft);
-   
-} else { 
-  console.log('Mobile');
-    // let iconOpenLeft = document.querySelector("#open-icon-left");
-    // iconOpenLeft.addEventListener("click", navLeftMobile);
+    $('#main-left').on('touchmove', navLeft);
+  
+  } else { 
+    console.log('Mobile');
     $("#open-icon-left").on("click", navLeftMobile);
-    $("#left-menu").on("touchmove", navLeftMobile);
-} 
-
+    $("#main-left").on("touchmove", navLeftMobile);
+  } 
 }
 
-/*******************************
+/***********************************************
  *  LEFT SIDE DESKTOP
- *******************************/
+ *  Configuration sidebar size (open and close)
+ **********************************************/
 
 // let iconOpenLeft = document.querySelector("#open-icon-left");
 // iconOpenLeft.addEventListener("click", navLeft);
+// let barLeft = document.querySelector("#left-menu");
+// barLeft.document.querySelector("#left-menu").addEventListener("touchmove", navLeft);
 
 // $("#left-menu").on("touchmove", navLeft);
 
@@ -104,12 +105,17 @@ function navLeft(event) {
 }
 
 
-/*******************************
+/*************************************************
  *  LEFT SIDE BAR MOBILE
- *******************************/
+ *  Configuration sidebar size (open and close)
+ *************************************************/
 
 // let iconOpenLeft = document.querySelector("#open-icon-left");
 // iconOpenLeft.addEventListener("click", navLeftMobile);
+
+// let barLeft = document.querySelector("#left-menu");
+// barLeft.document.querySelector("#left-menu").addEventListener("touchmove", navLeftMobile);
+
 
 // $("#left-menu").on("touchmove", navLeftMobile);
 
