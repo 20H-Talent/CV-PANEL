@@ -137,7 +137,7 @@ function editForm(event) {
   $("#FirstName").val(data.name.first);
   $("#LastName").val(data.name.last);
   $("#email").val(data.email);
-  $("#age1").val(data.dob.age);
+  $("#test").html(data.dob.age + " years " + " since you where born ");
   $("#tel").val(data.phone);
   $("#country").val(data.location.state);
   $("#city").val(data.location.city);
@@ -160,17 +160,12 @@ function editForm(event) {
   }
   switchVisible("Div2");
 }
-
-//var dateBirthday = $("#datebirth").val();
-
-//var years = moment().diff(dateBirthday$, "years");
-//Math.floor(moment(new Date()).diff(moment("02/26/1978","MM/DD/YYYY"),'years',true)));
-//var years = moment().diff(moment(dateBirthday, "DD-MM-YYYY"), "years");
-
-//document.getElementById("test").innerHTML = years;
-
-$("#datebirth").on("click", function(event) {
+/**************************************************************************
+ * Selecting the day birth and putting the years of the user in a span***
+ **************************************************************************/
+$("#datebirth").on("mouseenter mouseleave", function(event) {
   event.stopPropagation();
-  var dateBirthday = $("#datebirth").val();
-  console.log("dateBirthday", dateBirthday);
+  var valor = $(this).val();
+  var years = moment().diff(valor, "years");
+  var testing = $("#test").html(years + " years old");
 });
