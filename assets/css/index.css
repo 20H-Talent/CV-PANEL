@@ -118,7 +118,7 @@ html {
 
 /* The navigation menu links */
 .sidenav-right a {
-  padding: 8px 8px 8px 32px;
+  padding: 8px 8px 8px;
   text-decoration: none;
 
   color: #818181;
@@ -133,7 +133,7 @@ html {
 
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
-    position: absolute;
+    /* position: absolute; */
     top: 15px;
     left: -25px;
     /* font-size: 36px; */
@@ -481,7 +481,6 @@ ul div[class*="border-dark"] {
 }
 
 #right-menu p {
-    margin-top: 20px;
     opacity: 0;
 } 
 
@@ -531,7 +530,7 @@ ul div[class*="border-dark"] {
 } */
 
 #submit_search {
-  background-color: none;
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
   /* margin-bottom: 4rem !important; */
   height: 56%;
 }
