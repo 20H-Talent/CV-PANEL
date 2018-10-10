@@ -21,7 +21,7 @@ html {
 }
 
 .container-right {
-  margin-left: 60px;
+    margin-left: 19px;
 }
 
 /* ****************
@@ -56,8 +56,8 @@ html {
 
 /* The navigation menu links */
 .sidenav-left a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
+    padding: 8px 18px 8px 32px;
+    text-decoration: none;
 
   color: #818181;
   display: block;
@@ -92,6 +92,12 @@ html {
 #card-container > .user-card {
   display: none;
 }
+/*Search button. Only display on mobile devices.*/
+#search-btn {
+    display: none;
+}
+
+
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
@@ -106,14 +112,14 @@ html {
 
 /* The side navigation menu */
 .sidenav-right {
-  height: 100%; /* 100% Full-height */
-  width: 70px; /*0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  right: 0;
-  background-color: transparent;
+    height: 100%; /* 100% Full-height */
+    width: 34px; /*0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    right: 0;
+    background-color: transparent;
 
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    /* background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%); */
 }
 
 /* The navigation menu links */
@@ -133,11 +139,11 @@ html {
 
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
-  position: absolute;
-  top: 0;
-  left: -25px;
-  /* font-size: 36px; */
-  margin-left: 0;
+    position: absolute;
+    top: 15px;
+    left: -25px;
+    /* font-size: 36px; */
+    margin-left: 0;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -151,16 +157,10 @@ html {
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  /* .sidenav-right {padding-top: 15px;} */
-  .sidenav-right a {
-    font-size: 18px;
-  }
-
-  /*
-        .container-right {
-            display: none;
-
-        } */
+    /* .sidenav-right {padding-top: 15px;} */
+    .sidenav-right a {
+        font-size: 18px;
+    }
 }
 
 .main-header .nav-link {
@@ -448,19 +448,20 @@ ul div[class*="border-dark"] {
 
 /* ----------- LATERAL RIGHT MENU ----------- */
 
-#languages div label {
-  font-size: 0.8rem;
-}
-#languages div div {
-  width: 70%;
-}
 #skills label {
-  font-size: 1rem;
-  color: white;
+    font-size: 0.9rem;
 }
 
 #skills div label {
   font-size: 0.8rem;
+}
+#right-menu input {
+    font-size: 1rem;
+}
+
+#right-menu label[class*='font-italic'] {
+    font-size: 0.9rem;
+    text-decoration: underline;
 }
 
 #right-menu {
@@ -479,13 +480,11 @@ ul div[class*="border-dark"] {
   background-color: rgb(209, 91, 209);
 }
 
-/* #right-menu p {
-    padding-top: 30px;
-} */
 #right-menu p {
-  margin-top: 20px;
-  opacity: 0;
-}
+    margin-top: 20px;
+    opacity: 0;
+} 
+
 
 #right-menu a {
   text-decoration: none;
@@ -499,20 +498,20 @@ ul div[class*="border-dark"] {
   list-style: none;
 }
 
-#right-menu input {
-  font-size: 0.6rem;
+ 
+#age_user #age-range,
+#experience #exp-years {
+    width: 90%;
+} 
+#age_user #age,
+#experience #range {
+    padding-top: 0;
+    opacity: 1;
 }
 
-#age_user #age-range {
-  width: 60%;
-}
-#age_user #age {
-  padding-top: 0;
-}
-
-#age_user {
+/* #age_user {
   height: 50px;
-}
+} */
 #genre div {
   width: 70%;
   /* background-color: red; */
@@ -520,16 +519,6 @@ ul div[class*="border-dark"] {
 #button_right {
   height: 70px;
 }
-/* #name_user,
-#last_name_user,
-#genre,
-#age_user,
-#experience,
-#languages,
-#skills {
-    background-color: rgba(114, 78, 173, 0.596);
-    border: 1px solid black;
-} */
 
 #submit_search {
   background-color: none;
@@ -628,11 +617,13 @@ body {
     display: none;
   }
 
-  .container-left {
-    /*Funciona con el form pero no con la tabla*/
-    transition: width 0.5s;
-    z-index: 1;
-  }
+    .container-left { 
+        transition: width 0.5s;
+        z-index: 1;
+    }
+    #search-btn {
+        display: inline-block;
+    }
 }
 
 /**
@@ -640,28 +631,17 @@ body {
 */
 
 @media (max-width: 768px) {
-  .container-right {
-    display: none;
-  }
+    .container-right {
+        display: none;
+    }
 
-  .container-left {
-    /*Funciona con el form pero no con la tabla*/
-    position: absolute;
-    transition: width 0.5s;
-    z-index: 1;
-  }
-}
+    .container-left { 
+        position: absolute;
+        transition: width 0.5s;
+        z-index: 1;
+    }
 
-/****************************************
-* Modal elements style.
-*****************************************/
-
-.item-modal {
-  display: inline-flex;
-  border-radius: 6px;
-  /* display: inline-block; */
-  background: #0399ff;
-  color: white;
-  padding: 5px 10px;
-  margin: 2px;
+    #search-btn {
+        display: inline-block;
+    }
 }

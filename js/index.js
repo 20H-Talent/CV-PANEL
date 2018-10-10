@@ -12,10 +12,18 @@ function openNewWindow() {
 }
 
 // --------------- LATERAL RIGHT MENU ----------
-let range = document.querySelector("#age-range");
+let rangeAge = document.querySelector("#age-range");
 let age = document.querySelector("#age");
-range.addEventListener("click", function(event) {
-  age.innerHTML = range.value;
+let rangeExp = document.querySelector("#exp-years");
+let experience = document.querySelector("#range");
+
+// to set age of user next to input age-range
+rangeAge.addEventListener("click", function(event) {
+  age.innerHTML = rangeAge.value;
+});
+// to set experience of user next to input exp-years
+rangeExp.addEventListener("click", function(event) {
+  experience.innerHTML = rangeExp.value;
 });
 
 let sidebarItems2 = document.querySelectorAll("#right-menu li");
@@ -26,12 +34,43 @@ for (sidebarItem of sidebarItems2) {
     this.className += " sidebar-position";
   });
 }
+
 /*******************************
- *  LEFT SIDE BAR
+ *  LEFT SIDE BAR control (mobile or desktop/tablet)
+ *******************************/
+// El ancho de la barra izquierda es igual para la tablet y para el escritorio, solo cambia para el móvil.
+changeScreen();
+$(window).on("resize", function() {
+  // var windowSize = $(window).width();
+  changeScreen();
+});
+
+function changeScreen() {
+  var windowSize = $(window).width();
+  if (windowSize > 425) {
+    console.log("Desktop");
+    // let iconOpenLeft = document.querySelector("#open-icon-left");
+    // iconOpenLeft.addEventListener("click", navLeft);
+    $("#open-icon-left").on("click", navLeft);
+    $("#left-menu").on("touchmove", navLeft);
+    //$('#main-left').on('click', navLeft);
+  } else {
+    console.log("Mobile");
+    // let iconOpenLeft = document.querySelector("#open-icon-left");
+    // iconOpenLeft.addEventListener("click", navLeftMobile);
+    $("#open-icon-left").on("click", navLeftMobile);
+    $("#left-menu").on("touchmove", navLeftMobile);
+  }
+}
+
+/*******************************
+ *  LEFT SIDE DESKTOP
  *******************************/
 
-let iconOpenLeft = document.querySelector("#open-icon-left");
-iconOpenLeft.addEventListener("click", navLeft);
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeft);
+
+// $("#left-menu").on("touchmove", navLeft);
 
 function navLeft(event) {
   let icon = event.target;
@@ -42,11 +81,10 @@ function navLeft(event) {
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
-  
+
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -60,7 +98,6 @@ function navLeft(event) {
     for (span of spans) {
       span.classList.replace("open", "close");
     }
-  
   }
 }
 
@@ -68,15 +105,17 @@ function navLeft(event) {
  *  LEFT SIDE BAR MOBILE
  *******************************/
 
-$('body').resize( navLeftMobile );
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeftMobile);
+
+// $("#left-menu").on("touchmove", navLeftMobile);
 
 function navLeftMobile(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-
-    document.getElementById("mySidenavLeft").style.width = "370px";
-    document.getElementById("main-left").style.marginLeft = "370px";
-    document.querySelector(".container-left").style.width = "370px";
+    document.getElementById("mySidenavLeft").style.width = "90%";
+    document.getElementById("main-left").style.marginLeft = "90%";
+    document.querySelector(".container-left").style.width = "90%";
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
@@ -84,7 +123,6 @@ function navLeftMobile(event) {
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-    
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -101,8 +139,6 @@ function navLeftMobile(event) {
     }
   }
 }
-
-
 
 /*******************************
  *  RIGHT SIDE BAR
@@ -114,50 +150,40 @@ iconOpenRight.addEventListener("click", navRight);
 function navRight(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-    let pSearchFor = document.querySelector('#right-menu p');
-    let selectedElements = document.querySelectorAll("#right-menu .close");
-    let divSelectedElements = document.querySelectorAll("#right-menu div.close");
+    let pSearchFor = document.querySelector("#right-menu p");
+    let selectedElement = document.querySelector("#main-right .close");
+
     document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
+    document.querySelector("#mySidenavRight").style.background =
+      "linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)";
 
     // to hide the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "1";
     pSearchFor.style.fontSize = "1rem";
     pSearchFor.style.transitionDuration = "0s";
-    pSearchFor.style.transitionDelay = '1s';
+    pSearchFor.style.transitionDelay = "1s";
 
-    for (selectedElement of selectedElements) {
-      for(divSelectedElement of divSelectedElements){
-        divSelectedElement.classList.add('d-flex');
-      }
-      selectedElement.classList.replace("close", "open");
-
-    }
+    selectedElement.classList.replace("close", "open");
   } else {
-    let pSearchFor = document.querySelector('#right-menu p');
-    let selectedElements = document.querySelectorAll("#right-menu .open");
-    let divSelectedElements = document.querySelectorAll("#right-menu div.open");
-    document.getElementById("mySidenavRight").style.width = "70px";
+    let pSearchFor = document.querySelector("#right-menu p");
+    let selectedElement = document.querySelector("#main-right section");
+    document.getElementById("mySidenavRight").style.width = "34px";
     document.getElementById("main-right").style.marginRight = "0";
-    document.querySelector(".container-right").style.width = "70px";
+    document.querySelector(".container-right").style.width = "0px";
+    document.querySelector(".container-right").style.marginLeft = "19px";
     document.querySelector("#right-menu p").style.fontSize = "0.55rem";
-
+    document.querySelector("#mySidenavRight").style.background = "transparent";
 
     // to display the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "0";
     pSearchFor.style.fontSize = "0.55rem";
     pSearchFor.style.transitionDuration = "0s";
-    pSearchFor.style.transitionDelay = '0s';
+    pSearchFor.style.transitionDelay = "0s";
 
-    for (selectedElement of selectedElements) {
-      for(divSelectedElement of divSelectedElements){
-        divSelectedElement.classList.remove('d-flex');
-      }
-      selectedElement.classList.replace("open", "close");
-    }
-  // }
+    selectedElement.classList.replace("open", "close");
   }
 }
 // ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
