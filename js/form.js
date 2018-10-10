@@ -12,7 +12,7 @@ function formErrors() {
   //getting the form by id
   var form = document.getElementById("alertform");
   var input = form.querySelectorAll(
-    "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone]"
+    "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone],,input[type=radio],input[type=checkbox]"
   );
   //looping trought the elements of the form
   for (i = 0; i < input.length; i++) {
@@ -133,6 +133,18 @@ function editForm(event) {
   const property = element.data("id");
 
   const data = usersTable.getUserByEmailOrID(property);
+  // empting the checkboxes when editing another user
+  var skillUser = document.getElementById("skill");
+  var inpskill = skillUser.querySelectorAll("input");
+  for (var i = 0; i < inpskill.length; i++) {
+    inpskill[i].checked = false;
+  }
+  // empting the selected languages  when editing another user
+  var lang = document.getElementById("selLanguage");
+  //var inpLang = lang.querySelectorAll("option");
+  for (var i = 0; i < lang.options.length; i++) {
+    lang.options[i].selected = false;
+  }
 
   $("#Username").val(data.login.username);
   $("#FirstName").val(
@@ -164,16 +176,6 @@ function editForm(event) {
       lang.options[i].selected = true;
     }
   }
-  // var skillUser = document.getElementById("skill");
-  // var inpskill = skillUser.querySelectorAll("input");
-  // for (var i = 0; i < inpskill.length; i++) {
-  //   inpskill[i].checked = false;
-  // }
-  // var lang = document.getElementById("selLanguage");
-  // //var inpLang = lang.querySelectorAll("option");
-  // for (var i = 0; i < inpskill.length; i++) {
-  //   inpskill[i].checked = false;
-  // }
 
   switchVisible("Div2");
 }
