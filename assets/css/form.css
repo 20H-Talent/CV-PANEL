@@ -1,7 +1,7 @@
 #Div2 {
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #f0f0f0;
+    background-color: #ecf0f3;
     background-size: cover;
     font-family: 'Crete Round', sans-serif;
     color: black;
@@ -51,7 +51,7 @@ select {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     background-color: #ffffff !important;
-    color: #1b1fe9;
+    color: #0a0a0a;
 }
 
 input::placeholder {
@@ -158,5 +158,5 @@ body {
 }
 
 .custom-control-label::before {
-    background-color: white;
+    background-color: rgb(192, 191, 191);
 }
