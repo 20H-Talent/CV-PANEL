@@ -34,12 +34,45 @@ for (sidebarItem of sidebarItems2) {
     this.className += " sidebar-position";
   });
 }
+
 /*******************************
- *  LEFT SIDE BAR
+ *  LEFT SIDE BAR control (mobile or desktop/tablet)
+ *******************************/
+// El ancho de la barra izquierda es igual para la tablet y para el escritorio, solo cambia para el móvil.
+changeScreen();
+$(window).on('resize', function(){
+	// var windowSize = $(window).width(); 
+    changeScreen();
+});
+
+function changeScreen (){
+  var windowSize = $(window).width(); 
+  if (windowSize > 425){
+    console.log('Desktop');
+    // let iconOpenLeft = document.querySelector("#open-icon-left");
+    // iconOpenLeft.addEventListener("click", navLeft);
+    $("#open-icon-left").on("click", navLeft);
+    $("#left-menu").on("touchmove", navLeft);
+    //$('#main-left').on('click', navLeft);
+   
+} else { 
+  console.log('Mobile');
+    // let iconOpenLeft = document.querySelector("#open-icon-left");
+    // iconOpenLeft.addEventListener("click", navLeftMobile);
+    $("#open-icon-left").on("click", navLeftMobile);
+    $("#left-menu").on("touchmove", navLeftMobile);
+} 
+
+}
+
+/*******************************
+ *  LEFT SIDE DESKTOP
  *******************************/
 
-let iconOpenLeft = document.querySelector("#open-icon-left");
-iconOpenLeft.addEventListener("click", navLeft);
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeft);
+
+// $("#left-menu").on("touchmove", navLeft);
 
 function navLeft(event) {
   let icon = event.target;
@@ -54,7 +87,6 @@ function navLeft(event) {
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -68,23 +100,26 @@ function navLeft(event) {
     for (span of spans) {
       span.classList.replace("open", "close");
     }
-  
   }
 }
+
 
 /*******************************
  *  LEFT SIDE BAR MOBILE
  *******************************/
 
-$('body').resize( navLeftMobile );
+// let iconOpenLeft = document.querySelector("#open-icon-left");
+// iconOpenLeft.addEventListener("click", navLeftMobile);
+
+// $("#left-menu").on("touchmove", navLeftMobile);
 
 function navLeftMobile(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
 
-    document.getElementById("mySidenavLeft").style.width = "370px";
-    document.getElementById("main-left").style.marginLeft = "370px";
-    document.querySelector(".container-left").style.width = "370px";
+    document.getElementById("mySidenavLeft").style.width = "90%";
+    document.getElementById("main-left").style.marginLeft = "90%";
+    document.querySelector(".container-left").style.width = "90%";
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
@@ -109,8 +144,6 @@ function navLeftMobile(event) {
     }
   }
 }
-
-
 
 /*******************************
  *  RIGHT SIDE BAR

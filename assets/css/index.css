@@ -56,8 +56,8 @@ html {
 
 /* The navigation menu links */
 .sidenav-left a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
+    padding: 8px 18px 8px 32px;
+    text-decoration: none;
 
   color: #818181;
   display: block;
@@ -92,6 +92,12 @@ html {
 #card-container > .user-card {
   display: none;
 }
+/*Search button. Only display on mobile devices.*/
+#search-btn {
+    display: none;
+}
+
+
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
@@ -151,16 +157,10 @@ html {
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  /* .sidenav-right {padding-top: 15px;} */
-  .sidenav-right a {
-    font-size: 18px;
-  }
-
-  /*
-        .container-right {
-            display: none;
-
-        } */
+    /* .sidenav-right {padding-top: 15px;} */
+    .sidenav-right a {
+        font-size: 18px;
+    }
 }
 
 .main-header .nav-link {
@@ -519,16 +519,6 @@ ul div[class*="border-dark"] {
 #button_right {
   height: 70px;
 }
-/* #name_user,
-#last_name_user,
-#genre,
-#age_user,
-#experience,
-#languages,
-#skills {
-    background-color: rgba(114, 78, 173, 0.596);
-    border: 1px solid black;
-} */
 
 #submit_search {
   background-color: none;
@@ -627,11 +617,13 @@ body {
     display: none;
   }
 
-  .container-left {
-    /*Funciona con el form pero no con la tabla*/
-    transition: width 0.5s;
-    z-index: 1;
-  }
+    .container-left { 
+        transition: width 0.5s;
+        z-index: 1;
+    }
+    #search-btn {
+        display: inline-block;
+    }
 }
 
 /**
@@ -639,28 +631,17 @@ body {
 */
 
 @media (max-width: 768px) {
-  .container-right {
-    display: none;
-  }
+    .container-right {
+        display: none;
+    }
 
-  .container-left {
-    /*Funciona con el form pero no con la tabla*/
-    position: absolute;
-    transition: width 0.5s;
-    z-index: 1;
-  }
-}
+    .container-left { 
+        position: absolute;
+        transition: width 0.5s;
+        z-index: 1;
+    }
 
-/****************************************
-* Modal elements style.
-*****************************************/
-
-.item-modal {
-  display: inline-flex;
-  border-radius: 6px;
-  /* display: inline-block; */
-  background: #0399ff;
-  color: white;
-  padding: 5px 10px;
-  margin: 2px;
+    #search-btn {
+        display: inline-block;
+    }
 }
