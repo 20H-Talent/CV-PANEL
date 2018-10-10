@@ -108,10 +108,11 @@
                         <!-- Table users -->
                         <div class="col ">
                             <div class="mb-3 adduser text-center">
-                                <h4 class="mb-3 text-center"><i class="fas fa-user-edit"></i>Add User</h4>
+                                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i></i>Add User /<i class="fas fa-user-edit"></i>
+                                    Edit User</h4>
                             </div>
 
-                            <div id="renderize"></div>
+                            <div id="renderize" class="alert  alert-dismissible fade show" role="alert"></div>
                             <hr class="mb-4">
                             <hr class=" hr-2">
                             <form id="alertform" action="get" method="post" class="needs-validation col-md-12 ">
@@ -248,11 +249,11 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa mr-2"></i></span>
                                             <div class="custom-control gen custom-radio">
-                                                <input id="male" name="Gender" type="radio" class="custom-control-input" required>
+                                                <input id="male" name="Gender" type="radio" class="custom-control-input">
                                                 <label class="custom-control-label" for="male">Male</label>
                                             </div>
                                             <div class="custom-control gen custom-radio">
-                                                <input id="female" name="Gender" type="radio" class="custom-control-input" required>
+                                                <input id="female" name="Gender" type="radio" class="custom-control-input">
                                                 <label class="custom-control-label" for="female">Female</label>
                                             </div>
                                         </div>
@@ -339,16 +340,16 @@
                                 </button>
                                 <button type="button" class=" btn-custom btn reset " onclick="reset()" value="Reset">Reset</button>
                                 <div id="output"></div>
-
-
                                 <div class="d-block my-3 d-block custom-controls-stacked langsel">
                                     <h4 class="mb-3">Are you available for an interview in the near future?</h4>
                                     <div class=" custom-radio ">
-                                        <input id="available" onchange="validate()" name="Radiobutton" type="radio" class="custom-control-input" required>
+
+                                        <input id="available" name="Radiobutton" type="radio" class="custom-control-input">
                                         <label class="custom-control-label" for="available">Yes</label>
                                     </div>
                                     <div class=" custom-radio ">
-                                        <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input" required>
+
+                                        <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
                                         <label class="custom-control-label" for="Radiobutton1">No</label>
                                     </div>
                                 </div>

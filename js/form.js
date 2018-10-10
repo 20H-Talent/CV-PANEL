@@ -3,7 +3,6 @@
  ***************************************************************************************/
 function formErrors() {
   //Cleaning the content of the div before calling the function again
-
   var renderize = document.getElementById("renderize");
   //Go back to initial value/display
   document.getElementById("renderize").style.display = "block";
@@ -12,7 +11,7 @@ function formErrors() {
   //getting the form by id
   var form = document.getElementById("alertform");
   var input = form.querySelectorAll(
-    "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone],,input[type=radio],input[type=checkbox]"
+    "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone]"
   );
   //looping trought the elements of the form
   for (i = 0; i < input.length; i++) {
@@ -123,11 +122,9 @@ function switchVisible(visible) {
       break;
   }
 }
-
 /**************************************************************************
- * Setting the values of the table and adding them in the inputs of the form on click***
+ * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
-
 function editForm(event) {
   const element = $(event.currentTarget);
   const property = element.data("id");
@@ -139,13 +136,12 @@ function editForm(event) {
   for (var i = 0; i < inpskill.length; i++) {
     inpskill[i].checked = false;
   }
-  // empting the selected languages  when editing another user
+  // empting the checkboxes when editing another user
   var lang = document.getElementById("selLanguage");
   //var inpLang = lang.querySelectorAll("option");
   for (var i = 0; i < lang.options.length; i++) {
     lang.options[i].selected = false;
   }
-
   $("#Username").val(data.login.username);
   $("#FirstName").val(
     data.name.first.charAt(0).toUpperCase() + data.name.first.slice(1)
@@ -162,7 +158,6 @@ function editForm(event) {
   $("#zip").val(data.location.postcode);
   $("#address").val(data.location.street);
   document.getElementById(data.gender).checked = true;
-
   for (var i = 0; i < data.skills.length; i++) {
     document.getElementById(data.skills[i] + "1").checked = true;
   }
@@ -176,7 +171,6 @@ function editForm(event) {
       lang.options[i].selected = true;
     }
   }
-
   switchVisible("Div2");
 }
 /**************************************************************************
