@@ -50,8 +50,13 @@ select {
     background: rgb(255, 254, 254) !important;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
+<<<<<<< HEAD
     background-color: #ffffff !important;
     color: #0a0a0a;
+=======
+    background-color: #f7ffff !important;
+    color: #2f3031;
+>>>>>>> 6869d24a14e0d9fc55a5f7db54aebbc732a12b0f
 }
 
 input::placeholder {
@@ -89,7 +94,7 @@ body {
     overflow: hidden;
 }
 
-.btn {
+.btn-custom {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
     color: white;
 }
@@ -159,4 +164,8 @@ body {
 
 .custom-control-label::before {
     background-color: rgb(192, 191, 191);
+}
+
+#test {
+    padding-top: 6px;
 }
