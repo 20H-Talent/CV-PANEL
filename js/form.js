@@ -127,6 +127,7 @@ function switchVisible(visible) {
 /**************************************************************************
  * Setting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
+
 function editForm(event) {
   const element = $(event.currentTarget);
   const property = element.data("id");
@@ -134,10 +135,14 @@ function editForm(event) {
   const data = usersTable.getUserByEmailOrID(property);
 
   $("#Username").val(data.login.username);
-  $("#FirstName").val(data.name.first);
-  $("#LastName").val(data.name.last);
+  $("#FirstName").val(
+    data.name.first.charAt(0).toUpperCase() + data.name.first.slice(1)
+  );
+  $("#LastName").val(
+    data.name.last.charAt(0).toUpperCase() + data.name.last.slice(1)
+  );
   $("#email").val(data.email);
-  $("#test").html(data.dob.age + " years " + " since you where born ");
+  $("#age1").val(data.dob.age + " years old ");
   $("#tel").val(data.phone);
   $("#country").val(data.location.state);
   $("#city").val(data.location.city);
@@ -163,9 +168,9 @@ function editForm(event) {
 /**************************************************************************
  * Selecting the day birth and putting the years of the user in a span***
  **************************************************************************/
-$("#datebirth").on("mouseenter mouseleave", function(event) {
-  event.stopPropagation();
-  var valor = $(this).val();
-  var years = moment().diff(valor, "years");
-  var testing = $("#test").html(years + " years old");
-});
+// $("#datebirth").on("mouseenter mouseleave", function(event) {
+//   event.stopPropagation();
+//   var valor = $(this).val();
+//   var years = moment().diff(valor, "years");
+//   var testing = $("#test").html(years + " years old");
+// });
