@@ -413,22 +413,24 @@ const Table = (function() {
     }
 
     /** Render again the table with specific conditions
-     * @function renderTable
+     * @function renderData
      * @public
      * @param {Object} filters - Conditions to render again the table with filtered data
      * @param {Array} data
      */
-    function renderTable(inputsData = [], data = null) {
+    function renderData(inputsData = [], data = null) {
       let users = data || JSON.parse(sessionStorage.getItem("users-list"));
       _showOverlay(true);
       const filters = _buildFilters(inputsData);
-      const tableBody = mainContainer.find("#users-tabletbody");
+      const tableBody = mainContainer.find("#users-table tbody");
 
       if (filters["gender"]) {
         users = users.filter(
           user => user["gender"] === filters["gender"].toLowerCase()
         );
       }
+      console.log(filters);
+      /*
       if (filters["firstname"] || filters["lastname"]) {
         users = users.filter(user => {
           return (
@@ -439,6 +441,36 @@ const Table = (function() {
           );
         });
       }
+      */
+    }
+
+    /**
+     * Filter the inputs when the advanced search is used,
+     * only inputs that aren't empty or checked are allowed
+     * @function buildFilters
+     * @public
+     * @param {Array of jQuery objects} elements
+     * @return {object} filters
+     */
+    function _buildFilters(elements) {
+      const filters = {};
+      elements
+        .filter((index, input) => {
+          const $input = $(input);
+          if (
+            $input.prop("type") === "radio" ||
+            $input.prop("type") === "checkbox"
+          ) {
+            return $input.prop("checked");
+          } else {
+            return $.trim($input.val()).length > 0;
+          }
+        })
+        .each((index, input) => {
+          const $input = $(input);
+          filters[$input.prop("name")] = $input.val();
+        });
+      return filters;
     }
 
     function _showOverlay(show) {
