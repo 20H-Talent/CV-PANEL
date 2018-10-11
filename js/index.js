@@ -19,9 +19,9 @@ function formSideBar (){
       this.className += " sidebar-position";
     });
   }
-  // function openNewWindow() {   // Esta función no se utiliza en ningún lado.
-  //   open("form.html");
-  // }
+  //  function openNewWindow() {   // Esta función no se utiliza en ningún lado.
+  //     open("form.html");
+  //   }
  // --------------- LATERAL RIGHT MENU ----------
   let rangeAge = document.querySelector("#age-range");
   let age = document.querySelector("#age");
@@ -47,10 +47,11 @@ function formSideBar (){
   }
 }
 
-/*******************************
+/**************************************************************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
- *  The width of the left sidebar is the same for the tablet and for the desktop, it only changes for the mobile.
- *******************************/
+ *  The width of the left sidebar is the same 
+ * for the tablet and for the desktop, it only changes for the mobile.
+ **************************************************************************/
 
 changeScreen();
 $(window).on("resize", function() {
@@ -71,10 +72,10 @@ function changeScreen() {
   }
 }
 
-/*******************************
+/*******************************************************************
  *  LEFT SIDE DESKTOP
  *  Control size left container, (open and close states) 
- *******************************/
+ *******************************************************************/
 
 function navLeft(event) {
   let icon = event.target;
@@ -105,10 +106,10 @@ function navLeft(event) {
   }
 }
 
-/*******************************
+/*******************************************************************
  *  LEFT SIDE BAR MOBILE
  *  Control size left container, (open and close states) 
- *******************************/
+ *******************************************************************/
 
 function navLeftMobile(event) {
   let icon = event.target;
@@ -140,10 +141,10 @@ function navLeftMobile(event) {
   }
 }
 
-/*******************************
+/*******************************************************************
  *  RIGHT SIDE BAR
  * Control size right container, (open and close states) 
- *******************************/
+ *******************************************************************/
 
 let iconOpenRight = document.querySelector("#open-icon-right");
 iconOpenRight.addEventListener("click", navRight);
@@ -216,7 +217,7 @@ buttonCreateUser.addEventListener("click", function() {
   divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
-let submitSearch = document.querySelector("#submit_search"); // Problema al dividir el html este parametro no se ha cargado todavía por ajax.
+let submitSearch = document.querySelector("#submit_search"); // Problema, al dividir el html este parámetro no se ha cargado todavía por ajax.
 submitSearch.addEventListener("click", function() {
   divNavBar.classList.replace("close", "open");
   divNavBar.innerHTML = "";
@@ -227,16 +228,16 @@ submitSearch.addEventListener("click", function() {
 });
 
 
-/*******************************************************************
+/*************************************************************************************
  * New function: load by ajax the sidebar form into the center column....
- ******************************************************************/
+ ************************************************************************************/
 
-// $("#search-btn").on("click", loadMain);
+$("#search-btn").on("click", loadMain);
 
-// function loadMain(){
-//   $("#Div1").load( "right-menu.html", function() {
-//     formSideBar();
-//   });
-// }
+function loadMain(){
+  $("#Div1").load( "right-menu.html", function() {
+    formSideBar();
+  });
+}
 
 
