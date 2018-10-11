@@ -38,11 +38,16 @@ for (sidebarItem of sidebarItems2) {
 /************************************************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
  ************************************************************/
-changeScreen();
 
-$(window).on('resize', function() {
-  changeScreen();  
-});
+changeScreen();
+setInterval("reload ()", 5000);
+
+function reload (){
+  $(window).on('resize', function() {
+    changeScreen();  
+  });
+}
+
 
 /***************************************************************
  * CONTROL LISTENERS
