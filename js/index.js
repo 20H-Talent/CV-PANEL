@@ -41,7 +41,7 @@ for (sidebarItem of sidebarItems2) {
 changeScreen();
 
 $(window).on('resize', function() {
-  changeScreen();
+  changeScreen();  
 });
 
 /***************************************************************
@@ -64,8 +64,8 @@ function changeScreen (){
 }
 
 /***********************************************
- *  LEFT SIDE DESKTOP
- *  Configuration sidebar size (open and close)
+ *  LEFT SIDE DESKTOP/TABLET
+ *  Configuration size of left sidebar (open and close)
  **********************************************/
 
 // let iconOpenLeft = document.querySelector("#open-icon-left");
@@ -107,7 +107,7 @@ function navLeft(event) {
 
 /*************************************************
  *  LEFT SIDE BAR MOBILE
- *  Configuration sidebar size (open and close)
+ *  Configuration size of left sidebar (open and close)
  *************************************************/
 
 // let iconOpenLeft = document.querySelector("#open-icon-left");
