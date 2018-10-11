@@ -157,8 +157,6 @@ function navRight(event) {
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
     document.querySelector(".container-right").style.marginLeft = "0px";
-    document.querySelector("#mySidenavRight").style.background =
-      "linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)";
 
     // to hide the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "1";
@@ -173,9 +171,8 @@ function navRight(event) {
     document.getElementById("mySidenavRight").style.width = "34px";
     document.getElementById("main-right").style.marginRight = "0";
     document.querySelector(".container-right").style.width = "0px";
-    document.querySelector(".container-right").style.marginLeft = "19px";
+    document.querySelector(".container-right").style.marginLeft = "30px";
     document.querySelector("#right-menu p").style.fontSize = "0.55rem";
-    document.querySelector("#mySidenavRight").style.background = "transparent";
 
     // to display the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "0";
