@@ -381,24 +381,25 @@
                                     <form id="advanced-search">
                                         <div id="name_user" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
                                             <!-- <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label> -->
-                                            <input type="text" class="form-control" id="name"
-                                            placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
+                                            <input type="text" class="form-control" id="name" placeholder="Insert name"
+                                                name="firstname" pattern="[a-zA-Z]*">
                                             <small class="text-center text-white w-100">
                                                 Must be written in lowercase.
                                             </small>
+                                            <button type="submit" class="btn btn-warning">submit</button>
                                         </div>
-                                    
+
                                         <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
                                             <!-- <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
                                                 Name
                                             </label> -->
-                                            <input type="text" class="form-control" id="last-name"
-                                                placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
+                                            <input type="text" class="form-control" id="last-name" placeholder="Insert last name"
+                                                name="lastname" pattern="[a-zA-Z]*">
                                             <small class="text-center text-white w-100">
                                                 Must be written in lowercase.
                                             </small>
                                         </div>
-                                    
+
                                         <div id="genre" class="text-white form-group bg-dark m-2 p-2 d-flex justify-content-center align-items-center flex-wrap border">
                                             <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
                                             <div class="custom-control custom-radio text-center w-50">
@@ -407,8 +408,8 @@
                                                 <label class="custom-control-label" for="genre_female">Female</label>
                                             </div>
                                             <div class="custom-control custom-radio text-center w-50">
-                                                <input type="radio" id="genre_male" class="custom-control-input"
-                                                    value="male" name="gender">
+                                                <input type="radio" id="genre_male" class="custom-control-input" value="male"
+                                                    name="gender">
                                                 <label class="custom-control-label" for="genre_male">Male</label>
                                             </div>
                                         </div>
@@ -418,32 +419,33 @@
                                             <p id="age" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
                                         </div>
                                         <div id="experience" class="text-white form-group m-2 p-2 bg-dark border">
-                                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years of experience</label> 
+                                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
+                                                of experience</label>
                                             <input type="range" min="0" max="30" class="custom-range" id="exp-years">
                                             <p id="range" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
                                         </div>
-                                    
+
                                         <!-- ********* lANGUAGES *********** -->
                                         <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
                                             <label class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</label>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="english" class="custom-control-input w-50"
-                                                    name="lang_english" value=0>
+                                                <input type="radio" id="english" class="custom-control-input w-50" name="lang_english"
+                                                    value=0>
                                                 <label class="custom-control-label" for="english">English</label>
                                             </div>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="spanish" class="custom-control-input w-50"
-                                                    name="lang_spanish" value=0>
+                                                <input type="radio" id="spanish" class="custom-control-input w-50" name="lang_spanish"
+                                                    value=0>
                                                 <label class="custom-control-label" for="spanish">Spanish</label>
                                             </div>
                                             <div class="custom-control custom-radio col-3">
-                                                <input type="radio" id="italian" class="custom-control-input w-50"
-                                                    name="lang_italian" value=0>
+                                                <input type="radio" id="italian" class="custom-control-input w-50" name="lang_italian"
+                                                    value=0>
                                                 <label class="custom-control-label" for="italian">Italian</label>
                                             </div>
                                             <div class="custom-control custom-radio col-4">
-                                                <input type="radio" id="french" class="custom-control-input w-50"
-                                                    name="lang_french" value=0>
+                                                <input type="radio" id="french" class="custom-control-input w-50" name="lang_french"
+                                                    value=0>
                                                 <label class="custom-control-label" for="french">French</label>
                                             </div>
                                             <div class="custom-control custom-radio col-4">
@@ -452,25 +454,25 @@
                                                 <label class="custom-control-label" for="rumanian">Rumanian</label>
                                             </div>
                                             <div class="custom-control custom-radio col-3">
-                                                <input type="radio" id="african" class="custom-control-input w-50"
-                                                    name="lang_african" value=0>
+                                                <input type="radio" id="african" class="custom-control-input w-50" name="lang_african"
+                                                    value=0>
                                                 <label class="custom-control-label" for="african">African</label>
                                             </div>
                                         </div>
-                                    
+
                                         <!-- ******** SKILLS ********** -->
                                         <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
                                             <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
                                             <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
                                                 <label class="w-100 text-center font-italic">Layout</label>
                                                 <div class="custom-control custom-radio mr-3">
-                                                    <input type="radio" id="css" class="custom-control-input"
-                                                        value=0 name="skills_css">
+                                                    <input type="radio" id="css" class="custom-control-input" value=0
+                                                        name="skills_css">
                                                     <label class="custom-control-label" for="css">CSS</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="html" class="custom-control-input"
-                                                        value=0 name="skills_html">
+                                                    <input type="radio" id="html" class="custom-control-input" value=0
+                                                        name="skills_html">
                                                     <label class="custom-control-label" for="html">HTML</label>
                                                 </div>
                                             </div>
@@ -482,36 +484,36 @@
                                                     <label class="custom-control-label" for="javascript">Javascript</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="php" class="custom-control-input"
-                                                        value=0 name="skills_php">
+                                                    <input type="radio" id="php" class="custom-control-input" value=0
+                                                        name="skills_php">
                                                     <label class="custom-control-label" for="php">PHP</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="python" class="custom-control-input"
-                                                        value=0 name="skills_python">
+                                                    <input type="radio" id="python" class="custom-control-input" value=0
+                                                        name="skills_python">
                                                     <label class="custom-control-label" for="python">Python</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="ruby" class="custom-control-input"
-                                                        value=0 name="skills_ruby">
+                                                    <input type="radio" id="ruby" class="custom-control-input" value=0
+                                                        name="skills_ruby">
                                                     <label class="custom-control-label" for="ruby">Ruby</label>
                                                 </div>
                                                 <div class="custom-control custom-radio w-100">
-                                                    <input type="radio" id="c++" class="custom-control-input"
-                                                        value=0 name="skills_c++">
+                                                    <input type="radio" id="c++" class="custom-control-input" value=0
+                                                        name="skills_c++">
                                                     <label class="custom-control-label" for="c++">C++</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="java" class="custom-control-input"
-                                                        value=0 name="skills_java">
+                                                    <input type="radio" id="java" class="custom-control-input" value=0
+                                                        name="skills_java">
                                                     <label class="custom-control-label" for="java">Java</label>
                                                 </div>
                                             </div>
                                             <div class="col-6 d-flex flex-column p-0 bg-dark">
                                                 <label class="w-100 text-center font-italic">Frameworks</label>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="django" class="custom-control-input"
-                                                        value=0 name="skills_django">
+                                                    <input type="radio" id="django" class="custom-control-input" value=0
+                                                        name="skills_django">
                                                     <label class="custom-control-label" for="django">Django</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
@@ -522,28 +524,28 @@
                                                     </label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="react" class="custom-control-input"
-                                                        value=0 name="skills_react">
+                                                    <input type="radio" id="react" class="custom-control-input" value=0
+                                                        name="skills_react">
                                                     <label class="custom-control-label" for="react">React</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="angular" class="custom-control-input"
-                                                        value=0 name="skills_angular">
+                                                    <input type="radio" id="angular" class="custom-control-input" value=0
+                                                        name="skills_angular">
                                                     <label class="custom-control-label" for="angular">Angular</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="vue" class="custom-control-input"
-                                                        value=0 name="skills_vue">
+                                                    <input type="radio" id="vue" class="custom-control-input" value=0
+                                                        name="skills_vue">
                                                     <label class="custom-control-label" for="vue">Vue</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="laravel" class="custom-control-input"
-                                                        value=0 name="skills_laravel">
+                                                    <input type="radio" id="laravel" class="custom-control-input" value=0
+                                                        name="skills_laravel">
                                                     <label class="custom-control-label" for="laravel">Laravel</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                         <div id="button_right" class="d-flex justify-content-center mb-5">
                                             <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill">
                                                 <i class="fa fa-check-circle fa-3x "></i>

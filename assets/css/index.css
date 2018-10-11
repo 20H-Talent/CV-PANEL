@@ -21,7 +21,7 @@ html {
 }
 
 .container-right {
-    margin-left: 19px;
+  margin-left: 19px;
 }
 
 /* ****************
@@ -106,14 +106,14 @@ html {
 
 /* The side navigation menu */
 .sidenav-right {
-    height: 100%; /* 100% Full-height */
-    width: 34px; /*0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    right: 0;
-    background-color: transparent;
+  height: 100%; /* 100% Full-height */
+  width: 34px; /*0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  right: 0;
+  background-color: transparent;
 
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    /* background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%); */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  /* background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%); */
 }
 
 /* The navigation menu links */
@@ -133,11 +133,11 @@ html {
 
 /* Position and style the OPEN button (right side bar, top left corner) */
 .sidenav-right .openbtn-right {
-    position: absolute;
-    top: 15px;
-    left: -25px;
-    /* font-size: 36px; */
-    margin-left: 0;
+  position: absolute;
+  top: 15px;
+  left: -25px;
+  /* font-size: 36px; */
+  margin-left: 0;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -230,7 +230,7 @@ tbody td.user-city i {
 
 .table-wrapper-scroll-y {
   display: block;
-  max-height: 100vh;
+  max-height: 88vh;
   overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -337,12 +337,6 @@ body {
   text-transform: capitalize;
 }
 
-.table-wrapper-scroll-y {
-  display: block;
-  max-height: 100vh;
-  overflow-y: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-}
 nav label {
   color: white;
   margin-right: 0.5em;
@@ -449,19 +443,19 @@ ul div[class*="border-dark"] {
 /* ----------- LATERAL RIGHT MENU ----------- */
 
 #skills label {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 #skills div label {
   font-size: 0.8rem;
 }
 #right-menu input {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-#right-menu label[class*='font-italic'] {
-    font-size: 0.9rem;
-    text-decoration: underline;
+#right-menu label[class*="font-italic"] {
+  font-size: 0.9rem;
+  text-decoration: underline;
 }
 
 #right-menu {
@@ -481,10 +475,9 @@ ul div[class*="border-dark"] {
 }
 
 #right-menu p {
-    margin-top: 20px;
-    opacity: 0;
-} 
-
+  margin-top: 20px;
+  opacity: 0;
+}
 
 #right-menu a {
   text-decoration: none;
@@ -498,15 +491,14 @@ ul div[class*="border-dark"] {
   list-style: none;
 }
 
- 
 #age_user #age-range,
 #experience #exp-years {
-    width: 90%;
-} 
+  width: 90%;
+}
 #age_user #age,
 #experience #range {
-    padding-top: 0;
-    opacity: 1;
+  padding-top: 0;
+  opacity: 1;
 }
 
 /* #age_user {

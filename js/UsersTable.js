@@ -93,14 +93,32 @@ const Table = (function() {
       return baseURL;
     }
 
+    /**
+     * Format the array of elements like this example ["ES", "DE", "TR"] => "ES,DE,TR"
+     * @param {Array} nationalities
+     */
     function _nationalitiesRequestFormat(nationalities = []) {
       return nationalities.map(nat => nat).join(",");
     }
 
+    /**
+     * Append a new HTML row into the specific container with the user data
+     * @function _appendRowData
+     * @private
+     * @param {jQuery Object} tableBody
+     * @param {Object} user
+     */
     function _appendRowData(tableBody, user) {
       tableBody.append(_tableRowSkeleton(user));
     }
 
+    /**
+     * Append a new HTML Card element into the specific container with the user data
+     * @function _appendCardData
+     * @private
+     * @param {jQuery Object} cardContainer
+     * @param {Object} user
+     */
     function _appendCardData(cardContainer, user) {
       cardContainer.append(_cardSkeleton(user));
     }
@@ -111,35 +129,111 @@ const Table = (function() {
      * @public
      * @param {Number} width
      */
-    function renderDataOnResize(users = null, browserWidth) {
+    function renderDataOnResize(users = null, browserWidth, inputsData = []) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
       const cardContainer = mainContainer.find("div#card-container");
 
-      if (browserWidth > 868 && tableBody.children("tr").length === 0) {
-        const usersData =
-          users || JSON.parse(sessionStorage.getItem("users-list"));
+      let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
 
-        mainContainer.find("div#card-container").empty();
-        mainTable.show();
-        usersData.forEach(user => _appendRowData(tableBody, user));
-      } else if (
-        browserWidth < 868 &&
-        cardContainer.children(".user-card").length === 0
-      ) {
-        const usersData =
-          users || JSON.parse(sessionStorage.getItem("users-list"));
+      if (browserWidth > 868) {
+        if (inputsData.length > 0) {
+          tableBody.empty();
+          _showOverlay(true);
 
-        mainTable
-          .hide()
-          .find("tbody")
-          .empty();
-        usersData.forEach(user =>
-          _appendCardData(mainContainer.find("div#card-container"), user)
-        );
+          const filters = _buildFilters(inputsData);
+          const filteredUsers = _filterUsers(filters, usersData);
+
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendRowData(tableBody, user));
+          }, 1000);
+        }
+
+        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
+          _renderTableOnResize(mainTable, cardContainer, usersData);
+        }
+      } else if (browserWidth < 868) {
+        if (inputsData.length > 0) {
+          cardContainer.empty();
+          _showOverlay(true);
+
+          const filters = _buildFilters(inputsData);
+          const filteredUsers = _filterUsers(filters, usersData);
+
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
+          }, 1000);
+        }
+
+        if (
+          cardContainer.children(".user-card").length === 0 &&
+          inputsData.length === 0
+        ) {
+          _renderCardOnResize(mainTable, cardContainer, usersData);
+        }
+        _showOverlay(false);
       }
     }
 
+    /**
+     * @function _renderTableOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderTableOnResize(mainTable, cardContainer, users) {
+      cardContainer.empty();
+      mainTable.show();
+      const tableBody = mainTable.find("tbody");
+      users.forEach(user => _appendRowData(tableBody, user));
+    }
+
+    /**
+     * @function _renderCardOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderCardOnResize(mainTable, cardContainer, users) {
+      mainTable
+        .hide()
+        .find("tbody")
+        .empty();
+      users.forEach(user => _appendCardData(cardContainer, user));
+    }
+
+    /**
+     * Filter the users array based on specific object that define the conditions
+     * @function filterUsers
+     * @private
+     * @param {Object} filters
+     * @param {Array} users
+     * @return {Array} filteredUsers
+     */
+    function _filterUsers(filters, users) {
+      let filteredUsers;
+      if (filters["gender"]) {
+        filteredUsers = users.filter(
+          user => user["gender"] === filters["gender"].toLowerCase()
+        );
+      }
+
+      if (filters["firstname"] && filters["lastname"]) {
+        const firstnameQuery = filters["firstname"].toLowerCase();
+        const lastnameQuery = filters["lastname"].toLowerCase();
+
+        filteredUsers = usersData.filter(
+          user =>
+            user["name"]["first"].toLowerCase().includes(firstnameQuery) &&
+            user["name"]["last"].toLowerCase().includes(lastnameQuery)
+        );
+      }
+      return filteredUsers;
+    }
     /**
      * HTML5 skeleton to draw a table row
      * @function _tableRowSkeleton
@@ -412,38 +506,6 @@ const Table = (function() {
       apiRequest(apiURL, renderDataOnResize);
     }
 
-    /** Render again the table with specific conditions
-     * @function renderData
-     * @public
-     * @param {Object} filters - Conditions to render again the table with filtered data
-     * @param {Array} data
-     */
-    function renderData(inputsData = [], data = null) {
-      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-      _showOverlay(true);
-      const filters = _buildFilters(inputsData);
-      const tableBody = mainContainer.find("#users-table tbody");
-
-      if (filters["gender"]) {
-        users = users.filter(
-          user => user["gender"] === filters["gender"].toLowerCase()
-        );
-      }
-      console.log(filters);
-      /*
-      if (filters["firstname"] || filters["lastname"]) {
-        users = users.filter(user => {
-          return (
-            user["name"]["first"]
-              .toLowerCase()
-              .includes(filters["firstname"]) ||
-            user["name"]["last"].toLowerCase().includes(filters["lastname"])
-          );
-        });
-      }
-      */
-    }
-
     /**
      * Filter the inputs when the advanced search is used,
      * only inputs that aren't empty or checked are allowed
@@ -454,7 +516,7 @@ const Table = (function() {
      */
     function _buildFilters(elements) {
       const filters = {};
-      elements
+      const filtered = elements
         .filter((index, input) => {
           const $input = $(input);
           if (
@@ -508,20 +570,14 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
-activateSelect2();
 
-function activateSelect2(container) {
-  container = container || document;
-  const selects = $(container)
-    .find("select.select2:not(.select2-loaded)")
-    .each(function() {
-      $(this)
-        .addClass("select2-loaded")
-        .select2({
-          selectOnClose: true
-        });
-    });
-}
+//Submit event for the form that handle the advanced search
+$("form#advanced-search").on("submit", function(e) {
+  e.preventDefault();
+  //Build the filters object to render the table with the new results
+  const formInputs = $(this).find("input");
+  usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+});
 
 $("nav.search-navbar").on("change", "select", function(e) {
   const selectsContainer = $(this).closest("nav");
@@ -607,11 +663,3 @@ function appendTechSkills(container, user) {
       );
   });
 }
-
-//Submit event for the form that handle the advanced search
-$("form#advanced-search").on("submit", function(e) {
-  e.preventDefault();
-  //Build the filters object to render the table with the new results
-  const formInputs = $(this).find("input");
-  usersTable.renderTable(formInputs);
-});
