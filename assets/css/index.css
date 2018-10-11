@@ -520,8 +520,8 @@ ul div[class*="border-dark"] {
 }
 
 #submit_search {
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
   /* margin-bottom: 4rem !important; */
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
   height: 56%;
 }
 

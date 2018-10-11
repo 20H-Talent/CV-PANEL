@@ -3,55 +3,55 @@
         "tag": "layout",
         "label": "css",
         "name": "skills_css",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "layout",
         "label": "html",
         "name": "skills_html",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "languages",
         "label": "javascript",
         "name": "skills_javascript",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "languages",
         "label": "php",
         "name": "skills_php",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "languages",
         "label": "python",
         "name": "skills_python",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "languages",
         "label": "ruby",
         "name": "skills_ruby",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "languages",
         "label": "c++",
         "name": "skills_c++",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "languages",
         "label": "java",
         "name": "skills_java",
-        "default-value": 0
+        "defaultValue": 0
     },
     {
         "tag": "frameworks",
         "label": "django",
         "name": "skills_django",
-        "default-value": 0 
+        "defaultValue": 0 
     },
     {
         "tag": "frameworks",
@@ -63,24 +63,24 @@
         "tag": "frameworks",
         "label": "react",
         "name": "skills_react",
-        "default-value": 0 
+        "defaultValue": 0 
     },
     {
         "tag": "frameworks",
         "label": "angular",
         "name": "skills_angular",
-        "default-value": 0 
+        "defaultValue": 0 
     },
     {
         "tag": "frameworks",
         "label": "vue",
         "name": "skills_vue",
-        "default-value": 0 
+        "defaultValue": 0 
     },
     {
         "tag": "frameworks",
         "label": "laravel",
         "name": "skills_laravel",
-        "default-value": 0 
+        "defaultValue": 0 
     }
 ]
