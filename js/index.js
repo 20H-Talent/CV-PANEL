@@ -2,51 +2,49 @@
  *  Function to load the content by ajax
  */
 $("#right-menu-ajax").load( "right-menu.html", function() {
-  menuRight();
+  formSideBar();
 });
 
 /**
- * Function to control the content(search form) of the right sidebar
+ * Function to control the content (search form) of the right sidebar
  */
-function menuRight (){
 
-// -------------  LATERAL LEFT MENU ----------
-let sidebarItems = document.querySelectorAll("#left-menu li");
-for (sidebarItem of sidebarItems) {
-  sidebarItem.addEventListener("click", function() {
-    let current = document.getElementsByClassName("sidebar-position");
-    current[0].className = current[0].className.replace("sidebar-position", "");
-    this.className += " sidebar-position";
+function formSideBar (){
+  // -------------  LATERAL LEFT MENU ----------
+  let sidebarItems = document.querySelectorAll("#left-menu li");
+  for (sidebarItem of sidebarItems) {
+    sidebarItem.addEventListener("click", function() {
+      let current = document.getElementsByClassName("sidebar-position");
+      current[0].className = current[0].className.replace("sidebar-position", "");
+      this.className += " sidebar-position";
+    });
+  }
+  // function openNewWindow() {   // Esta función no se utiliza en ningún lado.
+  //   open("form.html");
+  // }
+ // --------------- LATERAL RIGHT MENU ----------
+  let rangeAge = document.querySelector("#age-range");
+  let age = document.querySelector("#age");
+  let rangeExp = document.querySelector("#exp-years");
+  let experience = document.querySelector("#range");
+
+  // to set age of user next to input age-range
+  rangeAge.addEventListener("click", function(event) {
+    age.innerHTML = rangeAge.value;
   });
-}
-function openNewWindow() {
-  open("form.html");
-}
-
-// // --------------- LATERAL RIGHT MENU ----------
-
-let rangeAge = document.querySelector("#age-range");
-let age = document.querySelector("#age");
-let rangeExp = document.querySelector("#exp-years");
-let experience = document.querySelector("#range");
-
-// to set age of user next to input age-range
-rangeAge.addEventListener("click", function(event) {
-  age.innerHTML = rangeAge.value;
-});
-// to set experience of user next to input exp-years
-rangeExp.addEventListener("click", function(event) {
-  experience.innerHTML = rangeExp.value;
-});
-
-let sidebarItems2 = document.querySelectorAll("#right-menu li");
-for (sidebarItem of sidebarItems2) {
-  sidebarItem.addEventListener("click", function() {
-    let current = document.getElementsByClassName("sidebar-position");
-    current[0].className = current[0].className.replace("sidebar-position", "");
-    this.className += " sidebar-position";
+  // to set experience of user next to input exp-years
+  rangeExp.addEventListener("click", function(event) {
+    experience.innerHTML = rangeExp.value;
   });
-}
+
+  let sidebarItems2 = document.querySelectorAll("#right-menu li");
+  for (sidebarItem of sidebarItems2) {
+    sidebarItem.addEventListener("click", function() {
+      let current = document.getElementsByClassName("sidebar-position");
+      current[0].className = current[0].className.replace("sidebar-position", "");
+      this.className += " sidebar-position";
+    });
+  }
 }
 
 /*******************************
@@ -75,6 +73,7 @@ function changeScreen() {
 
 /*******************************
  *  LEFT SIDE DESKTOP
+ *  Control size left container, (open and close states) 
  *******************************/
 
 function navLeft(event) {
@@ -108,6 +107,7 @@ function navLeft(event) {
 
 /*******************************
  *  LEFT SIDE BAR MOBILE
+ *  Control size left container, (open and close states) 
  *******************************/
 
 function navLeftMobile(event) {
@@ -142,6 +142,7 @@ function navLeftMobile(event) {
 
 /*******************************
  *  RIGHT SIDE BAR
+ * Control size right container, (open and close states) 
  *******************************/
 
 let iconOpenRight = document.querySelector("#open-icon-right");
@@ -183,8 +184,12 @@ function navRight(event) {
     selectedElement.classList.replace("open", "close");
   }
 }
-// ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
-// --- TO SEE LIST OF USERS ---
+
+/********************************************
+ * FUNCTIONS TO DISPLAY LAST CHANGE ON NAV
+ ********************************************/
+
+// --- TO SEE LIST OF USERS --- 
 let listUsers = document.querySelector("#list-users");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
@@ -211,7 +216,7 @@ buttonCreateUser.addEventListener("click", function() {
   divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
-let submitSearch = document.querySelector("#submit_search");
+let submitSearch = document.querySelector("#submit_search"); // Problema al dividir el html este parametro no se ha cargado todavía por ajax.
 submitSearch.addEventListener("click", function() {
   divNavBar.classList.replace("close", "open");
   divNavBar.innerHTML = "";
@@ -220,3 +225,18 @@ submitSearch.addEventListener("click", function() {
   </button>`;
   divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
+
+
+/*******************************************************************
+ * New function: load by ajax the sidebar form into the center column....
+ ******************************************************************/
+
+// $("#search-btn").on("click", loadMain);
+
+// function loadMain(){
+//   $("#Div1").load( "right-menu.html", function() {
+//     formSideBar();
+//   });
+// }
+
+
