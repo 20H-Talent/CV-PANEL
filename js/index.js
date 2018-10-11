@@ -1,3 +1,12 @@
+// $( "#right-menu-ajax" ).load( "right-menu.html");
+
+
+$("#right-menu-ajax"  ).load( "right-menu.html", function() {
+  menuRight();
+});
+
+function menuRight (){
+
 // -------------  LATERAL LEFT MENU ----------
 let sidebarItems = document.querySelectorAll("#left-menu li");
 for (sidebarItem of sidebarItems) {
@@ -11,7 +20,8 @@ function openNewWindow() {
   open("form.html");
 }
 
-// --------------- LATERAL RIGHT MENU ----------
+// // --------------- LATERAL RIGHT MENU ----------
+
 let rangeAge = document.querySelector("#age-range");
 let age = document.querySelector("#age");
 let rangeExp = document.querySelector("#exp-years");
@@ -34,6 +44,8 @@ for (sidebarItem of sidebarItems2) {
     this.className += " sidebar-position";
   });
 }
+}
+
 
 /*******************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
