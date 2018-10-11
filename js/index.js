@@ -1,90 +1,81 @@
-// -------------  LATERAL LEFT MENU ----------
-let sidebarItems = document.querySelectorAll("#left-menu li");
-for (sidebarItem of sidebarItems) {
-  sidebarItem.addEventListener("click", function() {
-    let current = document.getElementsByClassName("sidebar-position");
-    current[0].className = current[0].className.replace("sidebar-position", "");
-    this.className += " sidebar-position";
-  });
-}
-// function openNewWindow() {
-//   open("form.html");
-// }
-
-// --------------- LATERAL RIGHT MENU ----------
-let rangeAge = document.querySelector("#age-range");
-let age = document.querySelector("#age");
-let rangeExp = document.querySelector("#exp-years");
-let experience = document.querySelector("#range");
-
-// to set age of user next to input age-range
-rangeAge.addEventListener("click", function(event) {
-  age.innerHTML = rangeAge.value;
-});
-// to set experience of user next to input exp-years
-rangeExp.addEventListener("click", function(event) {
-  experience.innerHTML = rangeExp.value;
+/**
+ *  Function to load the content by ajax
+ */
+$("#right-menu-ajax").load( "right-menu.html", function() {
+  formSideBar();
 });
 
-let sidebarItems2 = document.querySelectorAll("#right-menu li");
-for (sidebarItem of sidebarItems2) {
-  sidebarItem.addEventListener("click", function() {
-    let current = document.getElementsByClassName("sidebar-position");
-    current[0].className = current[0].className.replace("sidebar-position", "");
-    this.className += " sidebar-position";
+/**
+ * Function to control the content (search form) of the right sidebar
+ */
+
+function formSideBar (){
+  // -------------  LATERAL LEFT MENU ----------
+  let sidebarItems = document.querySelectorAll("#left-menu li");
+  for (sidebarItem of sidebarItems) {
+    sidebarItem.addEventListener("click", function() {
+      let current = document.getElementsByClassName("sidebar-position");
+      current[0].className = current[0].className.replace("sidebar-position", "");
+      this.className += " sidebar-position";
+    });
+  }
+  //  function openNewWindow() {   // Esta función no se utiliza en ningún lado.
+  //     open("form.html");
+  //   }
+ // --------------- LATERAL RIGHT MENU ----------
+  let rangeAge = document.querySelector("#age-range");
+  let age = document.querySelector("#age");
+  let rangeExp = document.querySelector("#exp-years");
+  let experience = document.querySelector("#range");
+
+  // to set age of user next to input age-range
+  rangeAge.addEventListener("click", function(event) {
+    age.innerHTML = rangeAge.value;
   });
+  // to set experience of user next to input exp-years
+  rangeExp.addEventListener("click", function(event) {
+    experience.innerHTML = rangeExp.value;
+  });
+
+  let sidebarItems2 = document.querySelectorAll("#right-menu li");
+  for (sidebarItem of sidebarItems2) {
+    sidebarItem.addEventListener("click", function() {
+      let current = document.getElementsByClassName("sidebar-position");
+      current[0].className = current[0].className.replace("sidebar-position", "");
+      this.className += " sidebar-position";
+    });
+  }
 }
 
-/************************************************************
+/**************************************************************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
- ************************************************************/
+ *  The width of the left sidebar is the same 
+ * for the tablet and for the desktop, it only changes for the mobile.
+ **************************************************************************/
 
-changeScreen(); // lo hace una vez sí o sí.
+changeScreen();
+$(window).on("resize", function() {
+  // var windowSize = $(window).width();
+  changeScreen();
+});
 
-// $( window ).ready( function() { // ejecuta la función reload cuando está lista.
-//   reload();  
-// });
-
-  // $(window).on('resize', function() {
-  //   changeScreen();  
-  // });
-
-  $( window ).resize(function() {
-    changeScreen();  
-    console.log("resize");
-  });
-
-
-/***************************************************************
- * CONTROL LISTENERS
- * Function to check the screen size and set elements listeners.
- ***************************************************************/
-
-function changeScreen (){
-  var windowSize = $(window).width(); 
-  if (windowSize > 425){
-    console.log('Desktop');
+function changeScreen() {
+  var windowSize = $(window).width();
+  if (windowSize > 425) {
+    console.log("Desktop");
     $("#open-icon-left").on("click", navLeft);
-    $('#main-left').on('touchmove', navLeft);
-  
-  } else { 
-    console.log('Mobile');
+    $("#left-menu").on("touchmove", navLeft);
+  } else {
+    console.log("Mobile");
     $("#open-icon-left").on("click", navLeftMobile);
     $("#main-left").on("touchmove", navLeftMobile);
   } 
 }
 
-/***********************************************
- *  LEFT SIDE DESKTOP/TABLET
- *  Configuration size of left sidebar (open and close)
- **********************************************/
-
-// let iconOpenLeft = document.querySelector("#open-icon-left");
-// iconOpenLeft.addEventListener("click", navLeft);
-// let barLeft = document.querySelector("#left-menu");
-// barLeft.document.querySelector("#left-menu").addEventListener("touchmove", navLeft);
-
-// $("#left-menu").on("touchmove", navLeft);
+/*******************************************************************
+ *  LEFT SIDE DESKTOP
+ *  Control size left container, (open and close states) 
+ *******************************************************************/
 
 function navLeft(event) {
   let icon = event.target;
@@ -115,20 +106,10 @@ function navLeft(event) {
   }
 }
 
-
-/*************************************************
+/*******************************************************************
  *  LEFT SIDE BAR MOBILE
- *  Configuration size of left sidebar (open and close)
- *************************************************/
-
-// let iconOpenLeft = document.querySelector("#open-icon-left");
-// iconOpenLeft.addEventListener("click", navLeftMobile);
-
-// let barLeft = document.querySelector("#left-menu");
-// barLeft.document.querySelector("#left-menu").addEventListener("touchmove", navLeftMobile);
-
-
-// $("#left-menu").on("touchmove", navLeftMobile);
+ *  Control size left container, (open and close states) 
+ *******************************************************************/
 
 function navLeftMobile(event) {
   let icon = event.target;
@@ -160,9 +141,10 @@ function navLeftMobile(event) {
   }
 }
 
-/*******************************
+/*******************************************************************
  *  RIGHT SIDE BAR
- *******************************/
+ * Control size right container, (open and close states) 
+ *******************************************************************/
 
 let iconOpenRight = document.querySelector("#open-icon-right");
 iconOpenRight.addEventListener("click", navRight);
@@ -203,8 +185,12 @@ function navRight(event) {
     selectedElement.classList.replace("open", "close");
   }
 }
-// ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
-// --- TO SEE LIST OF USERS ---
+
+/********************************************
+ * FUNCTIONS TO DISPLAY LAST CHANGE ON NAV
+ ********************************************/
+
+// --- TO SEE LIST OF USERS --- 
 let listUsers = document.querySelector("#list-users");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
@@ -231,12 +217,31 @@ buttonCreateUser.addEventListener("click", function() {
   divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
-let submitSearch = document.querySelector("#submit_search");
-submitSearch.addEventListener("click", function() {
-  divNavBar.classList.replace("close", "open");
-  divNavBar.innerHTML = "";
-  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
-  <i class="far fa-times-circle"></i>
-  </button>`;
-  divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
-});
+
+/*************************************************************************************
+ * Load by ajax the sidebar form into the center column
+ ************************************************************************************/
+
+if( $("#submit_search").length ) {// use this if you are using id to check  // it exists
+  let submitSearch = document.querySelector("#submit_search"); 
+  submitSearch.addEventListener("click", function() {
+    divNavBar.classList.replace("close", "open");
+    divNavBar.innerHTML = "";
+    divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
+    <i class="far fa-times-circle"></i>
+    </button>`;
+    divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+  });
+}else{
+
+  $("#search-btn").on("click", loadMain);
+
+  function loadMain(){
+    $("#Div1").load( "right-menu.html", function(   responseText,  textStatus,  jqXHR ) {
+      console.log( " loadMain:  " + textStatus);
+      formSideBar();
+    });
+  }
+  
+}
+
