@@ -1,10 +1,13 @@
-// $( "#right-menu-ajax" ).load( "right-menu.html");
-
-
-$("#right-menu-ajax"  ).load( "right-menu.html", function() {
+/**
+ *  Function to load the content by ajax
+ */
+$("#right-menu-ajax").load( "right-menu.html", function() {
   menuRight();
 });
 
+/**
+ * Function to control the content(search form) of the right sidebar
+ */
 function menuRight (){
 
 // -------------  LATERAL LEFT MENU ----------
@@ -46,11 +49,11 @@ for (sidebarItem of sidebarItems2) {
 }
 }
 
-
 /*******************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
+ *  The width of the left sidebar is the same for the tablet and for the desktop, it only changes for the mobile.
  *******************************/
-// El ancho de la barra izquierda es igual para la tablet y para el escritorio, solo cambia para el móvil.
+
 changeScreen();
 $(window).on("resize", function() {
   // var windowSize = $(window).width();
@@ -61,15 +64,10 @@ function changeScreen() {
   var windowSize = $(window).width();
   if (windowSize > 425) {
     console.log("Desktop");
-    // let iconOpenLeft = document.querySelector("#open-icon-left");
-    // iconOpenLeft.addEventListener("click", navLeft);
     $("#open-icon-left").on("click", navLeft);
     $("#left-menu").on("touchmove", navLeft);
-    //$('#main-left').on('click', navLeft);
   } else {
     console.log("Mobile");
-    // let iconOpenLeft = document.querySelector("#open-icon-left");
-    // iconOpenLeft.addEventListener("click", navLeftMobile);
     $("#open-icon-left").on("click", navLeftMobile);
     $("#left-menu").on("touchmove", navLeftMobile);
   }
@@ -78,11 +76,6 @@ function changeScreen() {
 /*******************************
  *  LEFT SIDE DESKTOP
  *******************************/
-
-// let iconOpenLeft = document.querySelector("#open-icon-left");
-// iconOpenLeft.addEventListener("click", navLeft);
-
-// $("#left-menu").on("touchmove", navLeft);
 
 function navLeft(event) {
   let icon = event.target;
@@ -116,11 +109,6 @@ function navLeft(event) {
 /*******************************
  *  LEFT SIDE BAR MOBILE
  *******************************/
-
-// let iconOpenLeft = document.querySelector("#open-icon-left");
-// iconOpenLeft.addEventListener("click", navLeftMobile);
-
-// $("#left-menu").on("touchmove", navLeftMobile);
 
 function navLeftMobile(event) {
   let icon = event.target;
