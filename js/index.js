@@ -7,9 +7,9 @@ for (sidebarItem of sidebarItems) {
     this.className += " sidebar-position";
   });
 }
-function openNewWindow() {
-  open("form.html");
-}
+// function openNewWindow() {
+//   open("form.html");
+// }
 
 // --------------- LATERAL RIGHT MENU ----------
 let rangeAge = document.querySelector("#age-range");
@@ -39,19 +39,20 @@ for (sidebarItem of sidebarItems2) {
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
  ************************************************************/
 
-changeScreen();
-setInterval("reload ()", 5000);
-ready();
+changeScreen(); // lo hace una vez sí o sí.
 
-$( document ).ready(function() {
-  // Handler for .ready() called.
-});
+// $( window ).ready( function() { // ejecuta la función reload cuando está lista.
+//   reload();  
+// });
 
-function reload (){
-  $(window).on('resize', function() {
+  // $(window).on('resize', function() {
+  //   changeScreen();  
+  // });
+
+  $( window ).resize(function() {
     changeScreen();  
+    console.log("resize");
   });
-}
 
 
 /***************************************************************
