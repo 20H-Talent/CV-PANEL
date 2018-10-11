@@ -623,6 +623,10 @@ body {
     #search-btn {
         display: inline-block;
     }
+
+    #right-menu{
+      margin-left:50px ;
+    }
 }
 
 /**

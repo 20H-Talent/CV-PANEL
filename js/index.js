@@ -217,27 +217,31 @@ buttonCreateUser.addEventListener("click", function() {
   divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
-let submitSearch = document.querySelector("#submit_search"); // Problema, al dividir el html este parámetro no se ha cargado todavía por ajax.
-submitSearch.addEventListener("click", function() {
-  divNavBar.classList.replace("close", "open");
-  divNavBar.innerHTML = "";
-  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
-  <i class="far fa-times-circle"></i>
-  </button>`;
-  divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
-});
-
 
 /*************************************************************************************
- * New function: load by ajax the sidebar form into the center column....
+ * Load by ajax the sidebar form into the center column
  ************************************************************************************/
 
-$("#search-btn").on("click", loadMain);
-
-function loadMain(){
-  $("#Div1").load( "right-menu.html", function() {
-    formSideBar();
+if( $("#submit_search").length ) {// use this if you are using id to check  // it exists
+  let submitSearch = document.querySelector("#submit_search"); 
+  submitSearch.addEventListener("click", function() {
+    divNavBar.classList.replace("close", "open");
+    divNavBar.innerHTML = "";
+    divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
+    <i class="far fa-times-circle"></i>
+    </button>`;
+    divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
   });
-}
+}else{
 
+  $("#search-btn").on("click", loadMain);
+
+  function loadMain(){
+    $("#Div1").load( "right-menu.html", function(   responseText,  textStatus,  jqXHR ) {
+      console.log( " loadMain:  " + textStatus);
+      formSideBar();
+    });
+  }
+  
+}
 
