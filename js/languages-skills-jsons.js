@@ -1,7 +1,3 @@
-// crear 2 metodos :
-  //  - form create
-  //  - form search
-// segun que evento sea llamado se llama a un met o a otro
 $('#mySidenavLeft ul li:nth-of-type(2)').on('click', languages);
 $('#mySidenavRight a').on('click', languages);
 $('#mySidenavLeft ul li:nth-of-type(2)').on('click', skills);
