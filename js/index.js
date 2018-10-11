@@ -41,6 +41,11 @@ for (sidebarItem of sidebarItems2) {
 
 changeScreen();
 setInterval("reload ()", 5000);
+ready();
+
+$( document ).ready(function() {
+  // Handler for .ready() called.
+});
 
 function reload (){
   $(window).on('resize', function() {
