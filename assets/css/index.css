@@ -354,8 +354,23 @@ nav label {
   flex: 1;
 }
 
-.search-badges {
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0.5em;
+}
+.filters > .search-badges {
   padding: 1em 2em 0.5em 2em;
+  font-size: 1.2em;
+}
+.search-badges .badge.filter {
+  padding: 0.5em 1em 0.5em 1em;
+}
+
+.search-badges .badge.filter span {
+  font-weight: normal;
 }
 
 @media screen and (max-width: 428px) {

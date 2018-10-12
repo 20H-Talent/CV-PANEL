@@ -141,18 +141,16 @@ const Table = (function() {
       if (browserWidth > 868) {
         if (inputsData.length > 0) {
           const builtFilters = _buildFilters(inputsData);
-          const filteredUsers = (builtFilters, usersData);
+          const filteredUsers = _filterUsers(builtFilters, usersData);
 
-          if (filteredUsers.length > 0) {
-            tableBody.empty();
-            _showOverlay(true);
-            _createSearchBadges(builtFilters);
+          tableBody.empty();
+          _showOverlay(true);
+          _createSearchBadges(builtFilters);
 
-            setTimeout(() => {
-              _showOverlay(false);
-              filteredUsers.forEach(user => _appendRowData(tableBody, user));
-            }, 1000);
-          }
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendRowData(tableBody, user));
+          }, 1000);
         }
 
         if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
@@ -162,19 +160,15 @@ const Table = (function() {
       } else if (browserWidth < 868) {
         if (inputsData.length > 0) {
           const builtFilters = _buildFilters(inputsData);
-          const filteredUsers = (builtFilters, usersData);
+          const filteredUsers = _filterUsers(builtFilters, usersData);
 
-          if (filteredUsers.length > 0) {
-            cardContainer.empty();
-            _showOverlay(true);
+          cardContainer.empty();
+          _showOverlay(true);
 
-            setTimeout(() => {
-              _showOverlay(false);
-              filteredUsers.forEach(user =>
-                _appendCardData(cardContainer, user)
-              );
-            }, 1000);
-          }
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
+          }, 1000);
         }
 
         if (
@@ -188,17 +182,29 @@ const Table = (function() {
     }
 
     function _createSearchBadges(filters) {
-      const badgeContainer = mainContainer.find(".search-badges");
+      const filtersContainer = mainContainer.find(".filters");
+      const badgeContainer = filtersContainer.children(".search-badges");
+      filtersContainer.find("button").remove();
       badgeContainer.empty();
+
       Object.keys(filters).forEach(key => {
         const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
         const badge = $(
-          `<span class="badge badge-success mr-2"><strong>${keyCapitalized}: </strong>${
+          `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
             filters[key]
-          }</span>`
+          }</span></span>`
         ).hide();
         badgeContainer.append(badge);
         badge.show("slow");
+      });
+      const resetButton = filtersContainer.append(
+        `<button class="btn btn-sm btn-info">Cancel search</button>`
+      );
+      resetButton.off("click").on("click", function(e) {
+        badgeContainer.empty();
+        $(this).remove();
+        _showOverlay(true);
+        initTable(null, window.innerWidth);
       });
     }
 
@@ -240,10 +246,10 @@ const Table = (function() {
      * @return {Array} filteredUsers
      */
     function _filterUsers(filters, users) {
-      let filteredUsers = [];
+      let filteredUsers = users;
 
       if (filters["gender"]) {
-        filteredUsers = users.filter(
+        filteredUsers = filteredUsers.filter(
           user => user["gender"] === filters["gender"].toLowerCase()
         );
       }
@@ -252,20 +258,20 @@ const Table = (function() {
         const firstnameQuery = filters["firstname"].toLowerCase();
         const lastnameQuery = filters["lastname"].toLowerCase();
 
-        filteredUsers = usersData.filter(
+        filteredUsers = filteredUsers.filter(
           user =>
             user["name"]["first"].toLowerCase().includes(firstnameQuery) &&
             user["name"]["last"].toLowerCase().includes(lastnameQuery)
         );
       } else if (!filters["firstname"] && filters["lastname"]) {
         const lastnameQuery = filters["lastname"].toLowerCase();
-        filteredUsers = usersData.filter(user =>
+        filteredUsers = filteredUsers.filter(user =>
           user["name"]["last"].toLowerCase().includes(lastnameQuery)
         );
       } else if (filters["firstname"] && !filters["lastname"]) {
         const firstnameQuery = filters["firstname"].toLowerCase();
-        filteredUsers = usersData.filter(user =>
-          user["name"]["last"].toLowerCase().includes(firstnameQuery)
+        filteredUsers = filteredUsers.filter(user =>
+          user["name"]["first"].toLowerCase().includes(firstnameQuery)
         );
       }
 
