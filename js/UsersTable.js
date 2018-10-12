@@ -1,5 +1,3 @@
-const SearchFilter = (function() {})();
-
 /**
  * This class represents the table that manage users in the application
  * It's built based on the Singleton pattern
@@ -61,8 +59,8 @@ const Table = (function() {
      */
     function initTable(data, browserWidth) {
       let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-
       if (browserWidth > 768) {
+        _showOverlay(true);
         const tableBody = mainContainer.find("#users-table tbody");
         users.forEach(user => _appendRowData(tableBody, user));
       } else {
@@ -140,12 +138,10 @@ const Table = (function() {
 
       if (browserWidth > 868) {
         if (inputsData.length > 0) {
-          const builtFilters = _buildFilters(inputsData);
-          const filteredUsers = _filterUsers(builtFilters, usersData);
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
           tableBody.empty();
           _showOverlay(true);
-          _createSearchBadges(builtFilters);
 
           setTimeout(() => {
             _showOverlay(false);
@@ -159,8 +155,7 @@ const Table = (function() {
         }
       } else if (browserWidth < 868) {
         if (inputsData.length > 0) {
-          const builtFilters = _buildFilters(inputsData);
-          const filteredUsers = _filterUsers(builtFilters, usersData);
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
           cardContainer.empty();
           _showOverlay(true);
@@ -181,9 +176,16 @@ const Table = (function() {
       }
     }
 
+    /**
+     * Create badge-pills to show the user input search values
+     * @function _createSearchBadges
+     * @private
+     * @param {Object} filters
+     */
     function _createSearchBadges(filters) {
       const filtersContainer = mainContainer.find(".filters");
       const badgeContainer = filtersContainer.children(".search-badges");
+
       filtersContainer.find("button").remove();
       badgeContainer.empty();
 
@@ -237,46 +239,6 @@ const Table = (function() {
       users.forEach(user => _appendCardData(cardContainer, user));
     }
 
-    /**
-     * Filter the users array based on specific object that define the conditions
-     * @function filterUsers
-     * @private
-     * @param {Object} filters
-     * @param {Array} users
-     * @return {Array} filteredUsers
-     */
-    function _filterUsers(filters, users) {
-      let filteredUsers = users;
-
-      if (filters["gender"]) {
-        filteredUsers = filteredUsers.filter(
-          user => user["gender"] === filters["gender"].toLowerCase()
-        );
-      }
-
-      if (filters["firstname"] && filters["lastname"]) {
-        const firstnameQuery = filters["firstname"].toLowerCase();
-        const lastnameQuery = filters["lastname"].toLowerCase();
-
-        filteredUsers = filteredUsers.filter(
-          user =>
-            user["name"]["first"].toLowerCase().includes(firstnameQuery) &&
-            user["name"]["last"].toLowerCase().includes(lastnameQuery)
-        );
-      } else if (!filters["firstname"] && filters["lastname"]) {
-        const lastnameQuery = filters["lastname"].toLowerCase();
-        filteredUsers = filteredUsers.filter(user =>
-          user["name"]["last"].toLowerCase().includes(lastnameQuery)
-        );
-      } else if (filters["firstname"] && !filters["lastname"]) {
-        const firstnameQuery = filters["firstname"].toLowerCase();
-        filteredUsers = filteredUsers.filter(user =>
-          user["name"]["first"].toLowerCase().includes(firstnameQuery)
-        );
-      }
-
-      return filteredUsers;
-    }
     /**
      * HTML5 skeleton to draw a table row
      * @function _tableRowSkeleton
@@ -549,35 +511,6 @@ const Table = (function() {
       apiRequest(apiURL, renderDataOnResize);
     }
 
-    /**
-     * Filter the inputs when the advanced search is used,
-     * only inputs that aren't empty or checked are allowed
-     * @function buildFilters
-     * @public
-     * @param {Array of jQuery objects} elements
-     * @return {object} filters
-     */
-    function _buildFilters(elements) {
-      const filters = {};
-      const filtered = elements
-        .filter((index, input) => {
-          const $input = $(input);
-          if (
-            $input.prop("type") === "radio" ||
-            $input.prop("type") === "checkbox"
-          ) {
-            return $input.prop("checked");
-          } else {
-            return $.trim($input.val()).length > 0;
-          }
-        })
-        .each((index, input) => {
-          const $input = $(input);
-          filters[$input.prop("name")] = $input.val();
-        });
-      return filters;
-    }
-
     function _showOverlay(show) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
@@ -593,6 +526,7 @@ const Table = (function() {
     }
 
     return {
+      initTable,
       setupApiURL,
       buildUserFullname,
       getUserByEmailOrID,
