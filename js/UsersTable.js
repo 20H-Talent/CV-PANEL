@@ -1,3 +1,5 @@
+const SearchFilter = (function() {})();
+
 /**
  * This class represents the table that manage users in the application
  * It's built based on the Singleton pattern
@@ -12,7 +14,7 @@ const Table = (function() {
   let instance;
 
   function init() {
-    const mainContainer = $("#users-table").parent();
+    const mainContainer = $(".main-container");
     let apiURL = setupApiURL({
       results: 100,
       nationalities: ["ES"],
@@ -138,33 +140,41 @@ const Table = (function() {
 
       if (browserWidth > 868) {
         if (inputsData.length > 0) {
-          tableBody.empty();
-          _showOverlay(true);
+          const builtFilters = _buildFilters(inputsData);
+          const filteredUsers = (builtFilters, usersData);
 
-          const filters = _buildFilters(inputsData);
-          const filteredUsers = _filterUsers(filters, usersData);
+          if (filteredUsers.length > 0) {
+            tableBody.empty();
+            _showOverlay(true);
+            _createSearchBadges(builtFilters);
 
-          setTimeout(() => {
-            _showOverlay(false);
-            filteredUsers.forEach(user => _appendRowData(tableBody, user));
-          }, 1000);
+            setTimeout(() => {
+              _showOverlay(false);
+              filteredUsers.forEach(user => _appendRowData(tableBody, user));
+            }, 1000);
+          }
         }
 
         if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
           _renderTableOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
         }
       } else if (browserWidth < 868) {
         if (inputsData.length > 0) {
-          cardContainer.empty();
-          _showOverlay(true);
+          const builtFilters = _buildFilters(inputsData);
+          const filteredUsers = (builtFilters, usersData);
 
-          const filters = _buildFilters(inputsData);
-          const filteredUsers = _filterUsers(filters, usersData);
+          if (filteredUsers.length > 0) {
+            cardContainer.empty();
+            _showOverlay(true);
 
-          setTimeout(() => {
-            _showOverlay(false);
-            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
-          }, 1000);
+            setTimeout(() => {
+              _showOverlay(false);
+              filteredUsers.forEach(user =>
+                _appendCardData(cardContainer, user)
+              );
+            }, 1000);
+          }
         }
 
         if (
@@ -172,9 +182,24 @@ const Table = (function() {
           inputsData.length === 0
         ) {
           _renderCardOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
         }
-        _showOverlay(false);
       }
+    }
+
+    function _createSearchBadges(filters) {
+      const badgeContainer = mainContainer.find(".search-badges");
+      badgeContainer.empty();
+      Object.keys(filters).forEach(key => {
+        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
+        const badge = $(
+          `<span class="badge badge-success mr-2"><strong>${keyCapitalized}: </strong>${
+            filters[key]
+          }</span>`
+        ).hide();
+        badgeContainer.append(badge);
+        badge.show("slow");
+      });
     }
 
     /**
@@ -215,7 +240,8 @@ const Table = (function() {
      * @return {Array} filteredUsers
      */
     function _filterUsers(filters, users) {
-      let filteredUsers;
+      let filteredUsers = [];
+
       if (filters["gender"]) {
         filteredUsers = users.filter(
           user => user["gender"] === filters["gender"].toLowerCase()
@@ -231,7 +257,18 @@ const Table = (function() {
             user["name"]["first"].toLowerCase().includes(firstnameQuery) &&
             user["name"]["last"].toLowerCase().includes(lastnameQuery)
         );
+      } else if (!filters["firstname"] && filters["lastname"]) {
+        const lastnameQuery = filters["lastname"].toLowerCase();
+        filteredUsers = usersData.filter(user =>
+          user["name"]["last"].toLowerCase().includes(lastnameQuery)
+        );
+      } else if (filters["firstname"] && !filters["lastname"]) {
+        const firstnameQuery = filters["firstname"].toLowerCase();
+        filteredUsers = usersData.filter(user =>
+          user["name"]["last"].toLowerCase().includes(firstnameQuery)
+        );
       }
+
       return filteredUsers;
     }
     /**
@@ -577,11 +614,6 @@ $("form#advanced-search").on("submit", function(e) {
   //Build the filters object to render the table with the new results
   const formInputs = $(this).find("input");
   usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
-});
-
-$("nav.search-navbar").on("change", "select", function(e) {
-  const selectsContainer = $(this).closest("nav");
-  usersTable.changeApiParams(selectsContainer.find("select"));
 });
 
 $(window).on("resize", function(e) {

@@ -7,7 +7,7 @@ html {
   margin: 0;
   box-sizing: border-box;
 }
-
+/*COLOR MENU IZQUIERDO: #4D394B*/
 /***************************/
 /*      General styles      */
 /***************************/
@@ -352,6 +352,10 @@ nav label {
 
 .user-collapse-info {
   flex: 1;
+}
+
+.search-badges {
+  padding: 1em 2em 0.5em 2em;
 }
 
 @media screen and (max-width: 428px) {
