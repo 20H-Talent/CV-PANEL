@@ -81,20 +81,8 @@ const SearchFilter = (function() {
   function _createSearchBadges(filters) {
     const filtersContainer = mainContainer.find(".filters");
     const badgesContainer = filtersContainer.children(".search-badges");
-
     filtersContainer.find("button").remove();
-    badgesContainer.empty();
-
-    Object.keys(filters).forEach(key => {
-      const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-      const badge = $(
-        `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
-          filters[key]
-        }</span></span>`
-      ).hide();
-      badgesContainer.append(badge);
-      badge.show("slow");
-    });
+    _appendFilterBadges(filters, badgesContainer);
     _createResetButton(filtersContainer, badgesContainer);
   }
 
@@ -106,6 +94,21 @@ const SearchFilter = (function() {
       badgesContainer.empty();
       $(this).remove();
       usersTable.initTable(null, window.innerWidth);
+    });
+  }
+
+  function _appendFilterBadges(filters, badgesContainer) {
+    badgesContainer.empty();
+
+    Object.keys(filters).forEach(key => {
+      const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
+      const badge = $(
+        `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
+          filters[key]
+        }</span></span>`
+      ).hide();
+      badgesContainer.append(badge);
+      badge.show("slow");
     });
   }
 
