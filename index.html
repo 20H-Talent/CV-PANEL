@@ -78,10 +78,13 @@
                 <!-- Table of users -->
                 <div class="col p-0" id="Div1">
                     <div id="main" class="main-container">
-                        <!-- Here we must put the table  -->
-                        <!-- Table of users -->
-                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center mt-4">
-                            <div id="users-table" class="table-responsive table-wrapper-scroll-y mt-4">
+
+                        <div class="filters">
+                            <div class="search-badges"></div>
+                        </div>
+
+                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center mt-1">
+                            <div id="users-table" class="table-responsive table-wrapper-scroll-y mt-1">
                                 <table class="table table-bordered table-hover" role="grid">
                                     <thead class="thead-dark">
                                         <tr>
@@ -121,8 +124,9 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input type="text" name="FirstName" class="form-control " minlength="3" maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName"
-                                                placeholder="required" value="" required>
+                                            <input type="text" name="FirstName" class="form-control " minlength="3"
+                                                maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName" placeholder="required"
+                                                value="" required>
                                         </div>
 
                                     </div>
@@ -132,9 +136,9 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName" pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+"
-                                                title="Last name must have 3-15 characters long" placeholder="required" value=""
-                                                required>
+                                            <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName"
+                                                pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+" title="Last name must have 3-15 characters long"
+                                                placeholder="required" value="" required>
                                         </div>
 
 
@@ -146,8 +150,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputfault"><i class="fas asweome fa-users"></i></span>
 
-                                            <input lang="es-ES" name="Username" pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+" type="text" class="form-control" id="Username"
-                                                placeholder="Username" required>
+                                            <input lang="es-ES" name="Username" pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+"
+                                                type="text" class="form-control" id="Username" placeholder="Username"
+                                                required>
                                         </div>
 
 
@@ -158,8 +163,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="in-sizing-default"><i class="fas asweome fa-at"></i></span>
-                                            <input lang="es-ES" type="email" name="Email" class="form-control form-control-success" id="email" placeholder="name@example.com"
-                                                required>
+                                            <input lang="es-ES" type="email" name="Email" class="form-control form-control-success"
+                                                id="email" placeholder="name@example.com" required>
 
                                         </div>
 
@@ -171,7 +176,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputizing-default"><i class="fas asweome fa-phone-square"></i></span>
-                                            <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}" id="tel" placeholder="required" required>
+                                            <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}"
+                                                id="tel" placeholder="required" required>
                                         </div>
 
                                     </div>
@@ -182,7 +188,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inpudefault"><i class="fas asweome-address fa-map-marker-alt"></i></span>
-                                            <input lang="es-ES" name="Adress" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                                            <input lang="es-ES" name="Adress" type="text" class="form-control" id="address"
+                                                placeholder="1234 Main St" required>
                                         </div>
 
                                     </div>
@@ -194,8 +201,9 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
-                                            <input lang="es-ES" name="Country" class="custom-select d-block w-100" pattern=".{3,25}" pattern="^[a-zA-Z]+$" type="text"
-                                                placeholder="required" required id="country">
+                                            <input lang="es-ES" name="Country" class="custom-select d-block w-100"
+                                                pattern=".{3,25}" pattern="^[a-zA-Z]+$" type="text" placeholder="required"
+                                                required id="country">
                                         </div>
 
                                     </div>
@@ -206,8 +214,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
-                                            <input lang="es-ES" name="city" class="custom-select d-block w-100" pattern=".{3,25}" type="text" id="city" placeholder="required"
-                                                required>
+                                            <input lang="es-ES" name="city" class="custom-select d-block w-100" pattern=".{3,25}"
+                                                type="text" id="city" placeholder="required" required>
                                         </div>
 
                                     </div>
@@ -217,7 +225,8 @@
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
-                                            <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+" id="zip" placeholder=" required" required>
+                                            <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+"
+                                                id="zip" placeholder=" required" required>
                                         </div>
 
                                     </div>
@@ -353,7 +362,8 @@
                                 </div>
                                 <div id="upload-curriculum" class="form-row langsel">
                                     <div class="col">
-                                        <label for="exampleFormControlFile1"> <strong>Upload Curriculum</strong> </label>
+                                        <label for="exampleFormControlFile1"> <strong>Upload Curriculum</strong>
+                                        </label>
                                         <input type="file" class="form-control-file fileupload" id="exampleFormControlFile1">
                                     </div>
 
@@ -365,7 +375,8 @@
 
                                 </div>
 
-                                <button id="button-create-user" class="btn checkout  btn-custom btn-lg btn-block" onclick="formErrors()" type="submit">Save</button>
+                                <button id="button-create-user" class="btn checkout  btn-custom btn-lg btn-block"
+                                    onclick="formErrors()" type="submit">Save</button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
                                 <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>
@@ -386,8 +397,8 @@
                                         class="fa fa-search"></i></span>
                             </a>
                             <!-- Menu right -->
-                             <section id="right-menu-ajax" class="close">
-                            <!--  <div id="right-menu" class="p-0">
+                            <section id="right-menu-ajax" class="close">
+                                <!--  <div id="right-menu" class="p-0">
                                     <p class="text-white text-center w-100">Search for: </p>
 
                                     <form id="advanced-search">
@@ -401,7 +412,7 @@
                                         </div>
 
                                         <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-                                            <label for="last-name" class="badge-pill bg-dark text-center w-100 mb-3">Last Name</label> 
+                                            <label for="last-name" class="badge-pill bg-dark text-center w-100 mb-3">Last Name</label>
                                             <input type="text" class="form-control" id="last-name"
                                                 placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
                                             <small class="text-center text-white w-100">
@@ -432,12 +443,12 @@
                                             <p id="range" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
                                         </div>
 
-                                         ********* lANGUAGES *********** 
+                                         ********* lANGUAGES ***********
                                         <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
                                             <label class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</label>
                                         </div>
 
-                                        ******** SKILLS ********** 
+                                        ******** SKILLS **********
                                         <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
                                             <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
                                             <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
@@ -458,7 +469,7 @@
                                         </div>
                                     </form>
                                 </div>-->
-                            </section> 
+                            </section>
                         </div>
 
                     </div>
@@ -500,7 +511,8 @@
                             <div class="card">
                                 <div class="card-header" id="languages-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo" aria-expanded="true" aria-controls="languagesInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo"
+                                            aria-expanded="true" aria-controls="languagesInfo">
                                             Languages
                                         </button>
                                     </h5>
@@ -515,7 +527,8 @@
                             <div class="card">
                                 <div class="card-header" id="skills-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo" aria-expanded="true" aria-controls="skillsInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo"
+                                            aria-expanded="true" aria-controls="skillsInfo">
                                             Skills
                                         </button>
                                     </h5>
@@ -531,7 +544,8 @@
                             <div class="card">
                                 <div class="card-header" id="frameworks-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#frameworksInfo" aria-expanded="true" aria-controls="frameworksInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#frameworksInfo"
+                                            aria-expanded="true" aria-controls="frameworksInfo">
                                             Frameworks
                                         </button>
                                     </h5>
@@ -564,6 +578,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="js/form.js"></script>
     <script src="js/UsersTable.js"></script>
+    <script src="js/SearchFilter.js"></script>
     <script src="js/index.js"></script>
     <script src="js/languages-skills-jsons.js"></script>
 

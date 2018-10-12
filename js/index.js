@@ -1,28 +1,37 @@
 /**
  *  Function to load the content by ajax
  */
-$("#right-menu-ajax").load( "right-menu.html", function() {
+$("#right-menu-ajax").load("right-menu.html", function() {
   formSideBar();
+  //Submit event for the form that handle the advanced search
+  $("form#advanced-search").on("submit", function(e) {
+    e.preventDefault();
+    const formInputs = $(this).find("input");
+    usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+  });
 });
 
 /**
  * Function to control the content (search form) of the right sidebar
  */
 
-function formSideBar (){
+function formSideBar() {
   // -------------  LATERAL LEFT MENU ----------
   let sidebarItems = document.querySelectorAll("#left-menu li");
   for (sidebarItem of sidebarItems) {
     sidebarItem.addEventListener("click", function() {
       let current = document.getElementsByClassName("sidebar-position");
-      current[0].className = current[0].className.replace("sidebar-position", "");
+      current[0].className = current[0].className.replace(
+        "sidebar-position",
+        ""
+      );
       this.className += " sidebar-position";
     });
   }
   //  function openNewWindow() {   // Esta función no se utiliza en ningún lado.
   //     open("form.html");
   //   }
- // --------------- LATERAL RIGHT MENU ----------
+  // --------------- LATERAL RIGHT MENU ----------
   let rangeAge = document.querySelector("#age-range");
   let age = document.querySelector("#age");
   let rangeExp = document.querySelector("#exp-years");
@@ -41,7 +50,10 @@ function formSideBar (){
   for (sidebarItem of sidebarItems2) {
     sidebarItem.addEventListener("click", function() {
       let current = document.getElementsByClassName("sidebar-position");
-      current[0].className = current[0].className.replace("sidebar-position", "");
+      current[0].className = current[0].className.replace(
+        "sidebar-position",
+        ""
+      );
       this.className += " sidebar-position";
     });
   }
@@ -49,7 +61,7 @@ function formSideBar (){
 
 /**************************************************************************
  *  LEFT SIDE BAR control (mobile or desktop/tablet)
- *  The width of the left sidebar is the same 
+ *  The width of the left sidebar is the same
  * for the tablet and for the desktop, it only changes for the mobile.
  **************************************************************************/
 
@@ -69,12 +81,12 @@ function changeScreen() {
     console.log("Mobile");
     $("#open-icon-left").on("click", navLeftMobile);
     $("#main-left").on("touchmove", navLeftMobile);
-  } 
+  }
 }
 
 /*******************************************************************
  *  LEFT SIDE DESKTOP
- *  Control size left container, (open and close states) 
+ *  Control size left container, (open and close states)
  *******************************************************************/
 
 function navLeft(event) {
@@ -108,7 +120,7 @@ function navLeft(event) {
 
 /*******************************************************************
  *  LEFT SIDE BAR MOBILE
- *  Control size left container, (open and close states) 
+ *  Control size left container, (open and close states)
  *******************************************************************/
 
 function navLeftMobile(event) {
@@ -143,7 +155,7 @@ function navLeftMobile(event) {
 
 /*******************************************************************
  *  RIGHT SIDE BAR
- * Control size right container, (open and close states) 
+ * Control size right container, (open and close states)
  *******************************************************************/
 
 let iconOpenRight = document.querySelector("#open-icon-right");
@@ -190,7 +202,7 @@ function navRight(event) {
  * FUNCTIONS TO DISPLAY LAST CHANGE ON NAV
  ********************************************/
 
-// --- TO SEE LIST OF USERS --- 
+// --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
@@ -222,8 +234,9 @@ buttonCreateUser.addEventListener("click", function() {
  * Load by ajax the sidebar form into the center column
  ************************************************************************************/
 
-if( $("#submit_search").length ) {// use this if you are using id to check  // it exists
-  let submitSearch = document.querySelector("#submit_search"); 
+if ($("#submit_search").length) {
+  // use this if you are using id to check  // it exists
+  let submitSearch = document.querySelector("#submit_search");
   submitSearch.addEventListener("click", function() {
     divNavBar.classList.replace("close", "open");
     divNavBar.innerHTML = "";
@@ -232,16 +245,17 @@ if( $("#submit_search").length ) {// use this if you are using id to check  // i
     </button>`;
     divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
   });
-}else{
-
+} else {
   $("#search-btn").on("click", loadMain);
 
-  function loadMain(){
-    $("#Div1").load( "right-menu.html", function(   responseText,  textStatus,  jqXHR ) {
-      console.log( " loadMain:  " + textStatus);
+  function loadMain() {
+    $("#Div1").load("right-menu.html", function(
+      responseText,
+      textStatus,
+      jqXHR
+    ) {
+      console.log(" loadMain:  " + textStatus);
       formSideBar();
     });
   }
-  
 }
-

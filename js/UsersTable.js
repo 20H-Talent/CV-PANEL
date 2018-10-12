@@ -12,7 +12,7 @@ const Table = (function() {
   let instance;
 
   function init() {
-    const mainContainer = $("#users-table").parent();
+    const mainContainer = $(".main-container");
     let apiURL = setupApiURL({
       results: 100,
       nationalities: ["ES"],
@@ -36,6 +36,7 @@ const Table = (function() {
     }
 
     function apiRequest(url, callback) {
+      _showOverlay(true);
       $.getJSON(url, function(response) {
         if (!response["error"]) {
           usersWithExtraData = _appendExtraData(response["results"]);
@@ -46,6 +47,7 @@ const Table = (function() {
           callback(usersWithExtraData, window.innerWidth);
         }
       }).fail(function(err) {
+        _showOverlay(false);
         throw new Error(err);
       });
     }
@@ -57,8 +59,8 @@ const Table = (function() {
      */
     function initTable(data, browserWidth) {
       let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-
       if (browserWidth > 768) {
+        _showOverlay(true);
         const tableBody = mainContainer.find("#users-table tbody");
         users.forEach(user => _appendRowData(tableBody, user));
       } else {
@@ -70,6 +72,7 @@ const Table = (function() {
         let cardContainer = mainContainer.find("div#card-container");
         users.forEach(user => _appendCardData(cardContainer, user));
       }
+      _showOverlay(false);
     }
 
     /**
@@ -90,14 +93,32 @@ const Table = (function() {
       return baseURL;
     }
 
+    /**
+     * Format the array of elements like this example ["ES", "DE", "TR"] => "ES,DE,TR"
+     * @param {Array} nationalities
+     */
     function _nationalitiesRequestFormat(nationalities = []) {
       return nationalities.map(nat => nat).join(",");
     }
 
+    /**
+     * Append a new HTML row into the specific container with the user data
+     * @function _appendRowData
+     * @private
+     * @param {jQuery Object} tableBody
+     * @param {Object} user
+     */
     function _appendRowData(tableBody, user) {
       tableBody.append(_tableRowSkeleton(user));
     }
 
+    /**
+     * Append a new HTML Card element into the specific container with the user data
+     * @function _appendCardData
+     * @private
+     * @param {jQuery Object} cardContainer
+     * @param {Object} user
+     */
     function _appendCardData(cardContainer, user) {
       cardContainer.append(_cardSkeleton(user));
     }
@@ -108,33 +129,114 @@ const Table = (function() {
      * @public
      * @param {Number} width
      */
-    function renderDataOnResize(users = null, browserWidth) {
+    function renderDataOnResize(users = null, browserWidth, inputsData = []) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
       const cardContainer = mainContainer.find("div#card-container");
 
-      if (browserWidth > 768 && tableBody.children("tr").length === 0) {
-        const usersData =
-          users || JSON.parse(sessionStorage.getItem("users-list"));
+      let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
 
-        mainContainer.find("div#card-container").empty();
-        mainTable.show();
-        usersData.forEach(user => _appendRowData(tableBody, user));
-      } else if (
-        browserWidth < 768 &&
-        cardContainer.children(".user-card").length === 0
-      ) {
-        const usersData =
-          users || JSON.parse(sessionStorage.getItem("users-list"));
+      if (browserWidth > 868) {
+        if (inputsData.length > 0) {
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
-        mainTable
-          .hide()
-          .find("tbody")
-          .empty();
-        usersData.forEach(user =>
-          _appendCardData(mainContainer.find("div#card-container"), user)
-        );
+          tableBody.empty();
+          _showOverlay(true);
+
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendRowData(tableBody, user));
+          }, 1000);
+        }
+
+        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
+          _renderTableOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
+        }
+      } else if (browserWidth < 868) {
+        if (inputsData.length > 0) {
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
+
+          cardContainer.empty();
+          _showOverlay(true);
+
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
+          }, 1000);
+        }
+
+        if (
+          cardContainer.children(".user-card").length === 0 &&
+          inputsData.length === 0
+        ) {
+          _renderCardOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
+        }
       }
+    }
+
+    /**
+     * Create badge-pills to show the user input search values
+     * @function _createSearchBadges
+     * @private
+     * @param {Object} filters
+     */
+    function _createSearchBadges(filters) {
+      const filtersContainer = mainContainer.find(".filters");
+      const badgeContainer = filtersContainer.children(".search-badges");
+
+      filtersContainer.find("button").remove();
+      badgeContainer.empty();
+
+      Object.keys(filters).forEach(key => {
+        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
+        const badge = $(
+          `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
+            filters[key]
+          }</span></span>`
+        ).hide();
+        badgeContainer.append(badge);
+        badge.show("slow");
+      });
+      const resetButton = filtersContainer.append(
+        `<button class="btn btn-sm btn-info">Cancel search</button>`
+      );
+      resetButton.off("click").on("click", function(e) {
+        badgeContainer.empty();
+        $(this).remove();
+        _showOverlay(true);
+        initTable(null, window.innerWidth);
+      });
+    }
+
+    /**
+     * @function _renderTableOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderTableOnResize(mainTable, cardContainer, users) {
+      cardContainer.empty();
+      mainTable.show();
+      const tableBody = mainTable.find("tbody");
+      users.forEach(user => _appendRowData(tableBody, user));
+    }
+
+    /**
+     * @function _renderCardOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderCardOnResize(mainTable, cardContainer, users) {
+      mainTable
+        .hide()
+        .find("tbody")
+        .empty();
+      users.forEach(user => _appendCardData(cardContainer, user));
     }
 
     /**
@@ -409,7 +511,22 @@ const Table = (function() {
       apiRequest(apiURL, renderDataOnResize);
     }
 
+    function _showOverlay(show) {
+      const mainTable = mainContainer.find("#users-table");
+      const tableBody = mainTable.find("tbody");
+      const cardContainer = mainContainer.find("div#card-container");
+
+      let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
+
+      if (show) {
+        overlayContainer.append(`<div class="loading">Loading&#8230;</div>`);
+      } else {
+        overlayContainer.find("div.loading").remove();
+      }
+    }
+
     return {
+      initTable,
       setupApiURL,
       buildUserFullname,
       getUserByEmailOrID,
@@ -430,25 +547,6 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
-activateSelect2();
-
-function activateSelect2(container) {
-  container = container || document;
-  const selects = $(container)
-    .find("select.select2:not(.select2-loaded)")
-    .each(function() {
-      $(this)
-        .addClass("select2-loaded")
-        .select2({
-          selectOnClose: true
-        });
-    });
-}
-
-$("nav.search-navbar").on("change", "select", function(e) {
-  const selectsContainer = $(this).closest("nav");
-  usersTable.changeApiParams(selectsContainer.find("select"));
-});
 
 $(window).on("resize", function(e) {
   const width = this.innerWidth;
@@ -529,11 +627,3 @@ function appendTechSkills(container, user) {
       );
   });
 }
-
-//Submit event for the form that handle the advanced search
-$("form#advanced-search").on("submit", function(e) {
-  e.preventDefault();
-  //Build the filters object to render the table with the new results
-  const formInputs = $(this).find("div.collapse.show input");
-  usersTable.renderTable(formInputs);
-});
