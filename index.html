@@ -111,11 +111,11 @@
                         <!-- Table users -->
                         <div class="col ">
                             <div class="mb-3 adduser text-center">
-                                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i></i>Add User /<i class="fas fa-user-edit"></i>
+                                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i>Add User /<i class="fas fa-user-edit"></i>
                                     Edit User</h4>
                             </div>
 
-                            <div id="renderize" class="alert  alert-dismissible fade show" role="alert"></div>
+                            <div id="renderize" class="alert fade show" role="alert"></div>
                             <hr class="mb-4">
                             <hr class=" hr-2">
                             <form id="alertform" action="get" method="post" class="needs-validation col-md-12 ">
@@ -125,7 +125,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing"><i class="fas asweome fa-user-tie"></i></span>
                                             <input type="text" name="FirstName" class="form-control " minlength="3"
-                                                maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName" placeholder="required"
+                                                maxlength="25" pattern="[a-zA-Z\s]+" id="FirstName" placeholder="required"
                                                 value="" required>
                                         </div>
 
@@ -137,7 +137,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
                                             <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName"
-                                                pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+" title="Last name must have 3-15 characters long"
+                                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" title="Last name must have 3-15 characters long"
                                                 placeholder="required" value="" required>
                                         </div>
 
@@ -150,9 +150,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputfault"><i class="fas asweome fa-users"></i></span>
 
-                                            <input lang="es-ES" name="Username" pattern=".{3,25}" pattern="[a-zA-Z0-9\s]+"
-                                                type="text" class="form-control" id="Username" placeholder="Username"
-                                                required>
+                                            <input lang="es-ES" name="Username" pattern="[a-zA-Z0-9\s]+" minlength="3"
+                                                maxlength="25" type="text" class="form-control" id="Username"
+                                                placeholder="required" required>
                                         </div>
 
 
@@ -164,7 +164,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="in-sizing-default"><i class="fas asweome fa-at"></i></span>
                                             <input lang="es-ES" type="email" name="Email" class="form-control form-control-success"
-                                                id="email" placeholder="name@example.com" required>
+                                                minlength="3" maxlength="25" id="email" placeholder="name@example.com"
+                                                required>
 
                                         </div>
 
@@ -176,8 +177,8 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputizing-default"><i class="fas asweome fa-phone-square"></i></span>
-                                            <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}"
-                                                id="tel" placeholder="required" required>
+                                            <input name="Telephone" type="tel" class="form-control" minlength="3"
+                                                maxlength="25" id="tel" placeholder="required" required>
                                         </div>
 
                                     </div>
@@ -187,9 +188,10 @@
                                     <label for="address" class="col-sm-2 col-form-label">Address</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inpudefault"><i class="fas asweome-address fa-map-marker-alt"></i></span>
-                                            <input lang="es-ES" name="Adress" type="text" class="form-control" id="address"
-                                                placeholder="1234 Main St" required>
+                                            <span class="input-group-text" id="inpudefault"><i class="fas asweome asweome-address fa-map-marker-alt"></i></span>
+                                            <input lang="es-ES" name="Adress" type="text" class="form-control"
+                                                minlength="3" maxlength="25" id="address" placeholder="1234 Main St"
+                                                required>
                                         </div>
 
                                     </div>
@@ -202,8 +204,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
                                             <input lang="es-ES" name="Country" class="custom-select d-block w-100"
-                                                pattern=".{3,25}" pattern="^[a-zA-Z]+$" type="text" placeholder="required"
-                                                required id="country">
+                                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" type="text"
+                                                placeholder="residence country" required id="country">
                                         </div>
 
                                     </div>
@@ -214,8 +216,9 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
-                                            <input lang="es-ES" name="city" class="custom-select d-block w-100" pattern=".{3,25}"
-                                                type="text" id="city" placeholder="required" required>
+                                            <input lang="es-ES" name="city" class="custom-select d-block w-100"
+                                                minlength="3" maxlength="25" type="text" id="city" placeholder="residence city"
+                                                required>
                                         </div>
 
                                     </div>
@@ -226,7 +229,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
                                             <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+"
-                                                id="zip" placeholder=" required" required>
+                                                id="zip" minlength="3" maxlength="15" placeholder="90425" required>
                                         </div>
 
                                     </div>
@@ -241,7 +244,8 @@
 
                                             <!-- <input name="date" class="form-control" value="" id="datebirth" type="date"> -->
 
-                                            <input name="Age" class="form-control" value="" id="age1" type="text">
+                                            <input name="Age" class="form-control" value="" id="age1" type="text"
+                                                required>
 
                                             <!-- <span class="col-sm-6 alert-dark" name="test" id="test"></span> -->
 
@@ -256,13 +260,15 @@
                                     <div class="col-sm-10">
 
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa mr-2"></i></span>
+                                            <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa "></i></span>
                                             <div class="custom-control gen custom-radio">
-                                                <input id="male" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="male" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="male">Male</label>
                                             </div>
                                             <div class="custom-control gen custom-radio">
-                                                <input id="female" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="female" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="female">Female</label>
                                             </div>
                                         </div>
@@ -346,12 +352,14 @@
                                     <h4 class="mb-3">Are you available for an interview in the near future?</h4>
                                     <div class=" custom-radio ">
 
-                                        <input id="available" name="Radiobutton" type="radio" class="custom-control-input">
+                                        <input id="available" name="Radiobutton" type="radio" class="custom-control-input"
+                                            required>
                                         <label class="custom-control-label" for="available">Yes</label>
                                     </div>
                                     <div class=" custom-radio ">
 
-                                        <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
+                                        <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input"
+                                            required>
                                         <label class="custom-control-label" for="Radiobutton1">No</label>
                                     </div>
                                 </div>

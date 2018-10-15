@@ -20,22 +20,21 @@ function formErrors() {
       // input[i].className = "form-control close";
     }
   }
-  for (i = 0; i < form.elements.length; i++) {
+  for (i = 0; i < input.length; i++) {
     //if the elemnts of the form are not valids
-    if (!form.elements[i].checkValidity()) {
+    if (!input[i].checkValidity()) {
       //creating the div main where the errors will be printed
       var divMain = document.createElement("div");
       //giving a class to the div of boostrap
-      divMain.className = "col-lg-2";
+      divMain.className = "col-lg-12";
       var ul = document.createElement("ul");
-      ul.className = " badge  badge-danger";
+      ul.className = "alert alert-danger ";
       var li = document.createElement("li");
-      li.className = "badge-danger font-weight-light text-light";
+      li.className = "font-weight-light ";
       ul.appendChild(li);
       //the li  will appear as messages of error if the input is invalid
-      li.innerHTML =
-        form.elements[i].name + " : " + form.elements[i].validationMessage;
-      form.elements[i].className = "form-control borderafter";
+      li.innerHTML = input[i].name + " : " + input[i].validationMessage;
+      input[i].className = "form-control borderafter";
       divMain.appendChild(ul);
       //inserting the div where the errors are in to the div rederize that already exists in html
       document.getElementById("renderize").appendChild(divMain);

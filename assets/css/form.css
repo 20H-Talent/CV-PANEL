@@ -123,10 +123,12 @@ body {
 } */
 .asweome {
     color: rgb(0, 0, 0) !important;
+    width: 16px;
+    height: 20px;
 }
 
 .asweome-address {
-    color: red;
+    color: red !important;
 }
 
 .gen {
