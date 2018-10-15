@@ -74,7 +74,6 @@ $(window).on("resize", function() {
 function changeScreen() {
   var windowSize = $(window).width();
   if (windowSize > 425) {
-    console.log("Desktop");
     $("#open-icon-left").on("click", navLeft);
     $("#left-menu").on("touchmove", navLeft);
   } else {

@@ -42,7 +42,6 @@ function formErrors() {
     } // end if
   }
   setTimeout(function() {
-    console.log("se ejecuta esto?");
     document.getElementById("renderize").style.opacity = "0";
     document.getElementById("renderize").style.display = "none";
   }, 5000); // end for loop

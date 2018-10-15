@@ -1,0 +1,67 @@
+[
+  {
+    "tag": "h4",
+    "class": "mb-3 langsel",
+    "text_element": "Skills"
+  },
+  {
+    "tag": "div",
+    "class": "custom-control custom-checkbox custom-control-inline",
+    "childrens": [
+      {
+        "tag": "input",
+        "name": "skills_css",
+        "type": "checkbox",
+        "class": "custom-control-input",
+        "id": "css",
+        "value": 0
+      },
+      {
+        "tag": "label",
+        "class": "custom-control-label",
+        "for": "css",
+        "text_element": "css"
+      }
+    ]
+  },
+  {
+    "tag": "div",
+    "class": "custom-control custom-checkbox custom-control-inline",
+    "childrens": [
+      {
+        "tag": "input",
+        "name": "skills_html",
+        "type": "checkbox",
+        "class": "custom-control-input",
+        "id": "html",
+        "value": 0
+      },
+      {
+        "tag": "label",
+        "class": "custom-control-label",
+        "for": "html",
+        "text_element": "html"
+      }
+    ]
+  },
+  {
+    "tag": "div",
+    "class": "custom-control custom-checkbox custom-control-inline",
+    "childrens": [
+      {
+        "tag": "input",
+        "name": "skills_javascript",
+        "type": "checkbox",
+        "class": "custom-control-input",
+        "id": "javascript",
+        "value": 0
+      },
+      {
+        "tag": "label",
+        "class": "custom-control-label",
+        "for": "javascript",
+        "text_element": "javascript"
+      }
+    ]
+  }
+]

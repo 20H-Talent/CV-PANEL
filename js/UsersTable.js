@@ -519,9 +519,14 @@ const Table = (function() {
       let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
 
       if (show) {
-        overlayContainer.append(`<div class="loading">Loading&#8230;</div>`);
+        overlayContainer
+          .css("position", "relative")
+          .append(`<div class="loading">Loading&#8230;</div>`);
       } else {
-        overlayContainer.find("div.loading").remove();
+        overlayContainer
+          .css("position", "static")
+          .find("div.loading")
+          .remove();
       }
     }
 

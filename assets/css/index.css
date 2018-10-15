@@ -391,6 +391,18 @@ nav label {
 }
 
 @media screen and (max-width: 1070px) {
+  .main-container {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+  }
+
+  .main-container::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
   #users-table {
     font-size: 0.7em;
   }
@@ -425,7 +437,7 @@ section {
   height: 100%;
 
   /* background-color: rgba(73, 69, 69, 0.932); */
-  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+  background-color: #4d394b;
   font-size: 0.8rem;
 }
 
@@ -553,13 +565,6 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  #card-container {
-    overflow-y: auto;
-    overflow-x: hidden;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    height: 100vh;
-  }
-
   #card-container > .user-card {
     display: block;
     width: 28rem;

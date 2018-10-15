@@ -100,8 +100,9 @@ const SearchFilter = (function() {
   function _appendFilterBadges(filters, badgesContainer) {
     badgesContainer.empty();
 
-    Object.keys(filters).forEach(key => {
+    for (key in filters) {
       const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
+      console.log("FILTERS KEY: ", key, filters[key]);
       const badge = $(
         `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
           filters[key]
@@ -109,7 +110,7 @@ const SearchFilter = (function() {
       ).hide();
       badgesContainer.append(badge);
       badge.show("slow");
-    });
+    }
   }
 
   return {
