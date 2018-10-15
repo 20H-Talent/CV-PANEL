@@ -167,7 +167,7 @@ const form = new UserForm({
       tag: "div",
       class: "custom-control custom-checkbox",
       id: "skill",
-      childrens: "../data/addUserForm.json"
+      childrens: "../data/test.json"
     },
     {
       tag: "button",
