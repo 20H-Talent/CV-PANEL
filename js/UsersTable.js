@@ -361,28 +361,25 @@ const Table = (function() {
      */
     function _appendExtraData(usersData) {
       const skills = [
-        "html5",
-        "css3",
+        "html",
+        "css",
         "javascript",
         "php",
         "ruby",
-        "perl",
         "java",
-        "C++",
-        "go",
-        "sass",
+        "c++",
         "python"
       ];
 
       const languages = [
-        "Afrikan",
-        "English",
-        "Spanish",
-        "Romanian",
-        "French",
-        "German",
-        "Italian",
-        "Turkish"
+        "afrikan",
+        "english",
+        "spanish",
+        "romanian",
+        "french",
+        "german",
+        "italian",
+        "turkish"
       ];
 
       const frameworks = [

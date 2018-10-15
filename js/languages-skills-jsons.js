@@ -10,7 +10,7 @@ function languages(e) {
     
     // console.log(e.target.value);
     // console.log(e);
-    if(e.currentTarget.value === 0){
+    if(e.currentTarget.tagName === 'LI' || e.currentTarget.tagName === 'I'){
       createForm(data);
       // to prevent the duplicity of data, removing the event from the dom.
       $('#mySidenavLeft ul li:nth-of-type(2)').off('click', languages);
@@ -30,7 +30,7 @@ function languages(e) {
     $.each(data, function(d) {
       
       $("#selLanguage").append(
-        `<option value="${data[d].defaultValue}">${data[d].label}</option>`
+        `<option value="${data[d].label}">${data[d].label}</option>`
       );
     });
   }
