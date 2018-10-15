@@ -126,6 +126,7 @@ function switchVisible(visible) {
  * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(event) {
+  console.log('hola',event.currentTarget);
   const element = $(event.currentTarget);
   const property = element.data("id");
 
@@ -135,6 +136,7 @@ function editForm(event) {
   var inpskill = skillUser.querySelectorAll("input");
   for (var i = 0; i < inpskill.length; i++) {
     inpskill[i].checked = false;
+    console.log('test: ', inpskill[i]);
   }
   // empting the checkboxes when editing another user
   var lang = document.getElementById("selLanguage");
@@ -159,7 +161,7 @@ function editForm(event) {
   $("#address").val(data.location.street);
   document.getElementById(data.gender).checked = true;
   for (var i = 0; i < data.skills.length; i++) {
-    document.getElementById(data.skills[i] + "1").checked = true;
+    document.getElementById(data.skills[i]).checked = true;
   }
   var lang = document.getElementById("selLanguage");
   for (var i = 0; i < lang.options.length; i++) {
