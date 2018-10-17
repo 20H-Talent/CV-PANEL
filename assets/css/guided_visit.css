@@ -1,0 +1,13 @@
+.welcome-modal {
+  /* background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  ); */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(0, 0, 0, 0.4) 0,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
