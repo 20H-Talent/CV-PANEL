@@ -1,24 +1,22 @@
 function comapanies() {
-  $.getJSON("./../companies.json")
+  $.getJSON("../data/companies.json")
     .done(function(data) {
       console.log(data);
-      $.each(data, function(i) {
+      $.each(data, function(i, item) {
         $("#tableBody").append(`<tr scope="row">
-      <td class="company-logo">
-            <img class="img"  src=${data[i].logo}  style="width:100px" ; /></td>
+      <td class="company-logo user-avatar  pl-5">
+            <img class="img text-center align-middle"  src=${
+              item.logo
+            }  style="width:50px; "  /></td>
             <td class="fullname">
-              <p>${data[i].name}</p>
+              <p>${item.name}</p>
             </td>
-            <td class="company-email">${data[i].email}</td>
-            
-           
-            <td class="company-registered">${data[i].phone}</td> 
-            <td class="company-city">${data[i].address.city}</td>
-            <td class="company-registered">${data[i].descripcion}</td> 
+            <td class="company-email">${item.email}</td>
+            <td class="company-registered">${item.phone}</td> 
+            <td class="company-city">${item.address.city}</td>
+            <td class="company-registered">${item.descripcion}</td> 
             </td>
           </tr>`);
-        console.log(data[i].name);
-        console.log(data[i].email);
       });
     })
     .fail(function(jqXHR) {
