@@ -109,12 +109,21 @@ function switchVisible(visible) {
       document.getElementById("Div1").style.display = "block";
       //hidding the form
       document.getElementById("Div2").style.display = "none";
+      document.getElementById("Div3").style.display = "none";
       break;
     case "Div2": //== form
       //hidding the table
       document.getElementById("Div1").style.display = "none";
       //showing the form
       document.getElementById("Div2").style.display = "block";
+      document.getElementById("Div3").style.display = "none";
+      break;
+    case "Div3": //== table users
+      //showing the table
+      document.getElementById("Div1").style.display = "none";
+      //hidding the form
+      document.getElementById("Div2").style.display = "none";
+      document.getElementById("Div3").style.display = "block";
       break;
     default:
       break;
@@ -124,7 +133,7 @@ function switchVisible(visible) {
  * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(event) {
-  console.log('hola',event.currentTarget);
+  console.log("hola", event.currentTarget);
   const element = $(event.currentTarget);
   const property = element.data("id");
 
@@ -134,7 +143,7 @@ function editForm(event) {
   var inpskill = skillUser.querySelectorAll("input");
   for (var i = 0; i < inpskill.length; i++) {
     inpskill[i].checked = false;
-    console.log('test: ', inpskill[i]);
+    console.log("test: ", inpskill[i]);
   }
   // empting the checkboxes when editing another user
   var lang = document.getElementById("selLanguage");
