@@ -84,6 +84,12 @@ li {
 #Div2 {
     display: none;
 }
+#Div3 {
+    display: none;
+}
+#Div4 {
+    display: none;
+}
 
 body {
     overflow: hidden;
