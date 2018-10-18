@@ -1,0 +1,30 @@
+.survey-container {
+  width: 100%;
+  font-family: Roboto, Arial, serif;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.survey-container table thead th h4 {
+  display: inline-block;
+}
+
+.survey-container table thead i {
+  font-size: 1.4em;
+}
+
+.survey-container form label {
+  font-size: 1.3em;
+}
+
+td.ValueType-Cell label {
+  width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+td.FieldType-Cell {
+  vertical-align: middle;
+}
