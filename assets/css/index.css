@@ -642,8 +642,24 @@ body {
   #right-menu {
     margin-left: 50px;
   }
-}
 
+  .container-fluid {
+    padding-left: 50px;
+  }
+
+  #card-container > .user-card {
+      display: block;
+      width: auto;
+      margin-bottom: 0.5em;
+  }
+  #data-column {
+    padding-right: 0px;
+    padding-left: 20px;
+  }
+  .filters {
+    display:none
+  }
+}
 /**
 * MEDIA QUERY TABLET
 */
