@@ -654,10 +654,10 @@ body {
   }
   #data-column {
     padding-right: 0px;
-    padding-left: 20px;
+    padding-left: 5px;
   }
   .filters {
-    display:none
+    display: none;
   }
 }
 /**
@@ -678,6 +678,28 @@ body {
   #search-btn {
     display: inline-block;
   }
+
+  #card-container > .user-card {
+    display: block;
+    width: 44.5rem;
+    margin-right: 0.5em;
+    margin-left: 3.5em;
+    margin-bottom: 0.5em;
+  }
+  .filters {
+    display: none;
+  }
+  #right-menu {
+    margin-left: 4em;
+  }
+  #right-menu p:first-child {
+    display: none;
+  }
+
+  .container-fluid {
+    padding-left: 1em;
+  }
+
 }
 
 /* Absolute Center Spinner */
