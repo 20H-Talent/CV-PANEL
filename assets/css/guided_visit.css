@@ -1,14 +1,34 @@
 .welcome-modal {
-  /* background: linear-gradient(
+  background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.9) 100%
-  ); */
-  background: -webkit-radial-gradient(
+    rgba(125, 126, 125, 0.5) 0%,
+    rgb(14, 14, 14, 0.5) 100%
+  );
+  /* background: -webkit-radial-gradient(
     center,
     ellipse cover,
     rgba(0, 0, 0, 0.4) 0,
     rgba(0, 0, 0, 0.9) 100%
-  );
+  ); */
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+.tooltips {
+  position: relative;
+  top: 8px;
+  left: 163px;
+  /* width: 141px; */
+}
+.tooltips-arrow.top {
+  /* position: relative; */
+  top: 65px;
+  left: 163px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: white;
+  border-left-color: transparent;
+}
+.tooltips-arrow {
+  border: 5px solid white;
+  content: "";
+  position: absolute;
 }

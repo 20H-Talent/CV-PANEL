@@ -2,11 +2,25 @@
   {
     "id": 1,
     "zone": "navbar",
+    "position": {
+      "top": "0px",
+      "left": "0px",
+      "right": "0px"
+    },
+    "height": "68px",
+    "width": "100%",
     "text": "Here you can see the last time when you load, create and search users and enterprises."
   },
   {
     "id": 2,
     "zone": "left-menu",
+    "position": {
+      "top": "66px",
+      "left": "0px",
+      "right": "0px"
+    },
+    "height": "100vw",
+    "width": "4.6%",
     "text": "Here you can load and create users and enterprises."
   },
   {
