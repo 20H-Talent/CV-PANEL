@@ -2,30 +2,61 @@
   {
     "id": 1,
     "zone": "navbar",
-    "position": {
-      "top": "0px",
-      "left": "0px",
-      "right": "0px"
+    "elPositionSelected": {
+      "top": "0%",
+      "left": "0%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "12%",
+      "width": "100%"
     },
-    "height": "68px",
-    "width": "100%",
+    "tooltipPosition": {
+      "top": "13.5%",
+      "left": "14.9%",
+      "right": "0%",
+      "bottom": "0%"
+    },
+
     "text": "Here you can see the last time when you load, create and search users and enterprises."
   },
   {
     "id": 2,
     "zone": "left-menu",
-    "position": {
-      "top": "66px",
-      "left": "0px",
-      "right": "0px"
+    "elPositionSelected": {
+      "top": "11.8%",
+      "left": "0%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "100%",
+      "width": "4.6%"
     },
-    "height": "100vw",
-    "width": "4.6%",
+    "tooltipPosition": {
+      "top": "18%",
+      "left": "5.9%",
+      "right": "0%",
+      "bottom": "0%"
+    },
+
     "text": "Here you can load and create users and enterprises."
   },
   {
     "id": 3,
     "zone": "right-menu",
+    "elPositionSelected": {
+      "top": "11.8%",
+      "left": "96.7%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "100%",
+      "width": "3.2%"
+    },
+    "tooltipPosition": {
+      "top": "30%",
+      "left": "59.8%",
+      "right": "0%",
+      "bottom": "0%"
+    },
+
     "text": "Here you can search users and enterprises."
   }
 ]
