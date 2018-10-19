@@ -31,11 +31,6 @@ function SurveyConstructor(container) {
       .on("click", " i.fa-plus-square", function(event) {
         _newFieldValue(event, $form);
       });
-
-    $surveyContainer
-      .find(".ValueType-Cell")
-      .off("click")
-      .on("click", "button.AppendOption", _appendOption);
   }
 
   function _appendOption(event) {
@@ -43,7 +38,7 @@ function SurveyConstructor(container) {
       .parent()
       .siblings("input[type=text]");
 
-    const inputValue = $input.val();
+    const inputValue = $input.val().trim();
     const $selector = $input
       .closest("div.col-md-6")
       .siblings("div.border-right")
@@ -51,6 +46,8 @@ function SurveyConstructor(container) {
 
     let optionExists = false;
     const $selectOptions = $selector.children("option");
+
+    const lastPosition = $selectOptions.length;
 
     $selectOptions.each(function(index, option) {
       if (
@@ -64,9 +61,11 @@ function SurveyConstructor(container) {
 
     if (!optionExists) {
       const newOption = $("<option>", {
-        value: inputValue,
-        text: inputValue.trim()
+        value: inputValue.toLowerCase(),
+        text: inputValue
       });
+
+      newOption.data("position", lastPosition);
 
       $input
         .parent()
@@ -74,30 +73,58 @@ function SurveyConstructor(container) {
         .find(" ul.preview-list")
         .append(
           `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
-            ${inputValue}
+              <span data-position=${lastPosition}>${inputValue}</span>
               <div class="btn-group btn-group" role="group">
                 <button class="btn btn-outline-primary editOption" data-value=${inputValue} title="Edit this option"><i class="far fa-edit"></i></button>
                 <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
               </div>
           </li>`
         );
-
       $selector
         .hide()
         .append(newOption)
         .fadeIn("slow");
 
-      $("form#survey-form")
-        .find(".ValueType-Cell ul.preview-list")
+      const previewList = $("form#survey-form").find(
+        ".ValueType-Cell ul.preview-list"
+      );
+
+      previewList
         .off("click")
         .on("click", "button.deleteOption", _deleteOption);
+
+      previewList.on("click", "button.editOption", _editOption);
     }
+  }
+
+  function _editOption(event) {
+    const editButton = $(event.currentTarget);
+    const optionValue = editButton.data("value").toLowerCase();
+    const editableField = editButton.parent().siblings("span");
+
+    editableField
+      .prop("contenteditable", true)
+      .focus()
+      .css({ fontSize: "1.2em", width: "100%" })
+      .on("input", function(e) {
+        const editableField = $(this);
+        const position = editableField.data("position");
+
+        const optionToEdit = editableField
+          .closest(".preview-group")
+          .parent()
+          .siblings(".border-right")
+          .find("select")
+          .children(`option[position=${position}]`)
+          .text(editableField.text());
+      });
   }
 
   function _deleteOption(event) {
     if (window.confirm("Are you sure to delete this option?")) {
       const deleteButton = $(event.currentTarget);
-      const optionValue = deleteButton.data("value");
+      const optionValue = deleteButton.data("value").toLowerCase();
+
       deleteButton
         .closest(".preview-group")
         .parent()
@@ -142,7 +169,10 @@ function SurveyConstructor(container) {
         </div>`);
         break;
       case "select":
-        $typesCell.empty().append(`
+        $typesCell
+          .empty()
+          .append(
+            `
          <div class="form-group ValueType-data">
            <div class="form-row d-flex">
              <div class="col-md-6 border-right">
@@ -163,7 +193,11 @@ function SurveyConstructor(container) {
               </div>
             </div>
            </div>
-         </div>`);
+         </div>`
+          )
+          .off("click")
+          .on("click", "button.AppendOption", _appendOption);
+
         break;
     }
   }
