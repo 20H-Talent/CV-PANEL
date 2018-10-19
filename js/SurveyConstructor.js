@@ -59,13 +59,12 @@ function SurveyConstructor(container) {
       }
     });
 
-    if (!optionExists) {
+    if (!optionExists && inputValue.length > 0) {
+      $input.val("");
       const newOption = $("<option>", {
         value: inputValue.toLowerCase(),
         text: inputValue
       });
-
-      newOption.data("position", lastPosition);
 
       $input
         .parent()
@@ -99,25 +98,46 @@ function SurveyConstructor(container) {
 
   function _editOption(event) {
     const editButton = $(event.currentTarget);
-    const optionValue = editButton.data("value").toLowerCase();
+    const buttonIcon = editButton.find("i");
     const editableField = editButton.parent().siblings("span");
+    const $selector = editableField
+      .closest(".preview-group")
+      .parent()
+      .siblings(".border-right")
+      .find("select");
+    const optionValue = editButton.data("value");
 
-    editableField
-      .prop("contenteditable", true)
-      .focus()
-      .css({ fontSize: "1.2em", width: "100%" })
-      .on("input", function(e) {
-        const editableField = $(this);
-        const position = editableField.data("position");
+    if (buttonIcon.hasClass("fa-edit")) {
+      buttonIcon.removeClass("far fa-edit").addClass("fas fa-check");
 
-        const optionToEdit = editableField
-          .closest(".preview-group")
-          .parent()
-          .siblings(".border-right")
-          .find("select")
-          .children(`option[position=${position}]`)
-          .text(editableField.text());
-      });
+      $selector.val(optionValue);
+
+      editableField
+        .prop("contenteditable", true)
+        .focus()
+        .css({ fontSize: "1.2em", width: "100%" })
+        .off("input")
+        .on("input", function(e) {
+          $selector.children(`option[value=${optionValue.toLowerCase()}]`).text(
+            $(this)
+              .text()
+              .trim()
+          );
+        });
+    } else {
+      buttonIcon.removeClass("fas fa-check").addClass("far fa-edit");
+      const editableFieldText = editableField.text().trim();
+      editableField
+        .prop("contenteditable", false)
+        .css("font-size", "1em")
+        .off("input");
+
+      $selector
+        .children(`option[value=${optionValue.toLowerCase()}]`)
+        .prop("value", editableFieldText);
+
+      editButton.data("value", editableFieldText);
+    }
   }
 
   function _deleteOption(event) {
@@ -164,7 +184,7 @@ function SurveyConstructor(container) {
         <div class="form-group ValueType-data">
           <label>
             <p contenteditable="true">Modify this text</p>
-             <input name="text_input[]" class="form-control" placeholder="Insert default value on this field" />
+             <input type="text" name="text_input[]" class="form-control" placeholder="Insert default value on this field" />
           </label>
         </div>`);
         break;
@@ -197,7 +217,15 @@ function SurveyConstructor(container) {
           )
           .off("click")
           .on("click", "button.AppendOption", _appendOption);
-
+        break;
+      case "telephone":
+        $typesCell.empty().append(`
+        <div class="form-group ValueType-data">
+            <label>
+            <p contenteditable="true">Modify this text</p>
+            <input type="tel" name="phone_input[]" class="form-control" placeholder="Insert default value on this field" />
+            </label>
+        </div>`);
         break;
     }
   }
@@ -233,13 +261,15 @@ function SurveyConstructor(container) {
               </div>
           </div>
         </div>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input class="form-control" name="title" type="text">
-        </div>
-        <div class="form-group">
-            <label for="subtitle">Subtitle</label>
-            <input class="form-control" name="subtitle" type="text">
+        <div class="form-row my-2">
+            <div class="col-md-6">
+                <label for="title">Title</label>
+                <input class="form-control" name="title" type="text">
+            </div>
+            <div class="col-md-6">
+                <label for="subtitle">Subtitle</label>
+                <input class="form-control" name="subtitle" type="text">
+            </div>
         </div>
         <div class="form-group">
             <label for="description">Explain briefly the purpose of this survey</label>
@@ -278,14 +308,8 @@ function SurveyConstructor(container) {
                         <td class="ValueType-Cell"></td>
                         <td class="actions text-center">
                         <div class="btn-group btn-group-lg" role="group" aria-label="...">
-                            <button class="btn btn-outline-success">
-                               <i class="far fa-plus-square mr-4"></i>
-                            </button>
-                            <button class="btn btn-outline-success">
-                               
-                            </button>
-                            <button class="btn btn-outline-success">
-                               
+                            <button class="btn btn-success">
+                               Add this field to the survey
                             </button>
                         </div>
                         </td>
