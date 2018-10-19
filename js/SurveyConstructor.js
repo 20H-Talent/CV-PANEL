@@ -14,15 +14,53 @@ function SurveyConstructor(container) {
   _setupEventListeners(this.container);
 
   function _setupEventListeners(container) {
-    container
-      .find("form")
-      .off("submit")
-      .on("submit", _buildJSON);
-    container
-      .find("#survey-element .SelectedType-Cell")
+    $form = container.find("form#survey-form");
+    $surveyContainer = container.find("#survey-element");
+
+    $form.off("submit").on("submit", _buildJSON);
+
+    $surveyContainer
+      .find(".SelectedType-Cell")
       .children(".SelectedType-Select")
       .off("click")
       .on("click", _typeSelect);
+
+    $surveyContainer
+      .find(".FieldValues")
+      .off("click")
+      .on("click", " i.fa-plus-square", function(event) {
+        _newFieldValue(event, $form);
+      });
+
+    $surveyContainer
+      .find(".ValueType-Cell")
+      .off("click")
+      .on("click", "button.AppendOption", _appendOption);
+  }
+
+  function _appendOption(event) {
+    const $input = $(event.currentTarget)
+      .parent()
+      .siblings("input[type=text]");
+
+    const inputValue = $input.val();
+    const $selector = $input
+      .closest("div.col-md-6")
+      .siblings("div.border-right")
+      .find("select");
+    const newOption = $("<option>", { value: inputValue, text: inputValue });
+    $selector
+      .hide()
+      .append(newOption)
+      .fadeIn("slow");
+  }
+
+  function _newFieldValue(event, container) {
+    const valueTypeCell = container.find(".ValueType-Cell");
+    valueTypeCell
+      .find("div.ValueType-data")
+      .clone()
+      .appendTo(valueTypeCell);
   }
 
   function _typeSelect(event) {
@@ -32,16 +70,16 @@ function SurveyConstructor(container) {
       .closest("table")
       .find("thead th.FieldValues");
 
-    if ($typesCellHead.find("button").length === 0) {
+    if ($typesCellHead.find("i.fa-plus-square").length === 0) {
       $typesCellHead.append(
-        `<button class="btn btn-success text-right">Nuevo</button>`
+        `<i class="far fa-plus-square" title="New value inside this field"></i>`
       );
     }
 
     switch ($select.val()) {
       case "text":
         $typesCell.empty().append(`
-        <div class="form-group">
+        <div class="form-group ValueType-data">
           <label>
             <p contenteditable="true">Modify this text</p>
              <input name="text_input[]" class="form-control" placeholder="Insert default value on this field" />
@@ -50,10 +88,24 @@ function SurveyConstructor(container) {
         break;
       case "select":
         $typesCell.empty().append(`
-          <label>
-            <p contenteditable="true">Modify this text</p>
-            <select class="form-control" name="select_input[]"></select>
-          </label>`);
+         <div class="form-group ValueType-data">
+           <div class="form-row d-flex">
+             <div class="col-md-6 border-right">
+              <label>
+                <p contenteditable="true">Title of your selector</p>
+                <select class="form-control" name="select_input[]"></select>
+              </label>
+            </div>
+            <div class="col-md-6 align-self-start">
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="New option here..."/>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary AppendOption" type="button">Append option</button>
+                </div>
+              </div>
+            </div>
+           </div>
+         </div>`);
         break;
     }
   }
@@ -111,7 +163,6 @@ function SurveyConstructor(container) {
                                 <i class="fas fa-sort-numeric-up mr-4"></i>
                                 <h4>Values inside the field</h4>
                             </div>
-
                             </th>
                         <th class="FieldActions"><i class="fas fa-cogs mr-4"></i><h4>Actions</h4></th>
                     </tr>
@@ -124,15 +175,27 @@ function SurveyConstructor(container) {
                                 <option value="checkboxes">Checkboxes</option>
                                 <option value="radios">Radio</option>
                                 <option value="text">Text</option>
+                                <option value="date">Date</option>
+                                <option value="file">File</option>
+                                <option value="color">Color</option>
+                                <option value="number">Number</option>
+                                <option value="range">Range</option>
+                                <option value="telephone">Telephone</option>
                             </select>
                         </td>
-                        <td class="ValueType-Cell">
-
-                        </td>
+                        <td class="ValueType-Cell"></td>
                         <td class="actions text-center">
-                         <button class="btn btn-outline-success">
-                            <i class="far fa-plus-square mr-4"></i>
-                         </button>
+                        <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                            <button class="btn btn-outline-success">
+                               <i class="far fa-plus-square mr-4"></i>
+                            </button>
+                            <button class="btn btn-outline-success">
+                               
+                            </button>
+                            <button class="btn btn-outline-success">
+                               
+                            </button>
+                        </div>
                         </td>
                     </tr>
                 </tbody>

@@ -1,7 +1,7 @@
 .survey-container {
   width: 100%;
   font-family: Roboto, Arial, serif;
-  height: 100vh;
+  height: 89vh;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -16,6 +16,14 @@
   font-size: 1.4em;
 }
 
+.survey-container table tbody td {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
 .survey-container form label {
   font-size: 1.3em;
 }
@@ -23,6 +31,18 @@
 td.ValueType-Cell label {
   width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+th.FieldValues i.fa-plus-square {
+  font-size: 1.5em;
+  color: #28a745;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+th.FieldValues i:hover {
+  transform: scale(1.1);
 }
 
 td.FieldType-Cell {
