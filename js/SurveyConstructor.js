@@ -69,6 +69,26 @@ function SurveyConstructor(container) {
     </div>
     <div class="card-body">
       <form id="survey-form" method="POST" novalidate>
+        <div class="form-row">
+         <div class="col-md-3 offset-md-2">
+          <label for="start_date">Start Date</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="start_date_group_icon"><i class="far fa-calendar-alt"></i></span>
+              </div>
+              <input type="date" name="start_date" class="form-control mr-2" aria-describedby="start_date_group_icon" />
+            </div>
+            </div>
+       <div class="col-md-3 offset-md-1">
+            <label for="end_date">EndDate</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="end_date_group_icon"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" name="end_date" class="form-control mr-2" aria-describedby="end_date_group_icon" />
+              </div>
+          </div>
+        </div>
         <div class="form-group">
             <label for="title">Title</label>
             <input class="form-control" name="title" type="text">
