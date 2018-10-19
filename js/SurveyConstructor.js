@@ -5,7 +5,7 @@ $("#main-left")
       .empty()
       .append('<div class="survey-container"></div>');
 
-    const surveyContainer = new SurveyConstructor(".survey-container");
+    const surveyManagement = new SurveyConstructor(".survey-container");
   });
 
 function SurveyConstructor(container) {
@@ -65,22 +65,19 @@ function SurveyConstructor(container) {
     if (!optionExists) {
       const newOption = $("<option>", {
         value: inputValue,
-        text: inputValue
+        text: inputValue.trim()
       });
-
-      newOption.data("position", $selectOptions.length + 1);
 
       $input
         .parent()
         .siblings(".preview-group")
         .find(" ul.preview-list")
         .append(
-          `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1" data-position=${$selectOptions.length +
-            1}>
+          `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
             ${inputValue}
               <div class="btn-group btn-group" role="group">
-                <button class="btn btn-outline-primary editOption" title="Edit this option"><i class="far fa-edit"></i></button>
-                <button class="btn btn-outline-danger deleteOption" title="Delete this option"><i class="far fa-trash-alt"></i></button>
+                <button class="btn btn-outline-primary editOption" data-value=${inputValue} title="Edit this option"><i class="far fa-edit"></i></button>
+                <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
               </div>
           </li>`
         );
@@ -89,6 +86,27 @@ function SurveyConstructor(container) {
         .hide()
         .append(newOption)
         .fadeIn("slow");
+
+      $("form#survey-form")
+        .find(".ValueType-Cell ul.preview-list")
+        .off("click")
+        .on("click", "button.deleteOption", _deleteOption);
+    }
+  }
+
+  function _deleteOption(event) {
+    if (window.confirm("Are you sure to delete this option?")) {
+      const deleteButton = $(event.currentTarget);
+      const optionValue = deleteButton.data("value");
+      deleteButton
+        .closest(".preview-group")
+        .parent()
+        .siblings(".border-right")
+        .find("select")
+        .children(`option[value="${optionValue}"]`)
+        .remove();
+
+      deleteButton.closest("li").remove();
     }
   }
 
