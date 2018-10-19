@@ -11,10 +11,17 @@
       "width": "100%"
     },
     "tooltipPosition": {
-      "top": "13.5%",
+      "top": "16.5%",
       "left": "14.9%",
       "right": "0%",
       "bottom": "0%"
+    },
+    "arrowPosition": {
+      "top": "13%",
+      "left": "15%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
     },
 
     "text": "Here you can see the last time when you load, create and search users and enterprises."
@@ -32,9 +39,16 @@
     },
     "tooltipPosition": {
       "top": "18%",
-      "left": "5.9%",
+      "left": "6.9%",
       "right": "0%",
       "bottom": "0%"
+    },
+    "arrowPosition": {
+      "top": "20%",
+      "left": "5%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
     },
 
     "text": "Here you can load and create users and enterprises."
@@ -51,12 +65,46 @@
       "width": "3.2%"
     },
     "tooltipPosition": {
-      "top": "30%",
-      "left": "59.8%",
+      "top": "18%",
+      "left": "57.8%",
       "right": "0%",
       "bottom": "0%"
     },
+    "arrowPosition": {
+      "top": "20%",
+      "left": "94.5%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "right"
+    },
 
     "text": "Here you can search users and enterprises."
+  },
+  {
+    "id": 4,
+    "zone": "center",
+    "elPositionSelected": {
+      "top": "42%",
+      "left": "31%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "20%",
+      "width": "40%"
+    },
+    "tooltipPosition": {
+      "top": "45%",
+      "left": "32.8%",
+      "right": "0%",
+      "bottom": "0%"
+    },
+    "arrowPosition": {
+      "top": "37%",
+      "left": "49%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "down"
+    },
+
+    "text": "Congrats!! You passed the guided visit. Now, you can work with the app."
   }
 ]
