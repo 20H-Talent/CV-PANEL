@@ -7,24 +7,27 @@
       "left": "0%",
       "right": "0%",
       "bottom": "0%",
-      "height": "12%",
+      "height": "15%",
       "width": "100%"
     },
     "tooltipPosition": {
-      "top": "16.5%",
+      "top": "20.5%",
       "left": "14.9%",
       "right": "0%",
-      "bottom": "0%"
+      "bottom": "0%",
+      "height": "15%"
     },
     "arrowPosition": {
-      "top": "13%",
+      "top": "16%",
       "left": "15%",
       "right": "0%",
       "bottom": "0%",
       "icon": "up"
     },
 
-    "text": "Here you can see the last time when you load, create and search users and enterprises."
+    "text": "Here you can see the last time when you load, create and search users and enterprises.",
+    "eventCallToOpen": "",
+    "eventCallToClose": "#div-navbar button"
   },
   {
     "id": 2,
@@ -41,7 +44,8 @@
       "top": "18%",
       "left": "6.9%",
       "right": "0%",
-      "bottom": "0%"
+      "bottom": "0%",
+      "height": "19%"
     },
     "arrowPosition": {
       "top": "20%",
@@ -51,7 +55,9 @@
       "icon": "left"
     },
 
-    "text": "Here you can load and create users and enterprises."
+    "text": "In the left menu, you can load and create users and enterprises. If you can't see the elements of menu you can expand it.",
+    "eventCallToOpen": "",
+    "eventCallToClose": ""
   },
   {
     "id": 3,
@@ -68,7 +74,8 @@
       "top": "18%",
       "left": "57.8%",
       "right": "0%",
-      "bottom": "0%"
+      "bottom": "0%",
+      "height": "15%"
     },
     "arrowPosition": {
       "top": "20%",
@@ -78,7 +85,9 @@
       "icon": "right"
     },
 
-    "text": "Here you can search users and enterprises."
+    "text": "In the right menu, you can search users and enterprises. As the same of left menu, you can expand it.",
+    "eventCallToOpen": "",
+    "eventCallToClose": ""
   },
   {
     "id": 4,
@@ -88,14 +97,15 @@
       "left": "31%",
       "right": "0%",
       "bottom": "0%",
-      "height": "20%",
+      "height": "21%",
       "width": "40%"
     },
     "tooltipPosition": {
       "top": "45%",
       "left": "32.8%",
       "right": "0%",
-      "bottom": "0%"
+      "bottom": "0%",
+      "height": "15%"
     },
     "arrowPosition": {
       "top": "37%",
@@ -105,6 +115,8 @@
       "icon": "down"
     },
 
-    "text": "Congrats!! You passed the guided visit. Now, you can work with the app."
+    "text": "Congrats!! You passed the guided visit. Now, you can work with the app.",
+    "eventCallToOpen": "",
+    "eventCallToClose": ""
   }
 ]
