@@ -72,7 +72,8 @@ function SurveyConstructor(container) {
 
       $input
         .parent()
-        .siblings("ul.data-preview")
+        .siblings(".preview-group")
+        .find(" ul.preview-list")
         .append(
           `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1" data-position=${$selectOptions.length +
             1}>
@@ -139,7 +140,9 @@ function SurveyConstructor(container) {
                   <button class="btn btn-outline-primary AppendOption" type="button">Append option</button>
                 </div>
               </div>
-               <ul class="list-group data-preview my-2"></ul>
+              <div class="container preview-group my-2">
+                <ul class="list-group preview-list my-1 px-1 py-1"></ul>
+              </div>
             </div>
            </div>
          </div>`);

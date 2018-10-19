@@ -48,3 +48,10 @@ th.FieldValues i:hover {
 td.FieldType-Cell {
   vertical-align: middle;
 }
+
+.preview-group {
+  height: auto;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
