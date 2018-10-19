@@ -48,11 +48,47 @@ function SurveyConstructor(container) {
       .closest("div.col-md-6")
       .siblings("div.border-right")
       .find("select");
-    const newOption = $("<option>", { value: inputValue, text: inputValue });
-    $selector
-      .hide()
-      .append(newOption)
-      .fadeIn("slow");
+
+    let optionExists = false;
+    const $selectOptions = $selector.children("option");
+
+    $selectOptions.each(function(index, option) {
+      if (
+        $(option)
+          .text()
+          .toLowerCase() === inputValue.toLowerCase()
+      ) {
+        optionExists = true;
+      }
+    });
+
+    if (!optionExists) {
+      const newOption = $("<option>", {
+        value: inputValue,
+        text: inputValue
+      });
+
+      newOption.data("position", $selectOptions.length + 1);
+
+      $input
+        .parent()
+        .siblings("ul.data-preview")
+        .append(
+          `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1" data-position=${$selectOptions.length +
+            1}>
+            ${inputValue}
+              <div class="btn-group btn-group" role="group">
+                <button class="btn btn-outline-primary editOption" title="Edit this option"><i class="far fa-edit"></i></button>
+                <button class="btn btn-outline-danger deleteOption" title="Delete this option"><i class="far fa-trash-alt"></i></button>
+              </div>
+          </li>`
+        );
+
+      $selector
+        .hide()
+        .append(newOption)
+        .fadeIn("slow");
+    }
   }
 
   function _newFieldValue(event, container) {
@@ -103,6 +139,7 @@ function SurveyConstructor(container) {
                   <button class="btn btn-outline-primary AppendOption" type="button">Append option</button>
                 </div>
               </div>
+               <ul class="list-group data-preview my-2"></ul>
             </div>
            </div>
          </div>`);
@@ -206,7 +243,7 @@ function SurveyConstructor(container) {
                Elements created
             </div>
             <div class="card-body">
-                <ul class="list-group">
+                <ul class="list-group my-2">
                     <li class="list-group-item list-group-item-action">
                     A simple primary list group item
                     </li>
