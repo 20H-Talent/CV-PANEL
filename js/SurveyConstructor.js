@@ -40,7 +40,7 @@ function SurveyConstructor(container) {
 
     const inputValue = $input.val().trim();
     const $selector = $input
-      .closest("div.col-md-6")
+      .closest("div.col-md-7")
       .siblings("div.border-right")
       .find("select");
 
@@ -74,7 +74,7 @@ function SurveyConstructor(container) {
           `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
               <span data-position=${lastPosition}>${inputValue}</span>
               <div class="btn-group btn-group" role="group">
-                <button class="btn btn-outline-primary editOption" data-value=${inputValue} title="Edit this option"><i class="far fa-edit"></i></button>
+                <button class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
                 <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
               </div>
           </li>`
@@ -127,13 +127,14 @@ function SurveyConstructor(container) {
     } else {
       buttonIcon.removeClass("fas fa-check").addClass("far fa-edit");
       const editableFieldText = editableField.text().trim();
+
       editableField
         .prop("contenteditable", false)
         .css("font-size", "1em")
         .off("input");
 
       $selector
-        .children(`option[value=${optionValue.toLowerCase()}]`)
+        .children(`option[value="${optionValue.toLowerCase()}"]`)
         .prop("value", editableFieldText);
 
       editButton.data("value", editableFieldText);
@@ -195,13 +196,13 @@ function SurveyConstructor(container) {
             `
          <div class="form-group ValueType-data">
            <div class="form-row d-flex">
-             <div class="col-md-6 border-right">
+             <div class="col-md-5 border-right">
               <label>
                 <p contenteditable="true">Title of your selector</p>
                 <select class="form-control" name="select_input[]"></select>
               </label>
             </div>
-            <div class="col-md-6 align-self-start">
+            <div class="col-md-7 align-self-start">
               <div class="input-group">
                 <input class="form-control" type="text" placeholder="New option here..."/>
                 <div class="input-group-append">
