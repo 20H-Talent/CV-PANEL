@@ -50,3 +50,4 @@ $.getJSON("../data/companies.json")
       console.log("[ERROR]: on loading json.");
     }
   });
+// working
