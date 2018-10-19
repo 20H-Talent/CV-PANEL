@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enterprise Form</title>
+    <!-- Icons fontaweson CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <!-- Google fonts CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+    <!-- BOOSTRAP CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <!-- CUSTOM CSS-->
+    <link rel="stylesheet" href="assets/css/enterprises-form.css">
+    <!-- <link rel="stylesheet" href="assets/css/form.css"> -->
+
+</head>
+
+<body>
+
+    <!-- form enterprise -->
+
+    <section id="Div4">
+        <form class="container enterprise-form">
+            <h1>Enterprise Count</h1>
+            <hr>
+            <div class="form-row col-md-12">
+                <label for="inputName">Enterprise's name</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Name">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputCif">CIF</label>
+                <input type="text" class="form-control" id="inputCif" placeholder="CIF">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Street">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="City">
+            </div>
+            <div class="form-row col-md-12 country">
+                <label for="inputCountry">Country</label>
+                <select id="inputCountry" class="form-control">
+                    <option selected>Country</option>
+                    <option>Spain </option>
+                    <option>France</option>
+                    <option>Italy</option>
+                    <option>United Kingdom</option>
+                    <option>Germany</option>
+                </select>
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" id="inputZip" placeholder="Zipcode">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputPhone">Phone</label>
+                <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" id="inputEemail" placeholder="Email">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputWorkersNumber">Workers Number</label>
+                <input type="text" class="form-control" id="inputWorkersNumber" placeholder="ID worker">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputSocialNetworks">Social Networks</label>
+                <input type="text" class="form-control" id="inputSocialNetworks" placeholder="facebook, twitter...">
+            </div>
+            <div class="form-row col-md-12">
+                <label for="inputLogo">Logo</label>
+                <input type="text" class="form-control" id="inputLogo" placeholder="Add logo">
+            </div>
+            <p class="form-row col-md-12">Description</p>
+            <div class="form-row col-md-12">
+                <!-- <label for="inputDescription">Description</label> --> 
+                <textarea type="text" class="form-control" id="inputDescription" cols="30" rows="5" placeholder="Description"></textarea>
+            </div>
+            <div class="form-row col-md-12" >
+                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- BOOSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <!-- CUSTOMS JS -->
+    <!-- <script src="js/Form.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/UsersTable.js"></script>
+    <script src="js/SearchFilter.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/languages-skills-jsons.js"></script> -->
+
+</body>
+
+</html>
+
+<!-- 
+"name": ok
+"CIF": ok
+"email":ok
+"address": {
+  "country": "Spain",
+  "street": "Kulas Light",
+  "city": "Lebsackbury",
+  "zipcode": "92998-3874"
+},
+"socialnetworks": {
+  "facebook": "hildegard.org",
+  "twitter": "@hildegard"
+},
+"logo": 
+"descripcion": 
+"workersNumber": 
+"phone":  -->

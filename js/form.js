@@ -107,29 +107,29 @@ function switchVisible(visible) {
     case "Div1": //== table users
       //hidding the form
       document.getElementById("Div2").style.display = "none";
-      document.getElementById("Div3").style.display = "none";
-      document.getElementById("Div4").style.display = "none";
+      // document.getElementById("Div3").style.display = "none";
+      // document.getElementById("Div4").style.display = "none";
       //showing the table
       document.getElementById("Div1").style.display = "block";
       break;
     case "Div2": //== form
       //hidding the table
       document.getElementById("Div1").style.display = "none";
-      document.getElementById("Div3").style.display = "none";
-      document.getElementById("Div4").style.display = "none";
+      // document.getElementById("Div3").style.display = "none";
+      // document.getElementById("Div4").style.display = "none";
       //showing the form
       document.getElementById("Div2").style.display = "block";
 
       break;
 
-    case "Div4": //== form
-      //hidding the table
-      document.getElementById("Div1").style.display = "none";
-      document.getElementById("Div2").style.display = "none";
-      document.getElementById("Div3").style.display = "none";
-      //showing the form
-      document.getElementById("Div4").style.display = "block";
-      break;
+    // case "Div4": //== form
+    //   //hidding the table
+    //   document.getElementById("Div1").style.display = "none";
+    //   document.getElementById("Div2").style.display = "none";
+    //   document.getElementById("Div3").style.display = "none";
+    //   //showing the form
+    //   document.getElementById("Div4").style.display = "block";
+    //   break;
 
     default:
       break;
