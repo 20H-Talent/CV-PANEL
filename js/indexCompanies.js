@@ -43,31 +43,31 @@ $.getJSON("../data/companies.json")
 function showInfo(id) {
     var company = companies.getCompanyByiD(id);
     $("#modal").html(
-        `<div class="shadow-lg p-3 bg-dark rounded"   data-id=${company.id} >
+        `<div class="shadow-lg p-3 border border-info  rounded"   data-id=${company.id} >
         <div class="card-header d-flex bg-info flex-row align-items-center">
-            <img class="img-fluid mr-2" src=${company.logo} width=120px height:60px  alt="test"/>
-            <div class=" text-light">
+            <img class="img-fluid mr-2 rounded-circle" src=${company.logo} width=120px height:60px  alt="test"/>
+            <div class=" ml-4 text-light">
                 <h4 class="modal-title">                     
                 <p>${company.name}</p>
+                <p> CIF ${company.CIF}</p>
                 </h4>
             </div>
         </div> 
         <div class="text-light">
-            <div class=" mt-3"><h5 class=" badge-info  text-dark">Email:</h5><p><a class="text-white" href="mailto:${company.email}">${company.email}</a></p>
+            <div class=" text-dark mt-3 font-weight-bold"><h5 class=" badge-info rounded  text-dark">Email:</h5><p><a class="text-dark" href="mailto:${company.email}">${company.email}</a></p>
         </div>
-            <div class=""><h5 class=" badge-info text-dark ">Profile </h5>
+            <div class="text-dark font-weight-bold"><h5 class=" badge-info text-dark rounded ">Profile </h5>
             <p>${company.descripcion}</p> 
         </div>
-            <div><h5 class="badge-info text-dark">Phone</h5>
+            <div  class="text-dark font-weight-bold"><h5 class="badge-info text-dark rounded">Phone</h5>
             <p>${company.phone}</p> 
         </div>
-            <div ><h5 class=" badge-info text-dark">Numbers of workers</h5>
+            <div class="text-dark font-weight-bold" ><h5 class=" badge-info text-dark rounded">Numbers of workers</h5>
             <p>${company.workersNumber}</p> 
         </div>
-            <div"><h5 class=" badge-info text-dark" >Address</h5>
+            <div class="text-dark font-weight-bold"><h5 class=" badge-info text-dark rounded" >Address</h5>
             <p>${company.address.country} ~ ${company.address.city} ${company.address.street} / ${company.address.zipcode}</p>
         </div>
-            <div class="card-footer  bg-info text-right">
-        </div>
+            <div class="card-footer  bg-info text-right"></div>
     </div> `);
 };

@@ -6,10 +6,11 @@
     cursor: pointer;
     border-right: 1px solid #fafafa;
     opacity: 1;
+    background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }
 
 #tableBody {
-    background-color: #ecf0f3;
+    background-color: #ededf1;
     background-size: cover;
 }
 
