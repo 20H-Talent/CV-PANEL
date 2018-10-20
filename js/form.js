@@ -124,7 +124,6 @@ function switchVisible(visible) {
  * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(event) {
-  console.log("hola", event.currentTarget);
   const element = $(event.currentTarget);
   const property = element.data("id");
 
@@ -134,7 +133,6 @@ function editForm(event) {
   var inpskill = skillUser.querySelectorAll("input");
   for (var i = 0; i < inpskill.length; i++) {
     inpskill[i].checked = false;
-    console.log("test: ", inpskill[i]);
   }
   // empting the checkboxes when editing another user
   var lang = document.getElementById("selLanguage");

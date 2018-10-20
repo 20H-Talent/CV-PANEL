@@ -554,7 +554,6 @@ $(window).on("resize", function(e) {
   const width = this.innerWidth;
   usersTable.renderDataOnResize(null, width);
 });
-
 $("div.main-container").on("click", "button.edit", editForm);
 
 $("div.main-container").on("click", "button.delete", function(e) {
