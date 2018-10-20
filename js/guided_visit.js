@@ -28,13 +28,13 @@ function getTooltips() {
             data[i].tooltipPosition.top
           }; left: ${data[i].tooltipPosition.left}; right: ${data[i].tooltipPosition.right}; bottom: ${data[i].tooltipPosition.bottom}; width: 36%; height: ${data[i].tooltipPosition.height};' class='d-none tool-${data[i].id} bg-white tooltips p-3 rounded' data-toggle='tooltip'>
           <span class='badge badge-danger' style='position: absolute; top: 3%; left:1%; font-size: 0.6rem'>${
-            data[i].id
+            data[i].badgeTool
           }</span> ${data[i].text} <button class='btn-tool badge badge-pill' data-tool= ${data[i].id}>Next <i class='fas fa-arrow-right'></i></button>
         </div>`);
       });
 
       // llamando al primer tool ...
-      let tool1 = $(".tool-1");
+      let tool1 = $(".tool-0");
       $.each(tool1, function(u) {
         tool1[u].classList.replace("d-none", "d-block");
       });
@@ -52,7 +52,7 @@ function getTooltips() {
       });
       function callTools(valDataTool) {
         //recive de data-toogle value of the active button of tooltips.
-
+        console.log("id:", data[parseInt(valDataTool)].id);
         let activeTool = $(`.tool-${parseInt(valDataTool)}`); //convert valDataTool string to number and select the elements with class .tool-valDataTool.
         if (!data[parseInt(valDataTool)]) {
           //id data[valDataTool] not exist, remove the modal.
@@ -65,15 +65,28 @@ function getTooltips() {
         $.each(activeTool, function(a) {
           activeTool[a].classList.replace("d-block", "d-none");
         });
-
+        // console.log(
+        //   "Data en la que estoy: ",
+        //   data[parseInt(valDataTool)].id + 0.1
+        // );
+        // console.log("activetool +1: ", activeTool + 0.1);
         let nextTool = $(`.tool-${parseInt(valDataTool) + 1}`);
 
         // call event to open of disable tooltip(the next).
         // console.log(
         //   $(data[parseInt(valDataTool)].eventCallToOpen).trigger("click")
         // );
-        $(data[parseInt(valDataTool)].eventCallToOpen).trigger("click");
+        $(data[parseInt(valDataTool)].eventCallToOpen).trigger(
+          data[parseInt(valDataTool)].eventCallToClose
+        );
+        console.log($(event.relatedTarget));
+        // let test = $("tr[1]");
+        // $.each(test, function(r) {
+        //   console.log(r);
+        // });
+        // console.log("test: ", test);
 
+        //tbody[0].td[class*='options'].button[title='View user']
         $.each(nextTool, function(n) {
           nextTool[n].classList.replace("d-none", "d-block");
         });
@@ -93,7 +106,7 @@ function getTooltips() {
 
 // el tooltip 2.1 abre el menu ---> "eventCallToOpen": "#open-icon-left" y explica boton list users.
 // el 2.2 explica tabla
-//el 2.3 explica boton visualizar detalles user.
+//el 2.3 explica boton visualizar detalles user , like birthday, telp, full address , languages, skills and frameworks.
 // el 2.4 abre detalles de user.
 // el 2.5 explica boton modificar user.
 //el 2.6 abre formulario editar user
