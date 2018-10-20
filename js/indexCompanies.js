@@ -9,7 +9,6 @@
 //     });
 //   });
 var companies = new Companies();
-
 $.getJSON("../data/companies.json")
     .done(function(data) {
         $.each(data, function(i, item) {
@@ -27,6 +26,7 @@ $.getJSON("../data/companies.json")
                 data[i].socialnetworks
             );
             companies.addCompany(comp1);
+            console.log('comp1 :', comp1);
         });
         companies.renderTable();
         // companies.buttonOpciones();
@@ -36,4 +36,3 @@ $.getJSON("../data/companies.json")
             console.log("[ERROR]: on loading json.");
         }
     });
-// working ??

@@ -24,8 +24,8 @@ function Company(
     this.phone = phone;
 
     this.showInfo = function() {
-        $("#modal").html(
-            `<div class="shadow-lg p-3 bg-dark rounded" data-id=${this.id}>
+        setTimeout($("#modal").html(
+            `<div class="shadow-lg p-3 bg-dark rounded" >
             <div class="card-header d-flex bg-info flex-row align-items-center">
                <img class="img-fluid mr-2" src=${this.logo} width=120px height:60px  alt="test"/>
               <div class=" text-light">
@@ -40,7 +40,8 @@ function Company(
            <div class="card-footer  bg-info text-right">
            </div>
          </div> `
-        );
+        ), 6000);
         console.log('this.id :', this.id);
+
     };
 }
