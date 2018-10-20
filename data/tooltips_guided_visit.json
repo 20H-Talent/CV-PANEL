@@ -275,11 +275,135 @@
     "badgeTool": 2.7,
 
     "text": "Click on this button and you can modify the user's properties.",
-    "eventCallToOpen": "",
-    "eventCallToClose": ""
+    "eventCallToOpen": "#userModal",
+    "eventCallToClose": "click, button.my-2.btn.btn-outline-primary.btn-sm.edit"
   },
   {
     "id": 9,
+    "zone": "left-menu",
+    "elPositionSelected": {
+      "top": "62.5%",
+      "left": "22.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "28.5%",
+      "width": "54%"
+    },
+    "tooltipPosition": {
+      "top": "38%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%"
+    },
+    "arrowPosition": {
+      "top": "58%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "down"
+    },
+    "badgeTool": 2.8,
+
+    "text": "As you can see, here you can modified the assigned properties of the user.",
+    "eventCallToOpen": "#list-users",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 10,
+    "zone": "left-menu",
+    "elPositionSelected": {
+      "top": "45.6%",
+      "left": "87.3%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "6.5%",
+      "width": "3.4%"
+    },
+    "tooltipPosition": {
+      "top": "44%",
+      "left": "48%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%"
+    },
+    "arrowPosition": {
+      "top": "46%",
+      "left": "84.4%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "right"
+    },
+    "badgeTool": 2.9,
+
+    "text": "Click this button if you want to delete the user!!.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 11,
+    "zone": "left-menu",
+    "elPositionSelected": {
+      "top": "34.7%",
+      "left": "0%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "5%",
+      "width": "15.6%"
+    },
+    "tooltipPosition": {
+      "top": "33%",
+      "left": "17.9%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%"
+    },
+    "arrowPosition": {
+      "top": "35.4%",
+      "left": "16%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "badgeTool": "2.10",
+
+    "text": "If you click this button, you can create a new user.",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(2)",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 12,
+    "zone": "left-menu",
+    "elPositionSelected": {
+      "top": "45.6%",
+      "left": "87.3%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "6.5%",
+      "width": "3.4%"
+    },
+    "tooltipPosition": {
+      "top": "44%",
+      "left": "48%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%"
+    },
+    "arrowPosition": {
+      "top": "46%",
+      "left": "84.4%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "right"
+    },
+    "badgeTool": "2.11",
+
+    "text": "Here, is the form when you set the values of the user.",
+    "eventCallToOpen": "#list-users",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 13,
     "zone": "right-menu",
     "elPositionSelected": {
       "top": "11.8%",
@@ -310,7 +434,7 @@
     "eventCallToClose": ""
   },
   {
-    "id": 10,
+    "id": 14,
     "zone": "center",
     "elPositionSelected": {
       "top": "42%",

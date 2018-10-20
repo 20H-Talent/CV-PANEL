@@ -116,3 +116,4 @@ function getTooltips() {
 // el 2.10 abre boton crear user
 
 //el 3.1 abre menu derecho.
+//#left-menu ul li:nth-of-type(2) abre el form

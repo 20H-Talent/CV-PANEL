@@ -103,6 +103,7 @@ function reset() {
 function switchVisible(visible) {
   // console.log("div1", document.getElementById("Div1").style.display);
   // console.log("div2", document.getElementById("Div2").style.display);
+
   switch (visible) {
     case "Div1": //== table users
       //showing the table
@@ -124,6 +125,7 @@ function switchVisible(visible) {
  * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(event) {
+  console.log(event.currentTarget);
   switchVisible("Div2");
   const element = $(event.currentTarget);
   const property = element.data("id");
@@ -157,9 +159,9 @@ function editForm(event) {
   $("#zip").val(data.location.postcode);
   $("#address").val(data.location.street);
   document.getElementById(data.gender).checked = true;
-  for (var i = 0; i < data.skills.length; i++) {
-    document.getElementById(data.skills[i]).checked = true;
-  }
+  // for (var i = 0; i < data.skills.length; i++) {
+  //   document.getElementById(data.skills[i]).checked = true;
+  // }
   var lang = document.getElementById("selLanguage");
   for (var i = 0; i < lang.options.length; i++) {
     // data.languages es un array con "languages" like ["Spanish","English"]
