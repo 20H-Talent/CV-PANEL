@@ -20,7 +20,10 @@ const Table = (function() {
       format: "json"
     });
 
-    _setupSessionStorage(apiURL, initTable);
+    function construct(container) {
+      container.empty().append(_tableSkeleton);
+      _setupSessionStorage(apiURL, initTable);
+    }
 
     /** Prepare sessionStorage that allow us save the data in client side to work with it
      * @function _setupSessionStorage
@@ -340,7 +343,7 @@ const Table = (function() {
            .join("")}
      </div>
      <div class="card-footer card-buttons text-right">
-        <button type="button" class="btn btn-outline-success btn-sm" data-email=${email} data-toggle="modal" data-target="#userModal"><i class="far fa-eye"></i></button>
+        <button type="button" class="btn btn-outline-success btn-sm" data-id=${id} data-toggle="modal" data-target="#userModal"><i class="far fa-eye"></i></button>
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
           id.value
         }><i class="fas fa-user-edit"></i></button>
@@ -429,15 +432,9 @@ const Table = (function() {
      * @return {object} User
      */
     function getUserByEmailOrID(value) {
-      if (value.includes("@")) {
-        return JSON.parse(sessionStorage.getItem("users-list")).find(
-          user => user.email === value
-        );
-      } else {
-        return JSON.parse(sessionStorage.getItem("users-list")).find(
-          user => user.id.value === value
-        );
-      }
+      return JSON.parse(sessionStorage.getItem("users-list")).find(
+        user => user.id.value === value
+      );
     }
 
     /**
@@ -527,7 +524,26 @@ const Table = (function() {
       }
     }
 
+    function _tableSkeleton() {
+      return `<div id="users-table" class="table-responsive table-wrapper-scroll-y mt-1">
+      <table class="table table-bordered table-hover" role="grid">
+          <thead class="thead-dark">
+              <tr>
+                  <th><i class="far fa-user-circle"></i><span> Avatar </span></th>
+                  <th><i class="far fa-id-card"></i><span> Full name</span></th>
+                  <th><i class="far fa-envelope"></i><span> Email</span></th>
+                  <th><i class="fas fa-city"></i><span> State - City</span></th>
+                  <th><i class="far fa-clock"></i><span> Registered</span></th>
+                  <th><i class="fas fa-cogs"></i><span> Options</span></th>
+              </tr>
+          </thead>
+          <tbody style="position: static;"></tbody>
+      </table>
+    </div>
+  <div id="card-container"></div>`;
+    }
     return {
+      construct,
       initTable,
       setupApiURL,
       buildUserFullname,
