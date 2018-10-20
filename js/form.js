@@ -124,6 +124,7 @@ function switchVisible(visible) {
  * Getting the values of the table and adding them in the inputs of the form on click***
  **************************************************************************/
 function editForm(event) {
+  switchVisible("Div2");
   const element = $(event.currentTarget);
   const property = element.data("id");
 
@@ -169,7 +170,6 @@ function editForm(event) {
       lang.options[i].selected = true;
     }
   }
-  switchVisible("Div2");
 }
 /**************************************************************************
  * Selecting the day birth and putting the years of the user in a span***
