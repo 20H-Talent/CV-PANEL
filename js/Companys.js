@@ -1,14 +1,14 @@
 function Companies() {
-  this.companies = [];
-  this.addCompany = function(company) {
-    this.companies.push(company);
-  };
-  this.renderTable = function() {
-    console.log("entro aqui", this.companies);
-    //companies.addCompany(comp1);
-    for (var i = 0; i < this.companies.length; i++) {
-      console.log("algo", i);
-      $("#tableBody").append(`<tr scope="row">
+    this.companies = [];
+    this.addCompany = function(company) {
+        this.companies.push(company);
+    };
+    this.renderTable = function() {
+        console.log("entro aqui", this.companies);
+        //companies.addCompany(comp1);
+        for (var i = 0; i < this.companies.length; i++) {
+            console.log("algo", i);
+            $("#tableBody").append(`<tr scope="row">
                 <td class="company-logo user-avatar  pl-5"><img class="img text-center align-middle"src=${
                   this.companies[i].logo
                 }  style="width:50px; "  />
@@ -37,18 +37,18 @@ function Companies() {
                       </button>
                       <button type="button" class=" id="deleteCompany" my-2 btn btn-outline-danger btn-sm " data-toggle="modal" data-target="#delete" data-uid="2"><i class="far fa-trash-alt"></i></button></td>
                     </tr>`);
-    }
-  };
-  this.buttonOpciones = function() {
-    for (var i = 0; i < this.companies.length; i++) {
-      $("#modal").append(
-        `<span>${this.companies[i].logo} </span>
+        }
+    };
+    this.buttonOpciones = function() {
+        for (var i = 0; i < this.companies.length; i++) {
+            $("#modal").append(
+                `<span>${this.companies[i].logo} </span>
                    <span>${this.companies[i].email} </span>
                    <span>${this.companies[i].phone} </span>
                    <span>${this.companies[i].descripcion} </span>
                   <span>${this.companies[i].socialnetworks.facebook} </span>`
-      );
-    }
-  };
+            );
+        }
+    };
 }
 // a ver si funciona
