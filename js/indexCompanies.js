@@ -1,18 +1,3 @@
-//   function options() {
-//     $.getJSON("../data/companies.json").done(function(data) {
-//       console.log(data);
-//       $.each(data, function(i, item) {
-//         $("#modal").append(
-//           `<span${item.name} </span>
-//           <span${item.email} </span>
-//           <span${item.phone} </span>
-//           <span${item.address.city} </span>
-//           <span${item.descripcion} </span>`
-//         );
-//       });
-//     });
-//   }
-
 //   $(".delete").click(function() {
 //     var id = $(this).data("uid");
 //     $("#del").click(function() {
@@ -29,6 +14,7 @@ $.getJSON("../data/companies.json")
     .done(function(data) {
         $.each(data, function(i, item) {
             var comp1 = new Company(
+                data[i].id,
                 data[i].name,
                 data[i].CIF,
                 data[i].email,

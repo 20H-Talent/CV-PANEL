@@ -1,4 +1,5 @@
 function Company(
+    id,
     name,
     CIF,
     email,
@@ -10,6 +11,7 @@ function Company(
     address,
     socialnetworks
 ) {
+    this.id = id;
     this.socialnetworks = socialnetworks;
     this.address = address;
     this.name = name;
@@ -23,11 +25,22 @@ function Company(
 
     this.showInfo = function() {
         $("#modal").html(
-            `<span>${this.logo} </span>
-                   <span>${this.email} </span>
-                   <span>${this.phone} </span>
-                   <span>${this.descripcion} </span>
-                  <span>${this.socialnetworks.facebook} </span>`
+            `<div class="shadow-lg p-3 bg-dark rounded" data-id=${this.id}>
+            <div class="card-header d-flex bg-info flex-row align-items-center">
+               <img class="img-fluid mr-2" src=${this.logo} width=120px height:60px  alt="test"/>
+              <div class=" text-light">
+              <h4 class="modal-title"> <p>${this.name}</p></h4></div>
+            </div>
+           <div class="text-light">
+           <div class="card-subtitle mt-3">Email:  <p><a href="mailto:${this.email}">${this.email}</a></p> </div>
+           <div class="card-subtitle">Profile:  <p>${this.descripcion}</p> </div>
+           <div class="card-subtitle">Phone:  <p>${this.phone}</p> </div>
+           <div class="card-subtitle">Numbers of workers:  <p>${this.workersNumber}</p> </div>
+           <div class="card-subtitle">Address:  <p>${this.address.country} ~ ${this.address.city} ${this.address.street} / ${this.address.zipcode}</p> </div>
+           <div class="card-footer  bg-info text-right">
+           </div>
+         </div> `
         );
+        console.log('this.id :', this.id);
     };
 }
