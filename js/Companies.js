@@ -22,9 +22,9 @@ function Companies() {
    
     <div class="col-md-12 text-center">
     
-     <a href="${this.companies[i].socialnetworks.linkedin}" target="_blank"><i class="fab fa-lg fa-linkedin "></i></a>
+     <a href="${this.companies[i].socialnetworks.linkedin}" target="_blank"><i class="fab btn-ldeep-purple   fa-lg fa-linkedin "></i></a>
       <a href="${this.companies[i].socialnetworks.instagram}" target="_blank"><i class="fab fa-lg fa-instagram"></i></a>
-      <a href="${this.companies[i].socialnetworks.twitter}" target="_blank><i class="fab fa-lg fa-twitter"></i></a>
+      <a href="${this.companies[i].socialnetworks.twitter}" target="_blank"><i class="fab fa-lg fa-twitter"></i></a>
       <a href="${this.companies[i].socialnetworks.youtube}" target="_blank"><i class="fab fa-lg fa-youtube text-danger"></i></a>
       <a href="${this.companies[i].socialnetworks.facebook}" target="_blank" ><i class="fab fa-lg fa-facebook-square"></i></a>
     </div>
