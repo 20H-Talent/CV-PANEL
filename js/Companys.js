@@ -24,7 +24,7 @@ function Companies() {
                 </tr>`);
         }
     };
-    this.getCompanyByiD = function(id) {
+    this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {
             return company.id == id
         });
