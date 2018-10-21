@@ -21,8 +21,15 @@ const Table = (function() {
     });
 
     function construct(container) {
-      container.empty().append(_tableSkeleton);
-      _setupSessionStorage(apiURL, initTable);
+      if (container.find("#users-table").length === 0) {
+        $.get("../../html/UserTable.html", function(htmlSkeleton) {
+          container.empty().append(htmlSkeleton);
+          _setupSessionStorage(apiURL, initTable);
+        }).fail(function(err) {
+          _showOverlay(false);
+          throw new Error(err);
+        });
+      }
     }
 
     /** Prepare sessionStorage that allow us save the data in client side to work with it
@@ -524,24 +531,6 @@ const Table = (function() {
       }
     }
 
-    function _tableSkeleton() {
-      return `<div id="users-table" class="table-responsive table-wrapper-scroll-y mt-1">
-      <table class="table table-bordered table-hover" role="grid">
-          <thead class="thead-dark">
-              <tr>
-                  <th><i class="far fa-user-circle"></i><span> Avatar </span></th>
-                  <th><i class="far fa-id-card"></i><span> Full name</span></th>
-                  <th><i class="far fa-envelope"></i><span> Email</span></th>
-                  <th><i class="fas fa-city"></i><span> State - City</span></th>
-                  <th><i class="far fa-clock"></i><span> Registered</span></th>
-                  <th><i class="fas fa-cogs"></i><span> Options</span></th>
-              </tr>
-          </thead>
-          <tbody style="position: static;"></tbody>
-      </table>
-    </div>
-  <div id="card-container"></div>`;
-    }
     return {
       construct,
       initTable,

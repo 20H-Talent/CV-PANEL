@@ -1,3 +1,4 @@
+generalConstructor.construct("users-table");
 /**
  *  Function to load the content by ajax
  */
