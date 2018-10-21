@@ -480,7 +480,7 @@ const Table = (function() {
       for (let index = 0; index <= numberOfItems; index++) {
         extraData.push(data[Math.floor(Math.random() * data.length)]);
       }
-      return Array.from(new Set(extraData));
+      return [...new Set(extraData)];
     }
 
     /**
