@@ -25,11 +25,34 @@ const Table = (function() {
         $.get("../../html/UserTable.html", function(htmlSkeleton) {
           container.empty().append(htmlSkeleton);
           _setupSessionStorage(apiURL, initTable);
+          _setupInternalEventListeners();
         }).fail(function(err) {
           _showOverlay(false);
           throw new Error(err);
         });
       }
+    }
+
+    function _setupInternalEventListeners() {
+      $(window)
+        .off("resize")
+        .on("resize", function(e) {
+          const width = this.innerWidth;
+          renderDataOnResize(null, width);
+        });
+
+      $("div.main-container")
+        .off("click")
+        .on("click", "button.edit", userForm.editForm);
+
+      $("div.main-container")
+        .off("click")
+        .on("click", "button.delete", function(e) {
+          if (window.confirm("Are you sure to delete this user?")) {
+            const userID = $(this).data("id");
+            deleteUser(userID);
+          }
+        });
     }
 
     /** Prepare sessionStorage that allow us save the data in client side to work with it
@@ -554,20 +577,6 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
-
-$(window).on("resize", function(e) {
-  const width = this.innerWidth;
-  usersTable.renderDataOnResize(null, width);
-});
-
-$("div.main-container").on("click", "button.edit", userForm.editForm);
-
-$("div.main-container").on("click", "button.delete", function(e) {
-  if (window.confirm("Are you sure to delete this user?")) {
-    const userID = $(this).data("id");
-    usersTable.deleteUser(userID);
-  }
-});
 
 $("#userModal").on("show.bs.modal", function(event) {
   const element = $(event.relatedTarget);
