@@ -22,6 +22,4 @@ function Company(
     this.descripcion = descripcion;
     this.workersNumber = workersNumber;
     this.phone = phone;
-
-
 }

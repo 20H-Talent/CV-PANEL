@@ -1,13 +1,3 @@
-//   $(".delete").click(function() {
-//     var id = $(this).data("uid");
-//     $("#del").click(function() {
-//       if (id == 1) {
-//         $("#d1").html("");
-//       } else if (id == 2) {
-//         $("#d2").html("");
-//       }
-//     });
-//   });
 var companies = new Companies();
 $.getJSON("../data/companies.json")
     .done(function(data) {
@@ -26,19 +16,14 @@ $.getJSON("../data/companies.json")
                 data[i].socialnetworks
             );
             companies.addCompany(comp1);
-            console.log('comp1 :', comp1);
         });
         companies.renderTable();
-
-        //companies.getCompanyByiD();
-        // companies.showInfo();
     })
     .fail(function(jqXHR) {
         if (jqXHR.statusText !== "OK") {
-            console.log("[ERROR]: on loading json.");
+            console.log("[ERROR]: on loading json Comapanies.");
         }
     });
-
 
 function showInfo(id) {
     var company = companies.getCompanyById(id);
@@ -71,3 +56,18 @@ function showInfo(id) {
             <div class="card-footer  bg-info text-right"></div>
     </div> `);
 };
+
+function removeCompanyFromDOM(id) {
+    console.log('id :', id);
+    var company = companies.getCompanyById(id);
+    console.log('company :', company);
+    const mainContainer = $(".main-container-companies");
+    const tableBody = mainContainer.find("#company-table tbody");
+    console.log('tableBody :', tableBody);
+    if (tableBody.children("tr").length > 0) {
+        var findTr = tableBody.find(`tr[data-id=${company.id}]`);
+        console.log('findTr :', findTr);
+        findTr.remove();
+    }
+    console.log('companies[i].id :', company.id);
+}
