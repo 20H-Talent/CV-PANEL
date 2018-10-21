@@ -10,9 +10,48 @@ const UserForm = (function() {
 
     function _setupInternalListeners() {
       const userForm = $("#user-form");
+      console.log(userForm.find("button#create-user"));
       userForm.find("button#create-user").on("click", _formErrors);
       userForm.find("button.reset").on("click", _resetFormField);
+      userForm.find("button#languages").on("click", _showChoices);
     }
+
+    function _showChoices() {
+      //retrieve data
+      var selLanguage = document.getElementById("selLanguage");
+      //set up output string
+      var result = "<h4>Your Languages</h4>";
+      result += "<ul>";
+      //step through options
+      for (i = 0; i < selLanguage.length; i++) {
+        //examine current option
+        var currentOption = selLanguage[i];
+        //print it if it has been selected
+        if (currentOption.selected == true) {
+          result +=
+            " <li>" +
+            currentOption.value +
+            "</li>" +
+            "</ul>" +
+            '<div class="input-group mb-3">' +
+            '<div class="input-group-prepend">' +
+            '<label class="input-group-text  text-light bg-primary" for="inputGroupSelect01">Level</label>' +
+            "</div>" +
+            '<select name="inputGroupSelect01" class="custom-select" id="inputGroupSelect01"   required>' +
+            "<option selected>Choose one</option>" +
+            ' <option value="Basic">Basic</option>' +
+            ' <option value="Medium">Medium</option>' +
+            '<option value="Advanced">Advanced</option>' +
+            '<option value="Native">Native</option>' +
+            "</select>" +
+            "</div>";
+        } // end if
+      } // end for loop
+      //finish off the list and print it out
+      result += "</ul>";
+      output = document.getElementById("output");
+      output.innerHTML = result;
+    } // end showChoices
 
     function _formErrors() {
       //Cleaning the content of the div before calling the function again
@@ -270,7 +309,7 @@ const UserForm = (function() {
                    </select>
                    <div class="invalid-feedback">Example invalid custom select feedback</div>
                </div>
-               <button class="btn reset btn-custom" type="button" onclick="showChoices()">
+               <button id="languages" class="btn reset btn-custom" type="button">
                    Select languages
                </button>
                <button type="button" class="btn-custom btn reset" value="Reset">Reset</button>
@@ -310,8 +349,7 @@ const UserForm = (function() {
 
                </div>
 
-               <button id="button-create-user" class="btn checkout  btn-custom btn-lg btn-block"
-                   onclick="formErrors()" type="submit">Save</button>
+               <button id="create-user"class="btn checkout  btn-custom btn-lg btn-block" type="submit">Save</button>
            </form>
            <footer class="my-5 pt-5 text-muted text-center text-small">
                <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>

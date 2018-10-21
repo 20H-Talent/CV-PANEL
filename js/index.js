@@ -203,7 +203,7 @@ function navRight(event) {
 
 // --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
-let newUser = document.getElementById("user-form");
+let newUser = document.getElementById("new-user");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
 let alertClose = document.querySelector(".alert-close");
