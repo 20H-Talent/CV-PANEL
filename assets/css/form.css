@@ -135,7 +135,8 @@ body {
   margin-top: 50px;
 }
 
-.reset {
+.reset,
+button#languages {
   margin-bottom: 30px;
 }
 

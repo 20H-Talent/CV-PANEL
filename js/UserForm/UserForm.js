@@ -2,15 +2,15 @@ const UserForm = (function() {
   let instance;
 
   function init() {
+    let userForm;
     function construct(container) {
       container.empty().append(_formSkeleton);
+      userForm = container.find("#user-form");
 
       _setupInternalListeners();
     }
 
     function _setupInternalListeners() {
-      const userForm = $("#user-form");
-      console.log(userForm.find("button#create-user"));
       userForm.find("button#create-user").on("click", _formErrors);
       userForm.find("button.reset").on("click", _resetFormField);
       userForm.find("button#languages").on("click", _showChoices);
@@ -18,40 +18,43 @@ const UserForm = (function() {
 
     function _showChoices() {
       //retrieve data
-      var selLanguage = document.getElementById("selLanguage");
+      const chosenLanguages = userForm.find(
+        "select#selLanguage option:selected"
+      );
       //set up output string
-      var result = "<h4>Your Languages</h4>";
-      result += "<ul>";
-      //step through options
-      for (i = 0; i < selLanguage.length; i++) {
-        //examine current option
-        var currentOption = selLanguage[i];
-        //print it if it has been selected
-        if (currentOption.selected == true) {
-          result +=
-            " <li>" +
-            currentOption.value +
-            "</li>" +
-            "</ul>" +
-            '<div class="input-group mb-3">' +
-            '<div class="input-group-prepend">' +
-            '<label class="input-group-text  text-light bg-primary" for="inputGroupSelect01">Level</label>' +
-            "</div>" +
-            '<select name="inputGroupSelect01" class="custom-select" id="inputGroupSelect01"   required>' +
-            "<option selected>Choose one</option>" +
-            ' <option value="Basic">Basic</option>' +
-            ' <option value="Medium">Medium</option>' +
-            '<option value="Advanced">Advanced</option>' +
-            '<option value="Native">Native</option>' +
-            "</select>" +
-            "</div>";
-        } // end if
-      } // end for loop
-      //finish off the list and print it out
-      result += "</ul>";
-      output = document.getElementById("output");
-      output.innerHTML = result;
-    } // end showChoices
+      if (chosenLanguages.length > 0) {
+        const displayContainer = $(
+          `<h4>Your Languages</h4><ul class="languages-list"></ul>`
+        );
+        userForm
+          .find("#output")
+          .empty()
+          .append(displayContainer);
+
+        const displayList = userForm.find("ul.languages-list");
+
+        chosenLanguages.each((index, element) => {
+          const language = $(element);
+          displayList.append(`
+             <li>
+                ${language.text()}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-light bg-primary" for="inputGroupSelect01">Level</label>
+                    </div>
+                    <select name="inputGroupSelect01" class="custom-select" id="inputGroupSelect01" required>
+                        <option selected>Choose one</option>
+                        <option value="Basic">Basic</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Native">Native</option>
+                    </select>
+                </div>
+             </li>`);
+          console.log("display list:", displayList);
+        });
+      }
+    }
 
     function _formErrors() {
       //Cleaning the content of the div before calling the function again
@@ -100,10 +103,8 @@ const UserForm = (function() {
     }
 
     function _resetFormField() {
-      var output = document.getElementById("output");
-      output.innerHTML = "";
-      var select = document.getElementById("selLanguage");
-      select.reset();
+      userForm.find("#output").empty();
+      userForm.find("select#selLanguage").val("");
     }
 
     function editForm(event) {
@@ -309,7 +310,7 @@ const UserForm = (function() {
                    </select>
                    <div class="invalid-feedback">Example invalid custom select feedback</div>
                </div>
-               <button id="languages" class="btn reset btn-custom" type="button">
+               <button id="languages" class="btn btn-custom" type="button">
                    Select languages
                </button>
                <button type="button" class="btn-custom btn reset" value="Reset">Reset</button>
