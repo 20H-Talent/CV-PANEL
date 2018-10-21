@@ -1,10 +1,11 @@
 #company-table thead tr:first-child th {
     position: sticky;
+    text-align: center;
     top: 0;
     z-index: 10;
     margin: 0;
     cursor: pointer;
-    border-right: 1px solid #fafafa;
+    border-right: 1px solid #ffffff;
     opacity: 1;
     background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
 }

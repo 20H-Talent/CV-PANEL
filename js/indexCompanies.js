@@ -54,18 +54,18 @@ function showInfo(id) {
             </div>
         </div> 
         <div class="text-light">
-            <div class=" text-dark mt-3 font-weight-bold"><h5 class=" badge-info rounded  text-dark">Email:</h5><p><a class="text-dark" href="mailto:${company.email}">${company.email}</a></p>
+            <div class=" text-dark text-center mt-3 h6"><h5 class="  text-center badge-info rounded  text-white">Email</h5><p><a class="text-dark text-center" href="mailto${company.email}">${company.email}</a></p>
         </div>
-            <div class="text-dark font-weight-bold"><h5 class=" badge-info text-dark rounded ">Profile </h5>
+            <div class="text-dark text-center h6 "><h5 class="  text-center badge-info text-white rounded ">Profile </h5>
             <p>${company.descripcion}</p> 
         </div>
-            <div  class="text-dark font-weight-bold"><h5 class="badge-info text-dark rounded">Phone</h5>
+            <div  class="text-dark text-center h6 "><h5 class="text-center badge-info text-white rounded">Phone</h5>
             <p>${company.phone}</p> 
         </div>
-            <div class="text-dark font-weight-bold" ><h5 class=" badge-info text-dark rounded">Numbers of workers</h5>
+            <div class="text-dark text-center h6"><h5 class=" text-center badge-info text-white rounded">Numbers of workers</h5>
             <p>${company.workersNumber}</p> 
         </div>
-            <div class="text-dark font-weight-bold"><h5 class=" badge-info text-dark rounded" >Address</h5>
+            <div class="text-dark text-center h6 "><h5 class="  text-center badge-info text-white rounded" >Address</h5>
             <p>${company.address.country} ~ ${company.address.city} ${company.address.street} / ${company.address.zipcode}</p>
         </div>
             <div class="card-footer  bg-info text-right"></div>

@@ -9,7 +9,7 @@ function Companies() {
         for (var i = 0; i < this.companies.length; i++) {
             console.log("algo", i);
             $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
-            <td class="company-logo text-center"><img class="img  align-middle"src=${this.companies[i].logo} style="width:50px;"/></td>
+            <td class="company-logo text-center"><img class="img rounded-circle  align-middle"src=${this.companies[i].logo} style="width:50px;"/></td>
                 <td class="fullname"><p>${this.companies[i].name}</p></td>
                     <td class="company-email">${this.companies[i].email}</td>
                     <td class="company-registered">${this.companies[i].phone}</td>
