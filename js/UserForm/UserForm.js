@@ -23,15 +23,11 @@ const UserForm = (function() {
       );
       //set up output string
       if (chosenLanguages.length > 0) {
-        const displayContainer = $(
-          `<h4>Your Languages</h4><ul class="languages-list"></ul>`
-        );
-        userForm
+        const displayList = userForm
           .find("#output")
           .empty()
-          .append(displayContainer);
-
-        const displayList = userForm.find("ul.languages-list");
+          .append(`<h4>Your Languages</h4><ul class="languages-list"></ul>`)
+          .children("ul.languages-list");
 
         chosenLanguages.each((index, element) => {
           const language = $(element);
@@ -51,55 +47,41 @@ const UserForm = (function() {
                     </select>
                 </div>
              </li>`);
-          console.log("display list:", displayList);
         });
       }
     }
 
     function _formErrors() {
-      //Cleaning the content of the div before calling the function again
-      var renderize = document.getElementById("renderize");
-      //Go back to initial value/display
-      document.getElementById("renderize").style.display = "block";
-      renderize.innerHTML = "";
-      document.getElementById("renderize").style.opacity = "100";
-      //getting the form by id
-      var form = document.getElementById("alertform");
-      var input = form.querySelectorAll(
-        "input[type=text],input[type=email],input[type=number],input[type=zip],input[type=address],input[type=select],input[type=telephone]"
+      const alertErrors = userForm.find("#alertErrors");
+      const form = userForm.find("form#alertform");
+
+      alertErrors.empty().append(
+        `
+             <div class="col-lg-12">
+                <ul class="alert alert-danger alert-dismissible"></ul>
+            </div>`
       );
-      //looping trought the elements of the form
-      for (i = 0; i < input.length; i++) {
-        if (input[i].checkValidity()) {
-          input[i].className = "form-control custom-control";
-          // input[i].className = "form-control close";
+
+      const inputs = form.find("input");
+
+      inputs.each((index, input) => {
+        if (input.checkValidity()) {
+          $(input).addClass("custom-control");
+        } else {
+          $(input).addClass("borderafter");
+          alertErrors
+            .find(`ul.alert-danger`)
+            .append(
+              ` <li class="font-weight-light">${input.name +
+                " : " +
+                input.validationMessage}</li>`
+            );
         }
-      }
-      for (i = 0; i < input.length; i++) {
-        //if the elemnts of the form are not valids
-        if (!input[i].checkValidity()) {
-          //creating the div main where the errors will be printed
-          var divMain = document.createElement("div");
-          //giving a class to the div of boostrap
-          divMain.className = "col-lg-12";
-          var ul = document.createElement("ul");
-          ul.className = "alert alert-danger ";
-          var li = document.createElement("li");
-          li.className = "font-weight-light ";
-          ul.appendChild(li);
-          //the li  will appear as messages of error if the input is invalid
-          li.innerHTML = input[i].name + " : " + input[i].validationMessage;
-          input[i].className = "form-control borderafter";
-          divMain.appendChild(ul);
-          //inserting the div where the errors are in to the div rederize that already exists in html
-          document.getElementById("renderize").appendChild(divMain);
-        } // end if
-      }
+      });
+      alertErrors.fadeIn("slow");
       setTimeout(function() {
-        document.getElementById("renderize").style.opacity = "0";
-        document.getElementById("renderize").style.display = "none";
-      }, 5000); // end for loop
-      //finish off the list and print it out
+        alertErrors.fadeOut("slow");
+      }, 5000);
     }
 
     function _resetFormField() {
@@ -166,10 +148,10 @@ const UserForm = (function() {
                    Edit User</h4>
            </div>
 
-           <div id="renderize" class="alert fade show" role="alert"></div>
+           <div id="alertErrors" class="alert fade show" role="alert"></div>
            <hr class="mb-4">
            <hr class=" hr-2">
-           <form id="alertform" method="POST" class="needs-validation col-md-12 ">
+           <form id="alertform" method="POST" class="needs-validation col-md-12">
                <div class="form-group row has-success">
                    <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
                    <div class="col-sm-10">
