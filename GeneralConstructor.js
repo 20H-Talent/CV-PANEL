@@ -46,7 +46,7 @@ let generalConstructor;
 
 try {
   generalConstructor = GeneralConstructor.getInstance([
-    { "users-table": usersTable }
+    { "users-table": usersTable, "user-form": userForm }
   ]);
 } catch (err) {
   alert(err.name + " " + err.message);
