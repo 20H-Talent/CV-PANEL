@@ -21,7 +21,7 @@ $.getJSON("../data/companies.json")
     })
     .fail(function(jqXHR) {
         if (jqXHR.statusText !== "OK") {
-            console.log("[ERROR]: on loading json Comapanies.");
+            console.log("[ERROR]: on loading json Companies.");
         }
     });
 
