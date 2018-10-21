@@ -1,4 +1,16 @@
 generalConstructor.construct("users-table");
+
+activateTooltips();
+function activateTooltips(container = null) {
+  const target = container || $(document);
+
+  target.find(".app-tooltip").each((index, element) => {
+    const $element = $(element);
+    if (!$element.hasClass("tooltip-loaded")) {
+      $element.addClass("tooltip-loaded").tooltip();
+    }
+  });
+}
 /**
  *  Function to load the content by ajax
  */
@@ -205,13 +217,14 @@ function navRight(event) {
 // --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
 let newUser = document.getElementById("new-user");
+let surveyMenuItem = document.querySelector(".SurveyMenuItem");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
 let alertClose = document.querySelector(".alert-close");
 function closeNavbar() {
   divNavBar.classList.replace("open", "close");
 }
-listUsers.addEventListener("click", function() {
+listUsers.addEventListener("click", function(e) {
   generalConstructor.construct("users-table");
   divNavBar.classList.replace("close", "open");
   divNavBar.innerHTML = "";
@@ -221,8 +234,12 @@ listUsers.addEventListener("click", function() {
   divNavBar.innerHTML += `Se ha listado usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 
-newUser.addEventListener("click", function() {
+newUser.addEventListener("click", function(e) {
   generalConstructor.construct("user-form");
+});
+
+surveyMenuItem.addEventListener("click", function(e) {
+  generalConstructor.construct("survey-creator");
 });
 // --- TO SEE CREATE USER ---
 /*

@@ -1,0 +1,105 @@
+<div class="card w-100 survey-container">
+    <div class="card-header">
+        <h2>Create your survey</h2>
+    </div>
+    <div class="card-body">
+        <form id="survey-form" method="POST" novalidate>
+            <div class="form-row">
+                <div class="col-md-3 offset-md-2">
+                    <label for="start_date">Start Date</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="start_date_group_icon"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="date" name="start_date" class="form-control mr-2" aria-describedby="start_date_group_icon" />
+                    </div>
+                </div>
+                <div class="col-md-3 offset-md-1">
+                    <label for="end_date">EndDate</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="end_date_group_icon"><i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="date" name="end_date" class="form-control mr-2" aria-describedby="end_date_group_icon" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-row my-2">
+                <div class="col-md-6">
+                    <label for="title">Title</label>
+                    <input class="form-control" name="title" type="text">
+                </div>
+                <div class="col-md-6">
+                    <label for="subtitle">Subtitle</label>
+                    <input class="form-control" name="subtitle" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Explain briefly the purpose of this survey</label>
+                <textarea name="description" cols="30" rows="4" class="form-control"></textarea>
+            </div>
+            <div id="survey-element" class="table-responsive mt-1">
+                <table class="table table-bordered table-hover" role="grid">
+                    <thead class="thead-">
+                        <tr>
+                            <th class="FieldTypes"><i class="far fa-hand-pointer mr-4"></i>
+                                <h4>Type of field</h4>
+                            </th>
+                            <th class="FieldValues d-flex justify-content-between">
+                                <div class="CellTitle">
+                                    <i class="fas fa-sort-numeric-up mr-4"></i>
+                                    <h4>Values inside the field</h4>
+                                </div>
+                            </th>
+                            <th class="FieldActions"><i class="fas fa-cogs mr-4"></i>
+                                <h4>Actions</h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="SelectedType-Cell">
+                                <select name="selected-type" class="form-control SelectedType-Select">
+                                    <option value="select">Selector</option>
+                                    <option value="checkboxes">Checkboxes</option>
+                                    <option value="radios">Radio</option>
+                                    <option value="text">Text</option>
+                                    <option value="date">Date</option>
+                                    <option value="file">File</option>
+                                    <option value="color">Color</option>
+                                    <option value="number">Number</option>
+                                    <option value="range">Range</option>
+                                    <option value="telephone">Telephone</option>
+                                </select>
+                            </td>
+                            <td class="ValueType-Cell"></td>
+                            <td class="actions text-center">
+                                <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                                    <button class="btn btn-success">
+                                        Add this field to the survey
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Elements created
+                </div>
+                <div class="card-body">
+                    <ul class="list-group my-2">
+                        <li class="list-group-item list-group-item-action">
+                            A simple primary list group item
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    Elements created
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info btn-lg btn-block my-3">Create this survey</button>
+        </form>
+    </div>
+</div>

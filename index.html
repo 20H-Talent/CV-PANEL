@@ -41,33 +41,37 @@
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
                                     <ul class="pl-0 w-100">
-                                        <li id="list-users" class="sidebar-position mb-3 rounded"">
+                                        <li id="list-users" class="sidebar-position mb-3 rounded app-tooltip"
+                                            data-toggle="tooltip" data-placement="right" title="List all the users">
                                             <a href="
                                             #" class="p-1 pl-2">
-                                            <i class="fa fa-users mr-2"></i>
-                                            <span class="close">List Users</span>
+                                                <i class="fa fa-users mr-2"></i>
+                                                <span class="close">List Users</span>
                                             </a>
                                         </li>
-                                        <li id="new-user" class="mb-3 rounded">
+                                        <li id="new-user" class="mb-3 rounded app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Add new user">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-user-plus mr-2"></i>
                                                 <span class="close">Add User</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded SurveyMenuItem"">
-                                            <a href="
-                                            #" class="p-1 pl-2">
-                                            <i class="fas fa-chalkboard-teacher mr-2"></i>
-                                            <span class="close">Create survey</span>
+                                        <li class="mb-3 rounded SurveyMenuItem app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Create a new survey">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fas fa-chalkboard-teacher mr-2"></i>
+                                                <span class="close">Create survey</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded w-100">
+                                        <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
+                                            title="Logout from this application">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-sign-out-alt mr-2"></i>
                                                 <span class="close">Logout</span>
                                             </a>
                                         </li>
-                                        <li id="search-btn" class="mb-3 rounded w-100">
+                                        <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Search data">
                                             <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-search mr-2"></i>
@@ -108,79 +112,7 @@
                                         class="fa fa-search"></i></span>
                             </a>
                             <!-- Menu right -->
-                            <section id="right-menu-ajax" class="close">
-                                <!--  <div id="right-menu" class="p-0">
-                                    <p class="text-white text-center w-100">Search for: </p>
-
-                                    <form id="advanced-search">
-                                        <div id="name_user" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
-                                            <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
-                                            <input type="text" class="form-control" id="name"
-                                            placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
-                                            <small class="text-center text-white w-100">
-                                                Must be written in lowercase.
-                                            </small>
-                                        </div>
-
-                                        <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-                                            <label for="last-name" class="badge-pill bg-dark text-center w-100 mb-3">Last Name</label>
-                                            <input type="text" class="form-control" id="last-name"
-                                                placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
-                                            <small class="text-center text-white w-100">
-                                                Must be written in lowercase.
-                                            </small>
-                                        </div>
-
-                                        <div id="genre" class="text-white form-group bg-dark m-2 p-2 d-flex justify-content-center align-items-center flex-wrap border">
-                                            <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
-                                            <div class="custom-control custom-radio text-center w-50">
-                                                <input type="radio" id="genre_female" class="custom-control-input" value="female" name="gender">
-                                                <label class="custom-control-label" for="genre_female">Female</label>
-                                            </div>
-                                            <div class="custom-control custom-radio text-center w-50">
-                                                <input type="radio" id="genre_male" class="custom-control-input" value="male" name="gender">
-                                                <label class="custom-control-label" for="genre_male">Male</label>
-                                            </div>
-                                        </div>
-                                        <div id="age_user" class="text-white form-group m-2 p-2 bg-dark border">
-                                            <label for="age-range" class="badge-pill bg-dark text-white text-center w-100 mb-3 ">Age</label>
-                                            <input type="range" min="16" max="90" class="custom-range" id="age-range">
-                                            <p id="age" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
-                                        </div>
-                                        <div id="experience" class="text-white form-group m-2 p-2 bg-dark border">
-                                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
-                                                of experience</label>
-                                            <input type="range" min="0" max="30" class="custom-range" id="exp-years">
-                                            <p id="range" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
-                                        </div>
-
-                                         ********* lANGUAGES ***********
-                                        <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
-                                            <label class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</label>
-                                        </div>
-
-                                        ******** SKILLS **********
-                                        <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
-                                            <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
-                                            <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
-                                                <label class="w-100 text-center font-italic">Layout</label>
-                                            </div>
-                                            <div class="col-5 d-flex flex-column mr-auto p-0 bg-dark">
-                                                <label class="w-100 text-center font-italic">Languages</label>
-                                            </div>
-                                            <div class="col-6 d-flex flex-column p-0 bg-dark">
-                                                <label class="w-100 text-center font-italic">Frameworks</label>
-                                            </div>
-                                        </div>
-
-                                        <div id="button_right" class="d-flex justify-content-center mb-5">
-                                            <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill">
-                                                <i class="fa fa-check-circle fa-3x "></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>-->
-                            </section>
+                            <section id="right-menu-ajax" class="close"> </section>
                         </div>
 
                     </div>
@@ -291,7 +223,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="js/form.js"></script>
     <script src="js/UserForm/UserForm.js"></script>
-    <script src="js/SurveyConstructor.js"></script>
+    <script src="js/SurveyCreator/SurveyCreator.js"></script>
     <script src="js/UsersTable/UsersTable.js"></script>
     <script src="js/UsersTable/SearchFilter.js"></script>
     <script src="js/GeneralConstructor.js"></script>

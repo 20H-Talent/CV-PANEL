@@ -14,11 +14,8 @@ const GeneralConstructor = (function() {
     constructors = classes;
 
     function construct(constructorKey) {
-      for (constructor of constructors) {
-        if (constructor[constructorKey]) {
-          constructor[constructorKey].construct(targetContainer);
-          break;
-        }
+      if (constructors[constructorKey]) {
+        constructors[constructorKey].construct(targetContainer);
       }
     }
 
@@ -30,7 +27,7 @@ const GeneralConstructor = (function() {
 
   return {
     getInstance: function(classes) {
-      if (!instance && classes instanceof Array) {
+      if (!instance && classes instanceof Object) {
         instance = init(classes);
       } else {
         throw new Error(
@@ -45,9 +42,11 @@ const GeneralConstructor = (function() {
 let generalConstructor;
 
 try {
-  generalConstructor = GeneralConstructor.getInstance([
-    { "users-table": usersTable, "user-form": userForm }
-  ]);
+  generalConstructor = GeneralConstructor.getInstance({
+    "users-table": usersTable,
+    "user-form": userForm,
+    "survey-creator": surveyCreator
+  });
 } catch (err) {
   alert(err.name + " " + err.message);
 }

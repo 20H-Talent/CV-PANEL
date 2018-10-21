@@ -11,14 +11,14 @@ const UserForm = (function() {
             .append(htmlSkeleton)
             .find("#user-form");
 
-          _setupInternalListeners(userForm);
+          _setupInternalEventListeners(userForm);
         }).fail(function(err) {
           throw new Error(err);
         });
       }
     }
 
-    function _setupInternalListeners(form) {
+    function _setupInternalEventListeners(form) {
       form
         .find("button#create-user")
         .off("click")
