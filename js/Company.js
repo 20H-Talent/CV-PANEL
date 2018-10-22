@@ -24,9 +24,9 @@ function Company(
     this.phone = phone;
     this.renderSocialNetworks = function() {
         var divCol = document.createElement("div");
-        console.log("social", this.socialnetworks);
+        //  console.log("social", this.socialnetworks);
         // var objectResult = Object.keys(this.socialnetworks)
-        console.log('objectResult :', objectResult);
+        //console.log('objectResult :', objectResult);
         // for (let i = 0; i < objectResult.length; i++) {
         //     console.log("entro al goro");
         //     var network = objectResult[i];
@@ -37,16 +37,16 @@ function Company(
         // };
 
 
-        // for (let social in this.socialnetworks) {
-        //     console.log("entro al goro");
-        //     console.log("NETWORK", this.socialnetworks[social]);
-        //     var innerNetwork = "<a href='" + this.socialnetworks[social] + "'title='" + this.socialnetworks[social] + "'><i class='fab ml-3 btn " + this.socialnetworks[social] + "  fa-lg fa-" + this.socialnetworks[social] + "'></i></a>";
-        //     console.log("innerNetwork", innerNetwork);
-        //     divCol.innerHTML = divCol.innerHTML + innerNetwork;
-        // }
-        console.log('divCol :', divCol.innerHTML);
-        console.log(this.id);
-        console.log('divCol.innerHTML :', divCol.innerHTML);
+        for (let social in this.socialnetworks) {
+            // console.log("entro al goro");
+            console.log("NETWORK", `${social} = ${this.socialnetworks[social]}`);
+            var innerNetwork = `<a href="${social}" title="${social}"><i style="z-index: 10;" class="fab ml-1 btn-${social}  fa-lg fa-${social}"></i></a>`;
+            console.log("innerNetwork", innerNetwork);
+            divCol.innerHTML = divCol.innerHTML + innerNetwork;
+        }
+        //console.log('divCol :', divCol.innerHTML);
+        // console.log(this.id);
+        //console.log('divCol.innerHTML :', divCol.innerHTML);
         return divCol.innerHTML;
         // return divCol;
     }

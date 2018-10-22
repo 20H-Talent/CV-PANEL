@@ -84,33 +84,37 @@ a.btn-social,
     color: #e71f44;
 }
 
-.btn-twitter {
+
+/* .btn-twitter {
     background-color: #55acee;
-}
+} */
 
 .btn-twitter:hover {
     background-color: #83c3f3;
 }
 
-.btn-youtube {
+
+/* .btn-youtube {
     background-color: #e52d27;
-}
+} */
 
 .btn-youtube:hover {
     background-color: #ea5955;
 }
 
-.btn-facebook {
+
+/* .btn-facebook {
     background-color: #2441a1;
-}
+} */
 
 .btn-facebook:hover {
     background-color: #0f2fe0;
 }
 
-.btn-linkedin {
+
+/* .btn-linkedin {
     background-color: #2441a1;
-}
+} */
 
 .btn-linkedin:hover {
     background-color: #0f2fe0;
