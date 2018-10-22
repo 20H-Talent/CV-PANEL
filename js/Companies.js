@@ -7,7 +7,6 @@ function Companies() {
         this.companies.push(company);
     };
     this.renderTable = function() {
-        //companies.addCompany(comp1);
         for (var i = 0; i < this.companies.length; i++) {
             $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
             <td class="company-logo text-center"><img class="img rounded-circle  align-middle"src=${this.companies[i].logo} style="width:50px;"/></td>
@@ -19,12 +18,8 @@ function Companies() {
                     <td class="company-registered">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <a href="${this.companies[i].socialnetworks.instagram}"title="Instagram"  target="_blank"><i class="fab btn-instagram  fa-lg fa-instagram"></i></a>
-                    <a href="${this.companies[i].socialnetworks.twitter}"title="Twitter"  target=" title="Linkedin" _blank"><i class="fab fa-lg fa-twitter"></i></a>
-                    <a href="${this.companies[i].socialnetworks.youtube}"title="Youtube" target="_blank"><i class="fab fa-lg fa-youtube text-danger"></i></a>
-                    <a href="${this.companies[i].socialnetworks.facebook}"title="Facebook" target="_blank" ><i class="fab fa-lg fa-facebook-square"></i></a>
-                    <a href="${this.companies[i].socialnetworks.linkedin}"title="Linkedin"  target="_blank"><i class="fab  btn-ldeep-purple fa-lg fa-linkedin "></i></a>
+                <div class="col-md-12 text-center social-net" id="networks${this.companies[i].id}">
+                ${this.companies[i].renderSocialNetworks()}
                 </div>
             </div>
         </div>
@@ -43,4 +38,9 @@ function Companies() {
         });
         return company[0];
     }
+
+
+
+
+
 }

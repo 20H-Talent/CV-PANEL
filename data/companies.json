@@ -10,10 +10,8 @@
             "zipcode": "92998-3874"
         },
         "socialnetworks": {
-            "facebook": "https://www.google.com/",
             "twitter": "https://www.google.com/",
             "linkedin": "https://www.google.com/",
-
             "youtube": "https://www.google.com/"
         },
         "logo": "./assets/images/kisspng-windows-7-windows-vista-logo-microsoft-windows-logos-5ab719c342adc2.6952612015219491232731.jpg",
@@ -36,8 +34,8 @@
             "facebook": "https://www.google.com/",
 
             "linkedin": "https://www.google.com/",
-            "instagram": "https://www.google.com/",
-            "youtube": "https://www.google.com/"
+            "instagram": "https://www.google.com/"
+
         },
         "logo": "./assets/images/skills/Apple-Offical-Logo-Png-bluecolor-660x660.png",
         "descripcion": "Switchable contextually-based project",
@@ -59,7 +57,6 @@
             "facebook": "https://www.google.com/",
             "twitter": "https://www.google.com/",
             "linkedin": "https://www.google.com/",
-            "instagram": "https://www.google.com/",
             "youtube": "https://www.google.com/"
         },
         "logo": "./assets/images/Google_-G-_Logo_svg.png",
@@ -79,7 +76,6 @@
             "zipcode": "59590-4157"
         },
         "socialnetworks": {
-            "facebook": "https://www.google.com/",
             "twitter": "https://www.google.com/",
             "linkedin": "https://www.google.com/",
             "instagram": "https://www.google.com/",
@@ -151,8 +147,8 @@
             "facebook": "https://www.google.com/",
             "twitter": "https://www.google.com/",
             "linkedin": "https://www.google.com/",
-            "instagram": "https://www.google.com/",
-            "youtube": "https://www.google.com/"
+            "instagram": "https://www.google.com/"
+
         },
         "logo": "./assets/images/1121436.png",
         "descripcion": "Synchronised bottom-line interface",
@@ -174,8 +170,7 @@
             "facebook": "https://www.google.com/",
             "twitter": "https://www.google.com/",
             "linkedin": "https://www.google.com/",
-            "instagram": "https://www.google.com/",
-            "youtube": "https://www.google.com/"
+            "instagram": "https://www.google.com/"
         },
         "logo": "./assets/images/Rounded-Design-HP-Logo-Free.jpg",
         "descripcion": "Multi-layered client-server neural-net",
