@@ -202,6 +202,7 @@ const SurveyCreator = (function() {
           case "text":
           case "color":
           case "telephone":
+          case "file":
             $typesCell
               .children(".Cell-Container")
               .empty()

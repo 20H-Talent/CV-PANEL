@@ -12,6 +12,8 @@ const UserForm = (function() {
             .find("#user-form");
 
           _setupInternalEventListeners(userForm);
+          _appendSkills();
+          _appendLanguages();
         }).fail(function(err) {
           throw new Error(err);
         });
@@ -31,6 +33,49 @@ const UserForm = (function() {
         .find("button#languages")
         .off("click")
         .on("click", _showChoices);
+    }
+
+    function _appendSkills() {
+      const skillsContainer = userForm.find("#skill");
+      skillsContainer
+        .find("*")
+        .not("h4")
+        .empty();
+
+      $.getJSON("../../data/skills.json", function(skills) {
+        skills.forEach(skill => {
+          skillsContainer.append(`
+          <div class="custom-control custom-checkbox custom-control-inline">
+               <input name="${
+                 skill["name"]
+               }" type="checkbox" class="custom-control-input" id="${
+            skill["label"]
+          }" value=${skill["defaultValue"]}>
+               <label class="custom-control-label" for="${skill["label"]}">${
+            skill["label"]
+          }</label>
+             </div`);
+        });
+      }).fail(function(err) {
+        throw new Error(err);
+      });
+    }
+
+    function _appendLanguages() {
+      $.getJSON("../../data/languages.json", function(languages) {
+        const languagesSelector = userForm.find("select#selLanguage");
+        languagesSelector.empty();
+
+        languages.forEach(language => {
+          const label = language["label"];
+
+          languagesSelector.append(
+            `<option value="${label}">${label}</option>`
+          );
+        });
+      }).fail(function(err) {
+        throw new Error(err);
+      });
     }
 
     function _showChoices() {
