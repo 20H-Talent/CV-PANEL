@@ -28,6 +28,11 @@
   font-size: 1.3em;
 }
 
+.survey-container .SurveyPreview iframe {
+  width: 100%;
+  height: auto;
+}
+
 td.ValueType-Cell label {
   width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;

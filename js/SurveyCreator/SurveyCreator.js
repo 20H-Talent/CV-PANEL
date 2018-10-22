@@ -202,46 +202,63 @@ const SurveyCreator = (function() {
           case "text":
           case "color":
           case "telephone":
-            $typesCell.children(".Cell-Container").empty().append(`
-          <div class="form-group ValueType-data">
+            $typesCell
+              .children(".Cell-Container")
+              .empty()
+              .append(
+                `
+        <div class="form-group ValueType-data">
           <label>
             <p contenteditable="true">You can modify this text</p>
-             <input type="${selectValue}" name="${selectValue}_input[]" class="form-control" placeholder="Insert default value on this field" />
+              <div class="input-group">
+                <input type="${selectValue}" name="${selectValue}_input[]" class="form-control" placeholder="Insert default value on this field" />
+                <div class="input-group-append">
+                  <button class="btn btn-outline-danger delete" type="button"><i class="far fa-trash-alt"></i></button>
+                </div>
           </label>
-        </div>`);
+        </div>`
+              )
+              .off("click")
+              .on("click", "button.delete", _deleteInput);
             break;
           case "select":
             $typesCell
               .children(".Cell-Container")
               .empty()
               .append(
-                `
-             <div class="form-group ValueType-data">
-               <div class="form-row d-flex">
-                 <div class="col-md-5 border-right">
-                  <label>
-                    <p contenteditable="true">Title of your selector</p>
-                    <select class="form-control" name="select_input[]"></select>
-                  </label>
-                </div>
-                <div class="col-md-7 align-self-start">
-                  <div class="input-group">
-                    <input class="form-control" type="text" placeholder="New option here..."/>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
-                      <button class="btn btn-outline-danger selectActions delete" type="button">Delete</button>
+                `<div class="form-group ValueType-data">
+                    <div class="form-row d-flex">
+                      <div class="col-md-5 border-right">
+                        <label>
+                          <p contenteditable="true">Title of your selector</p>
+                          <select class="form-control" name="select_input[]"></select>
+                        </label>
+                      </div>
+                      <div class="col-md-7 align-self-start">
+                        <div class="input-group">
+                          <input class="form-control" type="text" placeholder="New option here..."/>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
+                            <button class="btn btn-outline-danger selectActions delete" type="button">Delete</button>
+                          </div>
+                        </div>
+                        <div class="container preview-group my-2">
+                          <ul class="list-group preview-list my-1 px-1 py-1"></ul>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="container preview-group my-2">
-                    <ul class="list-group preview-list my-1 px-1 py-1"></ul>
-                  </div>
-                </div>
-               </div>
              </div>`
               )
               .off("click")
               .on("click", "button.selectActions", _selectActions);
             break;
+        }
+      }
+      function _deleteInput(event) {
+        if (window.confirm("Are you sure to delete this input element?")) {
+          $(event.currentTarget)
+            .closest(".ValueType-data")
+            .remove();
         }
       }
 
