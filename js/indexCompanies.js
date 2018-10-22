@@ -70,10 +70,10 @@ function removeCompanyFromDOM(id) {
     var company = companies.getCompanyById(id);
     const mainContainer = $(".main-container-companies");
     const tableBody = mainContainer.find("#company-table tbody");
-    if (window.confirm("Are you sure you want  to delete this company?")) {
+    $("div.main-container-companies").on("click", "button.remove-company", function(e) {
         if (tableBody.children("tr").length > 0) {
             var findTr = tableBody.find(`tr[data-id=${company.id}]`);
             findTr.remove();
         }
-    }
+    });
 }

@@ -30,10 +30,10 @@ function Companies() {
         </div>
                 </td>
                 <td class="options text-center">
-                    <button  type="button" onclick="showPreviewInfo(${this.companies[i].id})" title="View company"   class="btn  btn-sm  btn-outline-primary preview-company " data-toggle="modal" data-target="#ordine"><i class="far fa-eye"></i> </button>
+                    <button  type="button" onclick="showPreviewInfo(${this.companies[i].id})" data-toggle="modal" data-id=${this.companies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-primary preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" title="Delete company"  class="my-2 btn  remove-company  btn-sm  btn-outline-primary " onclick="removeCompanyFromDOM(${this.companies[i].id})" ><i class="far fa-trash-alt"></i></button></td>
+                    <button type="button" title="Delete company"  class="my-2 btn  remove-company  btn-sm  btn-outline-primary "  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="far fa-trash-alt"></i></button></td>
                 </tr>`);
         }
     };
