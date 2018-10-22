@@ -12,6 +12,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/form.css">
+    <link rel="stylesheet" href="/assets/css/enterprises-form.css"> 
     <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
     <title>CV - PANEL</title>
 </head>
@@ -66,7 +67,8 @@
                                                 <span class="close">Search</span>
                                             </a>
                                         </li>
-                                        <li id="form-enterprises" class="mb-3 rounded w-100">
+                                        <li class="mb-3 rounded" onclick="switchVisible('Div4')">
+                                            <!-- <li id="form-enterprises" class="mb-3 rounded w-100"> -->
                                             <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fas fa-business-time mr-2"></i>
@@ -349,12 +351,79 @@
                 </div>
 
                 <!-- <div class="col p-0 mr-3" id="Div3"> </div> -->
-                <div class="col p-0 mr-3" id="Div4"> 
-
+                <!-- Enterprise Form-->
+                <div class="col p-0 mr-3" id="Div4">
+                    <div class="container col h-100">
+                        <section class="col">
+                            <form class="container enterprise-form">
+                                <h1 class="format-1">Business area</h1>
+                                <hr>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputName">Enterprise's name</label>
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputCif">CIF</label>
+                                    <input type="text" class="form-control" id="inputCif" placeholder="CIF">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputAddress">Address</label>
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Street">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputCity">City</label>
+                                    <input type="text" class="form-control" id="inputCity" placeholder="City">
+                                </div>
+                                <div class="form-row col-md-12 country">
+                                    <label class="format-2" for="inputCountry">Country</label>
+                                    <select id="inputCountry" class="form-control">
+                                        <option selected>Country</option>
+                                        <option>Spain </option>
+                                        <option>France</option>
+                                        <option>Italy</option>
+                                        <option>United Kingdom</option>
+                                        <option>Germany</option>
+                                    </select>
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputZip">Zip</label>
+                                    <input type="text" class="form-control" id="inputZip" placeholder="Zipcode">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputPhone">Phone</label>
+                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputEmail">Email</label>
+                                    <input type="email" class="form-control" id="inputEemail" placeholder="Email">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputWorkersNumber">Workers Number</label>
+                                    <input type="text" class="form-control" id="inputWorkersNumber" placeholder="Number of workers in the company">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputSocialNetworks">Social Networks</label>
+                                    <input type="text" class="form-control" id="inputSocialNetworks" placeholder="facebook, twitter...">
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <label class="format-2" for="inputLogo">Logo</label>
+                                    <input type="text" class="form-control" id="inputLogo" placeholder="Add logo">
+                                </div>
+                                <p class="format-2 form-row col-md-12">Description</p>
+                                <div class="form-row col-md-12">
+                                    <!-- <label for="inputDescription">Description</label> -->
+                                    <textarea type="text" class="form-control" id="inputDescription" cols="30" rows="5"
+                                        placeholder="Description"></textarea>
+                                </div>
+                                <div class="form-row col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
                 </div>
                 <!-- Menu right -->
                 <div class="container-right">
-
                     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
                     <div id="main-right">
                         <div id="mySidenavRight" class="sidenav-right">
@@ -367,7 +436,6 @@
                                 <!-- Menu right load by ajax -->
                             </section>
                         </div>
-
                     </div>
                 </div>
             </div>
