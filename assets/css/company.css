@@ -21,6 +21,7 @@
 .modal-header {
     background-color: #333;
     color: #fff;
+    border-radius: 3px;
 }
 
 .btn-ldeep-purple {
