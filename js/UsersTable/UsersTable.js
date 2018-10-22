@@ -554,6 +554,72 @@ const Table = (function() {
       }
     }
 
+    function renderDataOnModal(event) {
+      const element = $(event.relatedTarget);
+      const modal = $(this);
+      const user = getUserByEmailOrID(element.data("id"));
+
+      const { picture, name, login, dob, phone, cell, location } = user;
+      const fullName = buildUserFullname(name);
+
+      const modalBody = modal.find(".modal-body");
+
+      modalBody.find("#infoUser span").remove();
+
+      modal.find(".modal-title").text(fullName + " ~ " + login.username);
+      modalBody.find("img").prop("src", picture["large"]);
+
+      _appendBirthday(modalBody, dob.date);
+      _appendPhones(modalBody, { phone, cell });
+      _appendAddress(modalBody, location);
+      _appendTechSkills(modalBody, user);
+    }
+
+    function _appendBirthday(container, date) {
+      container
+        .find(".birthday")
+        .append(`<span>${new Date(date).toLocaleDateString()}</span>`);
+    }
+
+    function _appendPhones(container, phones) {
+      container
+        .find(".phones")
+        .children("i")
+        .each((index, element) => {
+          if ($(element).hasClass("fa-phone")) {
+            $(`<span>${phones.phone}</span>`).insertAfter($(element));
+          }
+          if ($(element).hasClass("fa-mobile-alt")) {
+            $(`<span>${phones.cell}</span>`).insertAfter($(element));
+          }
+        });
+    }
+
+    function _appendAddress(container, location) {
+      container
+        .find(".address")
+        .append(
+          `<span>${location.state} ~ ${location.city} ${location.postcode} / ${
+            location.street
+          }</span>`
+        );
+    }
+
+    function _appendTechSkills(container, user) {
+      ["skills", "languages", "frameworks"].map(key => {
+        const userData = user[key];
+        container
+          .find(`#${key}Info > .card-body`)
+          .empty()
+          .append(
+            userData.map(
+              value =>
+                `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
+            )
+          );
+      });
+    }
+
     return {
       construct,
       initTable,
@@ -561,6 +627,7 @@ const Table = (function() {
       buildUserFullname,
       getUserByEmailOrID,
       renderDataOnResize,
+      renderDataOnModal,
       changeApiParams,
       deleteUser
     };
@@ -578,68 +645,4 @@ const Table = (function() {
 
 const usersTable = Table.getInstance();
 
-$("#userModal").on("show.bs.modal", function(event) {
-  const element = $(event.relatedTarget);
-  const modal = $(this);
-  const user = usersTable.getUserByEmailOrID(element.data("id"));
-
-  const { picture, name, login, dob, phone, cell, location } = user;
-  const fullName = usersTable.buildUserFullname(name);
-
-  const modalBody = modal.find(".modal-body");
-
-  modalBody.find("#infoUser span").remove();
-
-  modal.find(".modal-title").text(fullName + " ~ " + login.username);
-  modalBody.find("img").prop("src", picture["large"]);
-
-  appendBirthday(modalBody, dob.date);
-  appendPhones(modalBody, { phone, cell });
-  appendAddress(modalBody, location);
-  appendTechSkills(modalBody, user);
-});
-
-function appendBirthday(container, date) {
-  container
-    .find(".birthday")
-    .append(`<span>${new Date(date).toLocaleDateString()}</span>`);
-}
-
-function appendPhones(container, phones) {
-  container
-    .find(".phones")
-    .children("i")
-    .each((index, element) => {
-      if ($(element).hasClass("fa-phone")) {
-        $(`<span>${phones.phone}</span>`).insertAfter($(element));
-      }
-      if ($(element).hasClass("fa-mobile-alt")) {
-        $(`<span>${phones.cell}</span>`).insertAfter($(element));
-      }
-    });
-}
-
-function appendAddress(container, location) {
-  container
-    .find(".address")
-    .append(
-      `<span>${location.state} ~ ${location.city} ${location.postcode} / ${
-        location.street
-      }</span>`
-    );
-}
-
-function appendTechSkills(container, user) {
-  ["skills", "languages", "frameworks"].map(key => {
-    const userData = user[key];
-    container
-      .find(`#${key}Info > .card-body`)
-      .empty()
-      .append(
-        userData.map(
-          value =>
-            `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
-        )
-      );
-  });
-}
+$("#userModal").on("show.bs.modal", usersTable.renderDataOnModal);
