@@ -2,7 +2,7 @@ var companies = new Companies();
 $.getJSON("../data/companies.json")
     .done(function(data) {
         $.each(data, function(i, item) {
-            var comp1 = new Company(
+            var listOfCompanies = new Company(
                 data[i].id,
                 data[i].name,
                 data[i].CIF,
@@ -15,7 +15,7 @@ $.getJSON("../data/companies.json")
                 data[i].address,
                 data[i].socialnetworks
             );
-            companies.addCompany(comp1);
+            companies.addCompany(listOfCompanies);
         });
         companies.renderTable();
     })
@@ -25,7 +25,7 @@ $.getJSON("../data/companies.json")
         }
     });
 
-function showInfo(id) {
+function showPreviewInfo(id) {
     var company = companies.getCompanyById(id);
     $("#modal").html(
         `<div class="shadow-lg p-3 border border-info  rounded"   data-id=${company.id} >
@@ -67,16 +67,13 @@ function showInfo(id) {
 };
 
 function removeCompanyFromDOM(id) {
-    console.log('id :', id);
     var company = companies.getCompanyById(id);
-    console.log('company :', company);
     const mainContainer = $(".main-container-companies");
     const tableBody = mainContainer.find("#company-table tbody");
-    console.log('tableBody :', tableBody);
-    if (tableBody.children("tr").length > 0) {
-        var findTr = tableBody.find(`tr[data-id=${company.id}]`);
-        console.log('findTr :', findTr);
-        findTr.remove();
+    if (window.confirm("Are you sure you want  to delete this company?")) {
+        if (tableBody.children("tr").length > 0) {
+            var findTr = tableBody.find(`tr[data-id=${company.id}]`);
+            findTr.remove();
+        }
     }
-    console.log('companies[i].id :', company.id);
 }

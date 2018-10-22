@@ -20,7 +20,6 @@ function Companies() {
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                  
                     <a href="${this.companies[i].socialnetworks.instagram}"title="Instagram"  target="_blank"><i class="fab btn-instagram  fa-lg fa-instagram"></i></a>
                     <a href="${this.companies[i].socialnetworks.twitter}"title="Twitter"  target=" title="Linkedin" _blank"><i class="fab fa-lg fa-twitter"></i></a>
                     <a href="${this.companies[i].socialnetworks.youtube}"title="Youtube" target="_blank"><i class="fab fa-lg fa-youtube text-danger"></i></a>
@@ -31,7 +30,7 @@ function Companies() {
         </div>
                 </td>
                 <td class="options text-center">
-                    <button  type="button" onclick="showInfo(${this.companies[i].id})" title="View company"   class="btn  btn-sm  btn-outline-primary preview-company " data-toggle="modal" data-target="#ordine"><i class="far fa-eye"></i> </button>
+                    <button  type="button" onclick="showPreviewInfo(${this.companies[i].id})" title="View company"   class="btn  btn-sm  btn-outline-primary preview-company " data-toggle="modal" data-target="#ordine"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
                     <button type="button" title="Delete company"  class="my-2 btn  remove-company  btn-sm  btn-outline-primary " onclick="removeCompanyFromDOM(${this.companies[i].id})" ><i class="far fa-trash-alt"></i></button></td>
