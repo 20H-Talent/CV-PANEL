@@ -118,7 +118,7 @@ const SurveyCreator = (function() {
             .off("input")
             .on("input", function(e) {
               $selector
-                .children(`option[value=${optionValue.toLowerCase()}]`)
+                .children(`option[value="${optionValue.toLowerCase()}"]`)
                 .text(
                   $(this)
                     .text()
@@ -207,7 +207,8 @@ const SurveyCreator = (function() {
                   <div class="input-group">
                     <input class="form-control" type="text" placeholder="New option here..."/>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-primary AppendOption" type="button">Append option</button>
+                      <button class="btn btn-outline-primary AppendOption" type="button">Add option</button>
+                      <button class="btn btn-outline-danger" type="button">Delete</button>
                     </div>
                   </div>
                   <div class="container preview-group my-2">
