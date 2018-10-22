@@ -16,7 +16,7 @@
   font-size: 1.4em;
 }
 
-.survey-container table tbody td {
+.survey-container table tbody .Cell-Container {
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;

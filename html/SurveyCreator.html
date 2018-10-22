@@ -3,7 +3,7 @@
         <h2>Create your survey</h2>
     </div>
     <div class="card-body">
-        <form id="survey-form" method="POST" novalidate>
+        <form id="survey-form" method="POST" enctype="multipart/form-data" novalidate>
             <div class="form-row">
                 <div class="col-md-3 offset-md-2">
                     <label for="start_date">Start Date</label>
@@ -28,8 +28,9 @@
                 <div class="col-md-6">
                     <label for="title">Title</label>
                     <input class="form-control" name="title" type="text">
+
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 align">
                     <label for="subtitle">Subtitle</label>
                     <input class="form-control" name="subtitle" type="text">
                 </div>
@@ -72,7 +73,9 @@
                                     <option value="telephone">Telephone</option>
                                 </select>
                             </td>
-                            <td class="ValueType-Cell"></td>
+                            <td class="ValueType-Cell">
+                                <div class="Cell-Container"></div>
+                            </td>
                             <td class="actions text-center">
                                 <div class="btn-group btn-group-lg" role="group" aria-label="...">
                                     <button class="btn btn-success">

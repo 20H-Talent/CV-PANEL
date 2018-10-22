@@ -175,9 +175,11 @@ const SurveyCreator = (function() {
       }
 
       function _newFieldValue(event, container) {
-        const valueTypeCell = container.find(".ValueType-Cell");
+        const valueTypeCell = container.find(
+          ".ValueType-Cell > .Cell-Container"
+        );
         valueTypeCell
-          .find("div.ValueType-data")
+          .find("div.ValueType-data:first-child")
           .clone()
           .appendTo(valueTypeCell);
       }
@@ -194,19 +196,23 @@ const SurveyCreator = (function() {
             `<i class="far fa-plus-square" title="New value inside this field"></i>`
           );
         }
-
-        switch ($select.val()) {
+        const selectValue = $select.val();
+        switch (selectValue) {
+          case "date":
           case "text":
-            $typesCell.empty().append(`
-            <div class="form-group ValueType-data">
-              <label>
-                <p contenteditable="true">Modify this text</p>
-                 <input type="text" name="text_input[]" class="form-control" placeholder="Insert default value on this field" />
-              </label>
-            </div>`);
+          case "color":
+          case "telephone":
+            $typesCell.children(".Cell-Container").empty().append(`
+          <div class="form-group ValueType-data">
+          <label>
+            <p contenteditable="true">You can modify this text</p>
+             <input type="${selectValue}" name="${selectValue}_input[]" class="form-control" placeholder="Insert default value on this field" />
+          </label>
+        </div>`);
             break;
           case "select":
             $typesCell
+              .children(".Cell-Container")
               .empty()
               .append(
                 `
@@ -235,15 +241,6 @@ const SurveyCreator = (function() {
               )
               .off("click")
               .on("click", "button.selectActions", _selectActions);
-            break;
-          case "telephone":
-            $typesCell.empty().append(`
-            <div class="form-group ValueType-data">
-                <label>
-                <p contenteditable="true">Modify this text</p>
-                <input type="tel" name="phone_input[]" class="form-control" placeholder="Insert default value on this field" />
-                </label>
-            </div>`);
             break;
         }
       }
