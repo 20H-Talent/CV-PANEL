@@ -1,4 +1,4 @@
-<div class="col p-0 mr-3" id="user-form">
+<div class="col p-0 mr-3" id="user-form-container">
     <div class="container col-md-8 h-100">
         <div class="col ">
             <div class="mb-3 adduser text-center">
@@ -9,7 +9,7 @@
             <div id="alertErrors" class="alert fade show" role="alert"></div>
             <hr class="mb-4">
             <hr class=" hr-2">
-            <form id="alertform" method="POST" class="needs-validation col-md-12">
+            <form id="user-form" method="POST" class="needs-validation col-md-12">
                 <div class="form-group row has-success">
                     <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
@@ -128,11 +128,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa "></i></span>
                             <div class="custom-control gen custom-radio">
-                                <input name="gender" type="radio" class="custom-control-input" required>
+                                <input value="male" name="gender" type="radio" class="custom-control-input" required>
                                 <label class="custom-control-label" for="male">Male</label>
                             </div>
                             <div class="custom-control gen custom-radio">
-                                <input name="gender" type="radio" class="custom-control-input" required>
+                                <input value="female" name="gender" type="radio" class="custom-control-input" required>
                                 <label class="custom-control-label" for="female">Female</label>
                             </div>
                         </div>

@@ -42,17 +42,22 @@ const Table = (function() {
         });
 
       $("div.main-container")
+        .find("td.options")
         .off("click")
-        .on("click", "button.edit", userForm.editForm);
+        .on("click", "button:not(.detail)", _optionButtonsEvent);
+    }
 
-      $("div.main-container")
-        .off("click")
-        .on("click", "button.delete", function(e) {
-          if (window.confirm("Are you sure to delete this user?")) {
-            const userID = $(this).data("id");
-            deleteUser(userID);
-          }
-        });
+    function _optionButtonsEvent(event) {
+      const button = $(event.currentTarget);
+      const userID = button.data("id");
+
+      if (button.hasClass("edit")) {
+        userForm.editForm(getUserByEmailOrID(userID));
+      } else {
+        if (window.confirm("Are you sure to delete this user?")) {
+          deleteUser(userID);
+        }
+      }
     }
 
     /** Prepare sessionStorage that allow us save the data in client side to work with it
@@ -304,7 +309,7 @@ const Table = (function() {
            </td>
            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
            <td class="options text-center">
-                  <button type="button" class=" my-2 btn btn-outline-success btn-sm"
+                  <button type="button" class=" my-2 btn btn-outline-success btn-sm detail"
                     data-id=${
                       id.value
                     } data-toggle="modal" data-target="#userModal" title="View user">

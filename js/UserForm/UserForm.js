@@ -4,12 +4,12 @@ const UserForm = (function() {
   function init() {
     let userForm;
     function construct(container) {
-      if (container.find("#user-form").length === 0) {
+      if (container.find("#user-form-container").length === 0) {
         $.get("../../html/UserForm.html", function(htmlSkeleton) {
           userForm = container
             .empty()
             .append(htmlSkeleton)
-            .find("#user-form");
+            .find("#user-form-container");
 
           _setupInternalEventListeners(userForm);
           _appendSkills();
@@ -115,7 +115,7 @@ const UserForm = (function() {
 
     function _formErrors() {
       const alertErrors = userForm.find("#alertErrors");
-      const form = userForm.find("form#alertform");
+      const form = userForm.find("form#user-form");
 
       alertErrors.empty().append(`
              <div class="col-lg-12">
@@ -149,54 +149,51 @@ const UserForm = (function() {
       userForm.find("select#selLanguage").val("");
     }
 
-    function editForm(event) {
-      const element = $(event.currentTarget);
-      const property = element.data("id");
-
-      const data = usersTable.getUserByEmailOrID(property);
-      // empting the checkboxes when editing another user
-      var skillUser = document.getElementById("skill");
-      var inpskill = skillUser.querySelectorAll("input");
-      for (var i = 0; i < inpskill.length; i++) {
-        inpskill[i].checked = false;
-        console.log("test: ", inpskill[i]);
-      }
-      // empting the checkboxes when editing another user
-      var lang = document.getElementById("selLanguage");
-      //var inpLang = lang.querySelectorAll("option");
-      for (var i = 0; i < lang.options.length; i++) {
-        lang.options[i].selected = false;
-      }
-      $("#Username").val(data.login.username);
-      $("#FirstName").val(
-        data.name.first.charAt(0).toUpperCase() + data.name.first.slice(1)
-      );
-      $("#LastName").val(
-        data.name.last.charAt(0).toUpperCase() + data.name.last.slice(1)
-      );
-      $("#email").val(data.email);
-      console.log("dara", data);
-      $("#age1").val(data.dob.age + " years old ");
-      $("#tel").val(data.phone);
-      $("#country").val(data.location.state);
-      $("#city").val(data.location.city);
-      $("#zip").val(data.location.postcode);
-      $("#address").val(data.location.street);
-      document.getElementById(data.gender).checked = true;
-      for (var i = 0; i < data.skills.length; i++) {
-        document.getElementById(data.skills[i]).checked = true;
-      }
-      var lang = document.getElementById("selLanguage");
-      for (var i = 0; i < lang.options.length; i++) {
-        // data.languages es un array con "languages" like ["Spanish","English"]
-        // indexOf está buscando dentro del array data.languages la posición del "lang.options[i].value" por ejemplo "English"
-        // ["Spanish","English"].indexOf("Spanish")
-        // entonces el resultado sería 1
-        if (data.languages.indexOf(lang.options[i].value) > -1) {
-          lang.options[i].selected = true;
+    function editForm(user) {
+      generalConstructor.construct("user-form");
+      setTimeout(() => {
+        // empting the checkboxes when editing another user
+        var skillUser = document.getElementById("skill");
+        var inpskill = skillUser.querySelectorAll("input");
+        for (var i = 0; i < inpskill.length; i++) {
+          inpskill[i].checked = false;
         }
-      }
-      switchVisible("Div2");
+        // empting the checkboxes when editing another user
+        var lang = document.getElementById("selLanguage");
+        //var inpLang = lang.querySelectorAll("option");
+        for (var i = 0; i < lang.options.length; i++) {
+          lang.options[i].selected = false;
+        }
+        $("#Username").val(user.login.username);
+        $("#FirstName").val(
+          user.name.first.charAt(0).toUpperCase() + user.name.first.slice(1)
+        );
+        $("#LastName").val(
+          user.name.last.charAt(0).toUpperCase() + user.name.last.slice(1)
+        );
+        $("#email").val(user.email);
+        $("#age1").val(user.dob.age + " years old ");
+        $("#tel").val(user.phone);
+        $("#country").val(user.location.state);
+        $("#city").val(user.location.city);
+        $("#zip").val(user.location.postcode);
+        $("#address").val(user.location.street);
+
+        document.querySelector(`input[value=${user.gender}]`).checked = true;
+        for (var i = 0; i < user.skills.length; i++) {
+          document.getElementById(user.skills[i]).checked = true;
+        }
+        var lang = document.getElementById("selLanguage");
+        for (var i = 0; i < lang.options.length; i++) {
+          // user.languages es un array con "languages" like ["Spanish","English"]
+          // indexOf está buscando dentro del array user.languages la posición del "lang.options[i].value" por ejemplo "English"
+          // ["Spanish","English"].indexOf("Spanish")
+          // entonces el resultado sería 1
+          if (user.languages.indexOf(lang.options[i].value) > -1) {
+            lang.options[i].selected = true;
+          }
+        }
+      }, 300);
     }
 
     return {
