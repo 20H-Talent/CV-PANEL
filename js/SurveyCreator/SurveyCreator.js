@@ -32,13 +32,22 @@ const SurveyCreator = (function() {
           });
       }
 
-      function _appendOption(event) {
-        const $input = $(event.currentTarget)
-          .parent()
-          .siblings("input[type=text]");
+      function _selectActions(event) {
+        const button = $(event.currentTarget);
 
-        const inputValue = $input.val().trim();
-        const $selector = $input
+        if (button.hasClass("delete")) {
+          if (window.confirm("Are you sure to delete this selector")) {
+            button.closest("div.ValueType-data").remove();
+          }
+        } else {
+          const $input = button.parent().siblings("input[type=text]");
+          _appendOptionToSelector($input);
+        }
+      }
+
+      function _appendOptionToSelector(input) {
+        const inputValue = input.val().trim();
+        const $selector = input
           .closest("div.col-md-7")
           .siblings("div.border-right")
           .find("select");
@@ -59,24 +68,24 @@ const SurveyCreator = (function() {
         });
 
         if (!optionExists && inputValue.length > 0) {
-          $input.val("");
+          input.val("");
           const newOption = $("<option>", {
             value: inputValue.toLowerCase(),
             text: inputValue
           });
 
-          $input
+          input
             .parent()
             .siblings(".preview-group")
             .find(" ul.preview-list")
             .append(
               `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
-                  <span data-position=${lastPosition}>${inputValue}</span>
-                  <div class="btn-group btn-group" role="group">
-                    <button class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
-                    <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
-                  </div>
-              </li>`
+              <span data-position=${lastPosition}>${inputValue}</span>
+              <div class="btn-group btn-group" role="group">
+                <button class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
+                <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
+              </div>
+          </li>`
             );
           $selector
             .hide()
@@ -87,16 +96,20 @@ const SurveyCreator = (function() {
             ".ValueType-Cell ul.preview-list"
           );
 
-          previewList
-            .off("click")
-            .on("click", "button.deleteOption", _deleteOption);
-
-          previewList.on("click", "button.editOption", _editOption);
+          previewList.off("click").on("click", "button", _optionActions);
         }
       }
 
-      function _editOption(event) {
-        const editButton = $(event.currentTarget);
+      function _optionActions(event) {
+        const button = $(event.currentTarget);
+        if (button.hasClass("editOption")) {
+          _editOption(button);
+        } else {
+          _deleteOption(button);
+        }
+      }
+
+      function _editOption(editButton) {
         const buttonIcon = editButton.find("i");
         const editableField = editButton.parent().siblings("span");
         const $selector = editableField
@@ -142,10 +155,12 @@ const SurveyCreator = (function() {
         }
       }
 
-      function _deleteOption(event) {
+      function _deleteOption(deleteButton) {
         if (window.confirm("Are you sure to delete this option?")) {
-          const deleteButton = $(event.currentTarget);
-          const optionValue = deleteButton.data("value").toLowerCase();
+          const optionValue = deleteButton
+            .siblings("button.editOption")
+            .data("value")
+            .toLowerCase();
 
           deleteButton
             .closest(".preview-group")
@@ -207,8 +222,8 @@ const SurveyCreator = (function() {
                   <div class="input-group">
                     <input class="form-control" type="text" placeholder="New option here..."/>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-primary AppendOption" type="button">Add option</button>
-                      <button class="btn btn-outline-danger" type="button">Delete</button>
+                      <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
+                      <button class="btn btn-outline-danger selectActions delete" type="button">Delete</button>
                     </div>
                   </div>
                   <div class="container preview-group my-2">
@@ -219,7 +234,7 @@ const SurveyCreator = (function() {
              </div>`
               )
               .off("click")
-              .on("click", "button.AppendOption", _appendOption);
+              .on("click", "button.selectActions", _selectActions);
             break;
           case "telephone":
             $typesCell.empty().append(`
