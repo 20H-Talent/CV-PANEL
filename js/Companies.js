@@ -26,7 +26,7 @@ function Companies() {
                     <button  type="button" onclick="showPreviewInfo(${this.companies[i].id})" data-toggle="modal" data-id=${this.companies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-info preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="far fa-trash-alt"></i></button></td>
+                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
         }
     };

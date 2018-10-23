@@ -1,5 +1,9 @@
 /* //@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"); */
 
+#company-table {
+    font-size: 0.9rem;
+}
+
 #company-table thead tr:first-child th {
     position: sticky;
     text-align: center;
@@ -19,7 +23,8 @@
 }
 
 .modal-header {
-    background-color: #333;
+    background-color: #4d394b;
+    ;
     color: #fff;
     border-radius: 3px;
 }
@@ -117,4 +122,10 @@ a.btn-social,
 
 .btn-linkedin:hover {
     background-color: #0f2fe0;
+}
+
+@media screen and (max-width: 1070px) {
+    #company-table {
+        font-size: 0.7em;
+    }
 }
