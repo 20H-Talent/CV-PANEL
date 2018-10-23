@@ -4,7 +4,7 @@
     position: sticky;
     text-align: center;
     top: 0;
-    z-index: 10;
+    /* z-index: 10; */
     margin: 0;
     cursor: pointer;
     border-right: 1px solid #ffffff;
@@ -93,10 +93,9 @@ a.btn-social,
     background-color: #83c3f3;
 }
 
-
-/* .btn-youtube {
-    background-color: #e52d27;
-} */
+.btn-youtube {
+    color: #e52d27;
+}
 
 .btn-youtube:hover {
     background-color: #ea5955;

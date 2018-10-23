@@ -45,12 +45,8 @@ function showPreviewInfo(id) {
             <p>${company.descripcion}</p> 
         </div>
         <div class="text-dark text-center h6 "><h5 class="  text-center badge-info text-white rounded ">Social Networks </h5>
-        <div class="col-md-12 text-center ">
-        <a href="${company.socialnetworks.linkedin}" target="_blank"><i class="fab  fa-lg fa-linkedin "></i></a>
-        <a href="${company.socialnetworks.instagram}" target="_blank"><i class="fab fa-lg fa-instagram"></i></a>
-        <a href="${company.socialnetworks.twitter}" ><i class="fab fa-lg fa-twitter"></i></a>
-        <a href="${company.socialnetworks.youtube}" target="_blank"><i class="fab fa-lg fa-youtube text-danger"></i></a>
-        <a href="${company.socialnetworks.facebook}" target="_blank"><i class="fab fa-lg fa-facebook-square"></i></a>
+        <div class="col-md-12 text-center " id="networks${company.id}">
+        ${company.renderSocialNetworks()}
     </div>
     </div>
             <div  class="text-dark text-center h6 "><h5 class="text-center badge-info text-white rounded">Phone</h5>
