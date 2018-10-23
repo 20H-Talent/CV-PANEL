@@ -29,9 +29,9 @@ const SurveyCreator = (function() {
           });
 
         $surveyContainer
-          .find("th.FieldActions")
+          .find(".Actions-Cell button.newField")
           .off("click")
-          .on("click", "button.newField", _addNewSurveyField);
+          .on("click", _addNewSurveyField);
       }
 
       function _addNewSurveyField(event) {
@@ -39,7 +39,6 @@ const SurveyCreator = (function() {
         const surveyFieldsContainer = button
           .closest(".Actions-Cell")
           .siblings("td.ValueType-Cell");
-        console.log(surveyFieldsContainer);
       }
 
       function _selectActions(event) {
