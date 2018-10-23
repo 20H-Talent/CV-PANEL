@@ -181,7 +181,7 @@ html {
   margin: 0;
   border: 0;
   border-right: 1px solid rgba(216, 210, 210, 0.8);
-  background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
+  background: #4d394b;
 }
 
 #users-table tbody td:first-child {

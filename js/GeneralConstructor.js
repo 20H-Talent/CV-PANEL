@@ -14,8 +14,12 @@ const GeneralConstructor = (function() {
     constructors = classes;
 
     function construct(constructorKey) {
-      if (constructors[constructorKey]) {
-        constructors[constructorKey].construct(targetContainer);
+      if (
+        constructors[constructorKey] &&
+        targetContainer.find(constructors[constructorKey]["container"])
+          .length === 0
+      ) {
+        constructors[constructorKey]["constructor"].construct(targetContainer);
       }
     }
 
@@ -43,9 +47,9 @@ let generalConstructor;
 
 try {
   generalConstructor = GeneralConstructor.getInstance({
-    "users-table": usersTable,
-    "user-form": userForm,
-    "survey-creator": surveyCreator
+    "users-table": { container: "#users-table", constructor: usersTable },
+    "user-form": { container: "#user-form-container", constructor: userForm },
+    "survey-creator": { container: "", constructor: surveyCreator }
   });
 } catch (err) {
   alert(err.name + " " + err.message);

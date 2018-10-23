@@ -4,20 +4,18 @@ const UserForm = (function() {
   function init() {
     let userForm;
     function construct(container) {
-      if (container.find("#user-form-container").length === 0) {
-        $.get("../../html/UserForm.html", function(htmlSkeleton) {
-          userForm = container
-            .empty()
-            .append(htmlSkeleton)
-            .find("#user-form-container");
+      $.get("../../html/UserForm.html", function(htmlSkeleton) {
+        userForm = container
+          .empty()
+          .append(htmlSkeleton)
+          .find("#user-form-container");
 
-          _setupInternalEventListeners(userForm);
-          _appendSkills();
-          _appendLanguages();
-        }).fail(function(err) {
-          throw new Error(err);
-        });
-      }
+        _setupInternalEventListeners(userForm);
+        _appendSkills();
+        _appendLanguages();
+      }).fail(function(err) {
+        throw new Error(err);
+      });
     }
 
     function _setupInternalEventListeners(form) {

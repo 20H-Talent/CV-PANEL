@@ -4,18 +4,15 @@ const SurveyCreator = (function() {
   function init() {
     let surveyForm;
     function construct(container) {
-      if (container.find("form#survey-form").length === 0) {
-        $.get("../../html/SurveyCreator.html", function(htmlSkeleton) {
-          surveyForm = container.empty().append(htmlSkeleton);
-          _setupInternalEventListeners(surveyForm);
-        }).fail(function(err) {
-          throw new Error(err);
-        });
-      }
+      $.get("../../html/SurveyCreator.html", function(htmlSkeleton) {
+        surveyForm = container.empty().append(htmlSkeleton);
+        _setupInternalEventListeners(surveyForm);
+      }).fail(function(err) {
+        throw new Error(err);
+      });
 
       function _setupInternalEventListeners(form) {
         $surveyContainer = form.find("#survey-element");
-
         form.off("submit").on("submit", _buildJSON);
 
         $surveyContainer
@@ -30,6 +27,19 @@ const SurveyCreator = (function() {
           .on("click", " i.fa-plus-square", function(event) {
             _newFieldValue(event, form);
           });
+
+        $surveyContainer
+          .find("th.FieldActions")
+          .off("click")
+          .on("click", "button.newField", _addNewSurveyField);
+      }
+
+      function _addNewSurveyField(event) {
+        const button = $(event.currentTarget);
+        const surveyFieldsContainer = button
+          .closest(".Actions-Cell")
+          .siblings("td.ValueType-Cell");
+        console.log(surveyFieldsContainer);
       }
 
       function _selectActions(event) {

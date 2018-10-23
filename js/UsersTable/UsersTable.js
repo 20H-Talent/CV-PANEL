@@ -21,16 +21,14 @@ const Table = (function() {
     });
 
     function construct(container) {
-      if (container.find("#users-table").length === 0) {
-        $.get("../../html/UserTable.html", function(htmlSkeleton) {
-          container.empty().append(htmlSkeleton);
-          _setupSessionStorage(apiURL, initTable);
-          _setupInternalEventListeners();
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
-      }
+      $.get("../../html/UserTable.html", function(htmlSkeleton) {
+        container.empty().append(htmlSkeleton);
+        _setupSessionStorage(apiURL, initTable);
+        _setupInternalEventListeners();
+      }).fail(function(err) {
+        _showOverlay(false);
+        throw new Error(err);
+      });
     }
 
     function _setupInternalEventListeners() {
