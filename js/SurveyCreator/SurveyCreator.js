@@ -70,7 +70,7 @@ const SurveyCreator = (function() {
         const button = $(event.currentTarget);
         if (button.hasClass("delete")) {
           if (window.confirm("Are you sure to delete this selector")) {
-            button.closest("div.ValueType-data").remove();
+            button.closest("tr").remove();
           }
         } else {
           const $input = button.parent().siblings("input[type=text]");
@@ -81,8 +81,8 @@ const SurveyCreator = (function() {
       function _appendOptionToSelector(input) {
         const inputValue = input.val().trim();
         const $selector = input
-          .closest("div.col-md-7")
-          .siblings("div.border-right")
+          .closest("td")
+          .siblings("td.Selector-Cell")
           .find("select");
 
         let optionExists = false;
@@ -107,29 +107,28 @@ const SurveyCreator = (function() {
             text: inputValue
           });
 
-          input
+          const previewList = input
             .parent()
             .siblings(".preview-group")
-            .find(" ul.preview-list")
+            .find(" ul.preview-list");
+
+          previewList
             .append(
               `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
-              <span data-position=${lastPosition}>${inputValue}</span>
-              <div class="btn-group btn-group" role="group">
-                <button class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
-                <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
-              </div>
-          </li>`
-            );
+                <span data-position=${lastPosition}>${inputValue}</span>
+                <div class="btn-group btn-group" role="group">
+                  <button class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
+                  <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
+                </div>
+               </li>`
+            )
+            .off("click")
+            .on("click", "button", _optionActions);
+
           $selector
             .hide()
             .append(newOption)
             .fadeIn("slow");
-
-          const previewList = $("form#survey-form").find(
-            ".ValueType-Cell ul.preview-list"
-          );
-
-          previewList.off("click").on("click", "button", _optionActions);
         }
       }
 
@@ -146,10 +145,10 @@ const SurveyCreator = (function() {
         const buttonIcon = editButton.find("i");
         const editableField = editButton.parent().siblings("span");
         const $selector = editableField
-          .closest(".preview-group")
-          .parent()
-          .siblings(".border-right")
+          .closest("td")
+          .siblings("td.Selector-Cell")
           .find("select");
+
         const optionValue = editButton.data("value");
 
         if (buttonIcon.hasClass("fa-edit")) {
@@ -196,9 +195,8 @@ const SurveyCreator = (function() {
             .toLowerCase();
 
           deleteButton
-            .closest(".preview-group")
-            .parent()
-            .siblings(".border-right")
+            .closest("td")
+            .siblings("td.Selector-Cell")
             .find("select")
             .children(`option[value="${optionValue}"]`)
             .remove();
@@ -249,7 +247,7 @@ const SurveyCreator = (function() {
             tableBody
               .append(
                 `<tr class="ValueType-data">
-                <td>
+                <td class="Selector-Cell">
                 <div class="form-group">
                     <label class="w-100">
                       <p contenteditable="true">Title of your selector</p>
