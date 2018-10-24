@@ -5,10 +5,13 @@ function Companies() {
         this.companies.push(company);
     };
     this.renderTable = function() {
+        //  let mainContainer = $(".main-container-companies");
+        // let cardCompanyContainer = mainContainer.find("div#card-container-company");
         let width = $(window).width();
-        if (width > 868) {
-            for (var i = 0; i < this.companies.length; i++) {
-                $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
+
+        for (var i = 0; i < this.companies.length; i++) {
+            // mainContainer.empty();
+            $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
             <td class="company-logo text-center"><img class="img rounded-circle  align-middle" src=${this.companies[i].logo} style="width:50px;"/></td>
                 <td class="fullname"><p>${this.companies[i].name}</p></td>
                     <td class="company-email"> <a href="${this.companies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i></a>${this.companies[i].email}</td>
@@ -28,9 +31,9 @@ function Companies() {
                     </button>
                     <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
-            }
-
         }
+
+
     };
     this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {
@@ -43,14 +46,16 @@ function Companies() {
         let mainContainer = $(".main-container-companies");
         let cardCompanyContainer = mainContainer.find("div#card-container-company");
 
+
         //  var emptyTable = mainContainer.empty();
         let innerCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             let width = $(window).width();
             //  console.log('width :', width);
-            if (width < 868) {
-                console.log('entro aqui :', );
-                innerCard += `
+            // if (width < 868) {
+
+            console.log('entro aqui :', );
+            innerCard += `
             <div class="card"  data-id=${this.companies[i].id}>
               <img class="card-img-top" src=${this.companies[i].logo}   style="width:100px; alt="Card image cap">
               <div class="card-body">
@@ -64,23 +69,20 @@ function Companies() {
             </div>
             </div>
           `;
-            } else {
-                this.renderTable();
-            }
-            //console.log('cardCompanyContainer :', cardCompanyContainer.get());
+            //  }
         }
-        mainContainer.html(innerCard);
-        console.log('cardCompanyContainer.innerHTML :', cardCompanyContainer.get());
+        cardCompanyContainer.html(innerCard);
+        console.log('cardCompanyContainer :', cardCompanyContainer.get());
 
     }
 }
 
-function _showOverlay(show) {
-    const mainTable = mainContainer.find("#users-table");
-    const tableBody = mainTable.find("tbody");
-    const cardContainer = mainContainer.find("div#card-container");
+// function _showOverlay(show) {
+//     const mainTable = mainContainer.find("#users-table");
+//     const tableBody = mainTable.find("tbody");
+//     const cardContainer = mainContainer.find("div#card-container");
 
-    let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
+//     let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
 
 
-}
+// }
