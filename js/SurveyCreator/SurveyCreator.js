@@ -25,17 +25,15 @@ const SurveyCreator = (function() {
         form.off("submit").on("submit", _buildJSON);
 
         $surveyContainer
-          .find(".SelectedType-Cell")
-          .children(".SelectedType-Select")
-          .off("click")
-          .on("click", _typeSelect);
+          .find("th.Survey-TypeSelector")
+          .children("select.SelectedType-Select")
+          .off("change")
+          .on("change", _typeSelect);
 
         $surveyContainer
-          .find(".FieldValues")
+          .find(".AddNewElement-Cell > button.addNewElement")
           .off("click")
-          .on("click", " i.fa-plus-square", function(event) {
-            _newFieldValue(event, form);
-          });
+          .on("click", _newFieldValue);
 
         $surveyContainer
           .find(".Actions-Cell button.newField")
@@ -209,88 +207,87 @@ const SurveyCreator = (function() {
         }
       }
 
-      function _newFieldValue(event, container) {
-        const valueTypeCell = container.find(
-          ".ValueType-Cell > .Cell-Container"
+      function _newFieldValue(event) {
+        const typeSelectorValue = $(event.currentTarget)
+          .parent()
+          .siblings("th.Survey-TypeSelector")
+          .children("select")
+          .val();
+
+        const tableBody = $("#survey-element > table").find(
+          "tbody.Survey-TableBody"
         );
-        valueTypeCell
-          .find("div.ValueType-data:first-child")
-          .clone()
-          .appendTo(valueTypeCell);
-      }
 
-      function _typeSelect(event) {
-        const $select = $(event.target);
-        const $typesCell = $select.parent().siblings("td.ValueType-Cell");
-        const $typesCellHead = $select
-          .closest("table")
-          .find("thead th.FieldValues");
-
-        if ($typesCellHead.find("i.fa-plus-square").length === 0) {
-          $typesCellHead.append(
-            `<i class="far fa-plus-square" title="New value inside this field"></i>`
-          );
-        }
-
-        const selectValue = $select.val();
-
-        switch (selectValue) {
+        switch (typeSelectorValue) {
           case "date":
           case "text":
           case "color":
           case "telephone":
           case "file":
-            $typesCell
-              .children(".Cell-Container")
-              .empty()
+            tableBody
               .append(
-                `
-        <div class="form-group ValueType-data">
-          <label>
-            <p contenteditable="true">You can modify this text</p>
-              <div class="input-group">
-                <input type="${selectValue}" name="${selectValue}_input[]" class="form-control" placeholder="Insert default value on this field" />
-                <div class="input-group-append">
-                  <button class="btn btn-outline-danger delete" type="button"><i class="far fa-trash-alt"></i></button>
-                </div>
-          </label>
-        </div>`
+                `<tr>
+           <td class="ValueType-data">
+            <div class="form-group w-100">
+              <label class="w-100">
+                <p contenteditable="true">You can modify this text</p>
+                  <div class="input-group">
+                    <input type="${typeSelectorValue}" name="${typeSelectorValue}_input[]" class="form-control" placeholder="Insert default value on this field" />
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-danger delete" type="button"><i class="far fa-trash-alt"></i></button>
+                    </div>
+              </label>
+             </div>
+            </td>
+            <td></td>
+          </tr>`
               )
               .off("click")
               .on("click", "button.delete", _deleteInput);
             break;
           case "select":
-            $typesCell
-              .children(".Cell-Container")
-              .empty()
+            tableBody
               .append(
-                `<div class="form-group ValueType-data">
-                    <div class="form-row d-flex">
-                      <div class="col-md-5 border-right">
-                        <label>
-                          <p contenteditable="true">Title of your selector</p>
-                          <select class="form-control" name="select_input[]"></select>
-                        </label>
-                      </div>
-                      <div class="col-md-7 align-self-start">
-                        <div class="input-group">
-                          <input class="form-control" type="text" placeholder="New option here..."/>
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
-                            <button class="btn btn-outline-danger selectActions delete" type="button">Delete</button>
-                          </div>
-                        </div>
-                        <div class="container preview-group my-2">
-                          <ul class="list-group preview-list my-1 px-1 py-1"></ul>
+                `<tr class="ValueType-data">
+                <td>
+                <div class="form-group">
+                    <label class="w-100">
+                      <p contenteditable="true">Title of your selector</p>
+                      <select class="form-control" name="select_input[]"></select>
+                    </label>
+                </div>
+              </td>
+                <td>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input class="form-control" type="text" placeholder="New option here..."/>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
+                          <button class="btn btn-outline-danger selectActions delete" type="button">Delete</button>
                         </div>
                       </div>
+                    <div class="container preview-group my-2">
+                      <ul class="list-group preview-list my-1 px-1 py-1"></ul>
                     </div>
-             </div>`
+                  </div>
+                </td>
+                </tr>`
               )
               .off("click")
               .on("click", "button.selectActions", _selectActions);
             break;
         }
+      }
+
+      function _typeSelect(event) {
+        const typeSelector = $(event.currentTarget);
+        const addButton = typeSelector
+          .parent()
+          .siblings("th.AddNewElement-Cell")
+          .find("button.addNewElement");
+
+        addButton.html(`Add new ${typeSelector.val()} on the survey
+        <i class="fas fa-plus-square"></i>`);
       }
       function _deleteInput(event) {
         if (window.confirm("Are you sure to delete this input element?")) {

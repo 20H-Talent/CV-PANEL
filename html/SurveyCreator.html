@@ -43,50 +43,46 @@
             </div>
             <div id="survey-element" class="table-responsive mt-1">
                 <table class="table table-bordered table-hover" role="grid">
-                    <thead class="thead-">
+                    <thead>
                         <tr>
-                            <th class="FieldTypes"><i class="far fa-hand-pointer mr-4"></i>
-                                <h4>Type of field</h4>
-                            </th>
-                            <th class="FieldValues d-flex justify-content-between">
-                                <div class="CellTitle">
-                                    <i class="fas fa-sort-numeric-up mr-4"></i>
-                                    <h4>Values inside the field</h4>
-                                </div>
-                            </th>
-                            <th class="FieldActions"><i class="fas fa-cogs mr-4"></i>
-                                <h4>Actions</h4>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="SelectedType-Cell">
+                            <th class="Survey-TypeSelector">
                                 <select name="selected-type" class="form-control SelectedType-Select">
                                     <option value="select">Selector</option>
                                     <option value="checkboxes">Checkboxes</option>
                                     <option value="radios">Radio</option>
                                     <option value="text">Text</option>
                                     <option value="date">Date</option>
-                                    <option value="file">File</option>
+                                    <option value="file">File</o ption>
                                     <option value="color">Color</option>
                                     <option value="number">Number</option>
                                     <option value="range">Range</option>
                                     <option value="telephone">Telephone</option>
                                 </select>
-                            </td>
-                            <td class="ValueType-Cell">
-                                <div class="Cell-Container"></div>
-                            </td>
-                            <td class="Actions-Cell text-center">
-                                <div class="btn-group btn-group-lg" role="group" aria-label="...">
-                                    <button class="btn btn-success newField">
-                                        Add this field/s to the survey
+                            </th>
+                            <th class="AddNewElement-Cell">
+                                <button class="btn btn-success btn-block addNewElement" type="button">
+                                    Add new element on the survey
+                                    <i class="fas fa-plus-square"></i>
+                                </button></th>
+                        </tr>
+                    </thead>
+                    <tbody class="Survey-TableBody"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="btn-group surveyActions d-flex justify-content-end" role="group" aria-label="actions">
+                                    <button type="button" class="btn btn-warning previewSurvey">
+                                        Preview
+                                    </button>
+                                    <button type="button" class="btn btn-success saveSurvey">
+                                        Save
                                     </button>
                                 </div>
                             </td>
                         </tr>
-                    </tbody>
+
+                    </tfoot>
                 </table>
             </div>
             <div class="card">
