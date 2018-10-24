@@ -1,15 +1,15 @@
 // This is the object that represents a list of companies and the functions that you could use to work with companies
-
-
 function Companies() {
     this.companies = [];
     this.addCompany = function(company) {
         this.companies.push(company);
     };
     this.renderTable = function() {
-        for (var i = 0; i < this.companies.length; i++) {
-            $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
-            <td class="company-logo text-center"><img class="img rounded-circle  align-middle"src=${this.companies[i].logo} style="width:50px;"/></td>
+        let width = $(window).width();
+        if (width > 868) {
+            for (var i = 0; i < this.companies.length; i++) {
+                $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
+            <td class="company-logo text-center"><img class="img rounded-circle  align-middle" src=${this.companies[i].logo} style="width:50px;"/></td>
                 <td class="fullname"><p>${this.companies[i].name}</p></td>
                     <td class="company-email"> <a href="${this.companies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i></a>${this.companies[i].email}</td>
                     <td class="company-phone">${this.companies[i].phone}</td>
@@ -28,6 +28,8 @@ function Companies() {
                     </button>
                     <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
+            }
+
         }
     };
     this.getCompanyById = function(id) {
@@ -37,8 +39,48 @@ function Companies() {
         return company[0];
     }
 
+    this.renderCompanyCards = function() {
+        let mainContainer = $(".main-container-companies");
+        let cardCompanyContainer = mainContainer.find("div#card-container-company");
 
+        //  var emptyTable = mainContainer.empty();
+        let innerCard = "";
+        for (var i = 0; i < this.companies.length; i++) {
+            let width = $(window).width();
+            //  console.log('width :', width);
+            if (width < 868) {
+                console.log('entro aqui :', );
+                innerCard += `
+            <div class="card"  data-id=${this.companies[i].id}>
+              <img class="card-img-top" src=${this.companies[i].logo}   style="width:100px; alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">${this.companies[i].name}</h5>
+                <p class="card-text">${this.companies[i].email}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">${this.companies[i].phone}</small>
+              </div>
+            </div>
+            </div>
+            </div>
+          `;
+            } else {
+                this.renderTable();
+            }
+            //console.log('cardCompanyContainer :', cardCompanyContainer.get());
+        }
+        mainContainer.html(innerCard);
+        console.log('cardCompanyContainer.innerHTML :', cardCompanyContainer.get());
 
+    }
+}
+
+function _showOverlay(show) {
+    const mainTable = mainContainer.find("#users-table");
+    const tableBody = mainTable.find("tbody");
+    const cardContainer = mainContainer.find("div#card-container");
+
+    let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
 
 
 }

@@ -36,14 +36,11 @@ function Company(
         //     console.log("innerNetwork", innerNetwork);
         //     divCol.innerHTML = divCol.innerHTML + innerNetwork;
         // };
-
         let innerNetwork = "";
         for (let social in this.socialnetworks) {
             innerNetwork += `<a href="${social}" title="${social}"><i style="z-index: 10;" class="fab ml-1 btn-${social} text-center  fa-lg fa-${social}"></i></a>`;
-            console.log('social :', social);
         }
         divCol.innerHTML = innerNetwork;
-
         return divCol.innerHTML;
     }
 }

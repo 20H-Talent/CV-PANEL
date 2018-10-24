@@ -18,6 +18,10 @@ $.getJSON("../data/companies.json")
             companies.addCompany(listOfCompanies);
         });
         companies.renderTable();
+        $(window).on("resize", function() {
+            companies.renderCompanyCards();
+        });
+
     })
     .fail(function(jqXHR) {
         if (jqXHR.statusText !== "OK") {
