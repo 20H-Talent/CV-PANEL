@@ -22,7 +22,7 @@
         <!-- Just an image -->
         <nav class="navbar text-white">
             <a class="navbar-brand" href="#">
-                <img src="assets/images/logo-curriculum-connections.png" width="160" height="50" alt="">
+                <img src="assets/images/logo-curriculum-connections.png" width="160" height="50" alt="logo company">
             </a>
             <div id="div-navbar" class="close position-relative alert alert-info" role="alert"></div>
         </nav>
@@ -52,7 +52,7 @@
                                                 <span class="close">Add User</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded" onclick="switchVisible('Div3')">
+                                        <li class="mb-3 rounded" title="Company Table" data-toggle="tooltip" data-placement="right" onclick="switchVisible('Div3')">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="far fa-building mr-2"></i>
                                                 <span class="close">Companies</span>
@@ -190,7 +190,6 @@
                                             <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
                                             <input lang="es-ES" name="city" class="custom-select d-block w-100" minlength="3" maxlength="25" type="text" id="city" placeholder="residence city" required>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="form-group row has-success">
@@ -200,33 +199,23 @@
                                             <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
                                             <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+" id="zip" minlength="3" maxlength="15" placeholder="90425" required>
                                         </div>
-
                                     </div>
                                 </div>
-
                                 <div class="form-group row has-success" id="age-required">
                                     <!-- <label for="datebirth" class="col-sm-2 col-form-label">Birthday date</label> -->
                                     <label for="age1" class="col-sm-2 col-form-label">Age</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="Group-s"><i class="fas asweome fa-user-tie"></i></span>
-
                                             <!-- <input name="date" class="form-control" value="" id="datebirth" type="date"> -->
-
                                             <input name="Age" class="form-control" value="" id="age1" type="text" required>
-
                                             <!-- <span class="col-sm-6 alert-dark" name="test" id="test"></span> -->
-
-
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="form-group row has-success">
                                     <label class="col-sm-2 control-label gender" id="gender">Gender</label>
                                     <div class="col-sm-10">
-
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa "></i></span>
                                             <div class="custom-control gen custom-radio">
@@ -238,15 +227,12 @@
                                                 <label class="custom-control-label" for="female">Female</label>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="custom-control custom-checkbox " id="skill">
                                     <h4 class="mb-3 langsel">Skills</h4>
                                 </div>
-
                                 <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
                                 <div class="form-group">
                                     <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" required>
@@ -261,12 +247,10 @@
                                 <div class="d-block my-3 d-block custom-controls-stacked langsel">
                                     <h4 class="mb-3">Are you available for an interview in the near future?</h4>
                                     <div class=" custom-radio ">
-
                                         <input id="available" name="Radiobutton" type="radio" class="custom-control-input" required>
                                         <label class="custom-control-label" for="available">Yes</label>
                                     </div>
                                     <div class=" custom-radio ">
-
                                         <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input" required>
                                         <label class="custom-control-label" for="Radiobutton1">No</label>
                                     </div>
@@ -295,14 +279,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col p-0" id="Div3">
-
                     <div class="main-container-companies table-wrapper-scroll-y card-group">
                         <div class=" filters ">
                             <div class="search-badges "></div>
                         </div>
-                        <div id="company-column" class="ml-1 d-flex flex-row flex-wrap justify-content-center mt-1 mr-5">
+                        <div id="company-column" class="ml-1 col d-flex flex-row flex-wrap justify-content-center mt-1">
                             <div id="company-table" class="table-responsive table-wrapper-scroll-y mt-1">
                                 <table class="table table-bordered table-hover " role="grid">
                                     <thead class="thead-dark">
@@ -317,7 +299,6 @@
                                     </thead>
                                     <!-- Delete button -->
                                     <tbody id="tableBody">
-
                                         <!-- HERE COMES THE USERS LIST RENDERED FROM JAVASCRIPT-->
                                     </tbody>
                                     <!-- view company -->
@@ -327,12 +308,11 @@
                                             <div class="modal-content">
                                                 <!-- <div class="modal-header ">
                                                     <button type="button " class="close " data-dismiss="modal ">×</button>
-
                                                 </div> -->
                                                 <div id="modal" class="modal-body">
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn text-light header-card" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -349,19 +329,16 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" id="del" class="btn btn-danger delete-company" data-dismiss="modal">Delete</button>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn   btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </table>
                             </div>
-
                         </div>
-
                     </div>
                     <div id="card-container-company" class="table-wrapper-scroll-y  border-dark   row">
-
                         <!-- <div class="card-deck "></div> -->
                     </div>
                 </div>
@@ -443,7 +420,6 @@
                                 </div>-->
                             </section>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -530,10 +506,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
