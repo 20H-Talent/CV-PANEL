@@ -45,23 +45,16 @@ function Companies() {
     this.renderCompanyCards = function() {
         let mainContainer = $(".main-container-companies");
         let cardCompanyContainer = $("#card-container-company");
-        console.log('cardCompanyContainer :', cardCompanyContainer.get());
-
-        //  var emptyTable = mainContainer.empty();
+        //  console.log('cardCompanyContainer :', cardCompanyContainer.get());
         let innerCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             let width = $(window).width();
-            //  console.log('width :', width);
-            // if (width < 868) {
-
             console.log('entro aqui  cards function:', );
             innerCard += `
-            <div class="card mt-3  ml-5 mr-5 text-center"  data-id=${this.companies[i].id}>
-             
+            <div class="card mt-3  ml-5 mr-5 text-center"  data-id=${this.companies[i].id}>   
               <div class="">
                 <h5 class="card-header text-light header-card   col-sm-12 border border-dark rounded"> <img class="card-img-top" src=${this.companies[i].logo}   style="width:50px; alt="Card image cap">
                 <p class="card-text">${this.companies[i].name}</p>  <small class="text-light"> CIF  ${this.companies[i].CIF}</small></h5>
-              
                 <h5 class="card-title ">Email</h5>
                 <p class="card-text">${this.companies[i].email}</p> 
                 <h5 class="card-title">Profile</h5>
@@ -78,26 +71,13 @@ function Companies() {
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-light  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
                     <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-light"  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
-              
               </div>
             </div>
             </div>
             </div>
           `;
-            //  }
         }
         cardCompanyContainer.html(innerCard);
-        console.log('cardCompanyContainer :', cardCompanyContainer.get());
-
+        // console.log('cardCompanyContainer :', cardCompanyContainer.get());
     }
 }
-
-// function _showOverlay(show) {
-//     const mainTable = mainContainer.find("#users-table");
-//     const tableBody = mainTable.find("tbody");
-//     const cardContainer = mainContainer.find("div#card-container");
-
-//     let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
-
-
-// }

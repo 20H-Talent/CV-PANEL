@@ -21,7 +21,7 @@ $.getJSON("../data/companies.json")
         companies.renderCompanyCards();
         $(window).on("resize", function() {
             let width = $(window).width();
-            console.log('width :', width);
+            //console.log('width :', width);
             const mainContainer = $(".main-container-companies");
             const tableBody = mainContainer.find("#company-table tbody");
             // console.log('mainContainer:', mainContainer.get());
@@ -32,7 +32,6 @@ $.getJSON("../data/companies.json")
                 cardDiv.hide();
                 // companies.renderTable();
                 console.log('se esta llamando table?? :', );
-
             } else {
                 // companies.renderCompanyCards();
                 mainContainer.hide();
