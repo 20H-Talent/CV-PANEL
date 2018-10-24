@@ -2,7 +2,7 @@
 div elemento z-index alto important relative
 div encima del elemento z-index alto+1 absolute content-box rgba(blanco,.9)
 */
-
+var currentDataTool = 0;
 // ------- Load the modal welcome ---------
 $.get("../html/guided_visit.html", function(data) {
   $("body main").append(data);
@@ -149,7 +149,13 @@ function getTooltips() {
         $.each(nextTool, function(n) {
           nextTool[n].classList.replace("d-none", "d-block");
         });
+        currentDataTool++;
       }
+      $(window).on("keypress", function(e) {
+        if (e.keyCode === 32) {
+          callTools(currentDataTool);
+        }
+      });
     })
     .fail(function(jqXHR) {
       if (jqXHR.statusText !== "OK") {

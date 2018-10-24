@@ -341,23 +341,23 @@
     "id": 10,
     "zone": "left-menu",
     "elPositionSelected": {
-      "top": "45.6%",
-      "left": "87.3%",
+      "top": "25.6%",
+      "left": "91%",
       "right": "0%",
       "bottom": "0%",
       "height": "6.5%",
-      "width": "3.4%"
+      "width": "2.7%"
     },
     "tooltipPosition": {
-      "top": "44%",
-      "left": "48%",
+      "top": "23%",
+      "left": "53%",
       "right": "0%",
       "bottom": "0%",
       "height": "19%"
     },
     "arrowPosition": {
-      "top": "46%",
-      "left": "84.4%",
+      "top": "27%",
+      "left": "89.4%",
       "right": "0%",
       "bottom": "0%",
       "icon": "right"
@@ -375,23 +375,23 @@
     "id": 11,
     "zone": "left-menu",
     "elPositionSelected": {
-      "top": "34.7%",
+      "top": "27.7%",
       "left": "0%",
       "right": "0%",
       "bottom": "0%",
       "height": "5%",
-      "width": "15.6%"
+      "width": "12.6%"
     },
     "tooltipPosition": {
-      "top": "33%",
-      "left": "17.9%",
+      "top": "26%",
+      "left": "14.9%",
       "right": "0%",
       "bottom": "0%",
       "height": "19%"
     },
     "arrowPosition": {
-      "top": "35.4%",
-      "left": "16%",
+      "top": "28.4%",
+      "left": "13%",
       "right": "0%",
       "bottom": "0%",
       "icon": "left"
@@ -414,26 +414,26 @@
     "id": 12,
     "zone": "left-menu",
     "elPositionSelected": {
-      "top": "45.6%",
-      "left": "87.3%",
+      "top": "53%",
+      "left": "21.8%",
       "right": "0%",
       "bottom": "0%",
-      "height": "6.5%",
-      "width": "3.4%"
+      "height": "40%",
+      "width": "55.8%"
     },
     "tooltipPosition": {
-      "top": "44%",
-      "left": "48%",
+      "top": "28%",
+      "left": "23.2%",
       "right": "0%",
       "bottom": "0%",
       "height": "19%"
     },
     "arrowPosition": {
-      "top": "46%",
-      "left": "84.4%",
+      "top": "48%",
+      "left": "24.8%",
       "right": "0%",
       "bottom": "0%",
-      "icon": "right"
+      "icon": "down"
     },
     "elSelected": ["#Div2", "relative"],
     "overlayContent": ["header", ".container-left", ".container-right"],
@@ -449,11 +449,11 @@
     "zone": "right-menu",
     "elPositionSelected": {
       "top": "11.8%",
-      "left": "96.7%",
+      "left": "97.5%",
       "right": "0%",
       "bottom": "0%",
       "height": "100%",
-      "width": "3.2%"
+      "width": "2.5%"
     },
     "tooltipPosition": {
       "top": "18%",
@@ -475,11 +475,45 @@
     "badgeTool": 3,
 
     "text": "In the right menu, you can search users and enterprises. As the same of left menu, you can expand it.",
-    "eventCallToOpen": "",
-    "eventCallToClose": ""
+    "eventCallToOpen": "#open-icon-right",
+    "eventCallToClose": "click"
   },
   {
     "id": 14,
+    "zone": "left-menu",
+    "elPositionSelected": {
+      "top": "11.7%",
+      "left": "77.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "100%",
+      "width": "22%"
+    },
+    "tooltipPosition": {
+      "top": "21%",
+      "left": "37.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%"
+    },
+    "arrowPosition": {
+      "top": "24%",
+      "left": "74.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "right"
+    },
+    "elSelected": ["#Div2", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "3.1",
+
+    "text": "Here, you can search users by name, last name, genre, age, years of experience, laguages or skills.",
+    "eventCallToOpen": "#open-icon-right",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 15,
     "zone": "center",
     "elPositionSelected": {
       "top": "42%",

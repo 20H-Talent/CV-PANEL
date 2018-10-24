@@ -126,7 +126,6 @@ function switchVisible(visible) {
  **************************************************************************/
 function editForm(event) {
   console.log(event.currentTarget);
-  switchVisible("Div2");
   const element = $(event.currentTarget);
   const property = element.data("id");
 
@@ -172,6 +171,7 @@ function editForm(event) {
       lang.options[i].selected = true;
     }
   }
+  switchVisible("Div2");
 }
 /**************************************************************************
  * Selecting the day birth and putting the years of the user in a span***
