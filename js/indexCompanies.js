@@ -50,7 +50,7 @@ $.getJSON("../data/companies.json")
 function showPreviewInfo(id) {
     var company = companies.getCompanyById(id);
     $("#modal").html(
-        `<div class="shadow-lg p-3 border border-info  rounded"   data-id=${company.id} >
+        `<div class="shadow-lg p-3 border border-info col-lg col-sm  col-md  rounded"   data-id=${company.id} >
         <div class="card-header d-flex bg-info flex-row align-items-center">
             <img class="img-fluid mr-2 rounded-circle" src=${company.logo} width=120px height:60px  alt="test"/>
             <div class=" ml-4 text-light">

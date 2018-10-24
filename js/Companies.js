@@ -56,14 +56,20 @@ function Companies() {
 
             console.log('entro aqui  cards function:', );
             innerCard += `
-            <div class="card text-center"  data-id=${this.companies[i].id}>
-              <img class="card-img-top" src=${this.companies[i].logo}   style="width:100px; alt="Card image cap">
+            <div class="card mr-5  ml-5 col-lg col-sm  col-md text-center"  data-id=${this.companies[i].id}>
+              <img class="card-img-top  ml-5" src=${this.companies[i].logo}   style="width:100px; alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">${this.companies[i].name}</h5>
-                <p class="card-text">${this.companies[i].email}</p>
+                <h5 class="card-header">Company name</h5>
+                <p class="card-text">${this.companies[i].name}</p>
+                <h5 class="card-title">Email</h5>
+                <p class="card-text">${this.companies[i].email}</p> 
+                <h5 class="card-title">Profile</h5>
+                <p class="card-text">${this.companies[i].descripcion}</p>
+                <h5 class="card-title">Phone</h5>
+                <p class="card-text">${this.companies[i].phone}</p>
               </div>
               <div class="card-footer">
-                <small class="text-muted">${this.companies[i].phone}</small>
+                <small class="text-muted"> CIF  ${this.companies[i].CIF}</small>
               </div>
             </div>
             </div>
