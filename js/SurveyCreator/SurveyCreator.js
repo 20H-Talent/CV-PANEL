@@ -34,36 +34,21 @@ const SurveyCreator = (function() {
           .find(".AddNewElement-Cell > button.addNewElement")
           .off("click")
           .on("click", _newFieldValue);
-
-        $surveyContainer
-          .find(".Actions-Cell button.newField")
-          .off("click")
-          .on("click", _addNewSurveyField);
       }
 
-      function _addNewSurveyField(event) {
-        const button = $(event.currentTarget);
-        const surveyFieldsContainer = button
-          .closest(".Actions-Cell")
-          .siblings("td.ValueType-Cell");
-
-        const surveyHeaderData = $("#data-column .survey-container").find(
-          ".SurveyHeader-Data"
-        );
-        _setHeaderSurveyData(surveyHeaderData);
-      }
-
-      function _setHeaderSurveyData(surveyHeaderData) {
-        surveyHeaderData.find("input, textarea").each((index, element) => {
-          const $element = $(element);
-          if ($element.prop("type") === "date") {
-            surveyApiData[$element.prop("name")] = new Date(
-              $element.val()
-            ).getTime();
-          } else {
-            surveyApiData[$element.prop("name")] = $element.val();
-          }
-        });
+      function _setHeaderSurveyData() {
+        surveyForm
+          .find(".SurveyHeader-Data")
+          .find("input, textarea")
+          .each((index, element) => {
+            const $element = $(element);
+            if ($element.prop("type") === "date") {
+              const date = new Date($element.val()).getTime();
+              surveyApiData[$element.prop("name")] = isNaN(date) ? "" : date;
+            } else {
+              surveyApiData[$element.prop("name")] = $element.val();
+            }
+          });
       }
 
       function _selectActions(event) {
@@ -297,6 +282,8 @@ const SurveyCreator = (function() {
 
       function _buildJSON(event) {
         event.preventDefault();
+        _setHeaderSurveyData();
+        console.log(surveyApiData);
       }
     }
     return {
