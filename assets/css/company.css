@@ -1,0 +1,131 @@
+/* //@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"); */
+
+#company-table {
+    font-size: 0.9rem;
+}
+
+#company-table thead tr:first-child th {
+    position: sticky;
+    text-align: center;
+    top: 0;
+    /* z-index: 10; */
+    margin: 0;
+    cursor: pointer;
+    border-right: 1px solid #ffffff;
+    opacity: 1;
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    /* background-color: #1ab394; */
+}
+
+#tableBody {
+    background-color: #ffffff;
+    background-size: cover;
+}
+
+.modal-header {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.btn-ldeep-purple {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background-color: #ffffff;
+    /* border-color: black; */
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    /* background-color: #4d394b; */
+}
+
+.btn-ldeep-purple:hover {
+    color: rgb(255, 255, 255);
+    background-color: #1a1b1a;
+    /* border-color: #0084ff; */
+}
+
+a.btn-social,
+.btn-social {
+    border-radius: 50%;
+    color: #ffffff !important;
+    display: inline-block;
+    height: 54px;
+    line-height: 54px;
+    margin: 8px 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .3s;
+    width: 54px;
+}
+
+.btn-social.btn-xs {
+    font-size: 9px;
+    height: 24px;
+    line-height: 13px;
+    margin: 6px 2px;
+    width: 24px;
+}
+
+.btn-social.btn-sm {
+    font-size: 13px;
+    height: 36px;
+    line-height: 15px;
+    margin: 6px 2px;
+    width: 36px;
+}
+
+.btn-social.btn-lg {
+    font-size: 22px;
+    height: 52px;
+    line-height: 20px;
+    margin: 10px 6px;
+    width: 72px;
+}
+
+.btn-instagram {
+    color: rgb( 195, 42, 163);
+}
+
+.btn-instagram:hover {
+    color: #e71f44;
+}
+
+.btn-twitter {
+    color: #1da1f2;
+}
+
+.btn-twitter:hover {
+    color: #1993f0;
+}
+
+.btn-youtube {
+    color: #e52d27;
+}
+
+.btn-youtube:hover {
+    background-color: #ea5955;
+}
+
+.btn-facebook {
+    color: #3B5998;
+}
+
+.btn-facebook:hover {
+    color: #0f2fe0;
+}
+
+.btn-linkedin {
+    color: rgb(0, 119, 181);
+}
+
+.btn-linkedin:hover {
+    background-color: #0f2fe0;
+}
+
+@media screen and (max-width: 1070px) {
+    #company-table {
+        font-size: 0.7em;
+    }
+}
+
+.header-card {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+}
