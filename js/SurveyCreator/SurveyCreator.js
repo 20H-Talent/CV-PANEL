@@ -3,6 +3,15 @@ const SurveyCreator = (function() {
 
   function init() {
     let surveyForm;
+
+    const surveyApiData = {
+      title: "",
+      subtitle: "",
+      startDate: "",
+      endDate: "",
+      description: ""
+    };
+
     function construct(container) {
       $.get("../../html/SurveyCreator.html", function(htmlSkeleton) {
         surveyForm = container.empty().append(htmlSkeleton);
@@ -39,11 +48,28 @@ const SurveyCreator = (function() {
         const surveyFieldsContainer = button
           .closest(".Actions-Cell")
           .siblings("td.ValueType-Cell");
+
+        const surveyHeaderData = $("#data-column .survey-container").find(
+          ".SurveyHeader-Data"
+        );
+        _setHeaderSurveyData(surveyHeaderData);
+      }
+
+      function _setHeaderSurveyData(surveyHeaderData) {
+        surveyHeaderData.find("input, textarea").each((index, element) => {
+          const $element = $(element);
+          if ($element.prop("type") === "date") {
+            surveyApiData[$element.prop("name")] = new Date(
+              $element.val()
+            ).getTime();
+          } else {
+            surveyApiData[$element.prop("name")] = $element.val();
+          }
+        });
       }
 
       function _selectActions(event) {
         const button = $(event.currentTarget);
-
         if (button.hasClass("delete")) {
           if (window.confirm("Are you sure to delete this selector")) {
             button.closest("div.ValueType-data").remove();
@@ -205,7 +231,9 @@ const SurveyCreator = (function() {
             `<i class="far fa-plus-square" title="New value inside this field"></i>`
           );
         }
+
         const selectValue = $select.val();
+
         switch (selectValue) {
           case "date":
           case "text":
