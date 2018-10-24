@@ -17,31 +17,28 @@ $.getJSON("../data/companies.json")
             );
             companies.addCompany(listOfCompanies);
         });
-
-        //  companies.renderTable();
-        //  companies.renderCompanyCards();
+        companies.renderTable();
+        companies.renderCompanyCards();
         $(window).on("resize", function() {
             let width = $(window).width();
-            let mainContainer = $(".main-container-companies");
-            console.log('se esta llamando table?? :', mainContainer);
-
-            let cardViv = $("#Div3").find("div#card-container-company");
-
-
-            if (width > 800) {
-
-
+            console.log('width :', width);
+            const mainContainer = $(".main-container-companies");
+            const tableBody = mainContainer.find("#company-table tbody");
+            // console.log('mainContainer:', mainContainer.get());
+            let cardDiv = $("#card-container-company");
+            console.log('cardDiv:', cardDiv.get());
+            if (width > 868) {
                 mainContainer.show();
-                cardViv.hide();
-                companies.renderTable();
+                cardDiv.hide();
+                // companies.renderTable();
                 console.log('se esta llamando table?? :', );
+
             } else {
-                companies.renderCompanyCards();
+                // companies.renderCompanyCards();
                 mainContainer.hide();
-                cardViv.show();
+                cardDiv.show();
                 console.log('se esta llamando card?? :', );
             }
-
         });
     })
     .fail(function(jqXHR) {

@@ -12,7 +12,7 @@ function Companies() {
         for (var i = 0; i < this.companies.length; i++) {
             // mainContainer.empty();
             $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>    
-            <td class="company-logo text-center"><img class="img rounded-circle  align-middle" src=${this.companies[i].logo} style="width:50px;"/></td>
+            <td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${this.companies[i].logo} style="width:50px;"/></td>
                 <td class="fullname"><p>${this.companies[i].name}</p></td>
                     <td class="company-email"> <a href="${this.companies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i></a>${this.companies[i].email}</td>
                     <td class="company-phone">${this.companies[i].phone}</td>
@@ -44,8 +44,8 @@ function Companies() {
 
     this.renderCompanyCards = function() {
         let mainContainer = $(".main-container-companies");
-        let cardCompanyContainer = mainContainer.find("div#card-container-company");
-
+        let cardCompanyContainer = $("#card-container-company");
+        console.log('cardCompanyContainer :', cardCompanyContainer.get());
 
         //  var emptyTable = mainContainer.empty();
         let innerCard = "";
@@ -54,9 +54,9 @@ function Companies() {
             //  console.log('width :', width);
             // if (width < 868) {
 
-            console.log('entro aqui :', );
+            console.log('entro aqui  cards function:', );
             innerCard += `
-            <div class="card"  data-id=${this.companies[i].id}>
+            <div class="card text-center"  data-id=${this.companies[i].id}>
               <img class="card-img-top" src=${this.companies[i].logo}   style="width:100px; alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">${this.companies[i].name}</h5>
