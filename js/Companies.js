@@ -56,20 +56,29 @@ function Companies() {
 
             console.log('entro aqui  cards function:', );
             innerCard += `
-            <div class="card mr-5  ml-5 col-lg col-sm  col-md text-center"  data-id=${this.companies[i].id}>
-              <img class="card-img-top  ml-5" src=${this.companies[i].logo}   style="width:100px; alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-header">Company name</h5>
-                <p class="card-text">${this.companies[i].name}</p>
-                <h5 class="card-title">Email</h5>
+            <div class="card mt-3  ml-5 mr-5 text-center"  data-id=${this.companies[i].id}>
+             
+              <div class="">
+                <h5 class="card-header text-light header-card   col-sm-12 border border-dark rounded"> <img class="card-img-top" src=${this.companies[i].logo}   style="width:50px; alt="Card image cap">
+                <p class="card-text">${this.companies[i].name}</p>  <small class="text-light"> CIF  ${this.companies[i].CIF}</small></h5>
+              
+                <h5 class="card-title ">Email</h5>
                 <p class="card-text">${this.companies[i].email}</p> 
                 <h5 class="card-title">Profile</h5>
                 <p class="card-text">${this.companies[i].descripcion}</p>
                 <h5 class="card-title">Phone</h5>
                 <p class="card-text">${this.companies[i].phone}</p>
               </div>
-              <div class="card-footer">
-                <small class="text-muted"> CIF  ${this.companies[i].CIF}</small>
+              <h6 class="card-text">Social Networks</h6>
+              <div class=" social-net" id="networks${this.companies[i].id}">
+              ${this.companies[i].renderSocialNetworks()}
+              </div>
+              <div class="card-footer text-light header-card   col-sm-12 border border-dark rounded">
+              <button  type="button" onclick="showPreviewInfo(${this.companies[i].id})" data-toggle="modal" data-id=${this.companies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-light preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
+                    <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-light  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
+                    </button>
+                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-light"  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
+              
               </div>
             </div>
             </div>

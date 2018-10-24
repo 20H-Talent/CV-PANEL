@@ -129,3 +129,7 @@ a.btn-social,
         font-size: 0.7em;
     }
 }
+
+.header-card {
+    background-color: #808080!important;
+}
