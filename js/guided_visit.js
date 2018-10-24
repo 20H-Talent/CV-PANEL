@@ -1,3 +1,8 @@
+/*papi capa para todo
+div elemento z-index alto important relative
+div encima del elemento z-index alto+1 absolute content-box rgba(blanco,.9)
+*/
+
 // ------- Load the modal welcome ---------
 $.get("../html/guided_visit.html", function(data) {
   $("body main").append(data);
@@ -18,10 +23,12 @@ function getTooltips() {
 
       // make skeleton of tooltips.
       $.each(data, function(i) {
-        $(
-          "#guidedVisit"
-        ).append(`<div class="d-none tool-${data[i].id}" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
-          <i style= 'position:absolute; font-size: 19px; top:${
+        // <div class="d-none tool-${data[i].id}" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
+        $("#guidedVisit").append(`
+        <div class="d-none tool-${
+          data[i].id
+        }" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
+          <i style='position:absolute; font-size: 19px; top:${
             data[i].arrowPosition.top
           }; left: ${data[i].arrowPosition.left};' class="d-none tool-${data[i].id} fas fa-arrow-${data[i].arrowPosition.icon} text-white"></i>
           <div style='position: absolute; top: ${
@@ -38,6 +45,17 @@ function getTooltips() {
       $.each(tool1, function(u) {
         tool1[u].classList.replace("d-none", "d-block");
       });
+      //selecionamos elemento header y ponemos overlay en los demas contenedores.
+      // $(data[0].elSelected[0]).attr("style", function() {
+      //   return `z-index:101 !important; position:${$(data[0].elSelected[1])};`;
+      // });
+      // $(data[0].elSelected).attr("position", function() {
+      //   return `relative`;
+      // });
+
+      // $.each(data[0].overlayContent, function(o) {
+      //   $(data[0].overlayContent[o]).append(`<div class="overlay"></div>`);
+      // });
 
       //llamamos trigger del tooltip 1
       $(listUsers).trigger("click");
@@ -45,21 +63,34 @@ function getTooltips() {
       $(".btn-tool").on("click", function(e) {
         if ($(e.currentTarget).attr("data-tool")) {
           //call event to close of data[0].
+          console.log("active tool:", $(e.currentTarget).attr("data-tool"));
           $(data[0].eventCallToClose).trigger("click");
 
           callTools($(e.currentTarget).attr("data-tool"));
         }
       });
+
       function callTools(valDataTool) {
         //recive de data-toogle value of the active button of tooltips.
         console.log("id:", data[parseInt(valDataTool)].id);
         let activeTool = $(`.tool-${parseInt(valDataTool)}`); //convert valDataTool string to number and select the elements with class .tool-valDataTool.
+
+        //poniendo overlay y seleccionando elemento ...
+        // $(data[parseInt(valDataTool)].elSelected[0]).attr("style", "");
+        // $(data[parseInt(valDataTool)].elSelected).attr("position", "");
+
+        // let removeOverlay = $("div.overlay");
+        // console.log(removeOverlay);
+        // $.each(removeOverlay, function(r) {
+        //   removeOverlay[r].remove();
+        // });
+
         if (!data[parseInt(valDataTool)]) {
           //id data[valDataTool] not exist, remove the modal.
           return $("#guidedVisit").remove();
         }
 
-        // call event to close of active tooltip.
+        // call event to close of227 active tooltip.
         $(data[parseInt(valDataTool)].eventCallToClose).trigger("click");
 
         $.each(activeTool, function(a) {
@@ -76,6 +107,34 @@ function getTooltips() {
         // console.log(
         //   $(data[parseInt(valDataTool)].eventCallToOpen).trigger("click")
         // );
+        // $(
+        // console.log($(data[parseInt(valDataTool) + 1].elSelected));
+        //estaba esto y funcionaba
+        // $(data[parseInt(valDataTool) + 1].elSelected[0]).attr(
+        //   "style",
+        //   function() {
+        //     console.log(
+        //       `data ${data[parseInt(valDataTool) + 1].elSelected[0]} selected`
+        //     );
+        //     return `z-index: 101 !important; position: ${
+        //       data[parseInt(valDataTool) + 1].elSelected[1]
+        //     };`;
+        //   }
+        // );
+
+        // $(data[parseInt(valDataTool) + 1].elSelected).attr(
+        //   "position",
+        //   function() {
+        //     return `relative;`;
+        //   }
+        // );
+
+        //poner esto
+        // $.each(data[parseInt(valDataTool) + 1].overlayContent, function(o) {
+        //   $(data[parseInt(valDataTool) + 1].overlayContent[o]).append(
+        //     `<div class="overlay"></div>`
+        //   );
+        // });
         $(data[parseInt(valDataTool)].eventCallToOpen).trigger(
           data[parseInt(valDataTool)].eventCallToClose
         );
