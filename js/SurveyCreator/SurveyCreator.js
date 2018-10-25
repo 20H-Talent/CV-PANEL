@@ -275,7 +275,7 @@ const SurveyCreator = (function() {
       function _deleteInput(event) {
         if (window.confirm("Are you sure to delete this input element?")) {
           $(event.currentTarget)
-            .closest(".ValueType-data")
+            .closest("tr")
             .remove();
         }
       }
