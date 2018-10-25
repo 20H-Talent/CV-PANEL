@@ -99,7 +99,9 @@ function Companies() {
             </div>
           `;
     }
+
     cardCompanyContainer.html(innerCard);
+
     // console.log('cardCompanyContainer :', cardCompanyContainer.get());
   };
 }

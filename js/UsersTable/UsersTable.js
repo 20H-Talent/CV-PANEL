@@ -32,12 +32,10 @@ const Table = (function() {
     }
 
     function _setupInternalEventListeners() {
-      $(window)
-        .off("resize")
-        .on("resize", function(e) {
-          const width = this.innerWidth;
-          renderDataOnResize(null, width);
-        });
+      $(window).on("resize", function(e) {
+        const width = this.innerWidth;
+        renderDataOnResize(null, width);
+      });
 
       $("div.main-container")
         .find("td.options")
