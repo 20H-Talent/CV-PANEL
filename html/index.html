@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/form.css">
     <link rel="stylesheet" href="/assets/css/enterprises-form.css">
@@ -144,7 +143,7 @@
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName" minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" title="Last name must have 3-15 characters long" placeholder="required" value="" required>
+                                            <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName" minlength="3" maxlength="25" title="Last name must have 3-15 characters long" placeholder="required" value="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -353,7 +352,7 @@
                     </div>
                 </div>
                 <!-- Menu right -->
-                
+
                 <!-- Enterprise Form-->
                 <div class="col h-100" id="Div4">
                     <form id="alert-form-enterprises" action="get" method="post" class="container enterprise-form">
@@ -361,64 +360,53 @@
                         <hr>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputName">Enterprise's name</label>
-                            <input autofocus type="text" name="inputName" class="form-control " minlength="3" maxlength="25"
-                                pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name" value="" required>
+                            <input autofocus type="text" name="inputName" class="form-control " minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name" value="" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputCif">CIF</label>
-                            <input type="text" name="inputCif" class="form-control " minlength="9" maxlength="9"
-                                pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value="" required>
+                            <input type="text" name="inputCif" class="form-control " minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value="" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputAddress">Address</label>
-                            <input lang="es-ES" name="imputAdress" type="text" class="form-control" minlength="3" maxlength="25"
-                                pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street" required>
+                            <input lang="es-ES" name="imputAdress" type="text" class="form-control" minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputCity">City</label>
-                            <input lang="es-ES" name="imputCity" type="text" class="form-control" minlength="3" maxlength="25" 
-                                pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City" required>
+                            <input lang="es-ES" name="imputCity" type="text" class="form-control" minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City" required>
                         </div>
                         <div class="form-row col-md-12 country">
                             <label class="format-2" for="inputCountry">Country</label>
-                            <input lang="es-ES" name="inputCountry" type="text" class="form-control" minlength="3" maxlength="25" 
-                                pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country" required>
+                            <input lang="es-ES" name="inputCountry" type="text" class="form-control" minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputZip">Zip</label>
-                            <input name="inputZip" type="text" class="form-control" minlength="3" maxlength="6"
-                                pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
+                            <input name="inputZip" type="text" class="form-control" minlength="3" maxlength="6" pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputPhone">Phone</label>
-                            <input name="inputPhone" type="tel" class="form-control" minlength="3" maxlength="25"
-                                pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
+                            <input name="inputPhone" type="tel" class="form-control" minlength="3" maxlength="25" pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputEmail">Email</label>
-                            <input lang="es-ES" type="email" name="inputEmail" class="form-control" minlength="3" maxlength="25"
-                                pattern ="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
-                                id="inputEmail" placeholder="Email" required>
+                            <input lang="es-ES" type="email" name="inputEmail" class="form-control" minlength="3" maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)" id="inputEmail" placeholder="Email"
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputWorkersNumber">Workers Number</label>
-                            <input name="inputWorkersNumber" type="number" class="form-control" minlength="1" maxlength="5" 
-                              pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company" required>
+                            <input name="inputWorkersNumber" type="number" class="form-control" minlength="1" maxlength="5" pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputSocialNetworks">Social Networks</label>
-                            <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control" minlength="3" maxlength="25"
-                                pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter..." required>
+                            <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control" minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter..." required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputLogo">Logo</label>
                             <input name="inputLogo" type="file" class="form-control-file format-3" id="inputLogo">
                         </div>
-                        
+
                         <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
                         <div class="form-row col-md-12">
-                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5"
-                                pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
+                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
                             </textarea>
                         </div>
 
@@ -438,7 +426,7 @@
                             </a>
                             <!-- Menu right -->
                             <section id="right-menu-ajax" class="close ">
-                                 <!-- Menu right load by ajax -->
+                                <!-- Menu right load by ajax -->
                                 <!--  <div id="right-menu " class="p-0 ">
                                     <p class="text-white text-center w-100 ">Search for: </p>
                                     <form id="advanced-search ">
@@ -604,7 +592,7 @@
     <script src="/js/Companies.js"></script>
     <script src="/js/indexCompanies.js"></script>
     <script src="/js/enterprises-form.js"></script>
-    <script src="/js/AlphaForm.js" ></script>
+    <script src="/js/AlphaForm.js"></script>
 
 </body>
 
