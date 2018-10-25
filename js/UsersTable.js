@@ -624,7 +624,7 @@ function appendTechSkills(container, user) {
       .append(
         userData.map(
           value =>
-            `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
+            `<img class="mx-1 mt-2" src="/assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
         )
       );
   });
