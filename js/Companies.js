@@ -51,6 +51,7 @@ function Companies() {
   };
 
   this.renderCompanyCards = function() {
+    console.log("me estoy ejecutando");
     let mainContainer = $(".main-container-companies");
     let cardCompanyContainer = $("#card-container-company");
     //  console.log('cardCompanyContainer :', cardCompanyContainer.get());

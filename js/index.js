@@ -14,7 +14,7 @@ function activateTooltips(container = null) {
 /**
  *  Function to load the content by ajax
  */
-$("#right-menu-ajax").load("right-menu.html", function() {
+$("#right-menu-ajax").load("../html/right-menu.html", function() {
   formSideBar();
   //Submit event for the form that handle the advanced search
   $("form#advanced-search").on("submit", function(e) {
@@ -273,7 +273,7 @@ if ($("#submit_search").length) {
   $("#search-btn").on("click", loadMain);
 
   function loadMain() {
-    $("#Div1").load("right-menu.html", function(
+    $("#Div1").load("../html/right-menu.html", function(
       responseText,
       textStatus,
       jqXHR
@@ -281,5 +281,43 @@ if ($("#submit_search").length) {
       console.log(" loadMain:  " + textStatus);
       formSideBar();
     });
+  }
+}
+
+function switchVisible(visible) {
+  // console.log("div1", document.getElementById("Div1").style.display);
+  // console.log("div2", document.getElementById("Div2").style.display);
+  switch (visible) {
+    case "Div1": //== table users
+      //hidding the form
+      document.getElementById("Div3").style.display = "none";
+      document.getElementById("Div4").style.display = "none";
+      //showing the table
+      break;
+    case "Div2": //== form
+      //hidding the table
+      document.getElementById("Div1").style.display = "none";
+      document.getElementById("Div3").style.display = "none";
+      document.getElementById("Div4").style.display = "none";
+      //showing the form
+      break;
+    case "Div3": //== table users
+      //hidding the form
+      document.getElementById("Div1").style.display = "none";
+      document.getElementById("Div4").style.display = "none";
+      //showing the table
+      document.getElementById("Div3").style.display = "block";
+      break;
+
+    case "Div4": //== form
+      //hidding the table
+      document.getElementById("Div1").style.display = "none";
+      document.getElementById("Div3").style.display = "none";
+      //showing the form
+      document.getElementById("Div4").style.display = "block";
+      break;
+
+    default:
+      break;
   }
 }
