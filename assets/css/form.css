@@ -99,6 +99,10 @@ body {
     border: 1px solid red !important;
     border-radius: 5px;
 }
+.borderafterValid {
+    border: 1px solid green !important;
+    border-radius: 5px;
+}
 
 #renderize {
     opacity: 1;
