@@ -162,20 +162,20 @@ const UserForm = (function() {
         for (var i = 0; i < lang.options.length; i++) {
           lang.options[i].selected = false;
         }
-        $("#Username").val(user.login.username);
-        $("#FirstName").val(
+        $("input[name=username]").val(user.login.username);
+        $("input[name=firstname]").val(
           user.name.first.charAt(0).toUpperCase() + user.name.first.slice(1)
         );
-        $("#LastName").val(
+        $("input[name=lastname]").val(
           user.name.last.charAt(0).toUpperCase() + user.name.last.slice(1)
         );
-        $("#email").val(user.email);
-        $("#age1").val(user.dob.age + " years old ");
-        $("#tel").val(user.phone);
-        $("#country").val(user.location.state);
-        $("#city").val(user.location.city);
-        $("#zip").val(user.location.postcode);
-        $("#address").val(user.location.street);
+        $("input[name=email]").val(user.email);
+        $("input[name=birthdate]").val(user.dob.age + " years old ");
+        $("input[name=telephone]").val(user.phone);
+        $("input[name=country]").val(user.location.state);
+        $("input[name=city]").val(user.location.city);
+        $("input[name=zip]").val(user.location.postcode);
+        $("input[name=adress]").val(user.location.street);
 
         document.querySelector(`input[value=${user.gender}]`).checked = true;
         for (var i = 0; i < user.skills.length; i++) {
