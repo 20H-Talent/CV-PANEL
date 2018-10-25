@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/css/survey.css">
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/company.css">
+    <title>CV - PANEL</title>
+</head>
+<!-- Content here -->
+
+<body class="hold-transition sidebar-mini">
+    <header>
+        <!-- Just an image -->
+        <nav class="navbar text-white">
+            <a class="navbar-brand" href="#">
+                <img src="/assets/images/logo-curriculum-connections.png" width="160" height="50" alt="logo company">
+            </a>
+            <div id="div-navbar" class="close position-relative alert alert-info" role="alert"></div>
+        </nav>
+    </header>
+    <main>
+        <div class="container-fluid wrapper">
+            <div class="row">
+                <!-- Menu left -->
+                <div class="container-left">
+                    <div id="main-left">
+                        <div id="mySidenavLeft" class="sidenav-left">
+                            <a href="javascript:void(0)" class="openbtn-left pt-0 pb-0">
+                                <span style="font-size:30px;cursor:pointer; color:white" id="open-icon-left" class="open">&#9776;</span>
+                            </a>
+                            <section>
+                                <div id="left-menu" class="pt-2 pb-5 p-0">
+                                    <ul class="pl-0 w-100">
+                                        <li id="list-users" class="sidebar-position mb-3 rounded app-tooltip"
+                                            data-toggle="tooltip" data-placement="right" title="List all the users">
+                                            <a href="
+                                            #" class="p-1 pl-2">
+                                                <i class="fa fa-users mr-2"></i>
+                                                <span class="close">List Users</span>
+                                            </a>
+                                        </li>
+                                        <li id="new-user" class="mb-3 rounded app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Add new user">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fa fa-user-plus mr-2"></i>
+                                                <span class="close">Add User</span>
+                                            </a>
+                                        </li>
+                                        <li class="mb-3 rounded" title="Company Table" data-toggle="tooltip"
+                                            data-placement="right" onclick="switchVisible('Div3')">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="far fa-building mr-2"></i>
+                                                <span class="close">Companies</span>
+                                            </a>
+                                        </li>
+                                        <li class="mb-3 rounded SurveyMenuItem app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Create a new survey">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fas fa-chalkboard-teacher mr-2"></i>
+                                                <span class="close">Create survey</span>
+                                            </a>
+                                        </li>
+                                        <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
+                                            title="Logout from this application">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fa fa-sign-out-alt mr-2"></i>
+                                                <span class="close">Logout</span>
+                                            </a>
+                                        </li>
+                                        <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Search data">
+                                            <!-- llamar al index.html del menú derecho-->
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fa fa-search mr-2"></i>
+                                                <span class="close">Search</span>
+                                            </a>
+                                        </li>
+                                        <li class="mb-3 rounded" onclick="switchVisible('Div4')">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fas fa-business-time mr-2"></i>
+                                                <span class="close">Enterprises</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                    <!-- <div class="col-sm-2"> </div> -->
+                    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+                </div>
+                <!-- Table of users -->
+                <div class="col p-0" id="Div1">
+                    <div id="main" class="main-container">
+                        <div class="filters">
+                            <div class="search-badges"></div>
+                        </div>
+                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center mt-1">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col p-0" id="Div3">
+                    <div class="main-container-companies table-wrapper-scroll-y card-group">
+                        <div class=" filters ">
+                            <div class="search-badges "></div>
+                        </div>
+                        <div id="company-column" class="ml-1 col d-flex flex-row flex-wrap justify-content-center mt-1">
+                            <div id="company-table" class="table-responsive table-wrapper-scroll-y mt-1">
+                                <table class="table table-bordered table-hover " role="grid">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th><i class="far fa-lg mr-3 fa-building"></i><span>Logo</span></th>
+                                            <th><i class="far fa-lg mr-3 fa-id-card"></i><span> Name</span></th>
+                                            <th><i class="fas fa-lg mr-3 fa-at"></i><span> Email</span></th>
+                                            <th><i class="fas fa-lg mr-3 fa-phone"></i><span> Telephone</span></th>
+                                            <th><i class="fas fa-lg mr-3 fa-users"></i><span>Social Networks</span></th>
+                                            <th><i class="fas fa-lg mr-3 fa-cogs"></i><span>Settings</span></th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Delete button -->
+                                    <tbody id="tableBody">
+                                        <!-- HERE COMES THE USERS LIST RENDERED FROM JAVASCRIPT-->
+                                    </tbody>
+                                    <!-- view company -->
+                                    <div id="companyModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog rounded">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <!-- <div class="modal-header ">
+                                                    <button type="button " class="close " data-dismiss="modal ">×</button>
+                                                </div> -->
+                                                <div id="modal" class="modal-body">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn text-light header-card"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="confirm-delete" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close " data-dismiss="modal">×</button>
+                                                    <h4 class="modal-title" data-target="#confirm-delete ">Delete
+                                                        Company</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <strong>Are you sure you want to delete this company?</strong>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" id="del" class="btn btn-danger delete-company"
+                                                        data-dismiss="modal">Delete</button>
+                                                    <button type="button" class="btn   btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="card-container-company" class="table-wrapper-scroll-y  border-dark   row">
+                        <!-- <div class="card-deck "></div> -->
+                    </div>
+                </div>
+                <!-- Menu right -->
+
+                <!-- Enterprise Form-->
+                <div class="col h-100" id="Div4">
+                    <form id="alert-form-enterprises" action="get" method="post" class="container enterprise-form">
+                        <h1 class="format-1">Business area</h1>
+                        <hr>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputName">Enterprise's name</label>
+                            <input autofocus type="text" name="inputName" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name"
+                                value="" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputCif">CIF</label>
+                            <input type="text" name="inputCif" class="form-control form-control-width " minlength="9"
+                                maxlength="9" pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value=""
+                                required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputAddress">Address</label>
+                            <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street"
+                                required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputCity">City</label>
+                            <input lang="es-ES" name="imputCity" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City"
+                                required>
+                        </div>
+                        <div class="form-row col-md-12 country">
+                            <label class="format-2" for="inputCountry">Country</label>
+                            <input lang="es-ES" name="inputCountry" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country"
+                                required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputZip">Zip</label>
+                            <input name="inputZip" type="text" class="form-control form-control-width " minlength="3"
+                                maxlength="6" pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputPhone">Phone</label>
+                            <input name="inputPhone" type="tel" class="form-control form-control-width " minlength="3"
+                                maxlength="25" pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputEmail">Email</label>
+                            <input lang="es-ES" type="email" name="inputEmail" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
+                                id="inputEmail" placeholder="Email" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputWorkersNumber">Workers Number</label>
+                            <input name="inputWorkersNumber" type="number" class="form-control form-control-width "
+                                minlength="1" maxlength="5" pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company"
+                                required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputSocialNetworks">Social Networks</label>
+                            <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks"
+                                placeholder="Facebook, Twitter..." required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputLogo">Logo</label>
+                            <input name="inputLogo" type="file" class="form-control-file format-3" id="inputLogo">
+                        </div>
+
+                        <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
+                        <div class="form-row col-md-12">
+                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5"
+                                pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
+                            </textarea>
+                        </div>
+
+                        <div class="form-row col-md-12">
+                            <button id="btn-enterprises" type="submit" class="btn-lg btn-primary btn-block">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Menu right -->
+                <div class="container-right">
+                    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+                    <div id="main-right">
+                        <div id="mySidenavRight" class="sidenav-right">
+                            <a href="javascript:void(0) " class="openbtn-right pt-0 pb-0">
+                                <span style="font-size:20px;cursor:pointer; color:white " id="open-icon-right" class="open"><i
+                                        class="fa fa-search "></i></span>
+                            </a>
+                            <!-- Menu right -->
+                            <section id="right-menu-ajax" class="close"> </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalLabel"></h5>
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true ">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex">
+                        <img class="user-avatar img-fluid flex-grow-2" width="128" height="128" alt="user-avatar" />
+                        <div id="infoUser" class="flex-grow-1">
+                            <ul class="list-group">
+                                <li class="list-group-item birthday">
+                                    <i class="fas fa-birthday-cake mr-3"></i>
+                                </li>
+                                <li class="list-group-item phones">
+                                    <i class="fas fa-phone mr-3"></i>
+                                    <i class="fas fa-mobile-alt mx-3"></i>
+                                </li>
+                                <li class="list-group-item address">
+                                    <i class="fas fa-map-marked mr-3"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="my-2 modal-collapse-container d-flex justify-content-around flex-column-sm flex-wrap w-100 ">
+                        <div id="languages" class="user-collapse-info mb-2">
+                            <div class="card">
+                                <div class="card-header" id="languages-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo "
+                                            aria-expanded="true" aria-controls="languagesInfo">
+                                            Languages
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="languagesInfo" class="collapse" aria-labelledby="languages-info" data-parent="#languages">
+                                <div class="card-body card-body d-flex justify-content-around flex-wrap ">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="skills " class="user-collapse-info ">
+                            <div class="card ">
+                                <div class="card-header" id="skills-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo"
+                                            aria-expanded="true" aria-controls="skillsInfo">
+                                            Skills
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="skillsInfo" class="collapse" aria-labelledby="skills-info" data-parent="#skills">
+                                <div class="card-body d-flex justify-content-around flex-wrap ">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="frameworks" class="user-collapse-info">
+                            <div class="card">
+                                <div class="card-header" id="frameworks-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link " data-toggle="collapse" data-target="#frameworksInfo"
+                                            aria-expanded="true" aria-controls="frameworksInfo">
+                                            Frameworks
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="frameworksInfo" class="collapse" aria-labelledby="frameworks-info" data-parent="#frameworks">
+                                <div class="card-body card-body d-flex justify-content-around flex-wrap">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/UsersTable.js"></script>
+    <script src="/js/SearchFilter.js"></script>
+    <script src="/js/index.js "></script>
+    <script src="/js/languages-skills-jsons.js"></script>
+    <script src="/js/Company.js"></script>
+    <script src="/js/Companies.js"></script>
+
+    <script src="/js/AlphaForm.js"></script>
+
+</body>
+
+</html>

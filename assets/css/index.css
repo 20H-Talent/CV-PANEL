@@ -181,7 +181,7 @@ html {
   margin: 0;
   border: 0;
   border-right: 1px solid rgba(216, 210, 210, 0.8);
-  background: linear-gradient(to top, #7d7e7d 0%, #0e0e0e 100%);
+  background: #4d394b;
 }
 
 #users-table tbody td:first-child {
@@ -648,9 +648,9 @@ body {
   }
 
   #card-container > .user-card {
-      display: block;
-      width: auto;
-      margin-bottom: 0.5em;
+    display: block;
+    width: auto;
+    margin-bottom: 0.5em;
   }
   #data-column {
     padding-right: 0px;
@@ -699,7 +699,6 @@ body {
   .container-fluid {
     padding-left: 1em;
   }
-
 }
 
 /* Absolute Center Spinner */
@@ -829,3 +828,11 @@ body {
   }
 }
 
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+}
