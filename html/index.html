@@ -68,8 +68,6 @@
                                             </a>
                                         </li>
                                         <li class="mb-3 rounded" onclick="switchVisible('Div4')">
-                                            <!-- <li id="form-enterprises" class="mb-3 rounded w-100"> -->
-                                            <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fas fa-business-time mr-2"></i>
                                                 <span class="close">Enterprises</span>
@@ -350,8 +348,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="col p-0 mr-3" id="Div3"> </div> -->
                 <!-- Enterprise Form-->
                 <div class="col h-100" id="Div4">
                     <form id="alert-form-enterprises" action="get" method="post" class="container enterprise-form">
@@ -381,14 +377,6 @@
                             <label class="format-2" for="inputCountry">Country</label>
                             <input lang="es-ES" name="inputCountry" type="text" class="form-control" minlength="3" maxlength="25" 
                                 pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country" required>
-                            <!-- <select id="inputCountry" class="form-control">
-                                        <option selected>Country</option>
-                                        <option>Spain </option>
-                                        <option>France</option>
-                                        <option>Italy</option>
-                                        <option>United Kingdom</option>
-                                        <option>Germany</option>
-                                    </select> -->
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputZip">Zip</label>
@@ -403,10 +391,8 @@
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputEmail">Email</label>
                             <input lang="es-ES" type="email" name="inputEmail" class="form-control" minlength="3" maxlength="25"
-                      
-                                pattern="[a-zA-Z]"  
+                                pattern ="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
                                 id="inputEmail" placeholder="Email" required>
-                                          <!-- pattern="[a-zA-Z]{3,}@[a-zA-Z]{3,}[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,}" -->
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputWorkersNumber">Workers Number</label>

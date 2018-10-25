@@ -2,7 +2,7 @@
  * 
  * https://developer.mozilla.org/es/docs/HTML/HTML5/Forms_in_HTML5
  * https://getbootstrap.com/docs/4.0/components/forms/?
- * 
+ * https://www.w3.org/TR/html5/sec-forms.html#email-state-typeemail --> Documentation to control email input.
  */
 
 function verifyFormEnterprises() {
@@ -18,13 +18,6 @@ function verifyFormEnterprises() {
             inputsForm[i].className = "form-control is-invalid";
         }
       }
-    var logoFile = document.getElementById("inputLogo");
-    if (logoFile.checkValidity() == true) {
-        logoFile.classList.add("is-valid");
-    }else{ 
-        logoFile.classList.add("is-invalid");
-    }
-
 }
 
 $("#btn-enterprises").on("click", function() {
