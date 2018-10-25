@@ -6,6 +6,7 @@
     font-family: 'Crete Round', sans-serif;
     color: black;
     max-height: 100vh;
+    margin-left: 2em;
 }
 
 #gender-required {
@@ -40,13 +41,7 @@ nav {
     background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 60%, #fff), linear-gradient(70deg, #dbedff 32%, #ebfff0);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="tel"],
-input[type="address"],
-textarea,
-select {
+input[type="text"], input[type="email"], input[type="number"], input[type="tel"], input[type="address"], textarea, select {
     background: rgb(255, 254, 254) !important;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
@@ -57,7 +52,6 @@ select {
 input::placeholder {
     color: #fafafa;
     font-size: 1em;
-
     /* font-family: fantasy; */
     font-style: italic;
     text-align: right;
@@ -71,8 +65,7 @@ li {
     border-radius: 5px;
 }
 
-.custom-select[multiple],
-.custom-select[size]:not([size="1"]) {
+.custom-select[multiple], .custom-select[size]:not([size="1"]) {
     margin-bottom: 10px;
 }
 
@@ -89,6 +82,10 @@ li {
     display: none;
 }
 
+#Div4 {
+    display: none;
+}
+
 body {
     overflow: hidden;
 }
@@ -100,6 +97,10 @@ body {
 
 .borderafter {
     border: 1px solid red !important;
+    border-radius: 5px;
+}
+.borderafterValid {
+    border: 1px solid green !important;
     border-radius: 5px;
 }
 
@@ -125,6 +126,7 @@ body {
 /* .mb-3 {
     margin-top: 20px;
 } */
+
 .asweome {
     color: rgb(0, 0, 0) !important;
     width: 16px;
@@ -155,11 +157,11 @@ body {
     color: red !important;
 }
 
-.custom-radio .custom-control-input:checked ~ .custom-control-label::before {
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
 }
 
@@ -170,3 +172,98 @@ body {
 #test {
     padding-top: 6px;
 }
+
+@media (min-width:768px) {
+
+    #Div2 {
+        margin-left: 0;
+    }
+}
+
+ /*************************
+  * Form Enterprises Mobile 
+  *************************/
+
+  #Div4 {
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #ecf0f3;
+    background-size: cover;
+    font-family: 'Crete Round', sans-serif;
+    color: black;
+    max-height: 100vh;
+    margin-left: 2em;
+  }
+ 
+  .enterprise-form {
+    height: 100vh;
+    overflow-y: auto;
+    margin-bottom: 3em;
+  }
+ 
+  .btn-primary {
+    margin-top: 2em;
+    margin-bottom: 1.5rem;
+  }
+ 
+  .format-1 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+ 
+  .format-2 {
+    font-size: 1.2rem;
+    font-weight: bolder;
+  }
+ 
+ /****************************
+ * Form Enterprises Desktop
+ *****************************/
+ 
+  @media (min-width:768px) {
+
+    #Div2 {
+        margin-left: 0;
+    }
+
+    .enterprise-form {
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .btn-primary {
+      margin-top: 2em;
+      margin-bottom: 4rem;
+    }
+    .form-row {
+      margin-top: 2em;
+      align-items: center;
+    }
+    .format-2 {
+      width: 20%;
+      font-size: 1.2rem;
+      font-weight: bolder;
+    }
+    .format-3{
+     width: 80%;
+    }
+    .form-control {
+      width: 80%;
+    }
+    .format-1 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bolder;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    #inputDescription {
+      width: 100%;
+    }
+    #Div4 {
+      margin-left: 0;
+    }
+ 
+  }

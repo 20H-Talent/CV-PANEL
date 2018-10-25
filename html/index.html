@@ -7,11 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/form.css">
+    <link rel="stylesheet" href="/assets/css/enterprises-form.css">
     <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/company.css">
+    <link rel="stylesheet" href="/assets/css/company.css">
     <title>CV - PANEL</title>
 </head>
 <!-- Content here -->
@@ -22,7 +24,7 @@
         <!-- Just an image -->
         <nav class="navbar text-white">
             <a class="navbar-brand" href="#">
-                <img src="assets/images/logo-curriculum-connections.png" width="160" height="50" alt="logo company">
+                <img src="/assets/images/logo-curriculum-connections.png" width="160" height="50" alt="logo company">
             </a>
             <div id="div-navbar" class="close position-relative alert alert-info" role="alert"></div>
         </nav>
@@ -71,6 +73,13 @@
                                                 <span class="close">Search</span>
                                             </a>
                                         </li>
+                                        <li class="mb-3 rounded" onclick="switchVisible('Div4')">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fas fa-business-time mr-2"></i>
+                                                <span class="close">Enterprises</span>
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </section>
@@ -119,6 +128,7 @@
                             <div id="renderize" class="alert fade show" role="alert"></div>
                             <hr class="mb-4">
                             <hr class=" hr-2">
+                            <!--form Ana-->
                             <form id="alertform" action="get" method="post" class="needs-validation col-md-12 ">
                                 <div class="form-group row has-success">
                                     <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
@@ -343,7 +353,82 @@
                     </div>
                 </div>
                 <!-- Menu right -->
-                <div class="container-right ">
+                
+                <!-- Enterprise Form-->
+                <div class="col h-100" id="Div4">
+                    <form id="alert-form-enterprises" action="get" method="post" class="container enterprise-form">
+                        <h1 class="format-1">Business area</h1>
+                        <hr>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputName">Enterprise's name</label>
+                            <input autofocus type="text" name="inputName" class="form-control " minlength="3" maxlength="25"
+                                pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name" value="" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputCif">CIF</label>
+                            <input type="text" name="inputCif" class="form-control " minlength="9" maxlength="9"
+                                pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value="" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputAddress">Address</label>
+                            <input lang="es-ES" name="imputAdress" type="text" class="form-control" minlength="3" maxlength="25"
+                                pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputCity">City</label>
+                            <input lang="es-ES" name="imputCity" type="text" class="form-control" minlength="3" maxlength="25" 
+                                pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City" required>
+                        </div>
+                        <div class="form-row col-md-12 country">
+                            <label class="format-2" for="inputCountry">Country</label>
+                            <input lang="es-ES" name="inputCountry" type="text" class="form-control" minlength="3" maxlength="25" 
+                                pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputZip">Zip</label>
+                            <input name="inputZip" type="text" class="form-control" minlength="3" maxlength="6"
+                                pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputPhone">Phone</label>
+                            <input name="inputPhone" type="tel" class="form-control" minlength="3" maxlength="25"
+                                pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputEmail">Email</label>
+                            <input lang="es-ES" type="email" name="inputEmail" class="form-control" minlength="3" maxlength="25"
+                                pattern ="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
+                                id="inputEmail" placeholder="Email" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputWorkersNumber">Workers Number</label>
+                            <input name="inputWorkersNumber" type="number" class="form-control" minlength="1" maxlength="5" 
+                              pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company" required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputSocialNetworks">Social Networks</label>
+                            <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control" minlength="3" maxlength="25"
+                                pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter..." required>
+                        </div>
+                        <div class="form-row col-md-12">
+                            <label class="format-2" for="inputLogo">Logo</label>
+                            <input name="inputLogo" type="file" class="form-control-file format-3" id="inputLogo">
+                        </div>
+                        
+                        <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
+                        <div class="form-row col-md-12">
+                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5"
+                                pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
+                            </textarea>
+                        </div>
+
+                        <div class="form-row col-md-12">
+                            <button id="btn-enterprises" type="submit" class="btn-lg btn-primary btn-block">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Menu right -->
+                <div class="container-right">
                     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
                     <div id="main-right">
                         <div id="mySidenavRight" class="sidenav-right">
@@ -353,6 +438,7 @@
                             </a>
                             <!-- Menu right -->
                             <section id="right-menu-ajax" class="close ">
+                                 <!-- Menu right load by ajax -->
                                 <!--  <div id="right-menu " class="p-0 ">
                                     <p class="text-white text-center w-100 ">Search for: </p>
                                     <form id="advanced-search ">
@@ -509,14 +595,15 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="./js/form.js"></script>
-    <script src="./js/UsersTable.js"></script>
-    <script src="./js/SearchFilter.js"></script>
-    <script src="./js/index.js "></script>
-    <script src="./js/languages-skills-jsons.js"></script>
-    <script src="./js/Company.js"></script>
-    <script src="./js/Companies.js"></script>
-    <script src="./js/indexCompanies.js"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/UsersTable.js"></script>
+    <script src="/js/SearchFilter.js"></script>
+    <script src="/js/index.js "></script>
+    <script src="/js/languages-skills-jsons.js"></script>
+    <script src="/js/Company.js"></script>
+    <script src="/js/Companies.js"></script>
+    <script src="/js/indexCompanies.js"></script>
+    <script src="/js/enterprises-form.js"></script>
 
 </body>
 

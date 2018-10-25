@@ -101,33 +101,46 @@ function reset() {
  *  Showing the form when clicking the add user and showing the table user when clinking the list user***
  *********************************************************************************************************/
 function switchVisible(visible) {
-    // console.log("div1", document.getElementById("Div1").style.display);
-    // console.log("div2", document.getElementById("Div2").style.display);
-    switch (visible) {
-        case "Div1": //== table users
-            //showing the table
-            document.getElementById("Div1").style.display = "block";
-            //hidding the form
-            document.getElementById("Div2").style.display = "none";
-            document.getElementById("Div3").style.display = "none";
-            break;
-        case "Div2": //== form
-            //hidding the table
-            document.getElementById("Div1").style.display = "none";
-            //showing the form
-            document.getElementById("Div2").style.display = "block";
-            document.getElementById("Div3").style.display = "none";
-            break;
-        case "Div3": //== table users
-            //showing the table
-            document.getElementById("Div1").style.display = "none";
-            //hidding the form
-            document.getElementById("Div2").style.display = "none";
-            document.getElementById("Div3").style.display = "block";
-            break;
-        default:
-            break;
-    }
+  // console.log("div1", document.getElementById("Div1").style.display);
+  // console.log("div2", document.getElementById("Div2").style.display);
+  switch (visible) {
+    case "Div1": //== table users
+      //hidding the form
+      document.getElementById("Div2").style.display = "none";
+      document.getElementById("Div3").style.display = "none";
+      document.getElementById("Div4").style.display = "none";
+      //showing the table
+      document.getElementById("Div1").style.display = "block";
+      break;
+    case "Div2": //== form
+      //hidding the table
+      document.getElementById("Div1").style.display = "none";
+      document.getElementById("Div3").style.display = "none";
+      document.getElementById("Div4").style.display = "none";
+      //showing the form
+      document.getElementById("Div2").style.display = "block";
+      break;
+    case "Div3": //== table users
+      //hidding the form
+      document.getElementById("Div1").style.display = "none";
+      document.getElementById("Div2").style.display = "none";
+      document.getElementById("Div4").style.display = "none";
+      //showing the table
+      document.getElementById("Div3").style.display = "block";
+      break;
+
+    case "Div4": //== form
+      //hidding the table
+      document.getElementById("Div1").style.display = "none";
+      document.getElementById("Div2").style.display = "none";
+      document.getElementById("Div3").style.display = "none";
+      //showing the form
+      document.getElementById("Div4").style.display = "block";
+      break;
+
+    default:
+      break;
+  }
 }
 /**************************************************************************
  * Getting the values of the table and adding them in the inputs of the form on click***
