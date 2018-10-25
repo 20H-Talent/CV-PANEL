@@ -207,7 +207,7 @@
             "linkedin": "https://www.google.com/",
             "youtube": "https://www.google.com/"
         },
-        "logo": "./assets/images/NEC-Company-Logo.jpg",
+        "logo": "/assets/images/NEC-Company-Logo.jpg",
         "descripcion": "Proactive didactic contingency",
         "workersNumber": 10,
         "phone": "010-692-6593 125"
@@ -293,7 +293,7 @@
             "instagram": "https://www.google.com/",
             "youtube": "https://www.google.com/"
         },
-        "logo": "./assets/images/Amazon.com_Favicon.png",
+        "logo": "/assets/images/Amazon.com_Favicon.png",
         "descripcion": "Synchronised bottom-line interface",
         "workersNumber": 60,
         "phone": "210 067 612"
