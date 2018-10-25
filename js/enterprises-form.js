@@ -13,9 +13,9 @@ function verifyFormEnterprises() {
 
       for (i = 0; i < inputsForm.length; i++) {
         if (inputsForm[i].checkValidity() == true) {
-            inputsForm[i].className = "form-control is-valid";
+            inputsForm[i].className = "form-control form-control-width is-valid";
         }else{ 
-            inputsForm[i].className = "form-control is-invalid";
+            inputsForm[i].className = "form-control form-control-width is-invalid";
         }
       }
 }
