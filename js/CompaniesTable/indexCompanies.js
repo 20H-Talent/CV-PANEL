@@ -1,52 +1,53 @@
 var companies = new Companies();
 $.getJSON("../data/companies.json")
-  .done(function(data) {
-    $.each(data, function(i, item) {
-      var listOfCompanies = new Company(
-        data[i].id,
-        data[i].name,
-        data[i].CIF,
-        data[i].email,
-        data[i].socialnetworks,
-        data[i].logo,
-        data[i].descripcion,
-        data[i].workersNumber,
-        data[i].phone,
-        data[i].address,
-        data[i].socialnetworks
-      );
-      companies.addCompany(listOfCompanies);
+    .done(function(data) {
+        console.log('data :', data);
+        $.each(data, function(i, item) {
+            var company = new Company(
+                data[i].id,
+                data[i].name,
+                data[i].CIF,
+                data[i].email,
+                data[i].socialnetworks,
+                data[i].logo,
+                data[i].descripcion,
+                data[i].workersNumber,
+                data[i].phone,
+                data[i].address,
+                data[i].socialnetworks
+            );
+            companies.addCompany(company);
+        });
+
+        companies.renderTable();
+        companies.renderCompanyCards();
+
+        $(window).on("resize", function() {
+            let width = $(this).width();
+
+            const mainContainer = $(".main-container-companies");
+            const tableBody = mainContainer.find("#company-table tbody");
+            let cardDiv = $("#card-container-company");
+
+            if (width > 868) {
+                mainContainer.show();
+                cardDiv.hide();
+            } else {
+                mainContainer.hide();
+                cardDiv.show();
+            }
+        });
+    })
+    .fail(function(jqXHR) {
+        if (jqXHR.statusText !== "OK") {
+            console.log("[ERROR]: on loading json Companies.");
+        }
     });
-
-    companies.renderTable();
-    companies.renderCompanyCards();
-
-    $(window).on("resize", function() {
-      let width = $(this).width();
-
-      const mainContainer = $(".main-container-companies");
-      const tableBody = mainContainer.find("#company-table tbody");
-      let cardDiv = $("#card-container-company");
-
-      if (width > 868) {
-        mainContainer.show();
-        cardDiv.hide();
-      } else {
-        mainContainer.hide();
-        cardDiv.show();
-      }
-    });
-  })
-  .fail(function(jqXHR) {
-    if (jqXHR.statusText !== "OK") {
-      console.log("[ERROR]: on loading json Companies.");
-    }
-  });
 
 function showPreviewInfo(id) {
-  var company = companies.getCompanyById(id);
-  $("#modal").html(
-    `<div class="shadow-lg p-3 border col-lg col-sm  col-md  rounded"   data-id=${
+    var company = companies.getCompanyById(id);
+    $("#modal").html(
+        `<div class="shadow-lg p-3 border col-lg col-sm  col-md  rounded"   data-id=${
       company.id
     } >
         <div class="card-header d-flex header-card flex-row align-items-center">
@@ -86,17 +87,17 @@ function showPreviewInfo(id) {
         </div>
             <div class="card-footer   header-card text-right"></div>
     </div> `
-  );
+    );
 }
 
 function removeCompanyFromDOM(id) {
-  var company = companies.getCompanyById(id);
-  const mainContainer = $(".main-container-companies");
-  const tableBody = mainContainer.find("#company-table tbody");
-  mainContainer.on("click", "button.delete-company", function(e) {
-    if (tableBody.children("tr").length > 0) {
-      var findTr = tableBody.find(`tr[data-id=${company.id}]`);
-      findTr.remove();
-    }
-  });
+    var company = companies.getCompanyById(id);
+    const mainContainer = $(".main-container-companies");
+    const tableBody = mainContainer.find("#company-table tbody");
+    mainContainer.on("click", "button.delete-company", function(e) {
+        if (tableBody.children("tr").length > 0) {
+            var findTr = tableBody.find(`tr[data-id=${company.id}]`);
+            findTr.remove();
+        }
+    });
 }
