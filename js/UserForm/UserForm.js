@@ -13,6 +13,7 @@ const UserForm = (function() {
         _setupInternalEventListeners(userForm);
         _appendSkills();
         _appendLanguages();
+        userForm.trigger("reset");
       }).fail(function(err) {
         throw new Error(err);
       });
