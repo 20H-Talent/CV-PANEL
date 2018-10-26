@@ -1,21 +1,22 @@
 function Companies() {
-  this.construct = function(container) {
-    $.get("../../html/CompaniesTable.html", htmlSkeleton => {
-      container.empty().append(htmlSkeleton);
-      this.renderTable();
-    }).fail(function(err) {
-      throw new Error(err);
-    });
-  };
-  this.companies = [];
-  this.addCompany = function(company) {
-    this.companies.push(company);
-  };
-  this.renderTable = function() {
-    let width = $(window).width();
-    for (var i = 0; i < this.companies.length; i++) {
-      // mainContainer.empty();
-      $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>
+    this.construct = function(container) {
+        $.get("../../html/CompaniesTable.html", htmlSkeleton => {
+            container.empty().append(htmlSkeleton);
+            this.renderTable();
+            this.renderCompanyCards();
+        }).fail(function(err) {
+            throw new Error(err);
+        });
+    };
+    this.companies = [];
+    this.addCompany = function(company) {
+        this.companies.push(company);
+    };
+    this.renderTable = function() {
+        let width = $(window).width();
+        for (var i = 0; i < this.companies.length; i++) {
+            // mainContainer.empty();
+            $("#tableBody").append(`<tr scope="row""  data-id=${this.companies[i].id}>
             <td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${
               this.companies[i].logo
             } style="width:50px;"/></td>
@@ -50,22 +51,22 @@ function Companies() {
         this.companies[i].id
       })"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
-    }
-  };
-  this.getCompanyById = function(id) {
-    var company = this.companies.filter(function(company) {
-      return company.id == id;
-    });
-    return company[0];
-  };
+        }
+    };
+    this.getCompanyById = function(id) {
+        var company = this.companies.filter(function(company) {
+            return company.id == id;
+        });
+        return company[0];
+    };
 
-  this.renderCompanyCards = function() {
-    let mainContainer = $(".main-container-companies");
-    let cardCompanyContainer = $("#card-container-company");
-    let innerCard = "";
-    for (var i = 0; i < this.companies.length; i++) {
-      let width = $(window).width();
-      innerCard += `
+    this.renderCompanyCards = function() {
+        let mainContainer = $(".main-container-companies");
+        let cardCompanyContainer = $("#card-container-company");
+        let innerCard = "";
+        for (var i = 0; i < this.companies.length; i++) {
+            let width = $(window).width();
+            innerCard += `
             <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded  ml-5 mr-5 text-center"  data-id=${
               this.companies[i].id
             }>
@@ -105,8 +106,8 @@ function Companies() {
             </div>
             </div>
           `;
-    }
+        }
 
-    cardCompanyContainer.html(innerCard);
-  };
+        cardCompanyContainer.html(innerCard);
+    };
 }
