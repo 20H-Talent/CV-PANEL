@@ -23,16 +23,16 @@
 }
 
 .header-modal {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
     color: #fff;
     border-radius: 3px;
 }
 
 .btn-ldeep-purple {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
     background-color: #ffffff;
     /* border-color: black; */
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
     /* background-color: #4d394b; */
 }
 
@@ -127,5 +127,5 @@ a.btn-social,
 }
 
 .header-card {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
 }
