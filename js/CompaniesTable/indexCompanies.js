@@ -1,7 +1,6 @@
 var companies = new Companies();
 $.getJSON("../data/companies.json")
     .done(function(data) {
-        console.log('data :', data);
         $.each(data, function(i, item) {
             var company = new Company(
                 data[i].id,
@@ -92,10 +91,9 @@ function showPreviewInfo(id) {
 
 function removeCompanyFromDOM(id) {
     var company = companies.getCompanyById(id);
-    const btnDelete = $("#confirm-delete");
     const mainContainer = $(".main-container-companies");
     const tableBody = mainContainer.find("#company-table tbody");
-    btnDelete.on("click", "button.delete-company", function(e) {
+    mainContainer.on("click", "button.delete-company", function(e) {
         if (tableBody.children("tr").length > 0) {
             var findTr = tableBody.find(`tr[data-id=${company.id}]`);
             findTr.remove();
