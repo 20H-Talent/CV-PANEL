@@ -1,4 +1,12 @@
 function Companies() {
+  this.construct = function(container) {
+    $.get("../../html/CompaniesTable.html", htmlSkeleton => {
+      container.empty().append(htmlSkeleton);
+      this.renderTable();
+    }).fail(function(err) {
+      throw new Error(err);
+    });
+  };
   this.companies = [];
   this.addCompany = function(company) {
     this.companies.push(company);
@@ -35,6 +43,7 @@ function Companies() {
       } data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-info preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
+
                     <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${
                       this.companies[i].id
                     } data-target="#confirm-delete" onclick="removeCompanyFromDOM(${
@@ -51,10 +60,8 @@ function Companies() {
   };
 
   this.renderCompanyCards = function() {
-    console.log("me estoy ejecutando");
     let mainContainer = $(".main-container-companies");
     let cardCompanyContainer = $("#card-container-company");
-    //  console.log('cardCompanyContainer :', cardCompanyContainer.get());
     let innerCard = "";
     for (var i = 0; i < this.companies.length; i++) {
       let width = $(window).width();
@@ -101,7 +108,5 @@ function Companies() {
     }
 
     cardCompanyContainer.html(innerCard);
-
-    // console.log('cardCompanyContainer :', cardCompanyContainer.get());
   };
 }
