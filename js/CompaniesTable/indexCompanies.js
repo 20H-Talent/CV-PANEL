@@ -1,7 +1,6 @@
 var companies = new Companies();
 $.getJSON("../data/companies.json")
     .done(function(data) {
-        console.log('data :', data);
         $.each(data, function(i, item) {
             var company = new Company(
                 data[i].id,

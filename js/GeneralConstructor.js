@@ -49,7 +49,11 @@ try {
   generalConstructor = GeneralConstructor.getInstance({
     "users-table": { container: "#users-table", constructor: usersTable },
     "user-form": { container: "#user-form-container", constructor: userForm },
-    "survey-creator": { container: "", constructor: surveyCreator }
+    "survey-creator": {
+      container: ".survey-container",
+      constructor: surveyCreator
+    },
+    "companies-table": { container: ".companies-table", constructor: companies }
   });
 } catch (err) {
   alert(err.name + " " + err.message);
