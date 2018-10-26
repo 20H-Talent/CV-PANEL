@@ -217,6 +217,7 @@ function navRight(event) {
 // --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
 let newUser = document.getElementById("new-user");
+let listCompanies = document.getElementById("list-companies");
 let surveyMenuItem = document.querySelector(".SurveyMenuItem");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
@@ -240,6 +241,10 @@ newUser.addEventListener("click", function(e) {
 
 surveyMenuItem.addEventListener("click", function(e) {
   generalConstructor.construct("survey-creator");
+});
+
+listCompanies.addEventListener("click", function(e) {
+  generalConstructor.construct("companies-table");
 });
 // --- TO SEE CREATE USER ---
 /*
@@ -290,14 +295,12 @@ function switchVisible(visible) {
   switch (visible) {
     case "Div1": //== table users
       //hidding the form
-      document.getElementById("Div3").style.display = "none";
       document.getElementById("Div4").style.display = "none";
       //showing the table
       break;
     case "Div2": //== form
       //hidding the table
       document.getElementById("Div1").style.display = "none";
-      document.getElementById("Div3").style.display = "none";
       document.getElementById("Div4").style.display = "none";
       //showing the form
       break;
@@ -306,13 +309,11 @@ function switchVisible(visible) {
       document.getElementById("Div1").style.display = "none";
       document.getElementById("Div4").style.display = "none";
       //showing the table
-      document.getElementById("Div3").style.display = "block";
       break;
 
     case "Div4": //== form
       //hidding the table
       document.getElementById("Div1").style.display = "none";
-      document.getElementById("Div3").style.display = "none";
       //showing the form
       document.getElementById("Div4").style.display = "block";
       break;
