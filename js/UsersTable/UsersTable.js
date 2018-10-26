@@ -20,7 +20,41 @@ const Table = (function() {
       format: "json"
     });
 
-    _setupSessionStorage(apiURL, initTable);
+    function construct(container) {
+      $.get("../../html/UserTable.html", function(htmlSkeleton) {
+        container.empty().append(htmlSkeleton);
+        _setupSessionStorage(apiURL, initTable);
+        _setupInternalEventListeners();
+      }).fail(function(err) {
+        _showOverlay(false);
+        throw new Error(err);
+      });
+    }
+
+    function _setupInternalEventListeners() {
+      $(window).on("resize", function(e) {
+        const width = this.innerWidth;
+        renderDataOnResize(null, width);
+      });
+
+      $("div.main-container")
+        .find("td.options")
+        .off("click")
+        .on("click", "button:not(.detail)", _optionButtonsEvent);
+    }
+
+    function _optionButtonsEvent(event) {
+      const button = $(event.currentTarget);
+      const userID = button.data("id");
+
+      if (button.hasClass("edit")) {
+        userForm.editForm(getUserByEmailOrID(userID));
+      } else {
+        if (window.confirm("Are you sure to delete this user?")) {
+          deleteUser(userID);
+        }
+      }
+    }
 
     /** Prepare sessionStorage that allow us save the data in client side to work with it
      * @function _setupSessionStorage
@@ -271,7 +305,7 @@ const Table = (function() {
            </td>
            <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
            <td class="options text-center">
-                  <button type="button" class=" my-2 btn btn-outline-success btn-sm"
+                  <button type="button" class=" my-2 btn btn-outline-success btn-sm detail"
                     data-id=${
                       id.value
                     } data-toggle="modal" data-target="#userModal" title="View user">
@@ -340,7 +374,7 @@ const Table = (function() {
            .join("")}
      </div>
      <div class="card-footer card-buttons text-right">
-        <button type="button" class="btn btn-outline-success btn-sm" data-email=${email} data-toggle="modal" data-target="#userModal"><i class="far fa-eye"></i></button>
+        <button type="button" class="btn btn-outline-success btn-sm" data-id=${id} data-toggle="modal" data-target="#userModal"><i class="far fa-eye"></i></button>
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
           id.value
         }><i class="fas fa-user-edit"></i></button>
@@ -429,15 +463,9 @@ const Table = (function() {
      * @return {object} User
      */
     function getUserByEmailOrID(value) {
-      if (value.includes("@")) {
-        return JSON.parse(sessionStorage.getItem("users-list")).find(
-          user => user.email === value
-        );
-      } else {
-        return JSON.parse(sessionStorage.getItem("users-list")).find(
-          user => user.id.value === value
-        );
-      }
+      return JSON.parse(sessionStorage.getItem("users-list")).find(
+        user => user.id.value === value
+      );
     }
 
     /**
@@ -453,7 +481,7 @@ const Table = (function() {
       for (let index = 0; index <= numberOfItems; index++) {
         extraData.push(data[Math.floor(Math.random() * data.length)]);
       }
-      return Array.from(new Set(extraData));
+      return [...new Set(extraData)];
     }
 
     /**
@@ -527,12 +555,80 @@ const Table = (function() {
       }
     }
 
+    function renderDataOnModal(event) {
+      const element = $(event.relatedTarget);
+      const modal = $(this);
+      const user = getUserByEmailOrID(element.data("id"));
+
+      const { picture, name, login, dob, phone, cell, location } = user;
+      const fullName = buildUserFullname(name);
+
+      const modalBody = modal.find(".modal-body");
+
+      modalBody.find("#infoUser span").remove();
+
+      modal.find(".modal-title").text(fullName + " ~ " + login.username);
+      modalBody.find("img").prop("src", picture["large"]);
+
+      _appendBirthday(modalBody, dob.date);
+      _appendPhones(modalBody, { phone, cell });
+      _appendAddress(modalBody, location);
+      _appendTechSkills(modalBody, user);
+    }
+
+    function _appendBirthday(container, date) {
+      container
+        .find(".birthday")
+        .append(`<span>${new Date(date).toLocaleDateString()}</span>`);
+    }
+
+    function _appendPhones(container, phones) {
+      container
+        .find(".phones")
+        .children("i")
+        .each((index, element) => {
+          if ($(element).hasClass("fa-phone")) {
+            $(`<span>${phones.phone}</span>`).insertAfter($(element));
+          }
+          if ($(element).hasClass("fa-mobile-alt")) {
+            $(`<span>${phones.cell}</span>`).insertAfter($(element));
+          }
+        });
+    }
+
+    function _appendAddress(container, location) {
+      container
+        .find(".address")
+        .append(
+          `<span>${location.state} ~ ${location.city} ${location.postcode} / ${
+            location.street
+          }</span>`
+        );
+    }
+
+    function _appendTechSkills(container, user) {
+      ["skills", "languages", "frameworks"].map(key => {
+        const userData = user[key];
+        container
+          .find(`#${key}Info > .card-body`)
+          .empty()
+          .append(
+            userData.map(
+              value =>
+                `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
+            )
+          );
+      });
+    }
+
     return {
+      construct,
       initTable,
       setupApiURL,
       buildUserFullname,
       getUserByEmailOrID,
       renderDataOnResize,
+      renderDataOnModal,
       changeApiParams,
       deleteUser
     };
@@ -550,81 +646,4 @@ const Table = (function() {
 
 const usersTable = Table.getInstance();
 
-$(window).on("resize", function(e) {
-  const width = this.innerWidth;
-  usersTable.renderDataOnResize(null, width);
-});
-$("div.main-container").on("click", "button.edit", editForm);
-
-$("div.main-container").on("click", "button.delete", function(e) {
-  if (window.confirm("Are you sure to delete this user?")) {
-    const userID = $(this).data("id");
-    usersTable.deleteUser(userID);
-  }
-});
-
-$("#userModal").on("show.bs.modal", function(event) {
-  const element = $(event.relatedTarget);
-  const modal = $(this);
-  const user = usersTable.getUserByEmailOrID(element.data("id"));
-
-  const { picture, name, login, dob, phone, cell, location } = user;
-  const fullName = usersTable.buildUserFullname(name);
-
-  const modalBody = modal.find(".modal-body");
-
-  modalBody.find("#infoUser span").remove();
-
-  modal.find(".modal-title").text(fullName + " ~ " + login.username);
-  modalBody.find("img").prop("src", picture["large"]);
-
-  appendBirthday(modalBody, dob.date);
-  appendPhones(modalBody, { phone, cell });
-  appendAddress(modalBody, location);
-  appendTechSkills(modalBody, user);
-});
-
-function appendBirthday(container, date) {
-  container
-    .find(".birthday")
-    .append(`<span>${new Date(date).toLocaleDateString()}</span>`);
-}
-
-function appendPhones(container, phones) {
-  container
-    .find(".phones")
-    .children("i")
-    .each((index, element) => {
-      if ($(element).hasClass("fa-phone")) {
-        $(`<span>${phones.phone}</span>`).insertAfter($(element));
-      }
-      if ($(element).hasClass("fa-mobile-alt")) {
-        $(`<span>${phones.cell}</span>`).insertAfter($(element));
-      }
-    });
-}
-
-function appendAddress(container, location) {
-  container
-    .find(".address")
-    .append(
-      `<span>${location.state} ~ ${location.city} ${location.postcode} / ${
-        location.street
-      }</span>`
-    );
-}
-
-function appendTechSkills(container, user) {
-  ["skills", "languages", "frameworks"].map(key => {
-    const userData = user[key];
-    container
-      .find(`#${key}Info > .card-body`)
-      .empty()
-      .append(
-        userData.map(
-          value =>
-            `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
-        )
-      );
-  });
-}
+$("#userModal").on("show.bs.modal", usersTable.renderDataOnModal);

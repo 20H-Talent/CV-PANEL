@@ -1,5 +1,4 @@
-[
-    {    
+[{
         "tag": "layout",
         "label": "css",
         "name": "skills_css",
@@ -51,36 +50,36 @@
         "tag": "frameworks",
         "label": "django",
         "name": "skills_django",
-        "defaultValue": 0 
+        "defaultValue": 0
     },
     {
         "tag": "frameworks",
         "label": "ruby-rails",
         "name": "skills_ruby-rails",
-        "default-value": 0 
+        "default-value": 0
     },
     {
         "tag": "frameworks",
         "label": "react",
         "name": "skills_react",
-        "defaultValue": 0 
+        "defaultValue": 0
     },
     {
         "tag": "frameworks",
         "label": "angular",
         "name": "skills_angular",
-        "defaultValue": 0 
+        "defaultValue": 0
     },
     {
         "tag": "frameworks",
         "label": "vue",
         "name": "skills_vue",
-        "defaultValue": 0 
+        "defaultValue": 0
     },
     {
         "tag": "frameworks",
         "label": "laravel",
         "name": "skills_laravel",
-        "defaultValue": 0 
+        "defaultValue": 0
     }
 ]
