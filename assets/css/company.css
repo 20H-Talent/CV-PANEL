@@ -13,7 +13,7 @@
     cursor: pointer;
     border-right: 1px solid #ffffff;
     opacity: 1;
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
     /* background-color: #1ab394; */
 }
 
@@ -22,7 +22,7 @@
     background-size: cover;
 }
 
-.modal-header {
+.header-modal {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
     color: #fff;
     border-radius: 3px;
