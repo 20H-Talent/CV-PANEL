@@ -556,6 +556,7 @@ const Table = (function() {
     }
 
     function renderDataOnModal(event) {
+      console.log("Entro", event.relatedTarget, this);
       const element = $(event.relatedTarget);
       const modal = $(this);
       const user = getUserByEmailOrID(element.data("id"));

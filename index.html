@@ -5,11 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/css/guided_visit.css">
     <link rel="stylesheet" href="assets/css/survey.css">
     <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/company.css">
@@ -40,45 +43,52 @@
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
                                     <ul class="pl-0 w-100">
-                                        <li id="list-users" class="sidebar-position mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="List all the users">
+                                        <li id="list-users" class="sidebar-position mb-3 rounded app-tooltip"
+                                            data-toggle="tooltip" data-placement="right" title="List all the users">
                                             <a href="
                                             #" class="p-1 pl-2">
                                                 <i class="fa fa-users mr-2"></i>
                                                 <span class="close">List Users</span>
                                             </a>
                                         </li>
-                                        <li id="new-user" class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="Add new user">
+                                        <li id="new-user" class="mb-3 rounded app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Add new user">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-user-plus mr-2"></i>
                                                 <span class="close">Add User</span>
                                             </a>
                                         </li>
-                                        <li id="list-companies" class="mb-3 rounded app-tooltip" title="Company Table" data-toggle="tooltip" data-placement="right" title="List all the companies">
+                                        <li id="list-companies" class="mb-3 rounded app-tooltip" title="Company Table"
+                                            data-toggle="tooltip" data-placement="right" title="List all the companies">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="far fa-building mr-2"></i>
                                                 <span class="close">Companies</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded SurveyMenuItem app-tooltip" data-toggle="tooltip" data-placement="right" title="Create a new survey">
+                                        <li class="mb-3 rounded SurveyMenuItem app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Create a new survey">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fas fa-chalkboard-teacher mr-2"></i>
                                                 <span class="close">Create survey</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right" title="Logout from this application">
+                                        <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
+                                            title="Logout from this application">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-sign-out-alt mr-2"></i>
                                                 <span class="close">Logout</span>
                                             </a>
                                         </li>
-                                        <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right" title="Search data">
+                                        <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip"
+                                            data-placement="right" title="Search data">
                                             <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-search mr-2"></i>
                                                 <span class="close">Search</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="Show the enterprises form" onclick="switchVisible('Div4')">
+                                        <li class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right"
+                                            title="Show the enterprises form" onclick="switchVisible('Div4')">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fas fa-business-time mr-2"></i>
                                                 <span class="close">Enterprises</span>
@@ -94,7 +104,7 @@
                     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
                 </div>
                 <!-- Table of users -->
-                <div class="col p-0" id="Div1">
+                <div class="col p-0 bg-white" id="Div1">
                     <div id="main" class="main-container">
                         <div class="filters">
                             <div class="search-badges"></div>
@@ -113,44 +123,61 @@
                         <hr>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputName">Enterprise's name</label>
-                            <input autofocus type="text" name="inputName" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name" value="" required>
+                            <input autofocus type="text" name="inputName" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name"
+                                value="" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputCif">CIF</label>
-                            <input type="text" name="inputCif" class="form-control form-control-width " minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value="" required>
+                            <input type="text" name="inputCif" class="form-control form-control-width " minlength="9"
+                                maxlength="9" pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value=""
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputAddress">Address</label>
-                            <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street" required>
+                            <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street"
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputCity">City</label>
-                            <input lang="es-ES" name="imputCity" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City" required>
+                            <input lang="es-ES" name="imputCity" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City"
+                                required>
                         </div>
                         <div class="form-row col-md-12 country">
                             <label class="format-2" for="inputCountry">Country</label>
-                            <input lang="es-ES" name="inputCountry" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country" required>
+                            <input lang="es-ES" name="inputCountry" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country"
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputZip">Zip</label>
-                            <input name="inputZip" type="text" class="form-control form-control-width " minlength="3" maxlength="6" pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
+                            <input name="inputZip" type="text" class="form-control form-control-width " minlength="3"
+                                maxlength="6" pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputPhone">Phone</label>
-                            <input name="inputPhone" type="tel" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
+                            <input name="inputPhone" type="tel" class="form-control form-control-width " minlength="3"
+                                maxlength="25" pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputEmail">Email</label>
-                            <input lang="es-ES" type="email" name="inputEmail" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)" id="inputEmail"
-                                placeholder="Email" required>
+                            <input lang="es-ES" type="email" name="inputEmail" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
+                                id="inputEmail" placeholder="Email" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputWorkersNumber">Workers Number</label>
-                            <input name="inputWorkersNumber" type="number" class="form-control form-control-width " minlength="1" maxlength="5" pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company" required>
+                            <input name="inputWorkersNumber" type="number" class="form-control form-control-width "
+                                minlength="1" maxlength="5" pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company"
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputSocialNetworks">Social Networks</label>
-                            <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter..." required>
+                            <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width "
+                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks"
+                                placeholder="Facebook, Twitter..." required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputLogo">Logo</label>
@@ -159,12 +186,13 @@
 
                         <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
                         <div class="form-row col-md-12">
-                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
+                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5"
+                                pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
                             </textarea>
                         </div>
 
                         <div class="form-row col-md-12">
-                            <button id="btn-enterprises" type="submit" class="btn-lg btn-primary btn-block">Save</button>
+                            <button id="btn-enterprises" type="submit" class="btn-lg btn-primary btn-custom-2 btn-block">Save</button>
                         </div>
                     </form>
                 </div>
@@ -217,7 +245,8 @@
                             <div class="card">
                                 <div class="card-header" id="languages-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo " aria-expanded="true" aria-controls="languagesInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo "
+                                            aria-expanded="true" aria-controls="languagesInfo">
                                             Languages
                                         </button>
                                     </h5>
@@ -232,7 +261,8 @@
                             <div class="card ">
                                 <div class="card-header" id="skills-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo" aria-expanded="true" aria-controls="skillsInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo"
+                                            aria-expanded="true" aria-controls="skillsInfo">
                                             Skills
                                         </button>
                                     </h5>
@@ -247,7 +277,8 @@
                             <div class="card">
                                 <div class="card-header" id="frameworks-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link " data-toggle="collapse" data-target="#frameworksInfo" aria-expanded="true" aria-controls="frameworksInfo">
+                                        <button class="btn btn-link " data-toggle="collapse" data-target="#frameworksInfo"
+                                            aria-expanded="true" aria-controls="frameworksInfo">
                                             Frameworks
                                         </button>
                                     </h5>
@@ -266,11 +297,14 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="js/UserForm/UserForm.js"></script>
     <script src="js/SurveyCreator/SurveyCreator.js"></script>
@@ -283,7 +317,7 @@
     <script src="js/GeneralConstructor.js"></script>
     <script src="js/enterprises-form.js"></script>
     <script src="js/index.js"></script>
-
+    <script src="js/guided_visit.js"></script>
 </body>
 
 </html>

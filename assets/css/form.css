@@ -200,7 +200,7 @@ button#languages {
   margin-bottom: 3em;
 }
 
-.btn-primary {
+.btn-custom-2 {
   margin-top: 2em;
   margin-bottom: 1.5rem;
 }
@@ -231,7 +231,7 @@ button#languages {
     height: 100vh;
     overflow-y: auto;
   }
-  .btn-primary {
+  .btn-custom-2 {
     margin-top: 2em;
     margin-bottom: 4rem;
   }
