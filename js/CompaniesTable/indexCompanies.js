@@ -2,7 +2,7 @@ var companies = new Companies();
 $.getJSON("../data/companies.json")
   .done(function(data) {
     $.each(data, function(i, item) {
-      var listOfCompanies = new Company(
+      var company = new Company(
         data[i].id,
         data[i].name,
         data[i].CIF,
@@ -15,7 +15,7 @@ $.getJSON("../data/companies.json")
         data[i].address,
         data[i].socialnetworks
       );
-      companies.addCompany(listOfCompanies);
+      companies.addCompany(company);
     });
 
     companies.renderTable();
