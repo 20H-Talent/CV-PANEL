@@ -187,19 +187,18 @@ button#languages {
 #Div4 {
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #ecf0f3;
-    background-size: cover;
-    font-family: "Crete Round", sans-serif;
+    background-color: #ffffff;
     color: black;
     max-height: 100vh;
     margin-left: 2em;
 }
 
-.enterprise-form {
+
+/* .enterprise-form {
     height: 100vh;
     overflow-y: auto;
     margin-bottom: 3em;
-}
+} */
 
 .btn-custom-2 {
     margin-top: 2em;
@@ -228,10 +227,10 @@ button#languages {
     #Div2 {
         margin-left: 0;
     }
-    .enterprise-form {
+    /* .enterprise-form {
         height: 100vh;
         overflow-y: auto;
-    }
+    } */
     .btn-custom-2 {
         margin-top: 2em;
         margin-bottom: 4rem;
