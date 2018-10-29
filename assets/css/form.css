@@ -80,6 +80,7 @@ li {
 }
 
 #Div4 {
+    font-family: "Crete Round", sans-serif;
     display: none;
 }
 
@@ -217,7 +218,7 @@ button#languages {
 
 .format-2 {
     font-size: 1.2rem;
-    font-weight: bolder;
+    /* font-weight: bolder; */
 }
 
 
@@ -244,7 +245,7 @@ button#languages {
     .format-2 {
         width: 20%;
         font-size: 1.2rem;
-        font-weight: bolder;
+        /* font-weight: bolder; */
     }
     .format-3 {
         width: 80%;
