@@ -201,8 +201,10 @@ button#languages {
 } */
 
 .btn-custom-2 {
-    margin-top: 2em;
-    margin-bottom: 1.5rem;
+    color: white;
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+    margin-top: 2em!important;
+    margin-bottom: 8rem;
 }
 
 .format-1 {
@@ -233,7 +235,7 @@ button#languages {
     } */
     .btn-custom-2 {
         margin-top: 2em;
-        margin-bottom: 4rem;
+        margin-bottom: 8rem;
     }
     .form-row {
         margin-top: 2em;
