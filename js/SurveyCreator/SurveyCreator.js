@@ -25,13 +25,13 @@ const SurveyCreator = (function() {
         form.off("submit").on("submit", _buildJSON);
 
         $surveyContainer
-          .find("th.Survey-TypeSelector")
+          .find(".Survey-TypeSelector")
           .children("select.SelectedType-Select")
           .off("change")
           .on("change", _typeSelect);
 
         $surveyContainer
-          .find(".AddNewElement-Cell > button.addNewElement")
+          .find(".Survey-TypeSelector > button.addNewElement")
           .off("click")
           .on("click", _newFieldValue);
       }
@@ -192,9 +192,7 @@ const SurveyCreator = (function() {
 
       function _newFieldValue(event) {
         const typeSelectorValue = $(event.currentTarget)
-          .parent()
-          .siblings("th.Survey-TypeSelector")
-          .children("select")
+          .siblings("select.SelectedType-Select")
           .val();
 
         const tableBody = $("#survey-element > table").find(
@@ -222,7 +220,6 @@ const SurveyCreator = (function() {
               </label>
              </div>
             </td>
-            <td></td>
           </tr>`
               )
               .off("click")
@@ -232,14 +229,6 @@ const SurveyCreator = (function() {
             tableBody
               .append(
                 `<tr class="ValueType-data">
-                <td class="Selector-Cell">
-                <div class="form-group">
-                    <label class="w-100">
-                      <p contenteditable="true">Title of your selector</p>
-                      <select class="form-control" name="select_input[]"></select>
-                    </label>
-                </div>
-              </td>
                 <td>
                     <div class="form-group">
                       <div class="input-group">
@@ -264,10 +253,7 @@ const SurveyCreator = (function() {
 
       function _typeSelect(event) {
         const typeSelector = $(event.currentTarget);
-        const addButton = typeSelector
-          .parent()
-          .siblings("th.AddNewElement-Cell")
-          .find("button.addNewElement");
+        const addButton = typeSelector.siblings("button.addNewElement");
 
         addButton.html(`Add new ${typeSelector.val()} on the survey
         <i class="fas fa-plus-square"></i>`);

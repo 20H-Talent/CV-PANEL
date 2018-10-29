@@ -8,6 +8,9 @@
   overflow: -moz-scrollbars-none;
 }
 
+.survey-container .table-responsive {
+  overflow-x: hidden;
+}
 .survey-container table thead th h4 {
   display: inline-block;
 }
