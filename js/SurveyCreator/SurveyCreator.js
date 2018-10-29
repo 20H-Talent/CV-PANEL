@@ -235,12 +235,17 @@ const SurveyCreator = (function() {
                         <input class="form-control" type="text" placeholder="New option here..."/>
                         <div class="input-group-append">
                           <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
-                          <button class="btn btn-outline-danger selectActions delete" type="button">Delete</button>
                         </div>
                       </div>
                     <div class="container preview-group my-2">
                       <ul class="list-group preview-list my-1 px-1 py-1"></ul>
                     </div>
+                  </div>
+                  <div class="button-actions text-right">
+                     <button class="btn btn-outline-danger btn-block selectActions delete" type="button">
+                         Delete
+                         <i class="far fa-trash-alt"></i>
+                      </button>
                   </div>
                 </td>
                 </tr>`

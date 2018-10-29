@@ -41,6 +41,14 @@ td.ValueType-Cell label {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+tr.ValueType-data td {
+  border-top: 2px solid rgb(165, 160, 160) !important;
+}
+tr.ValueType-data .button-actions {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 th.FieldValues i.fa-plus-square {
   font-size: 1.5em;
   color: #28a745;
