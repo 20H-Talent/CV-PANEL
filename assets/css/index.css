@@ -118,6 +118,7 @@ html {
 #users-table {
     display: block;
     width: 100%;
+    font-size: 0.9rem;
     font-family: Source Sans Pro, Arial, serif;
 }
 
