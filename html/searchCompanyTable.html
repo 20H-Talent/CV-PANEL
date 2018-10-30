@@ -7,7 +7,7 @@
     <form id="advanced-search">
         <div id="name-company" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
             <label for="company-name" class="badge-pill bg-dark text-center w-100 mb-3">Company Name</label>
-            <input type="text" class="form-control" id="company-name" placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
+            <input type="text" class="form-control" onsubmit="advancedSearch()" id="company-name" placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
@@ -15,7 +15,7 @@
 
         <div id="cif-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
             <label for="company-cif" class="badge-pill bg-dark text-center w-100 mb-3">CIF</label>
-            <input type="text" class="form-control" id="company-cif" placeholder="Insert CIF" name="CIF" pattern="[a-zA-Z]*">
+            <input type="text" class="form-control" onsubmit="advancedSearch()" id="company-cif" placeholder="Insert CIF" name="CIF" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
@@ -23,7 +23,7 @@
 
         <div id="workers-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
             <label for="company-workers" class="badge-pill bg-dark text-center w-100 mb-3">Number of workers</label>
-            <input type="text" class="form-control" id="company-workers" placeholder="Number of workers" name="workers" pattern="[a-zA-Z]*">
+            <input type="number" class="form-control" onsubmit="advancedSearch()" id="company-workers" placeholder="Number of workers" name="workers" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
@@ -31,7 +31,7 @@
 
         <div id="profile-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
             <label for="company-profile" class="badge-pill bg-dark text-center w-100 mb-3">Company profile</label>
-            <input type="text" class="form-control" id="company-profile" placeholder="profile" name="profile" pattern="[a-zA-Z]*">
+            <input type="text" class="form-control" onsubmit="advancedSearch()" id="company-profile" placeholder="profile" name="profile" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
@@ -44,7 +44,7 @@
                 </small>
         </div>
         <div id="button_right" class="d-flex justify-content-center mb-5">
-            <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill">
+            <button id="submit_search" type="submit" onclick="advancedSearch()" class="btn btn-primary badge badge-pill">
                     <i class="fa fa-check-circle fa-3x "></i>
                 </button>
         </div>

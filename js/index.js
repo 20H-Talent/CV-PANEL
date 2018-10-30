@@ -17,36 +17,52 @@ function activateTooltips(container = null) {
  */
 
 // $(document).ready(function() {
-//   $("#open-icon-right").click(function() {
-//       $.ajax({
-//           url: "../html/right-menu.html",
-//           dataType: "html",
-//           success: function(data) {
-//               $("#right-menu-ajax").empty().append(data);
-//               formSideBar();
-//               $("form#advanced-search").on("submit", function(e) {
-//                   e.preventDefault();
-//                   const formInputs = $(this).find("input");
-//                   usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
-//               });
-//           }
-//       });
-//   });
+//     $("#open-icon-right").click(function() {
+//         $.ajax({
+//             url: "../html/searchCompanyTable.html",
+//             dataType: "html",
+//             success: function(data) {
+//                 $("#right-menu-ajax").empty().append(data);
+//             }
+//         });
+//     });
 // });
 
 
 
 
+$(document).ready(function() {
+    $("#list-users").click(function() {
+        $.ajax({
+            url: "../html/right-menu.html",
+            dataType: "html",
+            success: function(data) {
 
-$("#right-menu-ajax").load("../html/right-menu.html", function() {
-    formSideBar();
-    //Submit event for the form that handle the advanced search
-    $("form#advanced-search").on("submit", function(e) {
-        e.preventDefault();
-        const formInputs = $(this).find("input");
-        usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+                $("#right-menu-ajax").empty().append(data);
+                formSideBar();
+                $("form#advanced-search").on("submit", function(e) {
+                    e.preventDefault();
+                    const formInputs = $(this).find("input");
+                    usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+                });
+            }
+        });
     });
 });
+
+
+
+
+
+// $("#right-menu-ajax").load("../html/right-menu.html", function() {
+//     formSideBar();
+//     //Submit event for the form that handle the advanced search
+//     $("form#advanced-search").on("submit", function(e) {
+//         e.preventDefault();
+//         const formInputs = $(this).find("input");
+//         usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+//     });
+// });
 
 /**
  * Function to control the content (search form) of the right sidebar
@@ -329,7 +345,7 @@ function switchVisible(visible) {
             document.getElementById("Div4").style.display = "none";
             //showing the form
             break;
-        case "Div3": //== table users
+        case "companyTable": //== table users
             //hidding the form
             document.getElementById("Div1").style.display = "none";
             document.getElementById("Div4").style.display = "none";
