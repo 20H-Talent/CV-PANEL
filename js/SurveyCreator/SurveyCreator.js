@@ -5,11 +5,14 @@ const SurveyCreator = (function() {
     let surveyForm;
 
     const surveyApiData = {
-      title: "",
-      subtitle: "",
-      startDate: "",
-      endDate: "",
-      description: ""
+      header: {
+        title: "",
+        subtitle: "",
+        startDate: "",
+        endDate: "",
+        description: ""
+      },
+      elements: []
     };
 
     function construct(container) {
@@ -36,62 +39,26 @@ const SurveyCreator = (function() {
           .on("click", _newFieldValue);
       }
 
-      function _setHeaderSurveyData() {
-        surveyForm
-          .find(".SurveyHeader-Data")
-          .find("input, textarea")
-          .each((index, element) => {
-            const $element = $(element);
-            if ($element.prop("type") === "date") {
-              const date = new Date($element.val()).getTime();
-              surveyApiData[$element.prop("name")] = isNaN(date) ? "" : date;
-            } else {
-              surveyApiData[$element.prop("name")] = $element.val();
-            }
-          });
-      }
-
-      function _selectActions(event) {
-        const button = $(event.currentTarget);
-        if (button.hasClass("delete")) {
-          if (window.confirm("Are you sure to delete this selector")) {
-            button.closest("tr").remove();
-          }
-        } else {
-          const $input = button.parent().siblings("input[type=text]");
-          _appendOptionToSelector($input);
+      function _removeRow(element) {
+        if (window.confirm("Are you sure to delete this selector")) {
+          element.closest("tr").remove();
         }
       }
 
-      function _appendOptionToSelector(input) {
+      function _parentActions(event) {
+        const button = $(event.currentTarget);
+        if (button.hasClass("delete")) {
+          _removeRow(button);
+        } else {
+          const $input = button.parent().siblings("input[type=text]");
+          _appendOptionToParent($input);
+        }
+      }
+
+      function _appendOptionToParent(input) {
         const inputValue = input.val().trim();
-        const $selector = input
-          .closest("td")
-          .siblings("td.Selector-Cell")
-          .find("select");
 
-        let optionExists = false;
-        const $selectOptions = $selector.children("option");
-
-        const lastPosition = $selectOptions.length;
-
-        $selectOptions.each(function(index, option) {
-          if (
-            $(option)
-              .text()
-              .toLowerCase() === inputValue.toLowerCase()
-          ) {
-            optionExists = true;
-          }
-        });
-
-        if (!optionExists && inputValue.length > 0) {
-          input.val("");
-          const newOption = $("<option>", {
-            value: inputValue.toLowerCase(),
-            text: inputValue
-          });
-
+        if (inputValue !== "" && inputValue.length > 0) {
           const previewList = input
             .parent()
             .siblings(".preview-group")
@@ -100,24 +67,19 @@ const SurveyCreator = (function() {
           previewList
             .append(
               `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
-                <span data-position=${lastPosition}>${inputValue}</span>
+                <span>${inputValue}</span>
                 <div class="btn-group btn-group" role="group">
-                  <button class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
-                  <button class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
                 </div>
                </li>`
             )
             .off("click")
-            .on("click", "button", _optionActions);
-
-          $selector
-            .hide()
-            .append(newOption)
-            .fadeIn("slow");
+            .on("click", "button", _childrenActions);
         }
       }
 
-      function _optionActions(event) {
+      function _childrenActions(event) {
         const button = $(event.currentTarget);
         if (button.hasClass("editOption")) {
           _editOption(button);
@@ -129,44 +91,21 @@ const SurveyCreator = (function() {
       function _editOption(editButton) {
         const buttonIcon = editButton.find("i");
         const editableField = editButton.parent().siblings("span");
-        const $selector = editableField
-          .closest("td")
-          .siblings("td.Selector-Cell")
-          .find("select");
 
         const optionValue = editButton.data("value");
 
         if (buttonIcon.hasClass("fa-edit")) {
           buttonIcon.removeClass("far fa-edit").addClass("fas fa-check");
 
-          $selector.val(optionValue);
-
           editableField
             .prop("contenteditable", true)
             .focus()
-            .css({ fontSize: "1.2em", width: "100%" })
-            .off("input")
-            .on("input", function(e) {
-              $selector
-                .children(`option[value="${optionValue.toLowerCase()}"]`)
-                .text(
-                  $(this)
-                    .text()
-                    .trim()
-                );
-            });
+            .css({ fontSize: "1.2em", width: "100%" });
         } else {
           buttonIcon.removeClass("fas fa-check").addClass("far fa-edit");
           const editableFieldText = editableField.text().trim();
 
-          editableField
-            .prop("contenteditable", false)
-            .css("font-size", "1em")
-            .off("input");
-
-          $selector
-            .children(`option[value="${optionValue.toLowerCase()}"]`)
-            .prop("value", editableFieldText);
+          editableField.prop("contenteditable", false).css("font-size", "1em");
 
           editButton.data("value", editableFieldText);
         }
@@ -174,18 +113,6 @@ const SurveyCreator = (function() {
 
       function _deleteOption(deleteButton) {
         if (window.confirm("Are you sure to delete this option?")) {
-          const optionValue = deleteButton
-            .siblings("button.editOption")
-            .data("value")
-            .toLowerCase();
-
-          deleteButton
-            .closest("td")
-            .siblings("td.Selector-Cell")
-            .find("select")
-            .children(`option[value="${optionValue}"]`)
-            .remove();
-
           deleteButton.closest("li").remove();
         }
       }
@@ -207,15 +134,18 @@ const SurveyCreator = (function() {
           case "file":
             tableBody
               .append(
-                `<tr>
-           <td class="ValueType-data">
+                `<tr class="ValueType-data" data-type=${typeSelectorValue}>
+           <td>
             <div class="form-group w-100">
               <label class="w-100">
                 <p contenteditable="true">You can modify this text</p>
                   <div class="input-group">
-                    <input type="${typeSelectorValue}" name="${typeSelectorValue}_input[]" class="form-control" placeholder="Insert default value on this field" />
+                    <input type="${typeSelectorValue}" name="${typeSelectorValue}_input[]"
+                      class="form-control" placeholder="Insert S" />
                     <div class="input-group-append">
-                      <button class="btn btn-outline-danger delete" type="button"><i class="far fa-trash-alt"></i></button>
+                      <button type="button" class="btn btn-outline-danger delete">
+                         <i class="far fa-trash-alt"></i>
+                      </button>
                     </div>
               </label>
              </div>
@@ -226,15 +156,17 @@ const SurveyCreator = (function() {
               .on("click", "button.delete", _deleteInput);
             break;
           case "select":
+          case "checkbox":
+          case "radio":
             tableBody
               .append(
-                `<tr class="ValueType-data">
+                `<tr class="ValueType-data" data-type=${typeSelectorValue}>
                 <td>
                     <div class="form-group">
                       <div class="input-group">
-                        <input class="form-control" type="text" placeholder="New option here..."/>
+                        <input class="form-control" type="text" placeholder="New ${typeSelectorValue} value..."/>
                         <div class="input-group-append">
-                          <button class="btn btn-outline-primary selectActions add" type="button">Add option</button>
+                          <button type="button" class="btn btn-outline-primary Actions add">Add option</button>
                         </div>
                       </div>
                     <div class="container preview-group my-2">
@@ -242,7 +174,7 @@ const SurveyCreator = (function() {
                     </div>
                   </div>
                   <div class="button-actions text-right">
-                     <button class="btn btn-outline-danger btn-block selectActions delete" type="button">
+                     <button type="button" class="btn btn-outline-danger btn-block Actions delete" type="button">
                          Delete
                          <i class="far fa-trash-alt"></i>
                       </button>
@@ -251,7 +183,7 @@ const SurveyCreator = (function() {
                 </tr>`
               )
               .off("click")
-              .on("click", "button.selectActions", _selectActions);
+              .on("click", "button.Actions", _parentActions);
             break;
         }
       }
@@ -271,9 +203,36 @@ const SurveyCreator = (function() {
         }
       }
 
+      function _setHeaderSurveyData() {
+        surveyForm
+          .find(".SurveyHeader-Data")
+          .find("input, textarea")
+          .each((index, element) => {
+            const $element = $(element);
+            if ($element.prop("type") === "date") {
+              const date = new Date($element.val()).getTime();
+              surveyApiData["header"][$element.prop("name")] = isNaN(date)
+                ? ""
+                : date;
+            } else {
+              surveyApiData["header"][$element.prop("name")] = $element.val();
+            }
+          });
+      }
+
+      function _setBodySurveyData() {
+        surveyForm
+          .find("table tbody")
+          .children("tr.ValueType-data")
+          .each((index, element) => {
+            const type = $(element).data("type");
+          });
+      }
+
       function _buildJSON(event) {
         event.preventDefault();
         _setHeaderSurveyData();
+        _setBodySurveyData();
         console.log(surveyApiData);
       }
     }
