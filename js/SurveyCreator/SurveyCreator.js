@@ -67,7 +67,7 @@ const SurveyCreator = (function() {
           previewList
             .append(
               `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
-                <span>${inputValue}</span>
+                <span class="FieldValue">${inputValue}</span>
                 <div class="btn-group btn-group" role="group">
                   <button type="button" class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
                   <button type="button" class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
@@ -140,8 +140,8 @@ const SurveyCreator = (function() {
               <label class="w-100">
                 <p contenteditable="true">You can modify this text</p>
                   <div class="input-group">
-                    <input type="${typeSelectorValue}" name="${typeSelectorValue}_input[]"
-                      class="form-control" placeholder="Insert S" />
+                    <input type="${typeSelectorValue}" name="input_${typeSelectorValue}[]"
+                      class="form-control" placeholder="Insert default value" />
                     <div class="input-group-append">
                       <button type="button" class="btn btn-outline-danger delete">
                          <i class="far fa-trash-alt"></i>
@@ -152,8 +152,9 @@ const SurveyCreator = (function() {
             </td>
           </tr>`
               )
+              .find("button.delete")
               .off("click")
-              .on("click", "button.delete", _deleteInput);
+              .on("click", _deleteInput);
             break;
           case "select":
           case "checkbox":
@@ -163,8 +164,10 @@ const SurveyCreator = (function() {
                 `<tr class="ValueType-data" data-type=${typeSelectorValue}>
                 <td>
                     <div class="form-group">
+                    <p contenteditable="true">You can modify this text</p>
                       <div class="input-group">
-                        <input class="form-control" type="text" placeholder="New ${typeSelectorValue} value..."/>
+                        <input name="${typeSelectorValue}[]" class="form-control"
+                         type="text" placeholder="New ${typeSelectorValue} value..."/>
                         <div class="input-group-append">
                           <button type="button" class="btn btn-outline-primary Actions add">Add option</button>
                         </div>
@@ -182,8 +185,9 @@ const SurveyCreator = (function() {
                 </td>
                 </tr>`
               )
+              .find("button.Actions")
               .off("click")
-              .on("click", "button.Actions", _parentActions);
+              .on("click", _parentActions);
             break;
         }
       }
@@ -221,11 +225,31 @@ const SurveyCreator = (function() {
       }
 
       function _setBodySurveyData() {
+        const dinamicElements = ["select", "radio", "checkbox"];
+
         surveyForm
           .find("table tbody")
           .children("tr.ValueType-data")
           .each((index, element) => {
-            const type = $(element).data("type");
+            const $element = $(element);
+            const data = {
+              type: $element.data("type"),
+              title: $element.find(".form-group p").text(),
+              values: []
+            };
+            if (dinamicElements.includes(data["type"])) {
+              data["values"] = Array.from(
+                $element.find("ul.preview-list > li")
+              ).map(value =>
+                $(value)
+                  .children(".FieldValue")
+                  .text()
+              );
+            } else {
+              data["values"].push($element.find("input").val());
+            }
+
+            surveyApiData["elements"].push(data);
           });
       }
 
@@ -233,7 +257,7 @@ const SurveyCreator = (function() {
         event.preventDefault();
         _setHeaderSurveyData();
         _setBodySurveyData();
-        console.log(surveyApiData);
+        console.log(JSON.stringify(surveyApiData));
       }
     }
     return {
