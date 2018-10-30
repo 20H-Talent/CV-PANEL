@@ -19,9 +19,10 @@ function getTooltips() {
 
       // make skeleton of tooltips.
       $.each(data, function(i) {
-        // <div class="d-none tool-${data[i].id}" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
         $("#guidedVisit").append(`
-       
+        <div class="d-none tool-${
+          data[i].id
+        }" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
           <i style='position:absolute; font-size: 19px; top:${
             data[i].arrowPosition.top
           }; left: ${data[i].arrowPosition.left};' class="d-none tool-${data[i].id} fas fa-arrow-${data[i].arrowPosition.icon} text-white"></i>
@@ -31,7 +32,9 @@ function getTooltips() {
           <span class='badge badge-danger' style='position: absolute; top: 3%; left:1%; font-size: 0.6rem'>${
             data[i].badgeTool
           }</span> ${data[i].text} <button class='btn-tool badge badge-pill' data-tool= ${data[i].id}>Next <i class='fas fa-arrow-right'></i></button>
-        </div>`);
+        </div>
+       
+        `);
       });
       //make the div on final of #guidedVisit
       $("#guidedVisit").append(`<div></div>`);
