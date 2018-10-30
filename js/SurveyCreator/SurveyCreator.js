@@ -132,62 +132,77 @@ const SurveyCreator = (function() {
           case "color":
           case "telephone":
           case "file":
+            const inputBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
+            <td>
+             <div class="form-group w-100">
+               <label class="w-100">
+                 <p contenteditable="true">You can modify this text</p>
+                   <div class="input-group">
+                     <input type="${typeSelectorValue}" name="input_${typeSelectorValue}[]"
+                       class="form-control" placeholder="Insert default value" />
+                     <div class="input-group-append">
+                       <button type="button" class="btn btn-outline-danger delete">
+                          <i class="far fa-trash-alt"></i>
+                       </button>
+                     </div>
+               </label>
+              </div>
+             </td>
+           </tr>`);
+
             tableBody
-              .append(
-                `<tr class="ValueType-data" data-type=${typeSelectorValue}>
-           <td>
-            <div class="form-group w-100">
-              <label class="w-100">
-                <p contenteditable="true">You can modify this text</p>
-                  <div class="input-group">
-                    <input type="${typeSelectorValue}" name="input_${typeSelectorValue}[]"
-                      class="form-control" placeholder="Insert default value" />
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-outline-danger delete">
-                         <i class="far fa-trash-alt"></i>
-                      </button>
-                    </div>
-              </label>
-             </div>
-            </td>
-          </tr>`
-              )
+              .append(inputBlock)
               .find("button.delete")
               .off("click")
               .on("click", _deleteInput);
+
+            inputBlock.show("slow");
+
+            $(".survey-container").animate(
+              { scrollTop: tableBody.prop("scrollHeight") },
+              500
+            );
+
             break;
           case "select":
           case "checkbox":
           case "radio":
-            tableBody
-              .append(
-                `<tr class="ValueType-data" data-type=${typeSelectorValue}>
-                <td>
-                    <div class="form-group">
-                    <p contenteditable="true">You can modify this text</p>
-                      <div class="input-group">
-                        <input name="${typeSelectorValue}[]" class="form-control"
-                         type="text" placeholder="New ${typeSelectorValue} value..."/>
-                        <div class="input-group-append">
-                          <button type="button" class="btn btn-outline-primary Actions add">Add option</button>
-                        </div>
-                      </div>
-                    <div class="container preview-group my-2">
-                      <ul class="list-group preview-list my-1 px-1 py-1"></ul>
+            const dinamicBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
+            <td>
+                <div class="form-group">
+                <p contenteditable="true">You can modify this text</p>
+                  <div class="input-group">
+                    <input name="${typeSelectorValue}[]" class="form-control"
+                     type="text" placeholder="New ${typeSelectorValue} value..."/>
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-outline-primary Actions add">Add option</button>
                     </div>
                   </div>
-                  <div class="button-actions text-right">
-                     <button type="button" class="btn btn-outline-danger btn-block Actions delete" type="button">
-                         Delete
-                         <i class="far fa-trash-alt"></i>
-                      </button>
-                  </div>
-                </td>
-                </tr>`
-              )
+                <div class="container preview-group my-2">
+                  <ul class="list-group preview-list my-1 px-1 py-1"></ul>
+                </div>
+              </div>
+              <div class="button-actions text-right">
+                 <button type="button" class="btn btn-outline-danger btn-block Actions delete" type="button">
+                     Delete
+                     <i class="far fa-trash-alt"></i>
+                  </button>
+              </div>
+            </td>
+            </tr>`);
+
+            tableBody
+              .append(dinamicBlock)
               .find("button.Actions")
               .off("click")
               .on("click", _parentActions);
+
+            dinamicBlock.show("slow");
+
+            $(".survey-container").animate(
+              { scrollTop: tableBody.prop("scrollHeight") },
+              500
+            );
             break;
         }
       }
