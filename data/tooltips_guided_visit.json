@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "zone": "navbar",
+    "title": "Navigation bar",
     "elPositionSelected": {
       "top": "0%",
       "left": "0%",
@@ -15,7 +15,8 @@
       "left": "14.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "15%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "16%",
@@ -34,7 +35,7 @@
   },
   {
     "id": 1,
-    "zone": "left-menu",
+    "title": "Left menu",
     "elPositionSelected": {
       "top": "9.8%",
       "left": "0%",
@@ -48,7 +49,8 @@
       "left": "6.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "20%",
@@ -67,7 +69,7 @@
   },
   {
     "id": 2,
-    "zone": "left-menu",
+    "title": "List users",
     "elPositionSelected": {
       "top": "19.7%",
       "left": "0%",
@@ -81,7 +83,8 @@
       "left": "17.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "25%",
@@ -90,7 +93,7 @@
       "bottom": "0%",
       "icon": "left"
     },
-    "elSelected": ["#list-users", "relative"],
+    "elSelected": ["#Div1", "relative"],
     "overlayContent": ["header", "#Div1", ".container-right", "#mySidenavLeft"],
 
     "badgeTool": 2.1,
@@ -101,7 +104,7 @@
   },
   {
     "id": 3,
-    "zone": "left-menu",
+    "title": "Users listed",
     "elPositionSelected": {
       "top": "14.8%",
       "left": "4.7%",
@@ -115,7 +118,8 @@
       "left": "35.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "41%"
     },
     "arrowPosition": {
       "top": "62%",
@@ -124,7 +128,10 @@
       "bottom": "0%",
       "icon": "up"
     },
-    "elSelected": ["#Div1", "relative"],
+    "elSelected": [
+      "table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+      "relative"
+    ],
     "overlayContent": ["header", ".container-left", ".container-right"],
 
     "badgeTool": 2.2,
@@ -135,7 +142,7 @@
   },
   {
     "id": 4,
-    "zone": "left-menu",
+    "title": "More information about the user",
     "elPositionSelected": {
       "top": "25%",
       "left": "85.6%",
@@ -149,7 +156,8 @@
       "left": "46.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "26%",
@@ -158,32 +166,37 @@
       "bottom": "0%",
       "icon": "right"
     },
-    "elSelected": ["#Div1", "relative"],
+    "elSelected": [
+      "table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+      "relative"
+    ],
     "overlayContent": ["header", ".container-left", ".container-right"],
 
     "badgeTool": 2.3,
 
     "text": "Click this button to see more information about the user!!",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "show.bs.modal, table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm"
+    "eventCallToOpen": "show.bs.modal, table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+    "eventCallToClose": "click"
   },
   {
     "id": 5,
-    "zone": "left-menu",
+    "title": "User's nickname",
     "elPositionSelected": {
       "top": "5.5%",
       "left": "32.4%",
       "right": "0%",
       "bottom": "0%",
       "height": "6.5%",
-      "width": "12.7%"
+      "width": "12.7%",
+      "wid": "36%"
     },
     "tooltipPosition": {
       "top": "5%",
       "left": "48.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "14%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "7%",
@@ -203,7 +216,7 @@
   },
   {
     "id": 6,
-    "zone": "left-menu",
+    "title": "Additional Information",
     "elPositionSelected": {
       "top": "13%",
       "left": "31%",
@@ -217,7 +230,8 @@
       "left": "30.5%",
       "right": "0%",
       "bottom": "0%",
-      "height": "14%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "40%",
@@ -232,12 +246,12 @@
     "badgeTool": 2.5,
 
     "text": "Information as birthday, telephone number and full address is also available.",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "show.bs.modal, button.btn.btn-link"
+    "eventCallToOpen": "show.bs.modal, button.btn.btn-link",
+    "eventCallToClose": "click"
   },
   {
     "id": 7,
-    "zone": "left-menu",
+    "title": "Languages, Skills and Frameworks",
     "elPositionSelected": {
       "top": "38.5%",
       "left": "21.6%",
@@ -247,11 +261,12 @@
       "width": "56.7%"
     },
     "tooltipPosition": {
-      "top": "19%",
+      "top": "12%",
       "left": "25.6%",
       "right": "0%",
       "bottom": "0%",
-      "height": "14%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "34%",
@@ -266,12 +281,12 @@
     "badgeTool": 2.6,
 
     "text": "And there are the languages, skills and frameworks that the user manages.",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "show.bs.modal, button.my-2.btn.btn-outline-success.btn-sm"
+    "eventCallToOpen": "show.bs.modal, button.my-2.btn.btn-outline-success.btn-sm",
+    "eventCallToClose": "click"
   },
   {
     "id": 8,
-    "zone": "left-menu",
+    "title": "Edit information of the user",
     "elPositionSelected": {
       "top": "25%",
       "left": "88.3%",
@@ -285,7 +300,8 @@
       "left": "50.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "26%",
@@ -300,12 +316,12 @@
     "badgeTool": 2.7,
 
     "text": "Click on this button and you can modify the user's properties.",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "click, table tbody > tr:first-child button.my-2.btn.btn-outline-primary.btn-sm.edit"
+    "eventCallToOpen": "click, table tbody > tr:first-child button.my-2.btn.btn-outline-primary.btn-sm.edit",
+    "eventCallToClose": "click"
   },
   {
     "id": 9,
-    "zone": "left-menu",
+    "title": "User's information",
     "elPositionSelected": {
       "top": "53%",
       "left": "21.8%",
@@ -319,7 +335,8 @@
       "left": "23.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "48%",
@@ -339,7 +356,7 @@
   },
   {
     "id": 10,
-    "zone": "left-menu",
+    "title": "Delete the user",
     "elPositionSelected": {
       "top": "25.6%",
       "left": "91%",
@@ -353,7 +370,8 @@
       "left": "53%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "27%",
@@ -373,7 +391,7 @@
   },
   {
     "id": 11,
-    "zone": "left-menu",
+    "title": "Create a new user",
     "elPositionSelected": {
       "top": "27.7%",
       "left": "0%",
@@ -387,7 +405,8 @@
       "left": "14.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "28.4%",
@@ -412,7 +431,7 @@
   },
   {
     "id": 12,
-    "zone": "left-menu",
+    "title": "Attributes of the user",
     "elPositionSelected": {
       "top": "53%",
       "left": "21.8%",
@@ -426,7 +445,8 @@
       "left": "23.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "48%",
@@ -446,7 +466,7 @@
   },
   {
     "id": 13,
-    "zone": "right-menu",
+    "title": "Right menu",
     "elPositionSelected": {
       "top": "11.8%",
       "left": "97.5%",
@@ -460,7 +480,8 @@
       "left": "57.8%",
       "right": "0%",
       "bottom": "0%",
-      "height": "15%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "20%",
@@ -480,7 +501,7 @@
   },
   {
     "id": 14,
-    "zone": "left-menu",
+    "title": "Fields that you can search",
     "elPositionSelected": {
       "top": "11.7%",
       "left": "77.8%",
@@ -494,7 +515,8 @@
       "left": "37.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "24%",
@@ -514,7 +536,7 @@
   },
   {
     "id": 15,
-    "zone": "center",
+    "title": "Completed tutorial",
     "elPositionSelected": {
       "top": "42%",
       "left": "31%",
@@ -528,7 +550,8 @@
       "left": "32.8%",
       "right": "0%",
       "bottom": "0%",
-      "height": "15%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "37%",
