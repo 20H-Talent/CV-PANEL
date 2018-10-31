@@ -24,7 +24,7 @@
 
 .header-modal {
     background: #4d394b;
-    color: #fff;
+    color: black;
     border-radius: 3px;
 }
 
@@ -127,5 +127,5 @@ a.btn-social,
 }
 
 .header-card {
-    background: #4d394b;
+    color: black;
 }

@@ -5,9 +5,7 @@ $("#mySidenavRight a").on("click", skills);
 
 // ******* declare function to get data from languages json. ***********
 function languages(e) {
-    $("#selLanguage").html(" ");
-    $("#languages").html(" ");
-    $("#languages").html(" ");
+
     $.getJSON("../data/languages.json")
         .done(function(data) {
             //call createForm or searchForm method
@@ -106,6 +104,9 @@ function skills(e) {
     // method to search
     function searchForm(data) {
         //divObjectSkill.html(" ");
+        $('#skills div[class*="col-12"]').html(" ");
+        $('#skills div[class*="col-5"]').html(" ");
+        $('#skills div[class*="col-6"]').html(" ");
         $.each(data, function(d) {
             let divObjectSkill = `<div class="custom-control custom-checkbox mr-3">
         <input type="checkbox" id="${

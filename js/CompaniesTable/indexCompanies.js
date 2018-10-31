@@ -47,7 +47,7 @@ $.getJSON("../data/companies.json")
 function showPreviewInfo(id) {
     var company = companies.getCompanyById(id);
     $("#modal").html(
-        `<div class="shadow-lg p-3 border col-lg col-sm  col-md  rounded"   data-id=${
+        `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
       company.id
     } >
         <div class="card-header d-flex header-card flex-row align-items-center">

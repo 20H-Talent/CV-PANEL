@@ -67,26 +67,26 @@ function Companies() {
         for (var i = 0; i < this.companies.length; i++) {
             let width = $(window).width();
             innerCard += `
-            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded  ml-5 mr-5 text-center"  data-id=${
+            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded  text-center"  data-id=${
               this.companies[i].id
             }>
               <div class="">
-                <h5 class="card-header text-light header-card   col-sm-12 border border-dark rounded"> <img class="card-img-top" src=${
+                <h5 class="card-header text-dark header-card shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${
                   this.companies[i].logo
                 }   style="width:50px; alt="Card image cap">
                 <p class="card-text">${
                   this.companies[i].name
-                }</p>  <small class="text-light"> CIF  ${
+                }</p>  <small  class="text-dark"> CIF  ${
         this.companies[i].CIF
       }</small></h5>
                 <h5 class="card-title mt-3  ">Email</h5>
                 <p class="card-text  "><ins>${this.companies[i].email}</ins></p>
                 <h5 class="card-title">Profile</h5>
-                <p class="card-text"><ins>${
+                <p class=" badge badge-secondary card-text"><ins>${
                   this.companies[i].descripcion
                 }</ins></p>
                 <h5 class="card-title mt-3  ">Workers Number</h5>
-                <p class="card-text  "><ins>${this.companies[i].workersNumber}</ins></p>
+                <p class="card-text badge badge-secondary "><ins>${this.companies[i].workersNumber}</ins></p>
                 <h5 class="card-title">Phone</h5>
                 <p class="card-text"><ins>${this.companies[i].phone}</ins></p>
               </div>
@@ -94,11 +94,11 @@ function Companies() {
               <div class=" social-net" id="networks${this.companies[i].id}">
               ${this.companies[i].renderSocialNetworks()}
               </div>
-              <div class="card-footer text-light header-card   col-sm-12 mt-2 border border-dark rounded">
+              <div class="card-footer text-light header-card   col-sm-12 mt-2 border  rounded">
 
-                    <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-light text-white edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
+                    <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline text-white edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-light"  data-toggle="modal" data-id=${
+                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline"  data-toggle="modal" data-id=${
                       this.companies[i].id
                     } data-target="#confirm-delete" onclick="removeCompanyFromDOM(${
         this.companies[i].id
