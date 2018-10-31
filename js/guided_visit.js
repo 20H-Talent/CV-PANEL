@@ -19,14 +19,26 @@ function getConfetti() {
   function create(i) {
     var width = Math.random() * 8;
     var height = width * 0.4;
-    var colourIdx = Math.ceil(Math.random() * 3);
+    var colourIdx = Math.ceil(Math.random() * 6);
     var colour = "red";
     switch (colourIdx) {
       case 1:
-        colour = "yellow";
+        colour = "light-blue";
         break;
       case 2:
         colour = "blue";
+        break;
+      case 3:
+        colour = "pink";
+        break;
+      case 4:
+        colour = "purple";
+        break;
+      case 5:
+        colour = "green";
+        break;
+      case 6:
+        colour = "greenyellow";
         break;
       default:
         colour = "red";
