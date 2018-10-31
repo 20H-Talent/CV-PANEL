@@ -19,6 +19,14 @@
   font-size: 1.4em;
 }
 
+.survey-container table tbody {
+  background-color: ghostwhite;
+}
+
+.survey-container table tbody .ValueType-data p[contenteditable] {
+  font-size: 1.4em;
+  font-family: Source Sans Pro, Arial, serif;
+}
 .survey-container table tbody .Cell-Container {
   max-height: 300px;
   overflow-y: auto;
