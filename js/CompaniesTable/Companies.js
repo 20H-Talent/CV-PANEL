@@ -69,7 +69,7 @@ function Companies() {
         for (var i = 0; i < this.companies.length; i++) {
             let width = $(window).width();
             innerCard += `
-            <div class="card mt-3 shadow-lg p-3 mr-5 mb-5 bg-white rounded"  data-id=${
+            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded"  data-id=${
               this.companies[i].id
             }>
               <div class="">
