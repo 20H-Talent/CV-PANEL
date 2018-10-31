@@ -15,25 +15,31 @@ function activateTooltips(container = null) {
 /**
  *  Function to load the content by ajax
  */
-$(document).ready(function() {
-    $("#list-users").click(function() {
-        $("#mySidenavRight a").trigger("click");
-        $.ajax({
-            url: "../html/right-menu.html",
-            dataType: "html",
-            success: function(data) {
-                $("#right-menu-ajax").empty().append(data);
-                formSideBar();
-                $("form#advanced-search").on("submit", function(e) {
-                    e.preventDefault();
-                    const formInputs = $(this).find("input");
-                    usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
-                });
-            }
-        });
+$(window).load(function() {
+    $("#list-users").on("click", function() {
+        loadRightMenu();
     });
 });
-// $("#right-menu-ajax").load("../html/right-menu.html", function() {
+
+function loadRightMenu() {
+
+    $.ajax({
+        url: "../html/right-menu.html",
+        dataType: "html",
+        success: function(data) {
+            $("#right-menu-ajax").empty().append(data);
+            formSideBar();
+            $("form#advanced-search").on("submit", function(e) {
+                e.preventDefault();
+                const formInputs = $(this).find("input");
+                usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+            });
+        }
+    });
+
+
+}
+// $("#right-menu-a<´jax").load("../html/right-menu.html", function() {
 //     formSideBar();
 //     //Submit event for the form that handle the advanced search
 //     $("form#advanced-search").on("submit", function(e) {

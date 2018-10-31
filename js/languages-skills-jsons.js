@@ -13,8 +13,8 @@ function languages(e) {
             // console.log(e.target.value);
             //console.log(e.currentTarget);
             if (
-                //     e.currentTarget.tagName === "LI" ||
-                //     e.currentTarget.tagName === "I" ||
+                e.currentTarget.tagName === "LI" ||
+                e.currentTarget.tagName === "I" ||
                 e.currentTarget.tagName === "BUTTON"
             ) {
                 createForm(data);
