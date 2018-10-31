@@ -69,11 +69,11 @@ function Companies() {
         for (var i = 0; i < this.companies.length; i++) {
             let width = $(window).width();
             innerCard += `
-            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded  text-center"  data-id=${
+            <div class="card mt-3 shadow-lg p-3 mr-5 mb-5 bg-white rounded"  data-id=${
               this.companies[i].id
             }>
               <div class="">
-                <h5 class="card-header text-dark header-card shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${
+                <h5 class="card-header text-dark header-card  shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${
                   this.companies[i].logo
                 }   style="width:50px; alt="Card image cap">
                 <p class="card-text">${
@@ -81,22 +81,18 @@ function Companies() {
                 }</p>  <small  class="text-dark font-weight-bold "> CIF  ${
         this.companies[i].CIF
       }</small></h5>
-                <h5 class="card-title mt-3  ">Email</h5>
-                <h1 class="card-text  badge badge-secondary  "><ins>${this.companies[i].email}</ins></h1>
-                <h5 class="card-title">Profile</h5>
-                <h3 class=" badge badge-secondary card-text">${
-                  this.companies[i].descripcion
-                }</h3>
-                <h5 class="card-title mt-3  ">Workers Number</h5>
+                <p class="card-title font-weight-bold  mt-3  "><ins>Email</ins></p>
+                <h1 class="card-text  badge badge-secondary  ">${this.companies[i].email}</h1>
+                <p class="card-subtitle font-weight-bold  mt-3  ">Workers Number</p>
                 <h3 class="card-text badge badge-secondary "><ins>${this.companies[i].workersNumber}</ins></h3>
-                <h5 class="card-title">Phone</h5>
+                <p class="card-title font-weight-bold ">Phone</p>
                 <h3 class="card-text badge badge-secondary  "><ins>${this.companies[i].phone}</ins></h3>
               </div>
-              <h5 class="card-text mt-3">Social Networks</h5>
+              <p class="card-text font-weight-bold  mt-3">Social Networks</p>
               <div class=" social-net" id="networks${this.companies[i].id}">
               ${this.companies[i].renderSocialNetworks()}
               </div>
-              <div class="card-footer  header-card   col-sm-12 mt-2 border  rounded">
+              <div class="card-footer  header-card   col-sm-12 mt-2 border  text-center rounded">
 
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>

@@ -341,7 +341,7 @@ const Table = (function() {
                 }) {
                     let userFullName = buildUserFullname(name);
 
-                    return `<div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded  text-center" data-id=${id.value}>
+                    return `<div class="card mr-5 mt-3 shadow-lg p-3 mb-5 bg-white rounded" data-id=${id.value}>
       <div class="card-header card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
          <img class="img-fluid mr-2" src=${picture.medium} alt="test"/>
         <div class="card-username">
@@ -373,7 +373,7 @@ const Table = (function() {
            )
            .join("")}
      </div>
-     <div class="card-footer card-buttons text-right">
+     <div class="card-footer text-center card-buttons">
         <button type="button" class="btn btn-outline-success btn-sm" data-id=${id} data-toggle="modal" data-target="#userModal"><i class="far fa-eye"></i></button>
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
           id.value
