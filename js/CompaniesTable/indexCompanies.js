@@ -17,8 +17,9 @@ $.getJSON("../data/companies.json")
             );
             companies.addCompany(company);
         });
+        console.log('companies.companies :', companies.companies);
+        companies.renderTable(companies.companies);
 
-        companies.renderTable();
         companies.renderCompanyCards();
         //companies.searchAdvanced();
 
@@ -106,6 +107,10 @@ function searchAdvanced(event) {
     //   $("#submit_search").on("click", function(e) {
     event.stopPropagation();
     event.preventDefault();
+    //  let table = document.getElementById("companiesTable");
+    // let tr = table.getElementsByTagName("tr");
+    //let tdName = document.getElementsByTagName("td")[1];
+    // console.log('td :', td);
     let inputComapany = $("#company-name").val().toLowerCase();
     console.log('inputComapany :', inputComapany);
     let inputCif = $("#company-cif").val().toLowerCase();
@@ -122,16 +127,23 @@ function searchAdvanced(event) {
     console.log('filtersContainer :', filtersContainer.get());
     var badgesContainer = $(".search-badges");
 
-    var algo = companies.companies.filter((company) => {
+    //$("input[name=email]")
+
+
+
+
+
+
+    var filtredComapanies = companies.companies.filter((company) => {
         console.log('company.name.toLowerCase().includes(inputComapany):', company.name.toLowerCase().includes(inputComapany));
 
-        return $("#tableBody tr").filter(function() {
-
-            $(this).toggle($(this).company.name.toLowerCase().includes(inputComapany))
 
 
-        })
-
+        return (company.name.toLowerCase().includes(inputComapany)) &&
+            (company.CIF.toLowerCase().includes(inputCif)) &&
+            (company.email.toLowerCase().includes(inputEmail)) &&
+            (company.address.city.toLowerCase().includes(inputCity)) &&
+            (company.address.country.toLowerCase().includes(inputCountry));
 
 
 
@@ -141,7 +153,7 @@ function searchAdvanced(event) {
         // (company.address.city.toLowerCase().includes(inputCity)) &&
         // (company.address.country.toLowerCase().includes(inputCountry))
     });
-
-    console.log('algo :', algo);
+    companies.renderTable(filtredComapanies);
+    console.log('filtredComapanies :', filtredComapanies);
     // })
 }

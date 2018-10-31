@@ -15,22 +15,6 @@ function activateTooltips(container = null) {
 /**
  *  Function to load the content by ajax
  */
-
-// $(document).ready(function() {
-//     $("#open-icon-right").click(function() {
-//         $.ajax({
-//             url: "../html/searchCompanyTable.html",
-//             dataType: "html",
-//             success: function(data) {
-//                 $("#right-menu-ajax").empty().append(data);
-//             }
-//         });
-//     });
-// });
-
-
-
-
 $(document).ready(function() {
     $("#list-users").click(function() {
         $("#mySidenavRight a").trigger("click");
@@ -38,7 +22,6 @@ $(document).ready(function() {
             url: "../html/right-menu.html",
             dataType: "html",
             success: function(data) {
-
                 $("#right-menu-ajax").empty().append(data);
                 formSideBar();
                 $("form#advanced-search").on("submit", function(e) {
@@ -50,11 +33,6 @@ $(document).ready(function() {
         });
     });
 });
-
-
-
-
-
 // $("#right-menu-ajax").load("../html/right-menu.html", function() {
 //     formSideBar();
 //     //Submit event for the form that handle the advanced search
