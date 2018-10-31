@@ -158,9 +158,9 @@ function getTooltips() {
           $("#guidedVisit")
             .append(`<div class="bg-dark h-100" style="top:-28px; position:relative;">
             <div class="modal-dialog modal-dialog-centered" role="document">
-             <div class="modal-content align-items-center">
-                <div class="modal-header">
-                    <h5 class="modal-title">Completed tutorial</h5>
+             <div class="modal-content align-items-center" style="border-radius: 50%">
+                <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4d394b">
+                    <h5 class="modal-title font-weight-bold">Completed tutorial</h5>
                 </div>
                 <div class="modal-body text-center">
                     <p>Congratulations!! You passed the guided visit.<br>
