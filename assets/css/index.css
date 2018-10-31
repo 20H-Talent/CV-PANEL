@@ -118,7 +118,7 @@ html {
 #users-table {
     display: block;
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-family: Source Sans Pro, Arial, serif;
 }
 
@@ -645,7 +645,7 @@ body {
 
 @media screen and (max-width: 1070px) {
     #users-table {
-        font-size: 0.7em;
+        font-size: 0.8em;
     }
 }
 
