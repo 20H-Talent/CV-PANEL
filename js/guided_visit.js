@@ -10,6 +10,67 @@ $.get("../html/guided_visit.html", function(data) {
   $("#guidedVisit button.btn-primary").on("click", getTooltips);
 });
 
+// ----------------- FUNCTION TO CREATE CONFETTI TO THE END OF THE TUTORIAL ------------
+function getConfetti() {
+  for (var i = 0; i < 250; i++) {
+    create(i);
+  }
+
+  function create(i) {
+    var width = Math.random() * 8;
+    var height = width * 0.4;
+    var colourIdx = Math.ceil(Math.random() * 3);
+    var colour = "red";
+    switch (colourIdx) {
+      case 1:
+        colour = "yellow";
+        break;
+      case 2:
+        colour = "blue";
+        break;
+      default:
+        colour = "red";
+    }
+    $('<div class="confetti-' + i + " " + colour + '"></div>')
+      .css({
+        width: width + "px",
+        height: height + "px",
+        top: -Math.random() * 20 + "%",
+        left: Math.random() * 100 + "%",
+        opacity: Math.random() + 0.5,
+        transform: "rotate(" + Math.random() * 360 + "deg)"
+      })
+      .appendTo("#guidedVisit .modal-dialog");
+
+    drop(i);
+  }
+
+  function drop(x) {
+    $(".confetti-" + x).animate(
+      {
+        top: "100%",
+        left: "+=" + Math.random() * 15 + "%"
+      },
+      Math.random() * 3000 + 3000,
+      function() {
+        reset(x);
+      }
+    );
+  }
+
+  function reset(x) {
+    $(".confetti-" + x).animate(
+      {
+        top: -Math.random() * 20 + "%",
+        left: "-=" + Math.random() * 15 + "%"
+      },
+      0,
+      function() {
+        drop(x);
+      }
+    );
+  }
+}
 // function to get from JSON, the tooltips objects.
 function getTooltips() {
   $.getJSON("../data/tooltips_guided_visit.json")
@@ -36,10 +97,10 @@ function getTooltips() {
             data[i].title
           }</h5>
           <p>${data[i].text} </p>
-          <button class='btn-tool badge badge-pill d-inline-flex' data-tool= ${
+          <button style='position: relative; left: 360px; font-size: 0.8rem' class='btn-tool badge badge-pill badge-info' data-tool= ${
             data[i].id
           }>Next</button>
-          <button class='btn-tool-skip badge badge-pill d-inline-flex' data-tool= ${
+          <button style='position:relative; left:365px; font-size: 0.8rem' class='btn-tool-skip badge badge-pill badge-secondary' data-tool= ${
             data[i].id
           }>Skip</button>
         </div>
@@ -79,8 +140,35 @@ function getTooltips() {
         let activeTool = $(`.tool-${parseInt(valDataTool)}`); //convert valDataTool string to number and select the elements with class .tool-valDataTool.
 
         // if the valDataTool is equal to last data, remove the modal.
-        if (parseInt(valDataTool) === 15) {
-          return $("#guidedVisit").remove();
+        if (parseInt(valDataTool) === 20) {
+          $("#guidedVisit").html("");
+
+          $("#guidedVisit")
+            .append(`<div class="bg-dark h-100" style="top:-28px; position:relative;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content align-items-center">
+                <div class="modal-header">
+                    <h5 class="modal-title">Completed tutorial</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Congratulations!! You passed the guided visit.<br>
+                     Now, you can work with the app.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-tool-finish btn btn-primary">Finish</button>
+                </div>
+            </div>
+        </div>
+        </div>`);
+          $("#guidedVisit .modal-dialog").className = "wrappert";
+          getConfetti();
+          $(".btn-tool-finish").on("click", function(e) {
+            console.log("Finaliza tutorial");
+            $("#guidedVisit").remove();
+            //reload the page.
+            location.reload(true);
+          });
         }
 
         $.each(activeTool, function(a) {

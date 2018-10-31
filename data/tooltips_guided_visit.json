@@ -281,7 +281,7 @@
     "badgeTool": 2.6,
 
     "text": "And there are the languages, skills and frameworks that the user manages.",
-    "eventCallToOpen": "show.bs.modal, button.my-2.btn.btn-outline-success.btn-sm",
+    "eventCallToOpen": "show.bs.modal, table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
     "eventCallToClose": "click"
   },
   {
@@ -461,11 +461,221 @@
     "badgeTool": "2.11",
 
     "text": "Here, is the form when you set the values of the user.",
-    "eventCallToOpen": "#list-users",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(3)",
     "eventCallToClose": "click"
   },
   {
     "id": 13,
+    "title": "List Companies",
+    "elPositionSelected": {
+      "top": "33%",
+      "left": "16.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "32%",
+      "left": "16.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "35%",
+      "left": "13.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.12",
+
+    "text": "Click here if you can see the list of companies that are saved the database.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 14,
+    "title": "Companies listed",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "59%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "55%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.13",
+
+    "text": "Here there is a table! On you can see the logo, name, email, tlfn and social networks of the companies was been registered.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 15,
+    "title": "Surveys",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "39.8%",
+      "left": "15%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "42%",
+      "left": "12.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "elSelected": [".container-left", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.14",
+
+    "text": "Click here if you want to create a survey.",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(4)",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 16,
+    "title": "Survey Form",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "59%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "55%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.15",
+
+    "text": "There are the fields that you can use to create your survey.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 17,
+    "title": "Add an Enterprise",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "47%",
+      "left": "7.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "48%",
+      "left": "4.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.16",
+
+    "text": "Click here if you can create an enterprises that are saved on the database.",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(5)",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 18,
+    "title": "Enterprise Form",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "59%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "55%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.17",
+
+    "text": "There are the fields that you can use to create an Enterprise.",
+    "eventCallToOpen": "#list-users",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 19,
     "title": "Right menu",
     "elPositionSelected": {
       "top": "11.8%",
@@ -500,7 +710,7 @@
     "eventCallToClose": "click"
   },
   {
-    "id": 14,
+    "id": 20,
     "title": "Fields that you can search",
     "elPositionSelected": {
       "top": "11.7%",
@@ -533,37 +743,5 @@
     "text": "Here, you can search users by name, last name, genre, age, years of experience, laguages or skills.",
     "eventCallToOpen": "#open-icon-right",
     "eventCallToClose": "click"
-  },
-  {
-    "id": 15,
-    "title": "Completed tutorial",
-    "elPositionSelected": {
-      "top": "42%",
-      "left": "31%",
-      "right": "0%",
-      "bottom": "0%",
-      "height": "21%",
-      "width": "40%"
-    },
-    "tooltipPosition": {
-      "top": "45%",
-      "left": "32.8%",
-      "right": "0%",
-      "bottom": "0%",
-      "height": "18%",
-      "width": "36%"
-    },
-    "arrowPosition": {
-      "top": "37%",
-      "left": "49%",
-      "right": "0%",
-      "bottom": "0%",
-      "icon": "down"
-    },
-    "badgeTool": 4,
-
-    "text": "Congrats!! You passed the guided visit. Now, you can work with the app.",
-    "eventCallToOpen": "",
-    "eventCallToClose": ""
   }
 ]
