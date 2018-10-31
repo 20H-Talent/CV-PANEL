@@ -125,11 +125,21 @@ function searchAdvanced(event) {
     var algo = companies.companies.filter((company) => {
         console.log('company.name.toLowerCase().includes(inputComapany):', company.name.toLowerCase().includes(inputComapany));
 
-        return (company.name.toLowerCase().includes(inputComapany))
-            // (company.CIF.toLowerCase().includes(inputCif)) &&
-            // (company.email.toLowerCase().includes(inputEmail)) &&
-            // (company.address.city.toLowerCase().includes(inputCity)) &&
-            // (company.address.country.toLowerCase().includes(inputCountry))
+        return $("#tableBody tr").filter(function() {
+
+            $(this).toggle($(this).company.name.toLowerCase().includes(inputComapany))
+
+
+        })
+
+
+
+
+        // (company.name.toLowerCase().includes(inputComapany))
+        // (company.CIF.toLowerCase().includes(inputCif)) &&
+        // (company.email.toLowerCase().includes(inputEmail)) &&
+        // (company.address.city.toLowerCase().includes(inputCity)) &&
+        // (company.address.country.toLowerCase().includes(inputCountry))
     });
 
     console.log('algo :', algo);
