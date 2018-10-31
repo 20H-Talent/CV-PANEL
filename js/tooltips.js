@@ -46,22 +46,34 @@ function locationTooltipsIncorrect() {
 
 function locationTooltipsCorrect() {
   $(function() {
-    $("#inputName").tooltip({ title: "Correct!!", placement: "right" });
+    $("#inputName").tooltip({
+      title: "Correct!!",
+      placement: "right"
+    });
     $("#inputName").tooltip("show");
   });
 
   $(function() {
-    $("#inputCif").tooltip({ title: "Correct!!", placement: "left" });
+    $("#inputCif").tooltip({
+      title: "Correct!!",
+      placement: "left"
+    });
     $("#inputCif").tooltip("show");
   });
 
   $(function() {
-    $("#inputAddress").tooltip({ title: "Correct!!", placement: "right" });
+    $("#inputAddress").tooltip({
+      title: "Correct!!",
+      placement: "right"
+    });
     $("#inputAddress").tooltip("show");
   });
 
   $(function() {
-    $("#inputCity").tooltip({ title: "Correct!!", placement: "left" });
+    $("#inputCity").tooltip({
+      title: "Correct!!",
+      placement: "left"
+    });
     $("#inputCity").tooltip("show");
   });
 }
