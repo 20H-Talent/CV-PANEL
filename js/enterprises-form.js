@@ -14,8 +14,10 @@ function verifyFormEnterprises() {
       for (i = 0; i < inputsForm.length; i++) {
         if (inputsForm[i].checkValidity() == true) {
             inputsForm[i].className = "form-control form-control-width is-valid";
+            locationTooltipsCorrect();
         }else{ 
             inputsForm[i].className = "form-control form-control-width is-invalid";
+            locationTooltipsIncorrect();
         }
       }
 }
@@ -23,3 +25,4 @@ function verifyFormEnterprises() {
 $("#btn-enterprises").on("click", function() {
     verifyFormEnterprises();
 }); 
+

@@ -231,6 +231,9 @@ button#languages {
     height: 100vh;
     overflow-y: auto;
   }
+  #btn-enterprises{
+    width:80%;
+  }
   .btn-custom-2 {
     margin-top: 2em;
     margin-bottom: 4rem;
@@ -245,10 +248,10 @@ button#languages {
     font-weight: bolder;
   }
   .format-3 {
-    width: 80%;
+    width: 60%;
   }
   .form-control-width {
-    width: 80%;
+    width: 60%;
   }
   .format-1 {
     text-align: center;
@@ -258,7 +261,7 @@ button#languages {
     margin-bottom: 2rem;
   }
   #inputDescription {
-    width: 100%;
+    width: 80%;
   }
   #Div4 {
     margin-left: 0;

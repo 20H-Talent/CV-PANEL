@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/survey.css">
     <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/company.css">
+    <!-- <link rel="stylesheet" href="assets/css/tooltips.css"> -->
     <title>CV - PANEL</title>
 </head>
 <!-- Content here -->
@@ -121,74 +122,102 @@
                     <form id="alert-form-enterprises" action="get" method="post" class="container enterprise-form">
                         <h1 class="format-1">Business area</h1>
                         <hr>
+                        <!-- <div class="form-row col-md-12">
+                            <label class="format-2" for="inputName">Enterprise's name</label>
+                            <input autofocus type="text" name="inputName" class="form-control form-control-width"
+                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name"
+                                value="" data-toggle="tooltip" data-placement="left" title="Tooltip on left" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter your enterprise's name.
+                                </div>
+                        </div> -->
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputName">Enterprise's name</label>
-                            <input autofocus type="text" name="inputName" class="form-control form-control-width "
+                            <input type="text" name="inputName" class="form-control form-control-width"
                                 minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name"
-                                value="" required>
+                                value="" data-toggle="tooltip"  required>
+                                <!-- <div class="valid-tooltip">
+                                    <span class="tooltiptext"> Looks good! </span>
+                                </div>
+                                <div class="invalid-tooltip">
+                                    <span class="tooltiptext"> Please enter your enterprise's name. </span>  
+                                </div> -->
                         </div>
+                        <!-- <div class="tooltip">Hover over me
+                            <span class="tooltiptext">Tooltip text</span>
+                        </div> -->
+
+
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputCif">CIF</label>
-                            <input type="text" name="inputCif" class="form-control form-control-width " minlength="9"
+                            <input type="text" name="inputCif" class="form-control form-control-width" minlength="9"
                                 maxlength="9" pattern="[a-zA-Z0-9\s]+" id="inputCif" placeholder="CIF" value=""
-                                required>
+                                data-toggle="tooltip"  required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputAddress">Address</label>
                             <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width "
-                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street"
-                                required>
+                                minlength="3" maxlength="60" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="1234 Antigua"
+                                value="" data-toggle="tooltip"  required> 
+                                
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputCity">City</label>
                             <input lang="es-ES" name="imputCity" type="text" class="form-control form-control-width "
                                 minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City"
-                                required>
+                                value="" data-toggle="tooltip"  required>
                         </div>
                         <div class="form-row col-md-12 country">
                             <label class="format-2" for="inputCountry">Country</label>
                             <input lang="es-ES" name="inputCountry" type="text" class="form-control form-control-width "
                                 minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country"
-                                required>
+                                data-toggle="tooltip" data-placement="left" title="Tooltip on left" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputZip">Zip</label>
                             <input name="inputZip" type="text" class="form-control form-control-width " minlength="3"
-                                maxlength="6" pattern="[0-9\s]+" id="inputZip" placeholder="Zipcode" required>
+                                maxlength="5" pattern="[0-9\s]+" id="inputZip" placeholder="35004" data-toggle="tooltip"
+                                data-placement="right" title="Tooltip on right" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputPhone">Phone</label>
-                            <input name="inputPhone" type="tel" class="form-control form-control-width " minlength="3"
-                                maxlength="25" pattern="[0-9\s]+" id="inputPhone" placeholder="Phone" required>
+                            <input name="inputPhone" type="tel" class="form-control form-control-width " minlength="9"
+                                maxlength="13" pattern="[0-9\s]+" id="inputPhone" placeholder="+0034 928 556677" data-toggle="tooltip"
+                                data-placement="left" title="Tooltip on left" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputEmail">Email</label>
                             <input lang="es-ES" type="email" name="inputEmail" class="form-control form-control-width "
                                 minlength="3" maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
-                                id="inputEmail" placeholder="Email" required>
+                                id="inputEmail" placeholder="Email" data-toggle="tooltip" data-placement="right" title="Tooltip on right"
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputWorkersNumber">Workers Number</label>
-                            <input name="inputWorkersNumber" type="number" class="form-control form-control-width "
+                            <input name="inputWorkersNumber" type="text" class="form-control form-control-width "
                                 minlength="1" maxlength="5" pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company"
-                                required>
+                                data-toggle="tooltip" data-placement="left" title="Tooltip on left" required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputSocialNetworks">Social Networks</label>
                             <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width "
                                 minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks"
-                                placeholder="Facebook, Twitter..." required>
+                                placeholder="Facebook, Twitter..." data-toggle="tooltip" data-placement="right" title="Tooltip on right"
+                                required>
                         </div>
                         <div class="form-row col-md-12">
                             <label class="format-2" for="inputLogo">Logo</label>
-                            <input name="inputLogo" type="file" class="form-control-file format-3" id="inputLogo">
+                            <input name="inputLogo" type="file" class="form-control-file format-3" id="inputLogo"
+                                data-toggle="tooltip">
                         </div>
 
                         <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
                         <div class="form-row col-md-12">
-                            <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5"
-                                pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
-                            </textarea>
+                            <textarea name="inputDescription" type="text" class="format-2" cols="30" rows="5"
+                                pattern="[a-zA-Z0-9\s]+" id="inputDescription" placeholder=" Optional"></textarea>
                         </div>
 
                         <div class="form-row col-md-12">
@@ -297,6 +326,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Include for tooltips-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
@@ -318,6 +351,13 @@
     <script src="js/enterprises-form.js"></script>
     <script src="js/index.js"></script>
     <script src="js/guided_visit.js"></script>
+    <script src="js/tooltips.js"></script>
+
+    <!-- <div class="tooltip fade bs-tooltip-left show" role="tooltip" id="tooltip586334" style="position:absolute; transform:translate3d(273px, 206px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="left" >...</div> -->
+
+   
+
+
 </body>
 
 </html>
