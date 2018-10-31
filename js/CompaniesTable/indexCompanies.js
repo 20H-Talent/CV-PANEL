@@ -20,6 +20,7 @@ $.getJSON("../data/companies.json")
 
         companies.renderTable();
         companies.renderCompanyCards();
+        //companies.searchAdvanced();
 
         $(window).on("resize", function() {
             let width = $(this).width();
@@ -99,4 +100,38 @@ function removeCompanyFromDOM(id) {
             findTr.remove();
         }
     });
+}
+
+function searchAdvanced(event) {
+    //   $("#submit_search").on("click", function(e) {
+    event.stopPropagation();
+    event.preventDefault();
+    let inputComapany = $("#company-name").val().toLowerCase();
+    console.log('inputComapany :', inputComapany);
+    let inputCif = $("#company-cif").val().toLowerCase();
+    let inputWorkers = $("#company-employees").val().toLowerCase();
+    console.log('inputWorkers :', inputWorkers);
+    let inputBio = $("#company-bio").val().toLowerCase();
+    console.log('inputBio :', inputBio);
+    let inputCity = $("#company-city").val().toLowerCase();
+    let inputEmail = $("#company-email").val().toLowerCase();
+    let inputCountry = $("#company-country").val().toLowerCase();
+    counter = counter + 1;
+    var mainContainer = $("#main");
+    var filtersContainer = mainContainer.find(".filters");
+    console.log('filtersContainer :', filtersContainer.get());
+    var badgesContainer = $(".search-badges");
+
+    var algo = companies.companies.filter((company) => {
+        console.log('company.name.toLowerCase().includes(inputComapany):', company.name.toLowerCase().includes(inputComapany));
+
+        return (company.name.toLowerCase().includes(inputComapany))
+            // (company.CIF.toLowerCase().includes(inputCif)) &&
+            // (company.email.toLowerCase().includes(inputEmail)) &&
+            // (company.address.city.toLowerCase().includes(inputCity)) &&
+            // (company.address.country.toLowerCase().includes(inputCountry))
+    });
+
+    console.log('algo :', algo);
+    // })
 }

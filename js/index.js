@@ -33,6 +33,7 @@ function activateTooltips(container = null) {
 
 $(document).ready(function() {
     $("#list-users").click(function() {
+        $("#mySidenavRight a").trigger("click");
         $.ajax({
             url: "../html/right-menu.html",
             dataType: "html",

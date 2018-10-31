@@ -20,7 +20,7 @@ function Companies() {
             <td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${
               this.companies[i].logo
             } style="width:50px;"/></td>
-                <td class="fullname"><p>${this.companies[i].name}</p></td>
+                <td class="company-name-table"><p>${this.companies[i].name}</p></td>
                     <td class="company-email"> <a href="${
                       this.companies[i].email
                     }" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i></a>${
@@ -112,4 +112,5 @@ function Companies() {
 
         cardCompanyContainer.html(innerCard);
     };
+
 }
