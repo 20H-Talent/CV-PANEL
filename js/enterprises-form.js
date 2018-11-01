@@ -20,28 +20,42 @@ function verifyFormEnterprises() {
             inputsForm[i].className = "form-control form-control-width is-invalid";
             locationTooltipsIncorrect( inputsForm[i] );
         }  
-        /**
-         * Hides and destroys an element’s tooltip
-         */
+      
+        // Hides and destroys an element’s tooltip
         $(inputsForm[i]).tooltip('dispose');
     }
 }
 
+/***********************************
+ * Inputs incorrect 
+ ***********************************/
+
+function locationTooltipsIncorrect(input) {
+    $(function() {
+      $(input).tooltip({
+        title: "Error. Please enter a valid format."
+      });
+      $(input).tooltip("show");
+    });
+  }
+  
+  /*********************************
+   * Inputs correct 
+   *********************************/
+  
+  function locationTooltipsCorrect(input) {
+    $(function() {
+      $(input).tooltip({
+        title: "Correct!!"
+      });
+      $(input).tooltip("show");
+    });
+  }
+
+  /***********************************
+ * Listener Button form enterprises
+ ***********************************/
+
 $("#btn-enterprises").on("click", function() {
     verifyFormEnterprises();
 }); 
-
-/**
- * 
- * ¿ Porque no funciona con un .on("submit", function() ?
- * 
- * Al intentar enviar un formulario que no pasa la validación, 
- * se activa un evento no válido. La validación impide enviar el formulario, 
- * por lo que no hay ningún evento de envío.
- * 
- */
-
-// $( "#btn-enterprises" ).on("click", function( event ) {
-//     event.preventDefault();
-//     verifyFormEnterprises();
-// }); 
