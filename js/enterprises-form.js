@@ -1,8 +1,18 @@
 /**
  * 
- * https://developer.mozilla.org/es/docs/HTML/HTML5/Forms_in_HTML5
- * https://getbootstrap.com/docs/4.0/components/forms/?
+ * @param form form to add enterprises.
+ * @param inputsForm data enterprises. We use this variable to select all inputs form.
+ * 
+ * ## checkValidity() 
+ *      return true if inputs is valid.
+ * ## locationTooltipsCorrect
+ *      we use this function to handler tooltip function of bootstrap. 
+ *
+ * https://developer.mozilla.org/es/docs/HTML/HTML5/Forms_in_HTML5 --> Documentation to control inputs form
+ * https://getbootstrap.com/docs/4.0/components/forms/? --> Documentation to control inputs form
  * https://www.w3.org/TR/html5/sec-forms.html#email-state-typeemail --> Documentation to control email input.
+ * https://www.w3schools.com/howto/howto_css_tooltip.asp --> Documentation tooltip styles.css
+ * 
  */
 
 function verifyFormEnterprises() {
@@ -52,7 +62,7 @@ function locationTooltipsIncorrect(input) {
     });
   }
 
-  /***********************************
+/***********************************
  * Listener Button form enterprises
  ***********************************/
 
