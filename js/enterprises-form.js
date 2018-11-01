@@ -8,21 +8,44 @@
 function verifyFormEnterprises() {
     var form = document.getElementById("alert-form-enterprises");
     var inputsForm = form.querySelectorAll(
-        "input[type=text],input[type=number],input[type=email],input[type=tel]"
-      );
+        "input[type=text],input[type=email],input[type=tel]"
+      ); 
+  
+    for (var i = 0; i < inputsForm.length; i++) {
+// console.log("inputform:", inputsForm[i]);
+// console.log("Status:", inputsForm[i].checkValidity());
 
-      for (i = 0; i < inputsForm.length; i++) {
-        if (inputsForm[i].checkValidity() == true) {
+        if (inputsForm[i].checkValidity() === true) { 
             inputsForm[i].className = "form-control form-control-width is-valid";
-            locationTooltipsCorrect();
+            locationTooltipsCorrect( inputsForm[i] );   
+            // console.log(" Test validity ok:",inputsForm[i].checkValidity());
+            // console.log(" Test location ok:",locationTooltipsCorrect(inputsForm[i]));
         }else{ 
             inputsForm[i].className = "form-control form-control-width is-invalid";
-            locationTooltipsIncorrect();
-        }
-      }
+            locationTooltipsIncorrect( inputsForm[i].id );
+            // console.log(" Test validity error:",inputsForm[i].checkValidity());
+            console.log(" Test location error:",locationTooltipsIncorrect(inputsForm[i].id));
+
+        }  
+    }
 }
 
 $("#btn-enterprises").on("click", function() {
     verifyFormEnterprises();
 }); 
 
+
+/**
+ * 
+ * ¿ Porque no funciona con un .on("submit", function() ?
+ * 
+ * Al intentar enviar un formulario que no pasa la validación, 
+ * se activa un evento no válido. La validación impide enviar el formulario, 
+ * por lo que no hay ningún evento de envío.
+ * 
+ */
+
+// $( "#btn-enterprises" ).on("click", function( event ) {
+//     event.preventDefault();
+//     verifyFormEnterprises();
+// }); 
