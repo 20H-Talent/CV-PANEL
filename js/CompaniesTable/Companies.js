@@ -54,6 +54,19 @@ function Companies() {
       })"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
         }
+        //loading the right menu of searching companies
+        $(document).ready(function() {
+            $("#list-companies").click(function() {
+                $.ajax({
+                    url: "../html/searchCompanyTable.html",
+                    dataType: "html",
+                    success: function(data) {
+                        $("#right-menu-ajax").empty().append(data);
+                    }
+                });
+            });
+        });
+
     };
     this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {

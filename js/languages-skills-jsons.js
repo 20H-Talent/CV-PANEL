@@ -1,6 +1,6 @@
-$("#mySidenavLeft ul li:nth-of-type(2)").on("click", languages);
+$("#list-users").on("click", languages);
 $("#mySidenavRight a").on("click", languages);
-$("#mySidenavLeft ul li:nth-of-type(2)").on("click", skills);
+$("#list-users").on("click", skills);
 $("#mySidenavRight a").on("click", skills);
 
 // ******* declare function to get data from languages json. ***********

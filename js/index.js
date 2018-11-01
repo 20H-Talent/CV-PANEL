@@ -20,9 +20,9 @@ $('document').ready(function() {
         loadRightMenu();
     });
 });
+$("body").on("load", loadRightMenu());
 
 function loadRightMenu() {
-
     $.ajax({
         url: "../html/right-menu.html",
         dataType: "html",
