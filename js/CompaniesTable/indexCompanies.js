@@ -104,13 +104,17 @@ function removeCompanyFromDOM(id) {
 }
 
 function searchAdvanced(event) {
+
     //   $("#submit_search").on("click", function(e) {
-    event.stopPropagation();
+    // event.stopPropagation();
     event.preventDefault();
-    //  let table = document.getElementById("companiesTable");
-    // let tr = table.getElementsByTagName("tr");
-    //let tdName = document.getElementsByTagName("td")[1];
-    // console.log('td :', td);
+    $("input[name=company-name]").val();
+    $("input[name=company-cif]").val();
+    $("input[name=company-employees]").val();
+    $("input[name=company-bio]").val();
+    $("input[name=company-city]").val();
+    $("input[name=company-email]").val();
+    $("input[name=company-country]").val();
     let inputComapany = $("#company-name").val().toLowerCase();
     console.log('inputComapany :', inputComapany);
     let inputCif = $("#company-cif").val().toLowerCase();
@@ -125,35 +129,69 @@ function searchAdvanced(event) {
     var mainContainer = $("#main");
     var filtersContainer = mainContainer.find(".filters");
     console.log('filtersContainer :', filtersContainer.get());
-    var badgesContainer = $(".search-badges");
-
+    var badgesContainer = $(".search-badges").empty();
+    let formCompanyes = $("advanced-search");
+    let inputs = formCompanyes.find("input");
+    inputsval = inputs.val();
     //$("input[name=email]")
-
-
-
-
-
+    //var spans = `<span class="badge badge-info mr-2 badge-font">${inputs.name}<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button></span>`;
+    console.log('${inputs.name} :', inputs.name);
 
     var filtredComapanies = companies.companies.filter((company) => {
+        console.log(' companies.companies :', companies.companies);
         console.log('company.name.toLowerCase().includes(inputComapany):', company.name.toLowerCase().includes(inputComapany));
 
-
-
-        return (company.name.toLowerCase().includes(inputComapany)) &&
+        if ((company.name.toLowerCase().includes(inputComapany)) &&
             (company.CIF.toLowerCase().includes(inputCif)) &&
             (company.email.toLowerCase().includes(inputEmail)) &&
             (company.address.city.toLowerCase().includes(inputCity)) &&
-            (company.address.country.toLowerCase().includes(inputCountry));
+            (company.address.country.toLowerCase().includes(inputCountry))) {
+
+            const resetButton = badgesContainer.append(`<span class="badge badge-info mr-2 badge-font">${company.name}<button onclick="closeNavbar()" class="bg-transparent border-0 deletion" id="badgeButton"><i class="fas fa-times-circle"></i></button></span>`);
+            resetButton.off("click").on("click", function() {
+                // inputComapany.trigger("click");
+                badgesContainer.empty();
+                badgesContainer.map(badge => badge.remove());
+                //  $(this).remove();
+            });
+
+        }
 
 
 
-        // (company.name.toLowerCase().includes(inputComapany))
-        // (company.CIF.toLowerCase().includes(inputCif)) &&
-        // (company.email.toLowerCase().includes(inputEmail)) &&
-        // (company.address.city.toLowerCase().includes(inputCity)) &&
-        // (company.address.country.toLowerCase().includes(inputCountry))
+
+        return filtredComapanies;
+
     });
-    companies.renderTable(filtredComapanies);
+
+    // $("badgeButton").on("click", function() {
+
+    // })
+    // const filtersContainer = $(".filters");
+    // const badgeContainer = filtersContainer.children(".search-badges");
+
+    // filtersContainer.find("button").remove();
+    // badgeContainer.empty();
+    // companies.renderTable(filtredComapanies);
+
+
     console.log('filtredComapanies :', filtredComapanies);
     // })
 }
+
+
+
+
+
+// (company.CIF.toLowerCase().includes(inputCif)) &&
+// (company.email.toLowerCase().includes(inputEmail)) &&
+// (company.address.city.toLowerCase().includes(inputCity)) &&
+// (company.address.country.toLowerCase().includes(inputCountry));
+
+
+
+// (company.name.toLowerCase().includes(inputComapany))
+// (company.CIF.toLowerCase().includes(inputCif)) &&
+// (company.email.toLowerCase().includes(inputEmail)) &&
+// (company.address.city.toLowerCase().includes(inputCity)) &&
+// (company.address.country.toLowerCase().includes(inputCountry))

@@ -63,6 +63,7 @@ function Companies() {
     };
 
     this.renderCompanyCards = function() {
+        $("#card-container-company").html(" ");
         let mainContainer = $(".main-container-companies");
         let cardCompanyContainer = $("#card-container-company");
         let innerCard = "";

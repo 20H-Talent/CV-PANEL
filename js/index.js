@@ -15,7 +15,7 @@ function activateTooltips(container = null) {
 /**
  *  Function to load the content by ajax
  */
-$(window).load(function() {
+$('document').ready(function() {
     $("#list-users").on("click", function() {
         loadRightMenu();
     });
