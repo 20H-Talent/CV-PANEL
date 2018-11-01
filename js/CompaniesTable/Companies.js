@@ -3,7 +3,7 @@ function Companies() {
         $.get("../../html/CompaniesTable.html", htmlSkeleton => {
             container.empty().append(htmlSkeleton);
             this.renderTable(this.companies);
-            this.renderCompanyCards();
+            // this.renderCompanyCards();
         }).fail(function(err) {
             throw new Error(err);
         });
@@ -13,21 +13,17 @@ function Companies() {
         this.companies.push(company);
     };
     this.renderTable = function(filtredComapanies) {
+
         $("#tableBody").html(" ");
+        let mainContainer = $(".main-container-companies");
         console.log('filtredComapanies :', filtredComapanies);
         let width = $(window).width();
         for (var i = 0; i < filtredComapanies.length; i++) {
             // mainContainer.empty();
-            $("#tableBody").append(`<tr scope="row""  data-id=${filtredComapanies[i].id}>
-            <td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${
-              filtredComapanies[i].logo
-            } style="width:50px;"/></td>
+            $("#tableBody").append(`<tr scope="row""  data-id=${filtredComapanies[i].id}><td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredComapanies[i].logo} style="width:50px;"/></td>
                 <td class="company-name-table"><p>${filtredComapanies[i].name}</p></td>
-                    <td class="company-email"> <a href="${
-                      filtredComapanies[i].email
-                    }" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i></a>${
-                      filtredComapanies[i].email
-      }</td>
+                    <td class="company-email"> <a href="${filtredComapanies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
+                    </a>${filtredComapanies[i].email}</td>
                     <td class="company-phone">${filtredComapanies[i].phone}</td>
                     <td class="company-social text-center">
         <div class="container">
@@ -39,33 +35,12 @@ function Companies() {
         </div>
                 </td>
                 <td class="options text-center">
-                    <button  type="button" onclick="showPreviewInfo(${
-                      filtredComapanies[i].id
-                    })" data-toggle="modal" data-id=${
-                      filtredComapanies[i].id
-      } data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
+                    <button  type="button" onclick="showPreviewInfo(${filtredComapanies[i].id})" data-toggle="modal" data-id=${filtredComapanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${
-                      filtredComapanies[i].id
-                    } data-target="#confirm-delete" onclick="removeCompanyFromDOM(${
-                      filtredComapanies[i].id
-      })"><i class="fas fa-trash-alt"></i></button></td>
+                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredComapanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredComapanies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
         }
-        //loading the right menu of searching companies
-        $(document).ready(function() {
-            $("#list-companies").click(function() {
-                $.ajax({
-                    url: "../html/searchCompanyTable.html",
-                    dataType: "html",
-                    success: function(data) {
-                        $("#right-menu-ajax").empty().append(data);
-                    }
-                });
-            });
-        });
 
     };
     this.getCompanyById = function(id) {
@@ -76,9 +51,10 @@ function Companies() {
     };
 
     this.renderCompanyCards = function() {
-        $("#card-container-company").html(" ");
+        $(".main-container-companies").html(" ");
         let mainContainer = $(".main-container-companies");
-        let cardCompanyContainer = $("#card-container-company");
+        let cardContain = mainContainer.find(".thead-dark").empty();
+        let cardCompanyContainer = $("#companyTable");
         let innerCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             let width = $(window).width();
@@ -97,8 +73,8 @@ function Companies() {
       }</small></h5>
                 <p class="card-title font-weight-bold  mt-3  "><ins>Email</ins></p>
                 <h1 class="card-text  badge badge-secondary  ">${this.companies[i].email}</h1>
-                <p class="card-subtitle font-weight-bold  mt-3  ">Workers Number</p>
-                <h3 class="card-text badge badge-secondary "><ins>${this.companies[i].workersNumber}</ins></h3>
+                <p class="card-subtitle font-weight-bold  mt-3  ">employees Number</p>
+                <h3 class="card-text badge badge-secondary "><ins>${this.companies[i].employeesNumber}</ins></h3>
                 <p class="card-title font-weight-bold ">Phone</p>
                 <h3 class="card-text badge badge-secondary  "><ins>${this.companies[i].phone}</ins></h3>
               </div>
@@ -122,7 +98,7 @@ function Companies() {
           `;
         }
 
-        cardCompanyContainer.html(innerCard);
+        mainContainer.empty().html(innerCard);
     };
 
 }

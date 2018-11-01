@@ -6,7 +6,7 @@ function Company(
     socialnetworks,
     logo,
     descripcion,
-    workersNumber,
+    employeesNumber,
     phone,
     address,
     socialnetworks
@@ -20,7 +20,7 @@ function Company(
     this.socialnetworks = socialnetworks;
     this.logo = logo;
     this.descripcion = descripcion;
-    this.workersNumber = workersNumber;
+    this.employeesNumber = employeesNumber;
     this.phone = phone;
     this.renderSocialNetworks = function() {
         var divCol = document.createElement("div");

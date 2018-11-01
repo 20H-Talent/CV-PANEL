@@ -10,7 +10,7 @@ $.getJSON("../data/companies.json")
                 data[i].socialnetworks,
                 data[i].logo,
                 data[i].descripcion,
-                data[i].workersNumber,
+                data[i].employeesNumber,
                 data[i].phone,
                 data[i].address,
                 data[i].socialnetworks
@@ -18,9 +18,8 @@ $.getJSON("../data/companies.json")
             companies.addCompany(company);
         });
         console.log('companies.companies :', companies.companies);
-        companies.renderTable(companies.companies);
-
-        companies.renderCompanyCards();
+        // companies.renderTable(companies.companies);
+        // companies.renderCompanyCards();
         //companies.searchAdvanced();
 
         $(window).on("resize", function() {
@@ -31,11 +30,11 @@ $.getJSON("../data/companies.json")
             let cardDiv = $("#card-container-company");
 
             if (width > 868) {
-                mainContainer.show();
-                cardDiv.hide();
+                companies.renderTable(companies.companies);
+                console.log('companies.companies :', companies.companies);
             } else {
-                mainContainer.hide();
-                cardDiv.show();
+                companies.renderCompanyCards();
+                console.log('cards? :');
             }
         });
     })
@@ -78,8 +77,8 @@ function showPreviewInfo(id) {
             <div  class="text-dark text-center h5 "><h5 class="text-center  header-card text-dark rounded font-weight-bold ">Phone</h5>
             <h4 class="text-white badge badge-secondary text-center">${company.phone}</h4>
         </div>
-            <div class="text-dark text-center h5"><h5 class=" text-center header-card text-dark rounded font-weight-bold ">Numbers of workers</h5>
-            <h4 class="text-white badge badge-secondary text-center">${company.workersNumber}</h4>
+            <div class="text-dark text-center h5"><h5 class=" text-center header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
+            <h4 class="text-white badge badge-secondary text-center">${company.employeesNumber}</h4>
         </div>
             <div class="text-dark text-center h5 "><h5 class="text-center header-card text-dark rounded font-weight-bold " >Address</h5>
             <h4 class="text-white badge badge-secondary text-center">${company.address.country} ~ ${company.address.city} ${
@@ -115,17 +114,16 @@ function searchAdvanced(event) {
     $("input[name=company-city]").val();
     $("input[name=company-email]").val();
     $("input[name=company-country]").val();
-    let inputComapany = $("#company-name").val().toLowerCase();
-    console.log('inputComapany :', inputComapany);
+    let inputCompanyName = $("#company-name").val().toLowerCase();
+    console.log('inputCompanyName :', inputCompanyName);
     let inputCif = $("#company-cif").val().toLowerCase();
-    let inputWorkers = $("#company-employees").val().toLowerCase();
-    console.log('inputWorkers :', inputWorkers);
+    let inputemployees = $("#company-employees").val().toLowerCase();
+    console.log('inputemployees :', inputemployees);
     let inputBio = $("#company-bio").val().toLowerCase();
     console.log('inputBio :', inputBio);
     let inputCity = $("#company-city").val().toLowerCase();
     let inputEmail = $("#company-email").val().toLowerCase();
     let inputCountry = $("#company-country").val().toLowerCase();
-    counter = counter + 1;
     var mainContainer = $("#main");
     var filtersContainer = mainContainer.find(".filters");
     console.log('filtersContainer :', filtersContainer.get());
@@ -133,53 +131,38 @@ function searchAdvanced(event) {
     let formCompanyes = $("advanced-search");
     let inputs = formCompanyes.find("input");
     inputsval = inputs.val();
-    //$("input[name=email]")
-    //var spans = `<span class="badge badge-info mr-2 badge-font">${inputs.name}<button class="bg-transparent border-0 deletion"><i class="fas fa-times-circle"></i></button></span>`;
-    console.log('${inputs.name} :', inputs.name);
-
-    var filtredComapanies = companies.companies.filter((company) => {
-        console.log(' companies.companies :', companies.companies);
-        console.log('company.name.toLowerCase().includes(inputComapany):', company.name.toLowerCase().includes(inputComapany));
-
-        if ((company.name.toLowerCase().includes(inputComapany)) &&
-            (company.CIF.toLowerCase().includes(inputCif)) &&
-            (company.email.toLowerCase().includes(inputEmail)) &&
-            (company.address.city.toLowerCase().includes(inputCity)) &&
-            (company.address.country.toLowerCase().includes(inputCountry))) {
-
-            const resetButton = badgesContainer.append(`<span class="badge badge-info mr-2 badge-font">${company.name}<button onclick="closeNavbar()" class="bg-transparent border-0 deletion" id="badgeButton"><i class="fas fa-times-circle"></i></button></span>`);
-            resetButton.off("click").on("click", function() {
-                // inputComapany.trigger("click");
-                badgesContainer.empty();
-                badgesContainer.map(badge => badge.remove());
-                //  $(this).remove();
-            });
-
-        }
-
-
-
-
-        return filtredComapanies;
-
+    var filteredCompanies = [];
+    filteredCompanies = companies.companies.filter((company) => {
+        return (company.name.toLowerCase().includes(inputCompanyName));
     });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.CIF.toLowerCase().includes(inputCif));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.employeesNumber.toString().includes(inputemployees));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.email.toLowerCase().includes(inputEmail));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.address.city.toLowerCase().includes(inputCity));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        console.log(' (company.address.country.toLowerCase().includes(inputCountry)) :', (company.address.country.toLowerCase().includes(inputCountry)));
+        return (company.address.country.toLowerCase().includes(inputCountry));
+    });
+    console.log('filtredComapanies :', filteredCompanies);
+    companies.renderTable(filteredCompanies);
 
-    // $("badgeButton").on("click", function() {
-
-    // })
-    // const filtersContainer = $(".filters");
-    // const badgeContainer = filtersContainer.children(".search-badges");
-
-    // filtersContainer.find("button").remove();
-    // badgeContainer.empty();
-    // companies.renderTable(filtredComapanies);
-
-
-    console.log('filtredComapanies :', filtredComapanies);
-    // })
 }
 
-
+// const resetButton = badgesContainer.append(`<span class="badge badge-info mr-2 badge-font">${company.name}<button onclick="closeNavbar()" class="bg-transparent border-0 deletion" id="badgeButton"><i class="fas fa-times-circle"></i></button></span>`);
+// resetButton.off("click").on("click", function() {
+//     // inputCompanyName.trigger("click");
+//     badgesContainer.empty();
+//     badgesContainer.map(badge => badge.remove());
+//     //  $(this).remove();
+// });
 
 
 
@@ -190,8 +173,21 @@ function searchAdvanced(event) {
 
 
 
-// (company.name.toLowerCase().includes(inputComapany))
+// (company.name.toLowerCase().includes(inputCompanyName))
 // (company.CIF.toLowerCase().includes(inputCif)) &&
 // (company.email.toLowerCase().includes(inputEmail)) &&
 // (company.address.city.toLowerCase().includes(inputCity)) &&
 // (company.address.country.toLowerCase().includes(inputCountry))
+// $("badgeButton").on("click", function() {
+
+// })
+// const filtersContainer = $(".filters");
+// const badgeContainer = filtersContainer.children(".search-badges");
+
+// filtersContainer.find("button").remove();
+// badgeContainer.empty();
+// companies.renderTable(filtredComapanies);
+
+
+
+// })

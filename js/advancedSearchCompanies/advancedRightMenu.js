@@ -2,7 +2,18 @@
 //function loads with ajax the html section of search advanced company and puts it in the menu right on click, (replacing) empting the section of users search advanced
 
 //var counter = 0;
-
+//loading the right menu of searching companies
+$(document).ready(function() {
+    $("#list-companies").click(function() {
+        $.ajax({
+            url: "../html/searchCompanyTable.html",
+            dataType: "html",
+            success: function(data) {
+                $("#right-menu-ajax").empty().append(data);
+            }
+        });
+    });
+});
 // function advancedSearch() {
 
 //     let inputComapany = $("#company-name").val().toLowerCase();

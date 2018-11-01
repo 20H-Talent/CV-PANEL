@@ -16,7 +16,7 @@
         },
         "logo": "/assets/images/kisspng-windows-7-windows-vista-logo-microsoft-windows-logos-5ab719c342adc2.6952612015219491232731.jpg",
         "descripcion": "Software development services with a high standard",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-806442"
     },
     {
@@ -37,7 +37,7 @@
         },
         "logo": "/assets/images/skills/Apple-Offical-Logo-Png-bluecolor-660x660.png",
         "descripcion": "Switchable contextually-based project",
-        "workersNumber": 40,
+        "employeesNumber": 40,
         "phone": "024-648-3804"
     },
     {
@@ -58,7 +58,7 @@
         },
         "logo": "/assets/images/Google_-G-_Logo_svg.png",
         "descripcion": "Top Tech Partner for Software and SaaS Companies",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "010-692-6593 125"
     },
     {
@@ -79,7 +79,7 @@
         },
         "logo": "/assets/images/firefox-logo-300x310.png",
         "descripcion": "Website and App Design and Development",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "493-170-623 156"
     },
     {
@@ -101,7 +101,7 @@
         },
         "logo": "/assets/images/Free-LG-Logo-Template.jpg",
         "descripcion": "Face to face bifurcated interface",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-831 442"
     },
     {
@@ -123,7 +123,7 @@
         },
         "logo": "/assets/images/00106-3D-company-logos-design-free-logo-online-02.png",
         "descripcion": " Product Development For Startups & Enterprises",
-        "workersNumber": 20,
+        "employeesNumber": 20,
         "phone": "(254)954-1289"
     },
     {
@@ -144,7 +144,7 @@
         },
         "logo": "/assets/images/1121436.png",
         "descripcion": " Software development agency",
-        "workersNumber": 60,
+        "employeesNumber": 60,
         "phone": "210 067 612"
     },
     {
@@ -165,7 +165,7 @@
         },
         "logo": "/assets/images/Rounded-Design-HP-Logo-Free.jpg",
         "descripcion": "Digital product design and development company",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-806442"
     },
     {
@@ -188,7 +188,7 @@
         },
         "logo": "/assets/images/Free-LG-Logo-Template.jpg",
         "descripcion": "Awesome Mobile Apps & Web Developmen",
-        "workersNumber": 40,
+        "employeesNumber": 40,
         "phone": "024-648-3804"
     },
     {
@@ -209,7 +209,7 @@
         },
         "logo": "/assets/images/NEC-Company-Logo.jpg",
         "descripcion": "Proactive didactic contingency",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "010-692-6593 125"
     },
     {
@@ -230,7 +230,7 @@
         },
         "logo": "/assets/images/163px-Coca-Cola_bottle_cap.svg.png",
         "descripcion": "User-centric fault-tolerant solution",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "493-170-623 156"
     },
     {
@@ -252,7 +252,7 @@
         },
         "logo": "/assets/images/Dell-Company-Logo.jpg",
         "descripcion": "Face to face bifurcated interface",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-831 442"
     },
     {
@@ -273,7 +273,7 @@
         },
         "logo": "/assets/images/Amazon.com_Favicon.png",
         "descripcion": " Custom software development - web & mobile.",
-        "workersNumber": 20,
+        "employeesNumber": 20,
         "phone": "(254)954-1289"
     },
     {
@@ -295,7 +295,7 @@
         },
         "logo": "/assets/images/Amazon.com_Favicon.png",
         "descripcion": "Web Design, Development & Digital Strategy",
-        "workersNumber": 60,
+        "employeesNumber": 60,
         "phone": "210 067 612"
     },
     {
@@ -317,7 +317,7 @@
         },
         "logo": "/assets/images/kisspng-windows-7-windows-vista-logo-microsoft-windows-logos-5ab719c342adc2.6952612015219491232731.jpg",
         "descripcion": "Multi-layered client-server neural-net",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-806442"
     },
     {
@@ -339,7 +339,7 @@
         },
         "logo": "/assets/images/skills/Apple-Offical-Logo-Png-bluecolor-660x660.png",
         "descripcion": "Mobile & Web Apps Development Company",
-        "workersNumber": 40,
+        "employeesNumber": 40,
         "phone": "024-648-3804"
     },
     {
@@ -361,7 +361,7 @@
         },
         "logo": "/assets/images/Google_-G-_Logo_svg.png",
         "descripcion": "Proactive didactic contingency",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "010-692-6593 125"
     },
     {
@@ -383,7 +383,7 @@
         },
         "logo": "/assets/images/firefox-logo-300x310.png",
         "descripcion": "Developing Impact.",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "493-170-623 156"
     },
     {
@@ -405,7 +405,7 @@
         },
         "logo": "./assets/images/logo_ibm.jpg",
         "descripcion": "Face to face bifurcated interface",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-831 442"
     },
     {
@@ -427,7 +427,7 @@
         },
         "logo": "/assets/images/Rounded-Design-HP-Logo-Free.jpg",
         "descripcion": "Trusted Software Development Partner since 2005",
-        "workersNumber": 20,
+        "employeesNumber": 20,
         "phone": "(254)954-1289"
     },
     {
@@ -449,7 +449,7 @@
         },
         "logo": "/assets/images/Amazon.com_Favicon.png",
         "descripcion": "Synchronised bottom-line interface",
-        "workersNumber": 60,
+        "employeesNumber": 60,
         "phone": "210 067 612"
     },
     {
@@ -471,7 +471,7 @@
         },
         "logo": "/assets/images/kisspng-windows-7-windows-vista-logo-microsoft-windows-logos-5ab719c342adc2.6952612015219491232731.jpg",
         "descripcion": "Multi-layered client-server neural-net",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-806442"
     },
     {
@@ -493,7 +493,7 @@
         },
         "logo": "/assets/images/skills/Apple-Offical-Logo-Png-bluecolor-660x660.png",
         "descripcion": "Advanced Web Solutions & Enterprise Web Apps",
-        "workersNumber": 40,
+        "employeesNumber": 40,
         "phone": "024-648-3804"
     },
     {
@@ -515,7 +515,7 @@
         },
         "logo": "/assets/images/Google_-G-_Logo_svg.png",
         "descripcion": " Full-stack web development team for your business",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "010-692-6593 125"
     },
     {
@@ -537,7 +537,7 @@
         },
         "logo": "/assets/images/firefox-logo-300x310.png",
         "descripcion": "Digital product innovation",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "493-170-623 156"
     },
     {
@@ -559,7 +559,7 @@
         },
         "logo": "/assets/images/logo_ibm.jpg",
         "descripcion": "Face to face bifurcated interface",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-831 442"
     },
     {
@@ -581,7 +581,7 @@
         },
         "logo": "/assets/images/Rounded-Design-HP-Logo-Free.jpg",
         "descripcion": "Software development agency",
-        "workersNumber": 20,
+        "employeesNumber": 20,
         "phone": "(254)954-1289"
     },
     {
@@ -602,7 +602,7 @@
         },
         "logo": "/assets/images/Amazon.com_Favicon.png",
         "descripcion": "Strategic Powerful Web/Digital Transformations",
-        "workersNumber": 60,
+        "employeesNumber": 60,
         "phone": "210 067 612"
     },
     {
@@ -624,7 +624,7 @@
         },
         "logo": "/assets/images/kisspng-windows-7-windows-vista-logo-microsoft-windows-logos-5ab719c342adc2.6952612015219491232731.jpg",
         "descripcion": "Multi-layered client-server neural-net",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-806442"
     },
     {
@@ -646,7 +646,7 @@
         },
         "logo": "/assets/images/skills/Apple-Offical-Logo-Png-bluecolor-660x660.png",
         "descripcion": "Switchable contextually-based project",
-        "workersNumber": 40,
+        "employeesNumber": 40,
         "phone": "024-648-3804"
     },
     {
@@ -668,7 +668,7 @@
         },
         "logo": "/assets/images/Google_-G-_Logo_svg.png",
         "descripcion": " Full-stack web development team for your business",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "010-692-6593 125"
     },
     {
@@ -690,7 +690,7 @@
         },
         "logo": "/assets/images/firefox-logo-300x310.png",
         "descripcion": "Product Development For Startups & Enterprises",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "493-170-623 156"
     },
     {
@@ -712,7 +712,7 @@
         },
         "logo": "/assets/images/Rounded-Design-HP-Logo-Free.jpg",
         "descripcion": "Face to face bifurcated interface",
-        "workersNumber": 10,
+        "employeesNumber": 10,
         "phone": "1-770-736-831 442"
     },
     {
@@ -735,7 +735,7 @@
         },
         "logo": "/assets/images/00106-3D-company-logos-design-free-logo-online-02.png",
         "descripcion": "Cloud, web, mobile and enterprise application dev.",
-        "workersNumber": 20,
+        "employeesNumber": 20,
         "phone": "(254)954-1289"
     },
     {
@@ -757,7 +757,7 @@
         },
         "logo": "/assets/images/Amazon.com_Favicon.png",
         "descripcion": "Web & Mobile App Development, Blockchain, IoT",
-        "workersNumber": 60,
+        "employeesNumber": 60,
         "phone": "210 067 612"
     }
 ]
