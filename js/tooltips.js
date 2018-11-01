@@ -8,7 +8,6 @@ function locationTooltipsIncorrect(input) {
       title: "Error. Please enter a valid format.",
       placement: "right"
     });
-    // console.log("Incorrect input:", input.id);
     $(input).tooltip("show");
   });
 }
@@ -21,20 +20,9 @@ function locationTooltipsCorrect(input) {
   $(function() {
     $(input).tooltip({
       title: "Correct!!", 
-      placement: "left"
+      placement: "right"
     });
-    // console.log("correct input:", input.id);
     $(input).tooltip("show");
   });
 }
 
-// function clearTooltips(input){
-//   $(function(input) {
-//     $(input).tooltip({
-//       title: " ",
-//       placement: "top"
-//     });
-//     // console.log("correct input:", input);
-//     $(input).tooltip("show");
-//   });
-// }

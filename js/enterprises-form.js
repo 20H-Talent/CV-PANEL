@@ -12,28 +12,24 @@ function verifyFormEnterprises() {
       ); 
   
     for (var i = 0; i < inputsForm.length; i++) {
-// console.log("inputform:", inputsForm[i]);
-// console.log("Status:", inputsForm[i].checkValidity());
 
         if (inputsForm[i].checkValidity() === true) { 
             inputsForm[i].className = "form-control form-control-width is-valid";
             locationTooltipsCorrect( inputsForm[i] );   
-            // console.log(" Test validity ok:",inputsForm[i].checkValidity());
-            // console.log(" Test location ok:",locationTooltipsCorrect(inputsForm[i]));
-        }else{ 
+        }else{
             inputsForm[i].className = "form-control form-control-width is-invalid";
-            locationTooltipsIncorrect( inputsForm[i].id );
-            // console.log(" Test validity error:",inputsForm[i].checkValidity());
-            console.log(" Test location error:",locationTooltipsIncorrect(inputsForm[i].id));
-
+            locationTooltipsIncorrect( inputsForm[i] );
         }  
+        /**
+         * Hides and destroys an element’s tooltip
+         */
+        $(inputsForm[i]).tooltip('dispose');
     }
 }
 
 $("#btn-enterprises").on("click", function() {
     verifyFormEnterprises();
 }); 
-
 
 /**
  * 
