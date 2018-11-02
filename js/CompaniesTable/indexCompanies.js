@@ -104,6 +104,8 @@ function removeCompanyFromDOM(id) {
 // Advanced search for companies
 function searchAdvancedComapanies(event) {
     event.preventDefault();
+
+    $("#alertNoCompany").remove();
     // PUTTING IN VARIABLES THE VALUES OF INPUTS TO LOWER CASE
     let inputCompanyName = $("#company-name").val().toLowerCase();
     let inputCif = $("#company-cif").val().toLowerCase();
@@ -138,7 +140,7 @@ function searchAdvancedComapanies(event) {
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value.toString().trim().length > 0) {
             console.log('inputs[i] :', inputs[i]);
-            const badgeCompany = $(`<span class="badge ml-3 badge-pill badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`).hide();
+            const badgeCompany = $(`<span class="badge ml-3 badge-pill badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
             badgesContainer.append(badgeCompany);
             badgeCompany.show("slow");
             badgeCompany.off("click").on("click", function(event) {
@@ -150,12 +152,9 @@ function searchAdvancedComapanies(event) {
         }
 
     }
-    if (filteredCompanies !== companies.companies) {
-        console.log('filteredCompanies :', filteredCompanies);
-        console.log('companies.companies :', companies.companies);
-        $(".row").append(`No company found`);
+    if (filteredCompanies.length == 0) {
+        $("#company-table").append(`<div id="alertNoCompany" class="alert alert-danger" role="alert">No companies found</div>`);
     }
-
+    console.log('filteredCompanies :', filteredCompanies);
     companies.renderCompaniesTable(filteredCompanies);
-
 }
