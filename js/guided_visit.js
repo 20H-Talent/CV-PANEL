@@ -1,16 +1,80 @@
 var currentDataTool = 0;
-// ------- Load the modal welcome ---------
-$.get("../html/guided_visit.html", function(data) {
-  $("body main").append(data);
 
-  // ------- Inicialize the events for button Skip and Start ---------
-  $("#guidedVisit button.btn-secondary").on("click", function() {
-    $("#guidedVisit").remove();
-  });
-  $("#guidedVisit button.btn-primary").on("click", getTooltips);
-});
+// ************** DECLARATION FUNCTIONS **************
 
-// ----------------- FUNCTION TO CREATE CONFETTI TO THE END OF THE TUTORIAL ------------
+// ------------ TO CHECK THE VISITS OF LOCAL STORAGE AND TO DO ACCORDIND THEM. --------
+function checkTimesVisitedPage() {
+  let visitsLocalStorage = localStorage.getItem("refreshPage");
+
+  function loadGuidedVisit() {
+    // ------- Load the modal welcome ---------
+    $.get("../html/guided_visit.html", function(data) {
+      $("body main").append(data);
+
+      // ------- Inicialize the events for button Skip and Start ---------
+      $("#guidedVisit button.btn-secondary").on("click", function() {
+        $("#guidedVisit").remove();
+      });
+      $("#guidedVisit button.btn-primary").on("click", getTooltips);
+    });
+  }
+  function toDoAccordingLocalStorage(visitsLocalStorage) {
+    //------- visitsLocalStorage is typeof object and  null the first time. -----------
+    if (visitsLocalStorage === null) {
+      console.log("NO hay visitas a la página");
+      localStorage.setItem("refreshPage", 1);
+
+      visitsLocalStorage = "1";
+    }
+
+    if (parseInt(visitsLocalStorage) < 4) {
+      console.log("Hay menos de 4 visitas");
+      loadGuidedVisit();
+    } else if (parseInt(visitsLocalStorage) === 4) {
+      // --------- if equal to 4, shows a message. ----------
+      $("main")
+        .append(` <div style='top: 0; position: absolute; z-index: 10; opacity:0.9; background-color: #484646' class="alert alert-dismissible fade show w-100 h-100 d-flex justify-content-center align-items-center flex-column text-white" role="alert">
+          <p style='font-size: 1.5rem' class='text-center'>
+            <strong>Hey you!</strong> You visited the page more than 3 times, so the
+            guided visit will not appear any more. If you want to see again, there is
+            a button on left menu.
+          </p>
+          <button type='button' class='open  btn btn-primary' data-dismiss='alert' aria-label='close' style='width: 5%;'>
+          <span aria-hidden="true">Close</span> 
+          </button>
+        </div>`);
+      console.log("Has visitado la página 4 veces");
+
+      $("button[class*=btn-primary").on("click", function() {
+        //reload the page.
+        location.reload(true);
+      });
+    } else {
+      // -------- if visits to Page is more than 4, added the button Guided Visit lo left menu. -------
+      console.log("Has visitado la pàgina mas de 4 veces");
+      if (!$("#btnGuidedVisit") === false) {
+        $('#left-menu li[data-original-title*="Logout"]').before(
+          `<li id="btnGuidedVisit" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
+         title="Replay the Guided Visit">
+          <a href="#" class="p-1 pl-2">
+              <i class="fa fa-reply mr-2"></i>
+              <span class="close">Guided Visit</span>
+          </a>
+          </li>`
+        );
+        $("#btnGuidedVisit").on("click", function() {
+          loadGuidedVisit();
+        });
+      }
+    }
+    console.log(
+      `Hay ${localStorage.getItem("refreshPage")} visitas a la página`
+    );
+    localStorage.setItem("refreshPage", parseInt(visitsLocalStorage) + 1);
+  }
+  toDoAccordingLocalStorage(visitsLocalStorage);
+}
+// ----------------- TO CREATE CONFETTI TO THE END OF THE TUTORIAL ------------
 function getConfetti() {
   for (var i = 0; i < 250; i++) {
     create(i);
@@ -83,6 +147,9 @@ function getConfetti() {
     );
   }
 }
+
+checkTimesVisitedPage();
+
 // function to get from JSON, the tooltips objects.
 function getTooltips() {
   $.getJSON("../data/tooltips_guided_visit.json")
@@ -144,6 +211,8 @@ function getTooltips() {
       $(".btn-tool-skip").on("click", function(e) {
         console.log("Saltamos tutorial");
         $("#guidedVisit").remove();
+        //reload the page.
+        location.reload(true);
       });
 
       function callTools(valDataTool) {
@@ -158,7 +227,7 @@ function getTooltips() {
           $("#guidedVisit")
             .append(`<div class="bg-dark h-100" style="top:-28px; position:relative;">
             <div class="modal-dialog modal-dialog-centered" role="document">
-             <div class="modal-content align-items-center" style="border-radius: 50%">
+             <div class="modal-content align-items-center">
                 <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4d394b">
                     <h5 class="modal-title font-weight-bold">Completed tutorial</h5>
                 </div>
