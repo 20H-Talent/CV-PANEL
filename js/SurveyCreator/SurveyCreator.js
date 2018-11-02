@@ -55,15 +55,39 @@ const SurveyCreator = (function() {
         }
       }
 
+      function _checkIfValueExists(container, value) {
+        let valueExists = false;
+
+        container.find("li > span").each((index, element) => {
+          const $element = $(element);
+          const $parentItem = $element.parent();
+          if (
+            $element
+              .text()
+              .trim()
+              .toLowerCase() === value.toLowerCase()
+          ) {
+            valueExists = true;
+            $element.parent().addClass("invalid-value");
+          } else if ($parentItem.hasClass("invalid-value")) {
+            $parentItem.removeClass("invalid-value");
+          }
+        });
+
+        return valueExists;
+      }
+
       function _appendOptionToParent(input) {
         const inputValue = input.val().trim();
+        const previewList = input
+          .parent()
+          .siblings(".preview-group")
+          .find(" ul.preview-list");
 
-        if (inputValue !== "" && inputValue.length > 0) {
-          const previewList = input
-            .parent()
-            .siblings(".preview-group")
-            .find(" ul.preview-list");
+        let valueExists = _checkIfValueExists(previewList, inputValue);
 
+        if (inputValue !== "" && inputValue.length > 0 && !valueExists) {
+          previewList;
           previewList
             .append(
               `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
@@ -268,11 +292,34 @@ const SurveyCreator = (function() {
           });
       }
 
+      function _activeToastMessage() {
+        const $toast = $("#toast");
+        $toast.addClass("show");
+        setTimeout(() => {
+          $toast.removeClass("show");
+        }, 5000);
+      }
+
       function _buildJSON(event) {
         event.preventDefault();
         _setHeaderSurveyData();
         _setBodySurveyData();
-        console.log(JSON.stringify(surveyApiData));
+        _activeToastMessage();
+
+        $.ajax("https://cv-mobile-api.herokuapp.com/surveys", {
+          type: "POST",
+          dataType: "json",
+          cache: true,
+          data: JSON.stringify(surveyApiData)
+        })
+          .done(response => {
+            console.log(response);
+          })
+          .fail((jqXHR, textStatus, errorThrown) => {
+            if (jqXHR.statusText !== "OK") {
+              console.log(error);
+            }
+          });
       }
     }
     return {
