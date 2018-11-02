@@ -37,6 +37,14 @@ const SurveyCreator = (function() {
           .find(".Survey-TypeSelector > button.addNewElement")
           .off("click")
           .on("click", _newFieldValue);
+
+        $surveyContainer
+          .find(".Survey-TableBody")
+          .on("change", "input[type=checkbox]", _selectedBlocks);
+
+        $surveyContainer
+          .find("tfoot button.deleteAll")
+          .on("click", _deleteSelectedBlocks);
       }
 
       function _removeRow(element) {
@@ -141,6 +149,57 @@ const SurveyCreator = (function() {
         }
       }
 
+      function _selectedBlocks(event) {
+        const tableBody = event
+          ? $(event.currentTarget).closest(".Survey-TableBody")
+          : $surveyContainer.find(".Survey-TableBody");
+
+        const deleteButton = tableBody.parent().find("tfoot button.deleteAll");
+
+        let selectedBlocks = 0;
+        tableBody.find(".ValueType-data").each((index, block) => {
+          if (
+            $(block)
+              .find(".ValueType-header input[type=checkbox]")
+              .prop("checked")
+          ) {
+            selectedBlocks++;
+          }
+        });
+
+        deleteButton
+          .prop("disabled", false)
+          .text(
+            selectedBlocks > 0
+              ? `Delete ${selectedBlocks} blocks`
+              : "No blocks selected"
+          )
+          .data("blocks", selectedBlocks);
+      }
+
+      function _deleteSelectedBlocks(event) {
+        const selectedBlocks = $(event.currentTarget).data("blocks");
+        if (
+          selectedBlocks > 0 &&
+          window.confirm(`Are you sure to delete ${selectedBlocks} blocks?`)
+        ) {
+          const tableBody = $(event.currentTarget)
+            .closest("tfoot")
+            .siblings(".Survey-TableBody");
+
+          const activeCheckboxes = tableBody.find(
+            "tr.ValueType-data input[type=checkbox]:checked"
+          );
+
+          activeCheckboxes.each((index, checkbox) => {
+            $(checkbox)
+              .closest("tr.ValueType-data")
+              .remove();
+          });
+          _selectedBlocks(null);
+        }
+      }
+
       function _newFieldValue(event) {
         const typeSelectorValue = $(event.currentTarget)
           .siblings("select.SelectedType-Select")
@@ -153,23 +212,27 @@ const SurveyCreator = (function() {
         switch (typeSelectorValue) {
           case "date":
           case "text":
+          case "number":
           case "color":
           case "telephone":
           case "file":
             const inputBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
              <div class="form-group w-100">
-               <label class="w-100">
-                 <p contenteditable="true">You can modify this text</p>
-                   <div class="input-group">
-                     <input type="${typeSelectorValue}" name="input_${typeSelectorValue}[]"
-                       class="form-control" placeholder="Insert default value" />
-                     <div class="input-group-append">
-                       <button type="button" class="btn btn-outline-danger delete">
-                          <i class="far fa-trash-alt"></i>
-                       </button>
-                     </div>
-               </label>
+            <div class="ValueType-header d-flex justify-content-between">
+                <p contenteditable="true">You can modify this text</p>
+                <div class="form-check align-self-start">
+                    <input class="form-check-input" type="checkbox" name="elements_check[]">
+                </div>
+              </div>
+              <div class="input-group">
+                <input type="${typeSelectorValue}" name="input_${typeSelectorValue}[]"
+                  class="form-control" placeholder="Insert default value" />
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-outline-danger delete">
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+                </div>
               </div>
              </td>
            </tr>`);
@@ -194,7 +257,12 @@ const SurveyCreator = (function() {
             const dinamicBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
                 <div class="form-group">
-                <p contenteditable="true">You can modify this text</p>
+                 <div class="ValueType-header d-flex justify-content-between">
+                    <p contenteditable="true">You can modify this text</p>
+                    <div class="form-check align-self-start">
+                        <input class="form-check-input" type="checkbox" name="elements_check[]">
+                    </div>
+                  </div>
                   <div class="input-group">
                     <input name="${typeSelectorValue}[]" class="form-control"
                      type="text" placeholder="New ${typeSelectorValue} value..."/>
