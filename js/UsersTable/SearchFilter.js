@@ -104,7 +104,7 @@ const SearchFilter = (function() {
             const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
             console.log("FILTERS KEY: ", key, filters[key]);
             const badge = $(
-                `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>position ${
+                `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
           filters[key]
         }</span></span>`
             ).hide();

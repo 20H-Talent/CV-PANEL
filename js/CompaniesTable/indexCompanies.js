@@ -30,7 +30,7 @@ $.getJSON("../data/companies.json")
             let cardDiv = $("#card-container-company");
 
             if (width > 868) {
-                companies.renderTable(companies.companies);
+                companies.renderCompaniesTable(companies.companies);
                 console.log('companies.companies :', companies.companies);
             } else {
                 companies.renderCompanyCards();
@@ -101,36 +101,22 @@ function removeCompanyFromDOM(id) {
         }
     });
 }
-
-function searchAdvanced(event) {
-
-    //   $("#submit_search").on("click", function(e) {
-    // event.stopPropagation();
+// Advanced search for companies
+function searchAdvancedComapanies(event) {
     event.preventDefault();
-    $("input[name=company-name]").val();
-    $("input[name=company-cif]").val();
-    $("input[name=company-employees]").val();
-    $("input[name=company-bio]").val();
-    $("input[name=company-city]").val();
-    $("input[name=company-email]").val();
-    $("input[name=company-country]").val();
+    // 
     let inputCompanyName = $("#company-name").val().toLowerCase();
-    console.log('inputCompanyName :', inputCompanyName);
     let inputCif = $("#company-cif").val().toLowerCase();
     let inputemployees = $("#company-employees").val().toLowerCase();
-    console.log('inputemployees :', inputemployees);
     let inputBio = $("#company-bio").val().toLowerCase();
-    console.log('inputBio :', inputBio);
     let inputCity = $("#company-city").val().toLowerCase();
     let inputEmail = $("#company-email").val().toLowerCase();
     let inputCountry = $("#company-country").val().toLowerCase();
     var mainContainer = $("#main");
-    var filtersContainer = mainContainer.find(".filters");
-    console.log('filtersContainer :', filtersContainer.get());
-    var badgesContainer = $(".search-badges").empty();
-    let formCompanyes = $("advanced-search");
+    var filtersContainer = mainContainer.find("#search");
+    var badgesContainer = $(".search-badges-company").empty();
+    let formCompanyes = $("#advanced-search");
     let inputs = formCompanyes.find("input");
-    inputsval = inputs.val();
     var filteredCompanies = [];
     filteredCompanies = companies.companies.filter((company) => {
         return (company.name.toLowerCase().includes(inputCompanyName));
@@ -148,46 +134,26 @@ function searchAdvanced(event) {
         return (company.address.city.toLowerCase().includes(inputCity));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
-        console.log(' (company.address.country.toLowerCase().includes(inputCountry)) :', (company.address.country.toLowerCase().includes(inputCountry)));
         return (company.address.country.toLowerCase().includes(inputCountry));
     });
-    console.log('filtredComapanies :', filteredCompanies);
-    companies.renderTable(filteredCompanies);
-
+    // $("#submit_search").on("click", function(e)
+    let divNavBar = document.querySelector("#div-navbar-companies");
+    let pdivNavBar = document.querySelector("#div-navbar p");
+    let alertClose = document.querySelector(".alert-close");
+    badgesContainer.empty();
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value.toString().trim().length > 0) {
+            console.log('inputs[i] :', inputs[i]);
+            const badgeCompany = $(`<span class="badge ml-3 badge-pill badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`).hide();
+            badgesContainer.append(badgeCompany);
+            badgeCompany.show("slow");
+            badgeCompany.off("click").on("click", function(event) {
+                event.preventDefault();
+                badgeCompany.remove();
+                inputs[i].value = "";
+                companies.renderCompaniesTable(companies.companies);
+            });
+        }
+    }
+    companies.renderCompaniesTable(filteredCompanies);
 }
-
-// const resetButton = badgesContainer.append(`<span class="badge badge-info mr-2 badge-font">${company.name}<button onclick="closeNavbar()" class="bg-transparent border-0 deletion" id="badgeButton"><i class="fas fa-times-circle"></i></button></span>`);
-// resetButton.off("click").on("click", function() {
-//     // inputCompanyName.trigger("click");
-//     badgesContainer.empty();
-//     badgesContainer.map(badge => badge.remove());
-//     //  $(this).remove();
-// });
-
-
-
-// (company.CIF.toLowerCase().includes(inputCif)) &&
-// (company.email.toLowerCase().includes(inputEmail)) &&
-// (company.address.city.toLowerCase().includes(inputCity)) &&
-// (company.address.country.toLowerCase().includes(inputCountry));
-
-
-
-// (company.name.toLowerCase().includes(inputCompanyName))
-// (company.CIF.toLowerCase().includes(inputCif)) &&
-// (company.email.toLowerCase().includes(inputEmail)) &&
-// (company.address.city.toLowerCase().includes(inputCity)) &&
-// (company.address.country.toLowerCase().includes(inputCountry))
-// $("badgeButton").on("click", function() {
-
-// })
-// const filtersContainer = $(".filters");
-// const badgeContainer = filtersContainer.children(".search-badges");
-
-// filtersContainer.find("button").remove();
-// badgeContainer.empty();
-// companies.renderTable(filtredComapanies);
-
-
-
-// })

@@ -2,7 +2,7 @@ function Companies() {
     this.construct = function(container) {
         $.get("../../html/CompaniesTable.html", htmlSkeleton => {
             container.empty().append(htmlSkeleton);
-            this.renderTable(this.companies);
+            this.renderCompaniesTable(this.companies);
             // this.renderCompanyCards();
         }).fail(function(err) {
             throw new Error(err);
@@ -12,33 +12,31 @@ function Companies() {
     this.addCompany = function(company) {
         this.companies.push(company);
     };
-    this.renderTable = function(filtredComapanies) {
-
+    this.renderCompaniesTable = function(filtredCompanies) {
         $("#tableBody").html(" ");
         let mainContainer = $(".main-container-companies");
-        console.log('filtredComapanies :', filtredComapanies);
+        console.log('filtredCompanies :', filtredCompanies);
         let width = $(window).width();
-        for (var i = 0; i < filtredComapanies.length; i++) {
-            // mainContainer.empty();
-            $("#tableBody").append(`<tr scope="row""  data-id=${filtredComapanies[i].id}><td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredComapanies[i].logo} style="width:50px;"/></td>
-                <td class="company-name-table"><p>${filtredComapanies[i].name}</p></td>
-                    <td class="company-email"> <a href="${filtredComapanies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
-                    </a>${filtredComapanies[i].email}</td>
-                    <td class="company-phone">${filtredComapanies[i].phone}</td>
+        for (var i = 0; i < filtredCompanies.length; i++) {
+            $("#tableBody").append(`<tr scope="row""  data-id=${filtredCompanies[i].id}><td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredCompanies[i].logo} style="width:50px;"/></td>
+                <td class="company-name-table"><p>${filtredCompanies[i].name}</p></td>
+                    <td class="company-email"> <a href="${filtredCompanies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
+                    </a>${filtredCompanies[i].email}</td>
+                    <td class="company-phone">${filtredCompanies[i].phone}</td>
                     <td class="company-social text-center">
         <div class="container">
             <div class="row d-flex justify-content-around ">
-                <div class=" social-net" id="networks${filtredComapanies[i].id}">
-                ${filtredComapanies[i].renderSocialNetworks()}
+                <div class=" social-net" id="networks${filtredCompanies[i].id}">
+                ${filtredCompanies[i].renderSocialNetworks()}
                 </div>
             </div>
         </div>
                 </td>
                 <td class="options text-center">
-                    <button  type="button" onclick="showPreviewInfo(${filtredComapanies[i].id})" data-toggle="modal" data-id=${filtredComapanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
+                    <button  type="button" onclick="showPreviewInfo(${filtredCompanies[i].id})" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredComapanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredComapanies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
+                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredCompanies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`);
         }
 
@@ -53,24 +51,13 @@ function Companies() {
     this.renderCompanyCards = function() {
         $(".main-container-companies").html(" ");
         let mainContainer = $(".main-container-companies");
-        let cardContain = mainContainer.find(".thead-dark").empty();
-        let cardCompanyContainer = $("#companyTable");
-        let innerCard = "";
+        let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
-            let width = $(window).width();
-            innerCard += `
-            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded"  data-id=${
-              this.companies[i].id
-            }>
+            companyCard += `
+            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
               <div class="">
-                <h5 class="card-header text-dark header-card  shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${
-                  this.companies[i].logo
-                }   style="width:50px; alt="Card image cap">
-                <p class="card-text">${
-                  this.companies[i].name
-                }</p>  <small  class="text-dark font-weight-bold "> CIF  ${
-        this.companies[i].CIF
-      }</small></h5>
+                <h5 class="card-header text-dark header-card  shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${this.companies[i].logo}style="width:50px; alt="Card image cap">
+                <p class="card-text">${this.companies[i].name}</p>  <small  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</small></h5>
                 <p class="card-title font-weight-bold  mt-3  "><ins>Email</ins></p>
                 <h1 class="card-text  badge badge-secondary  ">${this.companies[i].email}</h1>
                 <p class="card-subtitle font-weight-bold  mt-3  ">employees Number</p>
@@ -86,11 +73,7 @@ function Companies() {
 
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger"  data-toggle="modal" data-id=${
-                      this.companies[i].id
-                    } data-target="#confirm-delete" onclick="removeCompanyFromDOM(${
-        this.companies[i].id
-      })"><i class="fas fa-trash-alt"></i></button></td>
+                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger"  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
               </div>
             </div>
             </div>
@@ -98,7 +81,7 @@ function Companies() {
           `;
         }
 
-        mainContainer.empty().html(innerCard);
+        mainContainer.empty().html(companyCard);
     };
 
 }
