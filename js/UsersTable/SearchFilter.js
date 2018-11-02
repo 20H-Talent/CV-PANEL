@@ -58,7 +58,8 @@ const SearchFilter = (function() {
         const $input = $(input);
         if (
           $input.prop("type") === "radio" ||
-          $input.prop("type") === "checkbox"
+          $input.prop("type") === "checkbox" 
+          // || $input.prop("type") === "range"
         ) {
           return $input.prop("checked");
         } else {
