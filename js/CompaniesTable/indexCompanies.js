@@ -101,15 +101,13 @@ function removeCompanyFromDOM(id) {
         }
     });
 }
-// Advanced search for companies
-function searchAdvancedComapanies(event) {
+// Advanced search for companies form
+function advancedSearchCompanies(event) {
     event.preventDefault();
-
-    $("#alertNoCompany").remove();
-    // PUTTING IN VARIABLES THE VALUES OF INPUTS TO LOWER CASE
+    $("#alertNoCompanyFound").remove();
     let inputCompanyName = $("#company-name").val().toLowerCase();
     let inputCif = $("#company-cif").val().toLowerCase();
-    let inputemployees = $("#company-employees").val().toLowerCase();
+    let inputEmployees = $("#company-employees").val().toLowerCase();
     let inputBio = $("#company-bio").val().toLowerCase();
     let inputCity = $("#company-city").val().toLowerCase();
     let inputEmail = $("#company-email").val().toLowerCase();
@@ -118,6 +116,7 @@ function searchAdvancedComapanies(event) {
     let formCompanyes = $("#advanced-search");
     let inputs = formCompanyes.find("input");
     var filteredCompanies = [];
+
     filteredCompanies = companies.companies.filter((company) => {
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
@@ -125,7 +124,7 @@ function searchAdvancedComapanies(event) {
         return (company.CIF.toLowerCase().includes(inputCif));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.employeesNumber.toString().includes(inputemployees));
+        return (company.employeesNumber.toString().includes(inputEmployees));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.email.toLowerCase().includes(inputEmail));
@@ -136,11 +135,10 @@ function searchAdvancedComapanies(event) {
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.address.country.toLowerCase().includes(inputCountry));
     });
-    badgesContainer.empty();
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value.toString().trim().length > 0) {
             console.log('inputs[i] :', inputs[i]);
-            const badgeCompany = $(`<span class="badge ml-3 badge-pill badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+            const badgeCompany = $(`<span class="badge ml-3 badge-pill badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
             badgesContainer.append(badgeCompany);
             badgeCompany.show("slow");
             badgeCompany.off("click").on("click", function(event) {
@@ -153,7 +151,7 @@ function searchAdvancedComapanies(event) {
 
     }
     if (filteredCompanies.length == 0) {
-        $("#company-table").append(`<div id="alertNoCompany" class="alert alert-danger" role="alert">No companies found</div>`);
+        $("#company-table").append(`<div id="alertNoCompanyFound" class="alert alert-danger" role="alert">No companies found</div>`);
     }
     console.log('filteredCompanies :', filteredCompanies);
     companies.renderCompaniesTable(filteredCompanies);

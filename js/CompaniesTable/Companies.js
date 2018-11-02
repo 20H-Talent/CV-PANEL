@@ -54,7 +54,7 @@ function Companies() {
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
+            <div class="card mt-3 shadow-lg p-3 ml-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
               <div class="">
                 <h5 class="card-header text-dark header-card  shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${this.companies[i].logo} style="width:50px; alt="Card image cap">
                 <p class="card-text">${this.companies[i].name}</p>  <small  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</small></h5>
