@@ -36,6 +36,10 @@
     /* background-color: #4d394b; */
 }
 
+.ldeep-purple {
+    color: #4d394b;
+}
+
 .btn-ldeep-purple:hover {
     color: rgb(255, 255, 255);
     background-color: #1a1b1a;

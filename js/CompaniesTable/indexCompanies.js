@@ -50,24 +50,24 @@ function showPreviewInfo(id) {
         `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
       company.id
     } >
-        <div class="card-header d-flex header-card flex-row align-items-center">
+        <div class="card-header btn-ldeep-purple text-light d-flex header-card flex-row align-items-center">
             <img class="img-fluid mr-2 rounded-circle" src=${
               company.logo
             } width=120px height:50px  alt="test"/>
             <div class=" ml-4">
-                <h4 class="modal-title">
+                <h5 class="modal-title">
                 <p>${company.name}</p>
                 <p> CIF ${company.CIF}</p>
-                </h4>
+                </h5>
             </div>
         </div>
         <div class="text-dark">
-            <div class=" text-dark text-center mt-3 h5"><h5 class="text-center rounded text-dark font-weight-bold ">Email</h5><h4><a class="text-white badge badge-secondary text-center" href="mailto${
+            <div class=" text-dark text-center mt-3 h5"><h5 class="text-center rounded text-dark font-weight-bold ">Email</h5><h6><a class=" ldeep-purple text-center" href="mailto${
               company.email
-            }">${company.email}</a></h4>
+            }">${company.email}</a></h6>
         </div>
             <div class="text-dark text-center h5 "><h5 class="text-center  text-dark rounded font-weight-bold ">Profile </h5>
-            <h4 class="text-white badge badge-secondary text-center">${company.descripcion}</h4>
+            <h6 class=" ldeep-purple text-center">${company.descripcion}</h6>
         </div>
         <div class="text-dark text-center h5 "><h5 class="text-center  text-dark rounded font-weight-bold  ">Social Networks </h5>
         <div class="col-md-12 badge  text-center " id="networks${company.id}">
@@ -75,17 +75,19 @@ function showPreviewInfo(id) {
     </div>
     </div>
             <div  class="text-dark text-center h5 "><h5 class="text-center  header-card text-dark rounded font-weight-bold ">Phone</h5>
-            <h4 class="text-white badge badge-secondary text-center">${company.phone}</h4>
+            <h6 class=" ldeep-purple text-center">${company.phone}</h6>
         </div>
             <div class="text-dark text-center h5"><h5 class=" text-center header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
-            <h4 class="text-white badge badge-secondary text-center">${company.employeesNumber}</h4>
+            <h6 class=" ldeep-purple text-center">${company.employeesNumber}</h6>
         </div>
             <div class="text-dark text-center h5 "><h5 class="text-center header-card text-dark rounded font-weight-bold " >Address</h5>
-            <h4 class="text-white badge badge-secondary text-center">${company.address.country} ~ ${company.address.city} ${
+            <h6 class=" ldeep-purple text-center">${company.address.country} ~ ${company.address.city} ${
       company.address.street
-    } / ${company.address.zipcode}</h4>
+    } / ${company.address.zipcode}</h6>
         </div>
-            <div class="card-footer   header-card text-right"></div>
+        <div class=" modal-footer">
+        <button type="button" class="btn  btn-ldeep-purple text-light" data-dismiss="modal">Close</button>
+    </div>
     </div> `
     );
 }
