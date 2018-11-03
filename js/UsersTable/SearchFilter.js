@@ -58,7 +58,7 @@ const SearchFilter = (function() {
         const $input = $(input);
         if (
           $input.prop("type") === "radio" ||
-          $input.prop("type") === "checkbox" 
+          $input.prop("type") === "checkbox"
           // || $input.prop("type") === "range"
         ) {
           return $input.prop("checked");
@@ -85,24 +85,7 @@ const SearchFilter = (function() {
     filtersContainer.find("button").remove();
     _appendFilterBadges(filters, badgesContainer);
     _createResetButton(filtersContainer, badgesContainer);
-    _createDeletBadges(filters, badgesContainer);
   }
-
-/**
- * 
- * crear X en el badget para borrarlo.
- */
-
-  // function _createDeletBadges(filtersContainer, badgesContainer){
-  //   const resetButton = filtersContainer.append(
-  //     `<button class="btn btn-sm btn-info">Cancel search</button>`
-  //   );
-  //   resetButton.off("click").on("click", function(e) {
-  //     badgesContainer.empty();
-  //     $(this).remove();
-  //     usersTable.initTable(null, window.innerWidth);
-  //   });
-  // }
 
   function _createResetButton(filtersContainer, badgesContainer) {
     const resetButton = filtersContainer.append(
@@ -124,10 +107,20 @@ const SearchFilter = (function() {
       const badge = $(
         `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
           filters[key]
-        }</span>x</span></span></span>`
+        }</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
       ).hide();
       badgesContainer.append(badge);
       badge.show("slow");
+
+      // badge.off("click").on("click", function(event) {
+      //   console.log("entran en el click badge")
+      //     event.preventDefault();
+      //     // badge.remove();
+      //     badge.empty();
+      //     // filters[key].value = "";
+      //     usersTable.initTable(null, window.innerWidth);
+      // });
+
     }
   }
 
