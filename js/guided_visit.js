@@ -108,13 +108,14 @@ function checkTimesVisitedPage() {
       console.log("Hay menos de 4 visitas");
       loadGuidedVisit()
         .then(dataModal => {
+          console.log("Entro en el then del load");
           $("body main").append(dataModal);
 
           // ------- Inicialize the events for button Skip and Start ---------
           $("#guidedVisit button.btn-secondary").on("click", function() {
             $("#guidedVisit").remove();
           });
-          $("#guidedVisit button.btn-primary").on("click", tooltips(dataModal));
+          $("#guidedVisit button.btn-primary").on("click", () => tooltips());
         })
         .catch(dataModal => {
           console.log("Unable to load Guided Visit");
@@ -238,46 +239,40 @@ function tooltips() {
     return dataJSON;
   }
 
-  // call tooltips to display.
-  function callTooltips(dataJSON) {
+  function InicializeTooltips(dataJSON) {
     let data = dataJSON;
     //console.log(data);
-    // //make the div on final of #guidedVisit
-    // $("#guidedVisit").append(`<div id='elementSelected'></div>`);
+    function inicializeBtnTooltips() {
+      $(".btn-tool").on("click", function(e) {
+        if ($(e.currentTarget).attr("data-tool")) {
+          //call event to close of data[0].
+          console.log("active tool:", $(e.currentTarget).attr("data-tool"));
+          // $(data[0].eventCallToClose).trigger("click");
 
-    // llamando al primer tool ...
-    let tool1 = $(".tool-0");
-    $.each(tool1, function(u) {
-      tool1[u].classList.replace("d-none", "d-block");
-    });
+          callTooltips($(e.currentTarget).attr("data-tool"));
+        }
+      });
+      // if click on skip button on a tooltip, remove the modal.
+      $(".btn-tool-skip").on("click", function(e) {
+        console.log("Saltamos tutorial");
+        $("#guidedVisit").remove();
+        //reload the page.
+        location.reload(true);
+      });
+    }
+    // call tooltips to display.
+    function callTooltips(eventCurrentBtnNext) {
+      //convert eventCurrentBtnNext string to number and store on currentBtnNext.
+      let currentBtnNext = parseInt(eventCurrentBtnNext);
+      // store the data of actual tooltip.
+      let dataPosition = data[currentBtnNext];
 
-    //llamamos trigger del tooltip 1
-    $(listUsers).trigger("click");
-
-    $(".btn-tool").on("click", function(e) {
-      if ($(e.currentTarget).attr("data-tool")) {
-        //call event to close of data[0].
-        console.log("active tool:", $(e.currentTarget).attr("data-tool"));
-        // $(data[0].eventCallToClose).trigger("click");
-
-        callTools($(e.currentTarget).attr("data-tool"));
-      }
-    });
-    // if click on skip button on a tooltip, remove the modal.
-    $(".btn-tool-skip").on("click", function(e) {
-      console.log("Saltamos tutorial");
-      $("#guidedVisit").remove();
-      //reload the page.
-      location.reload(true);
-    });
-
-    function callTools(valDataTool) {
       //recive de data-toogle value of the active button of tooltips.
-      console.log("id:", data[parseInt(valDataTool)].id);
-      let activeTool = $(`.tool-${parseInt(valDataTool)}`); //convert valDataTool string to number and select the elements with class .tool-valDataTool.
+      console.log("id:", dataPosition.id);
+      let activeTool = $(`.tool-${currentBtnNext}`); //select the elements with class .tool-currentBtnNext.
 
-      // if the valDataTool is equal to last data, remove the modal.
-      if (parseInt(valDataTool) === 20) {
+      // if the currentBtnNext is equal to last data, remove the modal.
+      if (currentBtnNext === 20) {
         $("#guidedVisit").html("");
 
         $("#guidedVisit")
@@ -312,36 +307,31 @@ function tooltips() {
         activeTool[a].classList.replace("d-block", "d-none");
       });
 
-      let nextTool = $(`.tool-${parseInt(valDataTool) + 1}`);
+      let nextTool = $(`.tool-${currentBtnNext + 1}`);
 
-      $(data[parseInt(valDataTool)].eventCallToOpen).trigger(
-        data[parseInt(valDataTool)].eventCallToClose
-      );
-      console.log(
-        "Trigger que se ejecuta: ",
-        $(data[parseInt(valDataTool)].eventCallToOpen)
-      );
+      $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
+      console.log("Trigger que se ejecuta: ", $(dataPosition.eventCallToOpen));
       console.log(
         "Segundo parametro del trigger: ",
-        data[parseInt(valDataTool)].eventCallToClose
+        dataPosition.eventCallToClose
       );
 
       //cojo el tamaño y la posicion del elemento seleccionado.
       // function getDimensionsOfElementSelected() {
       //   let widthElementSelected = $(
-      //     data[parseInt(valDataTool)].elSelected[0]
+      //     dataPosition.elSelected[0]
       //   ).width();
       //   let heightElmentSelected = $(
-      //     data[parseInt(valDataTool)].elSelected[0]
+      //     dataPosition.elSelected[0]
       //   ).height();
       //   console.log(
       //     "[Width] Elemento seleccionado: ",
-      //     data[parseInt(valDataTool)].elSelected[0],
+      //     dataPosition.elSelected[0],
       //     widthElementSelected
       //   );
       //   console.log("[Height] Elemento seleccionado: ", heightElmentSelected);
       //   let positionElementSelected = $(
-      //     data[parseInt(valDataTool)].elSelected[0]
+      //     dataPosition.elSelected[0]
       //   ).position();
       //   console.log(
       //     "[Position] Elemento seleccionado: ",
@@ -361,16 +351,29 @@ function tooltips() {
       });
       currentDataTool++;
     }
+    // //make the div on final of #guidedVisit
+    // $("#guidedVisit").append(`<div id='elementSelected'></div>`);
+
+    inicializeBtnTooltips();
+    // llamando al primer tool ...
+    let tool1 = $(".tool-0");
+    $.each(tool1, function(u) {
+      tool1[u].classList.replace("d-none", "d-block");
+    });
+
+    //llamamos trigger del tooltip 1
+    $(listUsers).trigger("click");
+
     $(window).on("keypress", function(e) {
       if (e.keyCode === 32) {
-        callTools(currentDataTool);
+        callTooltips(currentDataTool);
       }
     });
   }
 
-  // call principal function
+  // call principal function of tooltips().
   getDataForTooltips()
     .then(dataJSON => makeSkeletonTooltips(dataJSON))
-    .then(dataJSON => callTooltips(dataJSON))
+    .then(dataJSON => InicializeTooltips(dataJSON))
     .catch(dataJSON => console.log(dataJSON));
 }
