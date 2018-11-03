@@ -65,18 +65,20 @@ function Companies() {
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
+            <div class="card mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white text-center rounded"  data-id=${this.companies[i].id}>
               <div class="">
-                <h5 class="card-header text-dark header-card  shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${this.companies[i].logo} style="width:50px; alt="Card image cap">
-                <p class="card-text">${this.companies[i].name}</p>  <small  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</small></h5>
-                <p class="card-title font-weight-bold  mt-3  "><ins>Email</ins></p>
-                <h1 class="card-text  badge badge-secondary  ">${this.companies[i].email}</h1>
-                <p class="card-subtitle font-weight-bold  mt-3  ">employees Number</p>
-                <h3 class="card-text badge badge-secondary "><ins>${this.companies[i].employeesNumber}</ins></h3>
-                <p class="card-title font-weight-bold ">Phone</p>
-                <h3 class="card-text badge badge-secondary  "><ins>${this.companies[i].phone}</ins></h3>
+              <div class="d-flex rounded  btn-ldeep-purple p-3">
+                <div class="col" text-light shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top rounded-circle" src=${this.companies[i].logo} style="width:50px; alt="Card image cap"></div>
+                <div  class="col-lg-6">
+                <h5 class="card-text text-light">${this.companies[i].name}</h5>  <small  class="text-light font-weight-bold ">CIF ${this.companies[i].CIF}</small></div></div>
+                <h5 class="card-title font-weight-bold  mt-3  ">Email</ins></h5>
+                <h6 class="card-text  ldeep-purple"><ins>${this.companies[i].email}</ins></h6>
+                <h5 class="card-subtitle font-weight-bold  mt-3">Employees Number</h5>
+                <p class="card-text ldeep-purple"><ins>${this.companies[i].employeesNumber}</ins></p>
+                <h5 class="card-title font-weight-bold ">Phone</h5>
+                <p class="card-text ldeep-purple"><ins>${this.companies[i].phone}</ins></p>
               </div>
-              <p class="card-text font-weight-bold  mt-3">Social Networks</p>
+              <h5 class="card-text font-weight-bold  mt-3">Social Networks</>
               <div class=" social-net" id="networks${this.companies[i].id}">
               ${this.companies[i].renderSocialNetworks()}
               </div>
