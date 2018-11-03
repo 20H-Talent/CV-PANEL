@@ -342,21 +342,21 @@ const Table = (function() {
                     let userFullName = buildUserFullname(name);
 
                     return `<div class="card mr-5 mt-3 shadow-lg p-3 mb-5 bg-white rounded" data-id=${id.value}>
-      <div class="card-header card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-         <img class="img-fluid mr-2" src=${picture.medium} alt="test"/>
-        <div class="card-username">
+      <div class=" d-flex card-header card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
+         <img class="img-fluid col-sm-3 mr-2" src=${picture.medium} alt="test"/>
+        <div class=" font-weight-bold col card-username">
            <p>${userFullName}</p>
            <p>${login.username}</p>
         </div>
       </div>
      <div class="card-body">
-     <div class="card-subtitle">Skills</div>
+     <div class=" font-weight-bold card-subtitle">Skills</div>
      <p class="card-text">
      ${skills
        .map(skill => `<span class="badge badge-secondary mr-1">${skill}</span>`)
        .join("")}
    </p>
-   <div class="card-subtitle">Languages</div>
+   <div class=" font-weight-bold card-subtitle">Languages</div>
        <p class="card-text">
        ${languages
          .map(
@@ -365,7 +365,7 @@ const Table = (function() {
          )
          .join("")}
        </p>
-       <div class="card-subtitle">Frameworks</div>
+       <div class=" font-weight-bold card-subtitle">Frameworks</div>
          ${frameworks
            .map(
              framework =>
@@ -373,8 +373,8 @@ const Table = (function() {
            )
            .join("")}
      </div>
-     <div class="card-footer text-center card-buttons">
-        <button type="button" class="btn btn-outline-success btn-sm" data-id=${id} data-toggle="modal" data-target="#userModal"><i class="far fa-eye"></i></button>
+     <div class="card-footer text-right card-buttons">
+      
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
           id.value
         }><i class="fas fa-user-edit"></i></button>

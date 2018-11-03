@@ -65,24 +65,27 @@ function Companies() {
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white text-center rounded"  data-id=${this.companies[i].id}>
+            <div class="card mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
               <div class="">
-              <div class="d-flex rounded  btn-ldeep-purple p-3">
-                <div class="col" text-light shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top rounded-circle" src=${this.companies[i].logo} style="width:50px; alt="Card image cap"></div>
+              <div class="d-flex rounded  card-header   p-3">
+                <div class="col" text-dark shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top rounded-circle" src=${this.companies[i].logo} style="width:50px; alt="Card image cap"></div>
                 <div  class="col-lg-6">
-                <h5 class="card-text text-light">${this.companies[i].name}</h5>  <small  class="text-light font-weight-bold ">CIF ${this.companies[i].CIF}</small></div></div>
-                <h5 class="card-title font-weight-bold  mt-3  ">Email</ins></h5>
-                <h6 class="card-text  ldeep-purple"><ins>${this.companies[i].email}</ins></h6>
-                <h5 class="card-subtitle font-weight-bold  mt-3">Employees Number</h5>
+            <h5 class="card-text  font-weight-bold text-dark">${this.companies[i].name}</h5>  <p  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</p></div></div>
+                <div class=" ml-3">
+
+                // HERE I LEFT TO THE GAME FOOTBAL
+                <div class="d-inline-flex  mt-3"> <h6 class="card-title col-sm-3 d-inline-flex font-weight-bold">Email</ins> <h6 class="card-text col-sm-3  ldeep-purple"><ins>${this.companies[i].email}</ins></h6></h6>  </div>
+               
+                <h6 class="card-subtitle font-weight-bold  mt-3">Employees Number</h6>
                 <p class="card-text ldeep-purple"><ins>${this.companies[i].employeesNumber}</ins></p>
-                <h5 class="card-title font-weight-bold ">Phone</h5>
+                <h6 class="card-title font-weight-bold ">Phone</h6>
                 <p class="card-text ldeep-purple"><ins>${this.companies[i].phone}</ins></p>
-              </div>
-              <h5 class="card-text font-weight-bold  mt-3">Social Networks</>
-              <div class=" social-net" id="networks${this.companies[i].id}">
+            
+              <h6 class="card-text font-weight-bold mb-1  mt-3">Social Networks</>
+              <div class="mt-2 social-net" id="networks${this.companies[i].id}">
               ${this.companies[i].renderSocialNetworks()}
-              </div>
-              <div class="card-footer  header-card   col-sm-12 mt-2 border  text-center rounded">
+              </div></div>  </div>
+              <div class="card-footer  header-card   col-sm-12 mt-2 border  text-right rounded">
            
               <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
               </button>
