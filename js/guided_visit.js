@@ -321,43 +321,11 @@ function tooltips() {
         dataPosition.eventCallToClose
       );
 
-      //cojo el tamaño y la posicion del elemento seleccionado.
-      // function getDimensionsOfElementSelected() {
-      //   let widthElementSelected = $(
-      //     dataPosition.elSelected[0]
-      //   ).width();
-      //   let heightElmentSelected = $(
-      //     dataPosition.elSelected[0]
-      //   ).height();
-      //   console.log(
-      //     "[Width] Elemento seleccionado: ",
-      //     dataPosition.elSelected[0],
-      //     widthElementSelected
-      //   );
-      //   console.log("[Height] Elemento seleccionado: ", heightElmentSelected);
-      //   let positionElementSelected = $(
-      //     dataPosition.elSelected[0]
-      //   ).position();
-      //   console.log(
-      //     "[Position] Elemento seleccionado: ",
-      //     positionElementSelected
-      //   );
-      //   return $("#elementSelected").html(
-      //     `<div style='position:relative; border: 1px solid red; width: ${widthElementSelected}px; height: ${heightElmentSelected}px; top: ${
-      //       positionElementSelected.top
-      //     }px; left: ${positionElementSelected.left}px;'></div>`
-      //   );
-      // }
-
-      // setTimeout(getDimensionsOfElementSelected, 500);
-
       $.each(nextTool, function(n) {
         nextTool[n].classList.replace("d-none", "d-block");
       });
       currentDataTool++;
     }
-    // //make the div on final of #guidedVisit
-    // $("#guidedVisit").append(`<div id='elementSelected'></div>`);
 
     // ------------- Executions --------------------
     _inicializeBtnTooltips();

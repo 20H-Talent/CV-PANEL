@@ -25,7 +25,8 @@
       "bottom": "0%",
       "icon": "up"
     },
-    "elSelected": ["header", "relative"],
+    "otherElms": [":nth-of-type(1)", "1"],
+    "elSelected": ["header", "", "transparent", "type", "button"],
     "overlayContent": [".container-left", "#Div1", ".container-right"],
     "badgeTool": 1,
 
@@ -59,7 +60,8 @@
       "bottom": "0%",
       "icon": "left"
     },
-    "elSelected": [".container-left", "relative"],
+    "otherElms": [":nth-of-type(1)", "1"],
+    "elSelected": ["#mySidenavLeft", "", "transparent", "type", "button"],
     "overlayContent": ["header", "#Div1", ".container-right"],
     "badgeTool": 2,
 
@@ -93,7 +95,8 @@
       "bottom": "0%",
       "icon": "left"
     },
-    "elSelected": ["#Div1", "relative"],
+    "otherElms": [":nth-of-type(1)", "0.5"],
+    "elSelected": ["#list-users", "", "transparent", "type", "button"],
     "overlayContent": ["header", "#Div1", ".container-right", "#mySidenavLeft"],
 
     "badgeTool": 2.1,
