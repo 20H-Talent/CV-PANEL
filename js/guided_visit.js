@@ -272,6 +272,83 @@ function tooltips() {
       // store the data of actual tooltip.
       let dataPosition = data[currentBtnNext];
 
+      // -----------------TESTEO ------------------
+      function _selectedTooltips(dataPosition) {
+        // ..... limpio estilos del actual ............
+        $(dataPosition.elSelected[0])
+          .not(dataPosition.elSelected[1])
+          .attr("style", function() {
+            return "";
+          });
+        $(dataPosition.elSelected[0])
+          .not(dataPosition.otherElms[0])
+          .attr("style", function() {
+            return "";
+          });
+
+        $(dataPosition.elSelected[0])
+          .not(dataPosition.elSelected[1])
+          .attr("type", function() {
+            return "";
+          });
+        console.log(
+          "limpio styles: ",
+          $(dataPosition.elSelected[0]).attr("style")
+        );
+
+        // -------------------------- EJECUTO TRIGGER -----------------
+        $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
+        console.log(
+          "Trigger que se ejecuta: ",
+          $(dataPosition.eventCallToOpen)
+        );
+        console.log(
+          "Segundo parametro del trigger: ",
+          dataPosition.eventCallToClose
+        );
+        // -------------------------- DESPUES DE TRIGGER -----------------
+        styleActiveToolAfter = $(dataPosition.elSelected[0]).attr("style");
+        attrActiveToolAfter = $(dataPosition.elSelected[0]).attr("type");
+
+        // if the element hasn't styles, the variable sets to empty string.
+        if (styleActiveToolAfter === undefined) {
+          console.log("Entro en und3");
+          styleActiveToolAfter = "";
+        }
+        if (attrActiveToolAfter === undefined) {
+          console.log("Entro en und4");
+          attrActiveToolAfter = "";
+        }
+        console.log(
+          "despues trigger --> stilos del activo: ",
+          styleActiveToolAfter
+        );
+        $(data[currentBtnNext + 1].elSelected[0])
+          .not(dataPosition.elSelected[1])
+          .attr("style", function() {
+            return `background: ${
+              data[currentBtnNext + 1].elSelected[2]
+            }; z-index: 20000 !important; ${styleActiveToolAfter};`;
+          });
+        //set the other elements to opacity.
+        $(data[currentBtnNext + 1].elSelected[0])
+          .not(data[currentBtnNext + 1].otherElms[0])
+          .attr("style", function() {
+            return `opacity: ${data[currentBtnNext + 1].otherElms[1]}`;
+          });
+        // para setear el type.
+        $(data[currentBtnNext + 1].elSelected[0])
+          .not(dataPosition.elSelected[1])
+          .attr(data[currentBtnNext + 1].elSelected[3], function() {
+            return `${data[currentBtnNext + 1].elSelected[4]}`;
+          });
+        console.log("al setear: ", $(dataPosition.elSelected[0]).attr("style"));
+        console.log("--------------------");
+      }
+
+      _selectedTooltips(dataPosition);
+      // ------------------- FIN TESTEO -------------------
+
       //recive de data-toogle value of the active button of tooltips.
       console.log("id:", dataPosition.id);
       let activeTool = $(`.tool-${currentBtnNext}`); //select the elements with class .tool-currentBtnNext.
@@ -314,12 +391,12 @@ function tooltips() {
 
       let nextTool = $(`.tool-${currentBtnNext + 1}`);
 
-      $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
-      console.log("Trigger que se ejecuta: ", $(dataPosition.eventCallToOpen));
-      console.log(
-        "Segundo parametro del trigger: ",
-        dataPosition.eventCallToClose
-      );
+      // $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
+      // console.log("Trigger que se ejecuta: ", $(dataPosition.eventCallToOpen));
+      // console.log(
+      //   "Segundo parametro del trigger: ",
+      //   dataPosition.eventCallToClose
+      // );
 
       $.each(nextTool, function(n) {
         nextTool[n].classList.replace("d-none", "d-block");
