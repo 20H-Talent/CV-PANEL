@@ -1,5 +1,3 @@
-var currentDataTool = 0;
-
 // ************** DECLARATION FUNCTIONS **************
 // ----------------- TO CREATE CONFETTI TO THE END OF THE TUTORIAL ------------
 function getConfetti() {
@@ -179,15 +177,11 @@ function checkTimesVisitedPage() {
   }
   toDoAccordingLocalStorage(visitsLocalStorage);
 }
-
-checkTimesVisitedPage();
-
-// *********** CLEAR THE CODE ************
-
+// --------------- MAKE TOOLTIPS AND FUNCTIONALITIES ----------------------
 function tooltips() {
   console.log("entro en tooltips()");
-  // function to get from JSON, the tooltips objects.
-  function getDataForTooltips() {
+  // to get from JSON, the tooltips objects.
+  function _getDataForTooltips() {
     return new Promise((resolve, reject) => {
       $.getJSON("../data/tooltips_guided_visit.json")
         .done(function(dataJSON) {
@@ -200,9 +194,8 @@ function tooltips() {
         });
     });
   }
-
-  // make skeleton of tools
-  function makeSkeletonTooltips(dataJSON) {
+  // to make skeleton of tools
+  function _makeSkeletonTooltips(dataJSON) {
     console.log("Entro en el makSkeleton");
     let data = dataJSON;
     // clear modal body to insert tooltips.
@@ -213,43 +206,55 @@ function tooltips() {
       //   data[i].id
       // }" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
       $("#guidedVisit").append(`
-              <i style='position:absolute; font-size: 19px; top:${
-                data[i].arrowPosition.top
-              }; left: ${data[i].arrowPosition.left};' class="d-none tool-${data[i].id} fas fa-arrow-${data[i].arrowPosition.icon} text-white"></i>
-              <div style='position: absolute; top: ${
-                data[i].tooltipPosition.top
-              }; left: ${data[i].tooltipPosition.left}; right: ${data[i].tooltipPosition.right}; bottom: ${data[i].tooltipPosition.bottom}; width: ${data[i].tooltipPosition.width}; height: ${data[i].tooltipPosition.height};' class='d-none tool-${data[i].id} bg-white tooltips p-3 rounded' data-toggle='tooltip'>
-              <span class='badge badge-danger' style='position: absolute; top: 5px; right:5px; font-size: 0.6rem'>${
-                data[i].badgeTool
-              }</span>
-              <h5 class="font-weight-bold mb-3" style='margin-top: -11px'>${
-                data[i].title
-              }</h5>
-              <p>${data[i].text} </p>
-              <button style='position: relative; left: 360px; font-size: 0.8rem' class='btn-tool badge badge-pill badge-info' data-tool= ${
-                data[i].id
-              }>Next</button>
-              <button style='position:relative; left:365px; font-size: 0.8rem' class='btn-tool-skip badge badge-pill badge-secondary' data-tool= ${
-                data[i].id
-              }>Skip</button>
-            </div>
+            <i style='position:absolute; font-size: 19px; top:${
+              data[i].arrowPosition.top
+            }; left: ${data[i].arrowPosition.left};' class="d-none tool-${data[i].id} fas fa-arrow-${data[i].arrowPosition.icon} text-white"></i>
+            <div style='position: absolute; top: ${
+              data[i].tooltipPosition.top
+            }; left: ${data[i].tooltipPosition.left}; right: ${data[i].tooltipPosition.right}; bottom: ${data[i].tooltipPosition.bottom}; width: ${data[i].tooltipPosition.width}; height: ${data[i].tooltipPosition.height};' class='d-none tool-${data[i].id} bg-white tooltips p-3 rounded' data-toggle='tooltip'>
+            <span class='badge badge-danger' style='position: absolute; top: 5px; right:5px; font-size: 0.6rem'>${
+              data[i].badgeTool
+            }</span>
+            <h5 class="font-weight-bold mb-3" style='margin-top: -11px'>${
+              data[i].title
+            }</h5>
+            <p>${data[i].text} </p>
+            <button style='position: relative; left: 360px; font-size: 0.8rem' class='btn-tool badge badge-pill badge-info' data-tool= ${
+              data[i].id
+            }>Next</button>
+            <button style='position:relative; left:365px; font-size: 0.8rem' class='btn-tool-skip badge badge-pill badge-secondary' data-tool= ${
+              data[i].id
+            }>Skip</button>
+          </div>
 
-            `);
+          `);
     });
     return dataJSON;
   }
+  // to inicialize the spacebar, the buttons next and call the next tooltip.
+  function _InicializeTooltips(dataJSON) {
+    // ----------- Declarations --------------
 
-  function InicializeTooltips(dataJSON) {
     let data = dataJSON;
-    //console.log(data);
-    function inicializeBtnTooltips() {
+    let currentDataTool = 0;
+
+    function _inicializeSpaceBar() {
+      $(window).on("keypress", function(e) {
+        if (e.keyCode === 32) {
+          // console.log("E current: ", e.ke);
+          _callTooltips(currentDataTool);
+        }
+      });
+    }
+
+    function _inicializeBtnTooltips() {
       $(".btn-tool").on("click", function(e) {
         if ($(e.currentTarget).attr("data-tool")) {
           //call event to close of data[0].
           console.log("active tool:", $(e.currentTarget).attr("data-tool"));
           // $(data[0].eventCallToClose).trigger("click");
 
-          callTooltips($(e.currentTarget).attr("data-tool"));
+          _callTooltips($(e.currentTarget).attr("data-tool"));
         }
       });
       // if click on skip button on a tooltip, remove the modal.
@@ -261,7 +266,7 @@ function tooltips() {
       });
     }
     // call tooltips to display.
-    function callTooltips(eventCurrentBtnNext) {
+    function _callTooltips(eventCurrentBtnNext) {
       //convert eventCurrentBtnNext string to number and store on currentBtnNext.
       let currentBtnNext = parseInt(eventCurrentBtnNext);
       // store the data of actual tooltip.
@@ -277,22 +282,22 @@ function tooltips() {
 
         $("#guidedVisit")
           .append(`<div class="bg-dark h-100" style="top:-28px; position:relative;">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-             <div class="modal-content align-items-center">
-                <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4d394b">
-                    <h5 class="modal-title font-weight-bold">Completed tutorial</h5>
-                </div>
-                <div class="modal-body text-center">
-                    <p>Congratulations!! You passed the guided visit.<br>
-                     Now, you can work with the app.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-tool-finish btn btn-primary">Finish</button>
-                </div>
-            </div>
-        </div>
-        </div>`);
+          <div class="modal-dialog modal-dialog-centered" role="document">
+           <div class="modal-content align-items-center">
+              <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4d394b">
+                  <h5 class="modal-title font-weight-bold">Completed tutorial</h5>
+              </div>
+              <div class="modal-body text-center">
+                  <p>Congratulations!! You passed the guided visit.<br>
+                   Now, you can work with the app.
+                  </p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn-tool-finish btn btn-primary">Finish</button>
+              </div>
+          </div>
+      </div>
+      </div>`);
         $("#guidedVisit .modal-dialog").className = "wrappert";
         getConfetti();
         $(".btn-tool-finish").on("click", function(e) {
@@ -354,26 +359,25 @@ function tooltips() {
     // //make the div on final of #guidedVisit
     // $("#guidedVisit").append(`<div id='elementSelected'></div>`);
 
-    inicializeBtnTooltips();
-    // llamando al primer tool ...
+    // ------------- Executions --------------------
+    _inicializeBtnTooltips();
+    _inicializeSpaceBar();
+
+    // call the first tool ...
     let tool1 = $(".tool-0");
     $.each(tool1, function(u) {
       tool1[u].classList.replace("d-none", "d-block");
     });
 
-    //llamamos trigger del tooltip 1
+    //call trigger of tooltip 1
     $(listUsers).trigger("click");
-
-    $(window).on("keypress", function(e) {
-      if (e.keyCode === 32) {
-        callTooltips(currentDataTool);
-      }
-    });
   }
-
   // call principal function of tooltips().
-  getDataForTooltips()
-    .then(dataJSON => makeSkeletonTooltips(dataJSON))
-    .then(dataJSON => InicializeTooltips(dataJSON))
+  _getDataForTooltips()
+    .then(dataJSON => _makeSkeletonTooltips(dataJSON))
+    .then(dataJSON => _InicializeTooltips(dataJSON))
     .catch(dataJSON => console.log(dataJSON));
 }
+
+// ***************** CALL FUNCTIONS *******************
+checkTimesVisitedPage();
