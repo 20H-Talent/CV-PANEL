@@ -85,7 +85,24 @@ const SearchFilter = (function() {
     filtersContainer.find("button").remove();
     _appendFilterBadges(filters, badgesContainer);
     _createResetButton(filtersContainer, badgesContainer);
+    _createDeletBadges(filters, badgesContainer);
   }
+
+/**
+ * 
+ * crear X en el badget para borrarlo.
+ */
+
+  // function _createDeletBadges(filtersContainer, badgesContainer){
+  //   const resetButton = filtersContainer.append(
+  //     `<button class="btn btn-sm btn-info">Cancel search</button>`
+  //   );
+  //   resetButton.off("click").on("click", function(e) {
+  //     badgesContainer.empty();
+  //     $(this).remove();
+  //     usersTable.initTable(null, window.innerWidth);
+  //   });
+  // }
 
   function _createResetButton(filtersContainer, badgesContainer) {
     const resetButton = filtersContainer.append(
@@ -107,7 +124,7 @@ const SearchFilter = (function() {
       const badge = $(
         `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
           filters[key]
-        }</span></span>`
+        }</span>x</span></span></span>`
       ).hide();
       badgesContainer.append(badge);
       badge.show("slow");
