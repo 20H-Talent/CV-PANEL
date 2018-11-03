@@ -735,6 +735,9 @@ body {
     .filters {
         display: none;
     }
+    .filters-company {
+        display: none;
+    }
     #right-menu {
         margin-left: 4em;
     }

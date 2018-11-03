@@ -13,12 +13,16 @@ function Companies() {
         this.companies.push(company);
     };
     this.renderCompaniesTable = function(filtredCompanies) {
-        $("#tableBody").html(" ");
-        let mainContainer = $(".main-container-companies");
+        // $("#tableBody").html(" ");
+        $("#card-container-company").hide();
+        $("#company-table").show();
+        let mainContainer = $("#company-table");
+        // mainContainer.html("");
+        let tableBody = "";
         console.log('filtredCompanies :', filtredCompanies);
         let width = $(window).width();
         for (var i = 0; i < filtredCompanies.length; i++) {
-            $("#tableBody").append(`<tr scope="row""  data-id=${filtredCompanies[i].id}><td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredCompanies[i].logo} style="width:50px;"/></td>
+            tableBody += `<tr scope="row""  data-id=${filtredCompanies[i].id}><td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredCompanies[i].logo} style="width:50px;"/></td>
                 <td class="company-name-table"><p>${filtredCompanies[i].name}</p></td>
                     <td class="company-email"> <a href="${filtredCompanies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
                     </a>${filtredCompanies[i].email}</td>
@@ -37,8 +41,13 @@ function Companies() {
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
                     <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredCompanies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
-                </tr>`);
+                </tr>`;
         }
+        console.log('tableBody :', tableBody);
+        $("#tableBody").html("");
+        $("#tableBody").append(tableBody);
+        // mainContainer.empty().html($("#tableBody").html());
+
 
     };
     this.getCompanyById = function(id) {
@@ -49,12 +58,14 @@ function Companies() {
     };
 
     this.renderCompanyCards = function() {
-        $(".main-container-companies").html(" ");
-        let mainContainer = $(".main-container-companies");
+        // $(".main-container-companies").html(" ");
+        $("#card-container-company").show();
+        $("#company-table").hide();
+        let mainContainer = $("#card-container-company");
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card mt-3 shadow-lg p-3 ml-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
+            <div class="card mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
               <div class="">
                 <h5 class="card-header text-dark header-card  shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top" src=${this.companies[i].logo} style="width:50px; alt="Card image cap">
                 <p class="card-text">${this.companies[i].name}</p>  <small  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</small></h5>
@@ -70,10 +81,10 @@ function Companies() {
               ${this.companies[i].renderSocialNetworks()}
               </div>
               <div class="card-footer  header-card   col-sm-12 mt-2 border  text-center rounded">
-
-                    <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
-                    </button>
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger"  data-toggle="modal" data-id=${this.companies[i].id} data-target="#confirm-delete" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
+           
+              <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
+              </button>
+              <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${this.companies[i].id}" data-target="#confirm-delete" onclick="removeCompanyCardFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
               </div>
             </div>
             </div>
@@ -83,5 +94,4 @@ function Companies() {
 
         mainContainer.empty().html(companyCard);
     };
-
 }

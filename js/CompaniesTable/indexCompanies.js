@@ -31,7 +31,7 @@ $.getJSON("../data/companies.json")
 
             if (width > 868) {
                 companies.renderCompaniesTable(companies.companies);
-                console.log('companies.companies :', companies.companies);
+                console.log('table :', companies.companies);
             } else {
                 companies.renderCompanyCards();
                 console.log('cards? :');
@@ -98,6 +98,20 @@ function removeCompanyFromDOM(id) {
         if (tableBody.children("tr").length > 0) {
             var findTr = tableBody.find(`tr[data-id=${company.id}]`);
             findTr.remove();
+        }
+    });
+}
+
+function removeCompanyCardFromDOM(id) {
+    var company = companies.getCompanyById(id);
+    const mainContainer = $(".main-container-companies");
+    const tableCards = mainContainer.find("div.card");
+    console.log('tableCards :', tableCards.get());
+    mainContainer.on("click", "button.delete-company", function(e) {
+        if (mainContainer.children(".card").length > 0) {
+            var findCard = tableCards.find(`div.card[data-id=${company.id}]`);
+            console.log('findCard :', findCard);
+            findCard.remove();
         }
     });
 }
