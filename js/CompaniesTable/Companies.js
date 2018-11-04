@@ -32,15 +32,18 @@ function Companies() {
             <td class="company-phone">${filtredCompanies[i].phone}</td>
             <td class="company-social text-center"> ${filtredCompanies[i].website}</td>
             <td class="options text-center">
-                <button  type="button" onclick="showPreviewInfo(${filtredCompanies[i].id})" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
+                <button  type="button" onclick="showPreviewInfo('${filtredCompanies[i].id}');" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
                 <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                 </button>
-                <button type="button" title="Delete company"  class="btn  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredCompanies[i].id})"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" title="Delete company"  class="btn  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM('${filtredCompanies[i].id}')"><i class="fas fa-trash-alt"></i></button>
             </td>
         </tr>`;
+            console.log('company.name :', filtredCompanies[i].name);
+            console.log(' data-id=${company.id} :', filtredCompanies[i].id);
         }
         $("#tableBody").html("");
         $("#tableBody").append(tableBody);
+
     };
     this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {

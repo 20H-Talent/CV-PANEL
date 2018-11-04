@@ -19,8 +19,9 @@ fetch("https://cv-mobile-api.herokuapp.com/api/company")
             );
             companies.addCompany(company);
 
-
+            console.log('jsonResponse[i]._id :', jsonResponse[i]._id);
         });
+
         console.log('companies.companies :', companies.companies);
         // companies.renderTable(companies.companies);
         // companies.renderCompanyCards();
@@ -85,7 +86,9 @@ function showPreviewInfo(id) {
     </div>
     </div> `
     );
+
 }
+
 
 function removeCompanyFromDOM(id) {
     var company = companies.getCompanyById(id);
@@ -95,6 +98,7 @@ function removeCompanyFromDOM(id) {
     companyContainer.on("click", "button.delete-company", function(e) {
         if (tableBodyCompanies.children("tr").length > 0) {
             var findTrCompanies = tableBodyCompanies.find(`tr[data-id=${company.id}]`);
+            console.log('company.id :', company.id);
             findTrCompanies.remove();
 
         } //else //{
