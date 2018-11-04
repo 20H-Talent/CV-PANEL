@@ -341,7 +341,7 @@ const Table = (function() {
                 }) {
                     let userFullName = buildUserFullname(name);
 
-                    return `<div class="card mr-5 mt-3 shadow-lg p-3 mb-5 bg-white rounded" data-id=${id.value}>
+                    return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${id.value}>
       <div class=" d-flex card-header card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
          <img class="img-fluid col-sm-3 mr-2" src=${picture.medium} alt="test"/>
         <div class=" font-weight-bold col card-username">
