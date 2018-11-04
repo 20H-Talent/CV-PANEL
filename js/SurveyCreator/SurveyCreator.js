@@ -374,7 +374,7 @@ const SurveyCreator = (function() {
         _setBodySurveyData();
         _activeToastMessage();
 
-        $.ajax("https://cv-mobile-api.herokuapp.com/surveys", {
+        $.ajax("https://cv-mobile-api.herokuapp.com/api/surveys", {
           type: "POST",
           dataType: "json",
           cache: true,

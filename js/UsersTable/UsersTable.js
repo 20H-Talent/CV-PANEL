@@ -20,6 +20,13 @@ const Table = (function() {
       format: "json"
     });
 
+    /**
+     * Render the HTML associate with this object in the central column
+     * and setup all the event listeners attached on the elements.
+     * @function construct
+     * @public
+     * @param {jQuery object} container
+     */
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
@@ -31,6 +38,11 @@ const Table = (function() {
       });
     }
 
+    /**
+     * Initialize all the object event listeners
+     * @function _setupInternalEventListeners
+     * @private
+     */
     function _setupInternalEventListeners() {
       $(window).on("resize", function(e) {
         const width = this.innerWidth;
@@ -41,8 +53,17 @@ const Table = (function() {
         .find("td.options")
         .off("click")
         .on("click", "button:not(.detail)", _optionButtonsEvent);
+
+      $("#userModal").on("show.bs.modal", renderDataOnModal);
     }
 
+    /**
+     * This function choose the actions depends on the button that
+     * fire the event
+     * @function _optionButtonsEvent
+     * @private
+     * @param {object} event
+     */
     function _optionButtonsEvent(event) {
       const button = $(event.currentTarget);
       const userID = button.data("id");
@@ -69,6 +90,12 @@ const Table = (function() {
       }
     }
 
+    /**Make the API Request that give the users data and handle the
+     * possible errors
+     * @function apiRequest
+     * @param {string} url
+     * @param {function} callback
+     */
     function apiRequest(url, callback) {
       _showOverlay(true);
       $.getJSON(url, function(response) {
@@ -536,6 +563,12 @@ const Table = (function() {
       apiRequest(apiURL, renderDataOnResize);
     }
 
+    /**
+     * Show the spinner when a new data is ready to render
+     * @function _showOverlay
+     * @private
+     * @param {boolean} show
+     */
     function _showOverlay(show) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
@@ -555,8 +588,13 @@ const Table = (function() {
       }
     }
 
+    /**
+     * Render the user data when the modal is opened
+     * @function renderDataOnModal
+     * @public
+     * @param {object} event
+     */
     function renderDataOnModal(event) {
-      console.log("Entro", event.relatedTarget, this);
       const element = $(event.relatedTarget);
       const modal = $(this);
       const user = getUserByEmailOrID(element.data("id"));
@@ -646,5 +684,3 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
-
-$("#userModal").on("show.bs.modal", usersTable.renderDataOnModal);
