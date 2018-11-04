@@ -120,12 +120,9 @@ td.FieldType-Cell {
   float: left;
   padding-top: 0.4em;
   box-sizing: border-box;
-  background-color: #d4edda;
-  color: #155724;
 }
 
 #toast #desc {
-  color: #155724;
   padding: 16px;
   overflow: hidden;
   white-space: nowrap;
@@ -137,6 +134,18 @@ td.FieldType-Cell {
     fadeout 0.5s 2.5s;
   animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s,
     fadeout 0.5s 4.5s;
+}
+
+#toast.show.success,
+#toast.show.success #desc {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+#toast.show.error,
+#toast.show.error #desc {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 @-webkit-keyframes fadein {

@@ -472,9 +472,26 @@ const SurveyCreator = (function() {
        * @function _activeToastMessage
        * @private
        */
-      function _activeToastMessage() {
+      function _activeToastMessage(error = false) {
         const $toast = $("#toast");
-        $toast.addClass("show");
+        const $toastIcon = $toast.find("i");
+
+        if (error) {
+          $toast
+            .removeClass("success")
+            .addClass("show error")
+            .children("#desc")
+            .text("Saved with success!");
+
+          $toastIcon.removeClass("fa-check").addClass("fa-exclamation");
+        } else {
+          $toast
+            .removeClass("error")
+            .addClass("show success")
+            .children("#desc")
+            .text("Saved with success!");
+          $toastIcon.removeClass("fa-exclamation").addClass(" fa-check-square");
+        }
         setTimeout(() => {
           $toast.removeClass("show");
         }, 5000);
@@ -489,22 +506,22 @@ const SurveyCreator = (function() {
         event.preventDefault();
         _setHeaderSurveyData();
         _setBodySurveyData();
-        _activeToastMessage();
 
-        $.ajax("localhost:3000/api/surveys", {
+        $.ajax({
+          url: "http://localhost:3000/api/surveys",
           type: "POST",
+          crossDomain: true,
+          contentType: "application/json",
           dataType: "json",
           cache: true,
-          data: JSON.stringify(surveyApiData)
-        })
-          .done(response => {
-            console.log(response);
-          })
-          .fail((jqXHR, textStatus, errorThrown) => {
-            if (jqXHR.statusText !== "OK") {
-              console.log(error);
-            }
-          });
+          data: JSON.stringify(surveyApiData),
+          success: function(response) {
+            _activeToastMessage();
+          },
+          error: function(jqXHR, textStatus) {
+            _activeToastMessage(jqXHR.statusText);
+          }
+        });
       }
     }
     return {
