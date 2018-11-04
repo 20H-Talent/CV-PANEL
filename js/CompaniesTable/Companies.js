@@ -20,24 +20,23 @@ function Companies() {
         let tableBody = "";
         let width = $(window).width();
         for (var i = 0; i < filtredCompanies.length; i++) {
-
             tableBody += `<tr scope="row"  data-id=${filtredCompanies[i].id}>
             <td class="company-logoURL text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredCompanies[i].logoURL} style="width:50px;"/></td>
             <td class="company-name-table">
-                <p>${filtredCompanies[i].name}</p>
+               <p>${filtredCompanies[i].name}</p>
             </td>
             <td class="company-email"> <a href="${filtredCompanies[i].email}" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
-                </a>${filtredCompanies[i].email}
+               </a>${filtredCompanies[i].email}
             </td>
             <td class="company-phone">${filtredCompanies[i].phone}</td>
-            <td class="company-social text-center"> ${filtredCompanies[i].website}</td>
+            <td class="company-social"> ${filtredCompanies[i].website}</td>
             <td class="options text-center">
-                <button  type="button" onclick="showPreviewInfo('${filtredCompanies[i].id}');" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
-                <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
-                </button>
-                <button type="button" title="Delete company"  class="btn  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM('${filtredCompanies[i].id}')"><i class="fas fa-trash-alt"></i></button>
+               <button  type="button" onclick="showPreviewInfo('${filtredCompanies[i].id}');" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
+               <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
+               </button>
+               <button type="button" title="Delete company"  class="btn  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM('${filtredCompanies[i].id}')"><i class="fas fa-trash-alt"></i></button>
             </td>
-        </tr>`;
+         </tr>`;
             console.log('company.name :', filtredCompanies[i].name);
             console.log(' data-id=${company.id} :', filtredCompanies[i].id);
         }
@@ -60,10 +59,10 @@ function Companies() {
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card card-company mt-3 shadow-lg p-3 ml-3 mr-2 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
+            <div class="card card-company mt-3 shadow-lg p-3 ml-4 mr-2 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
              <div class="">
                <div class="d-flex rounded  card-header   p-3">
-                  <div class=""> <img class="card-img-top rounded-circle" src=${this.companies[i].logoURL} style="width:50px; alt="Card image cap"></div>
+                  <div class=""> <img class="card-img-top rounded-circle" src=${this.companies[i].logoURL} style="width:50px; alt="Card logo company"></div>
                   <div  class="col-lg-6">
                      <h5 class="card-text  font-weight-bold text-dark">${this.companies[i].name}</h5>
                      <p  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</p>
@@ -88,7 +87,7 @@ function Companies() {
                      </div>
                   </div>
                </div>
-            </div>
+      
             <div class="card-footer  header-card   col-sm-12 mt-2 border  text-right rounded">
                <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                </button>

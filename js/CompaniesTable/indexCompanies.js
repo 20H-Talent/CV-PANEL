@@ -50,41 +50,47 @@ function showPreviewInfo(id) {
 
     $("#modal-company").html(
         `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${company.id} >
-        <div class="card-header btn-ldeep-purple text-light d-flex header-card flex-row align-items-center">
-            <img class="img-fluid mr-2 rounded-circle" src=${company.logoURL} width=120px height:50px  alt="test"/>
-            <div class=" ml-4">
-                <h5 class="modal-title">
-                <p>${company.name}</p>
-                <p> CIF ${company.CIF}</p>
-                </h5>
-            </div>
+        <div class="card-header rounded  text-dark d-flex header-card flex-row align-items-center">
+           <img class="img-fluid mr-2 rounded-circle" src=${company.logoURL} width=120px height:50px  alt="test"/>
+           <div class="  ml-4 ">
+              <h5 class=" font-weight-bold modal-title">
+                 <p>${company.name}</p>
+                 <p> CIF ${company.CIF}</p>
+              </h5>
+           </div>
         </div>
         <div class="text-dark">
-            <div class=" text-dark text-center mt-3 h5"><h5 class="text-center rounded text-dark font-weight-bold ">Email</h5><h6><a class=" ldeep-purple text-center" href="mailto${
-              company.email
-            }">${company.email}</a></h6>
-        </div>
-            <div class="text-dark text-center h5 "><h5 class="text-center  text-dark rounded font-weight-bold ">Profile </h5>
-            <h6 class=" ldeep-purple text-center">${company.bio}</h6>
-        </div>
-        <div class="text-dark text-center h5 "><h5 class="text-center  text-dark rounded font-weight-bold  ">Social Networks </h5>
-        <h6 class=" ldeep-purple text-center">${company.website}</h6>
-    </div>
-            <div  class="text-dark text-center h5 "><h5 class="text-center  header-card text-dark rounded font-weight-bold ">Phone</h5>
-            <h6 class=" ldeep-purple text-center">${company.phone}</h6>
-        </div>
-            <div class="text-dark text-center h5"><h5 class=" text-center header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
-            <h6 class=" ldeep-purple text-center">${company.employees}</h6>
-        </div>
-            <div class="text-dark text-center h5 "><h5 class="text-center header-card text-dark rounded font-weight-bold " >Address</h5>
-            <h6 class=" ldeep-purple text-center">${company.address.country} ~ ${company.address.city} ${
-      company.address.street
-    } / ${company.address.zipcode}</h6>
-        </div>
-        <div class=" modal-footer">
-        <button type="button" class="btn  btn-ldeep-purple text-light" data-dismiss="modal">Close</button>
-    </div>
-    </div> `
+           <div class=" text-dark  mt-3 h5">
+              <h5 class=" rounded text-dark font-weight-bold ">Email</h5>
+              <h6><a class=" ldeep-purple " href="mailto${company.email}">${company.email}</a></h6>
+           </div>
+           <div class="text-dark  h5 ">
+              <h5 class="  text-dark rounded font-weight-bold">Profile </h5>
+              <h6 class=" ldeep-purple ">${company.bio}</h6>
+           </div>
+           <div class="text-dark  h5 ">
+              <h5 class="  text-dark rounded font-weight-bold">Website</h5>
+              <h6 class=" ldeep-purple ">${company.website}</h6>
+           </div>
+           <div  class="text-dark  h5 ">
+              <h5 class="  header-card text-dark rounded font-weight-bold">Phone</h5>
+              <h6 class=" ldeep-purple ">${company.phone}</h6>
+           </div>
+           <div class="text-dark  h5">
+              <h5 class="  header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
+              <h6 class=" ldeep-purple ">${company.employees}</h6>
+           </div>
+           <div class="text-dark  h5 ">
+              <h5 class=" header-card text-dark rounded font-weight-bold " >Address</h5>
+              <h6 class=" ldeep-purple ">${company.address.country} ~ ${company.address.city} ${
+                 company.address.street
+                 } / ${company.address.zipcode}
+              </h6>
+           </div>
+           <div class=" modal-footer">
+              <button type="button" class="btn  btn-ldeep-purple text-light" data-dismiss="modal">Close</button>
+           </div>
+        </div> `
     );
 
 }
@@ -131,16 +137,20 @@ function advancedSearchCompanies(event) {
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.CIF.toLowerCase().includes(inputCif));
+        return (company.CIF.toString().toLowerCase().includes(inputCif));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.employees.toString().includes(inputEmployees));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.email.toLowerCase().includes(inputEmail));
+        return (company.bio.toString().includes(inputBio));
     });
+
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.address.city.toLowerCase().includes(inputCity));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.email.toLowerCase().includes(inputEmail));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.address.country.toLowerCase().includes(inputCountry));
@@ -158,6 +168,7 @@ function advancedSearchCompanies(event) {
                 $("#alertNoCompanyFound").remove();
                 companies.renderCompaniesTable(companies.companies);
             });
+
         }
 
     }
