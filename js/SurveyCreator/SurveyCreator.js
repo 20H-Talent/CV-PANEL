@@ -532,29 +532,59 @@ const SurveyCreator = (function() {
                   </header>
                   <main>
                     <form>
-                     ${elements
-                       .map(element => {
-                         if (element["type"] === "select") {
-                           return `<div class="form-group">
-                              <label>
-                                ${element["title"]}
-                                <select class="form-control">
-                                 ${element["values"].map(value => {
-                                   return `<option>${value}</option>`;
-                                 })}
-                                </select>
-                              </label>
-
-                            </div>`;
-                         }
-                       })
-                       .join("")}
+                     ${_buildChildrenElements(elements)}
                        </form>
                   </main>
               </div>
            </div>
          </div>`;
         iframeContent.empty().html(finalHTML);
+      }
+
+      function _buildChildrenElements(elements) {
+        return elements
+          .map(element => {
+            let encodedInputName = encodeURIComponent(element["title"]);
+            if (element["type"] === "checkbox") {
+              encodedInputName += "[]";
+            }
+
+            switch (element["type"]) {
+              case "select":
+                return `
+                <div class="form-group">
+                  <label>
+                    ${element["title"]}
+                    <select class="form-control" name="${encodedInputName}">
+                    ${element["values"].map(value => {
+                      return `<option>${value}</option>`;
+                    })}
+                    </select>
+                  </label>
+              </div>`;
+                break;
+
+              case "checkbox":
+              case "radio":
+                return `
+              <h5>${element["title"]}</h5>
+                ${element["values"]
+                  .map(value => {
+                    return `
+                  <div class="form-check">
+                    <label>
+                      <input class="form-check-input" type="${
+                        element["type"]
+                      }" value=${value.trim()} name="${encodedInputName}"/>
+                      ${value.trim()}
+                    </label>
+                    </div>`;
+                  })
+                  .join("")}`;
+                break;
+            }
+          })
+          .join("");
       }
 
       /**
