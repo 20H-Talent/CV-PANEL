@@ -23,10 +23,8 @@ $('document').ready(function() {
 $("body").on("load", loadRightMenu());
 
 function loadRightMenu() {
-    $.ajax({
-        url: "../html/right-menu.html",
-        dataType: "html",
-        success: function(data) {
+    $.get("../html/right-menu.html")
+        .done(function(data) {
             $("#right-menu-ajax").empty().append(data);
             formSideBar();
             $("form#advanced-search").on("submit", function(e) {
@@ -34,10 +32,7 @@ function loadRightMenu() {
                 const formInputs = $(this).find("input");
                 usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
             });
-        }
-    });
-
-
+        });
 }
 // $("#right-menu-a<´jax").load("../html/right-menu.html", function() {
 //     formSideBar();
