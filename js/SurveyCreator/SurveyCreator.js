@@ -37,7 +37,9 @@ const SurveyCreator = (function() {
        */
       function _setupInternalEventListeners(form) {
         $surveyContainer = form.find("#survey-element");
-        form.off("submit").on("submit", _buildJSON);
+        const $tableFooter = $surveyContainer.find("tfoot");
+
+        form.off("submit").on("submit", _sendJSONData);
 
         $surveyContainer
           .find(".Survey-TypeSelector")
@@ -54,9 +56,11 @@ const SurveyCreator = (function() {
           .find(".Survey-TableBody")
           .on("change", "input[type=checkbox]", _selectedBlocks);
 
-        $surveyContainer
-          .find("tfoot button.deleteAll")
+        $tableFooter
+          .find("button.deleteAll")
           .on("click", _deleteSelectedBlocks);
+
+        $tableFooter.find("button.previewSurvey").on("click", _previewSurvey);
       }
 
       /**
@@ -440,6 +444,7 @@ const SurveyCreator = (function() {
        */
       function _setBodySurveyData() {
         const dinamicElements = ["select", "radio", "checkbox"];
+        surveyApiData["elements"] = [];
 
         surveyForm
           .find("table tbody")
@@ -498,11 +503,66 @@ const SurveyCreator = (function() {
       }
 
       /**
+       * Build an HTML code from the survey blocks and use an iframe
+       * to visualize in the browser
+       * @function _previewSurvey
+       * @private
+       * @param {object} event
+       */
+      function _previewSurvey(event) {
+        _setHeaderSurveyData();
+        _setBodySurveyData();
+
+        const { header, elements } = surveyApiData;
+
+        const iframeContent = surveyForm
+          .find(".SurveyPreview > iframe")
+          .contents()
+          .find("body");
+
+        let finalHTML = `
+         <div class="container my-2">
+           <div class="row">
+             <div class="col-sm-12 d-flex flex-column justify-content-center
+              align-items-center align-content-center">
+                  <header>
+                     <h1>${header["title"]}</h1>
+                     <h3>${header["subtitle"]}</h3>
+                     <p class="text-justify">${header["description"]}</p>
+                  </header>
+                  <main>
+                    <form>
+                     ${elements
+                       .map(element => {
+                         if (element["type"] === "select") {
+                           return `<div class="form-group">
+                              <label>
+                                ${element["title"]}
+                                <select class="form-control">
+                                 ${element["values"].map(value => {
+                                   return `<option>${value}</option>`;
+                                 })}
+                                </select>
+                              </label>
+
+                            </div>`;
+                         }
+                       })
+                       .join("")}
+                       </form>
+                  </main>
+              </div>
+           </div>
+         </div>`;
+        iframeContent.empty().html(finalHTML);
+      }
+
+      /**
        * Group all the necessary functions to build the final
        * JSON data and get ready to store on the API.
        * @param {object} event
        */
-      function _buildJSON(event) {
+      function _sendJSONData(event) {
         event.preventDefault();
         _setHeaderSurveyData();
         _setBodySurveyData();
