@@ -25,8 +25,8 @@ $.getJSON("../data/companies.json")
         $(window).on("resize", function() {
             let width = $(this).width();
 
-            const mainContainer = $(".main-container-companies");
-            const tableBody = mainContainer.find("#company-table tbody");
+            const companyContainer = $(".main-container-companies");
+            const tableBodyCompanies = companyContainer.find("#company-table tbody");
             let cardDiv = $("#card-container-company");
 
             if (width > 868) {
@@ -47,13 +47,9 @@ $.getJSON("../data/companies.json")
 function showPreviewInfo(id) {
     var company = companies.getCompanyById(id);
     $("#modal").html(
-        `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
-      company.id
-    } >
+        `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${company.id} >
         <div class="card-header btn-ldeep-purple text-light d-flex header-card flex-row align-items-center">
-            <img class="img-fluid mr-2 rounded-circle" src=${
-              company.logo
-            } width=120px height:50px  alt="test"/>
+            <img class="img-fluid mr-2 rounded-circle" src=${company.logo} width=120px height:50px  alt="test"/>
             <div class=" ml-4">
                 <h5 class="modal-title">
                 <p>${company.name}</p>
@@ -94,29 +90,24 @@ function showPreviewInfo(id) {
 
 function removeCompanyFromDOM(id) {
     var company = companies.getCompanyById(id);
-    const mainContainer = $(".main-container-companies");
-    const tableBody = mainContainer.find("#company-table tbody");
-    mainContainer.on("click", "button.delete-company", function(e) {
-        if (tableBody.children("tr").length > 0) {
-            var findTr = tableBody.find(`tr[data-id=${company.id}]`);
-            findTr.remove();
+    const tableCompany = $("#card-container-company");
+    const companyContainer = $(".main-container-companies");
+    const tableBodyCompanies = companyContainer.find("#tableBody");
+    companyContainer.on("click", "button.delete-company", function(e) {
+        if (tableBodyCompanies.children("tr").length > 0) {
+            var findTrCompanies = tableBodyCompanies.find(`tr[data-id=${company.id}]`);
+            findTrCompanies.remove();
+
+        } else {
+            const cards = tableCompany.find(`.card-company[data-id=${company.id}]`);
+            //cards.remove();
+            cards.remove();
+            console.log('cards :', cards);
+
         }
     });
 }
 
-function removeCompanyCardFromDOM(id) {
-    var company = companies.getCompanyById(id);
-    const mainContainer = $(".main-container-companies");
-    const tableCards = mainContainer.find("div.card");
-    console.log('tableCards :', tableCards.get());
-    mainContainer.on("click", "button.delete-company", function(e) {
-        if (mainContainer.children(".card").length > 0) {
-            var findCard = tableCards.find(`div.card[data-id=${company.id}]`);
-            console.log('findCard :', findCard);
-            findCard.remove();
-        }
-    });
-}
 // Advanced search for companies form
 function advancedSearchCompanies(event) {
     event.preventDefault();

@@ -16,10 +16,7 @@ function Companies() {
         // $("#tableBody").html(" ");
         $("#card-container-company").hide();
         $("#company-table").show();
-        let mainContainer = $("#company-table");
-        // mainContainer.html("");
         let tableBody = "";
-        console.log('filtredCompanies :', filtredCompanies);
         let width = $(window).width();
         for (var i = 0; i < filtredCompanies.length; i++) {
             tableBody += `<tr scope="row""  data-id=${filtredCompanies[i].id}><td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${filtredCompanies[i].logo} style="width:50px;"/></td>
@@ -40,15 +37,11 @@ function Companies() {
                     <button  type="button" onclick="showPreviewInfo(${filtredCompanies[i].id})" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company " data-toggle="modal"><i class="far fa-eye"></i> </button>
                     <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredCompanies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
+                    <button type="button" title="Delete company"  class="btn  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${filtredCompanies[i].id}" data-target="#confirm-delete" onclick="removeCompanyFromDOM(${filtredCompanies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>`;
         }
-        console.log('tableBody :', tableBody);
         $("#tableBody").html("");
         $("#tableBody").append(tableBody);
-        // mainContainer.empty().html($("#tableBody").html());
-
-
     };
     this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {
@@ -61,11 +54,11 @@ function Companies() {
         // $(".main-container-companies").html(" ");
         $("#card-container-company").show();
         $("#company-table").hide();
-        let mainContainer = $("#card-container-company");
+        let mainContainerCompanies = $("#card-container-company");
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
+            <div class="card card-company mt-3 shadow-lg p-3 ml-5 mr-5 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
              <div class="">
                <div class="d-flex rounded  card-header   p-3">
                   <div class=""> <img class="card-img-top rounded-circle" src=${this.companies[i].logo} style="width:50px; alt="Card image cap"></div>
@@ -97,12 +90,12 @@ function Companies() {
             <div class="card-footer  header-card   col-sm-12 mt-2 border  text-right rounded">
                <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
                </button>
-               <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${this.companies[i].id}" data-target="#confirm-delete" onclick="removeCompanyCardFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
+               <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${this.companies[i].id}" data-target="#confirm-delete-card" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
             </div>
          </div>
           `;
         }
 
-        mainContainer.empty().html(companyCard);
+        mainContainerCompanies.empty().html(companyCard);
     };
 }
