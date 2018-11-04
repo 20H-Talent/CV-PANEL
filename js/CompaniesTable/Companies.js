@@ -70,29 +70,24 @@ function Companies() {
               <div class="d-flex rounded  card-header   p-3">
                 <div class="col" text-dark shadow-sm  col-sm-12 border  rounded"> <img class="card-img-top rounded-circle" src=${this.companies[i].logo} style="width:50px; alt="Card image cap"></div>
                 <div  class="col-lg-6">
-            <h5 class="card-text  font-weight-bold text-dark">${this.companies[i].name}</h5>  <p  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</p></div></div>
+                 <h5 class="card-text  font-weight-bold text-dark">${this.companies[i].name}</h5>  <p  class="text-dark font-weight-bold ">CIF ${this.companies[i].CIF}</p></div></div>
                 <div class=" ml-3">
-
-                // HERE I LEFT TO THE GAME FOOTBAL
-                <div class="d-inline-flex  mt-3"> <h6 class="card-title col-sm-3 d-inline-flex font-weight-bold">Email</ins> <h6 class="card-text col-sm-3  ldeep-purple"><ins>${this.companies[i].email}</ins></h6></h6>  </div>
-               
-                <h6 class="card-subtitle font-weight-bold  mt-3">Employees Number</h6>
-                <p class="card-text ldeep-purple"><ins>${this.companies[i].employeesNumber}</ins></p>
-                <h6 class="card-title font-weight-bold ">Phone</h6>
-                <p class="card-text ldeep-purple"><ins>${this.companies[i].phone}</ins></p>
-            
-              <h6 class="card-text font-weight-bold mb-1  mt-3">Social Networks</>
-              <div class="mt-2 social-net" id="networks${this.companies[i].id}">
+                <div class="d-inline-flex  col  mt-3"> <h6 class="card-title col d-inline-flex font-weight-bold">Email</ins></h6> <h6 class="card-text col-sm-8  text-right ldeep-purple"><ins>${this.companies[i].email}</ins></h6>  </div>
+                <div class="d-inline-flex  col  mt-3">     <h6 class="card-subtitle font-weight-bold d-inline-flex col  ">Employees Number </h6><p class="card-text  text-right  col-sm-8 ldeep-purple"><ins>${this.companies[i].employeesNumber}</ins></p> </div>
+                <div class="d-inline-flex  col  mt-3"><h6 class="card-title col d-inline-flex  font-weight-bold ">Phone</h6> <p class="card-text text-right  col-sm-8  ldeep-purple"><ins>${this.companies[i].phone}</ins></p></div>
+                <div class="d-inline-flex  col  mt-3">  <h6 class="card-text col d-inline-flex font-weight-bold mb-1  mt-3">Social Networks</h6><div class="mt-2 text-right  col-sm-8 social-net" id="networks${this.companies[i].id}">
               ${this.companies[i].renderSocialNetworks()}
-              </div></div>  </div>
+              </div> 
+               </div> 
+               </div>  
+                 </div>
               <div class="card-footer  header-card   col-sm-12 mt-2 border  text-right rounded">
-           
               <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
-              </button>
+                 </button>
               <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${this.companies[i].id}" data-target="#confirm-delete" onclick="removeCompanyCardFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
+                  </div>
+                 </div>
               </div>
-            </div>
-            </div>
             </div>
           `;
         }
