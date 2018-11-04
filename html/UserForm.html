@@ -1,9 +1,8 @@
-<div class="col p-0 mr-3" id="user-form-container">
-    <div class="container col-md-8 h-100">
+<div class="col p-0 " id="user-form-container">
+    <div class="container col-md-10 h-100">
         <div class="col ">
             <div class="mb-3 adduser text-center">
-                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i>Add User /<i class="fas fa-user-edit"></i>
-                    Edit User</h4>
+                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i>Add User /<i class="fas fa-user-edit"></i> Edit User</h4>
             </div>
 
             <div id="alertErrors" class="alert fade show" role="alert"></div>
@@ -15,8 +14,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing"><i class="fas asweome fa-user-tie"></i></span>
-                            <input type="text" name="firstname" class="form-control " minlength="3" maxlength="25"
-                                pattern="[a-zA-Z\s]+" value="" required>
+                            <input type="text" name="firstname" class="form-control " minlength="3" maxlength="25" pattern="[a-zA-Z\s  ñ]+" value="" required>
                         </div>
                     </div>
                 </div>
@@ -26,9 +24,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
-                            <input lang="es-ES" type="text" name="lastname" class="form-control" minlength="3"
-                                maxlength="25" pattern="[a-zA-Z\s]+" title="Last name must have 3-15 characters long"
-                                value="" required>
+                            <input lang="es-ES" type="text" name="lastname" class="form-control" minlength="3" maxlength="25" pattern="[A-Za-z ñ]+" title="Last name must have 3-15 characters long" value="" required>
                         </div>
                     </div>
                 </div>
@@ -38,8 +34,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputfault"><i class="fas asweome fa-users"></i></span>
-                            <input lang="es-ES" name="username" pattern="[a-zA-Z0-9\s]+" minlength="3" maxlength="25"
-                                type="text" class="form-control" required>
+                            <input lang="es-ES" name="username" pattern="[a-zA-Z0-9\s ñ]+" minlength="3" maxlength="25" type="text" class="form-control" required>
                         </div>
 
 
@@ -50,8 +45,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="in-sizing-default"><i class="fas asweome fa-at"></i></span>
-                            <input lang="es-ES" type="email" name="email" class="form-control form-control-success"
-                                minlength="3" maxlength="25" placeholder="name@example.com" required>
+                            <input lang="es-ES" type="email" name="email" class="form-control form-control-success" minlength="3" maxlength="25" placeholder="name@example.com" required>
                         </div>
                     </div>
                 </div>
@@ -61,8 +55,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputizing-default"><i class="fas asweome fa-phone-square"></i></span>
-                            <input name="telephone" type="tel" class="form-control" minlength="3" maxlength="25"
-                                required>
+                            <input name="telephone" type="tel" class="form-control" minlength="3" maxlength="25" required>
                         </div>
                     </div>
                 </div>
@@ -72,8 +65,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas asweome asweome-address fa-map-marker-alt"></i></span>
-                            <input lang="es-ES" name="adress" type="text" class="form-control" minlength="3" maxlength="25"
-                                placeholder="1234 Main St" required>
+                            <input lang="es-ES" name="adress" type="text" class="form-control" minlength="3" maxlength="25" placeholder="1234 Main St" required>
                         </div>
                     </div>
                 </div>
@@ -83,9 +75,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
-                            <input lang="es-ES" name="country" class="custom-select d-block w-100" minlength="3"
-                                maxlength="25" pattern="[a-zA-Z0-9\s]+" type="text" placeholder="residence country"
-                                required>
+                            <input lang="es-ES" name="country" class="custom-select d-block w-100" minlength="3" maxlength="25" pattern="[a-zA-Z\s ñ]+" type="text" placeholder="residence country" required>
                         </div>
                     </div>
                 </div>
@@ -95,8 +85,7 @@
                     <div class="col-sm-10">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
-                            <input lang="es-ES" name="city" class="custom-select d-block w-100" minlength="3" maxlength="25"
-                                type="text" required>
+                            <input lang="es-ES" name="city" pattern="[a-zA-Z\s ñ]+" class="custom-select d-block w-100" minlength="3" maxlength="25" type="text" required>
                         </div>
                     </div>
                 </div>
@@ -106,8 +95,7 @@
                     <div class="col-sm-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
-                            <input name="zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+" minlength="3"
-                                maxlength="15" placeholder="90425" required>
+                            <input name="zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+" minlength="3" maxlength="15" placeholder="90425" required>
                         </div>
                     </div>
                 </div>
@@ -117,7 +105,7 @@
                     <div class="col-sm-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="Group-s"><i class="fas asweome fa-user-tie"></i></span>
-                            <input name="birthdate" class="form-control" type="date" required>
+                            <input name="birthdate" minlength="1" maxlength="3" id="birthdate" class="form-control" type="text" required>
                         </div>
                     </div>
                 </div>
@@ -128,11 +116,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa "></i></span>
                             <div class="custom-control gen custom-radio">
-                                <input value="male" name="gender" type="radio" class="custom-control-input" required>
+                                <input value="male" id="male" name="gender" type="radio" class="custom-control-input" required>
                                 <label class="custom-control-label" for="male">Male</label>
                             </div>
                             <div class="custom-control gen custom-radio">
-                                <input value="female" name="gender" type="radio" class="custom-control-input" required>
+                                <input value="female" id="female" name="gender" type="radio" class="custom-control-input" required>
                                 <label class="custom-control-label" for="female">Female</label>
                             </div>
                         </div>
@@ -147,8 +135,7 @@
 
                 <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
                 <div class="form-group">
-                    <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12"
-                        name="selLanguage" required>
+                    <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12" name="selLanguage" required>
                     </select>
                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                 </div>
@@ -184,7 +171,7 @@
 
 
                     <div class="col" id="upload-carta">
-                        <label for="exampleFormControlFile2"><strong>Upload your application letter</strong></label>
+                        <label for="exampleFormControlFile2"><strong>Upload application letter</strong></label>
                         <input type="file" class="form-control-file  fileupload" id="exampleFormControlFile2">
                     </div>
 

@@ -1,49 +1,48 @@
 const UserForm = (function() {
-  let instance;
+    let instance;
 
-  function init() {
-    let userForm;
-    function construct(container) {
-      $.get("../../html/UserForm.html", function(htmlSkeleton) {
-        userForm = container
-          .empty()
-          .append(htmlSkeleton)
-          .find("#user-form-container");
+    function init() {
+        let userForm;
 
-        _setupInternalEventListeners(userForm);
-        _appendSkills();
-        _appendLanguages();
-        userForm.trigger("reset");
-      }).fail(function(err) {
-        throw new Error(err);
-      });
-    }
+        function construct(container) {
+            $.get("../../html/UserForm.html", function(htmlSkeleton) {
+                userForm = container
+                    .empty()
+                    .append(htmlSkeleton)
+                    .find("#user-form-container");
+                _setupInternalEventListeners(userForm);
+                _appendSkills();
+                _appendLanguages();
+                userForm.trigger("reset");
+            }).fail(function(err) {
+                throw new Error(err);
+            });
+        }
 
-    function _setupInternalEventListeners(form) {
-      form
-        .find("button#create-user")
-        .off("click")
-        .on("click", _formErrors);
-      form
-        .find("button.reset")
-        .off("click")
-        .on("click", _resetLanguagesSelector);
-      form
-        .find("button#languages")
-        .off("click")
-        .on("click", _showChoices);
-    }
+        function _setupInternalEventListeners(form) {
+            form
+                .find("button#create-user")
+                .off("click")
+                .on("click", _formErrors);
+            form
+                .find("button.reset")
+                .off("click")
+                .on("click", _resetLanguagesSelector);
+            form
+                .find("button#languages")
+                .off("click")
+                .on("click", _showChoices);
+        }
 
-    function _appendSkills() {
-      const skillsContainer = userForm.find("#skill");
-      skillsContainer
-        .find("*")
-        .not("h4")
-        .empty();
-
-      $.getJSON("../../data/skills.json", function(skills) {
-        skills.forEach(skill => {
-          skillsContainer.append(`
+        function _appendSkills() {
+            const skillsContainer = userForm.find("#skill");
+            skillsContainer
+                .find("*")
+                .not("h4")
+                .empty();
+            $.getJSON("../../data/skills.json", function(skills) {
+                skills.forEach(skill => {
+                    skillsContainer.append(`
           <div class="custom-control custom-checkbox custom-control-inline">
                <input name="${
                  skill["name"]
@@ -54,45 +53,42 @@ const UserForm = (function() {
             skill["label"]
           }</label>
              </div`);
-        });
-      }).fail(function(err) {
-        throw new Error(err);
-      });
-    }
+                });
+            }).fail(function(err) {
+                throw new Error(err);
+            });
+        }
 
-    function _appendLanguages() {
-      $.getJSON("../../data/languages.json", function(languages) {
-        const languagesSelector = userForm.find("select#selLanguage");
-        languagesSelector.empty();
+        function _appendLanguages() {
+            $.getJSON("../../data/languages.json", function(languages) {
+                const languagesSelector = userForm.find("select#selLanguage");
+                languagesSelector.empty();
+                languages.forEach(language => {
+                    const label = language["label"];
+                    languagesSelector.append(
+                        `<option value="${label}">${label}</option>`
+                    );
+                });
+            }).fail(function(err) {
+                throw new Error(err);
+            });
+        }
 
-        languages.forEach(language => {
-          const label = language["label"];
-
-          languagesSelector.append(
-            `<option value="${label}">${label}</option>`
-          );
-        });
-      }).fail(function(err) {
-        throw new Error(err);
-      });
-    }
-
-    function _showChoices() {
-      //retrieve data
-      const chosenLanguages = userForm.find(
-        "select#selLanguage option:selected"
-      );
-      //set up output string
-      if (chosenLanguages.length > 0) {
-        const displayList = userForm
-          .find("#output")
-          .empty()
-          .append(`<h4>Your Languages</h4><ul class="languages-list"></ul>`)
-          .children("ul.languages-list");
-
-        chosenLanguages.each((index, element) => {
-          const language = $(element);
-          displayList.append(`
+        function _showChoices() {
+            //retrieve data
+            const chosenLanguages = userForm.find(
+                "select#selLanguage option:selected"
+            );
+            //set up output string
+            if (chosenLanguages.length > 0) {
+                const displayList = userForm
+                    .find("#output")
+                    .empty()
+                    .append(`<h4>Your Languages</h4><ul class="languages-list"></ul>`)
+                    .children("ul.languages-list");
+                chosenLanguages.each((index, element) => {
+                    const language = $(element);
+                    displayList.append(`
              <li>
                 ${language.text()}
                 <div class="input-group mb-3">
@@ -108,107 +104,99 @@ const UserForm = (function() {
                     </select>
                 </div>
              </li>`);
-        });
-      }
-    }
+                });
+            }
+        }
 
-    function _formErrors() {
-      const alertErrors = userForm.find("#alertErrors");
-      const form = userForm.find("form#user-form");
-
-      alertErrors.empty().append(`
+        function _formErrors() {
+            const alertErrors = userForm.find("#alertErrors");
+            const form = userForm.find("form#user-form");
+            alertErrors.empty().append(`
              <div class="col-lg-12">
                 <ul class="alert alert-danger alert-dismissible"></ul>
             </div>`);
-
-      const inputs = form.find("input");
-
-      inputs.each((index, input) => {
-        if (input.checkValidity()) {
-          $(input).addClass("custom-control");
-        } else {
-          $(input).addClass("borderafter");
-          alertErrors
-            .find(`ul.alert-danger`)
-            .append(
-              ` <li class="font-weight-light">${input.name +
-                " : " +
-                input.validationMessage}</li>`
-            );
+            const inputs = form.find("input");
+            inputs.each((index, input) => {
+                if (input.checkValidity()) {
+                    $(input).addClass("is-valid");
+                } else {
+                    $(input).addClass("is-invalid");
+                    alertErrors
+                        .find(`ul.alert-danger`)
+                        .append(
+                            ` <li class="font-weight-light">${input.name + " : " + input.validationMessage}</li>`
+                        );
+                }
+            });
+            alertErrors.fadeIn("slow");
+            setTimeout(function() {
+                alertErrors.fadeOut("slow");
+            }, 5000);
         }
-      });
-      alertErrors.fadeIn("slow");
-      setTimeout(function() {
-        alertErrors.fadeOut("slow");
-      }, 5000);
+
+        function _resetLanguagesSelector() {
+            userForm.find("#output").empty();
+            userForm.find("select#selLanguage").val("");
+        }
+
+        function editForm(user) {
+            generalConstructor.construct("user-form");
+            setTimeout(() => {
+                // empting the checkboxes when editing another user
+                var skillUser = document.getElementById("skill");
+                var inpskill = skillUser.querySelectorAll("input");
+                for (var i = 0; i < inpskill.length; i++) {
+                    inpskill[i].checked = false;
+                }
+                // empting the checkboxes when editing another user
+                var lang = document.getElementById("selLanguage");
+                //var inpLang = lang.querySelectorAll("option");
+                for (var i = 0; i < lang.options.length; i++) {
+                    lang.options[i].selected = false;
+                }
+                $("input[name=username]").val(user.login.username);
+                $("input[name=firstname]").val(
+                    user.name.first.charAt(0).toUpperCase() + user.name.first.slice(1)
+                );
+                $("input[name=lastname]").val(
+                    user.name.last.charAt(0).toUpperCase() + user.name.last.slice(1)
+                );
+                $("input[name=email]").val(user.email);
+                $("input[name=birthdate]").val(user.dob.age + " years old ");
+                $("input[name=telephone]").val(user.phone);
+                $("input[name=country]").val(user.location.state);
+                $("input[name=city]").val(user.location.city);
+                $("input[name=zip]").val(user.location.postcode);
+                $("input[name=adress]").val(user.location.street);
+                document.querySelector(`input[value=${user.gender}]`).checked = true;
+                for (var i = 0; i < user.skills.length; i++) {
+                    document.getElementById(user.skills[i]).checked = true;
+                }
+                var lang = document.getElementById("selLanguage");
+                for (var i = 0; i < lang.options.length; i++) {
+                    // user.languages es un array con "languages" like ["Spanish","English"]
+                    // indexOf está buscando dentro del array user.languages la posición del "lang.options[i].value" por ejemplo "English"
+                    // ["Spanish","English"].indexOf("Spanish")
+                    // entonces el resultado sería 1
+                    if (user.languages.indexOf(lang.options[i].value) > -1) {
+                        lang.options[i].selected = true;
+                    }
+                }
+            }, 300);
+        }
+        return {
+            construct,
+            editForm
+        };
     }
-
-    function _resetLanguagesSelector() {
-      userForm.find("#output").empty();
-      userForm.find("select#selLanguage").val("");
-    }
-
-    function editForm(user) {
-      generalConstructor.construct("user-form");
-      setTimeout(() => {
-        // empting the checkboxes when editing another user
-        var skillUser = document.getElementById("skill");
-        var inpskill = skillUser.querySelectorAll("input");
-        for (var i = 0; i < inpskill.length; i++) {
-          inpskill[i].checked = false;
-        }
-        // empting the checkboxes when editing another user
-        var lang = document.getElementById("selLanguage");
-        //var inpLang = lang.querySelectorAll("option");
-        for (var i = 0; i < lang.options.length; i++) {
-          lang.options[i].selected = false;
-        }
-        $("input[name=username]").val(user.login.username);
-        $("input[name=firstname]").val(
-          user.name.first.charAt(0).toUpperCase() + user.name.first.slice(1)
-        );
-        $("input[name=lastname]").val(
-          user.name.last.charAt(0).toUpperCase() + user.name.last.slice(1)
-        );
-        $("input[name=email]").val(user.email);
-        $("input[name=birthdate]").val(user.dob.age + " years old ");
-        $("input[name=telephone]").val(user.phone);
-        $("input[name=country]").val(user.location.state);
-        $("input[name=city]").val(user.location.city);
-        $("input[name=zip]").val(user.location.postcode);
-        $("input[name=adress]").val(user.location.street);
-
-        document.querySelector(`input[value=${user.gender}]`).checked = true;
-        for (var i = 0; i < user.skills.length; i++) {
-          document.getElementById(user.skills[i]).checked = true;
-        }
-        var lang = document.getElementById("selLanguage");
-        for (var i = 0; i < lang.options.length; i++) {
-          // user.languages es un array con "languages" like ["Spanish","English"]
-          // indexOf está buscando dentro del array user.languages la posición del "lang.options[i].value" por ejemplo "English"
-          // ["Spanish","English"].indexOf("Spanish")
-          // entonces el resultado sería 1
-          if (user.languages.indexOf(lang.options[i].value) > -1) {
-            lang.options[i].selected = true;
-          }
-        }
-      }, 300);
-    }
-
     return {
-      construct,
-      editForm
+        getInstance: function() {
+            if (!instance) {
+                instance = init();
+            }
+            return instance;
+        }
     };
-  }
-
-  return {
-    getInstance: function() {
-      if (!instance) {
-        instance = init();
-      }
-      return instance;
-    }
-  };
 })();
 
 const userForm = UserForm.getInstance();

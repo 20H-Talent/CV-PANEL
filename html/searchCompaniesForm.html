@@ -1,0 +1,66 @@
+<!-- Menu right -->
+
+
+<div id="right-menu" class="p-0">
+    <p class="text-white text-center w-100">Search for: </p>
+
+    <form id="advanced-search">
+        <div id="name-company" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-name" class="badge-pill bg-dark text-center w-100 mb-3">Company Name</label>
+            <input type="text" class="form-control" id="company-name" placeholder="Insert name" name="company-name" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+
+        <div id="cif-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-cif" class="badge-pill bg-dark text-center w-100 mb-3">CIF</label>
+            <input type="text" class="form-control" id="company-cif" placeholder="Insert CIF" name="company-cif" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+
+        <div id="employees-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-employees" class="badge-pill bg-dark text-center w-100 mb-3">Number of employees</label>
+            <input type="number" class="form-control" id="company-employees" placeholder="Number of employees" name="company-employees" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+
+        <div id="bio-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-bio" class="badge-pill bg-dark text-center w-100 mb-3">Company Bio</label>
+            <input type="text" class="form-control" id="company-bio" placeholder="bio" name="company-bio" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+        <div id="city-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-city" class="badge-pill bg-dark text-center w-100 mb-3">Company City</label>
+            <input type="text" class="form-control" id="company-city" placeholder="City" name="company-city" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+        <div id="email-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-city" class="badge-pill bg-dark text-center w-100 mb-3">Company Email</label>
+            <input type="text" class="form-control" id="company-email" placeholder="Email" name="company-email" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+        <div id="country-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+            <label for="company-country" class="badge-pill bg-dark text-center w-100 mb-3">Company country</label>
+            <input type="text" class="form-control" id="company-country" placeholder="country" name="company-country" pattern="[a-zA-Z]*">
+            <small class="text-center text-white w-100">
+                    Must be written in lowercase.
+                </small>
+        </div>
+        <div id="button_right" class="d-flex justify-content-center mb-5">
+            <button id="submit_search" onclick="advancedSearchCompanies(event)" type="submit" class="btn btn-primary mb-5 badge badge-pill">
+                    <i class="fa fa-check-circle fa-3x "></i>
+                </button>
+        </div>
+    </form>
+</div>

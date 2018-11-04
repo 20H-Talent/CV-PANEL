@@ -1,102 +1,180 @@
 var companies = new Companies();
-$.getJSON("../data/companies.json")
-    .done(function(data) {
-        $.each(data, function(i, item) {
+fetch("https://cv-mobile-api.herokuapp.com/api/company")
+    .then(response => response.json())
+    .then(function(jsonResponse) {
+        $.each(jsonResponse, function(i, item) {
             var company = new Company(
-                data[i].id,
-                data[i].name,
-                data[i].CIF,
-                data[i].email,
-                data[i].socialnetworks,
-                data[i].logo,
-                data[i].descripcion,
-                data[i].workersNumber,
-                data[i].phone,
-                data[i].address,
-                data[i].socialnetworks
+                jsonResponse[i]._id,
+                jsonResponse[i].name,
+                jsonResponse[i].CIF,
+                jsonResponse[i].email,
+                jsonResponse[i].__v,
+                jsonResponse[i].logoURL,
+                jsonResponse[i].bio,
+                jsonResponse[i].employees,
+                jsonResponse[i].phone,
+                jsonResponse[i].address,
+                jsonResponse[i].website,
+                jsonResponse[i].registeredDate
             );
             companies.addCompany(company);
+
+            console.log('jsonResponse[i]._id :', jsonResponse[i]._id);
         });
 
-        companies.renderTable();
-        companies.renderCompanyCards();
+        console.log('companies.companies :', companies.companies);
+        // companies.renderTable(companies.companies);
+        // companies.renderCompanyCards();
+        //companies.searchAdvanced();
 
         $(window).on("resize", function() {
             let width = $(this).width();
 
-            const mainContainer = $(".main-container-companies");
-            const tableBody = mainContainer.find("#company-table tbody");
+            const companyContainer = $(".main-container-companies");
+            const tableBodyCompanies = companyContainer.find("#company-table tbody");
             let cardDiv = $("#card-container-company");
 
             if (width > 868) {
-                mainContainer.show();
-                cardDiv.hide();
+                companies.renderCompaniesTable(companies.companies);
+                console.log('table :', companies.companies);
             } else {
-                mainContainer.hide();
-                cardDiv.show();
+                companies.renderCompanyCards();
+                console.log('cards? :');
             }
         });
     })
-    .fail(function(jqXHR) {
-        if (jqXHR.statusText !== "OK") {
-            console.log("[ERROR]: on loading json Companies.");
-        }
-    });
 
 function showPreviewInfo(id) {
+    console.log('entra? :');
     var company = companies.getCompanyById(id);
-    $("#modal").html(
-        `<div class="shadow-lg p-3 border col-lg col-sm  col-md  rounded"   data-id=${
-      company.id
-    } >
-        <div class="card-header d-flex header-card flex-row align-items-center">
-            <img class="img-fluid mr-2 rounded-circle" src=${
-              company.logo
-            } width=120px height:60px  alt="test"/>
-            <div class=" ml-4 text-light">
-                <h4 class="modal-title">
-                <p>${company.name}</p>
-                <p> CIF ${company.CIF}</p>
-                </h4>
-            </div>
+
+    $("#modal-company").html(
+        `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${company.id} >
+        <div class="card-header rounded  text-dark d-flex header-card flex-row align-items-center">
+           <img class="img-fluid mr-2 rounded-circle" src=${company.logoURL} width=120px height:50px  alt="test"/>
+           <div class="  ml-4 ">
+              <h5 class=" font-weight-bold modal-title">
+                 <p>${company.name}</p>
+                 <p> CIF ${company.CIF}</p>
+              </h5>
+           </div>
         </div>
-        <div class="text-light">
-            <div class=" text-dark text-center mt-3 h6"><h6 class="  text-center rounded  header-card text-white">Email</h6><p><a class="text-dark text-center" href="mailto${
-              company.email
-            }">${company.email}</a></p>
-        </div>
-            <div class="text-dark text-center h6 "><h6 class="  text-center header-card text-white rounded ">Profile </h6>
-            <p>${company.descripcion}</p>
-        </div>
-        <div class="text-dark text-center h6 "><h6 class="  text-center header-card text-white rounded ">Social Networks </h6>
-        <div class="col-md-12 text-center " id="networks${company.id}">
-        ${company.renderSocialNetworks()}
-    </div>
-    </div>
-            <div  class="text-dark text-center h6 "><h6 class="text-center header-card text-white rounded">Phone</h6>
-            <p>${company.phone}</p>
-        </div>
-            <div class="text-dark text-center h6"><h6 class=" text-center header-card text-white rounded">Numbers of workers</h6>
-            <p>${company.workersNumber}</p>
-        </div>
-            <div class="text-dark text-center h6 "><h6 class="  text-center header-card text-white rounded" >Address</h6>
-            <p>${company.address.country} ~ ${company.address.city} ${
-      company.address.street
-    } / ${company.address.zipcode}</p>
-        </div>
-            <div class="card-footer   header-card text-right"></div>
-    </div> `
+        <div class="text-dark">
+           <div class=" text-dark  mt-3 h5">
+              <h5 class=" rounded text-dark font-weight-bold ">Email</h5>
+              <h6><a class=" ldeep-purple " href="mailto${company.email}">${company.email}</a></h6>
+           </div>
+           <div class="text-dark  h5 ">
+              <h5 class="  text-dark rounded font-weight-bold">Profile </h5>
+              <h6 class=" ldeep-purple ">${company.bio}</h6>
+           </div>
+           <div class="text-dark  h5 ">
+              <h5 class="  text-dark rounded font-weight-bold">Website</h5>
+              <h6 class=" ldeep-purple ">${company.website}</h6>
+           </div>
+           <div  class="text-dark  h5 ">
+              <h5 class="  header-card text-dark rounded font-weight-bold">Phone</h5>
+              <h6 class=" ldeep-purple ">${company.phone}</h6>
+           </div>
+           <div class="text-dark  h5">
+              <h5 class="  header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
+              <h6 class=" ldeep-purple ">${company.employees}</h6>
+           </div>
+           <div class="text-dark  h5 ">
+              <h5 class=" header-card text-dark rounded font-weight-bold " >Address</h5>
+              <h6 class=" ldeep-purple ">${company.address.country} ~ ${company.address.city} ${
+                 company.address.street
+                 } / ${company.address.zipcode}
+              </h6>
+           </div>
+           <div class=" modal-footer">
+              <button type="button" class="btn  btn-ldeep-purple text-light" data-dismiss="modal">Close</button>
+           </div>
+        </div> `
     );
+
 }
+
 
 function removeCompanyFromDOM(id) {
     var company = companies.getCompanyById(id);
-    const mainContainer = $(".main-container-companies");
-    const tableBody = mainContainer.find("#company-table tbody");
-    mainContainer.on("click", "button.delete-company", function(e) {
-        if (tableBody.children("tr").length > 0) {
-            var findTr = tableBody.find(`tr[data-id=${company.id}]`);
-            findTr.remove();
-        }
+    const tableCompany = $("#card-container-company");
+    const companyContainer = $(".main-container-companies");
+    const tableBodyCompanies = companyContainer.find("#tableBody");
+    companyContainer.on("click", "button.delete-company", function(e) {
+        if (tableBodyCompanies.children("tr").length > 0) {
+            var findTrCompanies = tableBodyCompanies.find(`tr[data-id=${company.id}]`);
+            console.log('company.id :', company.id);
+            findTrCompanies.remove();
+
+        } //else //{
+        //     const cards = tableCompany.find(`.card-company[data-id=${company.id}]`);
+        //     //cards.remove();
+        //     cards.remove();
+        //     console.log('cards :', cards);
+
+        // }
     });
+}
+
+// Advanced search for companies form
+function advancedSearchCompanies(event) {
+    event.preventDefault();
+    $("#alertNoCompanyFound").remove();
+    let inputCompanyName = $("#company-name").val().toLowerCase();
+    let inputCif = $("#company-cif").val().toLowerCase();
+    let inputEmployees = $("#company-employees").val().toLowerCase();
+    let inputBio = $("#company-bio").val().toLowerCase();
+    let inputCity = $("#company-city").val().toLowerCase();
+    let inputEmail = $("#company-email").val().toLowerCase();
+    let inputCountry = $("#company-country").val().toLowerCase();
+    var badgesContainer = $(".search-badges-company").empty();
+    let formCompanyes = $("#advanced-search");
+    let inputs = formCompanyes.find("input");
+    var filteredCompanies = [];
+
+    filteredCompanies = companies.companies.filter((company) => {
+        return (company.name.toLowerCase().includes(inputCompanyName));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.CIF.toString().toLowerCase().includes(inputCif));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.employees.toString().includes(inputEmployees));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.bio.toString().includes(inputBio));
+    });
+
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.address.city.toLowerCase().includes(inputCity));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.email.toLowerCase().includes(inputEmail));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.address.country.toLowerCase().includes(inputCountry));
+    });
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value.toString().trim().length > 0) {
+            console.log('inputs[i] :', inputs[i]);
+            const badgeCompany = $(`<span class="badge ml-3 badge-pill badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+            badgesContainer.append(badgeCompany);
+            badgeCompany.show("slow");
+            badgeCompany.off("click").on("click", function(event) {
+                event.preventDefault();
+                badgeCompany.remove();
+                inputs[i].value = "";
+                $("#alertNoCompanyFound").remove();
+                companies.renderCompaniesTable(companies.companies);
+            });
+
+        }
+
+    }
+    if (filteredCompanies.length == 0) {
+        $("#company-table").append(`<div id="alertNoCompanyFound" class="alert alert-danger" role="alert">No companies found</div>`);
+    }
+    console.log('filteredCompanies :', filteredCompanies);
+    companies.renderCompaniesTable(filteredCompanies);
 }
