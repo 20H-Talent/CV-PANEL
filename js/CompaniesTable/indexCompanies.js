@@ -1,21 +1,25 @@
 var companies = new Companies();
-$.getJSON("../data/companies.json")
-    .done(function(data) {
-        $.each(data, function(i, item) {
+fetch("https://cv-mobile-api.herokuapp.com/api/company")
+    .then(response => response.json())
+    .then(function(jsonResponse) {
+        $.each(jsonResponse, function(i, item) {
             var company = new Company(
-                data[i].id,
-                data[i].name,
-                data[i].CIF,
-                data[i].email,
-                data[i].socialnetworks,
-                data[i].logo,
-                data[i].descripcion,
-                data[i].employeesNumber,
-                data[i].phone,
-                data[i].address,
-                data[i].socialnetworks
+                jsonResponse[i]._id,
+                jsonResponse[i].name,
+                jsonResponse[i].CIF,
+                jsonResponse[i].email,
+                jsonResponse[i].__v,
+                jsonResponse[i].logoURL,
+                jsonResponse[i].bio,
+                jsonResponse[i].employees,
+                jsonResponse[i].phone,
+                jsonResponse[i].address,
+                jsonResponse[i].website,
+                jsonResponse[i].registeredDate
             );
             companies.addCompany(company);
+
+
         });
         console.log('companies.companies :', companies.companies);
         // companies.renderTable(companies.companies);
@@ -38,18 +42,15 @@ $.getJSON("../data/companies.json")
             }
         });
     })
-    .fail(function(jqXHR) {
-        if (jqXHR.statusText !== "OK") {
-            console.log("[ERROR]: on loading json Companies.");
-        }
-    });
 
 function showPreviewInfo(id) {
+    console.log('entra? :');
     var company = companies.getCompanyById(id);
-    $("#modal").html(
+
+    $("#modal-company").html(
         `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${company.id} >
         <div class="card-header btn-ldeep-purple text-light d-flex header-card flex-row align-items-center">
-            <img class="img-fluid mr-2 rounded-circle" src=${company.logo} width=120px height:50px  alt="test"/>
+            <img class="img-fluid mr-2 rounded-circle" src=${company.logoURL} width=120px height:50px  alt="test"/>
             <div class=" ml-4">
                 <h5 class="modal-title">
                 <p>${company.name}</p>
@@ -63,18 +64,16 @@ function showPreviewInfo(id) {
             }">${company.email}</a></h6>
         </div>
             <div class="text-dark text-center h5 "><h5 class="text-center  text-dark rounded font-weight-bold ">Profile </h5>
-            <h6 class=" ldeep-purple text-center">${company.descripcion}</h6>
+            <h6 class=" ldeep-purple text-center">${company.bio}</h6>
         </div>
         <div class="text-dark text-center h5 "><h5 class="text-center  text-dark rounded font-weight-bold  ">Social Networks </h5>
-        <div class="col-md-12 badge  text-center " id="networks${company.id}">
-        ${company.renderSocialNetworks()}
-    </div>
+        <h6 class=" ldeep-purple text-center">${company.website}</h6>
     </div>
             <div  class="text-dark text-center h5 "><h5 class="text-center  header-card text-dark rounded font-weight-bold ">Phone</h5>
             <h6 class=" ldeep-purple text-center">${company.phone}</h6>
         </div>
             <div class="text-dark text-center h5"><h5 class=" text-center header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
-            <h6 class=" ldeep-purple text-center">${company.employeesNumber}</h6>
+            <h6 class=" ldeep-purple text-center">${company.employees}</h6>
         </div>
             <div class="text-dark text-center h5 "><h5 class="text-center header-card text-dark rounded font-weight-bold " >Address</h5>
             <h6 class=" ldeep-purple text-center">${company.address.country} ~ ${company.address.city} ${
@@ -98,13 +97,13 @@ function removeCompanyFromDOM(id) {
             var findTrCompanies = tableBodyCompanies.find(`tr[data-id=${company.id}]`);
             findTrCompanies.remove();
 
-        } else {
-            const cards = tableCompany.find(`.card-company[data-id=${company.id}]`);
-            //cards.remove();
-            cards.remove();
-            console.log('cards :', cards);
+        } //else //{
+        //     const cards = tableCompany.find(`.card-company[data-id=${company.id}]`);
+        //     //cards.remove();
+        //     cards.remove();
+        //     console.log('cards :', cards);
 
-        }
+        // }
     });
 }
 
@@ -131,7 +130,7 @@ function advancedSearchCompanies(event) {
         return (company.CIF.toLowerCase().includes(inputCif));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.employeesNumber.toString().includes(inputEmployees));
+        return (company.employees.toString().includes(inputEmployees));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.email.toLowerCase().includes(inputEmail));
@@ -152,6 +151,7 @@ function advancedSearchCompanies(event) {
                 event.preventDefault();
                 badgeCompany.remove();
                 inputs[i].value = "";
+                $("#alertNoCompanyFound").remove();
                 companies.renderCompaniesTable(companies.companies);
             });
         }
