@@ -60,7 +60,11 @@ const SurveyCreator = (function() {
 
         $surveyTableContainer
           .find(".Survey-TableBody")
-          .on("keyup", "input[type=text]", _validateTextInput);
+          .on(
+            "keyup",
+            "input[type=text], p[contenteditable]",
+            _validateTextInput
+          );
 
         form
           .find(".SurveyHeader-Data")
@@ -636,16 +640,15 @@ const SurveyCreator = (function() {
 
       function _validateTextInput(textInput) {
         const $textInput = $(event.target);
+        const inputValue = $textInput.is("input")
+          ? $textInput.val().trim()
+          : $textInput.text();
+
         const targetContainer = $(".Survey-TableBody").find("ul.preview-list");
 
-        if (
-          !AlphaNumericREGEXP.test(
-            $($textInput)
-              .val()
-              .trim()
-          )
-        ) {
+        if (!AlphaNumericREGEXP.test(inputValue)) {
           $textInput.addClass("invalid-value");
+
           if (targetContainer.find("span.form-error").length === 0) {
             $(".Survey-TableBody")
               .find("ul.preview-list")
@@ -698,27 +701,24 @@ const SurveyCreator = (function() {
         let errors = _validateSurveyDates() + _validateHeaderTextInputs();
 
         if (errors === 0) {
-          console.log("FORM WITHOUT ERRORS");
-          /*
-        _setHeaderSurveyData();
-        _setBodySurveyData();
+          _setHeaderSurveyData();
+          _setBodySurveyData();
 
-        $.ajax({
-          url: "http://localhost:3000/api/surveys",
-          type: "POST",
-          crossDomain: true,
-          contentType: "application/json",
-          dataType: "json",
-          cache: true,
-          data: JSON.stringify(surveyApiData),
-          success: function(response) {
-            _activeToastMessage();
-          },
-          error: function(jqXHR, textStatus) {
-            _activeToastMessage(jqXHR.statusText);
-          }
-        });
-        */
+          $.ajax({
+            url: "http://localhost:3000/api/surveys",
+            type: "POST",
+            crossDomain: true,
+            contentType: "application/json",
+            dataType: "json",
+            cache: true,
+            data: JSON.stringify(surveyApiData),
+            success: function(response) {
+              _activeToastMessage();
+            },
+            error: function(jqXHR, textStatus) {
+              _activeToastMessage(jqXHR.statusText);
+            }
+          });
         }
       }
     }
