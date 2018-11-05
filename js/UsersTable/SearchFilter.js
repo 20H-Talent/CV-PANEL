@@ -91,7 +91,7 @@ const SearchFilter = (function() {
     const resetButton = filtersContainer.append(
       `<button id="reset-btn" class="btn btn-sm btn-info">Cancel search</button>`
     );
-    resetButton.off("click").on("click", function(e) {
+    $("#reset-btn").off("click").on("click", function(e) {
       badgesContainer.empty();
       $(this).remove();
       usersTable.initTable(null, window.innerWidth);
@@ -107,18 +107,20 @@ const SearchFilter = (function() {
       const badge = $(
         `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
           filters[key]
-        }</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
+        }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
       ).hide();
       badgesContainer.append(badge);
       badge.show("slow");  
 
-      $("#bagedButton").on("click",_deleteBagde); 
+      badge.on("click",_deleteBagde); 
+      
     }
+    
   }
 
-  function _deleteBagde(badge){
-    console.log("entra en borrar badge");
-    badgesContainer.remove(badge);
+  function _deleteBagde(){
+    $(this).remove();
+    usersTable.initTable(null, window.innerWidth);
   }
 
   return {
