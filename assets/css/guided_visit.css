@@ -41,3 +41,37 @@
   z-index: 100;
   top: 0;
 }
+/* ---------------- CONFETTI ------------- */
+
+.wrappert {
+  position: relative;
+  min-height: 100vh;
+}
+
+[class*="confetti"] {
+  position: absolute;
+}
+
+.red {
+  background-color: #e94a3f;
+}
+
+.light-blue {
+  background-color: #40faea;
+}
+
+.blue {
+  background-color: #22799e;
+}
+.pink {
+  background-color: #d07fe0;
+}
+.purple {
+  background-color: #9254d1;
+}
+.green {
+  background-color: #008000;
+}
+.greenyellow {
+  background-color: #adff2f;
+}

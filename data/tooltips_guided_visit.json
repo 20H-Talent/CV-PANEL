@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "zone": "navbar",
+    "title": "Navigation bar",
     "elPositionSelected": {
       "top": "0%",
       "left": "0%",
@@ -15,7 +15,8 @@
       "left": "14.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "15%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "16%",
@@ -24,7 +25,8 @@
       "bottom": "0%",
       "icon": "up"
     },
-    "elSelected": ["header", "relative"],
+    "otherElms": [":nth-of-type(1)", "1"],
+    "elSelected": ["header", "", "transparent", "type", "button"],
     "overlayContent": [".container-left", "#Div1", ".container-right"],
     "badgeTool": 1,
 
@@ -34,7 +36,7 @@
   },
   {
     "id": 1,
-    "zone": "left-menu",
+    "title": "Left menu",
     "elPositionSelected": {
       "top": "9.8%",
       "left": "0%",
@@ -48,7 +50,8 @@
       "left": "6.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "20%",
@@ -57,7 +60,8 @@
       "bottom": "0%",
       "icon": "left"
     },
-    "elSelected": [".container-left", "relative"],
+    "otherElms": [":nth-of-type(1)", "1"],
+    "elSelected": ["#mySidenavLeft", "", "transparent", "type", "button"],
     "overlayContent": ["header", "#Div1", ".container-right"],
     "badgeTool": 2,
 
@@ -67,7 +71,7 @@
   },
   {
     "id": 2,
-    "zone": "left-menu",
+    "title": "List users",
     "elPositionSelected": {
       "top": "19.7%",
       "left": "0%",
@@ -81,7 +85,8 @@
       "left": "17.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "25%",
@@ -90,7 +95,8 @@
       "bottom": "0%",
       "icon": "left"
     },
-    "elSelected": ["#list-users", "relative"],
+    "otherElms": [":nth-of-type(1)", "0.5"],
+    "elSelected": ["#list-users", "", "transparent", "type", "button"],
     "overlayContent": ["header", "#Div1", ".container-right", "#mySidenavLeft"],
 
     "badgeTool": 2.1,
@@ -101,7 +107,7 @@
   },
   {
     "id": 3,
-    "zone": "left-menu",
+    "title": "Users listed",
     "elPositionSelected": {
       "top": "14.8%",
       "left": "4.7%",
@@ -115,7 +121,8 @@
       "left": "35.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "41%"
     },
     "arrowPosition": {
       "top": "62%",
@@ -124,7 +131,10 @@
       "bottom": "0%",
       "icon": "up"
     },
-    "elSelected": ["#Div1", "relative"],
+    "elSelected": [
+      "table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+      "relative"
+    ],
     "overlayContent": ["header", ".container-left", ".container-right"],
 
     "badgeTool": 2.2,
@@ -135,7 +145,7 @@
   },
   {
     "id": 4,
-    "zone": "left-menu",
+    "title": "More information about the user",
     "elPositionSelected": {
       "top": "25%",
       "left": "85.6%",
@@ -149,7 +159,8 @@
       "left": "46.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "26%",
@@ -158,32 +169,37 @@
       "bottom": "0%",
       "icon": "right"
     },
-    "elSelected": ["#Div1", "relative"],
+    "elSelected": [
+      "table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+      "relative"
+    ],
     "overlayContent": ["header", ".container-left", ".container-right"],
 
     "badgeTool": 2.3,
 
     "text": "Click this button to see more information about the user!!",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "show.bs.modal, table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm"
+    "eventCallToOpen": "show.bs.modal, table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+    "eventCallToClose": "click"
   },
   {
     "id": 5,
-    "zone": "left-menu",
+    "title": "User's nickname",
     "elPositionSelected": {
       "top": "5.5%",
       "left": "32.4%",
       "right": "0%",
       "bottom": "0%",
       "height": "6.5%",
-      "width": "12.7%"
+      "width": "12.7%",
+      "wid": "36%"
     },
     "tooltipPosition": {
       "top": "5%",
       "left": "48.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "14%"
+      "height": "18%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "7%",
@@ -203,7 +219,7 @@
   },
   {
     "id": 6,
-    "zone": "left-menu",
+    "title": "Additional Information",
     "elPositionSelected": {
       "top": "13%",
       "left": "31%",
@@ -217,7 +233,8 @@
       "left": "30.5%",
       "right": "0%",
       "bottom": "0%",
-      "height": "14%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "40%",
@@ -232,12 +249,12 @@
     "badgeTool": 2.5,
 
     "text": "Information as birthday, telephone number and full address is also available.",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "show.bs.modal, button.btn.btn-link"
+    "eventCallToOpen": "show.bs.modal, button.btn.btn-link",
+    "eventCallToClose": "click"
   },
   {
     "id": 7,
-    "zone": "left-menu",
+    "title": "Languages, Skills and Frameworks",
     "elPositionSelected": {
       "top": "38.5%",
       "left": "21.6%",
@@ -247,11 +264,12 @@
       "width": "56.7%"
     },
     "tooltipPosition": {
-      "top": "19%",
+      "top": "12%",
       "left": "25.6%",
       "right": "0%",
       "bottom": "0%",
-      "height": "14%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "34%",
@@ -266,12 +284,12 @@
     "badgeTool": 2.6,
 
     "text": "And there are the languages, skills and frameworks that the user manages.",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "show.bs.modal, button.my-2.btn.btn-outline-success.btn-sm"
+    "eventCallToOpen": "show.bs.modal, table tbody > tr:first-child button.my-2.btn.btn-outline-success.btn-sm",
+    "eventCallToClose": "click"
   },
   {
     "id": 8,
-    "zone": "left-menu",
+    "title": "Edit information of the user",
     "elPositionSelected": {
       "top": "25%",
       "left": "88.3%",
@@ -285,7 +303,8 @@
       "left": "50.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "26%",
@@ -300,12 +319,12 @@
     "badgeTool": 2.7,
 
     "text": "Click on this button and you can modify the user's properties.",
-    "eventCallToOpen": "#userModal",
-    "eventCallToClose": "click, table tbody > tr:first-child button.my-2.btn.btn-outline-primary.btn-sm.edit"
+    "eventCallToOpen": "click, table tbody > tr:first-child button.my-2.btn.btn-outline-primary.btn-sm.edit",
+    "eventCallToClose": "click"
   },
   {
     "id": 9,
-    "zone": "left-menu",
+    "title": "User's information",
     "elPositionSelected": {
       "top": "53%",
       "left": "21.8%",
@@ -319,7 +338,8 @@
       "left": "23.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "48%",
@@ -339,7 +359,7 @@
   },
   {
     "id": 10,
-    "zone": "left-menu",
+    "title": "Delete the user",
     "elPositionSelected": {
       "top": "25.6%",
       "left": "91%",
@@ -353,7 +373,8 @@
       "left": "53%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "27%",
@@ -373,7 +394,7 @@
   },
   {
     "id": 11,
-    "zone": "left-menu",
+    "title": "Create a new user",
     "elPositionSelected": {
       "top": "27.7%",
       "left": "0%",
@@ -387,7 +408,8 @@
       "left": "14.9%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "28.4%",
@@ -412,7 +434,7 @@
   },
   {
     "id": 12,
-    "zone": "left-menu",
+    "title": "Attributes of the user",
     "elPositionSelected": {
       "top": "53%",
       "left": "21.8%",
@@ -426,7 +448,8 @@
       "left": "23.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "19%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "48%",
@@ -441,12 +464,222 @@
     "badgeTool": "2.11",
 
     "text": "Here, is the form when you set the values of the user.",
-    "eventCallToOpen": "#list-users",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(3)",
     "eventCallToClose": "click"
   },
   {
     "id": 13,
-    "zone": "right-menu",
+    "title": "List Companies",
+    "elPositionSelected": {
+      "top": "33%",
+      "left": "16.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "32%",
+      "left": "16.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "35%",
+      "left": "13.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.12",
+
+    "text": "Click here if you can see the list of companies that are saved the database.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 14,
+    "title": "Companies listed",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "59%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "55%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.13",
+
+    "text": "Here there is a table! On you can see the logo, name, email, tlfn and social networks of the companies was been registered.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 15,
+    "title": "Surveys",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "39.8%",
+      "left": "15%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "42%",
+      "left": "12.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "elSelected": [".container-left", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.14",
+
+    "text": "Click here if you want to create a survey.",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(4)",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 16,
+    "title": "Survey Form",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "59%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "55%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.15",
+
+    "text": "There are the fields that you can use to create your survey.",
+    "eventCallToOpen": "#open-icon-left",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 17,
+    "title": "Add an Enterprise",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "47%",
+      "left": "7.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "48%",
+      "left": "4.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "left"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.16",
+
+    "text": "Click here if you can create an enterprises that are saved on the database.",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(5)",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 18,
+    "title": "Enterprise Form",
+    "elPositionSelected": {
+      "top": "59%",
+      "left": "21.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "40%",
+      "width": "55.8%"
+    },
+    "tooltipPosition": {
+      "top": "59%",
+      "left": "23.2%",
+      "right": "0%",
+      "bottom": "0%",
+      "height": "19%",
+      "width": "36%"
+    },
+    "arrowPosition": {
+      "top": "55%",
+      "left": "24.8%",
+      "right": "0%",
+      "bottom": "0%",
+      "icon": "up"
+    },
+    "elSelected": ["#Div1", "relative"],
+    "overlayContent": ["header", ".container-left", ".container-right"],
+
+    "badgeTool": "2.17",
+
+    "text": "There are the fields that you can use to create an Enterprise.",
+    "eventCallToOpen": "#list-users",
+    "eventCallToClose": "click"
+  },
+  {
+    "id": 19,
+    "title": "Right menu",
     "elPositionSelected": {
       "top": "11.8%",
       "left": "97.5%",
@@ -460,7 +693,8 @@
       "left": "57.8%",
       "right": "0%",
       "bottom": "0%",
-      "height": "15%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "20%",
@@ -479,8 +713,8 @@
     "eventCallToClose": "click"
   },
   {
-    "id": 14,
-    "zone": "left-menu",
+    "id": 20,
+    "title": "Fields that you can search",
     "elPositionSelected": {
       "top": "11.7%",
       "left": "77.8%",
@@ -494,7 +728,8 @@
       "left": "37.2%",
       "right": "0%",
       "bottom": "0%",
-      "height": "19%"
+      "height": "21%",
+      "width": "36%"
     },
     "arrowPosition": {
       "top": "24%",
@@ -511,36 +746,5 @@
     "text": "Here, you can search users by name, last name, genre, age, years of experience, laguages or skills.",
     "eventCallToOpen": "#open-icon-right",
     "eventCallToClose": "click"
-  },
-  {
-    "id": 15,
-    "zone": "center",
-    "elPositionSelected": {
-      "top": "42%",
-      "left": "31%",
-      "right": "0%",
-      "bottom": "0%",
-      "height": "21%",
-      "width": "40%"
-    },
-    "tooltipPosition": {
-      "top": "45%",
-      "left": "32.8%",
-      "right": "0%",
-      "bottom": "0%",
-      "height": "15%"
-    },
-    "arrowPosition": {
-      "top": "37%",
-      "left": "49%",
-      "right": "0%",
-      "bottom": "0%",
-      "icon": "down"
-    },
-    "badgeTool": 4,
-
-    "text": "Congrats!! You passed the guided visit. Now, you can work with the app.",
-    "eventCallToOpen": "",
-    "eventCallToClose": ""
   }
 ]
