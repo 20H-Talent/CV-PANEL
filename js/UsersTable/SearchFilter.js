@@ -89,7 +89,7 @@ const SearchFilter = (function() {
 
   function _createResetButton(filtersContainer, badgesContainer) {
     const resetButton = filtersContainer.append(
-      `<button class="btn btn-sm btn-info">Cancel search</button>`
+      `<button id="reset-btn" class="btn btn-sm btn-info">Cancel search</button>`
     );
     resetButton.off("click").on("click", function(e) {
       badgesContainer.empty();
@@ -110,18 +110,15 @@ const SearchFilter = (function() {
         }</span><button id="badgeButton" class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
       ).hide();
       badgesContainer.append(badge);
-      badge.show("slow");
+      badge.show("slow");  
 
-      // badge.off("click").on("click", function(event) {
-      //   console.log("entran en el click badge")
-      //     event.preventDefault();
-      //     // badge.remove();
-      //     badge.empty();
-      //     // filters[key].value = "";
-      //     usersTable.initTable(null, window.innerWidth);
-      // });
-
+      $("#bagedButton").on("click",_deleteBagde); 
     }
+  }
+
+  function _deleteBagde(badge){
+    console.log("entra en borrar badge");
+    badgesContainer.remove(badge);
   }
 
   return {
