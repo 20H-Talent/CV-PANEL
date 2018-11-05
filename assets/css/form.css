@@ -80,8 +80,8 @@ li {
 }
 
 #Div4 {
-    font-family: "Crete Round", sans-serif;
-    display: none;
+  font-family: "Crete Round", sans-serif;
+  display: none;
 }
 
 body {
@@ -111,9 +111,9 @@ body {
 }
 
 .mb-4 {
-    /* margin-top: 40px; */
-    border-top: 4px solid black !important;
-    margin-bottom: 0.2rem !important;
+  /* margin-top: 40px; */
+  border-top: 4px solid black !important;
+  margin-bottom: 0.2rem !important;
 }
 
 .hr-2 {
@@ -186,26 +186,27 @@ button#languages {
   *************************/
 
 #Div4 {
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: #ffffff;
-    color: black;
-    max-height: 100vh;
-    margin-left: 2em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #fff;
+  /* background-size: cover; */
+  /* font-family: "Crete Round", sans-serif; */
+  color: black;
+  max-height: 100vh;
+  margin-left: 2em;
 }
-
-
-/* .enterprise-form {
-    height: 100vh;
-    overflow-y: auto;
-    margin-bottom: 3em;
+/* 
+.enterprise-form {
+  height: 100vh;
+  overflow-y: auto;
+  margin-bottom: 3em;
 } */
 
 .btn-custom-2 {
-    color: white;
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
-    margin-top: 2em!important;
-    margin-bottom: 8rem;
+  color: white;
+  background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+  margin-top: 2em!important;
+  margin-bottom: 8rem;
 }
 
 .format-1 {
@@ -217,8 +218,8 @@ button#languages {
 }
 
 .format-2 {
-    font-size: 1.2rem;
-    /* font-weight: bolder; */
+  font-size: 1.2rem;
+  /* font-weight: bolder; */
 }
 
 
@@ -227,43 +228,47 @@ button#languages {
  *****************************/
 
 @media (min-width: 768px) {
-    #Div2 {
-        margin-left: 0;
-    }
-    /* .enterprise-form {
-        height: 100vh;
-        overflow-y: auto;
-    } */
-    .btn-custom-2 {
-        margin-top: 2em;
-        margin-bottom: 8rem;
-    }
-    .form-row {
-        margin-top: 2em;
-        align-items: center;
-    }
-    .format-2 {
-        width: 20%;
-        font-size: 1.2rem;
-        /* font-weight: bolder; */
-    }
-    .format-3 {
-        width: 80%;
-    }
-    .form-control-width {
-        width: 80%;
-    }
-    .format-1 {
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: bolder;
-        margin-top: 3rem;
-        margin-bottom: 5rem;
-    }
-    #inputDescription {
-        width: 100%;
-    }
-    #Div4 {
-        margin-left: 0;
-    }
+  #Div2 {
+    margin-left: 0;
+  }
+
+  /* .enterprise-form {
+    height: 100vh;
+    overflow-y: auto;
+  } */
+  #btn-enterprises{
+    width:80%;
+  }
+  .btn-custom-2 {
+    margin-top: 2em;
+    margin-bottom: 8rem;
+  }
+  .form-row {
+    margin-top: 2em;
+    align-items: center;
+  }
+  .format-2 {
+    width: 20%;
+    font-size: 1.2rem;
+    /* font-weight: bolder; */
+  }
+  .format-3 {
+    width: 60%;
+  }
+  .form-control-width {
+    width: 60%;
+  }
+  .format-1 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+  }
+  #bio {
+    width: 80%;
+  }
+  #Div4 {
+    margin-left: 0;
+  }
 }
