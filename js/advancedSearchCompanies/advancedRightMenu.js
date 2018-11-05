@@ -17,7 +17,6 @@
 
      // Sent as a string
      formData.append('name', company.name);
-     º
      // Sent as a string
      formData.append('CIF', company.CIF);
 
@@ -25,13 +24,14 @@
      formData.append('email', company.email);
 
      // Sent as a string
-     formData.append('city', company.address.city);
+     //  formData.append('city', company.address.city);
 
      // Sent as a string
      formData.append('country', company.address.country);
+     formData.append('zipcode', company.address.zipcode);
 
      // Sent as a string
-     formData.append('jobTitle', company.address.street);
+     formData.append('street', company.address.street);
 
      // Sent as a string
      formData.append('bio', company.bio);
@@ -42,18 +42,30 @@
      // Sent as a string. Choose a value from below.
      formData.append('phone', company.phone);
 
-     // Pick the value from an input(type="date")
+     //  formData.append('logo', company.logoURL.files[0]);
 
+     // Pick the value from an input(type="date")
+     console.log('formData :', formData);
      return formData;
  }
 
 
 
 
- function sendNewUser(e) {
-     e.preventDefault();
+ function sendNewCompany(e) {
+
      let company = new Company(
-         $("input[name=inputName]").val(), $("input[name=inputCif]").val(), $("input[name=imputAdress]").val(), $("input[name=imputCity]").val(), $("input[name=inputCountry]").val(), $("input[name=inputZip]").val(), $("input[name=inputEmail]").val(), $("input[name=inputWorkersNumber]").val(), $("input[name=inputSocialNetworks]").val(), $("input[name=inputLogo]").val(), $("input[name=inputDescription]").val()
+         $("input[name=inputName]").val(),
+         $("input[name=inputCif]").val(),
+         $("input[name=inputAddress]").val(),
+         // $("input[name=imputCity]").val(),
+         $("input[name=inputCountry]").val(),
+         $("input[name=inputZip]").val(),
+         $("input[name=inputEmail]").val(),
+         $("input[name=inputWorkersNumber]").val(),
+         $("input[name=inputSocialNetworks]").val(),
+         // $("input[name=inputLogo]").val(),
+         $("input[name=inputDescription]").val()
      );
      let formBody = createRequestBody(company);
 
@@ -64,3 +76,10 @@
          .then(res => res.json())
          .then(response => console.log(response));
  }
+ $("#alert-form-enterprises").on("submit", function(e) {
+     e.preventDefault();
+
+     console.log($(this).serialize());
+     sendNewCompany();
+
+ })

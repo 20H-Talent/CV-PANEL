@@ -115,7 +115,7 @@
                 <div class="col p-0 " id="Div4">
                     <div class="container col-md-10 h-100">
                         <div class="col ">
-                            <form id="alert-form-enterprises" action="get" method="post" class="col enterprise-form">
+                            <form id="alert-form-enterprises" novalidate class="col enterprise-form">
                                 <h1 class="format-1">Business area</h1>
                                 <hr class="mb-4">
                                 <hr class=" hr-2">
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="form-row col-md-12">
                                     <label class="format-2" for="inputAddress">Address</label>
-                                    <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street" required>
+                                    <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="Street">
                                 </div>
                                 <div class="form-row col-md-12">
                                     <label class="format-2" for="inputCity">City</label>
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="form-row col-md-12">
                                     <label class="format-2" for="inputSocialNetworks">Social Networks</label>
-                                    <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter..." required>
+                                    <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter...">
                                 </div>
                                 <div class="form-row col-md-12">
                                     <label class="format-2" for="inputLogo">Logo</label>
@@ -167,8 +167,7 @@
 
                                 <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
                                 <div class="form-row col-md-12">
-                                    <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional
-                                    </textarea>
+                                    <textarea name="inputDescription" type="text" class="form-control" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="inputDescription">Optional</textarea>
                                 </div>
 
                                 <div class="form-row col-md-12">
