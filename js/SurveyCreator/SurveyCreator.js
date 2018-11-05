@@ -256,9 +256,9 @@ const SurveyCreator = (function() {
 
         deleteButton
           .prop("disabled", false)
-          .text(
+          .html(
             selectedBlocks > 0
-              ? `Delete ${selectedBlocks} blocks`
+              ? `<i class="far fa-trash-alt"></i> Delete ${selectedBlocks} blocks`
               : "No blocks selected"
           )
           .data("blocks", selectedBlocks);
@@ -656,23 +656,21 @@ const SurveyCreator = (function() {
           ? $textInput.val().trim()
           : $textInput.text();
 
-        const targetContainer = $(".Survey-TableBody").find("ul.preview-list");
+        const targetContainer = $textInput
+          .closest(".ValueType-data")
+          .find("ul.preview-list");
 
         if (!AlphaNumericREGEXP.test(inputValue)) {
           $textInput.addClass("invalid-value");
 
           if (targetContainer.find("span.form-error").length === 0) {
-            $(".Survey-TableBody")
-              .find("ul.preview-list")
-              .prepend(
-                '<span class="form-error">The text contains special characters not allowed</span>'
-              );
+            targetContainer.prepend(
+              '<span class="form-error">The text contains special characters not allowed</span>'
+            );
           }
         } else {
           $textInput.removeClass("invalid-value");
-          $(".Survey-TableBody")
-            .find("ul.preview-list span.form-error")
-            .remove();
+          targetContainer.find("span.form-error").remove();
         }
       }
 
