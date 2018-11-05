@@ -623,6 +623,13 @@ const SurveyCreator = (function() {
           .join("");
       }
 
+      /**
+       * Check if the dates have the logic correctly
+       * @function _validateSurveyData
+       * @private
+       * @param {object} event
+       * @return {Number} errors - Number of errors
+       */
       function _validateSurveyDates(event = null) {
         let errors = 0;
         const startDate = $(".SurveyHeader-Data input[name=startDate]");
@@ -649,6 +656,12 @@ const SurveyCreator = (function() {
         return errors;
       }
 
+      /**
+       * Validate if the text is correctly formatted
+       * @function _validateTextInput
+       * @private
+       * @param {jQuery object} textInput
+       */
       function _validateTextInput(textInput) {
         const $textInput = $(event.target);
         const inputValue = $textInput.is("input")
@@ -673,6 +686,13 @@ const SurveyCreator = (function() {
         }
       }
 
+      /**
+       * Validate if the text from the headers is correctly formatted
+       * @function _validateTextInput
+       * @private
+       * @param {jQuery object} textInput
+       * @return {Number} errors - Number of errors
+       */
       function _validateHeaderTextInputs() {
         let errors = 0;
         $(".SurveyHeader-Data")
