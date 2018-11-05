@@ -6,10 +6,10 @@
 
 #company-table thead tr:first-child th {
     position: sticky;
-    text-align: center;
     top: 0;
     /* z-index: 10; */
     margin: 0;
+    font-size: 1em;
     cursor: pointer;
     border-right: 1px solid #ffffff;
     opacity: 1;
@@ -23,17 +23,21 @@
 }
 
 .header-modal {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
-    color: #fff;
+    background: #4d394b;
+    color: black;
     border-radius: 3px;
 }
 
 .btn-ldeep-purple {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
     background-color: #ffffff;
     /* border-color: black; */
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    background: #4d394b;
     /* background-color: #4d394b; */
+}
+
+.ldeep-purple {
+    color: #4d394b;
 }
 
 .btn-ldeep-purple:hover {
@@ -127,5 +131,5 @@ a.btn-social,
 }
 
 .header-card {
-    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%)!important;
+    color: black;
 }

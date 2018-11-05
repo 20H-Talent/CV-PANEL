@@ -1,74 +1,83 @@
 <!-- Menu right -->
 
 <section>
-<div id="right-menu" class="p-0">
-    <p class="text-white text-center w-100">Search for: </p>
+    <div id="right-menu" class="p-0">
+        <p class="text-white text-center w-100">Search for: </p>
 
-    <form id="advanced-search">
-        <div id="name_user" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
-            <small class="text-center text-white w-100">
+        <form id="advanced-search">
+            <div id="name_user" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
+                <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
+                <small class="text-center text-white w-100">
                 Must be written in lowercase.
             </small>
-        </div>
+            </div>
 
-        <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="last-name" class="badge-pill bg-dark text-center w-100 mb-3">Last Name</label>
-            <input type="text" class="form-control" id="last-name" placeholder="Insert last name" name="lastname"
-                pattern="[a-zA-Z]*">
-            <small class="text-center text-white w-100">
+            <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+                <label for="last-name" class="badge-pill bg-dark text-center w-100 mb-3">Last Name</label>
+                <input type="text" class="form-control" id="last-name" placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
+                <small class="text-center text-white w-100">
                 Must be written in lowercase.
             </small>
-        </div>
+            </div>
 
-        <div id="genre" class="text-white form-group bg-dark m-2 p-2 d-flex justify-content-center align-items-center flex-wrap border">
-            <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
-            <div class="custom-control custom-radio text-center w-50">
-                <input type="radio" id="genre_female" class="custom-control-input" value="female" name="gender">
-                <label class="custom-control-label" for="genre_female">Female</label>
+            <div id="genre" class="text-white form-group bg-dark m-2 p-2 d-flex justify-content-center align-items-center flex-wrap border">
+                <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
+                <div class="custom-control custom-radio text-center w-50">
+                    <input type="radio" id="genre_female" class="custom-control-input" value="female" name="gender">
+                    <label class="custom-control-label" for="genre_female">Female</label>
+                </div>
+                <div class="custom-control custom-radio text-center w-50">
+                    <input type="radio" id="genre_male" class="custom-control-input" value="male" name="gender">
+                    <label class="custom-control-label" for="genre_male">Male</label>
+                </div>
             </div>
-            <div class="custom-control custom-radio text-center w-50">
-                <input type="radio" id="genre_male" class="custom-control-input" value="male" name="gender">
-                <label class="custom-control-label" for="genre_male">Male</label>
-            </div>
-        </div>
+ 
+       
         <div id="age_user" class="text-white form-group m-2 p-2 bg-dark border">
             <label for="age-range" class="badge-pill bg-dark text-white text-center w-100 mb-3 ">Age</label>
-            <input type="range" min="16" max="90" class="custom-range" id="age-range">
+            <input type="range" min="16" max="90" class="custom-range" id="age-range" value="" name="Age">
             <p id="age" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
         </div>
         <div id="experience" class="text-white form-group m-2 p-2 bg-dark border">
             <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
                 of experience</label>
-            <input type="range" min="0" max="30" class="custom-range" id="exp-years">
+            <input type="range" min="0" max="30" class="custom-range" id="exp-years" value="" name="Experience">
             <p id="range" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
         </div>
 
-        <!-- ********* lANGUAGES *********** -->
-        <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
-            <label class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</label>
-        </div>
+            <!-- ********* lANGUAGES *********** -->
+            <h6 class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</h6>
+            <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
 
-        <!-- ******** SKILLS ********** -->
-        <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
-            <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
-            <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
-                <label class="w-100 text-center font-italic">Layout</label>
             </div>
-            <div class="col-5 d-flex flex-column mr-auto p-0 bg-dark">
-                <label class="w-100 text-center font-italic">Languages</label>
-            </div>
-            <div class="col-6 d-flex flex-column p-0 bg-dark">
-                <label class="w-100 text-center font-italic">Frameworks</label>
-            </div>
-        </div>
 
-        <div id="button_right" class="d-flex justify-content-center mb-5">
-            <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill">
+            <!-- ******** SKILLS ********** -->
+            <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
+                <h6 class="badge-pill bg-dark text-white text-center w-100">Skills</h6>
+                <h6 class="w-100 text-center font-italic">Layout</h6>
+                <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
+
+                </div>
+                <div class="col">
+                    <h6 class="w-100 mb-3 text-left font-italic">Languages</h6>
+                    <div class="col-5 d-flex flex-column mr-auto p-0 bg-dark">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <h6 class="w-100 text-right font-italic">Frameworks</h6>
+                    <div class="col-6 d-flex flex-column p-0 bg-dark">
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="button_right" class="d-flex justify-content-center mb-5">
+                <button id="submit_search" type="submit" class="btn  mb-5 btn-primary badge badge-pill">
                 <i class="fa fa-check-circle fa-3x "></i>
             </button>
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
 </section>
