@@ -9,291 +9,261 @@
  */
 
 const Table = (function() {
-            let instance;
+  let instance;
 
-            function init() {
-                const mainContainer = $(".main-container");
-                let apiURL = setupApiURL({
-                    results: 100,
-                    nationalities: ["ES"],
-                    gender: "",
-                    format: "json"
-                });
+  function init() {
+    const mainContainer = $(".main-container");
 
-                function construct(container) {
-                    $.get("../../html/UserTable.html", function(htmlSkeleton) {
-                        container.empty().append(htmlSkeleton);
-                        _setupSessionStorage(apiURL, initTable);
-                        _setupInternalEventListeners();
-                    }).fail(function(err) {
-                        _showOverlay(false);
-                        throw new Error(err);
-                    });
-                }
+    let apiURL = "https://cv-mobile-api.herokuapp.com/api/users";
 
-                function _setupInternalEventListeners() {
-                    $(window).on("resize", function(e) {
-                        const width = this.innerWidth;
-                        renderDataOnResize(null, width);
-                    });
+    function construct(container) {
+      $.get("../../html/UserTable.html", function(htmlSkeleton) {
+        container.empty().append(htmlSkeleton);
+        _setupSessionStorage(apiURL, initTable);
+        _setupInternalEventListeners();
+      }).fail(function(err) {
+        _showOverlay(false);
+        throw new Error(err);
+      });
+    }
 
-                    $("div.main-container")
-                        .find("td.options")
-                        .off("click")
-                        .on("click", "button:not(.detail)", _optionButtonsEvent);
-                }
+    function _setupInternalEventListeners() {
+      $(window).on("resize", function(e) {
+        const width = this.innerWidth;
+        renderDataOnResize(null, width);
+      });
 
-                function _optionButtonsEvent(event) {
-                    const button = $(event.currentTarget);
-                    const userID = button.data("id");
+      $("div.main-container")
+        .find("td.options")
+        .off("click")
+        .on("click", "button:not(.detail)", _optionButtonsEvent);
+    }
 
-                    if (button.hasClass("edit")) {
-                        userForm.editForm(getUserByEmailOrID(userID));
-                    } else {
-                        if (window.confirm("Are you sure to delete this user?")) {
-                            deleteUser(userID);
-                        }
-                    }
-                }
+    function _optionButtonsEvent(event) {
+      const button = $(event.currentTarget);
+      const userID = button.data("id");
 
-                /** Prepare sessionStorage that allow us save the data in client side to work with it
-                 * @function _setupSessionStorage
-                 * @private
-                 * @param {function} callback - Callback that triggers when the response is ready
-                 */
-                function _setupSessionStorage(url, callback) {
-                    if (!sessionStorage.getItem("users-list")) {
-                        apiRequest(url, callback);
-                    } else {
-                        callback(null, window.innerWidth);
-                    }
-                }
+      if (button.hasClass("edit")) {
+        userForm.editForm(getUserByEmailOrID(userID));
+      } else {
+        if (window.confirm("Are you sure to delete this user?")) {
+          deleteUser(userID);
+        }
+      }
+    }
 
-                function apiRequest(url, callback) {
-                    _showOverlay(true);
-                    $.getJSON(url, function(response) {
-                        if (!response["error"]) {
-                            usersWithExtraData = _appendExtraData(response["results"]);
-                            sessionStorage.setItem(
-                                "users-list",
-                                JSON.stringify(usersWithExtraData)
-                            );
-                            callback(usersWithExtraData, window.innerWidth);
-                        }
-                    }).fail(function(err) {
-                        _showOverlay(false);
-                        throw new Error(err);
-                    });
-                }
+    /** Prepare sessionStorage that allow us save the data in client side to work with it
+     * @function _setupSessionStorage
+     * @private
+     * @param {function} callback - Callback that triggers when the response is ready
+     */
+    function _setupSessionStorage(url, callback) {
+      if (!sessionStorage.getItem("users-list")) {
+        apiRequest(url, callback);
+      } else {
+        callback(null, window.innerWidth);
+      }
+    }
 
-                /** Display table with the users data when the instance is initialized
-                 * @function initTable
-                 * @public
-                 * @param {array} data - Array of JSON data
-                 */
-                function initTable(data, browserWidth) {
-                    let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-                    if (browserWidth > 768) {
-                        _showOverlay(true);
-                        const tableBody = mainContainer.find("#users-table tbody");
-                        users.forEach(user => _appendRowData(tableBody, user));
-                    } else {
-                        mainContainer
-                            .find("#users-table")
-                            .hide()
-                            .find("tbody")
-                            .empty();
-                        let cardContainer = mainContainer.find("div#card-container");
-                        users.forEach(user => _appendCardData(cardContainer, user));
-                    }
-                    _showOverlay(false);
-                }
+    function apiRequest(url, callback) {
+      _showOverlay(true);
+      $.getJSON(url, function(response) {
+        if (!response["error"]) {
+          usersWithExtraData = _appendExtraData(response);
+          sessionStorage.setItem(
+            "users-list",
+            JSON.stringify(usersWithExtraData)
+          );
+          callback(usersWithExtraData, window.innerWidth);
+        }
+      }).fail(function(err) {
+        _showOverlay(false);
+        throw new Error(err);
+      });
+    }
 
-                /**
-                 * Build the api URL to make a new request
-                 * @function setupApiURL
-                 * @public
-                 * @param {object} config
-                 * @return {string} baseURL
-                 */
-                function setupApiURL(config) {
-                    const { results, gender, nationalities, format } = config;
+    /** Display table with the users data when the instance is initialized
+     * @function initTable
+     * @public
+     * @param {array} data - Array of JSON data
+     */
+    function initTable(data, browserWidth) {
+      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
+      if (browserWidth > 768) {
+        _showOverlay(true);
+        const tableBody = mainContainer.find("#users-table tbody");
+        users.forEach(user => _appendRowData(tableBody, user));
+      } else {
+        mainContainer
+          .find("#users-table")
+          .hide()
+          .find("tbody")
+          .empty();
+        let cardContainer = mainContainer.find("div#card-container");
+        users.forEach(user => _appendCardData(cardContainer, user));
+      }
+      _showOverlay(false);
+    }
 
-                    let nationalitiesFormatted = _nationalitiesRequestFormat(nationalities);
-                    let baseURL = `https://randomuser.me/api/?results=${results}&gender=${
-        gender ? gender : ""
-      }&nat=${nationalitiesFormatted}&format=${format}`;
+    /**
+     * Append a new HTML row into the specific container with the user data
+     * @function _appendRowData
+     * @private
+     * @param {jQuery Object} tableBody
+     * @param {Object} user
+     */
+    function _appendRowData(tableBody, user) {
+      tableBody.append(_tableRowSkeleton(user));
+    }
 
-                    return baseURL;
-                }
+    /**
+     * Append a new HTML Card element into the specific container with the user data
+     * @function _appendCardData
+     * @private
+     * @param {jQuery Object} cardContainer
+     * @param {Object} user
+     */
+    function _appendCardData(cardContainer, user) {
+      cardContainer.append(_cardSkeleton(user));
+    }
 
-                /**
-                 * Format the array of elements like this example ["ES", "DE", "TR"] => "ES,DE,TR"
-                 * @param {Array} nationalities
-                 */
-                function _nationalitiesRequestFormat(nationalities = []) {
-                    return nationalities.map(nat => nat).join(",");
-                }
+    /**
+     * Handle the resize on the browser to render data in a new container
+     * @function renderDataOnResize
+     * @public
+     * @param {Number} width
+     */
+    function renderDataOnResize(users = null, browserWidth, inputsData = []) {
+      const mainTable = mainContainer.find("#users-table");
+      const tableBody = mainTable.find("tbody");
+      const cardContainer = mainContainer.find("div#card-container");
 
-                /**
-                 * Append a new HTML row into the specific container with the user data
-                 * @function _appendRowData
-                 * @private
-                 * @param {jQuery Object} tableBody
-                 * @param {Object} user
-                 */
-                function _appendRowData(tableBody, user) {
-                    tableBody.append(_tableRowSkeleton(user));
-                }
+      let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
 
-                /**
-                 * Append a new HTML Card element into the specific container with the user data
-                 * @function _appendCardData
-                 * @private
-                 * @param {jQuery Object} cardContainer
-                 * @param {Object} user
-                 */
-                function _appendCardData(cardContainer, user) {
-                    cardContainer.append(_cardSkeleton(user));
-                }
+      if (browserWidth > 868) {
+        if (inputsData.length > 0) {
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
-                /**
-                 * Handle the resize on the browser to render data in a new container
-                 * @function renderDataOnResize
-                 * @public
-                 * @param {Number} width
-                 */
-                function renderDataOnResize(users = null, browserWidth, inputsData = []) {
-                    const mainTable = mainContainer.find("#users-table");
-                    const tableBody = mainTable.find("tbody");
-                    const cardContainer = mainContainer.find("div#card-container");
+          tableBody.empty();
+          _showOverlay(true);
 
-                    let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendRowData(tableBody, user));
+          }, 1000);
+        }
 
-                    if (browserWidth > 868) {
-                        if (inputsData.length > 0) {
-                            const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
+        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
+          _renderTableOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
+        }
+      } else if (browserWidth < 868) {
+        if (inputsData.length > 0) {
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
-                            tableBody.empty();
-                            _showOverlay(true);
+          cardContainer.empty();
+          _showOverlay(true);
 
-                            setTimeout(() => {
-                                _showOverlay(false);
-                                filteredUsers.forEach(user => _appendRowData(tableBody, user));
-                            }, 1000);
-                        }
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
+          }, 1000);
+        }
 
-                        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
-                            _renderTableOnResize(mainTable, cardContainer, usersData);
-                            _showOverlay(false);
-                        }
-                    } else if (browserWidth < 868) {
-                        if (inputsData.length > 0) {
-                            const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
+        if (
+          cardContainer.children(".user-card").length === 0 &&
+          inputsData.length === 0
+        ) {
+          _renderCardOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
+        }
+      }
+    }
 
-                            cardContainer.empty();
-                            _showOverlay(true);
+    /**
+     * Create badge-pills to show the user input search values
+     * @function _createSearchBadges
+     * @private
+     * @param {Object} filters
+     */
+    function _createSearchBadges(filters) {
+      const filtersContainer = mainContainer.find(".filters");
+      const badgeContainer = filtersContainer.children(".search-badges");
 
-                            setTimeout(() => {
-                                _showOverlay(false);
-                                filteredUsers.forEach(user => _appendCardData(cardContainer, user));
-                            }, 1000);
-                        }
+      filtersContainer.find("button").remove();
+      badgeContainer.empty();
 
-                        if (
-                            cardContainer.children(".user-card").length === 0 &&
-                            inputsData.length === 0
-                        ) {
-                            _renderCardOnResize(mainTable, cardContainer, usersData);
-                            _showOverlay(false);
-                        }
-                    }
-                }
-
-                /**
-                 * Create badge-pills to show the user input search values
-                 * @function _createSearchBadges
-                 * @private
-                 * @param {Object} filters
-                 */
-                function _createSearchBadges(filters) {
-                    const filtersContainer = mainContainer.find(".filters");
-                    const badgeContainer = filtersContainer.children(".search-badges");
-
-                    filtersContainer.find("button").remove();
-                    badgeContainer.empty();
-
-                    Object.keys(filters).forEach(key => {
-                        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-                        const badge = $(
-                            `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
+      Object.keys(filters).forEach(key => {
+        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
+        const badge = $(
+          `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
             filters[key]
           }</span></span>`
-                        ).hide();
-                        badgeContainer.append(badge);
-                        badge.show("slow");
-                    });
-                    const resetButton = filtersContainer.append(
-                        `<button class="btn btn-sm btn-info">Cancel search</button>`
-                    );
-                    resetButton.off("click").on("click", function(e) {
-                        badgeContainer.empty();
-                        $(this).remove();
-                        _showOverlay(true);
-                        initTable(null, window.innerWidth);
-                    });
-                }
+        ).hide();
+        badgeContainer.append(badge);
+        badge.show("slow");
+      });
+      const resetButton = filtersContainer.append(
+        `<button class="btn btn-sm btn-info">Cancel search</button>`
+      );
+      resetButton.off("click").on("click", function(e) {
+        badgeContainer.empty();
+        $(this).remove();
+        _showOverlay(true);
+        initTable(null, window.innerWidth);
+      });
+    }
 
-                /**
-                 * @function _renderTableOnResize
-                 * @private
-                 * @param {jQuery Object} mainTable
-                 * @param {jQuery Object} cardContainer
-                 * @param {Array} users
-                 */
-                function _renderTableOnResize(mainTable, cardContainer, users) {
-                    cardContainer.empty();
-                    mainTable.show();
-                    const tableBody = mainTable.find("tbody");
-                    users.forEach(user => _appendRowData(tableBody, user));
-                }
+    /**
+     * @function _renderTableOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderTableOnResize(mainTable, cardContainer, users) {
+      cardContainer.empty();
+      mainTable.show();
+      const tableBody = mainTable.find("tbody");
+      users.forEach(user => _appendRowData(tableBody, user));
+    }
 
-                /**
-                 * @function _renderCardOnResize
-                 * @private
-                 * @param {jQuery Object} mainTable
-                 * @param {jQuery Object} cardContainer
-                 * @param {Array} users
-                 */
-                function _renderCardOnResize(mainTable, cardContainer, users) {
-                    mainTable
-                        .hide()
-                        .find("tbody")
-                        .empty();
-                    users.forEach(user => _appendCardData(cardContainer, user));
-                }
+    /**
+     * @function _renderCardOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderCardOnResize(mainTable, cardContainer, users) {
+      mainTable
+        .hide()
+        .find("tbody")
+        .empty();
+      users.forEach(user => _appendCardData(cardContainer, user));
+    }
 
-                /**
-                 * HTML5 skeleton to draw a table row
-                 * @function _tableRowSkeleton
-                 * @private
-                 * @param {object} params
-                 * @return {String} html template
-                 */
-                function _tableRowSkeleton({
-                    picture,
-                    id,
-                    email,
-                    name,
-                    location,
-                    registered
-                }) {
-                    let registeredDate = new Date(registered["date"]);
-                    let userFullName = buildUserFullname(name);
-                    return `
-   <tr scope="row" data-id=${id.value}>
+    /**
+     * HTML5 skeleton to draw a table row
+     * @function _tableRowSkeleton
+     * @private
+     * @param {object} params
+     * @return {String} html template
+     */
+    function _tableRowSkeleton({
+      profilePicture,
+      _id,
+      email,
+      name,
+      location,
+      registeredDate
+    }) {
+      // let registeredDate = new Date(registered);
+      let userFullName = buildUserFullname(name);
+      return `
+   <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
-           <img class="img-fluid" src=${picture.thumbnail} alt=${
+           <img class="img-fluid" src=${profilePicture} alt=${
         name.first
       } /></td>
            <td class="fullname">
@@ -303,47 +273,53 @@ const Table = (function() {
            <td class="user-city">
            <p> ${location.city}</p>
            </td>
-           <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
+           <td class="user-registered">${new Date(
+             registeredDate
+           ).toLocaleDateString()}</td>
            <td class="options text-center">
                   <button type="button" class=" my-2 btn btn-outline-success btn-sm detail"
                     data-id=${
-                      id.value
+                      _id.value
                     } data-toggle="modal" data-target="#userModal" title="View user">
                        <i class="far fa-eye"></i>
                   </button>
                   <button type="button" class="my-2 btn btn-outline-primary btn-sm edit" data-id=${
-                    id.value
+                    _id.value
                   } title="Edit user"><i class="fas fa-user-edit"></i></button>
                   <button type="button" class=" my-2 btn btn-outline-danger btn-sm delete" data-id=${
-                    id.value
+                    _id.value
                   } title="Delete user"><i class="far fa-trash-alt"></i></button>
             </td>
          </tr>
          `;
-                }
+    }
 
-                /**
-                 * HTML5 skeleton to draw a user card
-                 * @function _cardSkeleton
-                 * @private
-                 * @param {object} params
-                 * @return {String} html template
-                 */
-                function _cardSkeleton({
-                    name,
-                    picture,
-                    email,
-                    id,
-                    login,
-                    skills,
-                    frameworks,
-                    languages
-                }) {
-                    let userFullName = buildUserFullname(name);
+    /**
+     * HTML5 skeleton to draw a user card
+     * @function _cardSkeleton
+     * @private
+     * @param {object} params
+     * @return {String} html template
+     */
+    function _cardSkeleton({
+      name,
+      profilePicture,
+      email,
+      _id,
+      login,
+      skills,
+      frameworks,
+      languages
+    }) {
+      let userFullName = buildUserFullname(name);
 
-                    return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${id.value}>
+      return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
+        _id.value
+      }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" src=${picture.medium} alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" src=${
+        profilePicture.medium
+      } alt="test"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${userFullName}</p>
            <p>${login.username}</p>
@@ -376,10 +352,10 @@ const Table = (function() {
      <div class="card-footer text-right card-buttons">
       
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
-          id.value
+          _id.value
         }><i class="fas fa-user-edit"></i></button>
         <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
-          id.value
+          _id.value
         }><i class="far fa-trash-alt"></i></button>
      </div>
    </div>
@@ -444,14 +420,14 @@ const Table = (function() {
      * @return {string} fullName
      */
     function buildUserFullname(name) {
-      const { first, last } = name;
-      const fullName =
-        first.charAt(0).toUpperCase() +
-        first.slice(1) +
-        " " +
-        last.charAt(0).toUpperCase() +
-        last.slice(1);
-
+      //const { first, last } = name;
+      const fullName = name.split();
+      // const fullName =
+      //   first.charAt(0).toUpperCase() +
+      //   first.slice(1) +
+      //   " " +
+      //   last.charAt(0).toUpperCase() +
+      //   last.slice(1);
       return fullName;
     }
 
@@ -464,7 +440,7 @@ const Table = (function() {
      */
     function getUserByEmailOrID(value) {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
-        user => user.id.value === value
+        user => user._id.value === value
       );
     }
 
@@ -489,7 +465,7 @@ const Table = (function() {
      * @function deleteUser
      * @public
      * @param {string} id
-     */
+
     function deleteUser(id) {
       let users = JSON.parse(sessionStorage.getItem("users-list"));
       users = users.filter(user => user.id.value !== id);
@@ -503,37 +479,15 @@ const Table = (function() {
        @private
      * @param {string} id
      */
-    function _removeUserFromDOM(id) {
+    function _removeUserFromDOM(_id) {
       const tableBody = mainContainer.find("#users-table tbody");
       if (tableBody.children("tr").length > 0) {
-        tableBody.find(`tr[data-id=${id}]`).remove();
+        tableBody.find(`tr[data-id=${_id}]`).remove();
       } else {
         mainContainer
-          .find(`#card-container > .user-card[data-id=${id}]`)
+          .find(`#card-container > .user-card[data-id=${_id}]`)
           .remove();
       }
-    }
-
-    /**
-     * Receive new parameters to make a new request to the API
-     * @function changeApiParams
-     * @public
-     * @param {jQuery objects} selects
-     */
-    function changeApiParams(selects) {
-      const paramsObject = { format: "json", nationalities: [] };
-      for (select of selects) {
-        const $select = $(select);
-        if ($select.prop("name") === "nationalities[]") {
-          paramsObject["nationalities"] = $select.val();
-        }
-        paramsObject[$select.prop("name")] = $select.val();
-      }
-      delete paramsObject["nationalities[]"];
-      sessionStorage.removeItem("users-list");
-
-      const apiURL = setupApiURL(paramsObject);
-      apiRequest(apiURL, renderDataOnResize);
     }
 
     function _showOverlay(show) {
@@ -556,31 +510,41 @@ const Table = (function() {
     }
 
     function renderDataOnModal(event) {
-      console.log("Entro", event.relatedTarget, this);
       const element = $(event.relatedTarget);
       const modal = $(this);
-      const user = getUserByEmailOrID(element.data("id"));
+      const user = getUserByEmailOrID(element.data("_id"));
+      console.log("USER: ", user);
+      const {
+        profilePicture,
+        username,
+        name,
+        birthDate,
+        phone,
+        cell,
+        location
+      } = user;
 
-      const { picture, name, login, dob, phone, cell, location } = user;
       const fullName = buildUserFullname(name);
 
       const modalBody = modal.find(".modal-body");
 
       modalBody.find("#infoUser span").remove();
 
-      modal.find(".modal-title").text(fullName + " ~ " + login.username);
-      modalBody.find("img").prop("src", picture["large"]);
+      modal.find(".modal-title").text(fullName + " ~ " + username);
+      modalBody.find("img").prop("src", profilePicture["large"]);
 
-      _appendBirthday(modalBody, dob.date);
+      // _appendBirthday(modalBody, dob.date);
+      _appendBirthday(modalBody, birthDate);
       _appendPhones(modalBody, { phone, cell });
       _appendAddress(modalBody, location);
       _appendTechSkills(modalBody, user);
     }
 
-    function _appendBirthday(container, date) {
+    function _appendBirthday(container, birthDate) {
+      console.log("Birhda: ", container);
       container
         .find(".birthday")
-        .append(`<span>${new Date(date).toLocaleDateString()}</span>`);
+        .append(`<span>${new Date(birthDate).toLocaleDateString()}</span>`);
     }
 
     function _appendPhones(container, phones) {
@@ -601,8 +565,8 @@ const Table = (function() {
       container
         .find(".address")
         .append(
-          `<span>${location.state} ~ ${location.city} ${location.postcode} / ${
-            location.street
+          `<span>${location.state} ~ ${location.city} / ${
+            location.country
           }</span>`
         );
     }
@@ -625,13 +589,11 @@ const Table = (function() {
     return {
       construct,
       initTable,
-      setupApiURL,
       buildUserFullname,
       getUserByEmailOrID,
       renderDataOnResize,
-      renderDataOnModal,
-      changeApiParams,
-      deleteUser
+      renderDataOnModal
+      //deleteUser
     };
   }
 
