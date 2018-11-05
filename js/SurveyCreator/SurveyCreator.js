@@ -484,7 +484,7 @@ const SurveyCreator = (function() {
                   .text()
               );
             } else {
-              data["values"].push($element.find("input").val());
+              data["values"].push($element.find("input.form-control").val());
             }
 
             surveyApiData["elements"].push(data);
@@ -578,14 +578,12 @@ const SurveyCreator = (function() {
               case "select":
                 return `
                 <div class="form-group my-1">
-                  <label>
-                    ${element["title"]}
+                   <h5>${element["title"]}</h5>
                     <select class="form-control" name="${encodedInputName}">
                     ${element["values"].map(value => {
                       return `<option>${value}</option>`;
                     })}
                     </select>
-                  </label>
               </div>`;
                 break;
 
@@ -606,6 +604,20 @@ const SurveyCreator = (function() {
                     </div>`;
                   })
                   .join("")}`;
+                break;
+
+              case "date":
+              case "text":
+              case "number":
+              case "color":
+              case "telephone":
+              case "file":
+                return `
+                  <h5>${element["title"]}</h5>
+                  <input class="form-control" type="${
+                    element["type"]
+                  }" value="${element["values"][0]}"/>
+                `;
                 break;
             }
           })
