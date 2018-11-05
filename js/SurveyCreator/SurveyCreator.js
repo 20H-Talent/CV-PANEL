@@ -15,7 +15,7 @@ const SurveyCreator = (function() {
       elements: []
     };
 
-    const AlphaNumericREGEXP = /^[\w ]+$/i;
+    const AlphaNumericREGEXP = /^[\w\¿\?\!\¡ ]+$/i;
 
     /**
      * Render the HTML associate with this object in the central column
@@ -39,9 +39,14 @@ const SurveyCreator = (function() {
        */
       function _setupInternalEventListeners(form) {
         $surveyTableContainer = form.find("#survey-table");
+        const $tableBody = $surveyTableContainer.find("tbody");
         const $tableFooter = $surveyTableContainer.find("tfoot");
 
         form.off("submit").on("submit", _sendJSONData);
+
+        form
+          .find(".SurveyHeader-Data")
+          .on("change", "input[type='date']", _validateSurveyDates);
 
         $surveyTableContainer
           .find(".Survey-TypeSelector")
@@ -54,21 +59,13 @@ const SurveyCreator = (function() {
           .off("click")
           .on("click", _newSurveyBlock);
 
-        $surveyTableContainer
-          .find(".Survey-TableBody")
-          .on("change", "input[type=checkbox]", _selectedBlocks);
+        $tableBody.on("change", "input[type=checkbox]", _selectedBlocks);
 
-        $surveyTableContainer
-          .find(".Survey-TableBody")
-          .on(
-            "keyup",
-            "input[type=text], p[contenteditable]",
-            _validateTextInput
-          );
-
-        form
-          .find(".SurveyHeader-Data")
-          .on("change", "input[type='date']", _validateSurveyDates);
+        $tableBody.on(
+          "keyup",
+          "input[type=text], p[contenteditable]",
+          _validateTextInput
+        );
 
         $tableFooter
           .find("button.deleteAll")
@@ -715,7 +712,7 @@ const SurveyCreator = (function() {
           _setBodySurveyData();
 
           $.ajax({
-            url: "http://localhost:3000/api/surveys",
+            url: "https://cv-mobile-api.herokuapp.com/api/surveys",
             type: "POST",
             crossDomain: true,
             contentType: "application/json",
@@ -729,6 +726,8 @@ const SurveyCreator = (function() {
               _activeToastMessage(jqXHR.statusText);
             }
           });
+        } else {
+          $(".survey-container").animate({ scrollTop: 0 }, "slow");
         }
       }
     }
