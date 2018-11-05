@@ -76,19 +76,16 @@ function getConfetti() {
 function checkTimesVisitedPage() {
   let visitsLocalStorage = localStorage.getItem("refreshPage");
 
-  function loadGuidedVisit() {
+  function _loadGuidedVisit() {
     // ------- Load the modal welcome ---------
     return new Promise((resolve, reject) => {
       $.get("../html/guided_visit.html", dataModal => {
-        // console.log("Obtengo visita");
         dataModal;
       })
         .done(dataModal => {
-          // console.log("entro en resolve: ", dataModal);
           resolve(dataModal);
         })
         .fail(dataModal => {
-          // console.log("Enro en reject: ", dataModal);
           reject(dataModal);
         });
     });
@@ -96,17 +93,14 @@ function checkTimesVisitedPage() {
   function toDoAccordingLocalStorage(visitsLocalStorage) {
     //------- visitsLocalStorage is typeof object and  null the first time. -----------
     if (visitsLocalStorage === null) {
-      console.log("NO hay visitas a la página");
       localStorage.setItem("refreshPage", 1);
 
       visitsLocalStorage = "1";
     }
 
     if (parseInt(visitsLocalStorage) < 4) {
-      console.log("Hay menos de 4 visitas");
-      loadGuidedVisit()
+      _loadGuidedVisit()
         .then(dataModal => {
-          console.log("Entro en el then del load");
           $("body main").append(dataModal);
 
           // ------- Inicialize the events for button Skip and Start ---------
@@ -116,7 +110,7 @@ function checkTimesVisitedPage() {
           $("#guidedVisit button.btn-primary").on("click", () => tooltips());
         })
         .catch(dataModal => {
-          console.log("Unable to load Guided Visit");
+          console.error("Unable to load Guided Visit");
         });
     } else if (parseInt(visitsLocalStorage) === 4) {
       // --------- if equal to 4, shows a message. ----------
@@ -131,15 +125,12 @@ function checkTimesVisitedPage() {
           <span aria-hidden="true">Close</span> 
           </button>
         </div>`);
-      console.log("Has visitado la página 4 veces");
 
       $("button[class*=btn-primary").on("click", function() {
-        //reload the page.
         location.reload(true);
       });
     } else {
       // -------- if visits to Page is more than 4, added the button Guided Visit lo left menu. -------
-      console.log("Has visitado la pàgina mas de 4 veces");
       if (!$("#btnGuidedVisit") === false) {
         $('#left-menu li[data-original-title*="Logout"]').before(
           `<li id="btnGuidedVisit" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
@@ -150,10 +141,10 @@ function checkTimesVisitedPage() {
           </a>
           </li>`
         );
+        $("#btnGuidedVisit").tooltip();
         $("#btnGuidedVisit").on("click", function() {
-          loadGuidedVisit()
+          _loadGuidedVisit()
             .then(dataModal => {
-              console.log("Entro en el then del load");
               $("body main").append(dataModal);
 
               // ------- Inicialize the events for button Skip and Start ---------
@@ -165,21 +156,17 @@ function checkTimesVisitedPage() {
               );
             })
             .catch(dataModal => {
-              console.log("Unable to load Guided Visit");
+              console.error("Unable to load Guided Visit");
             });
         });
       }
     }
-    console.log(
-      `Hay ${localStorage.getItem("refreshPage")} visitas a la página`
-    );
     localStorage.setItem("refreshPage", parseInt(visitsLocalStorage) + 1);
   }
   toDoAccordingLocalStorage(visitsLocalStorage);
 }
 // --------------- MAKE TOOLTIPS AND FUNCTIONALITIES ----------------------
 function tooltips() {
-  console.log("entro en tooltips()");
   // to get from JSON, the tooltips objects.
   function _getDataForTooltips() {
     return new Promise((resolve, reject) => {
@@ -196,15 +183,11 @@ function tooltips() {
   }
   // to make skeleton of tools
   function _makeSkeletonTooltips(dataJSON) {
-    console.log("Entro en el makSkeleton");
     let data = dataJSON;
     // clear modal body to insert tooltips.
     $("#guidedVisit").html("");
 
     $.each(data, function(i) {
-      // <div class="d-none tool-${
-      //   data[i].id
-      // }" style='position: relative; border: 2px solid white; height: ${data[i].elPositionSelected.height}; width: ${data[i].elPositionSelected.width}; top: ${data[i].elPositionSelected.top}; left: ${data[i].elPositionSelected.left}; right: ${data[i].elPositionSelected.right}; bottom: ${data[i].elPositionSelected.bottom}'></div>
       $("#guidedVisit").append(`
             <i style='position:absolute; font-size: 19px; top:${
               data[i].arrowPosition.top
@@ -226,7 +209,6 @@ function tooltips() {
               data[i].id
             }>Skip</button>
           </div>
-
           `);
     });
     return dataJSON;
@@ -241,7 +223,6 @@ function tooltips() {
     function _inicializeSpaceBar() {
       $(window).on("keypress", function(e) {
         if (e.keyCode === 32) {
-          // console.log("E current: ", e.ke);
           _callTooltips(currentDataTool);
         }
       });
@@ -251,17 +232,12 @@ function tooltips() {
       $(".btn-tool").on("click", function(e) {
         if ($(e.currentTarget).attr("data-tool")) {
           //call event to close of data[0].
-          console.log("active tool:", $(e.currentTarget).attr("data-tool"));
-          // $(data[0].eventCallToClose).trigger("click");
-
           _callTooltips($(e.currentTarget).attr("data-tool"));
         }
       });
       // if click on skip button on a tooltip, remove the modal.
       $(".btn-tool-skip").on("click", function(e) {
-        console.log("Saltamos tutorial");
         $("#guidedVisit").remove();
-        //reload the page.
         location.reload(true);
       });
     }
@@ -272,85 +248,7 @@ function tooltips() {
       // store the data of actual tooltip.
       let dataPosition = data[currentBtnNext];
 
-      // -----------------TESTEO ------------------
-      function _selectedTooltips(dataPosition) {
-        // ..... limpio estilos del actual ............
-        $(dataPosition.elSelected[0])
-          .not(dataPosition.elSelected[1])
-          .attr("style", function() {
-            return "";
-          });
-        $(dataPosition.elSelected[0])
-          .not(dataPosition.otherElms[0])
-          .attr("style", function() {
-            return "";
-          });
-
-        $(dataPosition.elSelected[0])
-          .not(dataPosition.elSelected[1])
-          .attr("type", function() {
-            return "";
-          });
-        console.log(
-          "limpio styles: ",
-          $(dataPosition.elSelected[0]).attr("style")
-        );
-
-        // -------------------------- EJECUTO TRIGGER -----------------
-        $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
-        console.log(
-          "Trigger que se ejecuta: ",
-          $(dataPosition.eventCallToOpen)
-        );
-        console.log(
-          "Segundo parametro del trigger: ",
-          dataPosition.eventCallToClose
-        );
-        // -------------------------- DESPUES DE TRIGGER -----------------
-        styleActiveToolAfter = $(dataPosition.elSelected[0]).attr("style");
-        attrActiveToolAfter = $(dataPosition.elSelected[0]).attr("type");
-
-        // if the element hasn't styles, the variable sets to empty string.
-        if (styleActiveToolAfter === undefined) {
-          console.log("Entro en und3");
-          styleActiveToolAfter = "";
-        }
-        if (attrActiveToolAfter === undefined) {
-          console.log("Entro en und4");
-          attrActiveToolAfter = "";
-        }
-        console.log(
-          "despues trigger --> stilos del activo: ",
-          styleActiveToolAfter
-        );
-        $(data[currentBtnNext + 1].elSelected[0])
-          .not(dataPosition.elSelected[1])
-          .attr("style", function() {
-            return `background: ${
-              data[currentBtnNext + 1].elSelected[2]
-            }; z-index: 20000 !important; ${styleActiveToolAfter};`;
-          });
-        //set the other elements to opacity.
-        $(data[currentBtnNext + 1].elSelected[0])
-          .not(data[currentBtnNext + 1].otherElms[0])
-          .attr("style", function() {
-            return `opacity: ${data[currentBtnNext + 1].otherElms[1]}`;
-          });
-        // para setear el type.
-        $(data[currentBtnNext + 1].elSelected[0])
-          .not(dataPosition.elSelected[1])
-          .attr(data[currentBtnNext + 1].elSelected[3], function() {
-            return `${data[currentBtnNext + 1].elSelected[4]}`;
-          });
-        console.log("al setear: ", $(dataPosition.elSelected[0]).attr("style"));
-        console.log("--------------------");
-      }
-
-      _selectedTooltips(dataPosition);
-      // ------------------- FIN TESTEO -------------------
-
       //recive de data-toogle value of the active button of tooltips.
-      console.log("id:", dataPosition.id);
       let activeTool = $(`.tool-${currentBtnNext}`); //select the elements with class .tool-currentBtnNext.
 
       // if the currentBtnNext is equal to last data, remove the modal.
@@ -378,9 +276,7 @@ function tooltips() {
         $("#guidedVisit .modal-dialog").className = "wrappert";
         getConfetti();
         $(".btn-tool-finish").on("click", function(e) {
-          console.log("Finaliza tutorial");
           $("#guidedVisit").remove();
-          //reload the page.
           location.reload(true);
         });
       }
@@ -391,12 +287,7 @@ function tooltips() {
 
       let nextTool = $(`.tool-${currentBtnNext + 1}`);
 
-      // $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
-      // console.log("Trigger que se ejecuta: ", $(dataPosition.eventCallToOpen));
-      // console.log(
-      //   "Segundo parametro del trigger: ",
-      //   dataPosition.eventCallToClose
-      // );
+      $(dataPosition.eventCallToOpen).trigger(dataPosition.eventCallToClose);
 
       $.each(nextTool, function(n) {
         nextTool[n].classList.replace("d-none", "d-block");
@@ -421,7 +312,7 @@ function tooltips() {
   _getDataForTooltips()
     .then(dataJSON => _makeSkeletonTooltips(dataJSON))
     .then(dataJSON => _InicializeTooltips(dataJSON))
-    .catch(dataJSON => console.log(dataJSON));
+    .catch(dataJSON => console.error(dataJSON));
 }
 
 // ***************** CALL FUNCTIONS *******************
