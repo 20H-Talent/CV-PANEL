@@ -350,7 +350,8 @@ const SurveyCreator = (function() {
           case "select":
           case "checkbox":
           case "radio":
-          let buttonText = typeSelectorValue === 'select' ? "option" : typeSelectorValue;
+            let buttonText =
+              typeSelectorValue === "select" ? "option" : typeSelectorValue;
             const dinamicBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
                 <div class="form-group">
