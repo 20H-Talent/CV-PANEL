@@ -71,3 +71,24 @@ $("#enterprises-form-ajax").load("../html/EnterprisesForm.html", function() {
     verifyFormEnterprises();
   });
 });
+
+function EnterprisesForm(){
+
+  this.construct=function(container) {
+    $.get("../../html/EnterprisesForm.html", function(htmlSkeleton) {
+        container.empty().append(htmlSkeleton);
+        $("#enterprises-form-ajax").load("../html/EnterprisesForm.html", function() {
+          //Listener Button, form enterprises.
+          $("#btn-enterprises").on("click", function() {
+            verifyFormEnterprises();
+          });
+        });
+
+    }).fail(function(err) {
+        throw new Error(err);
+    });
+  }
+
+}
+
+let enterpriseForm = new EnterprisesForm();
