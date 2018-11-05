@@ -14,6 +14,7 @@
                             </div>
                             <input type="date" name="startDate" class="form-control mr-2" aria-describedby="start_date_group_icon" />
                         </div>
+                        <span class="form-error"></span>
                     </div>
                     <div class="col-md-3 offset-md-1">
                         <label for="endDate">End Date</label>
@@ -23,16 +24,19 @@
                             </div>
                             <input type="date" name="endDate" class="form-control mr-2" aria-describedby="end_date_group_icon" />
                         </div>
+                        <span class="form-error"></span>
                     </div>
                 </div>
                 <div class="form-row my-4">
                     <div class="col-md-6">
                         <label for="title">Title</label>
                         <input class="form-control" name="title" type="text">
+                        <span class="form-error"></span>
                     </div>
                     <div class="col-md-6">
                         <label for="subtitle">Subtitle</label>
                         <input class="form-control" name="subtitle" type="text">
+                        <span class="form-error"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,7 +46,7 @@
             </div>
             <div class="form-row d-flex">
                 <div class="col-sm-12 col-md-5 align-self-stretch">
-                    <div id="survey-element" class="table-responsive mt-1">
+                    <div id="survey-table" class="table-responsive mt-1">
                         <table class="table table-bordered table-hover" role="grid">
                             <thead>
                                 <tr>
@@ -69,8 +73,7 @@
                             <tbody class="Survey-TableBody"></tbody>
                             <tfoot>
                                 <tr ">
-                                    <td class=" d-flex justify-content-between
-                                    align-items-center>
+                                    <td class=" d-flex justify-content-between align-items-center>
                                     <div class="d-flex-justify-content-start">
                                         <button type="button" class="btn btn-danger deleteAll">No blocks
                                             selected</button>
@@ -102,8 +105,7 @@
                                                 crossorigin='anonymous'>
                                         </head>
                                         <body></body>
-                                        </html>"
-                                frameborder="0">
+                                        </html>" frameborder="0">
                                 <p>Your browser does not support iframes.</p>
                             </iframe>
                         </div>

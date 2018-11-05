@@ -2,7 +2,7 @@ const SurveyCreator = (function() {
   let instance;
 
   function init() {
-    let surveyForm;
+    let surveyContainer;
 
     const surveyApiData = {
       header: {
@@ -15,6 +15,8 @@ const SurveyCreator = (function() {
       elements: []
     };
 
+    const AlphaNumericREGEXP = /^[\w ]+$/i;
+
     /**
      * Render the HTML associate with this object in the central column
      * and setup all the event listeners attached on the elements.
@@ -24,8 +26,8 @@ const SurveyCreator = (function() {
      */
     function construct(container) {
       $.get("../../html/SurveyCreator.html", function(htmlSkeleton) {
-        surveyForm = container.empty().append(htmlSkeleton);
-        _setupInternalEventListeners(surveyForm);
+        surveyContainer = container.empty().append(htmlSkeleton);
+        _setupInternalEventListeners(surveyContainer);
       }).fail(function(err) {
         throw new Error(err);
       });
@@ -36,25 +38,33 @@ const SurveyCreator = (function() {
        * @private
        */
       function _setupInternalEventListeners(form) {
-        $surveyContainer = form.find("#survey-element");
-        const $tableFooter = $surveyContainer.find("tfoot");
+        $surveyTableContainer = form.find("#survey-table");
+        const $tableFooter = $surveyTableContainer.find("tfoot");
 
         form.off("submit").on("submit", _sendJSONData);
 
-        $surveyContainer
+        $surveyTableContainer
           .find(".Survey-TypeSelector")
           .children("select.SelectedType-Select")
           .off("change")
           .on("change", _typeSelect);
 
-        $surveyContainer
+        $surveyTableContainer
           .find(".Survey-TypeSelector > button.addNewElement")
           .off("click")
           .on("click", _newSurveyBlock);
 
-        $surveyContainer
+        $surveyTableContainer
           .find(".Survey-TableBody")
           .on("change", "input[type=checkbox]", _selectedBlocks);
+
+        $surveyTableContainer
+          .find(".Survey-TableBody")
+          .on("keyup", "input[type=text]", _validateTextInput);
+
+        form
+          .find(".SurveyHeader-Data")
+          .on("change", "input[type='date']", _validateSurveyDates);
 
         $tableFooter
           .find("button.deleteAll")
@@ -101,26 +111,26 @@ const SurveyCreator = (function() {
        * @param {string} value
        * @return {boolean} the value exists
        */
-      function _checkIfValueExists(container, value) {
-        let valueExists = false;
+      function _validateValueToAppend(container, value) {
+        let valueIsCorrect = true;
 
         container.find("li > span").each((index, element) => {
           const $element = $(element);
           const $parentItem = $element.parent();
-          if (
-            $element
-              .text()
-              .trim()
-              .toLowerCase() === value.toLowerCase()
-          ) {
-            valueExists = true;
-            $element.parent().addClass("invalid-value");
+          const valueToCheck = $element
+            .text()
+            .trim()
+            .toLowerCase();
+
+          if (valueToCheck === value.toLowerCase()) {
+            valueIsCorrect = false;
+            $parentItem.addClass("invalid-value");
           } else if ($parentItem.hasClass("invalid-value")) {
             $parentItem.removeClass("invalid-value");
           }
         });
 
-        return valueExists;
+        return valueIsCorrect;
       }
 
       /**
@@ -137,9 +147,14 @@ const SurveyCreator = (function() {
           .siblings(".preview-group")
           .find(" ul.preview-list");
 
-        let valueExists = _checkIfValueExists(previewList, inputValue);
+        let valueIsCorrect = _validateValueToAppend(previewList, inputValue);
 
-        if (inputValue !== "" && inputValue.length > 0 && !valueExists) {
+        if (
+          !input.hasClass("invalid-value") &&
+          inputValue !== "" &&
+          inputValue.length > 0 &&
+          valueIsCorrect
+        ) {
           previewList;
           previewList
             .append(
@@ -220,7 +235,7 @@ const SurveyCreator = (function() {
       function _selectedBlocks(event) {
         const tableBody = event
           ? $(event.currentTarget).closest(".Survey-TableBody")
-          : $surveyContainer.find(".Survey-TableBody");
+          : $surveyTableContainer.find(".Survey-TableBody");
 
         const deleteButton = tableBody.parent().find("tfoot button.deleteAll");
 
@@ -285,7 +300,7 @@ const SurveyCreator = (function() {
       function _newSurveyBlock(event) {
         const typeSelectorValue = $(event.currentTarget).data("type");
 
-        const tableBody = $("#survey-element > table").find(
+        const tableBody = $("#survey-table > table").find(
           "tbody.Survey-TableBody"
         );
 
@@ -419,7 +434,7 @@ const SurveyCreator = (function() {
        * @private
        */
       function _setHeaderSurveyData() {
-        surveyForm
+        surveyContainer
           .find(".SurveyHeader-Data")
           .find("input, textarea")
           .each((index, element) => {
@@ -446,7 +461,7 @@ const SurveyCreator = (function() {
         const dinamicElements = ["select", "radio", "checkbox"];
         surveyApiData["elements"] = [];
 
-        surveyForm
+        surveyContainer
           .find("table tbody")
           .children("tr.ValueType-data")
           .each((index, element) => {
@@ -515,7 +530,7 @@ const SurveyCreator = (function() {
 
         const { header, elements } = surveyApiData;
 
-        const iframeContent = surveyForm
+        const iframeContent = surveyContainer
           .find(".SurveyPreview > iframe")
           .contents()
           .find("body");
@@ -541,6 +556,12 @@ const SurveyCreator = (function() {
         iframeContent.empty().html(finalHTML);
       }
 
+      /**
+       * @function _buildChildrenElements
+       * @private
+       * @param {Array} elements that represents an HTML template
+       * @return {Array} HTML templates already formatted
+       */
       function _buildChildrenElements(elements) {
         return elements
           .map(element => {
@@ -587,6 +608,86 @@ const SurveyCreator = (function() {
           .join("");
       }
 
+      function _validateSurveyDates(event = null) {
+        let errors = 0;
+        const startDate = $(".SurveyHeader-Data input[name=startDate]");
+        const endDate = $(".SurveyHeader-Data input[name=endDate]");
+
+        const startDateTimestamp = new Date(startDate.val()).getTime();
+        const endDateTimestamp = new Date(endDate.val()).getTime();
+
+        if (startDateTimestamp > endDateTimestamp) {
+          startDate
+            .addClass("border-red")
+            .parent()
+            .siblings("span.form-error")
+            .text("The start date cannot be after the final date");
+          errors++;
+        } else {
+          startDate
+            .removeClass("border-red")
+            .parent()
+            .siblings("span.form-error")
+            .text("");
+        }
+
+        return errors;
+      }
+
+      function _validateTextInput(textInput) {
+        const $textInput = $(event.target);
+        const targetContainer = $(".Survey-TableBody").find("ul.preview-list");
+
+        if (
+          !AlphaNumericREGEXP.test(
+            $($textInput)
+              .val()
+              .trim()
+          )
+        ) {
+          $textInput.addClass("invalid-value");
+          if (targetContainer.find("span.form-error").length === 0) {
+            $(".Survey-TableBody")
+              .find("ul.preview-list")
+              .prepend(
+                '<span class="form-error">The text contains special characters not allowed</span>'
+              );
+          }
+        } else {
+          $textInput.removeClass("invalid-value");
+          $(".Survey-TableBody")
+            .find("ul.preview-list span.form-error")
+            .remove();
+        }
+      }
+
+      function _validateHeaderTextInputs() {
+        let errors = 0;
+        $(".SurveyHeader-Data")
+          .find("input[type=text]")
+          .each((index, element) => {
+            const textInput = $(element);
+            if (
+              textInput.val().trim() === "" ||
+              !AlphaNumericREGEXP.test(textInput.val().trim())
+            ) {
+              textInput
+                .addClass("border-red")
+                .siblings("span.form-error")
+                .text(
+                  "This text can only have characters, numbers and underscores"
+                );
+              errors++;
+            } else {
+              textInput
+                .removeClass("border-red")
+                .siblings("span.form-error")
+                .text("");
+            }
+          });
+        return errors;
+      }
+
       /**
        * Group all the necessary functions to build the final
        * JSON data and get ready to store on the API.
@@ -594,17 +695,11 @@ const SurveyCreator = (function() {
        */
       function _sendJSONData(event) {
         event.preventDefault();
+        let errors = _validateSurveyDates() + _validateHeaderTextInputs();
 
-        const startDate = $("input[name=startDate]");
-        const endDate = $("input[name=endDate]");
-        if (
-          new Date(startDate.val()).getTime() >
-          new Date(endDate.val()).getTime()
-        ) {
-          startDate.css("border", "1px solid red");
-          endDate.css("border", "1px solid red");
-        }
-        /*
+        if (errors === 0) {
+          console.log("FORM WITHOUT ERRORS");
+          /*
         _setHeaderSurveyData();
         _setBodySurveyData();
 
@@ -624,6 +719,7 @@ const SurveyCreator = (function() {
           }
         });
         */
+        }
       }
     }
     return {
