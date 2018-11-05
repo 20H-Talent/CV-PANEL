@@ -86,16 +86,16 @@ const SearchFilter = (function() {
         _createResetButton(filtersContainer, badgesContainer);
     }
 
-    function _createResetButton(filtersContainer, badgesContainer) {
-        const resetButton = filtersContainer.append(
-            `<button class="btn btn-sm btn-info">Cancel search</button>`
-        );
-        resetButton.off("click").on("click", function(e) {
-            badgesContainer.empty();
-            $(this).remove();
-            usersTable.initTable(null, window.innerWidth);
-        });
-    }
+  function _createResetButton(filtersContainer, badgesContainer) {
+    const resetButton = filtersContainer.append(
+      `<button id="reset-btn" class="btn btn-sm btn-info">Cancel search</button>`
+    );
+    $("#reset-btn").off("click").on("click", function(e) {
+      badgesContainer.empty();
+      $(this).remove();
+      usersTable.initTable(null, window.innerWidth);
+    });
+  }
 
     function _appendFilterBadges(filters, badgesContainer) {
         badgesContainer.empty();
@@ -106,12 +106,21 @@ const SearchFilter = (function() {
             const badge = $(
                 `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
           filters[key]
-        }</span></span>`
-            ).hide();
-            badgesContainer.append(badge);
-            badge.show("slow");
-        }
+        }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
+      ).hide();
+      badgesContainer.append(badge);
+      badge.show("slow");  
+
+      badge.on("click",_deleteBagde); 
+      
     }
+    
+  }
+
+  function _deleteBagde(){
+    $(this).remove();
+    usersTable.initTable(null, window.innerWidth);
+  }
 
     return {
         filterUsers
