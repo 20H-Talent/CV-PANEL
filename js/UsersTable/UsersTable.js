@@ -263,9 +263,7 @@ const Table = (function() {
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
-           <img class="img-fluid" src=${profilePicture} alt=${
-        name.first
-      } /></td>
+           <img class="img-fluid h-25" src=${profilePicture} alt=${userFullName} /></td>
            <td class="fullname">
              <p>${userFullName}</p>
            </td>
@@ -304,7 +302,6 @@ const Table = (function() {
     function _cardSkeleton({
       name,
       profilePicture,
-      email,
       _id,
       login,
       skills,
@@ -420,8 +417,9 @@ const Table = (function() {
      * @return {string} fullName
      */
     function buildUserFullname(name) {
-      //const { first, last } = name;
+      // const { first, last } = name;
       const fullName = name.split();
+
       // const fullName =
       //   first.charAt(0).toUpperCase() +
       //   first.slice(1) +
@@ -513,7 +511,6 @@ const Table = (function() {
       const element = $(event.relatedTarget);
       const modal = $(this);
       const user = getUserByEmailOrID(element.data("_id"));
-      console.log("USER: ", user);
       const {
         profilePicture,
         username,
@@ -541,7 +538,6 @@ const Table = (function() {
     }
 
     function _appendBirthday(container, birthDate) {
-      console.log("Birhda: ", container);
       container
         .find(".birthday")
         .append(`<span>${new Date(birthDate).toLocaleDateString()}</span>`);
