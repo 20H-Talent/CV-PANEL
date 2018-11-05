@@ -525,15 +525,15 @@ const SurveyCreator = (function() {
            <div class="row">
              <div class="col-sm-12 d-flex flex-column justify-content-center
               align-items-center align-content-center">
-                  <header>
+                  <header class="text-center my-2">
                      <h1>${header["title"]}</h1>
                      <h3>${header["subtitle"]}</h3>
                      <p class="text-justify">${header["description"]}</p>
                   </header>
                   <main>
                     <form>
-                     ${_buildChildrenElements(elements)}
-                       </form>
+                      ${_buildChildrenElements(elements)}
+                    </form>
                   </main>
               </div>
            </div>
@@ -552,7 +552,7 @@ const SurveyCreator = (function() {
             switch (element["type"]) {
               case "select":
                 return `
-                <div class="form-group">
+                <div class="form-group my-1">
                   <label>
                     ${element["title"]}
                     <select class="form-control" name="${encodedInputName}">
@@ -571,7 +571,7 @@ const SurveyCreator = (function() {
                 ${element["values"]
                   .map(value => {
                     return `
-                  <div class="form-check">
+                  <div class="form-check my-1">
                     <label>
                       <input class="form-check-input" type="${
                         element["type"]
@@ -594,6 +594,17 @@ const SurveyCreator = (function() {
        */
       function _sendJSONData(event) {
         event.preventDefault();
+
+        const startDate = $("input[name=startDate]");
+        const endDate = $("input[name=endDate]");
+        if (
+          new Date(startDate.val()).getTime() >
+          new Date(endDate.val()).getTime()
+        ) {
+          startDate.css("border", "1px solid red");
+          endDate.css("border", "1px solid red");
+        }
+        /*
         _setHeaderSurveyData();
         _setBodySurveyData();
 
@@ -612,6 +623,7 @@ const SurveyCreator = (function() {
             _activeToastMessage(jqXHR.statusText);
           }
         });
+        */
       }
     }
     return {
