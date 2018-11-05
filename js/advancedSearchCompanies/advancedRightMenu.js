@@ -55,17 +55,17 @@
  function sendNewCompany(e) {
 
      let company = new Company(
-         $("input[name=inputName]").val(),
-         $("input[name=inputCif]").val(),
-         $("input[name=inputAddress]").val(),
-         // $("input[name=imputCity]").val(),
-         $("input[name=inputCountry]").val(),
-         $("input[name=inputZip]").val(),
-         $("input[name=inputEmail]").val(),
-         $("input[name=inputWorkersNumber]").val(),
-         $("input[name=inputSocialNetworks]").val(),
-         // $("input[name=inputLogo]").val(),
-         $("input[name=inputDescription]").val()
+         $("input[name=name]").val(),
+         $("input[name=CIF]").val(),
+         $("input[name=country]").val(),
+         $("input[name=city]").val(),
+         $("input[name=street]").val(),
+         $("input[name=phone]").val(),
+         $("input[name=email]").val(),
+         $("input[name=employees]").val(),
+         $("input[name=website]").val(),
+         $("input[name=bio]").val(),
+         $("input[name=logoURL]").val()
      );
      let formBody = createRequestBody(company);
 
