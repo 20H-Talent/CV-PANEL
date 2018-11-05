@@ -67,12 +67,6 @@
                                                 <span class="close">Create survey</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="Show the enterprises form" onclick="switchVisible('Div4')">
-                                            <a href="#" class="p-1 pl-2">
-                                                <i class="fas fa-business-time mr-2"></i>
-                                                <span class="close">Add Enterprise</span>
-                                            </a>
-                                        </li>
                                         <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right" title="Search data">
                                             <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
@@ -80,7 +74,12 @@
                                                 <span class="close">Search</span>
                                             </a>
                                         </li>
-
+                                        <li class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="Show the enterprises form" id="btn-enterpriseAdd">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fas fa-business-time mr-2"></i>
+                                                <span class="close">Enterprises</span>
+                                            </a>
+                                        </li>
                                         <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right" title="Logout from this application">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-sign-out-alt mr-2"></i>
@@ -113,7 +112,8 @@
                 <!-- Enterprise Form-->
                 <div class="col h-100" id="Div4">
                     <div class="container col-md-10 h-100">
-                        <div class="col ">
+                        <!-- EnterprisesForm.html load by Ajax-->
+                        <div class="col" id="enterprises-form-ajax">
 
                         </div>
                     </div>
@@ -234,11 +234,12 @@
     <script src="js/CompaniesTable/Company.js"></script>
     <script src="js/CompaniesTable/Companies.js"></script>
     <script src="js/CompaniesTable/indexCompanies.js"></script>
-    <script src="js/GeneralConstructor.js"></script>
     <script src="js/EnterprisesForm/enterprisesForm.js"></script>
+    <script src="js/GeneralConstructor.js"></script>
     <script src="js/index.js"></script>
     <script src="js/guided_visit.js"></script>
     <script src="js/advancedSearchCompanies/advancedRightMenu.js"></script>
+
 </body>
 
 </html>

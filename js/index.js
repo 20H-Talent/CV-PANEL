@@ -242,6 +242,7 @@ let surveyMenuItem = document.querySelector(".SurveyMenuItem");
 let divNavBar = document.querySelector("#div-navbar");
 let pdivNavBar = document.querySelector("#div-navbar p");
 let alertClose = document.querySelector(".alert-close");
+let enterpriseFormItem = document.querySelector("#btn-enterpriseAdd");
 
 function closeNavbar() {
     divNavBar.classList.replace("open", "close");
@@ -267,6 +268,11 @@ surveyMenuItem.addEventListener("click", function(e) {
 listCompanies.addEventListener("click", function(e) {
     generalConstructor.construct("companies-table");
 });
+enterpriseFormItem.addEventListener("click", function(e) {
+    generalConstructor.construct("enterprises-form");
+});
+
+
 // --- TO SEE CREATE USER ---
 /*
 let buttonCreateUser = document.querySelector("#button-create-user");

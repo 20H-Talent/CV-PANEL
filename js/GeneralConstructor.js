@@ -53,7 +53,8 @@ try {
       container: ".survey-container",
       constructor: surveyCreator
     },
-    "companies-table": { container: ".companies-table", constructor: companies }
+    "companies-table": { container: ".companies-table", constructor: companies },
+    "enterprises-form":{ container:"#alert-form-enterprises", constructor: enterpriseForm }
   });
 } catch (err) {
   alert(err.name + " " + err.message);
