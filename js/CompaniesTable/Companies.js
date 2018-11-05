@@ -94,6 +94,8 @@ function Companies() {
                <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id="${this.companies[i].id}" data-target="#confirm-delete-card" onclick="removeCompanyFromDOM(${this.companies[i].id})"><i class="fas fa-trash-alt"></i></button></td>
             </div>
          </div>
+         </div>
+        
           `;
         }
 

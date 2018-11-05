@@ -5,11 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/form.css">
     <link rel="stylesheet" href="assets/css/guided_visit.css">
@@ -44,53 +42,45 @@
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
                                     <ul class="pl-0 w-100">
-                                        <li id="list-users" class="sidebar-position active mb-3 rounded app-tooltip"
-                                            data-toggle="tooltip" data-placement="right" title="List all the users">
+                                        <li id="list-users" class="sidebar-position active mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="List all the users">
                                             <a href="
                                             #" class="p-1 active pl-2">
                                                 <i class="fa fa-users mr-2"></i>
                                                 <span class="close">List Users</span>
                                             </a>
                                         </li>
-                                        <li id="new-user" class="mb-3 rounded app-tooltip" data-toggle="tooltip"
-                                            data-placement="right" title="Add new user">
+                                        <li id="new-user" class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="Add new user">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-user-plus mr-2"></i>
                                                 <span class="close">Add User </span>
                                             </a>
                                         </li>
-                                        <li id="list-companies" class="mb-3 rounded app-tooltip" data-toggle="tooltip"
-                                            data-placement="right" title="List all the companies">
+                                        <li id="list-companies" class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="List all the companies">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="far fa-building mr-2"></i>
                                                 <span class="close">Companies </span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded SurveyMenuItem app-tooltip" data-toggle="tooltip"
-                                            data-placement="right" title="Create a new survey">
+                                        <li class="mb-3 rounded SurveyMenuItem app-tooltip" data-toggle="tooltip" data-placement="right" title="Create a new survey">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fas fa-chalkboard-teacher mr-2"></i>
                                                 <span class="close">Create survey</span>
                                             </a>
                                         </li>
-                                        <li class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right"
-                                            title="Show the enterprises form" onclick="switchVisible('Div4')">
-                                            <a href="#" class="p-1 pl-2">
-                                                <i class="fas fa-business-time mr-2"></i>
-                                                <span class="close">Add Enterprise</span>
-                                            </a>
-                                        </li>
-                                        <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip"
-                                            data-placement="right" title="Search data">
+                                        <li id="search-btn" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right" title="Search data">
                                             <!-- llamar al index.html del menú derecho-->
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-search mr-2"></i>
                                                 <span class="close">Search</span>
                                             </a>
                                         </li>
-
-                                        <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
-                                            title="Logout from this application">
+                                        <li class="mb-3 rounded app-tooltip" data-toggle="tooltip" data-placement="right" title="Show the enterprises form" id="btn-enterpriseAdd">
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fas fa-business-time mr-2"></i>
+                                                <span class="close">Enterprises</span>
+                                            </a>
+                                        </li>
+                                        <li class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right" title="Logout from this application">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-sign-out-alt mr-2"></i>
                                                 <span class="close">Logout</span>
@@ -180,8 +170,7 @@
                             <div class="card">
                                 <div class="card-header" id="languages-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo "
-                                            aria-expanded="true" aria-controls="languagesInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo " aria-expanded="true" aria-controls="languagesInfo">
                                             Languages
                                         </button>
                                     </h5>
@@ -196,8 +185,7 @@
                             <div class="card ">
                                 <div class="card-header" id="skills-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo"
-                                            aria-expanded="true" aria-controls="skillsInfo">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo" aria-expanded="true" aria-controls="skillsInfo">
                                             Skills
                                         </button>
                                     </h5>
@@ -212,8 +200,7 @@
                             <div class="card">
                                 <div class="card-header" id="frameworks-info">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link " data-toggle="collapse" data-target="#frameworksInfo"
-                                            aria-expanded="true" aria-controls="frameworksInfo">
+                                        <button class="btn btn-link " data-toggle="collapse" data-target="#frameworksInfo" aria-expanded="true" aria-controls="frameworksInfo">
                                             Frameworks
                                         </button>
                                     </h5>
@@ -233,14 +220,11 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="js/UserForm/UserForm.js"></script>
     <script src="js/SurveyCreator/SurveyCreator.js"></script>
@@ -250,11 +234,12 @@
     <script src="js/CompaniesTable/Company.js"></script>
     <script src="js/CompaniesTable/Companies.js"></script>
     <script src="js/CompaniesTable/indexCompanies.js"></script>
-    <script src="js/GeneralConstructor.js"></script>
     <script src="js/EnterprisesForm/enterprisesForm.js"></script>
+    <script src="js/GeneralConstructor.js"></script>
     <script src="js/index.js"></script>
     <script src="js/guided_visit.js"></script>
     <script src="js/advancedSearchCompanies/advancedRightMenu.js"></script>
+
 </body>
 
 </html>
