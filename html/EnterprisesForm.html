@@ -8,73 +8,82 @@
     <hr class=" hr-2">
 
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputName">Enterprise's name</label>
-        <input type="text" name="inputName" class="form-control form-control-width" minlength="3" maxlength="25"
-            pattern="[a-zA-Z\s]+" id="inputName" placeholder="Name" value="" data-toggle="tooltip" data-placement="left"
+        <label class="format-2" for="name">Enterprise's name</label>
+        <input type="text" name="name" class="form-control form-control-width" minlength="3" maxlength="25"
+            pattern="[a-zA-Z\s]+" id="name" placeholder="Name" value="" data-toggle="tooltip" data-placement="left"
             required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputCif">CIF</label>
-        <input type="text" name="inputCif" class="form-control form-control-width" minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+"
-            id="inputCif" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right" required>
+        <label class="format-2" for="CIF">CIF</label>
+        <input type="text" name="CIF" class="form-control form-control-width" minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+"
+            id="CIF" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right" required>
     </div>
-    <div class="form-row col-md-12">
-        <label class="format-2" for="inputAddress">Address</label>
-        <input lang="es-ES" name="imputAdress" type="text" class="form-control form-control-width " minlength="3"
-            maxlength="60" pattern="[a-zA-Z0-9\s]+" id="inputAddress" placeholder="1234 Antigua" value="" data-toggle="tooltip"
-            data-placement="left" required>
 
+    <!--
+        change inputs.Address
+    -->
+    <div class="form-row col-md-12 country">
+        <label class="format-2" for="country">Country</label>
+        <input lang="es-ES" name="country" type="text" class="form-control form-control-width " minlength="3"
+            maxlength="25" pattern="[a-zA-Z\s]+" id="country" placeholder="Country" data-toggle="tooltip"
+            data-placement="left" required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputCity">City</label>
-        <input lang="es-ES" name="imputCity" type="text" class="form-control form-control-width " minlength="3"
-            maxlength="25" pattern="[a-zA-Z\s]+" id="inputCity" placeholder="City" value="" data-toggle="tooltip"
+        <label class="format-2" for="city">City</label>
+        <input lang="es-ES" name="city" type="text" class="form-control form-control-width " minlength="3"
+            maxlength="25" pattern="[a-zA-Z\s]+" id="city" placeholder="City" value="" data-toggle="tooltip"
             data-placement="right" required>
     </div>
-    <div class="form-row col-md-12 country">
-        <label class="format-2" for="inputCountry">Country</label>
-        <input lang="es-ES" name="inputCountry" type="text" class="form-control form-control-width " minlength="3"
-            maxlength="25" pattern="[a-zA-Z\s]+" id="inputCountry" placeholder="Country" data-toggle="tooltip"
+    <div class="form-row col-md-12">
+        <label class="format-2" for="street">Street</label>
+        <input lang="es-ES" name="street" type="text" class="form-control form-control-width " minlength="3"
+            maxlength="60" pattern="[a-zA-Z0-9\s]+" id="street" placeholder="1234 Antigua" value="" data-toggle="tooltip"
             data-placement="left" required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputZip">Zip</label>
-        <input name="inputZip" type="text" class="form-control form-control-width " minlength="3" maxlength="5" pattern="[0-9\s]+"
-            id="inputZip" placeholder="35004" data-toggle="tooltip" data-placement="right" required>
+        <label class="format-2" for="zipcode">Zip</label>
+        <input name="zipcode" type="text" class="form-control form-control-width " minlength="3" maxlength="5" pattern="[0-9\s]+"
+            id="zipcode" placeholder="35004" data-toggle="tooltip" data-placement="right" required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputPhone">Phone</label>
-        <input name="inputPhone" type="tel" class="form-control form-control-width " minlength="9" maxlength="13"
-            pattern="[0-9\s]+" id="inputPhone" placeholder="+0034 928 556677" data-toggle="tooltip" data-placement="left"
+        <label class="format-2" for="phone">Phone</label>
+        <input name="phone" type="tel" class="form-control form-control-width " minlength="9" maxlength="13"
+            pattern="[0-9\s]+" id="phone" placeholder="+0034 928 556677" data-toggle="tooltip" data-placement="left"
             required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputEmail">Email</label>
-        <input lang="es-ES" type="email" name="inputEmail" class="form-control form-control-width " minlength="3"
+        <label class="format-2" for="email">Email</label>
+        <input lang="es-ES" type="email" name="email" class="form-control form-control-width " minlength="3"
             maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
-            id="inputEmail" placeholder="Email" data-toggle="tooltip" data-placement="right" required>
+            id="email" placeholder="Email" data-toggle="tooltip" data-placement="right" required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputWorkersNumber">Workers Number</label>
-        <input name="inputWorkersNumber" type="text" class="form-control form-control-width " minlength="1" maxlength="5"
-            pattern="[0-9\s]+" id="inputWorkersNumber" placeholder="Number of workers in the company" data-toggle="tooltip"
+        <label class="format-2" for="employees">Workers Number</label>
+        <input name="employees" type="text" class="form-control form-control-width " minlength="1" maxlength="5"
+            pattern="[0-9\s]+" id="employees" placeholder="Number of workers in the company" data-toggle="tooltip"
             data-placement="left" required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputSocialNetworks">Social Networks</label>
-        <input lang="es-ES" name="inputSocialNetworks" type="text" class="form-control form-control-width " minlength="3"
-            maxlength="25" pattern="[a-zA-Z0-9\s]+" id="inputSocialNetworks" placeholder="Facebook, Twitter..."
+        <label class="format-2" for="website">Website</label>
+        <input lang="es-ES" name="website" type="text" class="form-control form-control-width " minlength="3"
+            maxlength="25" pattern="[a-zA-Z0-9\s]+" id="website" placeholder="Facebook, Twitter..."
             data-toggle="tooltip" data-placement="right" required>
     </div>
     <div class="form-row col-md-12">
-        <label class="format-2" for="inputLogo">Logo</label>
-        <input name="inputLogo" type="file" class="form-control-file format-3" id="inputLogo">
+        <label class="format-2" for="socialUrls">Social Networks</label>
+        <input lang="es-ES" name="socialUrls" type="text" class="form-control form-control-width " minlength="3"
+            maxlength="25" pattern="[a-zA-Z0-9\s]+" id="socialUrls" placeholder="Facebook, Twitter..."
+            data-toggle="tooltip" data-placement="left" required>
+    </div>
+    <div class="form-row col-md-12">
+        <label class="format-2" for="logoURL">Logo</label>
+        <input name="logoURL" type="file" class="form-control-file format-3" id="logoURL"  data-toggle="tooltip" data-placement="right" required>
     </div>
 
-    <p class="format-2 form-row col-md-12" for="inputDescription">Description</p>
+    <p class="format-2 form-row col-md-12" for="bio">Bio</p>
     <div class="form-row col-md-12">
-        <textarea name="inputDescription" type="text" class="format-2" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="inputDescription"
-            placeholder=" Optional"></textarea>
+        <textarea name="bio" type="text" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="bio"
+            placeholder=" Optional" data-toggle="tooltip" data-placement="left" required></textarea>
     </div>
 
     <div class="form-row col-md-12">
