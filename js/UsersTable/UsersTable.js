@@ -152,173 +152,173 @@ const Table = (function() {
         gender ? gender : ""
       }&nat=${nationalitiesFormatted}&format=${format}`;
 
-                    return baseURL;
-                }
+      return baseURL;
+    }
 
-                /**
-                 * Format the array of elements like this example ["ES", "DE", "TR"] => "ES,DE,TR"
-                 * @param {Array} nationalities
-                 */
-                function _nationalitiesRequestFormat(nationalities = []) {
-                    return nationalities.map(nat => nat).join(",");
-                }
+    /**
+     * Format the array of elements like this example ["ES", "DE", "TR"] => "ES,DE,TR"
+     * @param {Array} nationalities
+     */
+    function _nationalitiesRequestFormat(nationalities = []) {
+      return nationalities.map(nat => nat).join(",");
+    }
 
-                /**
-                 * Append a new HTML row into the specific container with the user data
-                 * @function _appendRowData
-                 * @private
-                 * @param {jQuery Object} tableBody
-                 * @param {Object} user
-                 */
-                function _appendRowData(tableBody, user) {
-                    tableBody.append(_tableRowSkeleton(user));
-                }
+    /**
+     * Append a new HTML row into the specific container with the user data
+     * @function _appendRowData
+     * @private
+     * @param {jQuery Object} tableBody
+     * @param {Object} user
+     */
+    function _appendRowData(tableBody, user) {
+      tableBody.append(_tableRowSkeleton(user));
+    }
 
-                /**
-                 * Append a new HTML Card element into the specific container with the user data
-                 * @function _appendCardData
-                 * @private
-                 * @param {jQuery Object} cardContainer
-                 * @param {Object} user
-                 */
-                function _appendCardData(cardContainer, user) {
-                    cardContainer.append(_cardSkeleton(user));
-                }
+    /**
+     * Append a new HTML Card element into the specific container with the user data
+     * @function _appendCardData
+     * @private
+     * @param {jQuery Object} cardContainer
+     * @param {Object} user
+     */
+    function _appendCardData(cardContainer, user) {
+      cardContainer.append(_cardSkeleton(user));
+    }
 
-                /**
-                 * Handle the resize on the browser to render data in a new container
-                 * @function renderDataOnResize
-                 * @public
-                 * @param {Number} width
-                 */
-                function renderDataOnResize(users = null, browserWidth, inputsData = []) {
-                    const mainTable = mainContainer.find("#users-table");
-                    const tableBody = mainTable.find("tbody");
-                    const cardContainer = mainContainer.find("div#card-container");
+    /**
+     * Handle the resize on the browser to render data in a new container
+     * @function renderDataOnResize
+     * @public
+     * @param {Number} width
+     */
+    function renderDataOnResize(users = null, browserWidth, inputsData = []) {
+      const mainTable = mainContainer.find("#users-table");
+      const tableBody = mainTable.find("tbody");
+      const cardContainer = mainContainer.find("div#card-container");
 
-                    let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
+      let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
 
-                    if (browserWidth > 868) {
-                        if (inputsData.length > 0) {
-                            const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
+      if (browserWidth > 868) {
+        if (inputsData.length > 0) {
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
-                            tableBody.empty();
-                            _showOverlay(true);
+          tableBody.empty();
+          _showOverlay(true);
 
-                            setTimeout(() => {
-                                _showOverlay(false);
-                                filteredUsers.forEach(user => _appendRowData(tableBody, user));
-                            }, 1000);
-                        }
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendRowData(tableBody, user));
+          }, 1000);
+        }
 
-                        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
-                            _renderTableOnResize(mainTable, cardContainer, usersData);
-                            _showOverlay(false);
-                        }
-                    } else if (browserWidth < 868) {
-                        if (inputsData.length > 0) {
-                            const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
+        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
+          _renderTableOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
+        }
+      } else if (browserWidth < 868) {
+        if (inputsData.length > 0) {
+          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
 
-                            cardContainer.empty();
-                            _showOverlay(true);
+          cardContainer.empty();
+          _showOverlay(true);
 
-                            setTimeout(() => {
-                                _showOverlay(false);
-                                filteredUsers.forEach(user => _appendCardData(cardContainer, user));
-                            }, 1000);
-                        }
+          setTimeout(() => {
+            _showOverlay(false);
+            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
+          }, 1000);
+        }
 
-                        if (
-                            cardContainer.children(".user-card").length === 0 &&
-                            inputsData.length === 0
-                        ) {
-                            _renderCardOnResize(mainTable, cardContainer, usersData);
-                            _showOverlay(false);
-                        }
-                    }
-                }
+        if (
+          cardContainer.children(".user-card").length === 0 &&
+          inputsData.length === 0
+        ) {
+          _renderCardOnResize(mainTable, cardContainer, usersData);
+          _showOverlay(false);
+        }
+      }
+    }
 
-                /**
-                 * Create badge-pills to show the user input search values
-                 * @function _createSearchBadges
-                 * @private
-                 * @param {Object} filters
-                 */
-                function _createSearchBadges(filters) {
-                    const filtersContainer = mainContainer.find(".filters");
-                    const badgeContainer = filtersContainer.children(".search-badges");
+    /**
+     * Create badge-pills to show the user input search values
+     * @function _createSearchBadges
+     * @private
+     * @param {Object} filters
+     */
+    function _createSearchBadges(filters) {
+      const filtersContainer = mainContainer.find(".filters");
+      const badgeContainer = filtersContainer.children(".search-badges");
 
-                    filtersContainer.find("button").remove();
-                    badgeContainer.empty();
+      filtersContainer.find("button").remove();
+      badgeContainer.empty();
 
-                    Object.keys(filters).forEach(key => {
-                        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-                        const badge = $(
-                            `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
+      Object.keys(filters).forEach(key => {
+        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
+        const badge = $(
+          `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
             filters[key]
           }</span></span>`
-                        ).hide();
-                        badgeContainer.append(badge);
-                        badge.show("slow");
-                    });
-                    const resetButton = filtersContainer.append(
-                        `<button class="btn btn-sm btn-info">Cancel search</button>`
-                    );
-                    resetButton.off("click").on("click", function(e) {
-                        badgeContainer.empty();
-                        $(this).remove();
-                        _showOverlay(true);
-                        initTable(null, window.innerWidth);
-                    });
-                }
+        ).hide();
+        badgeContainer.append(badge);
+        badge.show("slow");
+      });
+      const resetButton = filtersContainer.append(
+        `<button class="btn btn-sm btn-info">Cancel search</button>`
+      );
+      resetButton.off("click").on("click", function(e) {
+        badgeContainer.empty();
+        $(this).remove();
+        _showOverlay(true);
+        initTable(null, window.innerWidth);
+      });
+    }
 
-                /**
-                 * @function _renderTableOnResize
-                 * @private
-                 * @param {jQuery Object} mainTable
-                 * @param {jQuery Object} cardContainer
-                 * @param {Array} users
-                 */
-                function _renderTableOnResize(mainTable, cardContainer, users) {
-                    cardContainer.empty();
-                    mainTable.show();
-                    const tableBody = mainTable.find("tbody");
-                    users.forEach(user => _appendRowData(tableBody, user));
-                }
+    /**
+     * @function _renderTableOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderTableOnResize(mainTable, cardContainer, users) {
+      cardContainer.empty();
+      mainTable.show();
+      const tableBody = mainTable.find("tbody");
+      users.forEach(user => _appendRowData(tableBody, user));
+    }
 
-                /**
-                 * @function _renderCardOnResize
-                 * @private
-                 * @param {jQuery Object} mainTable
-                 * @param {jQuery Object} cardContainer
-                 * @param {Array} users
-                 */
-                function _renderCardOnResize(mainTable, cardContainer, users) {
-                    mainTable
-                        .hide()
-                        .find("tbody")
-                        .empty();
-                    users.forEach(user => _appendCardData(cardContainer, user));
-                }
+    /**
+     * @function _renderCardOnResize
+     * @private
+     * @param {jQuery Object} mainTable
+     * @param {jQuery Object} cardContainer
+     * @param {Array} users
+     */
+    function _renderCardOnResize(mainTable, cardContainer, users) {
+      mainTable
+        .hide()
+        .find("tbody")
+        .empty();
+      users.forEach(user => _appendCardData(cardContainer, user));
+    }
 
-                /**
-                 * HTML5 skeleton to draw a table row
-                 * @function _tableRowSkeleton
-                 * @private
-                 * @param {object} params
-                 * @return {String} html template
-                 */
-                function _tableRowSkeleton({
-                    picture,
-                    id,
-                    email,
-                    name,
-                    location,
-                    registered
-                }) {
-                    let registeredDate = new Date(registered["date"]);
-                    let userFullName = buildUserFullname(name);
-                    return `
+    /**
+     * HTML5 skeleton to draw a table row
+     * @function _tableRowSkeleton
+     * @private
+     * @param {object} params
+     * @return {String} html template
+     */
+    function _tableRowSkeleton({
+      picture,
+      id,
+      email,
+      name,
+      location,
+      registered
+    }) {
+      let registeredDate = new Date(registered["date"]);
+      let userFullName = buildUserFullname(name);
+      return `
    <tr scope="row" data-id=${id.value}>
      <td class="user-avatar">
            <img class="img-fluid" src=${picture.thumbnail} alt=${
@@ -348,30 +348,34 @@ const Table = (function() {
             </td>
          </tr>
          `;
-                }
+    }
 
-                /**
-                 * HTML5 skeleton to draw a user card
-                 * @function _cardSkeleton
-                 * @private
-                 * @param {object} params
-                 * @return {String} html template
-                 */
-                function _cardSkeleton({
-                    name,
-                    picture,
-                    email,
-                    id,
-                    login,
-                    skills,
-                    frameworks,
-                    languages
-                }) {
-                    let userFullName = buildUserFullname(name);
+    /**
+     * HTML5 skeleton to draw a user card
+     * @function _cardSkeleton
+     * @private
+     * @param {object} params
+     * @return {String} html template
+     */
+    function _cardSkeleton({
+      name,
+      picture,
+      email,
+      id,
+      login,
+      skills,
+      frameworks,
+      languages
+    }) {
+      let userFullName = buildUserFullname(name);
 
-                    return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${id.value}>
+      return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
+        id.value
+      }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" src=${picture.medium} alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" src=${
+        picture.medium
+      } alt="test"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${userFullName}</p>
            <p>${login.username}</p>
@@ -685,8 +689,3 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
-<<<<<<< HEAD
-
-$("#userModal").on("show.bs.modal", usersTable.renderDataOnModal);
-=======
->>>>>>> feature/5.1_SurveyCreator
