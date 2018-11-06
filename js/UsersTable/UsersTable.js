@@ -80,6 +80,7 @@ const Table = (function() {
     /** Prepare sessionStorage that allow us save the data in client side to work with it
      * @function _setupSessionStorage
      * @private
+     * @param {String} url - The url from where we get the resources we need about users
      * @param {function} callback - Callback that triggers when the response is ready
      */
     function _setupSessionStorage(url, callback) {
@@ -93,7 +94,7 @@ const Table = (function() {
     /**Make the API Request that give the users data and handle the
      * possible errors
      * @function apiRequest
-     * @param {string} url
+     * @param {String} url
      * @param {function} callback
      */
     function apiRequest(url, callback) {

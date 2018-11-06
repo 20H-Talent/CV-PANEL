@@ -727,12 +727,18 @@ const SurveyCreator = (function() {
        */
       function _sendJSONData(event) {
         event.preventDefault();
+        const submitButton = $(event.target).find("button[type=submit]");
         let errors = _validateSurveyDates() + _validateHeaderTextInputs();
 
         if (errors === 0) {
           _setHeaderSurveyData();
           _setBodySurveyData();
 
+          submitButton
+            .css({ position: "relative", height: "60px" })
+            .html(
+              `<div style="position:absolute;" class="loading white">Loading&#8230;</div>`
+            );
           $.ajax({
             url: "https://cv-mobile-api.herokuapp.com/api/surveys",
             type: "POST",
@@ -746,6 +752,11 @@ const SurveyCreator = (function() {
             },
             error: function(jqXHR, textStatus) {
               _activeToastMessage(jqXHR.statusText);
+            },
+            complete: function(jqXHR, textStatus) {
+              submitButton
+                .css({ position: "static", height: "auto" })
+                .html(`Create Survey`);
             }
           });
         } else {
