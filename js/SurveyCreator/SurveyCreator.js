@@ -22,7 +22,7 @@ const SurveyCreator = (function() {
      * and setup all the event listeners attached on the elements.
      * @function construct
      * @public
-     * @param {jQuery object} container
+     * @param {jQuery object} container - The central container which represents the central column
      */
     function construct(container) {
       $.get("../../html/SurveyCreator.html", function(htmlSkeleton) {
@@ -36,6 +36,7 @@ const SurveyCreator = (function() {
        * Initialize all the object event listeners
        * @function _setupInternalEventListeners
        * @private
+       * @param {jquery Object} form - HTML element that represents the survey form
        */
       function _setupInternalEventListeners(form) {
         $surveyTableContainer = form.find("#survey-table");
@@ -78,7 +79,7 @@ const SurveyCreator = (function() {
        * Remove the parent row from the element passed as parameter
        * @function _removeRow
        * @private
-       * @param {jQuery object} element
+       * @param {jQuery object} element - HTML element to remove from the DOM
        */
       function _removeRow(element) {
         if (window.confirm("Are you sure to delete this selector")) {
@@ -104,13 +105,13 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Before append a new option in survey element like select, checkbox, radio
-       * this function check if the new value already exist.
+       * Before append a new option in survey element like select, checkbox, radio...
+       * This function check if the new value already exist.
        * @function _checkIfValueExists
        * @private
-       * @param {jQuery object} container
-       * @param {string} value
-       * @return {boolean} the value exists
+       * @param {jQuery object} container - Container where to check if the value exists inside
+       * @param {string} value - New value to append in string format
+       * @return {boolean} valueIsCorrect - Return a boolean that represents if the value is correct
        */
       function _validateValueToAppend(container, value) {
         let valueIsCorrect = true;
@@ -136,10 +137,11 @@ const SurveyCreator = (function() {
 
       /**
        * Append a new option to the parent that triggered this function,
+       * and setup the proper event listeners
        * The parent can be a selector, checkbox or radio block.
        * @function
        * @private
-       * @param {jQuery object} input
+       * @param {jQuery object} input - HTML input that manage the new values
        **/
       function _appendOptionToParent(input) {
         const inputValue = input.val().trim();
@@ -189,10 +191,10 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Modify a existing value for another one
+       * Modify a existing value for another one in the survey blocks
        * @function _editOption
        * @private
-       * @param {jQuery object} editButton
+       * @param {jQuery object} editButton - Button that fires the editOption event
        */
       function _editOption(editButton) {
         const buttonIcon = editButton.find("i");
@@ -214,10 +216,10 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Remove a children element on specific block
+       * Remove a children element on specific survey block
        * @function _deleteOption
        * @private
-       * @param {jQuery object} deleteButton
+       * @param {jQuery object} deleteButton - Button that fires the deleteOption event
        */
       function _deleteOption(deleteButton) {
         if (window.confirm("Are you sure to delete this option?")) {
@@ -228,7 +230,7 @@ const SurveyCreator = (function() {
       /**
        * Iterate over the survey blocks and define which
        * blocks are checked by the user to change the delete button text and insert
-       * the data-blocks attribute with the number of blocks to delete
+       * the data-blocks attribute that defines the number of survey blocks to delete
        * @function _selectedBlocks
        * @private
        * @param {object} event
@@ -293,7 +295,7 @@ const SurveyCreator = (function() {
       /**
        * Append a new survey block that define an HTML element like
        * selectors, text fields, dates, checkboxes, etc. Includes an
-       * scroll to this new block.
+       * scroll to this new block when this is appended.
        * @function _newSurveyBlock
        * @private
        * @param {object} event
@@ -398,8 +400,8 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Change the params on the add new element button to properly
-       * setup the block to add in the next click.
+       * Change the params on the "add new element" button to properly
+       * setup the block what will be added in the next click.
        * @function _typeSelect
        * @private
        * @param {object} event
@@ -420,7 +422,7 @@ const SurveyCreator = (function() {
        * Delete an specific input element from the survey blocks
        * @function _deleteInput
        * @private
-       * @param {object} event
+       * @param {object} event - The input to delete
        */
       function _deleteInput(event) {
         if (window.confirm("Are you sure to delete this input element?")) {
@@ -431,8 +433,9 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Append new data in our object that contains the data which
-       * will be sent to the API. This function only handle the header data
+       * Update our surveyApiData object that contains the data which
+       * will be sent to the API. This function only handle the data
+       * contained in the header of the Survey Form.
        * @function _setHeaderSurveyData
        * @private
        */
@@ -454,9 +457,9 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Append new data in our object that contains the data which
+       * Update our surveyApiData object that contains the data which
        * will be sent to the API. This function only handle the survey blocks
-       * that represents the body data
+       * that represents the body data.
        * @function _setBodySurveyData
        * @private
        */
@@ -494,6 +497,7 @@ const SurveyCreator = (function() {
        * Show a toast message when an action to the API is triggered
        * @function _activeToastMessage
        * @private
+       * @param {String}  [error=false] - Error response from the API
        */
       function _activeToastMessage(error = false) {
         const $toast = $("#toast");
@@ -504,7 +508,7 @@ const SurveyCreator = (function() {
             .removeClass("success")
             .addClass("show error")
             .children("#desc")
-            .text("Saved with success!");
+            .text(error);
 
           $toastIcon.removeClass("fa-check").addClass("fa-exclamation");
         } else {
@@ -522,7 +526,7 @@ const SurveyCreator = (function() {
 
       /**
        * Build an HTML code from the survey blocks and use an iframe
-       * to visualize in the browser
+       * to visualize the final result in the browser
        * @function _previewSurvey
        * @private
        * @param {object} event
@@ -560,9 +564,11 @@ const SurveyCreator = (function() {
       }
 
       /**
+       * Convert all the survey blocks into HTML elements that represents
+       * form inputs
        * @function _buildChildrenElements
        * @private
-       * @param {Array} elements that represents an HTML template
+       * @param {Array} Elements data that represents an HTML template
        * @return {Array} HTML templates already formatted
        */
       function _buildChildrenElements(elements) {
@@ -624,7 +630,7 @@ const SurveyCreator = (function() {
       }
 
       /**
-       * Check if the dates have the logic correctly
+       * Validate the date fields in thee form header container.
        * @function _validateSurveyData
        * @private
        * @param {object} event
@@ -660,7 +666,7 @@ const SurveyCreator = (function() {
        * Validate if the text is correctly formatted
        * @function _validateTextInput
        * @private
-       * @param {jQuery object} textInput
+       * @param {jQuery object} textInput - HTML input to get the value
        */
       function _validateTextInput(textInput) {
         const $textInput = $(event.target);
@@ -722,7 +728,7 @@ const SurveyCreator = (function() {
 
       /**
        * Group all the necessary functions to build the final
-       * JSON data and get ready to store on the API.
+       * JSON data (surveyApiData object) and get ready to make the store request on the API.
        * @param {object} event
        */
       function _sendJSONData(event) {
