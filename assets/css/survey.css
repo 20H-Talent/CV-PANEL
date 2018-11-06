@@ -8,12 +8,28 @@
   overflow: -moz-scrollbars-none;
 }
 
+.survey-container .table-responsive {
+  overflow-x: hidden;
+}
 .survey-container table thead th h4 {
   display: inline-block;
 }
 
 .survey-container table thead i {
   font-size: 1.4em;
+}
+
+.survey-container table tbody {
+  background-color: ghostwhite;
+}
+
+.survey-container table tbody .ValueType-data ul.preview-list > li {
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
+}
+
+.invalid-value {
+  background-color: #f8d7da !important;
+  color: red !important;
 }
 
 .survey-container table tbody .Cell-Container {
@@ -24,18 +40,33 @@
   overflow: -moz-scrollbars-none;
 }
 
-.survey-container form label {
-  font-size: 1.3em;
-}
-
 .survey-container .SurveyPreview iframe {
   width: 100%;
-  height: auto;
+  height: 650px;
 }
 
 td.ValueType-Cell label {
   width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+tr.ValueType-data td {
+  border-top: 2px solid rgb(165, 160, 160) !important;
+}
+
+tr.ValueType-data .ValueType-header input[type="checkbox"] {
+  width: 100%;
+  height: 1.2em;
+}
+
+tr.ValueType-data p[contenteditable] {
+  font-size: 1.3em;
+  font-family: Source Sans Pro, Arial, serif;
+}
+
+tr.ValueType-data .button-actions {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 th.FieldValues i.fa-plus-square {
@@ -54,9 +85,172 @@ td.FieldType-Cell {
   vertical-align: middle;
 }
 
+span.form-error {
+  font-family: Source Sans Pro, Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9em;
+  color: #b62f3d;
+}
+
+.border-red {
+  border: 1px solid red !important;
+}
+
 .preview-group {
   height: auto;
   max-height: 150px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+#toast {
+  visibility: hidden;
+  max-width: 50px;
+  height: 50px;
+  margin: auto;
+  background-color: #d4edda;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  font-size: 17px;
+  white-space: nowrap;
+}
+#toast #img {
+  width: 50px;
+  height: 50px;
+  float: left;
+  padding-top: 0.4em;
+  box-sizing: border-box;
+}
+
+#toast #desc {
+  padding: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 2s,
+    fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s,
+    fadeout 0.5s 4.5s;
+}
+
+#toast.show.success,
+#toast.show.success #desc {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+#toast.show.error,
+#toast.show.error #desc {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes expand {
+  from {
+    min-width: 50px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+
+@keyframes expand {
+  from {
+    min-width: 50px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+@-webkit-keyframes stay {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+
+@keyframes stay {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+@-webkit-keyframes shrink {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 50px;
+  }
+}
+
+@keyframes shrink {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 50px;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 60px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 60px;
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .survey-container {
+    margin-left: 10%;
+  }
 }

@@ -639,7 +639,7 @@
     "badgeTool": "2.16",
 
     "text": "Click here if you can create an enterprises that are saved on the database.",
-    "eventCallToOpen": "#left-menu ul li:nth-of-type(5)",
+    "eventCallToOpen": "#left-menu ul li:nth-of-type(6)",
     "eventCallToClose": "click"
   },
   {

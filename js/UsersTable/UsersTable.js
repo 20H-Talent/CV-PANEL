@@ -20,13 +20,17 @@ const Table = (function() {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
         _setupSessionStorage(apiURL, initTable);
-        _setupInternalEventListeners();
       }).fail(function(err) {
         _showOverlay(false);
         throw new Error(err);
       });
     }
 
+    /**
+     * Initialize all the object event listeners
+     * @function _setupInternalEventListeners
+     * @private
+     */
     function _setupInternalEventListeners() {
       $(window).on("resize", function(e) {
         const width = this.innerWidth;
@@ -37,14 +41,23 @@ const Table = (function() {
         .find("td.options")
         .off("click")
         .on("click", "button:not(.detail)", _optionButtonsEvent);
+
+      $("#userModal").on("show.bs.modal", renderDataOnModal);
     }
 
+    /**
+     * This function choose the actions depends on the button that
+     * fire the event
+     * @function _optionButtonsEvent
+     * @private
+     * @param {object} event
+     */
     function _optionButtonsEvent(event) {
       const button = $(event.currentTarget);
       const userID = button.data("id");
 
       if (button.hasClass("edit")) {
-        userForm.editForm(getUserByEmailOrID(userID));
+        userForm.editForm(getUserByID(userID));
       } else {
         if (window.confirm("Are you sure to delete this user?")) {
           deleteUser(userID);
@@ -55,6 +68,7 @@ const Table = (function() {
     /** Prepare sessionStorage that allow us save the data in client side to work with it
      * @function _setupSessionStorage
      * @private
+     * @param {String} url - The url from where we get the resources we need about users
      * @param {function} callback - Callback that triggers when the response is ready
      */
     function _setupSessionStorage(url, callback) {
@@ -65,6 +79,12 @@ const Table = (function() {
       }
     }
 
+    /**Make the API Request that give the users data and handle the
+     * possible errors
+     * @function apiRequest
+     * @param {String} url
+     * @param {function} callback
+     */
     function apiRequest(url, callback) {
       _showOverlay(true);
       $.getJSON(url, function(response) {
@@ -103,6 +123,7 @@ const Table = (function() {
         users.forEach(user => _appendCardData(cardContainer, user));
       }
       _showOverlay(false);
+      _setupInternalEventListeners();
     }
 
     /**
@@ -373,12 +394,12 @@ const Table = (function() {
 
     /**
      * Get a user object by the properties email or ID
-     * @function getUserByEmailOrID
+     * @function getUserByID
      * @public
      * @param {string} email || id
      * @return {object} User
      */
-    function getUserByEmailOrID(value) {
+    function getUserByID(value) {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
         user => user._id === value
       );
@@ -449,10 +470,16 @@ const Table = (function() {
       }
     }
 
+    /**
+     * Render the user data when the modal is opened
+     * @function renderDataOnModal
+     * @public
+     * @param {object} event
+     */
     function renderDataOnModal(event) {
       const element = $(event.relatedTarget);
       const modal = $(this);
-      const user = getUserByEmailOrID(element.data("id"));
+      const user = getUserByID(element.data("id"));
 
       const {
         profilePicture,
@@ -525,7 +552,7 @@ const Table = (function() {
     return {
       construct,
       initTable,
-      getUserByEmailOrID,
+      getUserByID,
       renderDataOnResize,
       renderDataOnModal
       //deleteUser
@@ -543,5 +570,3 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
-
-$("#userModal").on("show.bs.modal", usersTable.renderDataOnModal);

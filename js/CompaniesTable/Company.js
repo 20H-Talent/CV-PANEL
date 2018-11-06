@@ -24,7 +24,8 @@ function Company(
     this.bio = bio;
     this.employees = employees;
     this.phone = phone;
-    this.registeredDate = registeredDate;
+    this.registeredDate = Date.now();
+    console.log('  this.registeredDate :', this.registeredDate);
     // this.renderSocialNetworks = function() {
     //  var divCol = document.createElement("div");
     //  divCol.classList.add("text-center");

@@ -131,34 +131,36 @@ function checkTimesVisitedPage() {
       });
     } else {
       // -------- if visits to Page is more than 4, added the button Guided Visit lo left menu. -------
-      if (!$("#btnGuidedVisit") === false) {
-        $('#left-menu li[data-original-title*="Logout"]').before(
-          `<li id="btnGuidedVisit" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
-         title="Replay the Guided Visit">
-          <a href="#" class="p-1 pl-2">
-              <i class="fa fa-reply mr-2"></i>
-              <span class="close">Guided Visit</span>
-          </a>
-          </li>`
-        );
-        $("#btnGuidedVisit").tooltip();
-        $("#btnGuidedVisit").on("click", function() {
-          _loadGuidedVisit()
-            .then(dataModal => {
-              $("body main").append(dataModal);
+      if ($("#btnGuidedVisit").length === 0) {
+        setTimeout(() => {
+          $('#left-menu li[data-original-title*="Logout"]').before(
+            `<li id="btnGuidedVisit" class="mb-3 rounded w-100 app-tooltip" data-toggle="tooltip" data-placement="right"
+           title="Replay the Guided Visit">
+            <a href="#" class="p-1 pl-2">
+                <i class="fa fa-reply mr-2"></i>
+                <span class="close">Guided Visit</span>
+            </a>
+            </li>`
+          );
+          $("#btnGuidedVisit").tooltip();
+          $("#btnGuidedVisit").on("click", function() {
+            _loadGuidedVisit()
+              .then(dataModal => {
+                $("body main").append(dataModal);
 
-              // ------- Inicialize the events for button Skip and Start ---------
-              $("#guidedVisit button.btn-secondary").on("click", function() {
-                $("#guidedVisit").remove();
+                // ------- Inicialize the events for button Skip and Start ---------
+                $("#guidedVisit button.btn-secondary").on("click", function() {
+                  $("#guidedVisit").remove();
+                });
+                $("#guidedVisit button.btn-primary").on("click", () =>
+                  tooltips()
+                );
+              })
+              .catch(dataModal => {
+                console.error("Unable to load Guided Visit");
               });
-              $("#guidedVisit button.btn-primary").on("click", () =>
-                tooltips()
-              );
-            })
-            .catch(dataModal => {
-              console.error("Unable to load Guided Visit");
-            });
-        });
+          });
+        }, 500);
       }
     }
     localStorage.setItem("refreshPage", parseInt(visitsLocalStorage) + 1);
