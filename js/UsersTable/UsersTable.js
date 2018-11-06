@@ -297,10 +297,10 @@ const Table = (function() {
       name,
       profilePicture,
       _id,
-      login,
       skills,
       frameworks,
-      languages
+      languages,
+      username
     }) {
       let userFullName = buildUserFullname(name);
 
@@ -308,12 +308,10 @@ const Table = (function() {
         _id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" src=${
-        profilePicture.medium
-      } alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" src=${profilePicture} alt="test"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${userFullName}</p>
-           <p>${login.username}</p>
+           <p>${username}</p>
         </div>
       </div>
      <div class="card-body">
