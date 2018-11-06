@@ -12,6 +12,9 @@ function Companies() {
     this.addCompany = function(company) {
         this.companies.push(company);
     };
+    this.removeAllCompanies = function() {
+        this.companies = [];
+    }
     this.renderCompaniesTable = function(filtredCompanies) {
         // $("#tableBody").html(" ");
 
@@ -59,7 +62,7 @@ function Companies() {
         let companyCard = "";
         for (var i = 0; i < this.companies.length; i++) {
             companyCard += `
-            <div class="card card-company mt-3 shadow-lg p-3 ml-4 mr-2 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
+            <div class="card card-company mt-3 shadow-lg p-3 ml-5 mr-2 mb-5 bg-white rounded"  data-id=${this.companies[i].id}>
              <div class="">
                <div class="d-flex rounded  card-header   p-3">
                   <div class=""> <img class="card-img-top rounded-circle" src=${this.companies[i].logoURL} style="width:50px; alt="Card logo company"></div>
