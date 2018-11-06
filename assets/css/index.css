@@ -357,11 +357,12 @@ body {
 #users-table tbody td:first-child {
   text-align: center;
   padding: 0;
+  width: 10%;
 }
 
 #users-table tbody td:first-child > img {
   border-radius: 50%;
-  padding: 0.5em 0.5em 0 0.5em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 #users-table tbody td.user-city {

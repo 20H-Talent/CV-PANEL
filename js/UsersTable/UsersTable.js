@@ -13,20 +13,9 @@ const Table = (function() {
 
   function init() {
     const mainContainer = $(".main-container");
-    let apiURL = setupApiURL({
-      results: 100,
-      nationalities: ["ES"],
-      gender: "",
-      format: "json"
-    });
 
-    /**
-     * Render the HTML associate with this object in the central column
-     * and setup all the event listeners attached on the elements.
-     * @function construct
-     * @public
-     * @param {jQuery object} container
-     */
+    let apiURL = "https://cv-mobile-api.herokuapp.com/api/users";
+
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
@@ -100,7 +89,7 @@ const Table = (function() {
       _showOverlay(true);
       $.getJSON(url, function(response) {
         if (!response["error"]) {
-          usersWithExtraData = _appendExtraData(response["results"]);
+          usersWithExtraData = _appendExtraData(response);
           sessionStorage.setItem(
             "users-list",
             JSON.stringify(usersWithExtraData)
@@ -135,32 +124,6 @@ const Table = (function() {
       }
       _showOverlay(false);
       _setupInternalEventListeners();
-    }
-
-    /**
-     * Build the api URL to make a new request
-     * @function setupApiURL
-     * @public
-     * @param {object} config
-     * @return {string} baseURL
-     */
-    function setupApiURL(config) {
-      const { results, gender, nationalities, format } = config;
-
-      let nationalitiesFormatted = _nationalitiesRequestFormat(nationalities);
-      let baseURL = `https://randomuser.me/api/?results=${results}&gender=${
-        gender ? gender : ""
-      }&nat=${nationalitiesFormatted}&format=${format}`;
-
-      return baseURL;
-    }
-
-    /**
-     * Format the array of elements like this example ["ES", "DE", "TR"] => "ES,DE,TR"
-     * @param {Array} nationalities
-     */
-    function _nationalitiesRequestFormat(nationalities = []) {
-      return nationalities.map(nat => nat).join(",");
     }
 
     /**
@@ -309,42 +272,36 @@ const Table = (function() {
      * @return {String} html template
      */
     function _tableRowSkeleton({
-      picture,
-      id,
+      profilePicture,
+      _id,
       email,
       name,
       location,
-      registered
+      registeredDate,
+      skills,
+      languages
     }) {
-      let registeredDate = new Date(registered["date"]);
-      let userFullName = buildUserFullname(name);
       return `
-   <tr scope="row" data-id=${id.value}>
+   <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
-           <img class="img-fluid" src=${picture.thumbnail} alt=${
-        name.first
-      } /></td>
+           <img class="img-fluid" src=${profilePicture} alt="${name}" /></td>
            <td class="fullname">
-             <p>${userFullName}</p>
+             <p>${name}</p>
            </td>
            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
            <td class="user-city">
            <p> ${location.city}</p>
            </td>
-           <td class="user-registered">${registeredDate.toLocaleDateString()}</td>
+           <td class="user-registered">${new Date(
+             registeredDate
+           ).toLocaleDateString()}</td>
            <td class="options text-center">
                   <button type="button" class=" my-2 btn btn-outline-success btn-sm detail"
-                    data-id=${
-                      id.value
-                    } data-toggle="modal" data-target="#userModal" title="View user">
+                    data-id=${_id} data-toggle="modal" data-target="#userModal" title="View user">
                        <i class="far fa-eye"></i>
                   </button>
-                  <button type="button" class="my-2 btn btn-outline-primary btn-sm edit" data-id=${
-                    id.value
-                  } title="Edit user"><i class="fas fa-user-edit"></i></button>
-                  <button type="button" class=" my-2 btn btn-outline-danger btn-sm delete" data-id=${
-                    id.value
-                  } title="Delete user"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="my-2 btn btn-outline-primary btn-sm edit" data-id=${_id} title="Edit user"><i class="fas fa-user-edit"></i></button>
+                  <button type="button" class=" my-2 btn btn-outline-danger btn-sm delete" data-id=${_id} title="Delete user"><i class="far fa-trash-alt"></i></button>
             </td>
          </tr>
          `;
@@ -359,26 +316,21 @@ const Table = (function() {
      */
     function _cardSkeleton({
       name,
-      picture,
-      email,
-      id,
-      login,
+      profilePicture,
+      _id,
       skills,
       frameworks,
-      languages
+      languages,
+      username
     }) {
-      let userFullName = buildUserFullname(name);
-
       return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
-        id.value
+        _id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" src=${
-        picture.medium
-      } alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${profilePicture} alt="test"/></div>
         <div class=" font-weight-bold col card-username">
-           <p>${userFullName}</p>
-           <p>${login.username}</p>
+           <p>${name}</p>
+           <p>${username}</p>
         </div>
       </div>
      <div class="card-body">
@@ -407,12 +359,8 @@ const Table = (function() {
      </div>
      <div class="card-footer text-right card-buttons">
       
-        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
-          id.value
-        }><i class="fas fa-user-edit"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
-          id.value
-        }><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${_id}><i class="fas fa-user-edit"></i></button>
+        <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${_id}><i class="far fa-trash-alt"></i></button>
      </div>
    </div>
   `;
@@ -426,28 +374,6 @@ const Table = (function() {
      * @return {object} userWithExtraDAta
      */
     function _appendExtraData(usersData) {
-      const skills = [
-        "html",
-        "css",
-        "javascript",
-        "php",
-        "ruby",
-        "java",
-        "c++",
-        "python"
-      ];
-
-      const languages = [
-        "afrikan",
-        "english",
-        "spanish",
-        "romanian",
-        "french",
-        "german",
-        "italian",
-        "turkish"
-      ];
-
       const frameworks = [
         "django",
         "ruby on rails",
@@ -458,33 +384,12 @@ const Table = (function() {
       ];
 
       usersWithExtraData = usersData.map(user => {
-        user["skills"] = _generateExtraData(skills);
-        user["languages"] = _generateExtraData(languages);
         user["frameworks"] = _generateExtraData(frameworks);
 
         return user;
       });
 
       return usersWithExtraData;
-    }
-
-    /**
-     * Join the firstname and the last name to build user fullname capitalized
-     * @function buildUserFullName
-     * @public
-     * @param {string} name
-     * @return {string} fullName
-     */
-    function buildUserFullname(name) {
-      const { first, last } = name;
-      const fullName =
-        first.charAt(0).toUpperCase() +
-        first.slice(1) +
-        " " +
-        last.charAt(0).toUpperCase() +
-        last.slice(1);
-
-      return fullName;
     }
 
     /**
@@ -496,7 +401,7 @@ const Table = (function() {
      */
     function getUserByID(value) {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
-        user => user.id.value === value
+        user => user._id === value
       );
     }
 
@@ -521,7 +426,7 @@ const Table = (function() {
      * @function deleteUser
      * @public
      * @param {string} id
-     */
+
     function deleteUser(id) {
       let users = JSON.parse(sessionStorage.getItem("users-list"));
       users = users.filter(user => user.id.value !== id);
@@ -535,45 +440,17 @@ const Table = (function() {
        @private
      * @param {string} id
      */
-    function _removeUserFromDOM(id) {
+    function _removeUserFromDOM(_id) {
       const tableBody = mainContainer.find("#users-table tbody");
       if (tableBody.children("tr").length > 0) {
-        tableBody.find(`tr[data-id=${id}]`).remove();
+        tableBody.find(`tr[data-id=${_id}]`).remove();
       } else {
         mainContainer
-          .find(`#card-container > .user-card[data-id=${id}]`)
+          .find(`#card-container > .user-card[data-id=${_id}]`)
           .remove();
       }
     }
 
-    /**
-     * Receive new parameters to make a new request to the API
-     * @function changeApiParams
-     * @public
-     * @param {jQuery objects} selects
-     */
-    function changeApiParams(selects) {
-      const paramsObject = { format: "json", nationalities: [] };
-      for (select of selects) {
-        const $select = $(select);
-        if ($select.prop("name") === "nationalities[]") {
-          paramsObject["nationalities"] = $select.val();
-        }
-        paramsObject[$select.prop("name")] = $select.val();
-      }
-      delete paramsObject["nationalities[]"];
-      sessionStorage.removeItem("users-list");
-
-      const apiURL = setupApiURL(paramsObject);
-      apiRequest(apiURL, renderDataOnResize);
-    }
-
-    /**
-     * Show the spinner when a new data is ready to render
-     * @function _showOverlay
-     * @private
-     * @param {boolean} show
-     */
     function _showOverlay(show) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
@@ -604,26 +481,33 @@ const Table = (function() {
       const modal = $(this);
       const user = getUserByID(element.data("id"));
 
-      const { picture, name, login, dob, phone, cell, location } = user;
-      const fullName = buildUserFullname(name);
+      const {
+        profilePicture,
+        username,
+        name,
+        birthDate,
+        phone,
+        cell,
+        location
+      } = user;
 
       const modalBody = modal.find(".modal-body");
 
       modalBody.find("#infoUser span").remove();
 
-      modal.find(".modal-title").text(fullName + " ~ " + login.username);
-      modalBody.find("img").prop("src", picture["large"]);
+      modal.find(".modal-title").text(name + " ~ " + username);
+      modalBody.find("img").prop("src", profilePicture);
 
-      _appendBirthday(modalBody, dob.date);
+      _appendBirthday(modalBody, birthDate);
       _appendPhones(modalBody, { phone, cell });
       _appendAddress(modalBody, location);
       _appendTechSkills(modalBody, user);
     }
 
-    function _appendBirthday(container, date) {
+    function _appendBirthday(container, birthDate) {
       container
         .find(".birthday")
-        .append(`<span>${new Date(date).toLocaleDateString()}</span>`);
+        .append(`<span>${new Date(birthDate).toLocaleDateString()}</span>`);
     }
 
     function _appendPhones(container, phones) {
@@ -644,8 +528,8 @@ const Table = (function() {
       container
         .find(".address")
         .append(
-          `<span>${location.state} ~ ${location.city} ${location.postcode} / ${
-            location.street
+          `<span>${location.state} ~ ${location.city} / ${
+            location.country
           }</span>`
         );
     }
@@ -668,13 +552,10 @@ const Table = (function() {
     return {
       construct,
       initTable,
-      setupApiURL,
-      buildUserFullname,
       getUserByID,
       renderDataOnResize,
-      renderDataOnModal,
-      changeApiParams,
-      deleteUser
+      renderDataOnModal
+      //deleteUser
     };
   }
 

@@ -102,7 +102,6 @@ $("document").ready(function() {
 
   changeScreen();
   $(window).on("resize", function() {
-    // var windowSize = $(window).width();
     changeScreen();
   });
 
@@ -112,7 +111,6 @@ $("document").ready(function() {
       $("#open-icon-left").on("click", navLeft);
       $("#left-menu").on("touchmove", navLeft);
     } else {
-      console.log("Mobile");
       $("#open-icon-left").on("click", navLeftMobile);
       $("#main-left").on("touchmove", navLeftMobile);
     }
@@ -314,40 +312,6 @@ buttonCreateUser.addEventListener("click", function() {
         console.log(" loadMain:  " + textStatus);
         formSideBar();
       });
-    }
-  }
-
-  function switchVisible(visible) {
-    // console.log("div1", document.getElementById("Div1").style.display);
-    // console.log("div2", document.getElementById("Div2").style.display);
-    switch (visible) {
-      case "Div1": //== table users
-        //hidding the form
-        document.getElementById("Div4").style.display = "none";
-        //showing the table
-        break;
-      case "Div2": //== form
-        //hidding the table
-        document.getElementById("Div1").style.display = "none";
-        document.getElementById("Div4").style.display = "none";
-        //showing the form
-        break;
-      case "companyTable": //== table users
-        //hidding the form
-        document.getElementById("Div1").style.display = "none";
-        document.getElementById("Div4").style.display = "none";
-        //showing the table
-        break;
-
-      case "Div4": //== form
-        //hidding the table
-        document.getElementById("Div1").style.display = "none";
-        //showing the form
-        document.getElementById("Div4").style.display = "block";
-        break;
-
-      default:
-        break;
     }
   }
 });
