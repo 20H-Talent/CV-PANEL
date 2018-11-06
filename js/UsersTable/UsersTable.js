@@ -31,7 +31,6 @@ const Table = (function() {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
         _setupSessionStorage(apiURL, initTable);
-        _setupInternalEventListeners();
       }).fail(function(err) {
         _showOverlay(false);
         throw new Error(err);
@@ -69,7 +68,7 @@ const Table = (function() {
       const userID = button.data("id");
 
       if (button.hasClass("edit")) {
-        userForm.editForm(getUserByEmailOrID(userID));
+        userForm.editForm(getUserByID(userID));
       } else {
         if (window.confirm("Are you sure to delete this user?")) {
           deleteUser(userID);
@@ -135,6 +134,7 @@ const Table = (function() {
         users.forEach(user => _appendCardData(cardContainer, user));
       }
       _showOverlay(false);
+      _setupInternalEventListeners();
     }
 
     /**
@@ -489,12 +489,12 @@ const Table = (function() {
 
     /**
      * Get a user object by the properties email or ID
-     * @function getUserByEmailOrID
+     * @function getUserByID
      * @public
      * @param {string} email || id
      * @return {object} User
      */
-    function getUserByEmailOrID(value) {
+    function getUserByID(value) {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
         user => user.id.value === value
       );
@@ -602,7 +602,7 @@ const Table = (function() {
     function renderDataOnModal(event) {
       const element = $(event.relatedTarget);
       const modal = $(this);
-      const user = getUserByEmailOrID(element.data("id"));
+      const user = getUserByID(element.data("id"));
 
       const { picture, name, login, dob, phone, cell, location } = user;
       const fullName = buildUserFullname(name);
@@ -670,7 +670,7 @@ const Table = (function() {
       initTable,
       setupApiURL,
       buildUserFullname,
-      getUserByEmailOrID,
+      getUserByID,
       renderDataOnResize,
       renderDataOnModal,
       changeApiParams,
