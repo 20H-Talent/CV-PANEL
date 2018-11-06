@@ -65,9 +65,20 @@ const SearchFilter = (function() {
                     return $.trim($input.val()).length > 0;
                 }
             })
+            // .each((index, input) => {
+            //     const $input = $(input);
+            //     filters.push({ 
+            //         value: $input.val(),
+            //         name: $input.prop("name"),
+            //         id: $input.prop("id")
+            //     });
+            // });
             .each((index, input) => {
                 const $input = $(input);
-                filters[$input.prop("name")] = $input.val();
+                filters[$input.prop("name")] = { 
+                            value: $input.val(),
+                            id: $input.prop("id")
+                        };
             });
         return filters;
     }
@@ -104,8 +115,8 @@ const SearchFilter = (function() {
             const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
             console.log("FILTERS KEY: ", key, filters[key]);
             const badge = $(
-                `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
-          filters[key]
+                `<span data-name="${key}" class="badge badge-pill badge-secondary filter mr-2">${key}: <span>${
+          filters[key].value
         }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
       ).hide();
       badgesContainer.append(badge);
