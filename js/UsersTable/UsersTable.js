@@ -308,7 +308,7 @@ const Table = (function() {
         _id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" src=${profilePicture} alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${profilePicture} alt="test"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${userFullName}</p>
            <p>${username}</p>
