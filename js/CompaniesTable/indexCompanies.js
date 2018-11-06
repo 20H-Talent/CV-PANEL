@@ -97,24 +97,14 @@ function showPreviewInfo(id) {
 
 
 function removeCompanyFromDOM(id) {
-    var company = companies.getCompanyById(id);
-    const tableCompany = $("#card-container-company");
-    const companyContainer = $(".main-container-companies");
-    const tableBodyCompanies = companyContainer.find("#tableBody");
-    companyContainer.on("click", "button.delete-company", function(e) {
-        if (tableBodyCompanies.children("tr").length > 0) {
-            var findTrCompanies = tableBodyCompanies.find(`tr[data-id=${company.id}]`);
-            console.log('company.id :', company.id);
-            findTrCompanies.remove();
-
-        } //else //{
-        //     const cards = tableCompany.find(`.card-company[data-id=${company.id}]`);
-        //     //cards.remove();
-        //     cards.remove();
-        //     console.log('cards :', cards);
-
-        // }
-    });
+    fetch(`https://cv-mobile-api.herokuapp.com/api/company/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            window.location.reload();
+        });
 }
 
 // Advanced search for companies form
