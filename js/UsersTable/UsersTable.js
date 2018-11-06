@@ -258,14 +258,12 @@ const Table = (function() {
       location,
       registeredDate
     }) {
-      // let registeredDate = new Date(registered);
-      let userFullName = buildUserFullname(name);
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
-           <img class="img-fluid" src=${profilePicture} alt=${userFullName} /></td>
+           <img class="img-fluid" src=${profilePicture} alt="${name}" /></td>
            <td class="fullname">
-             <p>${userFullName}</p>
+             <p>${name}</p>
            </td>
            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
            <td class="user-city">
@@ -302,15 +300,13 @@ const Table = (function() {
       languages,
       username
     }) {
-      let userFullName = buildUserFullname(name);
-
       return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
         _id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
       <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${profilePicture} alt="test"/></div>
         <div class=" font-weight-bold col card-username">
-           <p>${userFullName}</p>
+           <p>${name}</p>
            <p>${username}</p>
         </div>
       </div>
@@ -398,26 +394,6 @@ const Table = (function() {
     }
 
     /**
-     * Join the firstname and the last name to build user fullname capitalized
-     * @function buildUserFullName
-     * @public
-     * @param {string} name
-     * @return {string} fullName
-     */
-    function buildUserFullname(name) {
-      // const { first, last } = name;
-      const fullName = name.split();
-
-      // const fullName =
-      //   first.charAt(0).toUpperCase() +
-      //   first.slice(1) +
-      //   " " +
-      //   last.charAt(0).toUpperCase() +
-      //   last.slice(1);
-      return fullName;
-    }
-
-    /**
      * Get a user object by the properties email or ID
      * @function getUserByEmailOrID
      * @public
@@ -496,17 +472,10 @@ const Table = (function() {
     }
 
     function renderDataOnModal(event) {
-      // const element = $(event.relatedTarget);
-
-      const element = event.relatedTarget.dataset.id;
-      // const btn = $(event.currentTarget);
-      // const user = getUserByEmailOrID(btn.data("_id"));
-
+      const element = $(event.relatedTarget);
       const modal = $(this);
-      // const user = getUserByEmailOrID(element.data("_id"));
-      const user = getUserByEmailOrID(element);
+      const user = getUserByEmailOrID(element.data("id"));
 
-      console.log("Abriendo user: ", user);
       const {
         profilePicture,
         username,
@@ -516,18 +485,14 @@ const Table = (function() {
         cell,
         location
       } = user;
-      console.log(`username: ${username}, name: ${name}`);
-
-      const fullName = buildUserFullname(name);
 
       const modalBody = modal.find(".modal-body");
 
       modalBody.find("#infoUser span").remove();
 
-      modal.find(".modal-title").text(fullName + " ~ " + username);
+      modal.find(".modal-title").text(name + " ~ " + username);
       modalBody.find("img").prop("src", profilePicture);
 
-      // _appendBirthday(modalBody, dob.date);
       _appendBirthday(modalBody, birthDate);
       _appendPhones(modalBody, { phone, cell });
       _appendAddress(modalBody, location);
@@ -582,7 +547,6 @@ const Table = (function() {
     return {
       construct,
       initTable,
-      buildUserFullname,
       getUserByEmailOrID,
       renderDataOnResize,
       renderDataOnModal
