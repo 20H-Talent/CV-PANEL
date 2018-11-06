@@ -1,4 +1,4 @@
-generalConstructor.construct("survey-creator");
+generalConstructor.construct("users-table");
 
 activateTooltips();
 function activateTooltips(container = null) {
