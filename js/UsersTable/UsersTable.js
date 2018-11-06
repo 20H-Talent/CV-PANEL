@@ -263,7 +263,7 @@ const Table = (function() {
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
-           <img class="img-fluid h-25" src=${profilePicture} alt=${userFullName} /></td>
+           <img class="img-fluid" src=${profilePicture} alt=${userFullName} /></td>
            <td class="fullname">
              <p>${userFullName}</p>
            </td>
@@ -276,17 +276,11 @@ const Table = (function() {
            ).toLocaleDateString()}</td>
            <td class="options text-center">
                   <button type="button" class=" my-2 btn btn-outline-success btn-sm detail"
-                    data-id=${
-                      _id.value
-                    } data-toggle="modal" data-target="#userModal" title="View user">
+                    data-id=${_id} data-toggle="modal" data-target="#userModal" title="View user">
                        <i class="far fa-eye"></i>
                   </button>
-                  <button type="button" class="my-2 btn btn-outline-primary btn-sm edit" data-id=${
-                    _id.value
-                  } title="Edit user"><i class="fas fa-user-edit"></i></button>
-                  <button type="button" class=" my-2 btn btn-outline-danger btn-sm delete" data-id=${
-                    _id.value
-                  } title="Delete user"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="my-2 btn btn-outline-primary btn-sm edit" data-id=${_id} title="Edit user"><i class="fas fa-user-edit"></i></button>
+                  <button type="button" class=" my-2 btn btn-outline-danger btn-sm delete" data-id=${_id} title="Delete user"><i class="far fa-trash-alt"></i></button>
             </td>
          </tr>
          `;
@@ -348,12 +342,8 @@ const Table = (function() {
      </div>
      <div class="card-footer text-right card-buttons">
       
-        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
-          _id.value
-        }><i class="fas fa-user-edit"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
-          _id.value
-        }><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${_id}><i class="fas fa-user-edit"></i></button>
+        <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${_id}><i class="far fa-trash-alt"></i></button>
      </div>
    </div>
   `;
@@ -438,7 +428,7 @@ const Table = (function() {
      */
     function getUserByEmailOrID(value) {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
-        user => user._id.value === value
+        user => user._id === value
       );
     }
 
@@ -508,9 +498,17 @@ const Table = (function() {
     }
 
     function renderDataOnModal(event) {
-      const element = $(event.relatedTarget);
+      // const element = $(event.relatedTarget);
+
+      const element = event.relatedTarget.dataset.id;
+      // const btn = $(event.currentTarget);
+      // const user = getUserByEmailOrID(btn.data("_id"));
+
       const modal = $(this);
-      const user = getUserByEmailOrID(element.data("_id"));
+      // const user = getUserByEmailOrID(element.data("_id"));
+      const user = getUserByEmailOrID(element);
+
+      console.log("Abriendo user: ", user);
       const {
         profilePicture,
         username,
@@ -520,6 +518,7 @@ const Table = (function() {
         cell,
         location
       } = user;
+      console.log(`username: ${username}, name: ${name}`);
 
       const fullName = buildUserFullname(name);
 
@@ -528,7 +527,7 @@ const Table = (function() {
       modalBody.find("#infoUser span").remove();
 
       modal.find(".modal-title").text(fullName + " ~ " + username);
-      modalBody.find("img").prop("src", profilePicture["large"]);
+      modalBody.find("img").prop("src", profilePicture);
 
       // _appendBirthday(modalBody, dob.date);
       _appendBirthday(modalBody, birthDate);
