@@ -256,7 +256,9 @@ const Table = (function() {
       email,
       name,
       location,
-      registeredDate
+      registeredDate,
+      skills,
+      languages
     }) {
       return `
    <tr scope="row" data-id=${_id}>
@@ -351,28 +353,6 @@ const Table = (function() {
      * @return {object} userWithExtraDAta
      */
     function _appendExtraData(usersData) {
-      const skills = [
-        "html",
-        "css",
-        "javascript",
-        "php",
-        "ruby",
-        "java",
-        "c++",
-        "python"
-      ];
-
-      const languages = [
-        "afrikan",
-        "english",
-        "spanish",
-        "romanian",
-        "french",
-        "german",
-        "italian",
-        "turkish"
-      ];
-
       const frameworks = [
         "django",
         "ruby on rails",
@@ -383,8 +363,6 @@ const Table = (function() {
       ];
 
       usersWithExtraData = usersData.map(user => {
-        user["skills"] = _generateExtraData(skills);
-        user["languages"] = _generateExtraData(languages);
         user["frameworks"] = _generateExtraData(frameworks);
 
         return user;
