@@ -16,8 +16,6 @@
  */
 
 function verifyFormEnterprises() {
-
-
     /***********************************
      * Adding a new company to API
      ***********************************/
@@ -32,12 +30,8 @@ function verifyFormEnterprises() {
     let employees = $("input[name=employees]").val();
     let website = $("input[name=website]").val();
     let bio = $("input[name=bio]").val();
-    let logoURL = $("input[name=logoURL]");
-    logoURL = [];
+    let logoURL = document.getElementById('logoURL').files[0];
     let socialUrls = $("input[name=socialUrls]");
-    let fileField = document.querySelector("input[type='file']");
-    console.log('fileField :', logoURL);
-    console.log('name :', name);
     $("#alert-form-enterprises").on("submit", function() {
         event.preventDefault();
         var neewCompany = sendNewCompany();
@@ -47,17 +41,12 @@ function verifyFormEnterprises() {
                 body: neewCompany
             })
             .then(res => {
-
                 return res.json()
             })
             .then(response => console.log(response));
-
-        //compiErrorData.classList.add("d-none");
-
     });
 
     function sendNewCompany() {
-
         let formData = new FormData();
         formData.append('name', name);
         formData.append('CIF', CIF);
@@ -69,24 +58,12 @@ function verifyFormEnterprises() {
         formData.append('employees', employees);
         formData.append('phone', phone);
         formData.append('city', city);
-        formData.append('logoURL', logoURL[0]);
+        formData.append('logoURL', logoURL);
         formData.append('website', website);
         formData.append('socialUrls', socialUrls);
         console.log('formData :', formData);
         return formData;
     }
-
-
-
-
-
-
-
-
-
-
-
-
     var form = document.getElementById("alert-form-enterprises");
     var inputsForm = form.querySelectorAll(
         "input[type=text],input[type=email],input[type=tel]"
