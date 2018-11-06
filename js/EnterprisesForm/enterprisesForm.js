@@ -34,11 +34,11 @@ function verifyFormEnterprises() {
     let socialUrls = $("input[name=socialUrls]");
     $("#alert-form-enterprises").on("submit", function() {
         event.preventDefault();
-        var neewCompany = sendNewCompany();
-        console.log(neewCompany);
+        var newCompany = sendNewCompany();
+        console.log(newCompany);
         fetch('https://cv-mobile-api.herokuapp.com/api/company', {
                 method: 'POST',
-                body: neewCompany
+                body: newCompany
             })
             .then(res => {
                 return res.json()
