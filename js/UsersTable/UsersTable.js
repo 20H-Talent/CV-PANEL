@@ -9,118 +9,146 @@
  */
 
 const Table = (function() {
-            let instance;
+  let instance;
 
-            function init() {
-                const mainContainer = $(".main-container");
-                let apiURL = setupApiURL({
-                    results: 100,
-                    nationalities: ["ES"],
-                    gender: "",
-                    format: "json"
-                });
+  function init() {
+    const mainContainer = $(".main-container");
+    let apiURL = setupApiURL({
+      results: 100,
+      nationalities: ["ES"],
+      gender: "",
+      format: "json"
+    });
 
-                function construct(container) {
-                    $.get("../../html/UserTable.html", function(htmlSkeleton) {
-                        container.empty().append(htmlSkeleton);
-                        _setupSessionStorage(apiURL, initTable);
-                        _setupInternalEventListeners();
-                    }).fail(function(err) {
-                        _showOverlay(false);
-                        throw new Error(err);
-                    });
-                }
+    /**
+     * Render the HTML associate with this object in the central column
+     * and setup all the event listeners attached on the elements.
+     * @function construct
+     * @public
+     * @param {jQuery object} container
+     */
+    function construct(container) {
+      $.get("../../html/UserTable.html", function(htmlSkeleton) {
+        container.empty().append(htmlSkeleton);
+        _setupSessionStorage(apiURL, initTable);
+        _setupInternalEventListeners();
+      }).fail(function(err) {
+        _showOverlay(false);
+        throw new Error(err);
+      });
+    }
 
-                function _setupInternalEventListeners() {
-                    $(window).on("resize", function(e) {
-                        const width = this.innerWidth;
-                        renderDataOnResize(null, width);
-                    });
+    /**
+     * Initialize all the object event listeners
+     * @function _setupInternalEventListeners
+     * @private
+     */
+    function _setupInternalEventListeners() {
+      $(window).on("resize", function(e) {
+        const width = this.innerWidth;
+        renderDataOnResize(null, width);
+      });
 
-                    $("div.main-container")
-                        .find("td.options")
-                        .off("click")
-                        .on("click", "button:not(.detail)", _optionButtonsEvent);
-                }
+      $("div.main-container")
+        .find("td.options")
+        .off("click")
+        .on("click", "button:not(.detail)", _optionButtonsEvent);
 
-                function _optionButtonsEvent(event) {
-                    const button = $(event.currentTarget);
-                    const userID = button.data("id");
+      $("#userModal").on("show.bs.modal", renderDataOnModal);
+    }
 
-                    if (button.hasClass("edit")) {
-                        userForm.editForm(getUserByEmailOrID(userID));
-                    } else {
-                        if (window.confirm("Are you sure to delete this user?")) {
-                            deleteUser(userID);
-                        }
-                    }
-                }
+    /**
+     * This function choose the actions depends on the button that
+     * fire the event
+     * @function _optionButtonsEvent
+     * @private
+     * @param {object} event
+     */
+    function _optionButtonsEvent(event) {
+      const button = $(event.currentTarget);
+      const userID = button.data("id");
 
-                /** Prepare sessionStorage that allow us save the data in client side to work with it
-                 * @function _setupSessionStorage
-                 * @private
-                 * @param {function} callback - Callback that triggers when the response is ready
-                 */
-                function _setupSessionStorage(url, callback) {
-                    if (!sessionStorage.getItem("users-list")) {
-                        apiRequest(url, callback);
-                    } else {
-                        callback(null, window.innerWidth);
-                    }
-                }
+      if (button.hasClass("edit")) {
+        userForm.editForm(getUserByEmailOrID(userID));
+      } else {
+        if (window.confirm("Are you sure to delete this user?")) {
+          deleteUser(userID);
+        }
+      }
+    }
 
-                function apiRequest(url, callback) {
-                    _showOverlay(true);
-                    $.getJSON(url, function(response) {
-                        if (!response["error"]) {
-                            usersWithExtraData = _appendExtraData(response["results"]);
-                            sessionStorage.setItem(
-                                "users-list",
-                                JSON.stringify(usersWithExtraData)
-                            );
-                            callback(usersWithExtraData, window.innerWidth);
-                        }
-                    }).fail(function(err) {
-                        _showOverlay(false);
-                        throw new Error(err);
-                    });
-                }
+    /** Prepare sessionStorage that allow us save the data in client side to work with it
+     * @function _setupSessionStorage
+     * @private
+     * @param {String} url - The url from where we get the resources we need about users
+     * @param {function} callback - Callback that triggers when the response is ready
+     */
+    function _setupSessionStorage(url, callback) {
+      if (!sessionStorage.getItem("users-list")) {
+        apiRequest(url, callback);
+      } else {
+        callback(null, window.innerWidth);
+      }
+    }
 
-                /** Display table with the users data when the instance is initialized
-                 * @function initTable
-                 * @public
-                 * @param {array} data - Array of JSON data
-                 */
-                function initTable(data, browserWidth) {
-                    let users = data || JSON.parse(sessionStorage.getItem("users-list"));
-                    if (browserWidth > 768) {
-                        _showOverlay(true);
-                        const tableBody = mainContainer.find("#users-table tbody");
-                        users.forEach(user => _appendRowData(tableBody, user));
-                    } else {
-                        mainContainer
-                            .find("#users-table")
-                            .hide()
-                            .find("tbody")
-                            .empty();
-                        let cardContainer = mainContainer.find("div#card-container");
-                        users.forEach(user => _appendCardData(cardContainer, user));
-                    }
-                    _showOverlay(false);
-                }
+    /**Make the API Request that give the users data and handle the
+     * possible errors
+     * @function apiRequest
+     * @param {String} url
+     * @param {function} callback
+     */
+    function apiRequest(url, callback) {
+      _showOverlay(true);
+      $.getJSON(url, function(response) {
+        if (!response["error"]) {
+          usersWithExtraData = _appendExtraData(response["results"]);
+          sessionStorage.setItem(
+            "users-list",
+            JSON.stringify(usersWithExtraData)
+          );
+          callback(usersWithExtraData, window.innerWidth);
+        }
+      }).fail(function(err) {
+        _showOverlay(false);
+        throw new Error(err);
+      });
+    }
 
-                /**
-                 * Build the api URL to make a new request
-                 * @function setupApiURL
-                 * @public
-                 * @param {object} config
-                 * @return {string} baseURL
-                 */
-                function setupApiURL(config) {
-                    const { results, gender, nationalities, format } = config;
+    /** Display table with the users data when the instance is initialized
+     * @function initTable
+     * @public
+     * @param {array} data - Array of JSON data
+     */
+    function initTable(data, browserWidth) {
+      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
+      if (browserWidth > 768) {
+        _showOverlay(true);
+        const tableBody = mainContainer.find("#users-table tbody");
+        users.forEach(user => _appendRowData(tableBody, user));
+      } else {
+        mainContainer
+          .find("#users-table")
+          .hide()
+          .find("tbody")
+          .empty();
+        let cardContainer = mainContainer.find("div#card-container");
+        users.forEach(user => _appendCardData(cardContainer, user));
+      }
+      _showOverlay(false);
+    }
 
-                    let nationalitiesFormatted = _nationalitiesRequestFormat(nationalities);
-                    let baseURL = `https://randomuser.me/api/?results=${results}&gender=${
+    /**
+     * Build the api URL to make a new request
+     * @function setupApiURL
+     * @public
+     * @param {object} config
+     * @return {string} baseURL
+     */
+    function setupApiURL(config) {
+      const { results, gender, nationalities, format } = config;
+
+      let nationalitiesFormatted = _nationalitiesRequestFormat(nationalities);
+      let baseURL = `https://randomuser.me/api/?results=${results}&gender=${
         gender ? gender : ""
       }&nat=${nationalitiesFormatted}&format=${format}`;
 
@@ -536,6 +564,12 @@ const Table = (function() {
       apiRequest(apiURL, renderDataOnResize);
     }
 
+    /**
+     * Show the spinner when a new data is ready to render
+     * @function _showOverlay
+     * @private
+     * @param {boolean} show
+     */
     function _showOverlay(show) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
@@ -555,8 +589,13 @@ const Table = (function() {
       }
     }
 
+    /**
+     * Render the user data when the modal is opened
+     * @function renderDataOnModal
+     * @public
+     * @param {object} event
+     */
     function renderDataOnModal(event) {
-      console.log("Entro", event.relatedTarget, this);
       const element = $(event.relatedTarget);
       const modal = $(this);
       const user = getUserByEmailOrID(element.data("id"));
@@ -646,5 +685,8 @@ const Table = (function() {
 })();
 
 const usersTable = Table.getInstance();
+<<<<<<< HEAD
 
 $("#userModal").on("show.bs.modal", usersTable.renderDataOnModal);
+=======
+>>>>>>> feature/5.1_SurveyCreator
