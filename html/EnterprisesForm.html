@@ -2,18 +2,18 @@
     Enterprise form to be load by ajax into index.html.
 -->
 
-<form id="alert-form-enterprises" action="get" method="post" class="container enterprise-form table-wrapper-scroll-y">
+<form id="alert-form-enterprises" action="get" method="post" class="enterprise-form container">
     <h1 class="format-1">Business area</h1>
     <hr class="mb-4">
     <hr class=" hr-2">
 
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="name">Enterprise's name</label>
         <input type="text" name="name" class="form-control form-control-width" minlength="3" maxlength="25"
             pattern="[a-zA-Z\s]+" id="name" placeholder="Name" value="" data-toggle="tooltip" data-placement="left"
             required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="CIF">CIF</label>
         <input type="text" name="CIF" class="form-control form-control-width" minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+"
             id="CIF" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right" required>
@@ -22,64 +22,64 @@
     <!--
         change inputs.Address
     -->
-    <div class="form-row col-md-12 country">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="country">Country</label>
         <input lang="es-ES" name="country" type="text" class="form-control form-control-width " minlength="3"
             maxlength="25" pattern="[a-zA-Z\s]+" id="country" placeholder="Country" data-toggle="tooltip"
             data-placement="left" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="city">City</label>
         <input lang="es-ES" name="city" type="text" class="form-control form-control-width " minlength="3"
             maxlength="25" pattern="[a-zA-Z\s]+" id="city" placeholder="City" value="" data-toggle="tooltip"
             data-placement="right" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="street">Street</label>
         <input lang="es-ES" name="street" type="text" class="form-control form-control-width " minlength="3"
             maxlength="60" pattern="[a-zA-Z0-9\s]+" id="street" placeholder="1234 Antigua" value="" data-toggle="tooltip"
             data-placement="left" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="zipcode">Zip</label>
         <input name="zipcode" type="text" class="form-control form-control-width " minlength="3" maxlength="5" pattern="[0-9\s]+"
             id="zipcode" placeholder="35004" data-toggle="tooltip" data-placement="right" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="phone">Phone</label>
         <input name="phone" type="tel" class="form-control form-control-width " minlength="9" maxlength="13"
             pattern="[0-9\s]+" id="phone" placeholder="+0034 928 556677" data-toggle="tooltip" data-placement="left"
             required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="email">Email</label>
         <input lang="es-ES" type="email" name="email" class="form-control form-control-width " minlength="3"
             maxlength="25" pattern="[a-zA-Z0-9._{|}-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)"
             id="email" placeholder="Email" data-toggle="tooltip" data-placement="right" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="employees">Workers Number</label>
         <input name="employees" type="text" class="form-control form-control-width " minlength="1" maxlength="5"
             pattern="[0-9\s]+" id="employees" placeholder="Number of workers in the company" data-toggle="tooltip"
             data-placement="left" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="website">Website</label>
         <input lang="es-ES" name="website" type="text" class="form-control form-control-width " minlength="3"
             maxlength="25" pattern="[a-zA-Z0-9\s]+" id="website" placeholder="www.example.com"
             data-toggle="tooltip" data-placement="right" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="socialUrls">Social Networks</label>
         <input lang="es-ES" name="socialUrls" type="text" class="form-control form-control-width " minlength="3"
             maxlength="25" pattern="[a-zA-Z0-9\s]+" id="socialUrls" placeholder="Facebook, Twitter..."
             data-toggle="tooltip" data-placement="left" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="logoURL">Logo</label>
         <input name="logoURL" type="file" class="form-control-file format-3" id="logoURL"  data-toggle="tooltip" data-placement="right" required>
     </div>
-    <div class="form-row col-md-12">
+    <div class="form-row col-md-12 container">
         <label class="format-2" for="bio">Social Networks</label>
         <input lang="es-ES" name="bio" type="text" class="form-control form-control-width " minlength="0"
             maxlength="40" pattern="[a-zA-Z0-9\s]+" id="bio" placeholder="Description"
