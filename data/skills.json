@@ -1,0 +1,86 @@
+[
+    {    
+        "tag": "layout",
+        "label": "css",
+        "name": "skills_css",
+        "defaultValue": 0
+    },
+    {
+        "tag": "layout",
+        "label": "html",
+        "name": "skills_html",
+        "defaultValue": 0
+    },
+    {
+        "tag": "languages",
+        "label": "javascript",
+        "name": "skills_javascript",
+        "defaultValue": 0
+    },
+    {
+        "tag": "languages",
+        "label": "php",
+        "name": "skills_php",
+        "defaultValue": 0
+    },
+    {
+        "tag": "languages",
+        "label": "python",
+        "name": "skills_python",
+        "defaultValue": 0
+    },
+    {
+        "tag": "languages",
+        "label": "ruby",
+        "name": "skills_ruby",
+        "defaultValue": 0
+    },
+    {
+        "tag": "languages",
+        "label": "c++",
+        "name": "skills_c++",
+        "defaultValue": 0
+    },
+    {
+        "tag": "languages",
+        "label": "java",
+        "name": "skills_java",
+        "defaultValue": 0
+    },
+    {
+        "tag": "frameworks",
+        "label": "django",
+        "name": "skills_django",
+        "defaultValue": 0 
+    },
+    {
+        "tag": "frameworks",
+        "label": "ruby-rails",
+        "name": "skills_ruby-rails",
+        "default-value": 0 
+    },
+    {
+        "tag": "frameworks",
+        "label": "react",
+        "name": "skills_react",
+        "defaultValue": 0 
+    },
+    {
+        "tag": "frameworks",
+        "label": "angular",
+        "name": "skills_angular",
+        "defaultValue": 0 
+    },
+    {
+        "tag": "frameworks",
+        "label": "vue",
+        "name": "skills_vue",
+        "defaultValue": 0 
+    },
+    {
+        "tag": "frameworks",
+        "label": "laravel",
+        "name": "skills_laravel",
+        "defaultValue": 0 
+    }
+]

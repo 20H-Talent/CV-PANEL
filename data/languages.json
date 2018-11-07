@@ -1,0 +1,42 @@
+[
+    {
+        "label": "afrikan",
+        "name": "lang_african",
+        "defaultValue": 0
+    },
+    {
+        "label": "english",
+        "name": "lang_english",
+        "defaultValue": 0
+    },
+    {
+        "label": "spanish",
+        "name": "lang_spanish",
+        "defaultValue": 0
+    },
+    {
+        "label": "romanian",
+        "name": "lang_romanian",
+        "defaultValue": 0
+    },
+    {
+        "label": "french",
+        "name": "lang_french",
+        "defaultValue": 0
+    },
+    {
+        "label": "german",
+        "name": "lang_german",
+        "defaultValue": 0
+    },
+    {
+        "label": "italian",
+        "name": "lang_italian",
+        "defaultValue": 0
+    },
+    {
+        "label": "turkish",
+        "name": "lang_turkish",
+        "defaultValue": 0
+    }
+]

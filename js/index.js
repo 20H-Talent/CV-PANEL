@@ -1,37 +1,92 @@
-// -------------  LATERAL LEFT MENU ----------
-let sidebarItems = document.querySelectorAll("#left-menu li");
-for (sidebarItem of sidebarItems) {
-  sidebarItem.addEventListener("click", function() {
-    let current = document.getElementsByClassName("sidebar-position");
-    current[0].className = current[0].className.replace("sidebar-position", "");
-    this.className += " sidebar-position";
+/**
+ *  Function to load the content by ajax
+ */
+$("#right-menu-ajax").load("right-menu.html", function() {
+  formSideBar();
+  //Submit event for the form that handle the advanced search
+  $("form#advanced-search").on("submit", function(e) {
+    e.preventDefault();
+    const formInputs = $(this).find("input");
+    usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
   });
-}
-function openNewWindow() {
-  open("form.html");
-}
-
-// --------------- LATERAL RIGHT MENU ----------
-let range = document.querySelector("#age-range");
-let age = document.querySelector("#age");
-range.addEventListener("click", function(event) {
-  age.innerHTML = range.value;
 });
 
-let sidebarItems2 = document.querySelectorAll("#right-menu li");
-for (sidebarItem of sidebarItems2) {
-  sidebarItem.addEventListener("click", function() {
-    let current = document.getElementsByClassName("sidebar-position");
-    current[0].className = current[0].className.replace("sidebar-position", "");
-    this.className += " sidebar-position";
-  });
-}
-/*******************************
- *  LEFT SIDE BAR
- *******************************/
+/**
+ * Function to control the content (search form) of the right sidebar
+ */
 
-let iconOpenLeft = document.querySelector("#open-icon-left");
-iconOpenLeft.addEventListener("click", navLeft);
+function formSideBar() {
+  // -------------  LATERAL LEFT MENU ----------
+  let sidebarItems = document.querySelectorAll("#left-menu li");
+  for (sidebarItem of sidebarItems) {
+    sidebarItem.addEventListener("click", function() {
+      let current = document.getElementsByClassName("sidebar-position");
+      current[0].className = current[0].className.replace(
+        "sidebar-position",
+        ""
+      );
+      this.className += " sidebar-position";
+    });
+  }
+  //  function openNewWindow() {   // Esta función no se utiliza en ningún lado.
+  //     open("form.html");
+  //   }
+  // --------------- LATERAL RIGHT MENU ----------
+  let rangeAge = document.querySelector("#age-range");
+  let age = document.querySelector("#age");
+  let rangeExp = document.querySelector("#exp-years");
+  let experience = document.querySelector("#range");
+
+  // to set age of user next to input age-range
+  rangeAge.addEventListener("click", function(event) {
+    age.innerHTML = rangeAge.value;
+  });
+  // to set experience of user next to input exp-years
+  rangeExp.addEventListener("click", function(event) {
+    experience.innerHTML = rangeExp.value;
+  });
+
+  let sidebarItems2 = document.querySelectorAll("#right-menu li");
+  for (sidebarItem of sidebarItems2) {
+    sidebarItem.addEventListener("click", function() {
+      let current = document.getElementsByClassName("sidebar-position");
+      current[0].className = current[0].className.replace(
+        "sidebar-position",
+        ""
+      );
+      this.className += " sidebar-position";
+    });
+  }
+}
+
+/**************************************************************************
+ *  LEFT SIDE BAR control (mobile or desktop/tablet)
+ *  The width of the left sidebar is the same
+ * for the tablet and for the desktop, it only changes for the mobile.
+ **************************************************************************/
+
+changeScreen();
+$(window).on("resize", function() {
+  // var windowSize = $(window).width();
+  changeScreen();
+});
+
+function changeScreen() {
+  var windowSize = $(window).width();
+  if (windowSize > 425) {
+    $("#open-icon-left").on("click", navLeft);
+    $("#left-menu").on("touchmove", navLeft);
+  } else {
+    console.log("Mobile");
+    $("#open-icon-left").on("click", navLeftMobile);
+    $("#main-left").on("touchmove", navLeftMobile);
+  }
+}
+
+/*******************************************************************
+ *  LEFT SIDE DESKTOP
+ *  Control size left container, (open and close states)
+ *******************************************************************/
 
 function navLeft(event) {
   let icon = event.target;
@@ -42,11 +97,10 @@ function navLeft(event) {
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
-  
+
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -60,23 +114,20 @@ function navLeft(event) {
     for (span of spans) {
       span.classList.replace("open", "close");
     }
-  
   }
 }
 
-/*******************************
+/*******************************************************************
  *  LEFT SIDE BAR MOBILE
- *******************************/
-
-$('body').resize( navLeftMobile );
+ *  Control size left container, (open and close states)
+ *******************************************************************/
 
 function navLeftMobile(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-
-    document.getElementById("mySidenavLeft").style.width = "370px";
-    document.getElementById("main-left").style.marginLeft = "370px";
-    document.querySelector(".container-left").style.width = "370px";
+    document.getElementById("mySidenavLeft").style.width = "90%";
+    document.getElementById("main-left").style.marginLeft = "90%";
+    document.querySelector(".container-left").style.width = "90%";
     document.querySelector(".container-left").style.marginRight = "0px";
 
     let spans = document.querySelectorAll("#left-menu span");
@@ -84,7 +135,6 @@ function navLeftMobile(event) {
     for (span of spans) {
       span.classList.replace("close", "open");
     }
-    
   } else {
     document.getElementById("mySidenavLeft").style.width = "50px";
     document.getElementById("main-left").style.marginLeft = "0";
@@ -102,11 +152,10 @@ function navLeftMobile(event) {
   }
 }
 
-
-
-/*******************************
+/*******************************************************************
  *  RIGHT SIDE BAR
- *******************************/
+ * Control size right container, (open and close states)
+ *******************************************************************/
 
 let iconOpenRight = document.querySelector("#open-icon-right");
 iconOpenRight.addEventListener("click", navRight);
@@ -114,9 +163,9 @@ iconOpenRight.addEventListener("click", navRight);
 function navRight(event) {
   let icon = event.target;
   if (icon.classList.toggle("active")) {
-    let pSearchFor = document.querySelector('#right-menu p');
-    let selectedElements = document.querySelectorAll("#right-menu .close");
-    let divSelectedElements = document.querySelectorAll("#right-menu div.close");
+    let pSearchFor = document.querySelector("#right-menu p");
+    let selectedElement = document.querySelector("#main-right .close");
+
     document.getElementById("mySidenavRight").style.width = "300px";
     document.getElementById("main-right").style.marginRight = "220px";
     document.querySelector(".container-right").style.width = "300px";
@@ -126,41 +175,32 @@ function navRight(event) {
     pSearchFor.style.opacity = "1";
     pSearchFor.style.fontSize = "1rem";
     pSearchFor.style.transitionDuration = "0s";
-    pSearchFor.style.transitionDelay = '1s';
+    pSearchFor.style.transitionDelay = "1s";
 
-    for (selectedElement of selectedElements) {
-      for(divSelectedElement of divSelectedElements){
-        divSelectedElement.classList.add('d-flex');
-      }
-      selectedElement.classList.replace("close", "open");
-
-    }
+    selectedElement.classList.replace("close", "open");
   } else {
-    let pSearchFor = document.querySelector('#right-menu p');
-    let selectedElements = document.querySelectorAll("#right-menu .open");
-    let divSelectedElements = document.querySelectorAll("#right-menu div.open");
-    document.getElementById("mySidenavRight").style.width = "70px";
+    let pSearchFor = document.querySelector("#right-menu p");
+    let selectedElement = document.querySelector("#main-right section");
+    document.getElementById("mySidenavRight").style.width = "34px";
     document.getElementById("main-right").style.marginRight = "0";
-    document.querySelector(".container-right").style.width = "70px";
+    document.querySelector(".container-right").style.width = "0px";
+    document.querySelector(".container-right").style.marginLeft = "30px";
     document.querySelector("#right-menu p").style.fontSize = "0.55rem";
-
 
     // to display the paragraph 'Search for:' with transition.
     pSearchFor.style.opacity = "0";
     pSearchFor.style.fontSize = "0.55rem";
     pSearchFor.style.transitionDuration = "0s";
-    pSearchFor.style.transitionDelay = '0s';
+    pSearchFor.style.transitionDelay = "0s";
 
-    for (selectedElement of selectedElements) {
-      for(divSelectedElement of divSelectedElements){
-        divSelectedElement.classList.remove('d-flex');
-      }
-      selectedElement.classList.replace("open", "close");
-    }
-  // }
+    selectedElement.classList.replace("open", "close");
   }
 }
-// ------------- FUNCTIONS TO DISPLAY LAST CHANGE ON NAV --------------
+
+/********************************************
+ * FUNCTIONS TO DISPLAY LAST CHANGE ON NAV
+ ********************************************/
+
 // --- TO SEE LIST OF USERS ---
 let listUsers = document.querySelector("#list-users");
 let divNavBar = document.querySelector("#div-navbar");
@@ -188,12 +228,33 @@ buttonCreateUser.addEventListener("click", function() {
   divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
 });
 // --- TO SEE SEARCH OF USERS ---
-let submitSearch = document.querySelector("#submit_search");
-submitSearch.addEventListener("click", function() {
-  divNavBar.classList.replace("close", "open");
-  divNavBar.innerHTML = "";
-  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
-  <i class="far fa-times-circle"></i>
-  </button>`;
-  divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
-});
+
+/*************************************************************************************
+ * Load by ajax the sidebar form into the center column
+ ************************************************************************************/
+
+if ($("#submit_search").length) {
+  // use this if you are using id to check  // it exists
+  let submitSearch = document.querySelector("#submit_search");
+  submitSearch.addEventListener("click", function() {
+    divNavBar.classList.replace("close", "open");
+    divNavBar.innerHTML = "";
+    divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
+    <i class="far fa-times-circle"></i>
+    </button>`;
+    divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
+  });
+} else {
+  $("#search-btn").on("click", loadMain);
+
+  function loadMain() {
+    $("#Div1").load("right-menu.html", function(
+      responseText,
+      textStatus,
+      jqXHR
+    ) {
+      console.log(" loadMain:  " + textStatus);
+      formSideBar();
+    });
+  }
+}

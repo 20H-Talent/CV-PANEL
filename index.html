@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -23,7 +23,7 @@
         <!-- Just an image -->
         <nav class="navbar text-white">
             <a class="navbar-brand" href="#">
-                <img src="images/logo-curriculum-connections.png" width="120" height="40" alt="">
+                <img src="assets/images/logo-curriculum-connections.png" width="120" height="40" alt="">
             </a>
             <div id="div-navbar" class="close position-relative alert alert-info" role="alert"></div>
         </nav>
@@ -36,7 +36,7 @@
                     <div id="main-left">
                         <div id="mySidenavLeft" class="sidenav-left">
                             <a href="javascript:void(0)" class="openbtn-left pt-0 pb-0">
-                                <span style="font-size:30px;cursor:pointer; color:black" id="open-icon-left" class="open">&#9776;</span>
+                                <span style="font-size:30px;cursor:pointer; color:white" id="open-icon-left" class="open">&#9776;</span>
                             </a>
                             <section>
                                 <div id="left-menu" class="pt-2 pb-5 p-0">
@@ -53,10 +53,17 @@
                                                 <span class="close">Add User</span>
                                             </a>
                                         </li>
-                                        <li class="rounded w-100">
+                                        <li class="mb-3 rounded w-100">
                                             <a href="#" class="p-1 pl-2">
                                                 <i class="fa fa-sign-out-alt mr-2"></i>
                                                 <span class="close">Logout</span>
+                                            </a>
+                                        </li>
+                                        <li id="search-btn" class="mb-3 rounded w-100">
+                                            <!-- llamar al index.html del menú derecho-->
+                                            <a href="#" class="p-1 pl-2">
+                                                <i class="fa fa-search mr-2"></i>
+                                                <span class="close">Search</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -70,20 +77,23 @@
                 </div>
                 <!-- Table of users -->
                 <div class="col p-0" id="Div1">
-                    <div id="main">
-                        <!-- Here we must put the table  -->
-                        <!-- Table of users -->
-                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center card-container mt-4">
-                            <div id="users-table" class="table-responsive table-wrapper-scroll-y mt-4">
+                    <div id="main" class="main-container">
+
+                        <div class="filters">
+                            <div class="search-badges"></div>
+                        </div>
+
+                        <div id="data-column" class="col d-flex flex-row flex-wrap justify-content-center mt-1">
+                            <div id="users-table" class="table-responsive table-wrapper-scroll-y mt-1">
                                 <table class="table table-bordered table-hover" role="grid">
                                     <thead class="thead-dark">
-                                        <tr scope="row">
-                                            <th>Avatar</th>
-                                            <th>Full name</th>
-                                            <th>Age</th>
-                                            <th>Email</th>
-                                            <th>State - City</th>
-                                            <th>Registered</th>
+                                        <tr>
+                                            <th><i class="far fa-user-circle"></i><span> Avatar </span></th>
+                                            <th><i class="far fa-id-card"></i><span> Full name</span></th>
+                                            <th><i class="far fa-envelope"></i><span> Email</span></th>
+                                            <th><i class="fas fa-city"></i><span> State - City</span></th>
+                                            <th><i class="far fa-clock"></i><span> Registered</span></th>
+                                            <th><i class="fas fa-cogs"></i><span> Options</span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,42 +101,43 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div id="card-container"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col p-0" id="Div2">
+                <div class="col p-0 mr-3" id="Div2">
                     <div class="  container col-md-8  h-100">
                         <!-- Here we must put the table  -->
                         <!-- Table users -->
                         <div class="col ">
                             <div class="mb-3 adduser text-center">
-                                <h4 class="mb-3 text-center"><i class="fas fa-user-edit"></i>Add User</h4>
+                                <h4 class="mb-3 text-center"><i class="fas fa-user-plus"></i>Add User /<i class="fas fa-user-edit"></i>
+                                    Edit User</h4>
                             </div>
-                            <input id="hidden-input" autofocus type="hidden">
-                            <div id="renderize"></div>
+
+                            <div id="renderize" class="alert fade show" role="alert"></div>
                             <hr class="mb-4">
                             <hr class=" hr-2">
-                            <form id="alertform" action="" method="post" class="needs-validation col-md-12 ">
+                            <form id="alertform" action="get" method="post" class="needs-validation col-md-12 ">
                                 <div class="form-group row has-success">
-                                    <label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">First Name</label>
+                                    <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
+                                            <span class="input-group-text" id="inputGroup-sizing"><i class="fas asweome fa-user-tie"></i></span>
                                             <input type="text" name="FirstName" class="form-control " minlength="3"
-                                                maxlength="15" pattern="[a-zA-Z0-9\s]+" id="FirstName" placeholder="required"
+                                                maxlength="25" pattern="[a-zA-Z\s]+" id="FirstName" placeholder="required"
                                                 value="" required>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="form-group row has-success">
-                                    <label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">Last Name</label>
+                                    <label for="LastName" class="col-sm-2 col-form-label">Last Name</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-user-tie"></i></i></span>
-                                            <input type="text" name="LastName" class="form-control" id="LastName"
-                                                minlength="3" maxlength="15" pattern="[a-zA-Z0-9\s]+" title="Last name must have 3-15 characters long"
-                                                x-moz-errormessage="Por favor, no utilice tildes en el nombre."
+                                            <span class="input-group-text" id="inputdefault"><i class="fas asweome fa-user-tie"></i></span>
+                                            <input lang="es-ES" type="text" name="LastName" class="form-control" id="LastName"
+                                                minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" title="Last name must have 3-15 characters long"
                                                 placeholder="required" value="" required>
                                         </div>
 
@@ -137,23 +148,24 @@
                                     <label for="Username" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-users"></i></span>
+                                            <span class="input-group-text" id="inputfault"><i class="fas asweome fa-users"></i></span>
 
-                                            <input name="Username" minlength="5" maxlength="15" pattern="[a-zA-Z\s]+"
-                                                type="text" class="form-control" id="Username" placeholder="Username"
-                                                required>
+                                            <input lang="es-ES" name="Username" pattern="[a-zA-Z0-9\s]+" minlength="3"
+                                                maxlength="25" type="text" class="form-control" id="Username"
+                                                placeholder="required" required>
                                         </div>
 
 
                                     </div>
                                 </div>
                                 <div class="form-group row has-success">
-                                    <label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">Email</label>
+                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-at"></i></span>
-                                            <input type="email" class="form-control form-control-success" id="email"
-                                                placeholder="name@example.com" required>
+                                            <span class="input-group-text" id="in-sizing-default"><i class="fas asweome fa-at"></i></span>
+                                            <input lang="es-ES" type="email" name="Email" class="form-control form-control-success"
+                                                minlength="3" maxlength="25" id="email" placeholder="name@example.com"
+                                                required>
 
                                         </div>
 
@@ -164,9 +176,9 @@
                                     <label for="tel" class="col-sm-2 col-form-label">Telephone</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-phone-square"></i></span>
-                                            <input name="Telephone" type="tel" class="form-control" pattern=".{3,15}"
-                                                id="tel" placeholder="required" required>
+                                            <span class="input-group-text" id="inputizing-default"><i class="fas asweome fa-phone-square"></i></span>
+                                            <input name="Telephone" type="tel" class="form-control" minlength="3"
+                                                maxlength="25" id="tel" placeholder="required" required>
                                         </div>
 
                                     </div>
@@ -176,9 +188,10 @@
                                     <label for="address" class="col-sm-2 col-form-label">Address</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome-address fa-map-marker-alt"></i></i></span>
-                                            <input name="Adress" type="address" pattern=".{1,30}" class="form-control"
-                                                id="address" placeholder="1234 Main St" required>
+                                            <span class="input-group-text" id="inpudefault"><i class="fas asweome asweome-address fa-map-marker-alt"></i></span>
+                                            <input lang="es-ES" name="Adress" type="text" class="form-control"
+                                                minlength="3" maxlength="25" id="address" placeholder="1234 Main St"
+                                                required>
                                         </div>
 
                                     </div>
@@ -189,9 +202,10 @@
                                     <label for="country" class="col-sm-2 col-form-label">Country</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-globe-americas"></i></span>
-                                            <input name="Country" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]+"
-                                                type="text" placeholder="required" required id="country" required>
+                                            <span class="input-group-text" id="inputGroupdefault"><i class="fas asweome fa-globe-americas"></i></span>
+                                            <input lang="es-ES" name="Country" class="custom-select d-block w-100"
+                                                minlength="3" maxlength="25" pattern="[a-zA-Z0-9\s]+" type="text"
+                                                placeholder="residence country" required id="country">
                                         </div>
 
                                     </div>
@@ -201,9 +215,10 @@
                                     <label for="city" class="col-sm-2 col-form-label">City</label>
                                     <div class="col-sm-10">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-city"></i></span>
-                                            <input name="city" class="custom-select d-block w-100" pattern="[a-zA-Z0-9\s]"
-                                                type="text" id="city" placeholder="required" required>
+                                            <span class="input-group-text" id="inputefault"><i class="fas asweome fa-city"></i></span>
+                                            <input lang="es-ES" name="city" class="custom-select d-block w-100"
+                                                minlength="3" maxlength="25" type="text" id="city" placeholder="residence city"
+                                                required>
                                         </div>
 
                                     </div>
@@ -212,21 +227,29 @@
                                     <label for="zip" class="col-sm-2 col-form-label">Zip</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-envelope-open-text"></i></span>
-                                            <input name="Zip" type="number" class="form-control" pattern="[a-zA-Z0-9\s]+"
-                                                id="zip" placeholder=" required" required>
+                                            <span class="input-group-text" id="input-group"><i class="fas asweome fa-envelope-open-text"></i></span>
+                                            <input name="Zip" type="text" class="form-control" pattern="[a-zA-Z0-9\s]+"
+                                                id="zip" minlength="3" maxlength="15" placeholder="90425" required>
                                         </div>
 
                                     </div>
                                 </div>
-                                <hr>
+
                                 <div class="form-group row has-success" id="age-required">
+                                    <!-- <label for="datebirth" class="col-sm-2 col-form-label">Birthday date</label> -->
                                     <label for="age1" class="col-sm-2 col-form-label">Age</label>
                                     <div class="col-sm-6">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas asweome fa-user-tie"></i></span>
-                                            <input name="Age" class="form-control" id="age1" type="number" pattern=".{1,3}"
-                                                placeholder="required" required>
+                                            <span class="input-group-text" id="Group-s"><i class="fas asweome fa-user-tie"></i></span>
+
+                                            <!-- <input name="date" class="form-control" value="" id="datebirth" type="date"> -->
+
+                                            <input name="Age" class="form-control" value="" id="age1" type="text"
+                                                required>
+
+                                            <!-- <span class="col-sm-6 alert-dark" name="test" id="test"></span> -->
+
+
                                         </div>
 
 
@@ -236,15 +259,16 @@
                                     <label class="col-sm-2 control-label gender" id="gender">Gender</label>
                                     <div class="col-sm-10">
 
-
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa mr-2"></i></span>
+                                            <span class="input-group-text" id="inpGroup-sizing-default"> <i class="fas asweome fa-venus-mars fa "></i></span>
                                             <div class="custom-control gen custom-radio">
-                                                <input id="male" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="male" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="male">Male</label>
                                             </div>
                                             <div class="custom-control gen custom-radio">
-                                                <input id="female" name="Gender" type="radio" class="custom-control-input">
+                                                <input id="female" name="Gender" type="radio" class="custom-control-input"
+                                                    required>
                                                 <label class="custom-control-label" for="female">Female</label>
                                             </div>
                                         </div>
@@ -252,110 +276,60 @@
 
                                     </div>
                                 </div>
-
+                                <hr>
                                 <div class="custom-control custom-checkbox " id="skill">
                                     <h4 class="mb-3 langsel">Skills</h4>
-
-                                    <!-- Default inline 1-->
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="css1" type="checkbox" class="custom-control-input" id="css31">
-                                        <label class="custom-control-label" for="css31">CSS</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="html1" type="checkbox" class="custom-control-input" id="html51">
-                                        <label class="custom-control-label" for="html51">HTML</label>
-                                    </div>
-
-                                    <!-- Default inline 2-->
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="javascript1" type="checkbox" class="custom-control-input" id="javascript1">
-                                        <label class="custom-control-label" for="javascript1">JAVASCRIPT</label>
-                                    </div>
-
-                                    <!-- Default inline 3-->
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="php1" type="checkbox" class="custom-control-input" id="php1">
-                                        <span class="custom-control-indicator"></span>
-                                        <label class="custom-control-label" for="php1">PHP</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input type="checkbox" class="custom-control-input" id="sass1">
-                                        <label class="custom-control-label" for="sass1">SASS</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="PYTHON" type="checkbox" class="custom-control-input" id="python1">
-                                        <label class="custom-control-label" for="python1">PYTHON</label>
-                                    </div><br> <br>
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="RUBY" type="checkbox" class="custom-control-input" id="ruby1">
-                                        <label class="custom-control-label" for="ruby1">RUBY</label>
-                                    </div>
-
-                                    <!-- Default inline 2-->
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="PERL1" type="checkbox" class="custom-control-input" id="perl1">
-                                        <label class="custom-control-label" for="perl1">PERL</label>
-                                    </div>
-
-                                    <!-- Default inline 3-->
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="JAVA" type="checkbox" class="custom-control-input" id="java1">
-                                        <label class="custom-control-label" for="java1"> JAVA</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="C++" type="checkbox" class="custom-control-input" id="C++1">
-                                        <label class="custom-control-label" for="C++1"> C++ </label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input name="GO" type="checkbox" class="custom-control-input" id="go1">
-                                        <label class="custom-control-label" for="go1">GO</label>
-                                    </div>
                                 </div>
 
                                 <h4 class="mb-3 langsel">Languages</h4> <small> (press ctrl to choose more languages)</small>
                                 <div class="form-group">
                                     <select id="selLanguage" multiple="multiple" size="10" class="chosen-select custom-select col-sm-12"
-                                        name="selLanguage" type="file" required>
-                                        <option value="Afrikan">Afrikan</option>
-                                        <option value="English">English</option>
-                                        <option value="Spanish">Spanish</option>
-                                        <option value="Romanian">Romanian</option>
-                                        <option value="French">French</option>
-                                        <option value="German">German</option>
-                                        <option value="Italian">Italian</option>
-                                        <option value="Turkish">Turkish</option>
+                                        name="selLanguage" required>
                                     </select>
                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                 </div>
-                                <button class="btn reset" type="button" onclick="showChoices()">
-                                    Continue
+                                <button class="btn reset btn-custom" type="button" onclick="showChoices()">
+                                    Select languages
                                 </button>
-                                <button type="button" class=" btn reset " onclick="reset()" value="Reset">Reset</button>
+                                <button type="button" class=" btn-custom btn reset " onclick="reset()" value="Reset">Reset</button>
                                 <div id="output"></div>
-                                <h4 class="mb-3">Are you available for an interview in the near future?</h4>
-
-                                <div class="d-block my-3 d-block custom-controls-stacked">
+                                <div class="d-block my-3 d-block custom-controls-stacked langsel">
+                                    <h4 class="mb-3">Are you available for an interview in the near future?</h4>
                                     <div class=" custom-radio ">
-                                        <input id="available" onchange="validate()" name="Radiobutton" type="radio"
-                                            class="custom-control-input">
+
+                                        <input id="available" name="Radiobutton" type="radio" class="custom-control-input"
+                                            required>
                                         <label class="custom-control-label" for="available">Yes</label>
                                     </div>
                                     <div class=" custom-radio ">
-                                        <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input">
+
+                                        <input id="Radiobutton1" name="Radiobutton" type="radio" class="custom-control-input"
+                                            required>
                                         <label class="custom-control-label" for="Radiobutton1">No</label>
                                     </div>
-                                    <div class=" custom-radio ">
-                                        <input id="Radiobutton2" name="Radiobutton" type="radio" class="custom-control-input">
-                                        <label class="custom-control-label" for="Radiobutton2">I have a job right
-                                            now,but
-                                            i want to stay on the market</label>
+                                </div>
+                                <div class="form-group">
+                                    <h4></h4>
+                                    <label for="exampleFormControlTextarea1"><strong>Additional informacion about you?</strong></label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                                <div id="upload-curriculum" class="form-row langsel">
+                                    <div class="col">
+                                        <label for="exampleFormControlFile1"> <strong>Upload Curriculum</strong>
+                                        </label>
+                                        <input type="file" class="form-control-file fileupload" id="exampleFormControlFile1">
                                     </div>
+
+
+                                    <div class="col" id="upload-carta">
+                                        <label for="exampleFormControlFile2"><strong>Upload your application letter</strong></label>
+                                        <input type="file" class="form-control-file  fileupload" id="exampleFormControlFile2">
+                                    </div>
+
                                 </div>
 
-                                <button id="button-create-user" class="btn checkout  btn-lg btn-block" onclick="formErrors()"
-                                    type="submit">Continue
-                                    to checkout
-                                </button>
+                                <button id="button-create-user" class="btn checkout  btn-custom btn-lg btn-block"
+                                    onclick="formErrors()" type="submit">Save</button>
                             </form>
                             <footer class="my-5 pt-5 text-muted text-center text-small">
                                 <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>
@@ -372,255 +346,74 @@
                     <div id="main-right">
                         <div id="mySidenavRight" class="sidenav-right">
                             <a href="javascript:void(0)" class="openbtn-right pt-0 pb-0">
-                                <span style="font-size:20px;cursor:pointer; color:black" id="open-icon-right" class="open"><i
-                                        class="fa fa-bars"></i></span>
+                                <span style="font-size:20px;cursor:pointer; color:white" id="open-icon-right" class="open"><i
+                                        class="fa fa-search"></i></span>
                             </a>
-
                             <!-- Menu right -->
-                            <section>
-                                <div id="right-menu" class="p-0">
+                            <section id="right-menu-ajax" class="close">
+                                <!--  <div id="right-menu" class="p-0">
                                     <p class="text-white text-center w-100">Search for: </p>
-                                    <!-- <div class="mt-4 mb-4">
-                                        <ul class="pl-0 w-100">
-                                            <li class="sidebar-position mb-3 rounded">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#name_user" role="button" aria-expanded="false" aria-controls="name_user">
-                                                    <i class="fas fa-fingerprint fa-2x mr-2"></i>
-                                                    <span class="close">Name</span>
-                                                </a>
-                                            </li>
-                                            <li class="border-bottom border-dark mt-4 mb-3">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#last_name_user" role="button" aria-expanded="false" aria-controls="last_name_user">
-                                                    <i class="fas fa-font fa-2x mr-2"></i>
-                                                    <span class="close">Last Name</span>
-                                                </a>
-                                            </li>
-                                            <li class="border-bottom border-dark mt-4 mb-3">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#genre" role="button" aria-expanded="false" aria-controls="genre">
-                                                    <i class="fas fa-venus-mars fa-2x mr-2"></i>
-                                                    <span class="close">Genre</span>
-                                                </a>
-                                            </li>
-                                            <li class="border-bottom border-dark mt-4 mb-3">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#age_user" role="button" aria-expanded="false" aria-controls="age_user">
-                                                    <i class="fas fa-child fa-2x mr-2"></i>
-                                                    <span class="close">Age</span>
-                                                </a>
-                                            </li>
-                                            <li class="border-bottom border-dark mt-4 mb-3">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#experience" role="button" aria-expanded="false" aria-controls="experience">
-                                                    <i class="fa fa-calendar-alt fa-2x mr-2"></i>
-                                                    <span class="close">Years of experience</span>
-                                                </a>
-                                            </li>
-                                            <li class="border-bottom border-dark mt-4 mb-3">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#languages" role="button" aria-expanded="false" aria-controls="languages">
-                                                    <i class="fas fa-globe-americas fa-2x mr-2"></i>
-                                                    <span class="close">Languages</span>
-                                                </a>
-                                            </li>
-                                            <li class="border-bottom border-dark mt-4 mb-3">
-                                                <a class="p-2 pl-3" data-toggle="collapse" href="#skills" role="button" aria-expanded="false" aria-controls="skills">
-                                                    <i class="fas fa-robot fa-2x mr-2"></i>
-                                                    <span class="close">Skills</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div> -->
 
                                     <form id="advanced-search">
-                                        <ul>
-                                            <li class="rounded">
-                                                <div id="name_user" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
-                                                    <!-- <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label> -->
-                                                    <i class="fas fa-fingerprint fa-2x mr-2"></i>
-                                                    <input type="text" class="close form-control w-50" id="name"
-                                                        placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
-                                                    <small class="close text-center text-white w-100">
-                                                        Must be written in lowercase.
-                                                    </small>
-                                                </div>
-                                            </li>
-                                            <li class="rounded">
-                                                <div id="last_name_user" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
-                                                    <!-- <label for="last-name" class="badge-pill bg-dark text-white text-center w-100 mb-3">Last
-                                                        Name
-                                                    </label> -->
-                                                    <i class="fas fa-font fa-2x mr-2"></i>
-                                                    <input type="text" class="close form-control w-50" id="last-name"
-                                                        placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
-                                                    <small class="close text-center text-white w-100">
-                                                        Must be written in lowercase.
-                                                    </small>
-                                                </div>
-                                            </li>
-                                            <li class="rounded">
-                                                <div id="genre" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
-                                                    <!-- <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label> -->
-                                                    <i class="fas fa-venus-mars fa-2x mr-2"></i>
-                                                    <div class="close border bg-dark text-white p-2">
-                                                        <div class="close custom-control custom-radio text-center">
-                                                            <input type="radio" id="genre_female" class="custom-control-input"
-                                                                value="female" name="gender">
-                                                            <label class="custom-control-label" for="genre_female">Female</label>
-                                                        </div>
-                                                        <div class="custom-control custom-radio text-center">
-                                                            <input type="radio" id="genre_male" class="custom-control-input"
-                                                                value="male" name="gender">
-                                                            <label class="custom-control-label" for="genre_male">Male</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="rounded">
-                                                <div id="age_user" class="text-white form-group mb-2 d-flex justify-content-center p-2">
-                                                    <i class="fas fa-child fa-2x mr-2"></i>
-                                                    <label for="age-range" class="close badge-pill bg-dark text-white text-center mr-2 mt-1">Age</label>
-                                                    <input type="range" min="16" max="90" class="close custom-range" id="age-range">
-                                                    <p id="age" class="d-inline-flex ml-1 text-white mt-1"></p>
-                                                </div>
-                                            </li>
-                                            <li class="rounded">
-                                                <div id="experience" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center">
-                                                    <!-- <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
-                                                        of experience</label> -->
-                                                    <i class="fa fa-calendar-alt fa-2x mr-2"></i>
-                                                    <input type="number" min="1" max="70" class="close form-control w-50"
-                                                        id="exp-years" placeholder="Insert years of experience">
-                                                </div>
-                                            </li>
-                                            <li class="rounded">
-                                                <!-- ********* lANGUAGES *********** -->
-                                                <div id="languages" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
-                                                    <i class="fas fa-globe-americas fa-2x mr-2"></i>
-                                                    <label class="close badge-pill bg-dark text-center text-white">Languages</label>
-                                                    <div class="close text-white mb-2">
-                                                        <div class="bg-dark border d-flex flex-wrap align-items-center justify-content-center mt-2 p-2 w-100">
-                                                            <div class="custom-control custom-radio col-4">
-                                                                <input type="radio" id="english" class="custom-control-input w-50"
-                                                                    value="lang_english">
-                                                                <label class="custom-control-label" for="english">English</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio col-4">
-                                                                <input type="radio" id="spanish" class="custom-control-input w-50"
-                                                                    value="lang_spanish">
-                                                                <label class="custom-control-label" for="spanish">Spanish</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio col-3">
-                                                                <input type="radio" id="italian" class="custom-control-input w-50"
-                                                                    value="lang_italian">
-                                                                <label class="custom-control-label" for="italian">Italian</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio col-4">
-                                                                <input type="radio" id="french" class="custom-control-input w-50"
-                                                                    value="lang_french">
-                                                                <label class="custom-control-label" for="french">French</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio col-4">
-                                                                <input type="radio" id="rumanian" class="custom-control-input w-50"
-                                                                    value="lang_rumanian">
-                                                                <label class="custom-control-label" for="rumanian">Rumanian</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio col-3">
-                                                                <input type="radio" id="african" class="custom-control-input w-50"
-                                                                    value="lang_african">
-                                                                <label class="custom-control-label" for="african">African</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="rounded">
-                                                <!-- ******** SKILLS ********** -->
-                                                <div id="skills" class="text-white form-group mb-2 p-2 d-flex justify-content-center align-items-center flex-wrap">
-                                                    <i class="fas fa-robot fa-2x mr-2"></i>
-                                                    <label class="close badge-pill bg-dark text-white text-center">Skills</label>
-                                                    <div class="close flex-wrap">
-                                                        <div class="col-12 d-flex flex-wrap justify-content-center border bg-dark mt-2 mb-3 pt-1 pb-2 pl-0 pr-0">
-                                                            <label class="w-100 text-center">Layout</label>
-                                                            <div class="custom-control custom-radio mr-3">
-                                                                <input type="radio" id="css" class="custom-control-input"
-                                                                    value="skills_css">
-                                                                <label class="custom-control-label" for="css">CSS</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="html" class="custom-control-input"
-                                                                    value="skills_html">
-                                                                <label class="custom-control-label" for="html">HTML</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="border col-6 d-flex flex-wrap justify-content-between mr-auto pt-1 pb-2 bg-dark">
-                                                            <label class="w-100">Languages</label>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="javascript" class="custom-control-input"
-                                                                    value="skills_javascript">
-                                                                <label class="custom-control-label" for="javascript">Javascript</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="php" class="custom-control-input"
-                                                                    value="skills_php">
-                                                                <label class="custom-control-label" for="php">PHP</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="python" class="custom-control-input"
-                                                                    value="skills_python">
-                                                                <label class="custom-control-label" for="python">Python</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="ruby" class="custom-control-input"
-                                                                    value="skills_ruby">
-                                                                <label class="custom-control-label" for="ruby">Ruby</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio w-100">
-                                                                <input type="radio" id="c++" class="custom-control-input"
-                                                                    value="skills_c++">
-                                                                <label class="custom-control-label" for="c++">C++</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="java" class="custom-control-input"
-                                                                    value="skills_java">
-                                                                <label class="custom-control-label" for="java">Java</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="border col-5 d-flex flex-wrap justify-content-between pt-1 pb-2 bg-dark">
-                                                            <label class="w-100">Frameworks</label>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="django" class="custom-control-input"
-                                                                    value="skills_django">
-                                                                <label class="custom-control-label" for="django">Django</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="ruby-rails" name="skills" class="custom-control-input"
-                                                                    value="skills_ruby-rails">
-                                                                <label class="custom-control-label" for="ruby-rails">Ruby
-                                                                    on Rails
-                                                                </label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="react" class="custom-control-input"
-                                                                    value="skills_react">
-                                                                <label class="custom-control-label" for="react">React</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="angular" class="custom-control-input"
-                                                                    value="skills_angular">
-                                                                <label class="custom-control-label" for="angular">Angular</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="vue" class="custom-control-input"
-                                                                    value="skills_vue">
-                                                                <label class="custom-control-label" for="vue">Vue</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="laravel" class="custom-control-input"
-                                                                    value="skills_laravel">
-                                                                <label class="custom-control-label" for="laravel">Laravel</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        <div id="name_user" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
+                                            <label for="name" class="badge-pill bg-dark text-center w-100 mb-3">Name</label>
+                                            <input type="text" class="form-control" id="name"
+                                            placeholder="Insert name" name="firstname" pattern="[a-zA-Z]*">
+                                            <small class="text-center text-white w-100">
+                                                Must be written in lowercase.
+                                            </small>
+                                        </div>
 
+                                        <div id="last_name_user" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
+                                            <label for="last-name" class="badge-pill bg-dark text-center w-100 mb-3">Last Name</label>
+                                            <input type="text" class="form-control" id="last-name"
+                                                placeholder="Insert last name" name="lastname" pattern="[a-zA-Z]*">
+                                            <small class="text-center text-white w-100">
+                                                Must be written in lowercase.
+                                            </small>
+                                        </div>
+
+                                        <div id="genre" class="text-white form-group bg-dark m-2 p-2 d-flex justify-content-center align-items-center flex-wrap border">
+                                            <label class="badge-pill bg-dark text-center w-100 mb-3">Genre</label>
+                                            <div class="custom-control custom-radio text-center w-50">
+                                                <input type="radio" id="genre_female" class="custom-control-input" value="female" name="gender">
+                                                <label class="custom-control-label" for="genre_female">Female</label>
+                                            </div>
+                                            <div class="custom-control custom-radio text-center w-50">
+                                                <input type="radio" id="genre_male" class="custom-control-input" value="male" name="gender">
+                                                <label class="custom-control-label" for="genre_male">Male</label>
+                                            </div>
+                                        </div>
+                                        <div id="age_user" class="text-white form-group m-2 p-2 bg-dark border">
+                                            <label for="age-range" class="badge-pill bg-dark text-white text-center w-100 mb-3 ">Age</label>
+                                            <input type="range" min="16" max="90" class="custom-range" id="age-range">
+                                            <p id="age" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
+                                        </div>
+                                        <div id="experience" class="text-white form-group m-2 p-2 bg-dark border">
+                                            <label for="exp-years" class="badge-pill bg-dark text-white text-center w-100 mb-3">Years
+                                                of experience</label>
+                                            <input type="range" min="0" max="30" class="custom-range" id="exp-years">
+                                            <p id="range" class="d-inline-flex ml-1 text-white mt-0 mb-0"></p>
+                                        </div>
+
+                                         ********* lANGUAGES ***********
+                                        <div id="languages" class="text-white form-group m-2 p-2 d-flex justify-content-center flex-wrap bg-dark border">
+                                            <label class="badge-pill bg-dark text-center text-white w-100 mb-3">Languages</label>
+                                        </div>
+
+                                        ******** SKILLS **********
+                                        <div id="skills" class="text-white form-group d-flex justify-content-center align-items-center flex-wrap m-2 p-2 bg-dark border">
+                                            <label class="badge-pill bg-dark text-white text-center w-100">Skills</label>
+                                            <div class="col-12 d-flex flex-wrap justify-content-center bg-dark mt-2 mb-3 p-0">
+                                                <label class="w-100 text-center font-italic">Layout</label>
+                                            </div>
+                                            <div class="col-5 d-flex flex-column mr-auto p-0 bg-dark">
+                                                <label class="w-100 text-center font-italic">Languages</label>
+                                            </div>
+                                            <div class="col-6 d-flex flex-column p-0 bg-dark">
+                                                <label class="w-100 text-center font-italic">Frameworks</label>
+                                            </div>
+                                        </div>
 
                                         <div id="button_right" class="d-flex justify-content-center mb-5">
                                             <button id="submit_search" type="submit" class="btn btn-primary badge badge-pill">
@@ -628,7 +421,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                </div>
+                                </div>-->
                             </section>
                         </div>
 
@@ -638,7 +431,7 @@
         </div>
     </main>
 
-    <!-- Modal -->
+
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -649,21 +442,74 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img class="user-avatar img-fluid" alt="" />
-                    <div id="infoUserModal">
-                        <!--
-                        User Info should appear here.
-                    -->
-                        <span id="infoUserModal-1" class="badge badge-secondary mr-1">Full Name: </span>
-                        <span id="infoUserModal-2" class="badge badge-secondary mr-1">Age: </span>
-                        <span id="infoUserModal-3" class="badge badge-secondary mr-1">Email: </span>
-                        <span id="infoUserModal-4" class="badge badge-secondary mr-1">Phone: </span>
-                        <span id="infoUserModal-5" class="badge badge-secondary mr-1">Post Code: </span>
-                        <span id="infoUserModal-6" class="badge badge-secondary mr-1">State: </span>
-                        <span id="infoUserModal-7" class="badge badge-secondary mr-1">City: </span>
-                        <span id="infoUserModal-8" class="badge badge-secondary mr-1">Street: </span>
-                        <span id="infoUserModal-9" class="badge badge-secondary mr-1">Skills: </span>
-                        <span id="infoUserModal-10" class="badge badge-secondary mr-1">Languages: </span>
+                    <div class="d-flex">
+                        <img class="user-avatar img-fluid flex-grow-2" width="128" height="128" alt="user-avatar" />
+                        <div id="infoUser" class="flex-grow-1">
+                            <ul class="list-group">
+                                <li class="list-group-item birthday">
+                                    <i class="fas fa-birthday-cake mr-3 "></i>
+                                </li>
+                                <li class="list-group-item phones">
+                                    <i class="fas fa-phone mr-3"></i>
+                                    <i class="fas fa-mobile-alt mx-3"></i>
+                                </li>
+                                <li class="list-group-item address">
+                                    <i class="fas fa-map-marked mr-3"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="my-2 modal-collapse-container d-flex justify-content-around flex-column-sm flex-wrap w-100">
+                        <div id="languages" class="user-collapse-info mb-2">
+                            <div class="card">
+                                <div class="card-header" id="languages-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#languagesInfo"
+                                            aria-expanded="true" aria-controls="languagesInfo">
+                                            Languages
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="languagesInfo" class="collapse" aria-labelledby="languages-info" data-parent="#languages">
+                                <div class="card-body card-body d-flex justify-content-around flex-wrap">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="skills" class="user-collapse-info">
+                            <div class="card">
+                                <div class="card-header" id="skills-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#skillsInfo"
+                                            aria-expanded="true" aria-controls="skillsInfo">
+                                            Skills
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="skillsInfo" class="collapse" aria-labelledby="skills-info" data-parent="#skills">
+                                <div class="card-body d-flex justify-content-around flex-wrap">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="frameworks" class="user-collapse-info">
+                            <div class="card">
+                                <div class="card-header" id="frameworks-info">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#frameworksInfo"
+                                            aria-expanded="true" aria-controls="frameworksInfo">
+                                            Frameworks
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div id="frameworksInfo" class="collapse" aria-labelledby="frameworks-info" data-parent="#frameworks">
+                                <div class="card-body card-body d-flex justify-content-around flex-wrap">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -673,16 +519,22 @@
         </div>
     </div>
 
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <script src="js/Form.js"></script>
     <script src="js/form.js"></script>
     <script src="js/UsersTable.js"></script>
+    <script src="js/SearchFilter.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/languages-skills-jsons.js"></script>
 
 
 </body>

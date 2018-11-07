@@ -1,8 +1,10 @@
 #Div2 {
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #f3fafd;
+    background-color: #ecf0f3;
+    background-size: cover;
     font-family: 'Crete Round', sans-serif;
+    color: black;
     max-height: 100vh;
 }
 
@@ -48,8 +50,8 @@ select {
     background: rgb(255, 254, 254) !important;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    background-color: #f7ffff !important;
-    color: #2f3031;
+    background-color: #ffffff !important;
+    color: #0a0a0a;
 }
 
 input::placeholder {
@@ -87,7 +89,7 @@ body {
     overflow: hidden;
 }
 
-.btn {
+.btn-custom {
     background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
     color: white;
 }
@@ -121,10 +123,12 @@ body {
 } */
 .asweome {
     color: rgb(0, 0, 0) !important;
+    width: 16px;
+    height: 20px;
 }
 
 .asweome-address {
-    color: red;
+    color: red !important;
 }
 
 .gen {
@@ -141,4 +145,24 @@ body {
 
 .langsel {
     margin-top: 40px;
+}
+
+.fileupload {
+    color: red !important;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::before {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background: linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+}
+
+.custom-control-label::before {
+    background-color: rgb(192, 191, 191);
+}
+
+#test {
+    padding-top: 6px;
 }
