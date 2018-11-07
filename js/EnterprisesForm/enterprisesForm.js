@@ -31,7 +31,7 @@ function verifyFormEnterprises() {
     }
 
     // Hides and destroys an element’s tooltip
-    $(inputsForm[i]).tooltip("dispose");
+    // $(inputsForm[i]).tooltip("dispose");
   }
 }
 
