@@ -55,7 +55,6 @@ const Table = (function() {
     function _optionButtonsEvent(event) {
       const button = $(event.currentTarget);
       const userID = button.data("id");
-
       if (button.hasClass("edit")) {
         userForm.editForm(getUserByID(userID));
       } else {
@@ -277,9 +276,7 @@ const Table = (function() {
       email,
       name,
       location,
-      registeredDate,
-      skills,
-      languages
+      registeredDate
     }) {
       return `
    <tr scope="row" data-id=${_id}>
@@ -426,10 +423,10 @@ const Table = (function() {
      * @function deleteUser
      * @public
      * @param {string} id
-
+     */
     function deleteUser(id) {
       let users = JSON.parse(sessionStorage.getItem("users-list"));
-      users = users.filter(user => user.id.value !== id);
+      users = users.filter(user => user._id !== id);
       sessionStorage.setItem("users-list", JSON.stringify(users));
       _removeUserFromDOM(id);
     }
@@ -554,8 +551,8 @@ const Table = (function() {
       initTable,
       getUserByID,
       renderDataOnResize,
-      renderDataOnModal
-      //deleteUser
+      renderDataOnModal,
+      deleteUser
     };
   }
 
