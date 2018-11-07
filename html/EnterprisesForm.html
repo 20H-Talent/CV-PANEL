@@ -66,7 +66,7 @@
     <div class="form-row col-md-12">
         <label class="format-2" for="website">Website</label>
         <input lang="es-ES" name="website" type="text" class="form-control form-control-width " minlength="3"
-            maxlength="25" pattern="[a-zA-Z0-9\s]+" id="website" placeholder="Facebook, Twitter..."
+            maxlength="25" pattern="[a-zA-Z0-9\s]+" id="website" placeholder="www.example.com"
             data-toggle="tooltip" data-placement="right" required>
     </div>
     <div class="form-row col-md-12">
@@ -79,11 +79,11 @@
         <label class="format-2" for="logoURL">Logo</label>
         <input name="logoURL" type="file" class="form-control-file format-3" id="logoURL"  data-toggle="tooltip" data-placement="right" required>
     </div>
-
-    <p class="format-2 form-row col-md-12" for="bio">Bio</p>
     <div class="form-row col-md-12">
-        <textarea name="bio" type="text" cols="30" rows="5" pattern="[a-zA-Z0-9\s]+" id="bio"
-            placeholder=" Optional" data-toggle="tooltip" data-placement="left" required></textarea>
+        <label class="format-2" for="bio">Social Networks</label>
+        <input lang="es-ES" name="bio" type="text" class="form-control form-control-width " minlength="0"
+            maxlength="40" pattern="[a-zA-Z0-9\s]+" id="bio" placeholder="Description"
+            data-toggle="tooltip" data-placement="left" required>
     </div>
 
     <div class="form-row col-md-12">
