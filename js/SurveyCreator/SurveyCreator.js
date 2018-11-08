@@ -497,7 +497,10 @@ const SurveyCreator = (function() {
 
                 return {
                   value: field.text(),
-                  name: field.data("name"),
+                  name:
+                    data["type"] === "radio"
+                      ? field.data("name")
+                      : data["name"],
                   label: field.text()
                 };
               });
@@ -744,11 +747,10 @@ const SurveyCreator = (function() {
         const submitButton = $(event.target).find("button[type=submit]");
         let errors = _validateSurveyDates() + _validateHeaderTextInputs();
 
-        // if (errors === 0) {
-        _setHeaderSurveyData();
-        _setBodySurveyData();
-        console.log(surveyApiData);
-        /*
+        if (errors === 0) {
+          _setHeaderSurveyData();
+          _setBodySurveyData();
+
           submitButton
             .css({ position: "relative", height: "60px" })
             .html(
@@ -777,7 +779,6 @@ const SurveyCreator = (function() {
         } else {
           $(".survey-container").animate({ scrollTop: 0 }, "slow");
         }
-        */
       }
     }
     return {
