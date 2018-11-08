@@ -3,7 +3,7 @@ $("#mySidenavRight a").on("click", skills);
 
 // ******* declare function to get data from languages json. ***********
 function languages() {
-  $.getJSON("../data/languages.json")
+  $.get("https://cv-mobile-api.herokuapp.com/api/langs")
     .done(function(data) {
       searchForm(data);
     })
@@ -33,7 +33,7 @@ function languages() {
 
 // ************** declare function to get data from skills json. *************
 function skills() {
-  $.getJSON("../data/skills.json")
+  $.get("https://cv-mobile-api.herokuapp.com/api/skills")
     .done(function(data) {
       searchForm(data);
     })

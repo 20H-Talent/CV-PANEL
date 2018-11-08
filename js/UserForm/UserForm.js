@@ -40,7 +40,8 @@ const UserForm = (function() {
         .find("*")
         .not("h4")
         .empty();
-      $.getJSON("../../data/skills.json", function(skills) {
+
+      $.get("https://cv-mobile-api.herokuapp.com/api/skills", function(skills) {
         skills.forEach(skill => {
           skillsContainer.append(`
                 <div class="custom-control custom-checkbox custom-control-inline">
@@ -58,7 +59,9 @@ const UserForm = (function() {
     }
 
     function _appendLanguages() {
-      $.getJSON("../../data/languages.json", function(languages) {
+      $.get("https://cv-mobile-api.herokuapp.com/api/langs", function(
+        languages
+      ) {
         const languagesSelector = userForm.find("select#selLanguage");
         languagesSelector.empty();
         languages.forEach(language => {
@@ -217,8 +220,6 @@ const UserForm = (function() {
     // faltan los años de experiencia.
     //coger la foto.
     // poner en el json las propiedades con su nombre correcto(como lo va a recoger)
-    //poner registeredDate --> generar nueva fecha.
-    // que pasa con el id? lo genera la API o lo generamos nosotros.
 
     // ------------------- FIN TESTEO ----------------
     function editForm(user) {
