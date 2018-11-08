@@ -349,6 +349,20 @@ const SurveyCreator = (function() {
           case "radio":
             let buttonText =
               typeSelectorValue === "select" ? "option" : typeSelectorValue;
+            let numberOfThisTypeElements =
+              parseInt(
+                tableBody.find(
+                  `.ValueType-data[data-type="${typeSelectorValue}"]`
+                ).length
+              ) + 1;
+
+            let fieldName =
+              typeSelectorValue + "_field" + numberOfThisTypeElements;
+
+            if (typeSelectorValue === "checkbox") {
+              fieldName += "[]";
+            }
+
             const dinamicBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
                 <div class="form-group">
@@ -359,9 +373,7 @@ const SurveyCreator = (function() {
                     </div>
                   </div>
                   <div class="input-group">
-                    <input name="${typeSelectorValue}${
-              typeSelectorValue === "checkbox" ? "[]" : ""
-            }" class="form-control"
+                    <input name="${fieldName}" class="form-control"
                         type="text" placeholder="New ${typeSelectorValue} value..."/>
                     <div class="input-group-append">
                       <button type="button" class="btn btn-outline-primary Actions add">Add ${buttonText}</button>
