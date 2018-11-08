@@ -158,11 +158,10 @@ const SurveyCreator = (function() {
           inputValue.length > 0 &&
           valueIsCorrect
         ) {
-          previewList;
           previewList
             .append(
               `<li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center py-1 px-1">
-                <span class="FieldValue">${inputValue}</span>
+                <span data-name="${inputValue}" class="FieldValue">${inputValue}</span>
                 <div class="btn-group btn-group" role="group">
                   <button type="button" class="btn btn-outline-primary editOption" data-value="${inputValue}" title="Edit this option"><i class="far fa-edit"></i></button>
                   <button type="button" class="btn btn-outline-danger deleteOption" title="Delete this option" data-value=${inputValue}><i class="far fa-trash-alt"></i></button>
@@ -309,12 +308,8 @@ const SurveyCreator = (function() {
 
         switch (typeSelectorValue) {
           case "date":
-          case "text":
-          case "number":
-          case "color":
-          case "telephone":
-          case "file":
-            const inputBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
+            const inputBlock = $(`
+            <tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
              <div class="form-group w-100">
             <div class="ValueType-header d-flex justify-content-between">
@@ -354,6 +349,20 @@ const SurveyCreator = (function() {
           case "radio":
             let buttonText =
               typeSelectorValue === "select" ? "option" : typeSelectorValue;
+            let numberOfThisTypeElements =
+              parseInt(
+                tableBody.find(
+                  `.ValueType-data[data-type="${typeSelectorValue}"]`
+                ).length
+              ) + 1;
+
+            let fieldName =
+              typeSelectorValue + "_field" + numberOfThisTypeElements;
+
+            if (typeSelectorValue === "checkbox") {
+              fieldName += "[]";
+            }
+
             const dinamicBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
                 <div class="form-group">
@@ -364,7 +373,7 @@ const SurveyCreator = (function() {
                     </div>
                   </div>
                   <div class="input-group">
-                    <input name="${typeSelectorValue}[]" class="form-control"
+                    <input name="${fieldName}" class="form-control"
                         type="text" placeholder="New ${typeSelectorValue} value..."/>
                     <div class="input-group-append">
                       <button type="button" class="btn btn-outline-primary Actions add">Add ${buttonText}</button>
@@ -472,23 +481,30 @@ const SurveyCreator = (function() {
           .children("tr.ValueType-data")
           .each((index, element) => {
             const $element = $(element);
+
             const data = {
               type: $element.data("type"),
-              title: $element.find(".form-group p").text(),
+              label: $element.find(".form-group p").text(),
+              name: $element.find("input.form-control").prop("name"),
               values: []
             };
+
             if (dinamicElements.includes(data["type"])) {
               data["values"] = Array.from(
                 $element.find("ul.preview-list > li")
-              ).map(value =>
-                $(value)
-                  .children(".FieldValue")
-                  .text()
-              );
-            } else {
-              data["values"].push($element.find("input.form-control").val());
-            }
+              ).map(listElement => {
+                const field = $(listElement).children(".FieldValue");
 
+                return {
+                  value: field.text(),
+                  name:
+                    data["type"] === "radio"
+                      ? field.data("name")
+                      : data["name"],
+                  label: field.text()
+                };
+              });
+            }
             surveyApiData["elements"].push(data);
           });
       }
@@ -612,11 +628,6 @@ const SurveyCreator = (function() {
                 break;
 
               case "date":
-              case "text":
-              case "number":
-              case "color":
-              case "telephone":
-              case "file":
                 return `
                   <h5>${element["title"]}</h5>
                   <input class="form-control" type="${
