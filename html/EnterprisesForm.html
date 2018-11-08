@@ -13,11 +13,26 @@
             pattern="[a-zA-Z\s]+" id="name" placeholder="Name" value="" data-toggle="tooltip" data-placement="left"
             required>
     </div>
+   
+
     <div class="form-row col-md-12 container">
-        <label class="format-2" for="CIF">CIF</label>
-        <input type="text" name="CIF" class="form-control form-control-width" minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+"
-            id="CIF" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right" required>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="CIF" value="option1">
+            <label class="form-check-label" for="CIF">CIF</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="NIF" value="option2">
+            <label class="form-check-label" for="NIF">NIF</label>
+        </div>
+        
+            <input type="text" name="cif-nif" class="form-control form-control-width" minlength="3" maxlength="25"
+                pattern="[a-zA-Z\s]+" id="cif-nif" placeholder="CIF/NIF" value="" data-toggle="tooltip" data-placement="right"
+                required>
+        
     </div>
+
+
+
 
     <!--
         change inputs.Address
