@@ -497,10 +497,6 @@ const SurveyCreator = (function() {
 
                 return {
                   value: field.text(),
-                  name:
-                    data["type"] === "radio"
-                      ? field.data("name")
-                      : data["name"],
                   label: field.text()
                 };
               });
@@ -750,7 +746,6 @@ const SurveyCreator = (function() {
         if (errors === 0) {
           _setHeaderSurveyData();
           _setBodySurveyData();
-
           submitButton
             .css({ position: "relative", height: "60px" })
             .html(

@@ -309,7 +309,6 @@ buttonCreateUser.addEventListener("click", function() {
         textStatus,
         jqXHR
       ) {
-        console.log(" loadMain:  " + textStatus);
         formSideBar();
       });
     }
