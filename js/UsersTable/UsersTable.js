@@ -513,7 +513,6 @@ const Table = (function() {
           .remove();
       }
     }
-
     /**
      * Receive new parameters to make a new request to the API
      * @function changeApiParams

@@ -40,16 +40,15 @@ const UserForm = (function() {
                 .find("*")
                 .not("h4")
                 .empty();
-            $.getJSON("../../data/skills.json", function(skills) {
+            $.getJSON("http://cv-mobile-api.herokuapp.com/api/skills", function(skills) {
+console.log("aqui estamos",skills);
+             
                 skills.forEach(skill => {
                     skillsContainer.append(`
           <div class="custom-control custom-checkbox custom-control-inline">
-               <input name="${
-                 skill["name"]
-               }" type="checkbox" class="custom-control-input" id="${
-            skill["label"]
-          }" value=${skill["defaultValue"]}>
-               <label class="custom-control-label" for="${skill["label"]}">${
+               <input name="skills[]" type="checkbox" class="custom-control-input" 
+               id="${skill["_id"]}" value=${skill["_id"]}>
+               <label class="custom-control-label" for="${skill["_id"]}">${
             skill["label"]
           }</label>
              </div`);
@@ -60,13 +59,12 @@ const UserForm = (function() {
         }
 
         function _appendLanguages() {
-            $.getJSON("../../data/languages.json", function(languages) {
+            $.getJSON("http://cv-mobile-api.herokuapp.com/api/langs", function(languages) {
                 const languagesSelector = userForm.find("select#selLanguage");
                 languagesSelector.empty();
                 languages.forEach(language => {
-                    const label = language["label"];
                     languagesSelector.append(
-                        `<option value="${label}">${label}</option>`
+                        `<option value="${language["_id"]}">${language["label"]}</option>`
                     );
                 });
             }).fail(function(err) {
