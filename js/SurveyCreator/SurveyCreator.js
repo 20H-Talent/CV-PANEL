@@ -307,48 +307,26 @@ const SurveyCreator = (function() {
         );
 
         switch (typeSelectorValue) {
-          case "date":
-            const inputBlock = $(`
-            <tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
-            <td>
-             <div class="form-group w-100">
-            <div class="ValueType-header d-flex justify-content-between">
-                <p contenteditable="true">You can modify this text</p>
-                <div class="form-check align-self-start">
-                    <input class="form-check-input" type="checkbox" name="elements_check[]">
-                </div>
-              </div>
-              <div class="input-group">
-                <input type="${typeSelectorValue}" name="input_${typeSelectorValue}[]"
-                  class="form-control" placeholder="Insert default value" />
-                <div class="input-group-append">
-                  <button type="button" class="btn btn-outline-danger delete">
-                    <i class="far fa-trash-alt"></i>
-                  </button>
-                </div>
-              </div>
-             </td>
-           </tr>`);
-
-            tableBody
-              .append(inputBlock)
-              .find("button.delete")
-              .off("click")
-              .on("click", _deleteInput);
-
-            inputBlock.show("slow");
-
-            $(".survey-container").animate(
-              { scrollTop: tableBody.prop("scrollHeight") },
-              500
-            );
-
-            break;
           case "select":
           case "checkbox":
           case "radio":
             let buttonText =
               typeSelectorValue === "select" ? "option" : typeSelectorValue;
+
+            let numberOfThisTypeElements =
+              parseInt(
+                tableBody.find(
+                  `.ValueType-data[data-type="${typeSelectorValue}"]`
+                ).length
+              ) + 1;
+
+            let fieldName =
+              typeSelectorValue + "_field" + numberOfThisTypeElements;
+
+            if (typeSelectorValue === "checkbox") {
+              fieldName += "[]";
+            }
+
             const dinamicBlock = $(`<tr style="display:none;" class="ValueType-data" data-type=${typeSelectorValue}>
             <td>
                 <div class="form-group">
@@ -359,9 +337,7 @@ const SurveyCreator = (function() {
                     </div>
                   </div>
                   <div class="input-group">
-                    <input name="${typeSelectorValue}${
-              typeSelectorValue === "checkbox" ? "[]" : ""
-            }" class="form-control"
+                    <input name="${fieldName}" class="form-control"
                         type="text" placeholder="New ${typeSelectorValue} value..."/>
                     <div class="input-group-append">
                       <button type="button" class="btn btn-outline-primary Actions add">Add ${buttonText}</button>
@@ -461,7 +437,6 @@ const SurveyCreator = (function() {
        * @private
        */
       function _setBodySurveyData() {
-        const dinamicElements = ["select", "radio", "checkbox"];
         surveyApiData["elements"] = [];
 
         surveyContainer
@@ -477,21 +452,24 @@ const SurveyCreator = (function() {
               values: []
             };
 
-            if (dinamicElements.includes(data["type"])) {
-              data["values"] = Array.from(
-                $element.find("ul.preview-list > li")
-              ).map(listElement => {
-                const field = $(listElement).children(".FieldValue");
+            data["values"] = _surveyElementsToJSON(
+              Array.from($element.find("ul.preview-list > li"))
+            );
 
-                return {
-                  value: field.text(),
-                  name: field.data("name"),
-                  label: field.text()
-                };
-              });
-            }
             surveyApiData["elements"].push(data);
           });
+      }
+
+      function _surveyElementsToJSON(elements) {
+        return elements.map(listElement => {
+          const field = $(listElement).children(".FieldValue");
+
+          return {
+            value: field.text(),
+            name: field.data("name"),
+            label: field.text()
+          };
+        });
       }
 
       /**
@@ -732,16 +710,16 @@ const SurveyCreator = (function() {
         const submitButton = $(event.target).find("button[type=submit]");
         let errors = _validateSurveyDates() + _validateHeaderTextInputs();
 
-        // if (errors === 0) {
-        _setHeaderSurveyData();
-        _setBodySurveyData();
-        console.log(surveyApiData);
-        /*
+        if (errors === 0) {
+          _setHeaderSurveyData();
+          _setBodySurveyData();
+
           submitButton
             .css({ position: "relative", height: "60px" })
             .html(
               `<div style="position:absolute;" class="loading white">Loading&#8230;</div>`
             );
+
           $.ajax({
             url: "https://cv-mobile-api.herokuapp.com/api/surveys",
             type: "POST",
@@ -765,7 +743,6 @@ const SurveyCreator = (function() {
         } else {
           $(".survey-container").animate({ scrollTop: 0 }, "slow");
         }
-        */
       }
     }
     return {
