@@ -170,6 +170,8 @@ const SurveyCreator = (function() {
             )
             .off("click")
             .on("click", "button", _childrenActions);
+
+          input.val("");
         }
       }
 
