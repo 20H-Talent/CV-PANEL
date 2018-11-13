@@ -15,7 +15,7 @@ const SurveyCreator = (function() {
       elements: []
     };
 
-    const AlphaNumericREGEXP = /^[\w\¿\?\!\¡ ]+$/i;
+    const AlphaNumericREGEXP = /^[ñ\w\¿\?\!\¡\.€ ]+$/i;
 
     /**
      * Render the HTML associate with this object in the central column
