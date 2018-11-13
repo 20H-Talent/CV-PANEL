@@ -3,6 +3,7 @@ $("#mySidenavRight a").on("click", skills);
 
 // ******* declare function to get data from languages json. ***********
 function languages() {
+  console.log("entro dentro de languages");
   $.get("https://cv-mobile-api.herokuapp.com/api/langs")
     .done(function(data) {
       searchForm(data);
@@ -58,10 +59,10 @@ function skills() {
         data[d].label
       }</label>
       </div>`;
-      if (data[d].type === "layout") {
+      if (data[d].type === "library") {
         //objects 0-1.
         $('#skills div[class*="col-12"]').append(divObjectSkill);
-      } else if (data[d].type === "languages") {
+      } else if (data[d].type === "language") {
         //objects 2-7.
         $('#skills div[class*="col-5"]').append(divObjectSkill);
       } else {

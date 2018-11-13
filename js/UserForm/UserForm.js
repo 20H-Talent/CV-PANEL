@@ -142,6 +142,9 @@ const UserForm = (function() {
       setTimeout(function() {
         let jsongenerated = createUser();
         console.log("JSON GENERADO ... : ", jsongenerated);
+
+        // llamada a api
+        sendNewUser(jsongenerated);
       }, 3000);
     }
 
@@ -152,8 +155,7 @@ const UserForm = (function() {
     // -------------------- TESTEO ---------------
     function createUser() {
       // comprobar que todos los inputs sean valids.
-      let firstName = $("input[name=firstname]").val();
-      let lastName = $("input[name=lastname").val();
+      let fullname = $("input[name=name]").val();
       let username = $("input[name=username").val();
       let email = $("input[name=email").val();
       let tlfn = $("input[name=telephone").val();
@@ -161,7 +163,8 @@ const UserForm = (function() {
       let country = $("input[name=country").val();
       let city = $("input[name=city").val();
       let zip = $("input[name=zip").val();
-      let age = $("input[name=birthdate").val();
+      let birthdate = $("input[name=birthdate").val();
+      let exprienceYears = $("input[name=experience_years").val();
 
       function _getSelectedElements(toSelect1, toSelect2, toSelect3) {
         // console.log("to select1: ", toSelect1, " and to select2: ", toSelect2);
@@ -197,29 +200,40 @@ const UserForm = (function() {
         $("input[name='skills[]']"),
         $("input[name='gender']")
       );
+      // to get the object location.
+      let location = {
+        country: `${country}`,
+        city: `${city}`,
+        street: `${address}`,
+        zipcode: `${zip}`
+      };
+
       //   console.log("Elementos seleccionados: ", selectedElements);
-      return JSON.parse(`{
-          "firstname": "${firstName}",
-          "lastname": "${lastName}",
-          "username": "${username}",
-          "email": "${email}",
-          "tlfn": "${tlfn}",
-          "address": "${address}",
-          "country": "${country}",
-          "city": "${city}",
-          "zip": "${zip}",
-          "age": "${age}",
-          "gender": "${selectedElements.selectedGender}",
-          "languages": ${JSON.stringify(selectedElements.selectedLanguages)},
-          "skills": ${JSON.stringify(selectedElements.selectedSkills)}
-        }`);
+      return {
+        name: fullname,
+        username: username,
+        email: email,
+        phone: tlfn,
+        gender: selectedElements.selectedGender,
+        address: location,
+        languages: selectedElements.selectedLanguages,
+        skills: selectedElements.selectedSkills,
+        experience: exprienceYears,
+        birthDate: birthdate
+      };
     }
-    //  ---- DECIRLE A MANU QUE AÑADA EL CAMPO DE BIRTHDAY EN EL USER CONTROLLER ---------------
-    // unir firstname y lastname en una variable para pasarsela al JSON como name.
-    // falta la llamada post a la API, con previo .epreventDefault y se le pasa el json.
-    // faltan los años de experiencia.
-    //coger la foto.
-    // poner en el json las propiedades con su nombre correcto(como lo va a recoger)
+    function sendNewUser(jsonObj) {
+      $.ajax({
+        type: "POST",
+        url: "https://cv-mobile-api.herokuapp.com/api/users",
+        data: JSON.stringify(jsonObj),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).done(response => console.log(response));
+    }
+
+    //falta coger la foto.
 
     // ------------------- FIN TESTEO ----------------
     function editForm(user) {

@@ -63,9 +63,7 @@ $("document").ready(function() {
         this.className += " sidebar-position";
       });
     }
-    //  function openNewWindow() {   // Esta función no se utiliza en ningún lado.
-    //     open("form.html");
-    //   }
+
     // --------------- LATERAL RIGHT MENU ----------
     let rangeAge = document.querySelector("#age-range");
     let age = document.querySelector("#age");
