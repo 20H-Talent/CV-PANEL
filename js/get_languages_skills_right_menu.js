@@ -3,7 +3,7 @@ $("#mySidenavRight a").on("click", skills);
 
 // ******* declare function to get data from languages json. ***********
 function languages() {
-  $.getJSON("../data/languages.json")
+  $.getJSON("http://cv-mobile-api.herokuapp.com/api/langs")
     .done(function(data) {
       searchForm(data);
     })
@@ -15,6 +15,7 @@ function languages() {
 
   // method to search
   function searchForm(data) {
+    console.log("aquiii", data);
     $("#languages").html(" ");
     $.each(data, function(d) {
       $("#languages").append(
@@ -33,7 +34,7 @@ function languages() {
 
 // ************** declare function to get data from skills json. *************
 function skills() {
-  $.getJSON("../data/skills.json")
+  $.getJSON("http://cv-mobile-api.herokuapp.com/api/skills")
     .done(function(data) {
       searchForm(data);
     })
@@ -45,6 +46,7 @@ function skills() {
 
   // method to search
   function searchForm(data) {
+ 
     $('#skills div[class*="col-12"]').html(" ");
     $('#skills div[class*="col-5"]').html(" ");
     $('#skills div[class*="col-6"]').html(" ");
@@ -58,10 +60,10 @@ function skills() {
         data[d].label
       }</label>
       </div>`;
-      if (data[d].type === "layout") {
+      if (data[d].type === "framework") {
         //objects 0-1.
         $('#skills div[class*="col-12"]').append(divObjectSkill);
-      } else if (data[d].type === "languages") {
+      } else if (data[d].type === "language") {
         //objects 2-7.
         $('#skills div[class*="col-5"]').append(divObjectSkill);
       } else {
