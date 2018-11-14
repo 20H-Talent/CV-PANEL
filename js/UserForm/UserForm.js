@@ -138,14 +138,12 @@ const UserForm = (function() {
         alertErrors.fadeOut("slow");
       }, 5000);
 
-      //llamar al createUser.
       setTimeout(function() {
-        let jsongenerated = createUser();
-        console.log("JSON GENERADO ... : ", jsongenerated);
+        let dataToSendServer = createUser();
 
-        // llamada a api
-        sendNewUser(jsongenerated);
-      }, 3000);
+        // call to API
+        _sendNewUser(dataToSendServer);
+      }, 1000);
     }
 
     function _resetLanguagesSelector() {
@@ -165,9 +163,10 @@ const UserForm = (function() {
       let zip = $("input[name=zip").val();
       let birthdate = $("input[name=birthdate").val();
       let exprienceYears = $("input[name=experience_years").val();
+      let website = $("input[name=website]").val();
+      let avatar = $("input[type=file]");
 
       function _getSelectedElements(toSelect1, toSelect2, toSelect3) {
-        // console.log("to select1: ", toSelect1, " and to select2: ", toSelect2);
         let selectedLanguages = [];
         let selectedSkills = [];
         let selectedGender;
@@ -186,12 +185,6 @@ const UserForm = (function() {
             selectedGender = select.value;
           }
         }
-        // console.log("Genero cogido: ", selectedGender);
-        // console.log("LANGS seleccionados: ", selectedLanguages);
-        // console.log("SKILLS seleccionados: ", selectedSkills);
-
-        //return { selectedLanguages, selectedSkills };
-        // console.log("langs: ", selectedLanguages);
 
         return { selectedLanguages, selectedSkills, selectedGender };
       }
@@ -207,9 +200,7 @@ const UserForm = (function() {
         street: `${address}`,
         zipcode: `${zip}`
       };
-
-      //   console.log("Elementos seleccionados: ", selectedElements);
-      return {
+      jsonObj = {
         name: fullname,
         username: username,
         email: email,
@@ -219,21 +210,37 @@ const UserForm = (function() {
         languages: selectedElements.selectedLanguages,
         skills: selectedElements.selectedSkills,
         experience: exprienceYears,
-        birthDate: birthdate
+        birthDate: birthdate,
+        website: website
       };
+      return { jsonObj, avatar };
     }
-    function sendNewUser(jsonObj) {
+    function _sendNewUser(dataToSendServer) {
       $.ajax({
         type: "POST",
         url: "https://cv-mobile-api.herokuapp.com/api/users",
-        data: JSON.stringify(jsonObj),
+        data: JSON.stringify(dataToSendServer.jsonObj),
         headers: {
           "Content-Type": "application/json"
         }
-      }).done(response => console.log(response));
+      })
+        .done(function(res) {
+          let formData = new FormData();
+          formData.append("img", dataToSendServer.avatar[0].files[0]);
+          $.ajax({
+            type: "POST",
+            url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
+              res._id
+            }`,
+            data: formData,
+            mimeType: "multipart/form-data",
+            processData: false,
+            contentType: false
+          });
+        })
+        .done(response => console.log(response))
+        .fail(res => console.log("Unable to create user: ", res));
     }
-
-    //falta coger la foto.
 
     // ------------------- FIN TESTEO ----------------
     function editForm(user) {

@@ -271,23 +271,23 @@ const Table = (function() {
      * @return {String} html template
      */
     function _tableRowSkeleton({
-      profilePicture,
+      avatar,
       _id,
       email,
       name,
-      location,
+      address,
       registeredDate
     }) {
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
-           <img class="img-fluid" src=${profilePicture} alt="${name}" /></td>
+           <img class="img-fluid" src=${avatar} alt="${name}" /></td>
            <td class="fullname">
              <p>${name}</p>
            </td>
            <td class="user-email"><a href="mailto:${email}">${email}</a></td>
            <td class="user-city">
-           <p> ${location.city}</p>
+           <p> ${address.city}</p>
            </td>
            <td class="user-registered">${new Date(
              registeredDate
