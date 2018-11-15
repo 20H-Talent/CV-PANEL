@@ -118,8 +118,10 @@ const UserForm = (function() {
              <div class="col-lg-12">
                 <ul class="alert alert-danger alert-dismissible"></ul>
             </div>`);
-      const inputs = form.find("input");
+      // const inputs = form.find("input");
+      const inputs = $("input");
       inputs.each((index, input) => {
+        $(input).removeClass("is-valid is-invalid");
         if (input.checkValidity()) {
           $(input).addClass("is-valid");
         } else {
@@ -138,21 +140,29 @@ const UserForm = (function() {
         alertErrors.fadeOut("slow");
       }, 5000);
 
-      setTimeout(function() {
-        let dataToSendServer = createUser();
+      let res = $("input[required]");
+      let valids = [];
+      for (re of res) {
+        if ($(re).hasClass("is-valid")) {
+          valids.push(re);
+        }
+      }
+      if (res.length === valids.length) {
+        setTimeout(function() {
+          let dataToSendServer = _createNewUser();
 
-        // call to API
-        _sendNewUser(dataToSendServer);
-      }, 1000);
+          // call to API
+          _sendNewUser(dataToSendServer);
+        }, 1000);
+      }
     }
 
     function _resetLanguagesSelector() {
       userForm.find("#output").empty();
       userForm.find("select#selLanguage").val("");
     }
-    // -------------------- TESTEO ---------------
-    function createUser() {
-      // comprobar que todos los inputs sean valids.
+
+    function _createNewUser() {
       let fullname = $("input[name=name]").val();
       let username = $("input[name=username").val();
       let email = $("input[name=email").val();
@@ -200,7 +210,7 @@ const UserForm = (function() {
         street: `${address}`,
         zipcode: `${zip}`
       };
-      jsonObj = {
+      dataUserTxtPlain = {
         name: fullname,
         username: username,
         email: email,
@@ -213,13 +223,13 @@ const UserForm = (function() {
         birthDate: birthdate,
         website: website
       };
-      return { jsonObj, avatar };
+      return { dataUserTxtPlain, avatar };
     }
     function _sendNewUser(dataToSendServer) {
       $.ajax({
         type: "POST",
         url: "https://cv-mobile-api.herokuapp.com/api/users",
-        data: JSON.stringify(dataToSendServer.jsonObj),
+        data: JSON.stringify(dataToSendServer.dataUserTxtPlain),
         headers: {
           "Content-Type": "application/json"
         }
@@ -238,11 +248,13 @@ const UserForm = (function() {
             contentType: false
           });
         })
-        .done(response => console.log(response))
+        .done(function() {
+          sessionStorage.setItem("users-list", "");
+          $("#list-users").trigger("click");
+        })
         .fail(res => console.log("Unable to create user: ", res));
     }
 
-    // ------------------- FIN TESTEO ----------------
     function editForm(user) {
       generalConstructor.construct("user-form");
       setTimeout(() => {

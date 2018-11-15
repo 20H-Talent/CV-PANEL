@@ -15,9 +15,7 @@
       <hr class=" hr-2" />
       <form id="user-form" method="POST" class="needs-validation col-md-12">
         <div class="form-group row has-success">
-          <label for="name" class="col-sm-2 col-form-label"
-            >Fullname</label
-          >
+          <label for="name" class="col-sm-2 col-form-label">Fullname</label>
           <div class="col-sm-10">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing"
@@ -26,7 +24,7 @@
               <input
                 type="text"
                 name="name"
-                class="form-control "
+                class="form-control"
                 minlength="3"
                 maxlength="25"
                 pattern="[a-zA-Z\s  ñ]+"
@@ -34,31 +32,6 @@
               />
             </div>
           </div>
-        </div>
-
-        <!-- <div class="form-group row has-success">
-          <label for="lastname" class="col-sm-2 col-form-label"
-            >Last Name</label
-          >
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputdefault"
-                ><i class="fas asweome fa-user-tie"></i
-              ></span>
-              <input
-                lang="es-ES"
-                type="text"
-                name="lastname"
-                class="form-control"
-                minlength="3"
-                maxlength="25"
-                pattern="[A-Za-z ñ]+"
-                title="Last name must have 3-15 characters long"
-                value=""
-                required
-              />
-            </div>
-          </div> -->
         </div>
 
         <div class="form-group row has-success">
@@ -228,8 +201,8 @@
             </div>
           </div>
         </div>
-        <div class="form-group row has-success" id="age-required">
-          <label for="birthdate" class="col-sm-2 col-form-label"
+        <div class="form-group row has-success" id="exp-years">
+          <label for="experience_years" class="col-sm-2 col-form-label"
             >Experience years</label
           >
           <div class="col-sm-6">
@@ -244,6 +217,7 @@
                 id="experience_years"
                 class="form-control"
                 type="text"
+                required
               />
             </div>
           </div>
@@ -303,7 +277,7 @@
         </div>
         <hr />
 
-        <div class="custom-control custom-checkbox " id="skill">
+        <div class="custom-control custom-checkbox" id="skill">
           <h4 class="mb-3 langsel">Skills</h4>
         </div>
 
@@ -316,7 +290,6 @@
             size="10"
             class="chosen-select custom-select col-sm-12"
             name="selLanguage"
-            required
           >
           </select>
           <div class="invalid-feedback">
@@ -330,56 +303,8 @@
           Reset
         </button>
         <div id="output"></div>
-        <!-- <div class="d-block my-3 d-block custom-controls-stacked langsel">
-          <h4 class="mb-3">
-            Are you available for an interview in the near future?
-          </h4>
-          <div class=" custom-radio ">
-            <input
-              id="available"
-              name="Radiobutton"
-              type="radio"
-              class="custom-control-input"
-            />
-            <label class="custom-control-label" for="available">Yes</label>
-          </div>
-          <div class=" custom-radio ">
-            <input
-              id="Radiobutton1"
-              name="Radiobutton"
-              type="radio"
-              class="custom-control-input"
-              required
-            />
-            <label class="custom-control-label" for="Radiobutton1">No</label>
-          </div>
-        </div> -->
-        <!-- <div class="form-group">
-          <h4></h4>
-          <label for="exampleFormControlTextarea1"
-            ><strong>Additional informacion about you?</strong></label
-          >
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
-        </div> -->
+
         <div id="upload-curriculum" class="form-row langsel">
-          <!--
-            <div class="col">
-                <label for="exampleFormControlFile1"> <strong>Upload Curriculum</strong>
-                </label>
-                <input type="file" class="form-control-file fileupload" id="exampleFormControlFile1">
-            </div>
-
-
-            <div class="col" id="upload-carta">
-                <label for="exampleFormControlFile2"><strong>Upload application letter</strong></label>
-                <input type="file" class="form-control-file  fileupload" id="exampleFormControlFile2">
-            </div>
-          -->
-
           <div class="col" id="upload-picture">
             <label for="uploadProfilePicture"
               ><strong>Upload profile picture</strong></label
@@ -395,7 +320,7 @@
         <button
           id="create-user"
           class="btn checkout  btn-custom btn-lg btn-block"
-          type="submit"
+          type="button"
         >
           Save
         </button>
