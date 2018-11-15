@@ -46,7 +46,6 @@ function skills() {
 
   // method to search
   function searchForm(data) {
- 
     $('#skills div[class*="col-12"]').html(" ");
     $('#skills div[class*="col-5"]').html(" ");
     $('#skills div[class*="col-6"]').html(" ");

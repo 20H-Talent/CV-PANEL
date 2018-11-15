@@ -40,14 +40,14 @@ const UserForm = (function() {
         .find("*")
         .not("h4")
         .empty();
-      $.getJSON("../../data/skills.json", function(skills) {
+
+      $.get("https://cv-mobile-api.herokuapp.com/api/skills", function(skills) {
         skills.forEach(skill => {
           skillsContainer.append(`
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input name="
-                 skills[]" type="checkbox" class="custom-control-input" id="${
-                   skill["label"]
-                 }" value=${skill["_id"]}>
+                    <input name="skills[]" type="checkbox" class="custom-control-input" id="${
+                      skill["label"]
+                    }" value=${skill["_id"]}>
                <label class="custom-control-label" for="${skill["label"]}">${
             skill["label"]
           }</label>
@@ -59,7 +59,9 @@ const UserForm = (function() {
     }
 
     function _appendLanguages() {
-      $.getJSON("../../data/languages.json", function(languages) {
+      $.get("https://cv-mobile-api.herokuapp.com/api/langs", function(
+        languages
+      ) {
         const languagesSelector = userForm.find("select#selLanguage");
         languagesSelector.empty();
         languages.forEach(language => {
@@ -116,8 +118,10 @@ const UserForm = (function() {
              <div class="col-lg-12">
                 <ul class="alert alert-danger alert-dismissible"></ul>
             </div>`);
-      const inputs = form.find("input");
+      // const inputs = form.find("input");
+      const inputs = $("input");
       inputs.each((index, input) => {
+        $(input).removeClass("is-valid is-invalid");
         if (input.checkValidity()) {
           $(input).addClass("is-valid");
         } else {
@@ -135,11 +139,120 @@ const UserForm = (function() {
       setTimeout(function() {
         alertErrors.fadeOut("slow");
       }, 5000);
+
+      let res = $("input[required]");
+      let valids = [];
+      for (re of res) {
+        if ($(re).hasClass("is-valid")) {
+          valids.push(re);
+        }
+      }
+      if (res.length === valids.length) {
+        setTimeout(function() {
+          let dataToSendServer = _createNewUser();
+
+          // call to API
+          _sendNewUser(dataToSendServer);
+        }, 1000);
+      }
     }
 
     function _resetLanguagesSelector() {
       userForm.find("#output").empty();
       userForm.find("select#selLanguage").val("");
+    }
+
+    function _createNewUser() {
+      let fullname = $("input[name=name]").val();
+      let username = $("input[name=username").val();
+      let email = $("input[name=email").val();
+      let tlfn = $("input[name=telephone").val();
+      let address = $("input[name=adress").val();
+      let country = $("input[name=country").val();
+      let city = $("input[name=city").val();
+      let zip = $("input[name=zip").val();
+      let birthdate = $("input[name=birthdate").val();
+      let exprienceYears = $("input[name=experience_years").val();
+      let website = $("input[name=website]").val();
+      let avatar = $("input[type=file]");
+
+      function _getSelectedElements(toSelect1, toSelect2, toSelect3) {
+        let selectedLanguages = [];
+        let selectedSkills = [];
+        let selectedGender;
+        for (select of toSelect1) {
+          if (select.selected) {
+            selectedLanguages.push(select.value);
+          }
+        }
+        for (select of toSelect2) {
+          if (select.checked) {
+            selectedSkills.push(select.value);
+          }
+        }
+        for (select of toSelect3) {
+          if (select.checked) {
+            selectedGender = select.value;
+          }
+        }
+
+        return { selectedLanguages, selectedSkills, selectedGender };
+      }
+      let selectedElements = _getSelectedElements(
+        $("#selLanguage option[name='languages[]']"),
+        $("input[name='skills[]']"),
+        $("input[name='gender']")
+      );
+      // to get the object location.
+      let location = {
+        country: `${country}`,
+        city: `${city}`,
+        street: `${address}`,
+        zipcode: `${zip}`
+      };
+      dataUserTxtPlain = {
+        name: fullname,
+        username: username,
+        email: email,
+        phone: tlfn,
+        gender: selectedElements.selectedGender,
+        address: location,
+        languages: selectedElements.selectedLanguages,
+        skills: selectedElements.selectedSkills,
+        experience: exprienceYears,
+        birthDate: birthdate,
+        website: website
+      };
+      return { dataUserTxtPlain, avatar };
+    }
+    function _sendNewUser(dataToSendServer) {
+      $.ajax({
+        type: "POST",
+        url: "https://cv-mobile-api.herokuapp.com/api/users",
+        data: JSON.stringify(dataToSendServer.dataUserTxtPlain),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .done(function(res) {
+          let formData = new FormData();
+          formData.append("img", dataToSendServer.avatar[0].files[0]);
+          $.ajax({
+            type: "POST",
+            url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
+              res._id
+            }`,
+            data: formData,
+            mimeType: "multipart/form-data",
+            processData: false,
+            contentType: false
+          });
+        })
+        .done(function() {
+          sessionStorage.setItem("users-list", "");
+          $("#list-users").trigger("click");
+        })
+        .fail(res => console.log("Unable to create user: ", res));
     }
 
     function editForm(user) {
