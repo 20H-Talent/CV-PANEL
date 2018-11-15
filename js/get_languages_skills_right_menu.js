@@ -15,17 +15,13 @@ function languages() {
 
   // method to search
   function searchForm(data) {
-    console.log("aquiii", data);
     $("#languages").html(" ");
     $.each(data, function(d) {
       $("#languages").append(
         `<div class="custom-control custom-checkbox col-5">
-          <input type="checkbox" name="languages[]" id="${
-            data[d].label
-          }" value=${data[d]._id} class="custom-control-input">
-          <label for="${data[d].label}" class="custom-control-label">${
-          data[d].label
-        }</label>
+          <input type="checkbox" fieldName="language" valueName="${data[d].label}" value="${data[d]._id}" 
+          name="languages[]" id="${data[d].label}" class="custom-control-input">
+          <label class="custom-control-label" for="${data[d].label}">${data[d].label}</label>
         </div>`
       );
     });
@@ -46,16 +42,17 @@ function skills() {
 
   // method to search
   function searchForm(data) {
+ 
     $('#skills div[class*="col-12"]').html(" ");
     $('#skills div[class*="col-5"]').html(" ");
     $('#skills div[class*="col-6"]').html(" ");
     $.each(data, function(d) {
       let divObjectSkill = `<div class="custom-control custom-checkbox mr-3">
         <input type="checkbox" id="${
-          data[d].label
-        }" class="custom-control-input" value=${data[d]._id} name="
-        skills[]">
-        <label class="custom-control-label" for="${data[d].label}">${
+          data[d]._id
+        }" class="custom-control-input" fieldName="${data[d].type}" valueName="${data[d].label}" value=${data[d]._id} 
+        name="skills[]">
+        <label class="custom-control-label" for="${data[d]._id}">${
         data[d].label
       }</label>
       </div>`;
@@ -72,3 +69,4 @@ function skills() {
     });
   }
 }
+

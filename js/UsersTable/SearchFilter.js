@@ -10,7 +10,8 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-    _createSearchBadges(filters);
+    const filtersBadgets = _buildFiltersForBadgets(inputsData);
+    _createSearchBadges(filtersBadgets);
     let filteredUsers = users;
 
     if (filters["gender"]) {
@@ -71,7 +72,26 @@ const SearchFilter = (function() {
       });
     return filters;
   }
-
+  function _buildFiltersForBadgets(elements) {
+    const filters = [];
+    const filtered = elements
+      .filter((index, input) => {
+        const $input = $(input);
+        if (
+          $input.prop("type") === "radio" ||
+          $input.prop("type") === "checkbox"
+        ) {
+          return $input.prop("checked");
+        } else {
+          return $.trim($input.val()).length > 0;
+        }
+      })
+      .each((index, input) => {
+        const $input = $(input);
+        filters.push(input);
+      });
+    return filters;
+  }
   /**
    * Create badge-pills to show the user input search values
    * @function _createSearchBadges
@@ -101,19 +121,32 @@ const SearchFilter = (function() {
 
   function _appendFilterBadges(filters, badgesContainer) {
     badgesContainer.empty();
+console.log("filters:", filters);
+    filters.forEach(function(element) {
+      let badge = "";
+        if( $(element).attr("fieldName") != undefined ){
+          console.log("_appendFilterBadges->", $(element).attr("name"), $(element).attr("fieldName"));
 
-    for (key in filters) {
-      const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-      const badge = $(
-        `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
-          filters[key]
-        }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
-      ).hide();
-      badgesContainer.append(badge);
-      badge.show("slow");
+           badge = $(
+            `<span class="badge badge-pill badge-secondary filter mr-2">${$(element).attr("fieldName")}: <span>${
+              $(element).attr("valueName")
+            }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
+          ).hide();
+          }else{
+            console.log("_appendFilterBadges->", $(element).attr("name"), $(element).attr("fieldName"));
 
-      badge.on("click", _deleteBagde);
-    }
+             badge = $(
+              `<span class="badge badge-pill badge-secondary filter mr-2">${$(element).attr("name")}: <span>${
+                $(element).val()
+              }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
+            ).hide();
+          }
+
+          badgesContainer.append(badge);
+          badge.show("slow");
+
+          badge.on("click", _deleteBagde);
+    });
   }
 
   function _deleteBagde() {
