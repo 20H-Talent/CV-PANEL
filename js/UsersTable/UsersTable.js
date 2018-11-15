@@ -271,21 +271,41 @@ const Table = (function() {
      * @return {String} html template
      */
     function _tableRowSkeleton({
-      avatar,
-      _id,
-      email,
-      name,
       address,
+      languages,
+      skills,
+      _id,
+      name,
+      username,
+      email,
+      phone,
+      company,
+      jobTitle,
+      website,
+      birthDate,
+      experience,
+      avatar,
       registeredDate
     }) {
 
 
-      console.log(avatar,
-        _id,
-        email,
-        name,
+      console.log( "objeto user creado: ", 
         address,
+        languages,
+        skills,
+        _id,
+        name,
+        username,
+        email,
+        phone,
+        company,
+        jobTitle,
+        website,
+        birthDate,
+        experience,
+        avatar,
         registeredDate);
+
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
@@ -321,7 +341,7 @@ const Table = (function() {
      */
     function _cardSkeleton({
       name,
-      profilePicture,
+      avatar,
       _id,
       skills,
       frameworks,
@@ -332,7 +352,7 @@ const Table = (function() {
         _id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${profilePicture} alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${avatar} alt="test"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${name}</p>
            <p>${username}</p>

@@ -40,7 +40,7 @@ const UserForm = (function() {
         .find("*")
         .not("h4")
         .empty();
-      $.getJSON("../../data/skills.json", function(skills) {
+      $.getJSON("http://cv-mobile-api.herokuapp.com/api/skills", function(skills) {
         skills.forEach(skill => {
           skillsContainer.append(`
                 <div class="custom-control custom-checkbox custom-control-inline">
@@ -59,7 +59,7 @@ const UserForm = (function() {
     }
 
     function _appendLanguages() {
-      $.getJSON("../../data/languages.json", function(languages) {
+      $.getJSON("http://cv-mobile-api.herokuapp.com/api/langs", function(languages) {
         const languagesSelector = userForm.find("select#selLanguage");
         languagesSelector.empty();
         languages.forEach(language => {
