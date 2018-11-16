@@ -173,7 +173,7 @@ const SearchFilter = (function() {
     switch( typeField ){
       case 'text':
         $('#'+idFieldName).val('');
-      break;s  
+      break; 
     }
     
 
