@@ -37,13 +37,14 @@ const SearchFilter = (function() {
 
     //framework
     console.log("filters:",filters);
-    if (filters["skills"] ) {
-      const skillsQuery = filters["skills"];
+    if (filters["languages"] ) {
+      const skillsQuery = filters["languages"];
       console.log("skills",skillsQuery);
       filteredUsers = filteredUsers.filter(
         user =>
-          user["skills"].includes(skillsQuery) 
+          user["languages"].includes(skillsQuery) 
       );
+      console.log("Languages-->:",filters);
     } 
 
     //languages(software)
