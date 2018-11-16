@@ -256,48 +256,39 @@ const UserForm = (function() {
     }
 
     function editForm(user) {
+      console.log(user);
       generalConstructor.construct("user-form");
       setTimeout(() => {
-        // empting the checkboxes when editing another user
+        $("div#data-column")
+          .find("form")
+          .prepend(`<input type=hidden value="${user._id}" />`);
+
         var skillUser = document.getElementById("skill");
-        var inpskill = skillUser.querySelectorAll("input");
-        for (var i = 0; i < inpskill.length; i++) {
-          inpskill[i].checked = false;
-        }
-        // empting the checkboxes when editing another user
-        var lang = document.getElementById("selLanguage");
-        //var inpLang = lang.querySelectorAll("option");
-        for (var i = 0; i < lang.options.length; i++) {
-          lang.options[i].selected = false;
-        }
-        $("input[name=username]").val(user.login.username);
-        $("input[name=firstname]").val(
-          user.name.first.charAt(0).toUpperCase() + user.name.first.slice(1)
-        );
-        $("input[name=lastname]").val(
-          user.name.last.charAt(0).toUpperCase() + user.name.last.slice(1)
-        );
+
+        $("input[name=name]").val(user.name);
+
+        $("input[name=username]").val(user.username);
         $("input[name=email]").val(user.email);
-        $("input[name=birthdate]").val(user.dob.age + " years old ");
+        $("input[name=birthdate]").val(user.birthDate);
         $("input[name=telephone]").val(user.phone);
-        $("input[name=country]").val(user.location.state);
-        $("input[name=city]").val(user.location.city);
-        $("input[name=zip]").val(user.location.postcode);
-        $("input[name=adress]").val(user.location.street);
-        document.querySelector(`input[value=${user.gender}]`).checked = true;
-        for (var i = 0; i < user.skills.length; i++) {
-          document.getElementById(user.skills[i]).checked = true;
-        }
-        var lang = document.getElementById("selLanguage");
-        for (var i = 0; i < lang.options.length; i++) {
-          // user.languages es un array con "languages" like ["Spanish","English"]
-          // indexOf está buscando dentro del array user.languages la posición del "lang.options[i].value" por ejemplo "English"
-          // ["Spanish","English"].indexOf("Spanish")
-          // entonces el resultado sería 1
-          if (user.languages.indexOf(lang.options[i].value) > -1) {
-            lang.options[i].selected = true;
-          }
-        }
+        $("input[name=country]").val(user.address.state);
+        $("input[name=city]").val(user.address.city);
+        $("input[name=zip]").val(user.address.zipcode);
+        $("input[name=address]").val(user.address.street);
+
+        $(`input[value=${user.gender}]`).prop("checked", true);
+
+        user["skills"].forEach(skill => {
+          $(`input[name='skills[]'][value=${skill}]`).prop("checked", true);
+        });
+
+        $("select#selLanguage")
+          .children("options")
+          .each((index, option) => {
+            if (user["languages"].indexOf($(option).val()) > -1) {
+              $(option).prop("selected", true);
+            }
+          });
       }, 300);
     }
     return {
