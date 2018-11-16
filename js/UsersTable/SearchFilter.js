@@ -20,26 +20,27 @@ const SearchFilter = (function() {
       );
     }
 
-    if (filters["firstname"] && filters["lastname"]) {
-      const firstnameQuery = filters["firstname"].toLowerCase();
-      const lastnameQuery = filters["lastname"].toLowerCase();
+    if (filters["name"] ) {
+      const firstnameQuery = filters["name"].toLowerCase();
 
       filteredUsers = filteredUsers.filter(
         user =>
-          user["name"]["first"].toLowerCase().includes(firstnameQuery) &&
-          user["name"]["last"].toLowerCase().includes(lastnameQuery)
+          user["name"].toLowerCase().includes(firstnameQuery) 
       );
-    } else if (!filters["firstname"] && filters["lastname"]) {
-      const lastnameQuery = filters["lastname"].toLowerCase();
-      filteredUsers = filteredUsers.filter(user =>
-        user["name"]["last"].toLowerCase().includes(lastnameQuery)
-      );
-    } else if (filters["firstname"] && !filters["lastname"]) {
-      const firstnameQuery = filters["firstname"].toLowerCase();
-      filteredUsers = filteredUsers.filter(user =>
-        user["name"]["first"].toLowerCase().includes(firstnameQuery)
-      );
-    }
+    } 
+
+   // //New filters field's added
+    // //Full Name
+
+
+    // //Skills
+    // if (filters["skills"]) {
+    //     console.log("skills", filters);
+    //     filteredUsers = filteredUsers.filter(
+    //       user => user["skills"] === filters["skills"].toLowerCase()
+    //     );
+    // console.log("filteredUsers", filteredUsers);
+    // }
 
     return filteredUsers;
   }
@@ -72,6 +73,7 @@ const SearchFilter = (function() {
       });
     return filters;
   }
+
   function _buildFiltersForBadgets(elements) {
     const filters = [];
     const filtered = elements
@@ -121,20 +123,16 @@ const SearchFilter = (function() {
 
   function _appendFilterBadges(filters, badgesContainer) {
     badgesContainer.empty();
-console.log("filters:", filters);
+// console.log("filters:", filters);
     filters.forEach(function(element) {
       let badge = "";
         if( $(element).attr("fieldName") != undefined ){
-          console.log("_appendFilterBadges->", $(element).attr("name"), $(element).attr("fieldName"));
-
            badge = $(
             `<span class="badge badge-pill badge-secondary filter mr-2">${$(element).attr("fieldName")}: <span>${
               $(element).attr("valueName")
             }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
           ).hide();
           }else{
-            console.log("_appendFilterBadges->", $(element).attr("name"), $(element).attr("fieldName"));
-
              badge = $(
               `<span class="badge badge-pill badge-secondary filter mr-2">${$(element).attr("name")}: <span>${
                 $(element).val()
@@ -144,7 +142,6 @@ console.log("filters:", filters);
 
           badgesContainer.append(badge);
           badge.show("slow");
-
           badge.on("click", _deleteBagde);
     });
   }

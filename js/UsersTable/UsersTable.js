@@ -289,22 +289,22 @@ const Table = (function() {
     }) {
 
 
-      console.log( "objeto user creado: ", 
-        address,
-        languages,
-        skills,
-        _id,
-        name,
-        username,
-        email,
-        phone,
-        company,
-        jobTitle,
-        website,
-        birthDate,
-        experience,
-        avatar,
-        registeredDate);
+      // console.log( "objeto user creado: ", 
+      //   address,
+      //   languages,
+      //   skills,
+      //   _id,
+      //   name,
+      //   username,
+      //   email,
+      //   phone,
+      //   company,
+      //   jobTitle,
+      //   website,
+      //   birthDate,
+      //   experience,
+      //   avatar,
+      //   registeredDate);
 
       return `
    <tr scope="row" data-id=${_id}>
