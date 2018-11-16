@@ -14,12 +14,15 @@ const SearchFilter = (function() {
     _createSearchBadges(filtersBadgets);
     let filteredUsers = users;
 
+    //Gender
     if (filters["gender"]) {
       filteredUsers = filteredUsers.filter(
         user => user["gender"] === filters["gender"].toLowerCase()
       );
     }
 
+    //New filters field's added
+    //Full Name
     if (filters["name"] ) {
       const firstnameQuery = filters["name"].toLowerCase();
 
@@ -28,9 +31,24 @@ const SearchFilter = (function() {
           user["name"].toLowerCase().includes(firstnameQuery) 
       );
     } 
+    //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
+    //Experience 
+    //languages (idiomas)
 
-   // //New filters field's added
-    // //Full Name
+    //framework
+    console.log("filters:",filters);
+    if (filters["skills"] ) {
+      const skillsQuery = filters["skills"];
+      console.log("skills",skillsQuery);
+      filteredUsers = filteredUsers.filter(
+        user =>
+          user["skills"].includes(skillsQuery) 
+      );
+    } 
+
+    //languages(software)
+
+
 
 
     // //Skills
@@ -134,7 +152,7 @@ const SearchFilter = (function() {
           ).hide();
           }else{
              badge = $(
-              `<span class="badge badge-pill badge-secondary filter mr-2">${$(element).attr("name")}: <span>${
+              `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}" >${$(element).attr("name")}: <span>${
                 $(element).val()
               }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
             ).hide();
@@ -147,8 +165,21 @@ const SearchFilter = (function() {
   }
 
   function _deleteBagde() {
+    var idFieldName = $(this).attr('idFieldName');
+    var fieldValue = $(this).attr('fieldValue');
+    var typeField = $('#'+idFieldName).attr( 'type' );
+
+    switch( typeField ){
+      case 'text':
+        $('#'+idFieldName).val('');
+      break;s  
+    }
+    
+
     $(this).remove();
-    usersTable.initTable(null, window.innerWidth);
+
+    $("#submit_search").trigger("click");
+    //usersTable.initTable(null, window.innerWidth);
   }
 
   return {
