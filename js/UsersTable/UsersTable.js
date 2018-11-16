@@ -201,40 +201,6 @@ const Table = (function() {
     }
 
     /**
-     * Create badge-pills to show the user input search values
-     * @function _createSearchBadges
-     * @private
-     * @param {Object} filters
-     */
-    function _createSearchBadges(filters) {
-      const filtersContainer = mainContainer.find(".filters");
-      const badgeContainer = filtersContainer.children(".search-badges");
-
-      filtersContainer.find("button").remove();
-      badgeContainer.empty();
-
-      Object.keys(filters).forEach(key => {
-        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-        const badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
-            filters[key]
-          }</span></span>`
-        ).hide();
-        badgeContainer.append(badge);
-        badge.show("slow");
-      });
-      const resetButton = filtersContainer.append(
-        `<button class="btn btn-sm btn-info">Cancel search</button>`
-      );
-      resetButton.off("click").on("click", function(e) {
-        badgeContainer.empty();
-        $(this).remove();
-        _showOverlay(true);
-        initTable(null, window.innerWidth);
-      });
-    }
-
-    /**
      * @function _renderTableOnResize
      * @private
      * @param {jQuery Object} mainTable
@@ -278,14 +244,7 @@ const Table = (function() {
       address,
       registeredDate
     }) {
-
-
-      console.log(avatar,
-        _id,
-        email,
-        name,
-        address,
-        registeredDate);
+      // console.log(avatar, _id, email, name, address, registeredDate);
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
@@ -321,7 +280,7 @@ const Table = (function() {
      */
     function _cardSkeleton({
       name,
-      profilePicture,
+      avatar,
       _id,
       skills,
       frameworks,
@@ -332,7 +291,7 @@ const Table = (function() {
         _id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${profilePicture} alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${avatar} alt="test"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${name}</p>
            <p>${username}</p>
@@ -486,26 +445,18 @@ const Table = (function() {
       const modal = $(this);
       const user = getUserByID(element.data("id"));
 
-      const {
-        profilePicture,
-        username,
-        name,
-        birthDate,
-        phone,
-        cell,
-        location
-      } = user;
+      const { avatar, username, name, birthDate, phone, address } = user;
 
       const modalBody = modal.find(".modal-body");
 
       modalBody.find("#infoUser span").remove();
 
       modal.find(".modal-title").text(name + " ~ " + username);
-      modalBody.find("img").prop("src", profilePicture);
+      modalBody.find("img").prop("src", avatar);
 
       _appendBirthday(modalBody, birthDate);
-      _appendPhones(modalBody, { phone, cell });
-      _appendAddress(modalBody, location);
+      _appendPhones(modalBody, { phone });
+      _appendAddress(modalBody, address);
       _appendTechSkills(modalBody, user);
     }
 
@@ -520,21 +471,18 @@ const Table = (function() {
         .find(".phones")
         .children("i")
         .each((index, element) => {
-          if ($(element).hasClass("fa-phone")) {
-            $(`<span>${phones.phone}</span>`).insertAfter($(element));
-          }
           if ($(element).hasClass("fa-mobile-alt")) {
-            $(`<span>${phones.cell}</span>`).insertAfter($(element));
+            $(`<span>${phones.phone}</span>`).insertAfter($(element));
           }
         });
     }
 
-    function _appendAddress(container, location) {
+    function _appendAddress(container, address) {
       container
         .find(".address")
         .append(
-          `<span>${location.state} ~ ${location.city} / ${
-            location.country
+          `<span>${address.street} ~ ${address.city} / ${
+            address.country
           }</span>`
         );
     }
@@ -542,6 +490,7 @@ const Table = (function() {
     function _appendTechSkills(container, user) {
       ["skills", "languages", "frameworks"].map(key => {
         const userData = user[key];
+        console.log("User data: ", userData);
         container
           .find(`#${key}Info > .card-body`)
           .empty()

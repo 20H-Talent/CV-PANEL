@@ -249,7 +249,7 @@ const UserForm = (function() {
           });
         })
         .done(function() {
-          sessionStorage.setItem("users-list", "");
+          sessionStorage.removeItem("users-list");
           $("#list-users").trigger("click");
         })
         .fail(res => console.log("Unable to create user: ", res));
