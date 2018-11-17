@@ -182,7 +182,7 @@ function advancedSearchCompanies(event) {
     let docNumber = "";
     if (docType == "nif") {
         docNumber = $("input[name=docNumberNif]").val();
-    } else {
+    } else if (docType == "cif") {
         docNumber = $("input[name=docNumberCif]").val();
     }
     let inputEmployees = $("#company-employees").val().toLowerCase();
@@ -192,6 +192,7 @@ function advancedSearchCompanies(event) {
     let inputCountry = $("#company-country").val().toLowerCase();
 
     let formCompanyes = $("#advanced-search-companies");
+    console.log('formCompanyes :', formCompanyes);
     let inputs = formCompanyes.find("input");
     console.log('inputs :', inputs);
     var filteredCompanies = [];
@@ -200,12 +201,12 @@ function advancedSearchCompanies(event) {
 
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
-    filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.docType.toString().toLowerCase().includes(docType));
-    });
-    filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.docNumber.toString().toLowerCase().includes(docNumber));
-    });
+    // filteredCompanies = filteredCompanies.filter((company) => {
+    //     return (company.docType.toString().toLowerCase().includes(docType));
+    // });
+    // filteredCompanies = filteredCompanies.filter((company) => {
+    //     return (company.docNumber.toString().toLowerCase().includes(docNumber));
+    // });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.employees.toString().includes(inputEmployees));
     });
