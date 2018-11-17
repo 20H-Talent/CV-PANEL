@@ -14,7 +14,7 @@
 }
 
 .calendar-wrapper {
-    background: #302f30;
+    background: #f3f2dd;
     border-radius: 5px;
 }
 
@@ -51,12 +51,12 @@ body {
 
 .calendar p {
     font-size: 1.1rem;
-    color: #ffffff;
+    color: #0f0f0f;
 }
 
 .calendar {
     /* height: 100vh; */
-    color: rgb(255, 255, 255);
+    color: rgb(7, 7, 7);
     padding: .5em .5em 1em;
     margin: .5em auto;
     -webkit-border-radius: 5px;
@@ -80,5 +80,5 @@ body {
 }
 
 .calendar li:nth-child(-n+7) {
-    color: rgb(255, 255, 255);
+    color: rgb(12, 12, 12);
 }
