@@ -201,12 +201,12 @@ function advancedSearchCompanies(event) {
 
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
-    // filteredCompanies = filteredCompanies.filter((company) => {
-    //     return (company.docType.toString().toLowerCase().includes(docType));
-    // });
-    // filteredCompanies = filteredCompanies.filter((company) => {
-    //     return (company.docNumber.toString().toLowerCase().includes(docNumber));
-    // });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.docType.toString().toLowerCase().includes(docType));
+    });
+    filteredCompanies = filteredCompanies.filter((company) => {
+        return (company.docNumber.toString().toLowerCase().includes(docNumber));
+    });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.employees.toString().includes(inputEmployees));
     });
@@ -227,19 +227,22 @@ function advancedSearchCompanies(event) {
         if (inputs[i].value.toString().trim().length > 0) {
             //   if (radioButtons.is(":checked")) {
             const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
-            badgesContainer.append(badgeCompany);
+
+            console.log('badgesContainer :', badgesContainer);
             badgeCompany.show("slow");
             badgeCompany.off("click").on("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
                 badgeCompany.remove();
                 inputs[i].value = "";
-                $("#advanced-search-companies").trigger("click");
+                $("#submit_search").trigger("click");
+                //  companies.renderCompaniesTable(companies.companies);
                 console.log('formCompanyes :', formCompanyes);
                 $("#alertNoCompanyFound").remove();
-                companies.renderCompaniesTable(companies.companies);
+
             });
             //  }
+            badgesContainer.append(badgeCompany);
         }
     }
     if (filteredCompanies.length == 0) {
