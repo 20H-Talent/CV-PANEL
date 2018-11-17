@@ -4,7 +4,6 @@ function getCompanyFromAPI() {
     generalConstructor.construct("companies-table");
     $.getJSON("https://cv-mobile-api.herokuapp.com/api/companies")
         .done(function(data) {
-            console.log('data :', data);
             $.each(data, function(i, item) {
                 var company = new Company(
                     data[i]._id,
@@ -25,8 +24,6 @@ function getCompanyFromAPI() {
                 companies.addCompany(company);
             });
             companies.renderCompaniesTable(companies.companies);
-            // companies.renderCompanyCards();
-            //companies.searchAdvanced();
             $(window).on("resize", function() {
                 let width = $(this).width();
                 const companyContainer = $(".main-container-companies");
@@ -122,25 +119,20 @@ function modalDelete(id) {
         const mainContainer = $("#companyTable");
         const tableBody = mainContainer.find("#company-table #tableBody");
         const cardCompany = mainContainer.find("#card-container-company");
-        console.log('cardCompany :', cardCompany);
         if (tableBody.children("tr").length > 0) {
             tableBody.find(`tr[data-id=${id}]`).remove();
         }
         if (cardCompany.children(".card").length > 0) {
             cardCompany.find(`.card-company[data-id=${id}]`).remove();
-            console.log('deletecard :')
         }
     }
 };
 
 function editCompany(id) {
     generalConstructor.construct("enterprises-form");
-    console.log('id :', id);
     setTimeout(() => {
         var company = companies.getCompanyById(id);
-        console.log('company :', company);
         $("input[name=company-id]").val(id);
-        console.log(' $("input[name=company-id]").val(id) :', $("input[name=company-id]").val());
         $("input[name=country]").val(company.address.country);
         document.querySelector(`input[value=${company.docType}]`).checked = true;
         if (company.docType == "nif") {
@@ -190,15 +182,10 @@ function advancedSearchCompanies(event) {
     let inputCity = $("#company-city").val().toLowerCase();
     let inputEmail = $("#company-email").val().toLowerCase();
     let inputCountry = $("#company-country").val().toLowerCase();
-
     let formCompanyes = $("#advanced-search-companies");
-    console.log('formCompanyes :', formCompanyes);
     let inputs = formCompanyes.find("input");
-    console.log('inputs :', inputs);
     var filteredCompanies = [];
-    console.log('companies.companies :', companies.companies);
     filteredCompanies = companies.companies.filter((company) => {
-
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
     // filteredCompanies = filteredCompanies.filter((company) => {
@@ -223,14 +210,9 @@ function advancedSearchCompanies(event) {
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.address.country.toLowerCase().includes(inputCountry));
     });
-    console.log('inputs :', inputs);
     for (let i = 0; i < inputs.length; i++) {
-
         if (inputs[i].type == "radio") {
-
             if (inputs[i].checked == true) {
-
-                console.log('bunnradio :', );
                 const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
                 badgeCompany.fadeIn("slow");
                 badgeCompany.off("click").on("click", function(event) {
@@ -256,8 +238,6 @@ function advancedSearchCompanies(event) {
             });
             badgesContainer.append(badgeCompany);
         }
-
-
     }
     if (filteredCompanies.length == 0) {
         $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
