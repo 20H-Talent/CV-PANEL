@@ -14,12 +14,19 @@ const Table = (function() {
   function init() {
     const mainContainer = $(".main-container");
 
-    let apiURL = "https://cv-mobile-api.herokuapp.com/api/users";
-
+    let apiUsers = "https://cv-mobile-api.herokuapp.com/api/users";
+    let apiSkills = "https://cv-mobile-api.herokuapp.com/api/skills";
+    let apiLanguages = "https://cv-mobile-api.herokuapp.com/api/langs";
+    let apiSkillsAndLangs = {
+      skills: "https://cv-mobile-api.herokuapp.com/api/skills",
+      langs: "https://cv-mobile-api.herokuapp.com/api/langs"
+    };
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
-        _setupSessionStorage(apiURL, initTable);
+        _setupSessionStorage(apiUsers, initTable);
+        _setupSessionStorage(apiSkills);
+        _setupSessionStorage(apiLanguages);
       }).fail(function(err) {
         _showOverlay(false);
         throw new Error(err);
@@ -71,10 +78,28 @@ const Table = (function() {
      * @param {function} callback - Callback that triggers when the response is ready
      */
     function _setupSessionStorage(url, callback) {
-      if (!sessionStorage.getItem("users-list")) {
-        apiRequest(url, callback);
+      console.log("URL 1: ", url);
+      // console.log("URL skills: ", url.skills);
+
+      if (!callback) {
+        // testeo
+        if (url.includes("langs")) {
+          if (!sessionStorage.getItem("languages-list")) {
+            apiRequest(url);
+          }
+        } else {
+          if (!sessionStorage.getItem("skills-list")) {
+            apiRequest(url);
+          }
+        }
+
+        // fin testeo
       } else {
-        callback(null, window.innerWidth);
+        if (!sessionStorage.getItem("users-list")) {
+          apiRequest(url, callback);
+        } else {
+          callback(null, window.innerWidth);
+        }
       }
     }
 
@@ -85,20 +110,51 @@ const Table = (function() {
      * @param {function} callback
      */
     function apiRequest(url, callback) {
-      _showOverlay(true);
-      $.getJSON(url, function(response) {
-        if (!response["error"]) {
-          usersWithExtraData = _appendExtraData(response);
-          sessionStorage.setItem(
-            "users-list",
-            JSON.stringify(usersWithExtraData)
-          );
-          callback(usersWithExtraData, window.innerWidth);
+      console.log("URL 2: ", url);
+
+      if (!callback) {
+        if (url.includes("langs")) {
+          $.getJSON(url, function(response) {
+            if (!response["error"]) {
+              sessionStorage.setItem(
+                "languages-list",
+                JSON.stringify(response)
+              );
+            }
+          }).fail(function(err) {
+            _showOverlay(false);
+            throw new Error(err);
+          });
+        } else {
+          // testeo
+          $.getJSON(url, function(response) {
+            console.log("response: ", response);
+            if (!response["error"]) {
+              sessionStorage.setItem("skills-list", JSON.stringify(response));
+            }
+          }).fail(function(err) {
+            _showOverlay(false);
+            throw new Error(err);
+          });
         }
-      }).fail(function(err) {
-        _showOverlay(false);
-        throw new Error(err);
-      });
+
+        // fin testeo
+      } else {
+        _showOverlay(true);
+        $.getJSON(url, function(response) {
+          if (!response["error"]) {
+            usersWithExtraData = _appendExtraData(response);
+            sessionStorage.setItem(
+              "users-list",
+              JSON.stringify(usersWithExtraData)
+            );
+            callback(usersWithExtraData, window.innerWidth);
+          }
+        }).fail(function(err) {
+          _showOverlay(false);
+          throw new Error(err);
+        });
+      }
     }
 
     /** Display table with the users data when the instance is initialized
@@ -490,16 +546,76 @@ const Table = (function() {
     function _appendTechSkills(container, user) {
       ["skills", "languages", "frameworks"].map(key => {
         const userData = user[key];
-        console.log("User data: ", userData);
-        container
-          .find(`#${key}Info > .card-body`)
-          .empty()
-          .append(
-            userData.map(
-              value =>
+        // console.log("User data: ", userData);
+
+        // container
+        //   .find(`#${key}Info > .card-body`)
+        //   .empty()
+        //   .append(
+        //     userData.map(
+        //       value =>
+        //         `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
+        //     )
+        //   );
+
+        container.find(`#${key}Info > .card-body`).empty();
+        userData.map(function(value) {
+          // console.log("value id: ", value);
+          if (key === "skills") {
+            // console.log(" --------Dentro del if --------------\n");
+            // console.log("value id: ", value);
+            let sessionSkills = JSON.parse(
+              sessionStorage.getItem("skills-list")
+            );
+            //console.log("sessionSkills: ", sessionSkills);
+            sessionSkills.map(function(sessionSkill) {
+              // console.log("sessionSkill: ", sessionSkill);
+              // console.log("value: ", value);
+              if (value === sessionSkill._id) {
+                console.log("ids iguales: ", value, sessionSkill);
+                return container
+                  .find(`#${key}Info > .card-body`)
+                  .append(
+                    `<img class="mx-1 mt-2" src="../assets/images/${key}/${
+                      sessionSkill.label
+                    }.png" alt="${
+                      sessionSkill.label
+                    }" width="48" height="48" title="${sessionSkill.label}" />`
+                  );
+              }
+            });
+          } else if (key === "languages") {
+            // console.log(" --------Dentro del else --------------\n");
+            let sessionLangs = JSON.parse(
+              sessionStorage.getItem("languages-list")
+            );
+            console.log("sessionLanguages: ", sessionLangs);
+            sessionLangs.map(function(sessionLang) {
+              // console.log("sessionLang: ", sessionLang);
+              // console.log("value: ", value);
+              if (value === sessionLang._id) {
+                console.log("ids iguales: ", value, sessionLang);
+                return container
+                  .find(`#${key}Info > .card-body`)
+                  .append(
+                    `<img class="mx-1 mt-2" src="../assets/images/${key}/${
+                      sessionLang.label
+                    }.png" alt="${
+                      sessionLang.label
+                    }" width="48" height="48" title="${sessionLang.label}" />`
+                  );
+              }
+            });
+          } else {
+            // // console.log("ultimo");
+            // console.log("key ultimo", key);
+            return container
+              .find(`#${key}Info > .card-body`)
+              .append(
                 `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
-            )
-          );
+              );
+          }
+        });
       });
     }
 
