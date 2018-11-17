@@ -167,12 +167,12 @@ const UserForm = (function() {
       let username = $("input[name=username").val();
       let email = $("input[name=email").val();
       let tlfn = $("input[name=telephone").val();
-      let address = $("input[name=adress").val();
+      let street = $("input[name=street").val();
       let country = $("input[name=country").val();
       let city = $("input[name=city").val();
-      let zip = $("input[name=zip").val();
+      let zipcode = $("input[name=zipcode").val();
       let birthdate = $("input[name=birthdate").val();
-      let exprienceYears = $("input[name=experience_years").val();
+      let experience = $("input[name=experience").val();
       let website = $("input[name=website]").val();
       let avatar = $("input[type=file]");
 
@@ -205,10 +205,10 @@ const UserForm = (function() {
       );
       // to get the object location.
       let location = {
-        country: `${country}`,
-        city: `${city}`,
-        street: `${address}`,
-        zipcode: `${zip}`
+        country,
+        city,
+        street,
+        zipcode
       };
       dataUserTxtPlain = {
         name: fullname,
@@ -219,34 +219,42 @@ const UserForm = (function() {
         address: location,
         languages: selectedElements.selectedLanguages,
         skills: selectedElements.selectedSkills,
-        experience: exprienceYears,
+        experience: experience,
         birthDate: birthdate,
         website: website
       };
       return { dataUserTxtPlain, avatar };
     }
     function _sendNewUser(dataToSendServer) {
+      const userID = $("form#user-form")
+        .find("input[type=hidden]")
+        .val();
+
       $.ajax({
-        type: "POST",
-        url: "https://cv-mobile-api.herokuapp.com/api/users",
+        method: userID ? "PUT" : "POST",
+        url: `https://cv-mobile-api.herokuapp.com/api/users/${
+          userID ? userID : ""
+        }`,
         data: JSON.stringify(dataToSendServer.dataUserTxtPlain),
         headers: {
           "Content-Type": "application/json"
         }
       })
         .done(function(res) {
-          let formData = new FormData();
-          formData.append("img", dataToSendServer.avatar[0].files[0]);
-          $.ajax({
-            type: "POST",
-            url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
-              res._id
-            }`,
-            data: formData,
-            mimeType: "multipart/form-data",
-            processData: false,
-            contentType: false
-          });
+          if (!userID) {
+            let formData = new FormData();
+            formData.append("img", dataToSendServer.avatar[0].files[0]);
+            $.ajax({
+              method: "POST",
+              url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
+                res._id
+              }`,
+              data: formData,
+              mimeType: "multipart/form-data",
+              processData: false,
+              contentType: false
+            });
+          }
         })
         .done(function() {
           sessionStorage.setItem("users-list", "");
@@ -256,7 +264,6 @@ const UserForm = (function() {
     }
 
     function editForm(user) {
-      console.log(user);
       generalConstructor.construct("user-form");
       setTimeout(() => {
         $("div#data-column")
@@ -274,7 +281,7 @@ const UserForm = (function() {
         $("input[name=country]").val(user.address.state);
         $("input[name=city]").val(user.address.city);
         $("input[name=zip]").val(user.address.zipcode);
-        $("input[name=address]").val(user.address.street);
+        $("input[name=street]").val(user.address.street);
 
         $(`input[value=${user.gender}]`).prop("checked", true);
 
@@ -283,13 +290,13 @@ const UserForm = (function() {
         });
 
         $("select#selLanguage")
-          .children("options")
+          .children("option")
           .each((index, option) => {
-            if (user["languages"].indexOf($(option).val()) > -1) {
+            if (user["languages"].includes($(option).val())) {
               $(option).prop("selected", true);
             }
           });
-      }, 300);
+      }, 400);
     }
     return {
       construct,

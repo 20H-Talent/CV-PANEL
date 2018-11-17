@@ -274,7 +274,6 @@ const Table = (function() {
       address,
       registeredDate
     }) {
-      console.log(avatar, _id, email, name, address, registeredDate);
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
