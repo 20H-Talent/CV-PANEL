@@ -40,17 +40,20 @@ function getCompanyFromAPI() {
 
 }
 /*********************************************************************
- * Showing short info about company when clicking the preview 
+ * Showing short info about company when clicking the preview
  * button on the table company
  *********************************************************************/
 function showPreviewInfo(id) {
-
     var company = companies.getCompanyById(id);
 
     $("#modal-company").html(
-        `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${company.id} >
+        `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
+      company.id
+    } >
         <div class="card-header rounded  text-dark d-flex header-card flex-row align-items-center">
-           <img class="img-fluid mr-2 rounded-circle" src=${company.logo} width=120px height:50px  alt="test"/>
+           <img class="img-fluid mr-2 rounded-circle" src=${
+             company.logo
+           } width=120px height:50px  alt="test"/>
            <div class="  ml-4 ">
               <h5 class=" font-weight-bold modal-title">
                  <p>${company.name}</p>
@@ -62,7 +65,9 @@ function showPreviewInfo(id) {
         <div class="text-dark">
            <div class=" text-dark  mt-3 h5">
               <h5 class=" rounded text-dark font-weight-bold ">Email</h5>
-              <h6><a class=" ldeep-purple " href="mailto${company.email}">${company.email}</a></h6>
+              <h6><a class=" ldeep-purple " href="mailto${company.email}">${
+      company.email
+    }</a></h6>
            </div>
            <div class="text-dark  h5 ">
               <h5 class="  text-dark rounded font-weight-bold">Bio</h5>
@@ -82,9 +87,9 @@ function showPreviewInfo(id) {
            </div>
            <div class="text-dark  h5 ">
               <h5 class=" header-card text-dark rounded font-weight-bold " >Address</h5>
-              <h6 class=" ldeep-purple ">${company.address.country} ~ ${company.address.city} ${
-                 company.address.street
-                 } / ${company.address.zipcode}
+              <h6 class=" ldeep-purple ">${company.address.country} ~ ${
+      company.address.city
+    } ${company.address.street} / ${company.address.zipcode}
               </h6>
            </div>
            <div class=" modal-footer">
@@ -92,25 +97,20 @@ function showPreviewInfo(id) {
            </div>
         </div> `
     );
-
 }
-
-
-
 
 function removeCompanyFromDOM(id) {
     fetch(`https://cv-mobile-api.herokuapp.com/api/companies/${id}`, {
-            method: 'DELETE'
+            method: "DELETE"
         })
         .then(response => response.json())
+        .then(response => {})
         .then(response => {
-
-        }).then(response => {
             // setTimeout(function() { window.location.reload(); }, 2000);
         });
 }
 /***********************************
- * Confirm the delete of a company 
+ * Confirm the delete of a company
  * in desktop and mobile
  ***********************************/
 function modalDelete(id) {
@@ -126,7 +126,11 @@ function modalDelete(id) {
             cardCompany.find(`.card-company[data-id=${id}]`).remove();
         }
     }
-};
+    if (cardCompany.children(".card").length > 0) {
+        cardCompany.find(`.card-company[data-id=${id}]`).remove();
+    }
+}
+
 
 function editCompany(id) {
     generalConstructor.construct("enterprises-form");

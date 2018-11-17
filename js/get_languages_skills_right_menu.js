@@ -15,7 +15,6 @@ function languages() {
 
   // method to search
   function searchForm(data) {
-    console.log("aquiii", data);
     $("#languages").html(" ");
     $.each(data, function(d) {
       $("#languages").append(
