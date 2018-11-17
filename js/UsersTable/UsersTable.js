@@ -443,7 +443,6 @@ const Table = (function() {
     function _appendTechSkills(container, user) {
       ["skills", "languages", "frameworks"].map(key => {
         const userData = user[key];
-        console.log("User data: ", userData);
         container
           .find(`#${key}Info > .card-body`)
           .empty()

@@ -122,7 +122,7 @@ function checkTimesVisitedPage() {
             a button on left menu.
           </p>
           <button type='button' class='open  btn btn-primary' data-dismiss='alert' aria-label='close' style='width: 5%;'>
-          <span aria-hidden="true">Close</span> 
+          <span aria-hidden="true">Close</span>
           </button>
         </div>`);
 
