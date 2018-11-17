@@ -1,84 +1,81 @@
-/**
+            /**
  * ALL the UI design credit goes to:
  * https://www.sketchappsources.com/free-source/2676-calendar-template-sketch-freebie-resource.html
  */
-
-
-/* WRAPPER */
-
-@import url(https://fonts.googleapis.com/css?family=Lato:300);
-* {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.calendar-wrapper {
-    background: #302f30;
-    border-radius: 5px;
-}
-
-ul {
-    list-style-type: none;
-}
-
-.left {
-    float: left;
-}
-
-.right {
-    float: right;
-}
-
-.monthname {
-    width: 30%;
-}
-
-.pointer {
-    cursor: pointer;
-}
-
-body {
-    font-family: 'Lato', sans-serif;
-    padding: 1em 0;
-}
-
-.group:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.calendar p {
-    font-size: 1.1rem;
-    color: #ffffff;
-}
-
-.calendar {
-    /* height: 100vh; */
-    color: rgb(255, 255, 255);
-    padding: .5em .5em 1em;
-    margin: .5em auto;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-}
-
-.calendar li {
-    background-color: rgba(0, 0, 0, 0.1);
-    float: left;
-    width: -webkit-calc(100%/7);
-    text-align: right;
-    padding: 1rem 0.5rem 3.25em 3.25em;
-    cursor: pointer;
-    border-bottom: 1px solid rgb(129, 125, 125);
-    border-left: 1px solid rgb(126, 122, 122);
-}
-
-.calendar li:hover,
-.calendar li.red {
-    color: red;
-}
-
-.calendar li:nth-child(-n+7) {
-    color: rgb(255, 255, 255);
-}
+        /* WRAPPER */
+        
+        @import url(https://fonts.googleapis.com/css?family=Lato:300);
+        * {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .calendar-wrapper {
+            background: #f3eddd;
+            border-radius: 5px;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        .left {
+            float: left;
+        }
+        
+        .right {
+            float: right;
+        }
+        
+        .monthname {
+            width: 30%;
+        }
+        
+        .pointer {
+            cursor: pointer;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            padding: 1em 0;
+        }
+        
+        .group:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        .calendar p {
+            font-size: 1.1rem;
+            color: #0f0f0f;
+        }
+        
+        .calendar {
+            /* height: 100vh; */
+            color: rgb(7, 7, 7);
+            padding: .5em .5em 1em;
+            margin: .5em auto;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+        
+        .calendar li {
+            background-color: rgba(0, 0, 0, 0.1);
+            float: left;
+            width: -webkit-calc(100%/7);
+            text-align: right;
+            padding: 1rem 0.5rem 3.25em 3.25em;
+            cursor: pointer;
+            border-bottom: 1px solid rgb(129, 125, 125);
+            border-left: 1px solid rgb(126, 122, 122);
+        }
+        
+        .calendar li:hover,
+        .calendar li.red {
+            color: red;
+        }
+        
+        .calendar li:nth-child(-n+7) {
+            color: rgb(12, 12, 12);
