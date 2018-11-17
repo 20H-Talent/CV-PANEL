@@ -88,12 +88,8 @@ const Table = (function() {
       _showOverlay(true);
       $.getJSON(url, function(response) {
         if (!response["error"]) {
-          usersWithExtraData = _appendExtraData(response);
-          sessionStorage.setItem(
-            "users-list",
-            JSON.stringify(usersWithExtraData)
-          );
-          callback(usersWithExtraData, window.innerWidth);
+          sessionStorage.setItem("users-list", JSON.stringify(response));
+          callback(response, window.innerWidth);
         }
       }).fail(function(err) {
         _showOverlay(false);
@@ -244,7 +240,6 @@ const Table = (function() {
       address,
       registeredDate
     }) {
-      // console.log(avatar, _id, email, name, address, registeredDate);
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
@@ -322,38 +317,12 @@ const Table = (function() {
            .join("")}
      </div>
      <div class="card-footer text-right card-buttons">
-      
+
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${_id}><i class="fas fa-user-edit"></i></button>
         <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${_id}><i class="far fa-trash-alt"></i></button>
      </div>
    </div>
   `;
-    }
-
-    /**
-     * Append extra data into the JSON.
-     * @function _appendExtraData
-     * @private
-     * @param {object} usersData
-     * @return {object} userWithExtraDAta
-     */
-    function _appendExtraData(usersData) {
-      const frameworks = [
-        "django",
-        "ruby on rails",
-        "react",
-        "angular",
-        "vue",
-        "laravel"
-      ];
-
-      usersWithExtraData = usersData.map(user => {
-        user["frameworks"] = _generateExtraData(frameworks);
-
-        return user;
-      });
-
-      return usersWithExtraData;
     }
 
     /**
@@ -367,22 +336,6 @@ const Table = (function() {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
         user => user._id === value
       );
-    }
-
-    /**
-     * Generate random content inside an array to assign it later.
-     * @function _generateExtraData
-     * @private
-     * @param {Array} data
-     * @return {Array} - array of random data content
-     */
-    function _generateExtraData(data) {
-      const numberOfItems = Math.floor(Math.random() * data.length);
-      const extraData = [];
-      for (let index = 0; index <= numberOfItems; index++) {
-        extraData.push(data[Math.floor(Math.random() * data.length)]);
-      }
-      return [...new Set(extraData)];
     }
 
     /**

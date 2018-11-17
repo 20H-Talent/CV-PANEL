@@ -167,12 +167,12 @@ const UserForm = (function() {
       let username = $("input[name=username").val();
       let email = $("input[name=email").val();
       let tlfn = $("input[name=telephone").val();
-      let address = $("input[name=adress").val();
+      let street = $("input[name=street").val();
       let country = $("input[name=country").val();
       let city = $("input[name=city").val();
-      let zip = $("input[name=zip").val();
+      let zipcode = $("input[name=zipcode").val();
       let birthdate = $("input[name=birthdate").val();
-      let exprienceYears = $("input[name=experience_years").val();
+      let experience = $("input[name=experience").val();
       let website = $("input[name=website]").val();
       let avatar = $("input[type=file]");
 
@@ -205,10 +205,10 @@ const UserForm = (function() {
       );
       // to get the object location.
       let location = {
-        country: `${country}`,
-        city: `${city}`,
-        street: `${address}`,
-        zipcode: `${zip}`
+        country,
+        city,
+        street,
+        zipcode
       };
       dataUserTxtPlain = {
         name: fullname,
@@ -219,34 +219,42 @@ const UserForm = (function() {
         address: location,
         languages: selectedElements.selectedLanguages,
         skills: selectedElements.selectedSkills,
-        experience: exprienceYears,
+        experience: experience,
         birthDate: birthdate,
         website: website
       };
       return { dataUserTxtPlain, avatar };
     }
     function _sendNewUser(dataToSendServer) {
+      const userID = $("form#user-form")
+        .find("input[type=hidden]")
+        .val();
+
       $.ajax({
-        type: "POST",
-        url: "https://cv-mobile-api.herokuapp.com/api/users",
+        method: userID ? "PUT" : "POST",
+        url: `https://cv-mobile-api.herokuapp.com/api/users/${
+          userID ? userID : ""
+        }`,
         data: JSON.stringify(dataToSendServer.dataUserTxtPlain),
         headers: {
           "Content-Type": "application/json"
         }
       })
         .done(function(res) {
-          let formData = new FormData();
-          formData.append("img", dataToSendServer.avatar[0].files[0]);
-          $.ajax({
-            type: "POST",
-            url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
-              res._id
-            }`,
-            data: formData,
-            mimeType: "multipart/form-data",
-            processData: false,
-            contentType: false
-          });
+          if (!userID) {
+            let formData = new FormData();
+            formData.append("img", dataToSendServer.avatar[0].files[0]);
+            $.ajax({
+              method: "POST",
+              url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
+                res._id
+              }`,
+              data: formData,
+              mimeType: "multipart/form-data",
+              processData: false,
+              contentType: false
+            });
+          }
         })
         .done(function() {
           sessionStorage.removeItem("users-list");
@@ -258,47 +266,37 @@ const UserForm = (function() {
     function editForm(user) {
       generalConstructor.construct("user-form");
       setTimeout(() => {
-        // empting the checkboxes when editing another user
+        $("div#data-column")
+          .find("form")
+          .prepend(`<input type=hidden value="${user._id}" />`);
+
         var skillUser = document.getElementById("skill");
-        var inpskill = skillUser.querySelectorAll("input");
-        for (var i = 0; i < inpskill.length; i++) {
-          inpskill[i].checked = false;
-        }
-        // empting the checkboxes when editing another user
-        var lang = document.getElementById("selLanguage");
-        //var inpLang = lang.querySelectorAll("option");
-        for (var i = 0; i < lang.options.length; i++) {
-          lang.options[i].selected = false;
-        }
-        $("input[name=username]").val(user.login.username);
-        $("input[name=firstname]").val(
-          user.name.first.charAt(0).toUpperCase() + user.name.first.slice(1)
-        );
-        $("input[name=lastname]").val(
-          user.name.last.charAt(0).toUpperCase() + user.name.last.slice(1)
-        );
+
+        $("input[name=name]").val(user.name);
+
+        $("input[name=username]").val(user.username);
         $("input[name=email]").val(user.email);
-        $("input[name=birthdate]").val(user.dob.age + " years old ");
+        $("input[name=birthdate]").val(user.birthDate);
         $("input[name=telephone]").val(user.phone);
-        $("input[name=country]").val(user.location.state);
-        $("input[name=city]").val(user.location.city);
-        $("input[name=zip]").val(user.location.postcode);
-        $("input[name=adress]").val(user.location.street);
-        document.querySelector(`input[value=${user.gender}]`).checked = true;
-        for (var i = 0; i < user.skills.length; i++) {
-          document.getElementById(user.skills[i]).checked = true;
-        }
-        var lang = document.getElementById("selLanguage");
-        for (var i = 0; i < lang.options.length; i++) {
-          // user.languages es un array con "languages" like ["Spanish","English"]
-          // indexOf está buscando dentro del array user.languages la posición del "lang.options[i].value" por ejemplo "English"
-          // ["Spanish","English"].indexOf("Spanish")
-          // entonces el resultado sería 1
-          if (user.languages.indexOf(lang.options[i].value) > -1) {
-            lang.options[i].selected = true;
-          }
-        }
-      }, 300);
+        $("input[name=country]").val(user.address.state);
+        $("input[name=city]").val(user.address.city);
+        $("input[name=zip]").val(user.address.zipcode);
+        $("input[name=street]").val(user.address.street);
+
+        $(`input[value=${user.gender}]`).prop("checked", true);
+
+        user["skills"].forEach(skill => {
+          $(`input[name='skills[]'][value=${skill}]`).prop("checked", true);
+        });
+
+        $("select#selLanguage")
+          .children("option")
+          .each((index, option) => {
+            if (user["languages"].includes($(option).val())) {
+              $(option).prop("selected", true);
+            }
+          });
+      }, 400);
     }
     return {
       construct,
