@@ -193,12 +193,15 @@ function advancedSearchCompanies(event) {
 
     let formCompanyes = $("#advanced-search-companies");
     let inputs = formCompanyes.find("input");
+    console.log('inputs :', inputs);
     var filteredCompanies = [];
+    console.log('companies.companies :', companies.companies);
     filteredCompanies = companies.companies.filter((company) => {
+
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.docNumber.toString().toLowerCase().includes(docType));
+        return (company.docType.toString().toLowerCase().includes(docType));
     });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.docNumber.toString().toLowerCase().includes(docNumber));
@@ -230,7 +233,8 @@ function advancedSearchCompanies(event) {
                 event.stopPropagation();
                 badgeCompany.remove();
                 inputs[i].value = "";
-                //  formCompanyes.trigger("submit");
+                $("#advanced-search-companies").trigger("click");
+                console.log('formCompanyes :', formCompanyes);
                 $("#alertNoCompanyFound").remove();
                 companies.renderCompaniesTable(companies.companies);
             });
