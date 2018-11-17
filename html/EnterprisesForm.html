@@ -11,9 +11,21 @@
         <label class="format-2" for="name">Enterprise's name</label>
         <input type="text" name="name" class="form-control form-control-width" minlength="3" maxlength="25" pattern="[a-zA-Z\s]+" id="name" placeholder="Name" value="" data-toggle="tooltip" data-placement="left" required>
     </div>
-    <div class="form-row col-md-12">
-        <label class="format-2" for="CIF">CIF</label>
-        <input type="text" name="CIF" class="form-control form-control-width" minlength="9" maxlength="9" pattern="[a-zA-Z0-9\s]+" id="CIF" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right" required>
+    <div class="form-row d-flex col-md-12 container">
+        <div class="format-2">
+            <input type="hidden" name="company-id" id="company-id">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input " type="radio" checked="checked" name="docType" id="rdoCif" value="cif">
+                <label class="form-check-label" for="CIF">CIF</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="docType" id="rdoNif" value="nif">
+                <label class="form-check-label" for="NIF">NIF</label>
+            </div>
+        </div>
+        <input class="form-control form-control-width " id="cif" pattern="^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])" type="text" name="docNumberCif" class="form-control form-control-width" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right">
+        <input class="form-control form-control-width " autocomplete id="nif" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" type="text" name="docNumberNif" class="form-control form-control-width" placeholder="NIF" value="" data-toggle="tooltip"
+            data-placement="right" style="display:none">
     </div>
 
     <!--

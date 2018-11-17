@@ -13,12 +13,25 @@
                 </small>
         </div>
 
-        <div id="cif-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-cif" class="badge-pill bg-dark text-center w-100 mb-3">CIF</label>
-            <input type="text" class="form-control" id="company-cif" placeholder="Insert CIF" name="company-cif" pattern="[a-zA-Z]*">
-            <small class="text-center text-white w-100">
-                    Must be written in lowercase.
-                </small>
+
+        <div class="text-white form-group m-2 p-2 d-flex flex-column border ">
+
+            <input type="hidden" name="company-id" id="company-id">
+            <div class="d-flex">
+                <div class="form-check ">
+
+                    <input class="form-check-input form-group " checked="checked" type="radio" name="docType" id="rdoCif" value="cif">
+                    <label class="form-check-label text-white badge-pill  mb-3" for="CIF">CIF</label>
+                </div>
+                <div class="form-check ">
+
+                    <input class="form-check-input form-group" type="radio" name="docType" id="rdoNif" value="nif">
+                    <label class="form-check-label text-white badge-pill  mb-3" for="NIF">NIF</label>
+                </div>
+            </div>
+            <input class="form-control form-control-width  w-100 " id="cif" pattern="^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])" type="text" name="docNumberCif" class="form-control form-control-width" placeholder="CIF" value="" data-toggle="tooltip" data-placement="right">
+            <input class="form-control form-control-width  w-100" autocomplete id="nif" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" type="text" name="docNumberNif" class="form-control form-control-width" placeholder="NIF" value=""
+                data-toggle="tooltip" data-placement="right" style="display:none">
         </div>
 
         <div id="employees-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
