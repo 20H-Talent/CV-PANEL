@@ -201,9 +201,9 @@ function advancedSearchCompanies(event) {
 
         return (company.name.toLowerCase().includes(inputCompanyName));
     });
-    filteredCompanies = filteredCompanies.filter((company) => {
-        return (company.docType.toString().toLowerCase().includes(docType));
-    });
+    // filteredCompanies = filteredCompanies.filter((company) => {
+    //     return (company.docType.toString().toLowerCase().includes(docType));
+    // });
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.docNumber.toString().toLowerCase().includes(docNumber));
     });
@@ -223,31 +223,46 @@ function advancedSearchCompanies(event) {
     filteredCompanies = filteredCompanies.filter((company) => {
         return (company.address.country.toLowerCase().includes(inputCountry));
     });
+    console.log('inputs :', inputs);
     for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].value.toString().trim().length > 0) {
-            //   if (radioButtons.is(":checked")) {
-            const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
 
-            console.log('badgesContainer :', badgesContainer);
-            badgeCompany.show("slow");
+        if (inputs[i].type == "radio") {
+
+            if (inputs[i].checked == true) {
+
+                console.log('bunnradio :', );
+                const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+                badgeCompany.fadeIn("slow");
+                badgeCompany.off("click").on("click", function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    badgeCompany.remove();
+                    $(inputs[i]).prop('checked', false);
+                    $("#submit_search-companies").trigger("click");
+                    $(".alertCompanyFound").remove();
+                });
+                badgesContainer.append(badgeCompany);
+            }
+        } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
+            const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+            badgeCompany.fadeIn("slow");
             badgeCompany.off("click").on("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
                 badgeCompany.remove();
                 inputs[i].value = "";
-                $("#submit_search").trigger("click");
-                //  companies.renderCompaniesTable(companies.companies);
-                console.log('formCompanyes :', formCompanyes);
-                $("#alertNoCompanyFound").remove();
-
+                $("#submit_search-companies").trigger("click");
+                $(".alertCompanyFound").remove();
             });
-            //  }
             badgesContainer.append(badgeCompany);
         }
+
+
     }
     if (filteredCompanies.length == 0) {
-        $("#company-table").append(`<div id="alertNoCompanyFound" class="alert alert-danger" role="alert">No companies found</div>`);
+        $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
+    } else {
+        badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
     }
-    console.log('filteredCompanies :', filteredCompanies);
     companies.renderCompaniesTable(filteredCompanies);
 }

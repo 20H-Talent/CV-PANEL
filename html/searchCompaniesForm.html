@@ -5,8 +5,8 @@
     <p class="text-white text-center w-100">Search for: </p>
 
     <form id="advanced-search-companies">
-        <div id="name-company" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-name" class="badge-pill bg-dark text-center w-100 mb-3">Company Name</label>
+        <div id="name-company" class="text-white input-group-prepend m-2 p-2 d-flex flex-column border purple-background">
+            <label for="company-name" class="badge-pill purple-background text-center w-100 mb-3">Company Name</label>
             <input type="text" class="form-control" id="company-name" placeholder="Insert name" name="company-name" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
@@ -14,13 +14,13 @@
         </div>
 
 
-        <div class="text-white form-group m-2 p-2 d-flex flex-column border ">
+        <div class="text-white  purple-background form-group m-2 p-2 d-flex flex-column border ">
 
             <input type="hidden" name="company-id" id="company-id">
             <div class="d-flex">
                 <div class="form-check ">
 
-                    <input class="form-check-input form-group " checked="checked" type="radio" name="docType" id="rdoCif" value="cif">
+                    <input class="form-check-input form-group " type="radio" name="docType" id="rdoCif" value="cif">
                     <label class="form-check-label text-white badge-pill  mb-3" for="CIF">CIF</label>
                 </div>
                 <div class="form-check ">
@@ -34,44 +34,44 @@
                 data-toggle="tooltip" data-placement="right" style="display:none">
         </div>
 
-        <div id="employees-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-employees" class="badge-pill bg-dark text-center w-100 mb-3">Number of employees</label>
+        <div id="employees-search" class="text-white form-group m-2 p-2 d-flex flex-column border purple-background">
+            <label for="company-employees" class="badge-pill purple-background text-center w-100 mb-3">Number of employees</label>
             <input type="number" class="form-control" id="company-employees" placeholder="Number of employees" name="company-employees" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
         </div>
 
-        <div id="bio-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-bio" class="badge-pill bg-dark text-center w-100 mb-3">Company Bio</label>
+        <div id="bio-search" class="text-white form-group m-2 p-2 d-flex flex-column border purple-background">
+            <label for="company-bio" class="badge-pill purple-background text-center w-100 mb-3">Company Bio</label>
             <input type="text" class="form-control" id="company-bio" placeholder="bio" name="company-bio" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
         </div>
-        <div id="city-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-city" class="badge-pill bg-dark text-center w-100 mb-3">Company City</label>
+        <div id="city-search" class="text-white form-group m-2 p-2 d-flex flex-column border purple-background">
+            <label for="company-city" class="badge-pill purple-background text-center w-100 mb-3">Company City</label>
             <input type="text" class="form-control" id="company-city" placeholder="City" name="company-city" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
         </div>
-        <div id="email-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-city" class="badge-pill bg-dark text-center w-100 mb-3">Company Email</label>
+        <div id="email-search" class="text-white form-group m-2 p-2 d-flex flex-column border purple-background">
+            <label for="company-city" class="badge-pill purple-background text-center w-100 mb-3">Company Email</label>
             <input type="text" class="form-control" id="company-email" placeholder="Email" name="company-email" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
         </div>
-        <div id="country-search" class="text-white form-group m-2 p-2 d-flex flex-column border bg-dark">
-            <label for="company-country" class="badge-pill bg-dark text-center w-100 mb-3">Company country</label>
+        <div id="country-search" class="text-white form-group m-2 p-2 d-flex flex-column border purple-background">
+            <label for="company-country" class="badge-pill purple-background text-center w-100 mb-3">Company country</label>
             <input type="text" class="form-control" id="company-country" placeholder="country" name="company-country" pattern="[a-zA-Z]*">
             <small class="text-center text-white w-100">
                     Must be written in lowercase.
                 </small>
         </div>
         <div id="button_right" class="d-flex justify-content-center mb-5">
-            <button id="submit_search" onclick="advancedSearchCompanies(event)" type="submit" class="btn btn-primary mb-5 badge badge-pill">
+            <button id="submit_search-companies" onclick="advancedSearchCompanies(event)" type="submit" class="btn btn-primary mb-5 badge badge-pill">
                     <i class="fa fa-check-circle fa-3x "></i>
                 </button>
         </div>
