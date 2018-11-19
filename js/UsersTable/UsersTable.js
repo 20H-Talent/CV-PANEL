@@ -199,41 +199,7 @@ const Table = (function() {
         }
       }
     }
-
-    /**
-     * Create badge-pills to show the user input search values
-     * @function _createSearchBadges
-     * @private
-     * @param {Object} filters
-     */
-    function _createSearchBadges(filters) {
-      const filtersContainer = mainContainer.find(".filters");
-      const badgeContainer = filtersContainer.children(".search-badges");
-
-      filtersContainer.find("button").remove();
-      badgeContainer.empty();
-
-      Object.keys(filters).forEach(key => {
-        const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-        const badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
-            filters[key]
-          }</span></span>`
-        ).hide();
-        badgeContainer.append(badge);
-        badge.show("slow");
-      });
-      const resetButton = filtersContainer.append(
-        `<button class="btn btn-sm btn-info">Cancel search</button>`
-      );
-      resetButton.off("click").on("click", function(e) {
-        badgeContainer.empty();
-        $(this).remove();
-        _showOverlay(true);
-        initTable(null, window.innerWidth);
-      });
-    }
-
+    
     /**
      * @function _renderTableOnResize
      * @private
@@ -287,25 +253,6 @@ const Table = (function() {
       avatar,
       registeredDate
     }) {
-
-
-      // console.log( "objeto user creado: ", 
-      //   address,
-      //   languages,
-      //   skills,
-      //   _id,
-      //   name,
-      //   username,
-      //   email,
-      //   phone,
-      //   company,
-      //   jobTitle,
-      //   website,
-      //   birthDate,
-      //   experience,
-      //   avatar,
-      //   registeredDate);
-
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
