@@ -86,7 +86,7 @@ const Table = (function() {
         }
       } else {
         if (!sessionStorage.getItem("users-list")) {
-          apiRequest(url, callback);
+          apiRequest(url);
         } else {
           callback(null, window.innerWidth);
         }
@@ -99,40 +99,30 @@ const Table = (function() {
      * @param {String} url
      * @param {function} callback
      */
-    function apiRequest(url, callback) {
-      if (!callback) {
-        if (url.includes("langs")) {
-          $.getJSON(url, function(response) {
-            if (!response["error"]) {
-              sessionStorage.setItem(
-                "languages-list",
-                JSON.stringify(response)
-              );
-            }
-          }).fail(function(err) {
-            _showOverlay(false);
-            throw new Error(err);
-          });
-        } else {
-          $.getJSON(url, function(response) {
-            if (!response["error"]) {
-              sessionStorage.setItem("skills-list", JSON.stringify(response));
-            }
-          }).fail(function(err) {
-            _showOverlay(false);
-            throw new Error(err);
-          });
-        }
+    function apiRequest(url) {
+      if (url.includes("langs")) {
+        $.getJSON(url, function(response) {
+          if (!response["error"]) {
+            sessionStorage.setItem("languages-list", JSON.stringify(response));
+          }
+        }).fail(function(err) {
+          _showOverlay(false);
+          throw new Error(err);
+        });
+      } else if (url.includes("skills")) {
+        $.getJSON(url, function(response) {
+          if (!response["error"]) {
+            sessionStorage.setItem("skills-list", JSON.stringify(response));
+          }
+        }).fail(function(err) {
+          _showOverlay(false);
+          throw new Error(err);
+        });
       } else {
         _showOverlay(true);
         $.getJSON(url, function(response) {
           if (!response["error"]) {
-            usersWithExtraData = _appendExtraData(response);
-            sessionStorage.setItem(
-              "users-list",
-              JSON.stringify(usersWithExtraData)
-            );
-            callback(usersWithExtraData, window.innerWidth);
+            sessionStorage.setItem("users-list", JSON.stringify(response));
           }
         }).fail(function(err) {
           _showOverlay(false);
@@ -379,23 +369,15 @@ const Table = (function() {
       </div>
      <div class="card-body">
      <div class=" font-weight-bold card-subtitle">Skills</div>
-     <p class="card-text">
-     ${data.skills.map(skillTag => skillTag).join("")}
-   </p>
-   <div class=" font-weight-bold card-subtitle">Languages</div>
+      <p class="card-text">
+        ${data.skills.map(skillTag => skillTag).join("")}
+      </p>
+     <div class=" font-weight-bold card-subtitle">Languages</div>
        <p class="card-text">
        ${data.languages.map(langTag => langTag).join("")}
        </p>
-       <div class=" font-weight-bold card-subtitle">Frameworks</div>
-         ${user.frameworks
-           .map(
-             framework =>
-               `<span class="badge badge-secondary mr-1">${framework}</span>`
-           )
-           .join("")}
      </div>
      <div class="card-footer text-right card-buttons">
-      
         <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
           user._id
         }><i class="fas fa-user-edit"></i></button>
@@ -405,32 +387,6 @@ const Table = (function() {
      </div>
    </div>
   `;
-    }
-
-    /**
-     * Append extra data into the JSON.
-     * @function _appendExtraData
-     * @private
-     * @param {object} usersData
-     * @return {object} userWithExtraDAta
-     */
-    function _appendExtraData(usersData) {
-      const frameworks = [
-        "django",
-        "ruby on rails",
-        "react",
-        "angular",
-        "vue",
-        "laravel"
-      ];
-
-      usersWithExtraData = usersData.map(user => {
-        user["frameworks"] = _generateExtraData(frameworks);
-
-        return user;
-      });
-
-      return usersWithExtraData;
     }
 
     /**
@@ -444,22 +400,6 @@ const Table = (function() {
       return JSON.parse(sessionStorage.getItem("users-list")).find(
         user => user._id === value
       );
-    }
-
-    /**
-     * Generate random content inside an array to assign it later.
-     * @function _generateExtraData
-     * @private
-     * @param {Array} data
-     * @return {Array} - array of random data content
-     */
-    function _generateExtraData(data) {
-      const numberOfItems = Math.floor(Math.random() * data.length);
-      const extraData = [];
-      for (let index = 0; index <= numberOfItems; index++) {
-        extraData.push(data[Math.floor(Math.random() * data.length)]);
-      }
-      return [...new Set(extraData)];
     }
 
     /**
@@ -565,7 +505,7 @@ const Table = (function() {
     }
 
     function _appendTechSkills(container, user) {
-      ["skills", "languages", "frameworks"].map(key => {
+      ["skills", "languages"].map(key => {
         let data = _renderLangsAndSkills(user);
 
         if (key === "skills") {
