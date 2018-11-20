@@ -4,7 +4,6 @@ function Companies() {
       container.empty().append(htmlSkeleton);
       getCompanyFromAPI();
       this.renderCompaniesTable(this.companies);
-      // this.renderCompanyCards();
     }).fail(function(err) {
       throw new Error(err);
     });
@@ -17,12 +16,9 @@ function Companies() {
     this.companies = [];
   };
   this.renderCompaniesTable = function(filtredCompanies) {
-    // $("#tableBody").html(" ");
-
     $("#card-container-company").hide();
     $("#company-table").show();
     let tableBody = "";
-    let width = $(window).width();
     for (var i = 0; i < filtredCompanies.length; i++) {
       tableBody += `<tr scope="row"  data-id=${filtredCompanies[i].id}>
           <td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${
@@ -67,7 +63,6 @@ function Companies() {
   };
 
   this.renderCompanyCards = function() {
-    // $(".main-container-companies").html(" ");
     $("#card-container-company").show();
     $("#company-table").hide();
     let mainContainerCompanies = $("#card-container-company");

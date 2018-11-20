@@ -35,10 +35,6 @@ function verifyFormEnterprises() {
     setTimeout(() => {
       sendNewCompanyToAPI();
     }, 1000);
-
-    // setTimeout(() => {
-    //     editCompanyPUT()
-    // }, 1000);
   }
 }
 /***********************************
@@ -75,9 +71,7 @@ function sendNewCompanyToAPI() {
   let employees = $("input[name=employees]").val();
   let website = $("input[name=website]").val();
   let bio = $("textarea[name=bio]").val();
-  //   let logo = document.getElementById('logo').files[0];
   let socialUrls = $("input[name=socialUrls]").val();
-  // let newCompany = sendNewCompanyToAPI();
   let newCompany = {
     name: `${name}`,
     docType: docType,
@@ -106,41 +100,7 @@ function sendNewCompanyToAPI() {
         }
       }
     });
-  // function sendNewCompanyToAPI() {
-  //     let json = {
-  //         'name': name,
-  //         "docType": docType,
-  //         'docNumber': docNumber,
-  //         'email': email,
-  //         'address': address,
-  //         'bio': bio,
-  //         'employees': employees,
-  //         'phone': phone,
-  //         'website': website,
-  //         'socialUrls': socialUrls,
-  //         "logo": "",
-  //         "socialUrls": [],
-  //         "jobOffers": []
-  //     }
-  //     return json;
-  // }
 }
-// function sendEditCompany() {
-//     let formData = new FormData();
-//     formData.append('name', name);
-//     formData.append('email', email);
-//     formData.append('country', country);
-//     formData.append('zipcode', zipcode);
-//     formData.append('street', street);
-//     formData.append('bio', bio);
-//     formData.append('employees', employees);
-//     formData.append('phone', phone);
-//     formData.append('city', city);
-//     formData.append('logo', logo);
-//     formData.append('website', website);
-//     formData.append('socialUrls', socialUrls);
-//     return formData;
-// }
 
 /***********************************
  * Inputs incorrect

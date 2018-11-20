@@ -105,9 +105,7 @@ function removeCompanyFromDOM(id) {
   })
     .then(response => response.json())
     .then(response => {})
-    .then(response => {
-      // setTimeout(function() { window.location.reload(); }, 2000);
-    });
+    .then(response => {});
 }
 /***********************************
  * Confirm the delete of a company
@@ -147,11 +145,9 @@ function editCompany(id) {
       $("#cif").show();
       $("#nif").hide();
     }
-    // $("input[name=docNumber]").val(company.docNumber);
     $("input[name=street]").val(company.address.street);
     $("input[name=city]").val(company.address.city);
     $("input[name=zipcode]").val(company.address.zipcode);
-    //  let address = { "country": country, "street": street, "city": city, "zipcode": zipcode }
     $("input[name=name]").val(company.name);
     $("input[name=employees]").val(company.employees);
     $("input[name=email]").val(company.email);
@@ -159,9 +155,6 @@ function editCompany(id) {
     $("textarea[name=bio]").val(company.bio);
     $("input[name=socialUrls]").val(company.socialUrls.socialUrls);
     $("input[name=phone]").val(company.phone);
-    //  var img = "<img src='" + company.logo + "'>";
-    // let logo = document.getElementById('logo').files[0];
-    //  $("#logo").html(img);
   }, 200);
 }
 // Advanced search for companies form
@@ -169,11 +162,9 @@ function advancedSearchCompanies(event) {
   event.preventDefault();
   $("#alertNoCompanyFound").remove();
   var badgesContainer = $(".search-badges-company").empty();
-  //   $("input[name=docType]").attr('checked', false);
   let inputCompanyName = $("#company-name")
     .val()
     .toLowerCase();
-  // let inputdocNumber = $("#docNumber").val().toLowerCase();
   let docType = $("input[name=docType]:checked").val();
   let radioButtons = $("input[name=docType]");
   let docNumber = "";
@@ -203,9 +194,6 @@ function advancedSearchCompanies(event) {
   filteredCompanies = companies.companies.filter(company => {
     return company.name.toLowerCase().includes(inputCompanyName);
   });
-  // filteredCompanies = filteredCompanies.filter((company) => {
-  //     return (company.docType.toString().toLowerCase().includes(docType));
-  // });
   filteredCompanies = filteredCompanies.filter(company => {
     return company.docNumber
       .toString()
