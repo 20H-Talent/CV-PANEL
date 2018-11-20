@@ -56,13 +56,10 @@ function skills() {
       }</label>
       </div>`;
       if (data[d].type === "framework") {
-        //objects 0-1.
         $('#skills div[class*="col-12"]').append(divObjectSkill);
       } else if (data[d].type === "language") {
-        //objects 2-7.
         $('#skills div[class*="col-5"]').append(divObjectSkill);
       } else {
-        //objects 7-14.
         $('#skills div[class*="col-6"]').append(divObjectSkill);
       }
     });

@@ -118,7 +118,6 @@ const UserForm = (function() {
              <div class="col-lg-12">
                 <ul class="alert alert-danger alert-dismissible"></ul>
             </div>`);
-      // const inputs = form.find("input");
       const inputs = $("input");
       inputs.each((index, input) => {
         $(input).removeClass("is-valid is-invalid");
