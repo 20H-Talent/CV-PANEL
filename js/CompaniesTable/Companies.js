@@ -3,7 +3,6 @@ function Companies() {
     $.get("../../html/CompaniesTable.html", htmlSkeleton => {
       container.empty().append(htmlSkeleton);
       this.renderCompaniesTable(this.companies);
-      // this.renderCompanyCards();
     }).fail(function(err) {
       throw new Error(err);
     });
@@ -16,8 +15,6 @@ function Companies() {
     this.companies = [];
   };
   this.renderCompaniesTable = function(filtredCompanies) {
-    // $("#tableBody").html(" ");
-
     $("#card-container-company").hide();
     $("#company-table").show();
     let tableBody = "";
@@ -64,7 +61,6 @@ function Companies() {
   };
 
   this.renderCompanyCards = function() {
-    // $(".main-container-companies").html(" ");
     $("#card-container-company").show();
     $("#company-table").hide();
     let mainContainerCompanies = $("#card-container-company");

@@ -2,11 +2,7 @@
  *
  * @param form form to add enterprises.
  * @param inputsForm data enterprises. We use this variable to select all inputs form.
- *
- * ## checkValidity()
- *      return true if inputs is valid.
- * ## locationTooltipsCorrect
- *      we use this function to handler tooltip function of bootstrap.
+
  *
  * https://developer.mozilla.org/es/docs/HTML/HTML5/Forms_in_HTML5 --> Documentation to control inputs form
  * https://getbootstrap.com/docs/4.0/components/forms/? --> Documentation to control inputs form
@@ -127,15 +123,3 @@ function EnterprisesForm() {
 }
 
 let enterpriseForm = new EnterprisesForm();
-
-/***********************************
- * Load by ajax into index.html.
- ***********************************/
-
-// $("#enterprises-form-ajax").load("../html/EnterprisesForm.html", function() {
-//     //Listener Button, form enterprises.
-//     $("#btn-enterprises").on("click", function() {
-//         sendNewCompany();
-//         verifyFormEnterprises();
-//     });
-// });

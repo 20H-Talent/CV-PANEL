@@ -36,15 +36,6 @@ $("document").ready(function() {
       });
     });
   }
-  // $("#right-menu-a<´jax").load("../html/right-menu.html", function() {
-  //     formSideBar();
-  //     //Submit event for the form that handle the advanced search
-  //     $("form#advanced-search").on("submit", function(e) {
-  //         e.preventDefault();
-  //         const formInputs = $(this).find("input");
-  //         usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
-  //     });
-  // });
 
   /**
    * Function to control the content (search form) of the right sidebar

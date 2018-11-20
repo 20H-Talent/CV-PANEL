@@ -118,7 +118,6 @@ const UserForm = (function() {
              <div class="col-lg-12">
                 <ul class="alert alert-danger alert-dismissible"></ul>
             </div>`);
-      // const inputs = form.find("input");
       const inputs = $("input");
       inputs.each((index, input) => {
         $(input).removeClass("is-valid is-invalid");
@@ -266,7 +265,6 @@ const UserForm = (function() {
         }
         // empting the checkboxes when editing another user
         var lang = document.getElementById("selLanguage");
-        //var inpLang = lang.querySelectorAll("option");
         for (var i = 0; i < lang.options.length; i++) {
           lang.options[i].selected = false;
         }
@@ -290,10 +288,6 @@ const UserForm = (function() {
         }
         var lang = document.getElementById("selLanguage");
         for (var i = 0; i < lang.options.length; i++) {
-          // user.languages es un array con "languages" like ["Spanish","English"]
-          // indexOf está buscando dentro del array user.languages la posición del "lang.options[i].value" por ejemplo "English"
-          // ["Spanish","English"].indexOf("Spanish")
-          // entonces el resultado sería 1
           if (user.languages.indexOf(lang.options[i].value) > -1) {
             lang.options[i].selected = true;
           }

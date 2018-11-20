@@ -20,10 +20,6 @@ fetch("https://cv-mobile-api.herokuapp.com/api/company")
       companies.addCompany(company);
     });
 
-    // companies.renderTable(companies.companies);
-    // companies.renderCompanyCards();
-    //companies.searchAdvanced();
-
     $(window).on("resize", function() {
       let width = $(this).width();
 
