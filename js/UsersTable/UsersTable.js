@@ -17,10 +17,6 @@ const Table = (function() {
     let apiUsers = "https://cv-mobile-api.herokuapp.com/api/users";
     let apiSkills = "https://cv-mobile-api.herokuapp.com/api/skills";
     let apiLanguages = "https://cv-mobile-api.herokuapp.com/api/langs";
-    let apiSkillsAndLangs = {
-      skills: "https://cv-mobile-api.herokuapp.com/api/skills",
-      langs: "https://cv-mobile-api.herokuapp.com/api/langs"
-    };
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
@@ -78,11 +74,7 @@ const Table = (function() {
      * @param {function} callback - Callback that triggers when the response is ready
      */
     function _setupSessionStorage(url, callback) {
-      console.log("URL 1: ", url);
-      // console.log("URL skills: ", url.skills);
-
       if (!callback) {
-        // testeo
         if (url.includes("langs")) {
           if (!sessionStorage.getItem("languages-list")) {
             apiRequest(url);
@@ -92,8 +84,6 @@ const Table = (function() {
             apiRequest(url);
           }
         }
-
-        // fin testeo
       } else {
         if (!sessionStorage.getItem("users-list")) {
           apiRequest(url, callback);
@@ -110,8 +100,6 @@ const Table = (function() {
      * @param {function} callback
      */
     function apiRequest(url, callback) {
-      console.log("URL 2: ", url);
-
       if (!callback) {
         if (url.includes("langs")) {
           $.getJSON(url, function(response) {
@@ -126,9 +114,7 @@ const Table = (function() {
             throw new Error(err);
           });
         } else {
-          // testeo
           $.getJSON(url, function(response) {
-            console.log("response: ", response);
             if (!response["error"]) {
               sessionStorage.setItem("skills-list", JSON.stringify(response));
             }
@@ -137,8 +123,6 @@ const Table = (function() {
             throw new Error(err);
           });
         }
-
-        // fin testeo
       } else {
         _showOverlay(true);
         $.getJSON(url, function(response) {
@@ -156,7 +140,53 @@ const Table = (function() {
         });
       }
     }
+    function _renderLangsAndSkills(user) {
+      let sessionSkills = JSON.parse(sessionStorage.getItem("skills-list"));
+      let sessionLangs = JSON.parse(sessionStorage.getItem("languages-list"));
+      const data = {
+        skills: [],
+        languages: []
+      };
+      Object.keys(user).map(function(key) {
+        if (key === "skills") {
+          data["skills"] = sessionSkills.map(function(sessionSkill) {
+            if (user[key].includes(sessionSkill._id)) {
+              if (window.innerWidth <= 867) {
+                return `<span class="badge badge-secondary mr-1">${
+                  sessionSkill.label
+                }</span>`;
+              } else {
+                return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
+                  sessionSkill.label
+                }.png" alt="${
+                  sessionSkill.label
+                }" width="48" height="48" title="${sessionSkill.label}" />`;
+              }
+            }
+          });
+        } else if (key === "languages") {
+          data["languages"] = sessionLangs.map(function(sessionLang) {
+            if (user[key].includes(sessionLang._id)) {
+              if (window.innerWidth <= 867) {
+                return `<span class="badge badge-secondary mr-1">${
+                  sessionLang.label
+                }</span>`;
+              } else {
+                return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
+                  sessionLang.label
+                }.png" alt="${
+                  sessionLang.label
+                }" width="48" height="48" title="${sessionLang.label}" />`;
+              }
+            }
+          });
+        }
+      });
+      data.skills = Array.from(new Set(data.skills));
+      data.languages = Array.from(new Set(data.languages));
 
+      return data;
+    }
     /** Display table with the users data when the instance is initialized
      * @function initTable
      * @public
@@ -300,7 +330,6 @@ const Table = (function() {
       address,
       registeredDate
     }) {
-      // console.log(avatar, _id, email, name, address, registeredDate);
       return `
    <tr scope="row" data-id=${_id}>
      <td class="user-avatar">
@@ -334,43 +363,31 @@ const Table = (function() {
      * @param {object} params
      * @return {String} html template
      */
-    function _cardSkeleton({
-      name,
-      avatar,
-      _id,
-      skills,
-      frameworks,
-      languages,
-      username
-    }) {
+    function _cardSkeleton(user) {
+      let data = _renderLangsAndSkills(user);
       return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
-        _id.value
+        user._id.value
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
-      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${avatar} alt="test"/></div>
+      <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${
+        user.avatar
+      } alt="test"/></div>
         <div class=" font-weight-bold col card-username">
-           <p>${name}</p>
-           <p>${username}</p>
+           <p>${user.name}</p>
+           <p>${user.username}</p>
         </div>
       </div>
      <div class="card-body">
      <div class=" font-weight-bold card-subtitle">Skills</div>
      <p class="card-text">
-     ${skills
-       .map(skill => `<span class="badge badge-secondary mr-1">${skill}</span>`)
-       .join("")}
+     ${data.skills.map(skillTag => skillTag).join("")}
    </p>
    <div class=" font-weight-bold card-subtitle">Languages</div>
        <p class="card-text">
-       ${languages
-         .map(
-           language =>
-             `<span class="badge badge-secondary mr-1">${language}</span>`
-         )
-         .join("")}
+       ${data.languages.map(langTag => langTag).join("")}
        </p>
        <div class=" font-weight-bold card-subtitle">Frameworks</div>
-         ${frameworks
+         ${user.frameworks
            .map(
              framework =>
                `<span class="badge badge-secondary mr-1">${framework}</span>`
@@ -379,8 +396,12 @@ const Table = (function() {
      </div>
      <div class="card-footer text-right card-buttons">
       
-        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${_id}><i class="fas fa-user-edit"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${_id}><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
+          user._id
+        }><i class="fas fa-user-edit"></i></button>
+        <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
+          user._id
+        }><i class="far fa-trash-alt"></i></button>
      </div>
    </div>
   `;
@@ -545,77 +566,19 @@ const Table = (function() {
 
     function _appendTechSkills(container, user) {
       ["skills", "languages", "frameworks"].map(key => {
-        const userData = user[key];
-        // console.log("User data: ", userData);
+        let data = _renderLangsAndSkills(user);
 
-        // container
-        //   .find(`#${key}Info > .card-body`)
-        //   .empty()
-        //   .append(
-        //     userData.map(
-        //       value =>
-        //         `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
-        //     )
-        //   );
-
-        container.find(`#${key}Info > .card-body`).empty();
-        userData.map(function(value) {
-          // console.log("value id: ", value);
-          if (key === "skills") {
-            // console.log(" --------Dentro del if --------------\n");
-            // console.log("value id: ", value);
-            let sessionSkills = JSON.parse(
-              sessionStorage.getItem("skills-list")
-            );
-            //console.log("sessionSkills: ", sessionSkills);
-            sessionSkills.map(function(sessionSkill) {
-              // console.log("sessionSkill: ", sessionSkill);
-              // console.log("value: ", value);
-              if (value === sessionSkill._id) {
-                console.log("ids iguales: ", value, sessionSkill);
-                return container
-                  .find(`#${key}Info > .card-body`)
-                  .append(
-                    `<img class="mx-1 mt-2" src="../assets/images/${key}/${
-                      sessionSkill.label
-                    }.png" alt="${
-                      sessionSkill.label
-                    }" width="48" height="48" title="${sessionSkill.label}" />`
-                  );
-              }
-            });
-          } else if (key === "languages") {
-            // console.log(" --------Dentro del else --------------\n");
-            let sessionLangs = JSON.parse(
-              sessionStorage.getItem("languages-list")
-            );
-            console.log("sessionLanguages: ", sessionLangs);
-            sessionLangs.map(function(sessionLang) {
-              // console.log("sessionLang: ", sessionLang);
-              // console.log("value: ", value);
-              if (value === sessionLang._id) {
-                console.log("ids iguales: ", value, sessionLang);
-                return container
-                  .find(`#${key}Info > .card-body`)
-                  .append(
-                    `<img class="mx-1 mt-2" src="../assets/images/${key}/${
-                      sessionLang.label
-                    }.png" alt="${
-                      sessionLang.label
-                    }" width="48" height="48" title="${sessionLang.label}" />`
-                  );
-              }
-            });
-          } else {
-            // // console.log("ultimo");
-            // console.log("key ultimo", key);
-            return container
-              .find(`#${key}Info > .card-body`)
-              .append(
-                `<img class="mx-1 mt-2" src="../assets/images/${key}/${value}.png" alt="${value}" width="48" height="48" title="${value}" />`
-              );
-          }
-        });
+        if (key === "skills") {
+          container
+            .find(`#${key}Info > .card-body`)
+            .empty()
+            .append(`${data.skills.map(skillTag => skillTag).join("")}`);
+        } else if (key === "languages") {
+          container
+            .find(`#${key}Info > .card-body`)
+            .empty()
+            .append(`${data.languages.map(langTag => langTag).join("")}`);
+        }
       });
     }
 
