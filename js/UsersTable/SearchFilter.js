@@ -146,21 +146,17 @@ const SearchFilter = (function() {
       let badge = "";
       if ($(element).attr("fieldName") != undefined) {
         badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2">${$(
-            element
-          ).attr("fieldName")}: <span>${$(element).attr(
-            "valueName"
-          )}</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
+          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
+          ${$(element).attr("fieldName")} : <span>${$(element).attr("valueName")}</span>
+          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
+          </span>`
         ).hide();
       } else {
         badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(
-            element
-          ).attr("id")}" fieldValue="${$(element).val()}">${$(element).attr(
-            "name"
-          )}: <span>${$(
-            element
-          ).val()}</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
+          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
+          ${$(element).attr("name")} : <span>${$(element).val()}</span>
+          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
+          </span>`
         ).hide();
       }
 
