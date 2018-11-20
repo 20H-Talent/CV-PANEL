@@ -10,33 +10,54 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-    _createSearchBadges(filters);
+    const filtersBadgets = _buildFiltersForBadgets(inputsData);
+    _createSearchBadges(filtersBadgets);
     let filteredUsers = users;
 
+    //FullName
+    if (filters["name"]) {
+      const firstnameQuery = filters["name"].toLowerCase();
+      filteredUsers = filteredUsers.filter(user =>
+        user["name"].toLowerCase().includes(firstnameQuery)
+      );
+    }
+    //Gender
     if (filters["gender"]) {
       filteredUsers = filteredUsers.filter(
-        user => user["gender"] === filters["gender"].toLowerCase()
+        user => user["gender"] === filters["gender"]
       );
     }
 
-    if (filters["firstname"] && filters["lastname"]) {
-      const firstnameQuery = filters["firstname"].toLowerCase();
-      const lastnameQuery = filters["lastname"].toLowerCase();
+    //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
+    // if(filters["age"]){
+    //   const ageQuery = filters["name"].toLowerCase();
+    //   filteredUsers = filteredUsers.filter(
+    //     user =>
+    //       user["name"].toLowerCase().includes(firstnameQuery)
+    //   );
+    // }
 
-      filteredUsers = filteredUsers.filter(
-        user =>
-          user["name"]["first"].toLowerCase().includes(firstnameQuery) &&
-          user["name"]["last"].toLowerCase().includes(lastnameQuery)
-      );
-    } else if (!filters["firstname"] && filters["lastname"]) {
-      const lastnameQuery = filters["lastname"].toLowerCase();
+    //Experience
+
+    if (filters["Experience"]) {
+      const experienceQuery = filters["Experience"];
       filteredUsers = filteredUsers.filter(user =>
-        user["name"]["last"].toLowerCase().includes(lastnameQuery)
+        user["Experience"].includes(experienceQuery)
       );
-    } else if (filters["firstname"] && !filters["lastname"]) {
-      const firstnameQuery = filters["firstname"].toLowerCase();
+    }
+    // Languages (idiomas)
+    if (filters["languages"]) {
+      const skillsQuery = filters["languages"];
       filteredUsers = filteredUsers.filter(user =>
-        user["name"]["first"].toLowerCase().includes(firstnameQuery)
+        user["languages"].includes(skillsQuery)
+      );
+    }
+
+    // skills are Frameworks, Languages.
+    if (filters["skills"]) {
+      const skillsQuery = filters["skills"];
+      filteredUsers = filteredUsers.filter(user =>
+        user["skills"].includes(skillsQuery)
       );
     }
 
@@ -72,6 +93,26 @@ const SearchFilter = (function() {
     return filters;
   }
 
+  function _buildFiltersForBadgets(elements) {
+    const filters = [];
+    const filtered = elements
+      .filter((index, input) => {
+        const $input = $(input);
+        if (
+          $input.prop("type") === "radio" ||
+          $input.prop("type") === "checkbox"
+        ) {
+          return $input.prop("checked");
+        } else {
+          return $.trim($input.val()).length > 0;
+        }
+      })
+      .each((index, input) => {
+        const $input = $(input);
+        filters.push(input);
+      });
+    return filters;
+  }
   /**
    * Create badge-pills to show the user input search values
    * @function _createSearchBadges
@@ -101,27 +142,82 @@ const SearchFilter = (function() {
 
   function _appendFilterBadges(filters, badgesContainer) {
     badgesContainer.empty();
+    filters.forEach(function(element) {
+      let badge = "";
+      if ($(element).attr("fieldName") != undefined) {
+        badge = $(
+          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
+          ${$(element).attr("fieldName")} : <span>${$(element).attr("valueName")}</span>
+          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
+          </span>`
+        ).hide();
+      } else {
+        badge = $(
+          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
+          ${$(element).attr("name")} : <span>${$(element).val()}</span>
+          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
+          </span>`
+        ).hide();
+      }
 
-    for (key in filters) {
-      const keyCapitalized = key.charAt(0).toUpperCase() + key.slice(1);
-      const badge = $(
-        `<span class="badge badge-pill badge-secondary filter mr-2">${keyCapitalized}: <span>${
-          filters[key]
-        }</span><button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button></span>`
-      ).hide();
       badgesContainer.append(badge);
       badge.show("slow");
-
       badge.on("click", _deleteBagde);
-    }
+    });
   }
 
-  function _deleteBagde() {
+  function _deleteBagde(badge) {
+    var idFieldName = $(this).attr("idFieldName");
+    var typeField = $("#" + idFieldName).attr("type");
+    // var fieldValue = $(this).attr("fieldValue");
+
+    switch (typeField) {
+      case "text":
+        $("#" + idFieldName).val("");
+        break;
+
+      case "checkbox":
+        $("#" + idFieldName).prop("checked", false);
+        break;
+
+      case "radio":
+        $("#" + idFieldName).prop("checked", false);
+        break;
+
+      case "range":
+        $("#" + idFieldName).val("");
+
+        if ($("#age-range").val("") != "") {
+          document.getElementById("age").innerHTML = "";
+        }
+        if ($("#exp-years").val("") != "") {
+          document.getElementById("range").innerHTML = "";
+        }
+        break;
+    }
+
     $(this).remove();
-    usersTable.initTable(null, window.innerWidth);
+
+    $("#submit_search").trigger("click");
+    //usersTable.initTable(null, window.innerWidth);
   }
 
   return {
     filterUsers
   };
 })();
+
+/**
+ * Calculate Age.
+ */
+
+// function dataBirthdateToAge(date) {
+//   var today = new Date();
+//   var borned = new Date(date);
+//   var age = today.getFullYear() - borned.getFullYear();
+//   var month = today.getMonth() - borned.getMonth();
+//   if (month < 0 || (month === 0 && today.getDate() < borned.getDate())) {
+//     age --;
+//   }
+//   return age;
+// }

@@ -19,12 +19,9 @@ function languages() {
     $.each(data, function(d) {
       $("#languages").append(
         `<div class="custom-control custom-checkbox col-5">
-          <input type="checkbox" name="languages[]" id="${
-            data[d].label
-          }" value=${data[d]._id} class="custom-control-input">
-          <label for="${data[d].label}" class="custom-control-label">${
-          data[d].label
-        }</label>
+          <input type="checkbox" fieldName="language" valueName="${data[d].label}" value="${data[d]._id}" 
+          name="${data[d].label}" id="${data[d]._id}" class="custom-control-input">
+          <label class="custom-control-label" for="${data[d]._id}">${data[d].label}</label>
         </div>`
       );
     });
@@ -51,10 +48,10 @@ function skills() {
     $.each(data, function(d) {
       let divObjectSkill = `<div class="custom-control custom-checkbox mr-3">
         <input type="checkbox" id="${
-          data[d].label
-        }" class="custom-control-input" value=${data[d]._id} name="
-        skills[]">
-        <label class="custom-control-label" for="${data[d].label}">${
+          data[d]._id
+        }" class="custom-control-input" fieldName="${data[d].type}" valueName="${data[d].label}" value=${data[d]._id} 
+        name="${data[d].label}">
+        <label class="custom-control-label" for="${data[d]._id}">${
         data[d].label
       }</label>
       </div>`;
@@ -71,3 +68,4 @@ function skills() {
     });
   }
 }
+

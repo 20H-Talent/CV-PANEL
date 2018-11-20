@@ -195,7 +195,6 @@ const Table = (function() {
         }
       }
     }
-
     /**
      * @function _renderTableOnResize
      * @private
@@ -233,11 +232,20 @@ const Table = (function() {
      * @return {String} html template
      */
     function _tableRowSkeleton({
-      avatar,
-      _id,
-      email,
-      name,
       address,
+      languages,
+      skills,
+      _id,
+      name,
+      username,
+      email,
+      phone,
+      company,
+      jobTitle,
+      website,
+      birthDate,
+      experience,
+      avatar,
       registeredDate
     }) {
       return `
