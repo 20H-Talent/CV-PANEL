@@ -251,51 +251,61 @@ function Companies() {
     }
 
     this.advancedSearchCompanies = function(event) {
-            event.preventDefault();
-            $("#alertNoCompanyFound").remove();
-            var badgesContainer = $(".search-badges-company").empty();
-            let inputCompanyName = $("#company-name").val().toLowerCase();
-            let docType = $("input[name=docType]:checked").val();
-            let radioButtons = $("input[name=docType]");
-            let docNumber = "";
-            if (docType == "nif") {
-                docNumber = $("input[name=docNumberNif]").val();
-            } else if (docType == "cif") {
-                docNumber = $("input[name=docNumberCif]").val();
-            }
-            let inputEmployees = $("#company-employees").val().toLowerCase();
-            let inputBio = $("#company-bio").val().toLowerCase();
-            let inputCity = $("#company-city").val().toLowerCase();
-            let inputEmail = $("#company-email").val().toLowerCase();
-            let inputCountry = $("#company-country").val().toLowerCase();
+        event.preventDefault();
+        $("#alertNoCompanyFound").remove();
+        var badgesContainer = $(".search-badges-company").empty();
+        let inputCompanyName = $("#company-name").val().toLowerCase();
+        let docType = $("input[name=docType]:checked").val();
+        let radioButtons = $("input[name=docType]");
+        let docNumber = "";
+        if (docType == "nif") {
+            docNumber = $("input[name=docNumberNif]").val();
+        } else if (docType == "cif") {
+            docNumber = $("input[name=docNumberCif]").val();
+        }
+        let inputEmployees = $("#company-employees").val().toLowerCase();
+        let inputBio = $("#company-bio").val().toLowerCase();
+        let inputCity = $("#company-city").val().toLowerCase();
+        let inputEmail = $("#company-email").val().toLowerCase();
+        let inputCountry = $("#company-country").val().toLowerCase();
+        var filteredCompanies = [];
+        filteredCompanies = companies.companies.filter((company) => {
+            return (company.name.toLowerCase().includes(inputCompanyName));
+        });
+        // filteredCompanies = filteredCompanies.filter((company) => {
+        //     return (company.docType.toString().toLowerCase().includes(docType));
+        // });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.docNumber.toString().toLowerCase().includes(docNumber));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.employees.toString().includes(inputEmployees));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.bio.toString().includes(inputBio));
+        });
+
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.address.city.toLowerCase().includes(inputCity));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.email.toLowerCase().includes(inputEmail));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.address.country.toLowerCase().includes(inputCountry));
+        });
+        if (filteredCompanies.length == 0) {
+            $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
+        } else {
+            badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
+        }
+        this.inputsBadgesSearch();
+        companies.renderCompaniesTable(filteredCompanies);
+    }
+    this.inputsBadgesSearch = function() {
             let formCompanyes = $("#advanced-search-companies");
             let inputs = formCompanyes.find("input");
-            var filteredCompanies = [];
-            filteredCompanies = companies.companies.filter((company) => {
-                return (company.name.toLowerCase().includes(inputCompanyName));
-            });
-            // filteredCompanies = filteredCompanies.filter((company) => {
-            //     return (company.docType.toString().toLowerCase().includes(docType));
-            // });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.docNumber.toString().toLowerCase().includes(docNumber));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.employees.toString().includes(inputEmployees));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.bio.toString().includes(inputBio));
-            });
-
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.address.city.toLowerCase().includes(inputCity));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.email.toLowerCase().includes(inputEmail));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.address.country.toLowerCase().includes(inputCountry));
-            });
+            var badgesContainer = $(".search-badges-company").empty();
             for (let i = 0; i < inputs.length; i++) {
                 if (inputs[i].type == "radio") {
                     if (inputs[i].checked == true) {
@@ -325,12 +335,6 @@ function Companies() {
                     badgesContainer.append(badgeCompany);
                 }
             }
-            if (filteredCompanies.length == 0) {
-                $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
-            } else {
-                badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
-            }
-            companies.renderCompaniesTable(filteredCompanies);
         }
         /***********************************
          * Adding a new company to API
