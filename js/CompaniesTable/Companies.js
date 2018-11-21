@@ -42,18 +42,12 @@ function Companies() {
                     let cardDiv = $("#card-container-company");
                     if (width > 868) {
                         companies.renderCompaniesTable(companies.companies);
-                        console.log('companies.companies :', companies.companies);
                     } else {
                         companies.renderCompanyCards();
                     }
                 });
             });
-
     }
-
-
-
-
     this.companies = [];
     this.addCompany = function(company) {
         this.companies.push(company);
@@ -97,7 +91,6 @@ function Companies() {
     };
 
     this.renderCompanyCards = function() {
-        // $(".main-container-companies").html(" ");
         $("#card-container-company").show();
         $("#company-table").hide();
         let mainContainerCompanies = $("#card-container-company");
@@ -216,11 +209,9 @@ function Companies() {
                 $("#cif").show();
                 $("#nif").hide();
             }
-            // $("input[name=docNumber]").val(company.docNumber);
             $("input[name=street]").val(company.address.street);
             $("input[name=city]").val(company.address.city);
             $("input[name=zipcode]").val(company.address.zipcode);
-            //  let address = { "country": country, "street": street, "city": city, "zipcode": zipcode }
             $("input[name=name]").val(company.name);
             $("input[name=employees]").val(company.employees);
             $("input[name=email]").val(company.email);
@@ -254,102 +245,96 @@ function Companies() {
             }
             if (cardCompany.children(".card").length > 0) {
                 cardCompany.find(`.card-company[data-id=${id}]`).remove();
+                //   window.location.replace("/index.html");
             }
-        }
-        if (cardCompany.children(".card").length > 0) {
-            cardCompany.find(`.card-company[data-id=${id}]`).remove();
         }
     }
 
     this.advancedSearchCompanies = function(event) {
-        event.preventDefault();
-        $("#alertNoCompanyFound").remove();
-        var badgesContainer = $(".search-badges-company").empty();
-        //   $("input[name=docType]").attr('checked', false);
-        let inputCompanyName = $("#company-name").val().toLowerCase();
-        // let inputdocNumber = $("#docNumber").val().toLowerCase();
-        let docType = $("input[name=docType]:checked").val();
-        let radioButtons = $("input[name=docType]");
-        let docNumber = "";
-        if (docType == "nif") {
-            docNumber = $("input[name=docNumberNif]").val();
-        } else if (docType == "cif") {
-            docNumber = $("input[name=docNumberCif]").val();
-        }
-        let inputEmployees = $("#company-employees").val().toLowerCase();
-        let inputBio = $("#company-bio").val().toLowerCase();
-        let inputCity = $("#company-city").val().toLowerCase();
-        let inputEmail = $("#company-email").val().toLowerCase();
-        let inputCountry = $("#company-country").val().toLowerCase();
-        let formCompanyes = $("#advanced-search-companies");
-        let inputs = formCompanyes.find("input");
-        var filteredCompanies = [];
-        filteredCompanies = companies.companies.filter((company) => {
-            return (company.name.toLowerCase().includes(inputCompanyName));
-        });
-        // filteredCompanies = filteredCompanies.filter((company) => {
-        //     return (company.docType.toString().toLowerCase().includes(docType));
-        // });
-        filteredCompanies = filteredCompanies.filter((company) => {
-            return (company.docNumber.toString().toLowerCase().includes(docNumber));
-        });
-        filteredCompanies = filteredCompanies.filter((company) => {
-            return (company.employees.toString().includes(inputEmployees));
-        });
-        filteredCompanies = filteredCompanies.filter((company) => {
-            return (company.bio.toString().includes(inputBio));
-        });
+            event.preventDefault();
+            $("#alertNoCompanyFound").remove();
+            var badgesContainer = $(".search-badges-company").empty();
+            let inputCompanyName = $("#company-name").val().toLowerCase();
+            let docType = $("input[name=docType]:checked").val();
+            let radioButtons = $("input[name=docType]");
+            let docNumber = "";
+            if (docType == "nif") {
+                docNumber = $("input[name=docNumberNif]").val();
+            } else if (docType == "cif") {
+                docNumber = $("input[name=docNumberCif]").val();
+            }
+            let inputEmployees = $("#company-employees").val().toLowerCase();
+            let inputBio = $("#company-bio").val().toLowerCase();
+            let inputCity = $("#company-city").val().toLowerCase();
+            let inputEmail = $("#company-email").val().toLowerCase();
+            let inputCountry = $("#company-country").val().toLowerCase();
+            let formCompanyes = $("#advanced-search-companies");
+            let inputs = formCompanyes.find("input");
+            var filteredCompanies = [];
+            filteredCompanies = companies.companies.filter((company) => {
+                return (company.name.toLowerCase().includes(inputCompanyName));
+            });
+            // filteredCompanies = filteredCompanies.filter((company) => {
+            //     return (company.docType.toString().toLowerCase().includes(docType));
+            // });
+            filteredCompanies = filteredCompanies.filter((company) => {
+                return (company.docNumber.toString().toLowerCase().includes(docNumber));
+            });
+            filteredCompanies = filteredCompanies.filter((company) => {
+                return (company.employees.toString().includes(inputEmployees));
+            });
+            filteredCompanies = filteredCompanies.filter((company) => {
+                return (company.bio.toString().includes(inputBio));
+            });
 
-        filteredCompanies = filteredCompanies.filter((company) => {
-            return (company.address.city.toLowerCase().includes(inputCity));
-        });
-        filteredCompanies = filteredCompanies.filter((company) => {
-            return (company.email.toLowerCase().includes(inputEmail));
-        });
-        filteredCompanies = filteredCompanies.filter((company) => {
-            return (company.address.country.toLowerCase().includes(inputCountry));
-        });
-        for (let i = 0; i < inputs.length; i++) {
-            if (inputs[i].type == "radio") {
-                if (inputs[i].checked == true) {
+            filteredCompanies = filteredCompanies.filter((company) => {
+                return (company.address.city.toLowerCase().includes(inputCity));
+            });
+            filteredCompanies = filteredCompanies.filter((company) => {
+                return (company.email.toLowerCase().includes(inputEmail));
+            });
+            filteredCompanies = filteredCompanies.filter((company) => {
+                return (company.address.country.toLowerCase().includes(inputCountry));
+            });
+            for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "radio") {
+                    if (inputs[i].checked == true) {
+                        const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+                        badgeCompany.fadeIn("slow");
+                        badgeCompany.off("click").on("click", function(event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            badgeCompany.remove();
+                            $(inputs[i]).prop('checked', false);
+                            $("#submit_search-companies").trigger("click");
+                            $(".alertCompanyFound").remove();
+                        });
+                        badgesContainer.append(badgeCompany);
+                    }
+                } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
                     const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
                     badgeCompany.fadeIn("slow");
                     badgeCompany.off("click").on("click", function(event) {
                         event.preventDefault();
                         event.stopPropagation();
                         badgeCompany.remove();
-                        $(inputs[i]).prop('checked', false);
+                        inputs[i].value = "";
                         $("#submit_search-companies").trigger("click");
                         $(".alertCompanyFound").remove();
                     });
                     badgesContainer.append(badgeCompany);
                 }
-            } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
-                const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
-                badgeCompany.fadeIn("slow");
-                badgeCompany.off("click").on("click", function(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    badgeCompany.remove();
-                    inputs[i].value = "";
-                    $("#submit_search-companies").trigger("click");
-                    $(".alertCompanyFound").remove();
-                });
-                badgesContainer.append(badgeCompany);
             }
+            if (filteredCompanies.length == 0) {
+                $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
+            } else {
+                badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
+            }
+            companies.renderCompaniesTable(filteredCompanies);
         }
-        if (filteredCompanies.length == 0) {
-            $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
-        } else {
-            badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
-        }
-        companies.renderCompaniesTable(filteredCompanies);
-    }
-
-
-    /***********************************
-     * Adding a new company to API
-     ***********************************/
+        /***********************************
+         * Adding a new company to API
+         ***********************************/
     this.sendNewCompanyToAPI = function() {
         let method = "POST";
         let url = "https://cv-mobile-api.herokuapp.com/api/companies";
@@ -411,7 +396,4 @@ function Companies() {
                 }
             });
     }
-
-
-
 }
