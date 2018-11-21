@@ -46,7 +46,7 @@ function locationTooltipsIncorrect(input) {
         $(input).tooltip({
             title: "Error. Please enter a valid format."
         });
-        $(input).tooltip("show");
+        //   $(input).tooltip("show");
     });
 }
 
@@ -59,7 +59,7 @@ function locationTooltipsCorrect(input) {
         $(input).tooltip({
             title: "Correct!!"
         });
-        $(input).tooltip("show");
+        // $(input).tooltip("show");
     });
 }
 
