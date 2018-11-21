@@ -5,6 +5,7 @@ function Companies() {
     this.construct = function(container) {
         $.get("../../html/CompaniesTable.html", htmlSkeleton => {
             container.empty().append(htmlSkeleton);
+            companies.removeAllCompanies();
             companies.getCompanyFromAPI();
             this.renderCompaniesTable(this.companies);
         }).fail(function(err) {
@@ -15,22 +16,23 @@ function Companies() {
         generalConstructor.construct("companies-table");
         $.getJSON("https://cv-mobile-api.herokuapp.com/api/companies")
             .done(function(data) {
-                $.each(data, function(i, item) {
+                $.each(data, function(i, comp) {
+                    console.log('comp :', comp);
                     var company = new Company(
-                        data[i]._id,
-                        data[i].name,
-                        data[i].docType,
-                        data[i].docNumber,
-                        data[i].email,
-                        data[i].website,
-                        data[i].address,
-                        data[i].socialUrls,
-                        data[i].logo,
-                        data[i].bio,
-                        data[i].employees,
-                        data[i].phone,
-                        data[i].registeredDate,
-                        data[i].jobOffers,
+                        comp._id,
+                        comp.name,
+                        comp.docType,
+                        comp.docNumber,
+                        comp.email,
+                        comp.website,
+                        comp.address,
+                        comp.socialUrls,
+                        comp.logo,
+                        comp.bio,
+                        comp.employees,
+                        comp.phone,
+                        comp.registeredDate,
+                        comp.jobOffers,
                     );
                     companies.addCompany(company);
                 });
