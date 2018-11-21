@@ -12,7 +12,7 @@ const SearchFilter = (function() {
     const filters = _buildFilters(inputsData);
     const filtersBadgets = _buildFiltersForBadgets(inputsData);
     _createSearchBadges(filtersBadgets);
-    let filteredUsers = users;
+    let filteredUsers = users; //recoge la lista de usuarios (todos los usuarios de la tabla) para filtrar.
 
     //FullName
     if (filters["name"]) {
@@ -22,27 +22,32 @@ const SearchFilter = (function() {
       );
     }
     //Gender
-    if (filters["gender"]) {
+    if (filters["genre_male"]) {
       filteredUsers = filteredUsers.filter(
-        user => user["gender"] === filters["gender"]
+        user => user["genre_male"] === filters["genre_male"]
+      );
+    }
+    if (filters["genre_female"]) {
+      filteredUsers = filteredUsers.filter(
+        user => user["genre_female"] === filters["genre_female"]
       );
     }
 
-    //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
+    // Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
     // if(filters["age"]){
-    //   const ageQuery = filters["name"].toLowerCase();
+    //   const ageQuery = filters["age"];
     //   filteredUsers = filteredUsers.filter(
     //     user =>
-    //       user["name"].toLowerCase().includes(firstnameQuery)
+    //       user["age"].includes(firstnameQuery)
     //   );
     // }
 
     //Experience
 
-    if (filters["Experience"]) {
-      const experienceQuery = filters["Experience"];
+    if (filters["experience"]) {
+      const experienceQuery = filters["experience"];
       filteredUsers = filteredUsers.filter(user =>
-        user["Experience"].includes(experienceQuery)
+        user["experience"].includes(experienceQuery)
       );
     }
     // Languages (idiomas)
@@ -83,13 +88,15 @@ const SearchFilter = (function() {
         ) {
           return $input.prop("checked");
         } else {
-          return $.trim($input.val()).length > 0;
+          return $.trim($input.val()).length > 0; // elimina los espacios en blanco.
         }
       })
       .each((index, input) => {
         const $input = $(input);
-        filters[$input.prop("name")] = $input.val();
+        filters[$input.prop("name")] = $input.val(); //establece la (propiedad : valor), lo hace utilizando el (name : id).
       });
+      console.log("filtered: ",filtered);
+      console.log("filters:: ",filters);
     return filters;
   }
 
