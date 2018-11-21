@@ -252,12 +252,86 @@ const UserForm = (function() {
               mimeType: "multipart/form-data",
               processData: false,
               contentType: false
+            }).done(function(res) {
+              console.log("res: ", res);
+              $(
+                "main"
+              ).append(`<div class="modal d-block welcome-modal" style="z-index:
+            10000" id="user_created" tabindex="-1" role="dialog"
+    aria-labelledby="guidedVisitTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content align-items-center">
+            <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4caf50;">
+                <h5 class="modal-title font-weight-bold">User Created</h5>
+            </div>
+            <div class="modal-body text-center">
+                <p>Name: ${res.name} and Username: ${res.username}.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">Go to Users</button>
+                <button type="button" class="btn btn-primary">Continue editing user</button>
+                <button type="button" class="btn btn-warning">Add another user</button>
+            </div>
+        </div>
+    </div>
+</div> `);
             });
+          } else {
+            $("main")
+              .append(`<div class="modal d-block welcome-modal" style="z-index:
+          10000" id="user_updated" tabindex="-1" role="dialog"
+  aria-labelledby="guidedVisitTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content align-items-center">
+          <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4caf50;">
+              <h5 class="modal-title font-weight-bold">User updated</h5>
+          </div>
+          <div class="modal-body text-center">
+              <p>Name: ${res.name} and Username: ${res.username}.
+              </p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary">Go to Users</button>
+              <button type="button" class="btn btn-primary">Continue updating user</button>
+              <button type="button" class="btn btn-warning">Add another user</button>
+          </div>
+      </div>
+  </div>
+</div> `);
           }
         })
         .done(function() {
           sessionStorage.removeItem("users-list");
-          $("#list-users").trigger("click");
+          // $("#list-users").trigger("click");
+
+          if ($("#user_updated")) {
+            $("#user_updated button.btn-secondary").on("click", function() {
+              $("#user_updated").remove();
+              location.reload(true);
+              // $("#list-users").trigger("click");
+            });
+            $("#user_updated button.btn-primary").on("click", function() {
+              $("#user_updated").remove();
+            });
+            $("#user_updated button.btn-warning").on("click", function() {
+              location.reload(true);
+              //$("#list-users").trigger("click");
+              $("#new-user").trigger("click");
+            });
+          } else if ($("#user_created")) {
+            $("#user_created button.btn-secondary").on("click", function() {
+              $("#user_created").remove();
+              $("#list-users").trigger("click");
+            });
+            $("#user_created button.btn-primary").on("click", function() {
+              $("#user_created").remove();
+            });
+            $("#user_created button.btn-warning").on("click", function() {
+              $("#list-users").trigger("click");
+              $("#new-user").trigger("click");
+            });
+          }
         })
         .fail(res => console.log("Unable to create user: ", res));
     }
@@ -269,19 +343,39 @@ const UserForm = (function() {
           .find("form")
           .prepend(`<input type=hidden value="${user._id}" />`);
 
-        var skillUser = document.getElementById("skill");
-
         $("input[name=name]").val(user.name);
-
         $("input[name=username]").val(user.username);
         $("input[name=email]").val(user.email);
-        $("input[name=birthdate]").val(user.birthDate);
         $("input[name=telephone]").val(user.phone);
-        $("input[name=country]").val(user.address.state);
+        $("input[name=country]").val(user.address.country);
         $("input[name=city]").val(user.address.city);
-        $("input[name=zip]").val(user.address.zipcode);
+        $("input[name=zipcode]").val(user.address.zipcode);
         $("input[name=street]").val(user.address.street);
+        $("input[name=website]").val(user.website);
+        $("input[name=experience]").val(user.experience);
 
+        //set user.birthDate (obtained of database, e.g.: 1990-12-12T00:00:00.000Z) to timeStamp.
+        getbirthDate = new Date(user.birthDate).getTime();
+        //set timestamp user.birthDate to Date (e.g.: Wed Dec 12 1990 00:00:00 GMT+0000 (WET) to get Date input
+        //of the FormUser, format: yyyy/MM/dd)
+        getbirthDate = new Date(getbirthDate);
+
+        birthMonth = `${getbirthDate.getMonth() + 1}`; //January is 0.
+        birthDay = `${getbirthDate.getDate()}`;
+        birthYear = `${getbirthDate.getFullYear()}`;
+        //if month, or date hasn't 2 digits, or year hasn't 4 digits, the format is invalid.
+        if (getbirthDate.getMonth() < 10) {
+          birthMonth = `0${getbirthDate.getMonth() + 1}`;
+        }
+        if (getbirthDate.getDate() < 10) {
+          birthDay = `0${getbirthDate.getDate()}`;
+        }
+        if (getbirthDate.getFullYear() < 1000) {
+          birthYear = `0${getbirthDate.getFullYear()}`;
+        }
+        getbirthDate = `${birthYear}-${birthMonth}-${birthDay}`;
+
+        $("input[name=birthdate]").val(getbirthDate);
         $(`input[value=${user.gender}]`).prop("checked", true);
 
         user["skills"].forEach(skill => {
