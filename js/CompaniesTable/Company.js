@@ -1,5 +1,4 @@
 function Company(
-
     id,
     name,
     docType,

@@ -4,7 +4,6 @@ function Companies() {
             container.empty().append(htmlSkeleton);
             getCompanyFromAPI();
             this.renderCompaniesTable(this.companies);
-            // this.renderCompanyCards();
         }).fail(function(err) {
             throw new Error(err);
         });
@@ -17,8 +16,6 @@ function Companies() {
         this.companies = [];
     }
     this.renderCompaniesTable = function(filtredCompanies) {
-        // $("#tableBody").html(" ");
-
         $("#card-container-company").hide();
         $("#company-table").show();
         let tableBody = "";
@@ -98,16 +95,13 @@ function Companies() {
           </div>
        </div>
        </div>
-      
+     
         `;
         }
-
         mainContainerCompanies.empty().html(companyCard);
     };
-
     this.showPreviewInfo = function(id) {
         var company = companies.getCompanyById(id);
-
         $("#modal-company").html(
             `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
         company.id
@@ -160,11 +154,6 @@ function Companies() {
           </div> `
         );
     }
-
-
-
-
-
     this.editCompany = function(id) {
         generalConstructor.construct("enterprises-form");
         setTimeout(() => {
