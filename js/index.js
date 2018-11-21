@@ -1,13 +1,14 @@
 /**
  *  Function to load the content by ajax
  */
+const ApiMachine = ApiFactory("https://cv-mobile-api.herokuapp.com/api");
+
 $("document").ready(function() {
   $("#list-users").on("click", function() {
     loadRightMenu();
   });
 
   generalConstructor.construct("users-table");
-
   activateTooltips();
 
   function activateTooltips(container = null) {
