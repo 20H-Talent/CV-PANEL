@@ -109,14 +109,23 @@ const ApiFactory = function(apiURL = "") {
   }
 
   function saveOnBrowserStorage(data, storage) {
-    const key = storage["key"];
-    if (sessionStorage.getItem(key)) {
-      throw new Error(
-        `The name of the key -> ${key}, already exist in the storage`
+    if (!sessionStorage.getItem(storage["key"])) {
+      sessionStorage.setItem(
+        storage["key"],
+        JSON.stringify(_collect(data, storage["collect"]))
       );
-    } else {
-      sessionStorage.setItem(key, JSON.stringify(data));
     }
+  }
+
+  function _collect(data, keyToCollect) {
+    const collectedObject = { data: {} };
+    data.forEach(item => {
+      const key = item[keyToCollect];
+      const itemCollected = {};
+      delete item[keyToCollect];
+      collectedObject["data"][key] = item;
+    });
+    return collectedObject;
   }
 
   return apiMethods;

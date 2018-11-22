@@ -21,11 +21,16 @@ const Table = (function() {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
         ApiMachine.request("/users", { method: "GET", callback: initTable });
-        //.request("/skills", { method: "GET", callback: , storage: 'skills' });
-        //ApiMachine.request("/langs", { method: "GET", callback: ,storage: 'langs' });
-        //_setupSessionStorage(apiUsers, initTable);
-        _setupSessionStorage(apiSkills);
-        _setupSessionStorage(apiLanguages);
+        ApiMachine.request("/skills", {
+          method: "GET",
+          callback: function(response) {},
+          storage: { key: "skills", collect: "_id" }
+        });
+        ApiMachine.request("/langs", {
+          method: "GET",
+          callback: function(response) {},
+          storage: { key: "langs", collect: "_id" }
+        });
       }).fail(function(err) {
         _showOverlay(false);
         throw new Error(err);
@@ -70,32 +75,6 @@ const Table = (function() {
       }
     }
 
-    /** Prepare sessionStorage that allow us save the data in client side to work with it
-     * @function _setupSessionStorage
-     * @private
-     * @param {String} url - The url from where we get the resources we need about users
-     * @param {function} callback - Callback that triggers when the response is ready
-     */
-    function _setupSessionStorage(url, callback) {
-      if (!callback) {
-        if (url.includes("langs")) {
-          if (!sessionStorage.getItem("languages-list")) {
-            apiRequest(url);
-          }
-        } else {
-          if (!sessionStorage.getItem("skills-list")) {
-            apiRequest(url);
-          }
-        }
-      } else {
-        if (!sessionStorage.getItem("users-list")) {
-          apiRequest(url);
-        } else {
-          callback(null, window.innerWidth);
-        }
-      }
-    }
-
     /**Make the API Request that give the users data and handle the
      * possible errors
      * @function apiRequest
@@ -134,68 +113,37 @@ const Table = (function() {
       }
     }
 
-    function _collect(data, key) {
-      return data.map(item => {
-        const key = item[keyToCollect];
-        const itemCollected = {};
-        delete item[keyToCollect];
-        itemCollected[key] = item;
-        return itemCollected;
-      });
-    }
-
     function _renderLangsAndSkills(user) {
-      let skillsFromStorage = collect(
-        JSON.parse(sessionStorage.getItem("skills")),
-        "_id"
-      );
-      let langsFromStorage = collect(
-        JSON.parse(sessionStorage.getItem("langs")),
-        "_id"
-      );
+      const skillsFromStorage = JSON.parse(sessionStorage.getItem("skills"))
+        .data;
+      const langsFromStorage = JSON.parse(sessionStorage.getItem("langs")).data;
 
       const data = {
         skills: [],
         languages: []
       };
 
-      Object.keys(user["skills"]).map(function(skillID) {
-        if (key === "skills") {
-          data["skills"] = skillsFromStorage.map(function(sessionSkill) {
-            if (user[key].includes(sessionSkill._id)) {
-              if (window.innerWidth <= 867) {
-                return `<span class="badge badge-secondary mr-1">${
-                  sessionSkill.label
-                }</span>`;
-              } else {
-                return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
-                  sessionSkill.label
-                }.png" alt="${
-                  sessionSkill.label
-                }" width="48" height="48" title="${sessionSkill.label}" />`;
-              }
-            }
-          });
-        } else if (key === "languages") {
-          data["languages"] = langsFromStorage.map(function(sessionLang) {
-            if (user[key].includes(sessionLang._id)) {
-              if (window.innerWidth <= 867) {
-                return `<span class="badge badge-secondary mr-1">${
-                  sessionLang.label
-                }</span>`;
-              } else {
-                return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
-                  sessionLang.label
-                }.png" alt="${
-                  sessionLang.label
-                }" width="48" height="48" title="${sessionLang.label}" />`;
-              }
-            }
-          });
+      data["skills"] = user["skills"].map(function(skill) {
+        const { type, label } = skillsFromStorage[skill["_id"]];
+
+        if (window.innerWidth <= 867) {
+          return `<span data-type=${
+            skill.type
+          } class="badge badge-secondary mr-1">${label}</span>`;
+        } else {
+          return `<img data-type=${type} class="mx-1 mt-2" src="../assets/images/skills/${label}.png" alt="${label}" width="48" height="48" title="${label}" />`;
         }
       });
-      data.skills = Array.from(new Set(data.skills));
-      data.languages = Array.from(new Set(data.languages));
+
+      data["languages"] = user["languages"].map(function(lang) {
+        const { label } = langsFromStorage[lang["_id"]];
+
+        if (window.innerWidth <= 867) {
+          return `<span class="badge badge-secondary mr-1">${label}</span>`;
+        } else {
+          return `<img class="mx-1 mt-2" src="../assets/images/languages/${label}.png" alt="${label}" width="48" height="48" title="${label}" />`;
+        }
+      });
 
       return data;
     }
@@ -386,7 +334,7 @@ const Table = (function() {
     function _cardSkeleton(user) {
       let data = _renderLangsAndSkills(user);
       return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
-        user._id.value
+        user._id
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
       <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${
@@ -490,21 +438,26 @@ const Table = (function() {
     function renderDataOnModal(event) {
       const element = $(event.relatedTarget);
       const modal = $(this);
-      const user = getUserByID(element.data("id"));
 
-      const { avatar, username, name, birthDate, phone, address } = user;
+      ApiMachine.request(`/users/${element.data("id")}`, {
+        method: "GET",
+        callback: function(userFromAPI) {
+          const user = userFromAPI;
 
-      const modalBody = modal.find(".modal-body");
+          const { avatar, username, name, birthDate, phone, address } = user;
+          const modalBody = modal.find(".modal-body");
 
-      modalBody.find("#infoUser span").remove();
+          modalBody.find("#infoUser span").remove();
 
-      modal.find(".modal-title").text(name + " ~ " + username);
-      modalBody.find("img").prop("src", avatar);
+          modal.find(".modal-title").text(name + " ~ " + username);
+          modalBody.find("img").prop("src", avatar);
 
-      _appendBirthday(modalBody, birthDate);
-      _appendPhones(modalBody, { phone });
-      _appendAddress(modalBody, address);
-      _appendTechSkills(modalBody, user);
+          _appendBirthday(modalBody, birthDate);
+          _appendPhones(modalBody, { phone });
+          _appendAddress(modalBody, address);
+          _appendTechSkills(modalBody, user);
+        }
+      });
     }
 
     function _appendBirthday(container, birthDate) {
@@ -535,21 +488,16 @@ const Table = (function() {
     }
 
     function _appendTechSkills(container, user) {
-      ["skills", "languages"].map(key => {
-        let data = _renderLangsAndSkills(user);
+      let data = _renderLangsAndSkills(user);
+      container
+        .find(`#skillsInfo > .card-body`)
+        .empty()
+        .append(`${data["skills"].map(skillTag => skillTag).join("")}`);
 
-        if (key === "skills") {
-          container
-            .find(`#${key}Info > .card-body`)
-            .empty()
-            .append(`${data.skills.map(skillTag => skillTag).join("")}`);
-        } else if (key === "languages") {
-          container
-            .find(`#${key}Info > .card-body`)
-            .empty()
-            .append(`${data.languages.map(langTag => langTag).join("")}`);
-        }
-      });
+      container
+        .find(`#languagesInfo > .card-body`)
+        .empty()
+        .append(`${data["languages"].map(langTag => langTag).join("")}`);
     }
 
     return {
