@@ -211,6 +211,8 @@ function Companies() {
                 $("#cif").show();
                 $("#nif").hide();
             }
+            $("input[name=socialplatform]").val(company.socialUrls.platform);
+            $("input[name=socialUrl]").val(company.socialUrls.url);
             $("input[name=street]").val(company.address.street);
             $("input[name=city]").val(company.address.city);
             $("input[name=zipcode]").val(company.address.zipcode);
@@ -343,7 +345,7 @@ function Companies() {
          ***********************************/
     this.sendNewCompanyToAPI = function() {
         let method = "POST";
-        let url = "https://cv-mobile-api.herokuapp.com/api/companies";
+        let urlApi = "https://cv-mobile-api.herokuapp.com/api/companies";
         let id = $("input[name=company-id]").val();
         if (id.length > 0) {
             method = "PUT";
@@ -361,18 +363,28 @@ function Companies() {
         let zipcode = $("input[name=zipcode]").val();
         let city = $("input[name=city]").val();
         let street = $("input[name=street]").val();
+        let platform = $("input[name=socialplatform]").val();
+        console.log('platform :', platform);
+        let url = $("input[name=socialUrl]").val();
+        console.log('url :', url);
+
         let address = {
             country: country,
             street: street,
             city: city,
             zipcode: zipcode
         };
+        let socialUrls = [{
+            platform: platform,
+            url: url
+        }];
         let phone = $("input[name=phone]").val();
         let email = $("input[name=email]").val();
         let employees = $("input[name=employees]").val();
         let website = $("input[name=website]").val();
         let bio = $("textarea[name=bio]").val();
-        let socialUrls = $("input[name=socialUrls]").val();
+        socialUrls = $("input[name=socialUrls]").val();
+        console.log('socialUrls :', socialUrls);
         let newCompany = {
             name: `${name}`,
             docType: docType,
@@ -383,10 +395,10 @@ function Companies() {
             employees: employees,
             phone: phone,
             website: website,
-            socialUrls: [],
+            socialUrls: socialUrls,
             jobOffers: []
         };
-        fetch(url, {
+        fetch(urlApi, {
                 method: method,
                 body: JSON.stringify(newCompany),
                 headers: {

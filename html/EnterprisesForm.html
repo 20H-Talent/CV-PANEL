@@ -65,8 +65,17 @@
     </div>
     <div class="form-row col-md-12">
         <label class="format-2" for="socialUrls">Social Networks</label>
-        <input lang="es-ES" name="socialUrls" type="text" class="form-control form-control-width " minlength="3" maxlength="25" pattern="[a-zA-Z0-9.,]+$" id="socialUrls" placeholder="Facebook, Twitter..." data-toggle="tooltip" data-placement="left">
+
+        <input lang="es-ES" name="socialplatform" type="text" class="form-control col-md-3  mr-3" minlength="3" maxlength="25" pattern="[a-zA-Z0-9.,]+$" id="socialplatform" placeholder="Facebook, Twitter..." data-toggle="tooltip" data-placement="left">
+        <input lang="es-ES" name="socialUrl" type="text" class="form-control col-md-4 " minlength="3" maxlength="25" pattern="[a-zA-Z0-9.,]+$" id="socialUrl" placeholder="url" data-toggle="tooltip" data-placement="left">
     </div>
+    <div class="form-row col-md-12">
+        <label class="format-2" for="socialUrls"></label>
+
+        <ul id="socialUL" class=""></ul>
+
+    </div>
+
     <div class="form-row col-md-12">
         <label class="format-2" for="logoURL">Logo</label>
         <input name="logoURL" type="file" class="form-control-file format-3" id="logoURL" data-toggle="tooltip" data-placement="right">

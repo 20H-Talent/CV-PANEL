@@ -67,6 +67,7 @@ function EnterprisesForm() {
     this.construct = function(container) {
         $.get("../../html/EnterprisesForm.html", function(htmlSkeleton) {
             container.empty().append(htmlSkeleton);
+            enterpriseForm.socialUrls();
             //hinding the CIF input and showing the NIF input
             $("#rdoNif").on("click", function() {
                 $("#nif").show();
@@ -90,4 +91,14 @@ function EnterprisesForm() {
             throw new Error(err);
         });
     };
+}
+
+EnterprisesForm.prototype.socialUrls = function() {
+    $("input[name=socialUrls]").on("keypress", function(event) {
+        if (event.which === 13) {
+            var socialLIst = $(this).val();
+            // $(this).val("");
+            $("ul").append("<li  ><span><i class='fa fa-users mr-3'></i></span> " + socialLIst + "</li>")
+        }
+    });
 }
