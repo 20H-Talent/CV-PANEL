@@ -20,17 +20,21 @@ const Table = (function() {
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
-        ApiMachine.request("/users", { method: "GET", callback: initTable });
-        ApiMachine.request("/skills", {
-          method: "GET",
-          callback: function(response) {},
-          storage: { key: "skills", collect: "_id" }
-        });
-        ApiMachine.request("/langs", {
-          method: "GET",
-          callback: function(response) {},
-          storage: { key: "langs", collect: "_id" }
-        });
+        try {
+          ApiMachine.request("/users", { method: "GET", callback: initTable });
+          ApiMachine.request("/skills", {
+            method: "GET",
+            callback: function(response) {},
+            storage: { key: "skills", collect: "_id" }
+          });
+          ApiMachine.request("/langs", {
+            method: "GET",
+            callback: function(response) {},
+            storage: { key: "langs", collect: "_id" }
+          });
+        } catch (err) {
+          return console.error("An error happened: " + err);
+        }
       }).fail(function(err) {
         _showOverlay(false);
         throw new Error(err);
@@ -67,49 +71,11 @@ const Table = (function() {
       const button = $(event.currentTarget);
       const userID = button.data("id");
       if (button.hasClass("edit")) {
-        userForm.editForm(getUserByID(userID));
+        getUserByID(userID, userForm.editForm);
       } else {
         if (window.confirm("Are you sure to delete this user?")) {
           deleteUser(userID);
         }
-      }
-    }
-
-    /**Make the API Request that give the users data and handle the
-     * possible errors
-     * @function apiRequest
-     * @param {String} url
-     * @param {function} callback
-     */
-    function apiRequest(url) {
-      if (url.includes("langs")) {
-        $.getJSON(url, function(response) {
-          if (!response["error"]) {
-            sessionStorage.setItem("languages-list", JSON.stringify(response));
-          }
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
-      } else if (url.includes("skills")) {
-        $.getJSON(url, function(response) {
-          if (!response["error"]) {
-            sessionStorage.setItem("skills-list", JSON.stringify(response));
-          }
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
-      } else {
-        _showOverlay(true);
-        $.getJSON(url, function(response) {
-          if (!response["error"]) {
-            sessionStorage.setItem("users-list", JSON.stringify(response));
-          }
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
       }
     }
 
@@ -124,7 +90,9 @@ const Table = (function() {
       };
 
       data["skills"] = user["skills"].map(function(skill) {
-        const { type, label } = skillsFromStorage[skill["_id"]];
+        const { type, label } = skillsFromStorage[
+          skill["_id"] ? skill["_id"] : skill
+        ];
 
         if (window.innerWidth <= 867) {
           return `<span data-type=${
@@ -136,7 +104,7 @@ const Table = (function() {
       });
 
       data["languages"] = user["languages"].map(function(lang) {
-        const { label } = langsFromStorage[lang["_id"]];
+        const { label } = langsFromStorage[lang["_id"] ? lang["_id"] : lang];
 
         if (window.innerWidth <= 867) {
           return `<span class="badge badge-secondary mr-1">${label}</span>`;
@@ -190,7 +158,6 @@ const Table = (function() {
      * @param {Object} user
      */
     function _appendCardData(cardContainer, user) {
-      console.log("User on append card data: ", user);
       cardContainer.append(_cardSkeleton(user));
     }
 
@@ -209,7 +176,6 @@ const Table = (function() {
         ApiMachine.request("/users", {
           method: "GET",
           callback: function(users) {
-            console.log("USER ON RENDER TABLE: ", users);
             _renderTableOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
           }
@@ -221,8 +187,6 @@ const Table = (function() {
         ApiMachine.request("/users", {
           method: "GET",
           callback: function(users) {
-            console.log("USER ON RENDER CARD TABLE: ", users);
-
             _renderCardOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
           }
@@ -255,7 +219,10 @@ const Table = (function() {
         .hide()
         .find("tbody")
         .empty();
-      users.forEach(user => _appendCardData(cardContainer, user));
+
+      for (let user of users) {
+        _appendCardData(cardContainer, user);
+      }
     }
 
     /**
@@ -358,10 +325,17 @@ const Table = (function() {
      * @param {string} email || id
      * @return {object} User
      */
-    function getUserByID(value) {
-      return JSON.parse(sessionStorage.getItem("users-list")).find(
-        user => user._id === value
-      );
+    function getUserByID(id, externalCallback) {
+      try {
+        ApiMachine.request(`/users/${id}`, {
+          method: "GET",
+          callback: function(userFromAPI) {
+            externalCallback(userFromAPI);
+          }
+        });
+      } catch (err) {
+        return console.error("An error happened: " + err);
+      }
     }
 
     /**
@@ -426,9 +400,14 @@ const Table = (function() {
       ApiMachine.request(`/users/${element.data("id")}`, {
         method: "GET",
         callback: function(userFromAPI) {
-          const user = userFromAPI;
-
-          const { avatar, username, name, birthDate, phone, address } = user;
+          const {
+            avatar,
+            username,
+            name,
+            birthDate,
+            phone,
+            address
+          } = userFromAPI;
           const modalBody = modal.find(".modal-body");
 
           modalBody.find("#infoUser span").remove();
@@ -439,7 +418,7 @@ const Table = (function() {
           _appendBirthday(modalBody, birthDate);
           _appendPhones(modalBody, { phone });
           _appendAddress(modalBody, address);
-          _appendTechSkills(modalBody, user);
+          _appendTechSkills(modalBody, userFromAPI);
         }
       });
     }

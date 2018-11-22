@@ -262,6 +262,16 @@ const UserForm = (function() {
         .fail(res => console.log("Unable to create user: ", res));
     }
 
+    function _collect(data, keyToCollect) {
+      const collectedObject = { data: {} };
+      data.forEach(item => {
+        const key = item[keyToCollect];
+        const itemCollected = {};
+        delete item[keyToCollect];
+        collectedObject["data"][key] = item;
+      });
+      return collectedObject;
+    }
     function editForm(user) {
       generalConstructor.construct("user-form");
       setTimeout(() => {
@@ -285,16 +295,18 @@ const UserForm = (function() {
         $(`input[value=${user.gender}]`).prop("checked", true);
 
         user["skills"].forEach(skill => {
-          $(`input[name='skills[]'][value=${skill}]`).prop("checked", true);
+          $(
+            `input[name='skills[]'][value=${
+              skill["_id"] ? skill["_id"] : skill
+            }]`
+          ).prop("checked", true);
         });
 
-        $("select#selLanguage")
-          .children("option")
-          .each((index, option) => {
-            if (user["languages"].includes($(option).val())) {
-              $(option).prop("selected", true);
-            }
-          });
+        user["languages"].forEach(lang => {
+          $("select#selLanguage")
+            .children(`option[value=${lang["_id"] ? lang["_id"] : lang}]`)
+            .prop("selected", true);
+        });
       }, 400);
     }
     return {
