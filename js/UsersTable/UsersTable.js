@@ -52,10 +52,17 @@ const Table = (function() {
         renderDataOnResize(width);
       });
 
-      $("div.main-container")
-        .find("td.options")
-        .off("click")
-        .on("click", "button:not(.detail)", _optionButtonsEvent);
+      if (window.innerWidth > 868) {
+        $("div.main-container")
+          .find("td.options")
+          .off("click")
+          .on("click", "button:not(.detail)", _optionButtonsEvent);
+      } else {
+        $("div#card-container")
+          .find(".user-card .card-footer")
+          .off("click")
+          .on("click", "button:not(.detail)", _optionButtonsEvent);
+      }
 
       $("#userModal").on("show.bs.modal", renderDataOnModal);
     }
@@ -125,7 +132,9 @@ const Table = (function() {
       if (browserWidth > 768) {
         _showOverlay(true);
         const tableBody = mainContainer.find("#users-table tbody");
-        users.forEach(user => _appendRowData(tableBody, user));
+        for (let user of users) {
+          _appendRowData(tableBody, user);
+        }
       } else {
         mainContainer
           .find("#users-table")
@@ -133,7 +142,9 @@ const Table = (function() {
           .find("tbody")
           .empty();
         let cardContainer = mainContainer.find("div#card-container");
-        users.forEach(user => _appendCardData(cardContainer, user));
+        for (let user of users) {
+          _appendCardData(cardContainer, user);
+        }
       }
       _showOverlay(false);
       _setupInternalEventListeners();
@@ -178,6 +189,7 @@ const Table = (function() {
           callback: function(users) {
             _renderTableOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
+            _setupInternalEventListeners();
           }
         });
       } else if (
@@ -189,6 +201,7 @@ const Table = (function() {
           callback: function(users) {
             _renderCardOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
+            _setupInternalEventListeners();
           }
         });
       }
@@ -204,7 +217,9 @@ const Table = (function() {
       cardContainer.empty();
       mainTable.show();
       const tableBody = mainTable.find("tbody");
-      users.forEach(user => _appendRowData(tableBody, user));
+      for (let user of users) {
+        _appendRowData(tableBody, user);
+      }
     }
 
     /**
