@@ -353,7 +353,7 @@ const Table = (function() {
           }
         });
       } catch (err) {
-        return console.error("An error happened: " + err);
+        return console.dir("An error happened: " + err);
       }
     }
 

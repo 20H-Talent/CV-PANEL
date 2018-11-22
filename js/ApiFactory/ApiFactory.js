@@ -52,6 +52,8 @@ const ApiFactory = function(apiURL = "") {
           break;
 
         case "DELETE":
+          console.log(baseURL + route, options);
+          deleteRequest(baseURL + route, options);
           break;
 
         default:
@@ -81,6 +83,27 @@ const ApiFactory = function(apiURL = "") {
     }).fail(function() {
       throw new Error(`An error ocurred in the ajax request to => ${url}`);
     });
+  }
+
+  function deleteRequest(url, options) {
+    $.ajax({
+      method: options["method"],
+      url,
+      cache: false,
+      crossDomain: true,
+      contentType: "application/json",
+      dataType: "json"
+    })
+      .done(function(response) {
+        if (isFunction(options["callback"])) {
+          options.callback(response);
+        } else {
+          throw new Error("The callback needs to be a function");
+        }
+      })
+      .fail(function(err) {
+        throw new Error(`An error in the request happened:  ${err}`);
+      });
   }
 
   function uploadFileRequest(options, _id) {
