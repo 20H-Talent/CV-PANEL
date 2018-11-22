@@ -12,25 +12,13 @@ const ApiFactory = function(apiURL = "") {
   const apiMethods = { baseURL };
 
   apiMethods.request = function(routeParameter, options = {}) {
-    console.log(routeParameter, options);
     const route =
       routeParameter[0] !== "/" ? `/${routeParameter}` : routeParameter;
 
     if (Object.keys(options).length > 0) {
       switch (options["method"]) {
         case "GET":
-          $.getJSON(baseURL + route, function(response) {
-            console.log(baseURL + route, response);
-            if (!response["error"] && response) {
-              if (typeof options["callback"] === "function") {
-                options["callback"](response);
-              } else {
-                throw new Error("The callback needs to be a function");
-              }
-            } else {
-              throw new Error(response["error"]);
-            }
-          });
+          getRequest(baseURL + route, options);
           break;
         case "POST":
           $.ajax({
@@ -46,24 +34,9 @@ const ApiFactory = function(apiURL = "") {
                 options["multipart"] &&
                 Object.keys(options["multipart"].length > 0)
               ) {
-                $.ajax({
-                  method: "POST",
-                  cache: false,
-                  proccessData: false,
-                  url: `${baseURL}/${options["multipart"]["url"]}/${
-                    response._id
-                  }`,
-                  data: options["multipart"]["file"],
-                  mimeType: "multipart/form-data"
-                }).done(function(uploadResponse) {
-                  if (typeof options["callback"] === "function") {
-                    options["callback"](uploadResponse);
-                  } else {
-                    throw new Error("The callback needs to be a function");
-                  }
-                });
+                uploadFileRequest(options, response._id);
               } else {
-                if (typeof options["callback"] === "function") {
+                if (isFunction(options["callback"])) {
                   options.callback(response);
                 } else {
                   throw new Error("The callback needs to be a function");
@@ -90,6 +63,47 @@ const ApiFactory = function(apiURL = "") {
       }
     }
   };
+
+  function getRequest(url, options) {
+    $.getJSON(url, function(response) {
+      if (!response["error"] && response) {
+        if (isFunction(options["callback"])) {
+          options.callback(response);
+        } else {
+          throw new Error("The callback needs to be a function");
+        }
+      } else {
+        throw new Error(response["error"]);
+      }
+    }).fail(function() {
+      throw new Error(`An error ocurred in the ajax request to => ${url}`);
+    });
+  }
+
+  function uploadFileRequest(options, _id) {
+    $.ajax({
+      method: "POST",
+      cache: false,
+      proccessData: false,
+      url: `${baseURL}/${options["multipart"]["url"]}/${_id}`,
+      data: options["multipart"]["file"],
+      mimeType: "multipart/form-data"
+    })
+      .done(function(uploadResponse) {
+        if (isFunction(options["callback"])) {
+          options.callback(uploadResponse);
+        } else {
+          throw new Error("The callback needs to be a function");
+        }
+      })
+      .fail(function(err) {
+        throw new Error(`An error in the request happened:  ${err}`);
+      });
+  }
+
+  function isFunction(param) {
+    return typeof param === "function";
+  }
 
   return apiMethods;
 };
