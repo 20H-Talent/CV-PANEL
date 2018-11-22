@@ -345,10 +345,16 @@ const Table = (function() {
      * @param {string} id
      */
     function deleteUser(id) {
-      let users = JSON.parse(sessionStorage.getItem("users-list"));
-      users = users.filter(user => user._id !== id);
-      sessionStorage.setItem("users-list", JSON.stringify(users));
-      _removeUserFromDOM(id);
+      try {
+        ApiMachine.request(`/users/${id}`, {
+          method: "DELETE",
+          callback: function(userFromAPI) {
+            _removeUserFromDOM(id);
+          }
+        });
+      } catch (err) {
+        return console.error("An error happened: " + err);
+      }
     }
 
     /**
