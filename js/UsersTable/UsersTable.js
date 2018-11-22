@@ -20,7 +20,10 @@ const Table = (function() {
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
-        _setupSessionStorage(apiUsers, initTable);
+        ApiMachine.request("/users", { method: "GET", callback: initTable });
+        //.request("/skills", { method: "GET", callback: , storage: 'skills' });
+        //ApiMachine.request("/langs", { method: "GET", callback: ,storage: 'langs' });
+        //_setupSessionStorage(apiUsers, initTable);
         _setupSessionStorage(apiSkills);
         _setupSessionStorage(apiLanguages);
       }).fail(function(err) {
@@ -130,16 +133,35 @@ const Table = (function() {
         });
       }
     }
+
+    function _collect(data, key) {
+      return data.map(item => {
+        const key = item[keyToCollect];
+        const itemCollected = {};
+        delete item[keyToCollect];
+        itemCollected[key] = item;
+        return itemCollected;
+      });
+    }
+
     function _renderLangsAndSkills(user) {
-      let sessionSkills = JSON.parse(sessionStorage.getItem("skills-list"));
-      let sessionLangs = JSON.parse(sessionStorage.getItem("languages-list"));
+      let skillsFromStorage = collect(
+        JSON.parse(sessionStorage.getItem("skills")),
+        "_id"
+      );
+      let langsFromStorage = collect(
+        JSON.parse(sessionStorage.getItem("langs")),
+        "_id"
+      );
+
       const data = {
         skills: [],
         languages: []
       };
-      Object.keys(user).map(function(key) {
+
+      Object.keys(user["skills"]).map(function(skillID) {
         if (key === "skills") {
-          data["skills"] = sessionSkills.map(function(sessionSkill) {
+          data["skills"] = skillsFromStorage.map(function(sessionSkill) {
             if (user[key].includes(sessionSkill._id)) {
               if (window.innerWidth <= 867) {
                 return `<span class="badge badge-secondary mr-1">${
@@ -155,7 +177,7 @@ const Table = (function() {
             }
           });
         } else if (key === "languages") {
-          data["languages"] = sessionLangs.map(function(sessionLang) {
+          data["languages"] = langsFromStorage.map(function(sessionLang) {
             if (user[key].includes(sessionLang._id)) {
               if (window.innerWidth <= 867) {
                 return `<span class="badge badge-secondary mr-1">${
@@ -182,8 +204,8 @@ const Table = (function() {
      * @public
      * @param {array} data - Array of JSON data
      */
-    function initTable(data, browserWidth) {
-      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
+    function initTable(data, browserWidth = window.innerWidth) {
+      let users = data;
       if (browserWidth > 768) {
         _showOverlay(true);
         const tableBody = mainContainer.find("#users-table tbody");

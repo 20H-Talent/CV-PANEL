@@ -11,7 +11,7 @@ const ApiFactory = function(apiURL = "") {
 
   const apiMethods = { baseURL };
 
-  apiMethods.request = function(routeParameter, options = {}) {
+  apiMethods.request = function(routeParameter, options = { storage: false }) {
     const route =
       routeParameter[0] !== "/" ? `/${routeParameter}` : routeParameter;
 
@@ -67,6 +67,9 @@ const ApiFactory = function(apiURL = "") {
   function getRequest(url, options) {
     $.getJSON(url, function(response) {
       if (!response["error"] && response) {
+        if (options["storage"]) {
+          saveOnBrowserStorage(response, options["storage"]);
+        }
         if (isFunction(options["callback"])) {
           options.callback(response);
         } else {
@@ -103,6 +106,17 @@ const ApiFactory = function(apiURL = "") {
 
   function isFunction(param) {
     return typeof param === "function";
+  }
+
+  function saveOnBrowserStorage(data, storage) {
+    const key = storage["key"];
+    if (sessionStorage.getItem(key)) {
+      throw new Error(
+        `The name of the key -> ${key}, already exist in the storage`
+      );
+    } else {
+      sessionStorage.setItem(key, JSON.stringify(data));
+    }
   }
 
   return apiMethods;
