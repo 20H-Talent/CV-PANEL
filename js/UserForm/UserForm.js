@@ -228,50 +228,22 @@ const UserForm = (function() {
       const userID = $("form#user-form")
         .find("input[type=hidden]")
         .val();
+      const file = new FormData();
+      file.append("img", dataToSendServer.avatar[0].files[0]);
 
-      $.ajax({
+      ApiMachine.request(`/users/${userID ? userID : ""}`, {
         method: userID ? "PUT" : "POST",
-        url: `https://cv-mobile-api.herokuapp.com/api/users/${
-          userID ? userID : ""
-        }`,
-        data: JSON.stringify(dataToSendServer.dataUserTxtPlain),
-        headers: {
-          "Content-Type": "application/json"
+        plainData: dataToSendServer.dataUserTxtPlain,
+        multipart: {
+          url: "files/upload/user",
+          file
+        },
+        callback: function(response) {
+          console.log("Response: ", response);
         }
-      })
-        .done(function(res) {
-          if (!userID) {
-            let formData = new FormData();
-            formData.append("img", dataToSendServer.avatar[0].files[0]);
-            $.ajax({
-              method: "POST",
-              url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
-                res._id
-              }`,
-              data: formData,
-              mimeType: "multipart/form-data",
-              processData: false,
-              contentType: false
-            });
-          }
-        })
-        .done(function() {
-          sessionStorage.removeItem("users-list");
-          $("#list-users").trigger("click");
-        })
-        .fail(res => console.log("Unable to create user: ", res));
+      });
     }
 
-    function _collect(data, keyToCollect) {
-      const collectedObject = { data: {} };
-      data.forEach(item => {
-        const key = item[keyToCollect];
-        const itemCollected = {};
-        delete item[keyToCollect];
-        collectedObject["data"][key] = item;
-      });
-      return collectedObject;
-    }
     function editForm(user) {
       generalConstructor.construct("user-form");
       setTimeout(() => {
@@ -308,6 +280,17 @@ const UserForm = (function() {
             .prop("selected", true);
         });
       }, 400);
+    }
+
+    function _collect(data, keyToCollect) {
+      const collectedObject = { data: {} };
+      data.forEach(item => {
+        const key = item[keyToCollect];
+        const itemCollected = {};
+        delete item[keyToCollect];
+        collectedObject["data"][key] = item;
+      });
+      return collectedObject;
     }
     return {
       construct,

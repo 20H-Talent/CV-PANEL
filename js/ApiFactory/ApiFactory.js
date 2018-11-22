@@ -21,41 +21,12 @@ const ApiFactory = function(apiURL = "") {
           getRequest(baseURL + route, options);
           break;
         case "POST":
-          $.ajax({
-            method,
-            url: baseURL + route,
-            data: JSON.stringify(options["plainData"]),
-            cache: true,
-            crossDomain: true,
-            contentType: "application/json"
-          })
-            .done(function(response) {
-              if (
-                options["multipart"] &&
-                Object.keys(options["multipart"].length > 0)
-              ) {
-                uploadFileRequest(options, response._id);
-              } else {
-                if (isFunction(options["callback"])) {
-                  options.callback(response);
-                } else {
-                  throw new Error("The callback needs to be a function");
-                }
-              }
-            })
-            .fail(function(err) {
-              throw new Error(`An error in the request happened:  ${err}`);
-            });
-          break;
-
         case "PUT":
+          storeOrUpdateRequest(baseURL + route, options);
           break;
-
         case "DELETE":
-          console.log(baseURL + route, options);
           deleteRequest(baseURL + route, options);
           break;
-
         default:
           throw new Error(
             `The method you passed as parameter is not valid => ${
@@ -85,6 +56,34 @@ const ApiFactory = function(apiURL = "") {
     });
   }
 
+  function storeOrUpdateRequest(url, options) {
+    $.ajax({
+      method: options["method"],
+      url,
+      data: JSON.stringify(options["plainData"]),
+      cache: true,
+      crossDomain: true,
+      contentType: "application/json"
+    })
+      .done(function(response) {
+        if (
+          options["multipart"] &&
+          Object.keys(options["multipart"].length > 0)
+        ) {
+          uploadFileRequest(options, response._id);
+        } else {
+          if (isFunction(options["callback"])) {
+            options.callback(response);
+          } else {
+            throw new Error("The callback needs to be a function");
+          }
+        }
+      })
+      .fail(function() {
+        throw new Error(`An error in the request happened`);
+      });
+  }
+
   function deleteRequest(url, options) {
     $.ajax({
       method: options["method"],
@@ -101,8 +100,8 @@ const ApiFactory = function(apiURL = "") {
           throw new Error("The callback needs to be a function");
         }
       })
-      .fail(function(err) {
-        throw new Error(`An error in the request happened:  ${err}`);
+      .fail(function() {
+        throw new Error(`An error in the request happened`);
       });
   }
 
@@ -110,7 +109,8 @@ const ApiFactory = function(apiURL = "") {
     $.ajax({
       method: "POST",
       cache: false,
-      proccessData: false,
+      processData: false,
+      contentType: false,
       url: `${baseURL}/${options["multipart"]["url"]}/${_id}`,
       data: options["multipart"]["file"],
       mimeType: "multipart/form-data"
