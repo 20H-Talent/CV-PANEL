@@ -45,7 +45,7 @@ const Table = (function() {
     function _setupInternalEventListeners() {
       $(window).on("resize", function(e) {
         const width = this.innerWidth;
-        renderDataOnResize(null, width);
+        renderDataOnResize(width);
       });
 
       $("div.main-container")
@@ -190,6 +190,7 @@ const Table = (function() {
      * @param {Object} user
      */
     function _appendCardData(cardContainer, user) {
+      console.log("User on append card data: ", user);
       cardContainer.append(_cardSkeleton(user));
     }
 
@@ -199,50 +200,33 @@ const Table = (function() {
      * @public
      * @param {Number} width
      */
-    function renderDataOnResize(users = null, browserWidth, inputsData = []) {
+    function renderDataOnResize(browserWidth = window.innerWidth) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
       const cardContainer = mainContainer.find("div#card-container");
 
-      let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
-
-      if (browserWidth > 868) {
-        if (inputsData.length > 0) {
-          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
-
-          tableBody.empty();
-          _showOverlay(true);
-
-          setTimeout(() => {
+      if (browserWidth > 868 && tableBody.children("tr").length === 0) {
+        ApiMachine.request("/users", {
+          method: "GET",
+          callback: function(users) {
+            console.log("USER ON RENDER TABLE: ", users);
+            _renderTableOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
-            filteredUsers.forEach(user => _appendRowData(tableBody, user));
-          }, 1000);
-        }
+          }
+        });
+      } else if (
+        browserWidth < 868 &&
+        cardContainer.children(".user-card").length === 0
+      ) {
+        ApiMachine.request("/users", {
+          method: "GET",
+          callback: function(users) {
+            console.log("USER ON RENDER CARD TABLE: ", users);
 
-        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
-          _renderTableOnResize(mainTable, cardContainer, usersData);
-          _showOverlay(false);
-        }
-      } else if (browserWidth < 868) {
-        if (inputsData.length > 0) {
-          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
-
-          cardContainer.empty();
-          _showOverlay(true);
-
-          setTimeout(() => {
+            _renderCardOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
-            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
-          }, 1000);
-        }
-
-        if (
-          cardContainer.children(".user-card").length === 0 &&
-          inputsData.length === 0
-        ) {
-          _renderCardOnResize(mainTable, cardContainer, usersData);
-          _showOverlay(false);
-        }
+          }
+        });
       }
     }
     /**
@@ -333,7 +317,7 @@ const Table = (function() {
      */
     function _cardSkeleton(user) {
       let data = _renderLangsAndSkills(user);
-      return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
+      return `<div class="card user-card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
         user._id
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
