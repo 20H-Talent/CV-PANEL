@@ -171,7 +171,7 @@ const UserForm = (function() {
       let city = $("input[name=city").val();
       let zipcode = $("input[name=zipcode").val();
       let birthdate = $("input[name=birthdate").val();
-      let experience = $("input[name=experience").val();
+      let experience = $("select[id='experience']").val();
       let website = $("input[name=website]").val();
       let avatar = $("input[type=file]");
 
@@ -328,7 +328,7 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
         $("input[name=zipcode]").val(user.address.zipcode);
         $("input[name=street]").val(user.address.street);
         $("input[name=website]").val(user.website);
-        $("input[name=experience]").val(user.experience);
+        $("select[id=experience]").val(user.experience);
 
         //set user.birthDate (obtained of database, e.g.: 1990-12-12T00:00:00.000Z) to timeStamp.
         getbirthDate = new Date(user.birthDate).getTime();
