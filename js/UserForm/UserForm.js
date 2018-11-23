@@ -174,6 +174,10 @@ const UserForm = (function() {
       let experience = $("select[id='experience']").val();
       let website = $("input[name=website]").val();
       let avatar = $("input[type=file]");
+      let company = $("input[name=company]").val();
+
+      let jobTitle = $("input[name=jobtitle]").val();
+      console.log("company/jobtitle: ", company, jobTitle);
 
       function _getSelectedElements(toSelect1, toSelect2, toSelect3) {
         let selectedLanguages = [];
@@ -220,7 +224,9 @@ const UserForm = (function() {
         skills: selectedElements.selectedSkills,
         experience: experience,
         birthDate: birthdate,
-        website: website
+        website: website,
+        company: company,
+        jobTitle: jobTitle
       };
       return { dataUserTxtPlain, avatar };
     }
@@ -330,6 +336,8 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
         $("input[name=street]").val(user.address.street);
         $("input[name=website]").val(user.website);
         $("select[id=experience]").val(user.experience);
+        $("input[name=company]").val(user.company);
+        $("input[name=jobTitle]").val(user.jobTitle);
 
         //set user.birthDate (obtained of database, e.g.: 1990-12-12T00:00:00.000Z) to timeStamp.
         getbirthDate = new Date(user.birthDate).getTime();
