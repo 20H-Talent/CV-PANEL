@@ -225,6 +225,55 @@ const UserForm = (function() {
       return { dataUserTxtPlain, avatar };
     }
     function _sendNewUser(dataToSendServer) {
+      console.log("datasent", dataToSendServer);
+      /**
+       * Render modal for updated or created user.
+       * @param stringForId - the posible values are created or updated.
+       */
+      function _renderModalEditOrCreateUser(stringForId) {
+        $("main")
+          .append(`<div class="modal d-block welcome-modal" style="z-index:
+      10000" id="user_${stringForId}" tabindex="-1" role="dialog"
+aria-labelledby="user_${stringForId}" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content align-items-center">
+      <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4caf50;">
+          <h5 class="modal-title font-weight-bold">User ${stringForId} Successfully</h5>
+      </div>
+      <div class="modal-body text-center">
+          <p>Name: ${dataToSendServer.dataUserTxtPlain.name} and Username: ${
+          dataToSendServer.dataUserTxtPlain.username
+        }.
+          </p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary">Go to Users</button>
+          <button type="button" class="btn btn-primary">Continue editing user</button>
+          <button type="button" class="btn btn-warning">Add another user</button>
+      </div>
+  </div>
+</div>
+</div> `);
+
+        // $("#list-users").trigger("click");
+        $(`#user_${stringForId} button.btn-secondary`).on("click", function() {
+          $(`#user_${stringForId}`).remove();
+          sessionStorage.removeItem("users-list");
+          location.reload(true);
+          location.reload(true);
+          // $("#list-users").trigger("click");
+        });
+        $(`#user_${stringForId} button.btn-primary`).on("click", function() {
+          $(`#user_${stringForId}`).remove();
+        });
+        $(`#user_${stringForId} button.btn-warning`).on("click", function() {
+          sessionStorage.removeItem("users-list");
+          location.reload(true);
+          location.reload(true);
+          //$("#list-users").trigger("click");
+          $("#new-user").trigger("click");
+        });
+      }
       const userID = $("form#user-form")
         .find("input[type=hidden]")
         .val();
@@ -254,83 +303,10 @@ const UserForm = (function() {
               contentType: false
             }).done(function(res) {
               console.log("res: ", res);
-              $(
-                "main"
-              ).append(`<div class="modal d-block welcome-modal" style="z-index:
-            10000" id="user_created" tabindex="-1" role="dialog"
-    aria-labelledby="guidedVisitTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content align-items-center">
-            <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4caf50;">
-                <h5 class="modal-title font-weight-bold">User Created</h5>
-            </div>
-            <div class="modal-body text-center">
-                <p>Name: ${res.name} and Username: ${res.username}.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Go to Users</button>
-                <button type="button" class="btn btn-primary">Continue editing user</button>
-                <button type="button" class="btn btn-warning">Add another user</button>
-            </div>
-        </div>
-    </div>
-</div> `);
+              _renderModalEditOrCreateUser("created");
             });
           } else {
-            $("main")
-              .append(`<div class="modal d-block welcome-modal" style="z-index:
-          10000" id="user_updated" tabindex="-1" role="dialog"
-  aria-labelledby="guidedVisitTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content align-items-center">
-          <div class="modal-header justify-content-center w-100 text-white" style="background-color: #4caf50;">
-              <h5 class="modal-title font-weight-bold">User updated</h5>
-          </div>
-          <div class="modal-body text-center">
-              <p>Name: ${res.name} and Username: ${res.username}.
-              </p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary">Go to Users</button>
-              <button type="button" class="btn btn-primary">Continue updating user</button>
-              <button type="button" class="btn btn-warning">Add another user</button>
-          </div>
-      </div>
-  </div>
-</div> `);
-          }
-        })
-        .done(function() {
-          sessionStorage.removeItem("users-list");
-          // $("#list-users").trigger("click");
-
-          if ($("#user_updated")) {
-            $("#user_updated button.btn-secondary").on("click", function() {
-              $("#user_updated").remove();
-              location.reload(true);
-              // $("#list-users").trigger("click");
-            });
-            $("#user_updated button.btn-primary").on("click", function() {
-              $("#user_updated").remove();
-            });
-            $("#user_updated button.btn-warning").on("click", function() {
-              location.reload(true);
-              //$("#list-users").trigger("click");
-              $("#new-user").trigger("click");
-            });
-          } else if ($("#user_created")) {
-            $("#user_created button.btn-secondary").on("click", function() {
-              $("#user_created").remove();
-              $("#list-users").trigger("click");
-            });
-            $("#user_created button.btn-primary").on("click", function() {
-              $("#user_created").remove();
-            });
-            $("#user_created button.btn-warning").on("click", function() {
-              $("#list-users").trigger("click");
-              $("#new-user").trigger("click");
-            });
+            _renderModalEditOrCreateUser("updated");
           }
         })
         .fail(res => console.log("Unable to create user: ", res));
