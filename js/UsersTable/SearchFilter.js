@@ -14,7 +14,7 @@ const SearchFilter = (function() {
     _createSearchBadges(filtersBadgets);
     let filteredUsers = users; //recoge la lista de usuarios (todos los usuarios de la tabla) para filtrar.
 
-    //FullName
+    // //FullName
     if (filters["name"]) {
       const firstnameQuery = filters["name"].toLowerCase();
       filteredUsers = filteredUsers.filter(user =>
@@ -37,20 +37,21 @@ const SearchFilter = (function() {
      * 
      *  */
     //Prueba moment.js
-    let ageVAR =moment(filters["birthDate"], "YYYYMMDD").fromNow();
-    console.log(ageVAR);
+  
+    // let ageVAR = moment(filters["birthDate"], "YYYYMMDD").fromNow();
+    // console.log(ageVAR);
 
-    // filtrado por fecha
-    if(filters["birthDate"]){
-      const ageQuery = filters["birthDate"];
-      filteredUsers = filteredUsers.filter(
-        user =>{
-          console.log(user,user["birthDate"], typeof user["birthDate"]);
-          user["birthDate"].includes(ageQuery);
-          // console.log(ageQuery);
-        }     
-      );
-    }
+    // // filtrado por fecha
+    // if(filters["birthDate"]){
+    //   const ageQuery = filters["birthDate"];
+    //   filteredUsers = filteredUsers.filter(
+    //     user =>{
+    //       console.log(user,user["birthDate"], typeof user["birthDate"]);
+    //       user["birthDate"].includes(ageQuery);
+    //       // console.log(ageQuery);
+    //     }     
+    //   );
+    // }
 
     // Experience
     if (filters["experience"]) {
@@ -64,21 +65,44 @@ const SearchFilter = (function() {
       );
     }
 
+    // Skills are Frameworks, Languages.
+
+    if (filters["skills"]) {
+      const skillsQuery = filters["skills"];
+      filteredUsers = filteredUsers.filter(user =>{
+        for(let i=0; i<=skillsQuery.length; i++) {
+          console.log(user,user["skills"], typeof user["skills"]);
+            user["skills"].includes( skillsQuery[i] );
+            let itemFilter =  user["skills"].includes( skillsQuery[i] );
+            if(!itemFilter){
+              return false;
+            }
+        }
+        console.log(user,user["skills"], typeof user["skills"]);
+        return true;
+      });
+    }
+
+
+
     // Languages (idiomas)
     if (filters["languages"]) {
       const skillsQuery = filters["languages"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["languages"].includes(skillsQuery)
-      );
+      filteredUsers = filteredUsers.filter(user =>{
+        for(let i=0; i<= skillsQuery.length; i++){
+          // console.log(user,user["languages"], typeof user["languages"]);
+          user["languages"].includes(skillsQuery[i]);
+          let languageItemFilter = user["languages"].includes(skillsQuery[i]);
+            if(!languageItemFilter){
+              return false;
+            }
+        }
+        console.log(user,user["languages"], typeof user["languages"]);
+        return true;  
+      });
     }
 
-    // Skills are Frameworks, Languages.
-    if (filters["skills"]) {
-      const skillsQuery = filters["skills"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["skills"].includes(skillsQuery)
-      );
-    }
+
 
     return filteredUsers;
   }
@@ -109,8 +133,6 @@ const SearchFilter = (function() {
         const $input = $(input);
         filters[$input.prop("name")] = $input.val(); //establece la (propiedad : valor), lo hace utilizando el (name : id).
       });
-      console.log("filtered: ",filtered);
-      console.log("filters:: ",filters);
     return filters;
   }
 
@@ -209,6 +231,9 @@ const SearchFilter = (function() {
         $("#" + idFieldName).val("");
       break;
 
+      case "select":
+        $("#" + idFieldName).val("");
+      break;
       // case "range":
       //   $("#" + idFieldName).val("");
 
