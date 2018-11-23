@@ -322,7 +322,7 @@ const Table = (function() {
        </p>
      </div>
      <div class="card-footer text-right card-buttons">
-        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
+        <button type="button" class="btn btn-outline-primary btn-sm edit" data-id=${
           user._id
         }><i class="fas fa-user-edit"></i></button>
         <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
