@@ -11,6 +11,11 @@ function renderLanguagesAndSkills(event) {
       case "skills":
         renderSkills(sourceData);
         break;
+
+      default:
+        throw new Error(
+          `This type method: ${type} doesn't exist in the array content`
+        );
     }
   }
 }
@@ -24,8 +29,9 @@ function renderLanguages(data) {
       `<div class="custom-control custom-checkbox col-5">
           <input type="checkbox" fieldName="language" valueName="${
             data[_id].label
-          }" value="${_id}"
-          name="${data[_id].label}" id="${_id}" class="custom-control-input">
+          }" value="${_id}" name="${
+        data[_id].label
+      }" id="${_id}" class="custom-control-input">
           <label class="custom-control-label" for="${_id}">${
         data[_id].label
       }</label>
