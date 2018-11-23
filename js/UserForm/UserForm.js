@@ -289,25 +289,26 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
         }
       })
         .done(function(res) {
+          let formData = new FormData();
+          formData.append("img", dataToSendServer.avatar[0].files[0]);
+
           if (!userID) {
-            let formData = new FormData();
-            formData.append("img", dataToSendServer.avatar[0].files[0]);
-            $.ajax({
-              method: "POST",
-              url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${
-                res._id
-              }`,
-              data: formData,
-              mimeType: "multipart/form-data",
-              processData: false,
-              contentType: false
-            }).done(function(res) {
-              console.log("res: ", res);
-              _renderModalEditOrCreateUser("created");
-            });
+            sendUserID = res._id;
+            modalID = "created";
           } else {
-            _renderModalEditOrCreateUser("updated");
+            sendUserID = userID;
+            modalID = "updated";
           }
+          $.ajax({
+            method: "POST",
+            url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${sendUserID}`,
+            data: formData,
+            mimeType: "multipart/form-data",
+            processData: false,
+            contentType: false
+          }).done(function(res) {
+            _renderModalEditOrCreateUser(modalID);
+          });
         })
         .fail(res => console.log("Unable to create user: ", res));
     }
