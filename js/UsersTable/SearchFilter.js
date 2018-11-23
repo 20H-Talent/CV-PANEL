@@ -205,6 +205,10 @@ const SearchFilter = (function() {
         $("#" + idFieldName).prop("checked", false);
         break;
 
+      case "date":
+        $("#" + idFieldName).val("");
+      break;
+
       // case "range":
       //   $("#" + idFieldName).val("");
 
