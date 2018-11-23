@@ -33,7 +33,7 @@ const Table = (function() {
             storage: { key: "langs", collect: "_id" }
           });
         } catch (err) {
-          return console.error("An error happened: " + err);
+          return console.dir("An error happened: " + err);
         }
       }).fail(function(err) {
         _showOverlay(false);
@@ -47,10 +47,12 @@ const Table = (function() {
      * @private
      */
     function _setupInternalEventListeners() {
-      $(window).on("resize", function(e) {
-        const width = this.innerWidth;
-        renderDataOnResize(width);
-      });
+      $(window)
+        .off("resize")
+        .on("resize", function(e) {
+          const width = this.innerWidth;
+          renderDataOnResize(width);
+        });
 
       if (window.innerWidth > 868) {
         $("div.main-container")
@@ -59,9 +61,9 @@ const Table = (function() {
           .on("click", "button:not(.detail)", _optionButtonsEvent);
       } else {
         $("div#card-container")
-          .find(".user-card .card-footer")
+          .find(".user-card .card-buttons")
           .off("click")
-          .on("click", "button:not(.detail)", _optionButtonsEvent);
+          .on("click", "button", _optionButtonsEvent);
       }
 
       $("#userModal").on("show.bs.modal", renderDataOnModal);
@@ -87,9 +89,8 @@ const Table = (function() {
     }
 
     function _renderLangsAndSkills(user) {
-      const skillsFromStorage = JSON.parse(sessionStorage.getItem("skills"))
-        .data;
-      const langsFromStorage = JSON.parse(sessionStorage.getItem("langs")).data;
+      const skillsFromStorage = JSON.parse(sessionStorage.getItem("skills"));
+      const langsFromStorage = JSON.parse(sessionStorage.getItem("langs"));
 
       const data = {
         skills: [],
@@ -102,9 +103,7 @@ const Table = (function() {
         ];
 
         if (window.innerWidth <= 867) {
-          return `<span data-type=${
-            skill.type
-          } class="badge badge-secondary mr-1">${label}</span>`;
+          return `<span data-type=${type} class="badge badge-secondary mr-1">${label}</span>`;
         } else {
           return `<img data-type=${type} class="mx-1 mt-2" src="../assets/images/skills/${label}.png" alt="${label}" width="48" height="48" title="${label}" />`;
         }
@@ -122,6 +121,7 @@ const Table = (function() {
 
       return data;
     }
+
     /** Display table with the users data when the instance is initialized
      * @function initTable
      * @public

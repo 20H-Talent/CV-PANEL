@@ -141,12 +141,12 @@ const ApiFactory = function(apiURL = "") {
   }
 
   function _collect(data, keyToCollect) {
-    const collectedObject = { data: {} };
+    const collectedObject = {};
     data.forEach(item => {
       const key = item[keyToCollect];
       const itemCollected = {};
       delete item[keyToCollect];
-      collectedObject["data"][key] = item;
+      collectedObject[key] = item;
     });
     return collectedObject;
   }
