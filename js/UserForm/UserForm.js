@@ -238,7 +238,7 @@ const UserForm = (function() {
           url: "files/upload/user",
           file
         },
-        callback: function(response) {
+        successCallback: function(response) {
           console.log("Response: ", response);
         }
       });

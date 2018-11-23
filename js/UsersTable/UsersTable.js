@@ -21,7 +21,10 @@ const Table = (function() {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
         try {
-          ApiMachine.request("/users", { method: "GET", callback: initTable });
+          ApiMachine.request("/users", {
+            method: "GET",
+            successCallback: initTable
+          });
           ApiMachine.request("/skills", {
             method: "GET",
             successCallback: function(response) {},

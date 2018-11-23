@@ -43,7 +43,7 @@ const ApiFactory = function(apiURL = "") {
         if (options["storage"]) {
           saveOnBrowserStorage(response, options["storage"]);
         }
-        if (_isFunction(options["callback"])) {
+        if (_isFunction(options["successCallback"])) {
           options.successCallback(response);
         } else {
           throw new Error("The callback needs to be a function");
@@ -77,7 +77,7 @@ const ApiFactory = function(apiURL = "") {
         ) {
           _uploadFileRequest(options, response._id);
         } else {
-          if (_isFunction(options["callback"])) {
+          if (_isFunction(options["successCallback"])) {
             options.successCallback(response);
           } else {
             throw new Error("The callback needs to be a function");
@@ -100,7 +100,7 @@ const ApiFactory = function(apiURL = "") {
       dataType: "json"
     })
       .done(function(response) {
-        if (_isFunction(options["callback"])) {
+        if (_isFunction(options["successCallback"])) {
           options.successCallback(response);
         } else {
           throw new Error("The callback needs to be a function");
@@ -123,7 +123,7 @@ const ApiFactory = function(apiURL = "") {
       mimeType: "multipart/form-data"
     })
       .done(function(uploadResponse) {
-        if (_isFunction(options["callback"])) {
+        if (_isFunction(options["successCallback"])) {
           options.successCallback(uploadResponse);
         } else {
           throw new Error("The callback needs to be a function");
@@ -133,7 +133,6 @@ const ApiFactory = function(apiURL = "") {
         const error = `An error ocurred in the ajax request to => ${
           options["multipart"]["url"]
         }`;
-
         dispatchError(error, options["errorCallback"]);
       });
   }

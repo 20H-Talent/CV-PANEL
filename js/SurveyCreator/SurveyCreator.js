@@ -733,6 +733,9 @@ const SurveyCreator = (function() {
               },
               errorCallback: function(error) {
                 _activeToastMessage(error);
+                submitButton
+                  .css({ position: "static", height: "auto" })
+                  .html(`Create Survey`);
               }
             }
           );
