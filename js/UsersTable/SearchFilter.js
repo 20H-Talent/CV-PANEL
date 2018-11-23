@@ -37,7 +37,7 @@ const SearchFilter = (function() {
     //   );
     // }
 
-    // // Experience
+    // // // Experience
     // if (filters["experience"]) {
     //   const experienceQuery = filters["experience"];
     //   filteredUsers = filteredUsers.filter(user => {
@@ -215,13 +215,13 @@ const SearchFilter = (function() {
  * Calculate Age.
  */
 
-function dataBirthdateToAge(date) {
-  var today = new Date();
-  var borned = new Date(date);
-  var age = today.getFullYear() - borned.getFullYear();
-  var month = today.getMonth() - borned.getMonth();
-  if (month < 0 || (month === 0 && today.getDate() < borned.getDate())) {
-    age --;
-  }
-  return age;
-}
+// function dataBirthdateToAge(date) {
+//   var today = new Date();
+//   var borned = new Date(date);
+//   var age = today.getFullYear() - borned.getFullYear();
+//   var month = today.getMonth() - borned.getMonth();
+//   if (month < 0 || (month === 0 && today.getDate() < borned.getDate())) {
+//     age --;
+//   }
+//   return age;
+// }
