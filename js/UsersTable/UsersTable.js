@@ -30,7 +30,7 @@ const Table = (function() {
           ApiMachine.request("/langs", {
             method: "GET",
             callback: function(response) {},
-            storage: { key: "langs", collect: "_id" }
+            storage: { key: "languages", collect: "_id" }
           });
         } catch (err) {
           return console.dir("An error happened: " + err);
@@ -90,33 +90,29 @@ const Table = (function() {
 
     function _renderLangsAndSkills(user) {
       const skillsFromStorage = JSON.parse(sessionStorage.getItem("skills"));
-      const langsFromStorage = JSON.parse(sessionStorage.getItem("langs"));
+      const langsFromStorage = JSON.parse(sessionStorage.getItem("languages"));
 
       const data = {
         skills: [],
         languages: []
       };
 
-      data["skills"] = user["skills"].map(function(skill) {
-        const { type, label } = skillsFromStorage[
-          skill["_id"] ? skill["_id"] : skill
-        ];
-
-        if (window.innerWidth <= 867) {
-          return `<span data-type=${type} class="badge badge-secondary mr-1">${label}</span>`;
-        } else {
-          return `<img data-type=${type} class="mx-1 mt-2" src="../assets/images/skills/${label}.png" alt="${label}" width="48" height="48" title="${label}" />`;
-        }
-      });
-
-      data["languages"] = user["languages"].map(function(lang) {
-        const { label } = langsFromStorage[lang["_id"] ? lang["_id"] : lang];
-
-        if (window.innerWidth <= 867) {
-          return `<span class="badge badge-secondary mr-1">${label}</span>`;
-        } else {
-          return `<img class="mx-1 mt-2" src="../assets/images/languages/${label}.png" alt="${label}" width="48" height="48" title="${label}" />`;
-        }
+      Object.keys(data).forEach(key => {
+        data[key] = user[key].map(item => {
+          const sourceData = JSON.parse(sessionStorage.getItem(key));
+          const dataFromStorage = sourceData[item["_id"] ? item["_id"] : item];
+          if (window.innerWidth <= 867) {
+            return `<span class="badge badge-secondary mr-1">${
+              dataFromStorage.label
+            }</span>`;
+          } else {
+            return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
+              dataFromStorage.label
+            }.png" alt="${
+              dataFromStorage.label
+            }" width="48" height="48" title="${dataFromStorage.label}" />`;
+          }
+        });
       });
 
       return data;
