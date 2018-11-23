@@ -5,6 +5,7 @@ function Companies() {
     this.construct = function(container) {
         $.get("../../html/CompaniesTable.html", htmlSkeleton => {
             container.empty().append(htmlSkeleton);
+            companies.removeAllCompanies();
             companies.getCompanyFromAPI();
             this.renderCompaniesTable(this.companies);
         }).fail(function(err) {
@@ -15,25 +16,27 @@ function Companies() {
         generalConstructor.construct("companies-table");
         $.getJSON("https://cv-mobile-api.herokuapp.com/api/companies")
             .done(function(data) {
-                $.each(data, function(i, item) {
+                $.each(data, function(i, comp) {
+                    console.log('comp :', comp);
                     var company = new Company(
-                        data[i]._id,
-                        data[i].name,
-                        data[i].docType,
-                        data[i].docNumber,
-                        data[i].email,
-                        data[i].website,
-                        data[i].address,
-                        data[i].socialUrls,
-                        data[i].logo,
-                        data[i].bio,
-                        data[i].employees,
-                        data[i].phone,
-                        data[i].registeredDate,
-                        data[i].jobOffers,
+                        comp._id,
+                        comp.name,
+                        comp.docType,
+                        comp.docNumber,
+                        comp.email,
+                        comp.website,
+                        comp.address,
+                        comp.socialUrls,
+                        comp.logo,
+                        comp.bio,
+                        comp.employees,
+                        comp.phone,
+                        comp.registeredDate,
+                        comp.jobOffers,
                     );
                     companies.addCompany(company);
                 });
+                console.log('companies.name :', companies.companies);
                 companies.renderCompaniesTable(companies.companies);
                 $(window).on("resize", function() {
                     let width = $(this).width();
@@ -70,7 +73,15 @@ function Companies() {
              </a>${filtredCompanies[i].email}
           </td>
           <td class="company-phone">${filtredCompanies[i].phone}</td>
-          <td class="company-social"> ${filtredCompanies[i].website}</td>
+          <td class="company-social text-center">
+          <div class="container">
+              <div class="row d-flex justify-content-around ">
+                  <div class=" social-net" id="networks${filtredCompanies[i].id}">
+                  ${companies.renderSocialNetworks(filtredCompanies[i].socialUrls)}
+                  </div>
+              </div>
+          </div>
+                  </td>
           <td class="options text-center">
              <button  type="button" onclick="companies.showPreviewInfo('${filtredCompanies[i].id}');" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
              <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm"    class="btn btn-sm btn-outline-primary  edit-company"  onclick="companies.editCompany('${filtredCompanies[i].id}');" data-original-title=""  )><i class="fas fa-user-edit"></i>
@@ -81,7 +92,6 @@ function Companies() {
         }
         $("#tableBody").html("");
         $("#tableBody").append(tableBody);
-
     };
     this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {
@@ -89,7 +99,17 @@ function Companies() {
         });
         return company[0];
     };
-
+    this.renderSocialNetworks = function(socialUrls) {
+        var divCol = document.createElement("div");
+        divCol.classList.add("text-center");
+        let innerNetwork = "";
+        for (let social in socialUrls) {
+            //innerNetwork += `<div>${socialUrls[social].url}/ ${socialUrls[social].platform}</div>`;
+            innerNetwork += `<a href="${socialUrls[social].url}" title="${socialUrls[social].platform}"><i style="z-index: 10;" class="fab ml-1 btn-${socialUrls[social].platform}   fa-lg fa-${socialUrls[social].platform}"></i></a>`;
+        }
+        divCol.innerHTML = innerNetwork;
+        return divCol.innerHTML;
+    }
     this.renderCompanyCards = function() {
         $("#card-container-company").show();
         $("#company-table").hide();
@@ -121,7 +141,7 @@ function Companies() {
                    <p class="card-text text-right  col-sm-8  ldeep-purple"><ins>${this.companies[i].phone}</ins></p>
                 </div>
                 <div class="d-inline-flex  col  mt-3">
-                   <p class="card-text col d-inline-flex font-weight-bold mb-1">Social Networks</p>
+                   <p class="card-text col d-inline-flex font-weight-bold mb-1">Website</p>
                    <div class="mt-2 text-right  col-sm-6 social-net">${this.companies[i].website}
                    </div>
                 </div>
@@ -209,6 +229,8 @@ function Companies() {
                 $("#cif").show();
                 $("#nif").hide();
             }
+            $("input[name=platform]").val(company.socialUrls.platform);
+            $("input[name=url]").val(company.socialUrls.url);
             $("input[name=street]").val(company.address.street);
             $("input[name=city]").val(company.address.city);
             $("input[name=zipcode]").val(company.address.zipcode);
@@ -249,99 +271,108 @@ function Companies() {
             }
         }
     }
+    this.inputsBadgesSearch = function() {
 
-    this.advancedSearchCompanies = function(event) {
-            event.preventDefault();
-            $("#alertNoCompanyFound").remove();
-            var badgesContainer = $(".search-badges-company").empty();
-            let inputCompanyName = $("#company-name").val().toLowerCase();
-            let docType = $("input[name=docType]:checked").val();
-            let radioButtons = $("input[name=docType]");
-            let docNumber = "";
-            if (docType == "nif") {
-                docNumber = $("input[name=docNumberNif]").val();
-            } else if (docType == "cif") {
-                docNumber = $("input[name=docNumberCif]").val();
-            }
-            let inputEmployees = $("#company-employees").val().toLowerCase();
-            let inputBio = $("#company-bio").val().toLowerCase();
-            let inputCity = $("#company-city").val().toLowerCase();
-            let inputEmail = $("#company-email").val().toLowerCase();
-            let inputCountry = $("#company-country").val().toLowerCase();
-            let formCompanyes = $("#advanced-search-companies");
-            let inputs = formCompanyes.find("input");
-            var filteredCompanies = [];
-            filteredCompanies = companies.companies.filter((company) => {
-                return (company.name.toLowerCase().includes(inputCompanyName));
-            });
-            // filteredCompanies = filteredCompanies.filter((company) => {
-            //     return (company.docType.toString().toLowerCase().includes(docType));
-            // });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.docNumber.toString().toLowerCase().includes(docNumber));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.employees.toString().includes(inputEmployees));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.bio.toString().includes(inputBio));
-            });
-
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.address.city.toLowerCase().includes(inputCity));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.email.toLowerCase().includes(inputEmail));
-            });
-            filteredCompanies = filteredCompanies.filter((company) => {
-                return (company.address.country.toLowerCase().includes(inputCountry));
-            });
-            for (let i = 0; i < inputs.length; i++) {
-                if (inputs[i].type == "radio") {
-                    if (inputs[i].checked == true) {
-                        const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
-                        badgeCompany.fadeIn("slow");
-                        badgeCompany.off("click").on("click", function(event) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            badgeCompany.remove();
-                            $(inputs[i]).prop('checked', false);
-                            $("#submit_search-companies").trigger("click");
-                            $(".alertCompanyFound").remove();
-                        });
-                        badgesContainer.append(badgeCompany);
-                    }
-                } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
+        let formCompanyes = $("#advanced-search-companies");
+        let inputs = formCompanyes.find("input");
+        var badgesContainer = $(".search-badges-company").empty();
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].type == "radio") {
+                if (inputs[i].checked == true) {
                     const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
                     badgeCompany.fadeIn("slow");
                     badgeCompany.off("click").on("click", function(event) {
                         event.preventDefault();
                         event.stopPropagation();
                         badgeCompany.remove();
-                        inputs[i].value = "";
+                        $(inputs[i]).prop('checked', false);
                         $("#submit_search-companies").trigger("click");
                         $(".alertCompanyFound").remove();
                     });
                     badgesContainer.append(badgeCompany);
                 }
+            } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
+                const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+                badgeCompany.fadeIn("slow");
+                badgeCompany.off("click").on("click", function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    badgeCompany.remove();
+                    inputs[i].value = "";
+                    $("#submit_search-companies").trigger("click");
+                    $(".alertCompanyFound").remove();
+                });
+                badgesContainer.append(badgeCompany);
             }
-            if (filteredCompanies.length == 0) {
-                $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
-            } else {
-                badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
-            }
-            companies.renderCompaniesTable(filteredCompanies);
         }
-        /***********************************
-         * Adding a new company to API
-         ***********************************/
+    }
+
+    this.advancedSearchCompanies = function(event) {
+
+        event.preventDefault();
+        $("#alertCompanyFound").remove();
+        var badgesContainer = $(".search-badges-company").empty();
+        let inputCompanyName = $("#company-name").val().toLowerCase();
+        let docType = $("input[name=docType]:checked").val();
+        let radioButtons = $("input[name=docType]");
+        let docNumber = "";
+        if (docType == "nif") {
+            docNumber = $("input[name=docNumberNif]").val();
+        } else if (docType == "cif") {
+            docNumber = $("input[name=docNumberCif]").val();
+        }
+        let inputEmployees = $("#company-employees").val().toLowerCase();
+        let inputBio = $("#company-bio").val().toLowerCase();
+        let inputCity = $("#company-city").val().toLowerCase();
+        let inputEmail = $("#company-email").val().toLowerCase();
+        let inputCountry = $("#company-country").val().toLowerCase();
+        var filteredCompanies = [];
+        filteredCompanies = companies.companies.filter((company) => {
+            return (company.name.toLowerCase().includes(inputCompanyName));
+        });
+        // filteredCompanies = filteredCompanies.filter((company) => {
+        //     return (company.docType.toString().toLowerCase().includes(docType));
+        // });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.docNumber.toString().toLowerCase().includes(docNumber));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.employees.toString().includes(inputEmployees));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.bio.toString().includes(inputBio));
+        });
+
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.address.city.toLowerCase().includes(inputCity));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.email.toLowerCase().includes(inputEmail));
+        });
+        filteredCompanies = filteredCompanies.filter((company) => {
+            return (company.address.country.toLowerCase().includes(inputCountry));
+        });
+        if (filteredCompanies.length == 0) {
+            $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
+
+        } else {
+
+            $("#company-table").append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
+        }
+        this.inputsBadgesSearch();
+        companies.renderCompaniesTable(filteredCompanies);
+    }
+
+    /***********************************
+     * Adding a new company to API
+     ***********************************/
     this.sendNewCompanyToAPI = function() {
         let method = "POST";
-        let url = "https://cv-mobile-api.herokuapp.com/api/companies";
+        let urlApi = "https://cv-mobile-api.herokuapp.com/api/companies";
         let id = $("input[name=company-id]").val();
         if (id.length > 0) {
             method = "PUT";
-            url = "https://cv-mobile-api.herokuapp.com/api/companies/" + id;
+            urlApi = "https://cv-mobile-api.herokuapp.com/api/companies/" + id;
         }
         let name = $("input[name=name]").val();
         let docType = $("input[name=docType]:checked").val();
@@ -355,18 +386,24 @@ function Companies() {
         let zipcode = $("input[name=zipcode]").val();
         let city = $("input[name=city]").val();
         let street = $("input[name=street]").val();
+        let platform = $("input[name=platform]").val();
+        let url = $("input[name=url]").val();
         let address = {
             country: country,
             street: street,
             city: city,
             zipcode: zipcode
         };
+        let socialUrls = [{
+            platform: platform,
+            url: url
+        }];
         let phone = $("input[name=phone]").val();
         let email = $("input[name=email]").val();
         let employees = $("input[name=employees]").val();
         let website = $("input[name=website]").val();
         let bio = $("textarea[name=bio]").val();
-        let socialUrls = $("input[name=socialUrls]").val();
+        //  socialUrls = $("input[name=socialUrls]").val();
         let newCompany = {
             name: `${name}`,
             docType: docType,
@@ -377,10 +414,10 @@ function Companies() {
             employees: employees,
             phone: phone,
             website: website,
-            socialUrls: [],
+            socialUrls: socialUrls,
             jobOffers: []
         };
-        fetch(url, {
+        fetch(urlApi, {
                 method: method,
                 body: JSON.stringify(newCompany),
                 headers: {
@@ -390,7 +427,7 @@ function Companies() {
             .then(res => res.json())
             .then(response => {
                 if (response) {
-                    if (window.confirm("You have an answer")) {
+                    if (window.confirm("Well done")) {
                         window.location.replace("/index.html");
                     }
                 }
