@@ -51,27 +51,6 @@ function Companies() {
                 });
             });
     }
-    this.rendersocialUrls = function() {
-        var divCol = document.createElement("div");
-        divCol.classList.add("text-center");
-        console.log("social", this.socialUrls);
-        var objectResult = Object.keys(this.socialUrls)
-        console.log('objectResult :', objectResult);
-        for (let i = 0; i < objectResult.length; i++) {
-            console.log("entro al goro");
-            var network = objectResult[i];
-            console.log("NETWORK", network);
-            var innerNetwork = "<a href='" + network + "'title='" + network + "'><i class='fab ml-3 btn" + network + "  fa-lg fa-" + network + "'></i></a>";
-            console.log("innerNetwork", innerNetwork);
-            divCol.innerHTML = divCol.innerHTML + innerNetwork;
-        };
-        let innerNetwork = "";
-        for (let social in this.socialUrls) {
-            innerNetwork += `<a href="${social}" title="${social}"><i style="z-index: 10;" class="fab ml-1 btn-${social} text-center  fa-lg fa-${social}"></i></a>`;
-        }
-        divCol.innerHTML = innerNetwork;
-        return divCol.innerHTML;
-    }
     this.companies = [];
     this.addCompany = function(company) {
         this.companies.push(company);
@@ -79,10 +58,6 @@ function Companies() {
     this.removeAllCompanies = function() {
         this.companies = [];
     }
-
-
-
-
     this.renderCompaniesTable = function(filtredCompanies) {
         $("#card-container-company").hide();
         $("#company-table").show();
@@ -117,7 +92,6 @@ function Companies() {
         }
         $("#tableBody").html("");
         $("#tableBody").append(tableBody);
-
     };
     this.getCompanyById = function(id) {
         var company = this.companies.filter(function(company) {
@@ -125,7 +99,6 @@ function Companies() {
         });
         return company[0];
     };
-
     this.renderSocialNetworks = function(socialUrls) {
         var divCol = document.createElement("div");
         divCol.classList.add("text-center");
@@ -137,12 +110,6 @@ function Companies() {
         divCol.innerHTML = innerNetwork;
         return divCol.innerHTML;
     }
-
-
-
-
-
-
     this.renderCompanyCards = function() {
         $("#card-container-company").show();
         $("#company-table").hide();
@@ -304,10 +271,46 @@ function Companies() {
             }
         }
     }
+    this.inputsBadgesSearch = function() {
+
+        let formCompanyes = $("#advanced-search-companies");
+        let inputs = formCompanyes.find("input");
+        var badgesContainer = $(".search-badges-company").empty();
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].type == "radio") {
+                if (inputs[i].checked == true) {
+                    const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+                    badgeCompany.fadeIn("slow");
+                    badgeCompany.off("click").on("click", function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        badgeCompany.remove();
+                        $(inputs[i]).prop('checked', false);
+                        $("#submit_search-companies").trigger("click");
+                        $(".alertCompanyFound").remove();
+                    });
+                    badgesContainer.append(badgeCompany);
+                }
+            } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
+                const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
+                badgeCompany.fadeIn("slow");
+                badgeCompany.off("click").on("click", function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    badgeCompany.remove();
+                    inputs[i].value = "";
+                    $("#submit_search-companies").trigger("click");
+                    $(".alertCompanyFound").remove();
+                });
+                badgesContainer.append(badgeCompany);
+            }
+        }
+    }
 
     this.advancedSearchCompanies = function(event) {
+
         event.preventDefault();
-        $("#alertNoCompanyFound").remove();
+        $("#alertCompanyFound").remove();
         var badgesContainer = $(".search-badges-company").empty();
         let inputCompanyName = $("#company-name").val().toLowerCase();
         let docType = $("input[name=docType]:checked").val();
@@ -351,49 +354,18 @@ function Companies() {
         });
         if (filteredCompanies.length == 0) {
             $("#company-table").append(`<div  class="alert alertCompanyFound m-3 alert-danger" role="alert">No companies found</div>`);
+
         } else {
-            badgesContainer.append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
+
+            $("#company-table").append(`<div class="alert mt-3 alertCompanyFound m-3 alert-success" role="alert"> We have found ${filteredCompanies.length} results</div>`);
         }
         this.inputsBadgesSearch();
         companies.renderCompaniesTable(filteredCompanies);
     }
-    this.inputsBadgesSearch = function() {
-            let formCompanyes = $("#advanced-search-companies");
-            let inputs = formCompanyes.find("input");
-            var badgesContainer = $(".search-badges-company").empty();
-            for (let i = 0; i < inputs.length; i++) {
-                if (inputs[i].type == "radio") {
-                    if (inputs[i].checked == true) {
-                        const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
-                        badgeCompany.fadeIn("slow");
-                        badgeCompany.off("click").on("click", function(event) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            badgeCompany.remove();
-                            $(inputs[i]).prop('checked', false);
-                            $("#submit_search-companies").trigger("click");
-                            $(".alertCompanyFound").remove();
-                        });
-                        badgesContainer.append(badgeCompany);
-                    }
-                } else if ((inputs[i].type == "text" || inputs[i].type == "number") && inputs[i].value.toString().trim().length > 0) {
-                    const badgeCompany = $(`<span class="badge p-2 ml-3 badge-pill  text-white ldeep-purple badge-secondary filter mr-2">${inputs[i].name}: <span>${inputs[i].value}</span><button id="badgeButton" class="bg-transparent border-0"><i class="far text-danger ml-2 fa-times-circle"></i></button></span>`).hide();
-                    badgeCompany.fadeIn("slow");
-                    badgeCompany.off("click").on("click", function(event) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        badgeCompany.remove();
-                        inputs[i].value = "";
-                        $("#submit_search-companies").trigger("click");
-                        $(".alertCompanyFound").remove();
-                    });
-                    badgesContainer.append(badgeCompany);
-                }
-            }
-        }
-        /***********************************
-         * Adding a new company to API
-         ***********************************/
+
+    /***********************************
+     * Adding a new company to API
+     ***********************************/
     this.sendNewCompanyToAPI = function() {
         let method = "POST";
         let urlApi = "https://cv-mobile-api.herokuapp.com/api/companies";
@@ -455,7 +427,7 @@ function Companies() {
             .then(res => res.json())
             .then(response => {
                 if (response) {
-                    if (window.confirm("You have an answer")) {
+                    if (window.confirm("Well done")) {
                         window.location.replace("/index.html");
                     }
                 }
