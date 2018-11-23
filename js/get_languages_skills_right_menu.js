@@ -1,68 +1,62 @@
-$("#mySidenavRight a").on("click", languages);
-$("#mySidenavRight a").on("click", skills);
+$("#mySidenavRight a").on("click", renderLanguagesAndSkills);
 
 // ******* declare function to get data from languages json. ***********
-function languages() {
-  $.getJSON("http://cv-mobile-api.herokuapp.com/api/langs")
-    .done(function(data) {
-      searchForm(data);
-    })
-    .fail(function(jqXHR) {
-      if (jqXHR.statusText !== "OK") {
-        console.log("[ERROR]: on loading json.");
-      }
-    });
-
-  // method to search
-  function searchForm(data) {
-    $("#languages").html(" ");
-    $.each(data, function(d) {
-      $("#languages").append(
-        `<div class="custom-control custom-checkbox col-5">
-          <input type="checkbox" fieldName="language" valueName="${data[d].label}" value="${data[d]._id}" 
-          name="${data[d].label}" id="${data[d]._id}" class="custom-control-input">
-          <label class="custom-control-label" for="${data[d]._id}">${data[d].label}</label>
-        </div>`
-      );
-    });
+function renderLanguagesAndSkills(event) {
+  for (let type of ["skills", "languages"]) {
+    const sourceData = JSON.parse(sessionStorage.getItem(type));
+    switch (type) {
+      case "languages":
+        renderLanguages(sourceData);
+        break;
+      case "skills":
+        renderSkills(sourceData);
+        break;
+    }
   }
 }
 
-// ************** declare function to get data from skills json. *************
-function skills() {
-  $.getJSON("http://cv-mobile-api.herokuapp.com/api/skills")
-    .done(function(data) {
-      searchForm(data);
-    })
-    .fail(function(jqXHR) {
-      if (jqXHR.statusText !== "OK") {
-        console.log("[ERROR]: on loading json.");
-      }
-    });
+function renderLanguages(data) {
+  const languagesContainer = $("form#advanced-search #languages");
+  languagesContainer.html(" ");
 
-  // method to search
-  function searchForm(data) {
-    $('#skills div[class*="col-12"]').html(" ");
-    $('#skills div[class*="col-5"]').html(" ");
-    $('#skills div[class*="col-6"]').html(" ");
-    $.each(data, function(d) {
-      let divObjectSkill = `<div class="custom-control custom-checkbox mr-3">
-        <input type="checkbox" id="${
-          data[d]._id
-        }" class="custom-control-input" fieldName="${data[d].type}" valueName="${data[d].label}" value=${data[d]._id} 
-        name="${data[d].label}">
-        <label class="custom-control-label" for="${data[d]._id}">${
-        data[d].label
+  for (let _id in data) {
+    languagesContainer.append(
+      `<div class="custom-control custom-checkbox col-5">
+          <input type="checkbox" fieldName="language" valueName="${
+            data[_id].label
+          }" value="${_id}"
+          name="${data[_id].label}" id="${_id}" class="custom-control-input">
+          <label class="custom-control-label" for="${_id}">${
+        data[_id].label
       }</label>
-      </div>`;
-      if (data[d].type === "framework") {
-        $('#skills div[class*="col-12"]').append(divObjectSkill);
-      } else if (data[d].type === "language") {
-        $('#skills div[class*="col-5"]').append(divObjectSkill);
-      } else {
-        $('#skills div[class*="col-6"]').append(divObjectSkill);
-      }
-    });
+        </div>`
+    );
   }
 }
 
+function renderSkills(data) {
+  const skillsContainer = $("form#advanced-search #skills");
+  skillsContainer.find('div[class*="col-12"]').html(" ");
+  skillsContainer.find('div[class*="col-5"]').html(" ");
+  skillsContainer.find('div[class*="col-6"]').html(" ");
+
+  for (let _id in data) {
+    let divObjectSkill = `<div class="custom-control custom-checkbox mr-3">
+        <input type="checkbox" id="${_id}" class="custom-control-input" fieldName="${
+      data[_id].type
+    }" valueName="${data[_id].label}" value=${_id}
+        name="${data[_id].label}">
+        <label class="custom-control-label" for="${_id}">${
+      data[_id].label
+    }</label>
+          </div>`;
+
+    if (data[_id].type === "framework") {
+      skillsContainer.find("div[class*='col-12']").append(divObjectSkill);
+    } else if (data[_id].type === "language") {
+      skillsContainer.find("div[class*='col-5']").append(divObjectSkill);
+    } else {
+      skillsContainer.find("div[class*='col-6']").append(divObjectSkill);
+    }
+  }
+}
