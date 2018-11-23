@@ -549,7 +549,7 @@ ul div[class*="border-dark"] {
 
 #age_user #age-range,
 #experience #exp-years {
-  width: 90%;
+  width: 100%;
 }
 
 #age_user #age,

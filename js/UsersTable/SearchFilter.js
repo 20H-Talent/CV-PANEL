@@ -28,24 +28,41 @@ const SearchFilter = (function() {
       );
     }
 
-    // Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
-    // if(filters["age"]){
-    //   const ageQuery = filters["age"];
-    //   filteredUsers = filteredUsers.filter(
-    //     user =>
-    //       user["age"].includes(ageQuery)
-    //   );
-    // }
+    /**
+     *  Age (ya no está en la API, ahora es birthDate una fecha de nacimiento, 
+     *  hay que calcularla y para eso utilizaremos la librería moment.js).
+     * 
+     *  Desde la Api cogemos la fecha de nacimiento y la comparamos que la fecha actual.
+     *  Por defecto la hora será T00:00:00.000Z
+     * 
+     *  */
+    //Prueba moment.js
+    let ageVAR =moment(filters["birthDate"], "YYYYMMDD").fromNow();
+    console.log(ageVAR);
 
-    // // // Experience
-    // if (filters["experience"]) {
-    //   const experienceQuery = filters["experience"];
-    //   filteredUsers = filteredUsers.filter(user => {
-    //     console.log(user,user["experience"], typeof user["experience"])
-    //     user["experience"].includes(experienceQuery)
-    //   }
-    //   );
-    // }
+    // filtrado por fecha
+    if(filters["birthDate"]){
+      const ageQuery = filters["birthDate"];
+      filteredUsers = filteredUsers.filter(
+        user =>{
+          console.log(user,user["birthDate"], typeof user["birthDate"]);
+          user["birthDate"].includes(ageQuery);
+          // console.log(ageQuery);
+        }     
+      );
+    }
+
+    // Experience
+    if (filters["experience"]) {
+      const experienceQuery = filters["experience"];
+      filteredUsers = filteredUsers.filter(user => {
+
+        console.log(user,user["experience"], typeof user["experience"]);
+
+        user["experience"].includes(experienceQuery);
+      }
+      );
+    }
 
     // Languages (idiomas)
     if (filters["languages"]) {
@@ -188,22 +205,20 @@ const SearchFilter = (function() {
         $("#" + idFieldName).prop("checked", false);
         break;
 
-      case "range":
-        $("#" + idFieldName).val("");
+      // case "range":
+      //   $("#" + idFieldName).val("");
 
-        if ($("#age-range").val("") != "") {
-          document.getElementById("age").innerHTML = "";
-        }
-        if ($("#exp-years").val("") != "") {
-          document.getElementById("range").innerHTML = "";
-        }
-        break;
+      //   if ($("#age-range").val("") != "") {
+      //     document.getElementById("age").innerHTML = "";
+      //   }
+      //   if ($("#exp-years").val("") != "") {
+      //     document.getElementById("range").innerHTML = "";
+      //   }
+      //   break;
     }
 
     $(this).remove();
-
     $("#submit_search").trigger("click");
-    //usersTable.initTable(null, window.innerWidth);
   }
 
   return {
@@ -211,17 +226,3 @@ const SearchFilter = (function() {
   };
 })();
 
-/**
- * Calculate Age.
- */
-
-// function dataBirthdateToAge(date) {
-//   var today = new Date();
-//   var borned = new Date(date);
-//   var age = today.getFullYear() - borned.getFullYear();
-//   var month = today.getMonth() - borned.getMonth();
-//   if (month < 0 || (month === 0 && today.getDate() < borned.getDate())) {
-//     age --;
-//   }
-//   return age;
-// }
