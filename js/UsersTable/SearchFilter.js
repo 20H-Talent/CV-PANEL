@@ -21,15 +21,10 @@ const SearchFilter = (function() {
         user["name"].toLowerCase().includes(firstnameQuery)
       );
     }
-    //Gender
-    if (filters["genre_male"]) {
+    // Gender
+    if (filters["gender"]) {
       filteredUsers = filteredUsers.filter(
-        user => user["genre_male"] === filters["genre_male"]
-      );
-    }
-    if (filters["genre_female"]) {
-      filteredUsers = filteredUsers.filter(
-        user => user["genre_female"] === filters["genre_female"]
+        user => user["gender"] === filters["gender"]
       );
     }
 
@@ -38,18 +33,20 @@ const SearchFilter = (function() {
     //   const ageQuery = filters["age"];
     //   filteredUsers = filteredUsers.filter(
     //     user =>
-    //       user["age"].includes(firstnameQuery)
+    //       user["age"].includes(ageQuery)
     //   );
     // }
 
-    //Experience
+    // // Experience
+    // if (filters["experience"]) {
+    //   const experienceQuery = filters["experience"];
+    //   filteredUsers = filteredUsers.filter(user => {
+    //     console.log(user,user["experience"], typeof user["experience"])
+    //     user["experience"].includes(experienceQuery)
+    //   }
+    //   );
+    // }
 
-    if (filters["experience"]) {
-      const experienceQuery = filters["experience"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["experience"].includes(experienceQuery)
-      );
-    }
     // Languages (idiomas)
     if (filters["languages"]) {
       const skillsQuery = filters["languages"];
@@ -58,7 +55,7 @@ const SearchFilter = (function() {
       );
     }
 
-    // skills are Frameworks, Languages.
+    // Skills are Frameworks, Languages.
     if (filters["skills"]) {
       const skillsQuery = filters["skills"];
       filteredUsers = filteredUsers.filter(user =>
@@ -218,13 +215,13 @@ const SearchFilter = (function() {
  * Calculate Age.
  */
 
-// function dataBirthdateToAge(date) {
-//   var today = new Date();
-//   var borned = new Date(date);
-//   var age = today.getFullYear() - borned.getFullYear();
-//   var month = today.getMonth() - borned.getMonth();
-//   if (month < 0 || (month === 0 && today.getDate() < borned.getDate())) {
-//     age --;
-//   }
-//   return age;
-// }
+function dataBirthdateToAge(date) {
+  var today = new Date();
+  var borned = new Date(date);
+  var age = today.getFullYear() - borned.getFullYear();
+  var month = today.getMonth() - borned.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < borned.getDate())) {
+    age --;
+  }
+  return age;
+}

@@ -20,7 +20,7 @@ function languages() {
       $("#languages").append(
         `<div class="custom-control custom-checkbox col-5">
           <input type="checkbox" fieldName="language" valueName="${data[d].label}" value="${data[d]._id}" 
-          name="${data[d].label}" id="${data[d]._id}" class="custom-control-input">
+          name="languages" id="${data[d]._id}" class="custom-control-input">
           <label class="custom-control-label" for="${data[d]._id}">${data[d].label}</label>
         </div>`
       );
@@ -50,7 +50,7 @@ function skills() {
         <input type="checkbox" id="${
           data[d]._id
         }" class="custom-control-input" fieldName="${data[d].type}" valueName="${data[d].label}" value=${data[d]._id} 
-        name="${data[d].label}">
+        name="skills">
         <label class="custom-control-label" for="${data[d]._id}">${
         data[d].label
       }</label>
