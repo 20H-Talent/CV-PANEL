@@ -18,14 +18,14 @@ const ApiFactory = function(apiURL = "") {
     if (Object.keys(options).length > 0) {
       switch (options["method"]) {
         case "GET":
-          getRequest(baseURL + route, options);
+          _getRequest(baseURL + route, options);
           break;
         case "POST":
         case "PUT":
-          storeOrUpdateRequest(baseURL + route, options);
+          _storeOrUpdateRequest(baseURL + route, options);
           break;
         case "DELETE":
-          deleteRequest(baseURL + route, options);
+          _deleteRequest(baseURL + route, options);
           break;
         default:
           throw new Error(
@@ -37,26 +37,31 @@ const ApiFactory = function(apiURL = "") {
     }
   };
 
-  function getRequest(url, options) {
+  function _getRequest(url, options) {
     $.getJSON(url, function(response) {
       if (!response["error"] && response) {
         if (options["storage"]) {
           saveOnBrowserStorage(response, options["storage"]);
         }
-        if (isFunction(options["callback"])) {
-          options.callback(response);
+        if (_isFunction(options["callback"])) {
+          options.successCallback(response);
         } else {
           throw new Error("The callback needs to be a function");
         }
       } else {
-        throw new Error(response["error"]);
+        if (_isFunction(options["errorCallback"])) {
+          options.errorCallback(response["error"]);
+        } else {
+          throw new Error(response["error"]);
+        }
       }
     }).fail(function() {
-      throw new Error(`An error ocurred in the ajax request to => ${url}`);
+      const error = `An error ocurred in the ajax request to => ${url}`;
+      dispatchError(error, options["errorCallback"]);
     });
   }
 
-  function storeOrUpdateRequest(url, options) {
+  function _storeOrUpdateRequest(url, options) {
     $.ajax({
       method: options["method"],
       url,
@@ -70,21 +75,22 @@ const ApiFactory = function(apiURL = "") {
           options["multipart"] &&
           Object.keys(options["multipart"].length > 0)
         ) {
-          uploadFileRequest(options, response._id);
+          _uploadFileRequest(options, response._id);
         } else {
-          if (isFunction(options["callback"])) {
-            options.callback(response);
+          if (_isFunction(options["callback"])) {
+            options.successCallback(response);
           } else {
             throw new Error("The callback needs to be a function");
           }
         }
       })
       .fail(function() {
-        throw new Error(`An error in the request happened`);
+        const error = `An error ocurred in the ajax request to => ${url}`;
+        dispatchError(error, options["errorCallback"]);
       });
   }
 
-  function deleteRequest(url, options) {
+  function _deleteRequest(url, options) {
     $.ajax({
       method: options["method"],
       url,
@@ -94,18 +100,19 @@ const ApiFactory = function(apiURL = "") {
       dataType: "json"
     })
       .done(function(response) {
-        if (isFunction(options["callback"])) {
-          options.callback(response);
+        if (_isFunction(options["callback"])) {
+          options.successCallback(response);
         } else {
           throw new Error("The callback needs to be a function");
         }
       })
       .fail(function() {
-        throw new Error(`An error in the request happened`);
+        const error = `An error ocurred in the ajax request to => ${url}`;
+        dispatchError(error, options["errorCallback"]);
       });
   }
 
-  function uploadFileRequest(options, _id) {
+  function _uploadFileRequest(options, _id) {
     $.ajax({
       method: "POST",
       cache: false,
@@ -116,18 +123,22 @@ const ApiFactory = function(apiURL = "") {
       mimeType: "multipart/form-data"
     })
       .done(function(uploadResponse) {
-        if (isFunction(options["callback"])) {
-          options.callback(uploadResponse);
+        if (_isFunction(options["callback"])) {
+          options.successCallback(uploadResponse);
         } else {
           throw new Error("The callback needs to be a function");
         }
       })
-      .fail(function(err) {
-        throw new Error(`An error in the request happened:  ${err}`);
+      .fail(function() {
+        const error = `An error ocurred in the ajax request to => ${
+          options["multipart"]["url"]
+        }`;
+
+        dispatchError(error, options["errorCallback"]);
       });
   }
 
-  function isFunction(param) {
+  function _isFunction(param) {
     return typeof param === "function";
   }
 
@@ -137,6 +148,14 @@ const ApiFactory = function(apiURL = "") {
         storage["key"],
         JSON.stringify(_collect(data, storage["collect"]))
       );
+    }
+  }
+
+  function dispatchError(error, callback) {
+    if (_isFunction(callback)) {
+      callback(error);
+    } else {
+      throw new Error(error);
     }
   }
 

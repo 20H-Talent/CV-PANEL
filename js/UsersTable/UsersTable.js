@@ -24,12 +24,12 @@ const Table = (function() {
           ApiMachine.request("/users", { method: "GET", callback: initTable });
           ApiMachine.request("/skills", {
             method: "GET",
-            callback: function(response) {},
+            successCallback: function(response) {},
             storage: { key: "skills", collect: "_id" }
           });
           ApiMachine.request("/langs", {
             method: "GET",
-            callback: function(response) {},
+            successCallback: function(response) {},
             storage: { key: "languages", collect: "_id" }
           });
         } catch (err) {
@@ -182,7 +182,7 @@ const Table = (function() {
       if (browserWidth > 868 && tableBody.children("tr").length === 0) {
         ApiMachine.request("/users", {
           method: "GET",
-          callback: function(users) {
+          successCallback: function(users) {
             _renderTableOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
             _setupInternalEventListeners();
@@ -194,7 +194,7 @@ const Table = (function() {
       ) {
         ApiMachine.request("/users", {
           method: "GET",
-          callback: function(users) {
+          successCallback: function(users) {
             _renderCardOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
             _setupInternalEventListeners();
@@ -340,12 +340,12 @@ const Table = (function() {
       try {
         ApiMachine.request(`/users/${id}`, {
           method: "GET",
-          callback: function(userFromAPI) {
+          successCallback: function(userFromAPI) {
             externalCallback(userFromAPI);
           }
         });
       } catch (err) {
-        return console.error("An error happened: " + err);
+        return console.dir("An error happened: " + err);
       }
     }
 
@@ -359,7 +359,7 @@ const Table = (function() {
       try {
         ApiMachine.request(`/users/${id}`, {
           method: "DELETE",
-          callback: function(userFromAPI) {
+          successCallback: function(userFromAPI) {
             _removeUserFromDOM(id);
           }
         });
