@@ -14,13 +14,11 @@ const Table = (function() {
   function init() {
     const mainContainer = $(".main-container");
 
-    let apiUsers = "https://cv-mobile-api.herokuapp.com/api/users";
-    let apiSkills = "https://cv-mobile-api.herokuapp.com/api/skills";
-    let apiLanguages = "https://cv-mobile-api.herokuapp.com/api/langs";
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
         try {
+          _showOverlay(true);
           ApiMachine.request("/users", {
             method: "GET",
             successCallback: initTable
@@ -129,7 +127,6 @@ const Table = (function() {
     function initTable(data, browserWidth = window.innerWidth) {
       let users = data;
       if (browserWidth > 768) {
-        _showOverlay(true);
         const tableBody = mainContainer.find("#users-table tbody");
         for (let user of users) {
           _appendRowData(tableBody, user);
@@ -183,6 +180,8 @@ const Table = (function() {
       const cardContainer = mainContainer.find("div#card-container");
 
       if (browserWidth > 868 && tableBody.children("tr").length === 0) {
+        _showOverlay(true);
+
         ApiMachine.request("/users", {
           method: "GET",
           successCallback: function(users) {
@@ -195,6 +194,8 @@ const Table = (function() {
         browserWidth < 868 &&
         cardContainer.children(".user-card").length === 0
       ) {
+        _showOverlay(true);
+
         ApiMachine.request("/users", {
           method: "GET",
           successCallback: function(users) {
@@ -395,7 +396,7 @@ const Table = (function() {
 
       let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
 
-      if (show) {
+      if (show && overlayContainer.find("div.loading").length === 0) {
         overlayContainer
           .css("position", "relative")
           .append(`<div class="loading">Loading&#8230;</div>`);
