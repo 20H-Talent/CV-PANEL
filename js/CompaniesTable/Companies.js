@@ -36,6 +36,7 @@ function Companies() {
                     );
                     companies.addCompany(company);
                 });
+                console.log('companies.name :', companies.companies);
                 companies.renderCompaniesTable(companies.companies);
                 $(window).on("resize", function() {
                     let width = $(this).width();
@@ -50,6 +51,27 @@ function Companies() {
                 });
             });
     }
+    this.rendersocialUrls = function() {
+        var divCol = document.createElement("div");
+        divCol.classList.add("text-center");
+        console.log("social", this.socialUrls);
+        var objectResult = Object.keys(this.socialUrls)
+        console.log('objectResult :', objectResult);
+        for (let i = 0; i < objectResult.length; i++) {
+            console.log("entro al goro");
+            var network = objectResult[i];
+            console.log("NETWORK", network);
+            var innerNetwork = "<a href='" + network + "'title='" + network + "'><i class='fab ml-3 btn" + network + "  fa-lg fa-" + network + "'></i></a>";
+            console.log("innerNetwork", innerNetwork);
+            divCol.innerHTML = divCol.innerHTML + innerNetwork;
+        };
+        let innerNetwork = "";
+        for (let social in this.socialUrls) {
+            innerNetwork += `<a href="${social}" title="${social}"><i style="z-index: 10;" class="fab ml-1 btn-${social} text-center  fa-lg fa-${social}"></i></a>`;
+        }
+        divCol.innerHTML = innerNetwork;
+        return divCol.innerHTML;
+    }
     this.companies = [];
     this.addCompany = function(company) {
         this.companies.push(company);
@@ -57,6 +79,10 @@ function Companies() {
     this.removeAllCompanies = function() {
         this.companies = [];
     }
+
+
+
+
     this.renderCompaniesTable = function(filtredCompanies) {
         $("#card-container-company").hide();
         $("#company-table").show();
@@ -72,7 +98,15 @@ function Companies() {
              </a>${filtredCompanies[i].email}
           </td>
           <td class="company-phone">${filtredCompanies[i].phone}</td>
-          <td class="company-social"> ${filtredCompanies[i].website}</td>
+          <td class="company-social text-center">
+          <div class="container">
+              <div class="row d-flex justify-content-around ">
+                  <div class=" social-net" id="networks${filtredCompanies[i].id}">
+                  ${companies.renderSocialNetworks(filtredCompanies[i].socialUrls)}
+                  </div>
+              </div>
+          </div>
+                  </td>
           <td class="options text-center">
              <button  type="button" onclick="companies.showPreviewInfo('${filtredCompanies[i].id}');" data-toggle="modal" data-id=${filtredCompanies[i].id} data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
              <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm"    class="btn btn-sm btn-outline-primary  edit-company"  onclick="companies.editCompany('${filtredCompanies[i].id}');" data-original-title=""  )><i class="fas fa-user-edit"></i>
@@ -91,6 +125,23 @@ function Companies() {
         });
         return company[0];
     };
+
+    this.renderSocialNetworks = function(socialUrls) {
+        var divCol = document.createElement("div");
+        divCol.classList.add("text-center");
+        let innerNetwork = "";
+        for (let social in socialUrls) {
+            //innerNetwork += `<div>${socialUrls[social].url}/ ${socialUrls[social].platform}</div>`;
+            innerNetwork += `<a href="${socialUrls[social].url}" title="${socialUrls[social].platform}"><i style="z-index: 10;" class="fab ml-1 btn-${socialUrls[social].platform}   fa-lg fa-${socialUrls[social].platform}"></i></a>`;
+        }
+        divCol.innerHTML = innerNetwork;
+        return divCol.innerHTML;
+    }
+
+
+
+
+
 
     this.renderCompanyCards = function() {
         $("#card-container-company").show();
@@ -123,7 +174,7 @@ function Companies() {
                    <p class="card-text text-right  col-sm-8  ldeep-purple"><ins>${this.companies[i].phone}</ins></p>
                 </div>
                 <div class="d-inline-flex  col  mt-3">
-                   <p class="card-text col d-inline-flex font-weight-bold mb-1">Social Networks</p>
+                   <p class="card-text col d-inline-flex font-weight-bold mb-1">Website</p>
                    <div class="mt-2 text-right  col-sm-6 social-net">${this.companies[i].website}
                    </div>
                 </div>
@@ -211,8 +262,8 @@ function Companies() {
                 $("#cif").show();
                 $("#nif").hide();
             }
-            $("input[name=socialplatform]").val(company.socialUrls.platform);
-            $("input[name=socialUrl]").val(company.socialUrls.url);
+            $("input[name=platform]").val(company.socialUrls.platform);
+            $("input[name=url]").val(company.socialUrls.url);
             $("input[name=street]").val(company.address.street);
             $("input[name=city]").val(company.address.city);
             $("input[name=zipcode]").val(company.address.zipcode);
@@ -349,7 +400,7 @@ function Companies() {
         let id = $("input[name=company-id]").val();
         if (id.length > 0) {
             method = "PUT";
-            url = "https://cv-mobile-api.herokuapp.com/api/companies/" + id;
+            urlApi = "https://cv-mobile-api.herokuapp.com/api/companies/" + id;
         }
         let name = $("input[name=name]").val();
         let docType = $("input[name=docType]:checked").val();
@@ -363,11 +414,8 @@ function Companies() {
         let zipcode = $("input[name=zipcode]").val();
         let city = $("input[name=city]").val();
         let street = $("input[name=street]").val();
-        let platform = $("input[name=socialplatform]").val();
-        console.log('platform :', platform);
-        let url = $("input[name=socialUrl]").val();
-        console.log('url :', url);
-
+        let platform = $("input[name=platform]").val();
+        let url = $("input[name=url]").val();
         let address = {
             country: country,
             street: street,
@@ -383,8 +431,7 @@ function Companies() {
         let employees = $("input[name=employees]").val();
         let website = $("input[name=website]").val();
         let bio = $("textarea[name=bio]").val();
-        socialUrls = $("input[name=socialUrls]").val();
-        console.log('socialUrls :', socialUrls);
+        //  socialUrls = $("input[name=socialUrls]").val();
         let newCompany = {
             name: `${name}`,
             docType: docType,
