@@ -16,7 +16,6 @@ function Companies() {
     $.getJSON("https://cv-mobile-api.herokuapp.com/api/companies").done(
       function(data) {
         $.each(data, function(i, comp) {
-          console.log("comp :", comp);
           var company = new Company(
             comp._id,
             comp.name,
@@ -35,7 +34,6 @@ function Companies() {
           );
           companies.addCompany(company);
         });
-        console.log("companies.name :", companies.companies);
         companies.renderCompaniesTable(companies.companies);
         $(window).on("resize", function() {
           let width = $(this).width();
@@ -277,6 +275,7 @@ function Companies() {
         $("#cif").show();
         $("#nif").hide();
       }
+
       $("input[name=platform]").val(company.socialUrls.platform);
       $("input[name=url]").val(company.socialUrls.url);
       $("input[name=street]").val(company.address.street);
