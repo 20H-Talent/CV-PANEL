@@ -364,12 +364,12 @@ const Table = (function() {
     function _cardSkeleton(user) {
       let data = _renderLangsAndSkills(user);
       return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
-        user._id.value
+        user._id
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
       <div class="col-4">    <img class="img-fluid  mr-2" style="border-radius: 50%" src=${
         user.avatar
-      } alt="test"/></div>
+      } alt="${user.name}"/></div>
         <div class=" font-weight-bold col card-username">
            <p>${user.name}</p>
            <p>${user.username}</p>

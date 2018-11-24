@@ -173,10 +173,10 @@ const UserForm = (function() {
       let birthdate = $("input[name=birthdate").val();
       let experience = $("select[id='experience']").val();
       let website = $("input[name=website]").val();
-      let avatar = $("input[type=file]");
+      let avatar = $("input[type=file]")[0].files[0];
       let company = $("input[name=company]").val();
 
-      let jobTitle = $("input[name=jobtitle]").val();
+      let jobTitle = $("input[name=jobTitle]").val();
       console.log("company/jobtitle: ", company, jobTitle);
 
       function _getSelectedElements(toSelect1, toSelect2, toSelect3) {
@@ -231,7 +231,6 @@ const UserForm = (function() {
       return { dataUserTxtPlain, avatar };
     }
     function _sendNewUser(dataToSendServer) {
-      console.log("datasent", dataToSendServer);
       /**
        * Render modal for updated or created user.
        * @param stringForId - the posible values are created or updated.
@@ -296,7 +295,7 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
       })
         .done(function(res) {
           let formData = new FormData();
-          formData.append("img", dataToSendServer.avatar[0].files[0]);
+          formData.append("img", dataToSendServer.avatar);
 
           if (!userID) {
             sendUserID = res._id;
@@ -305,21 +304,45 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
             sendUserID = userID;
             modalID = "updated";
           }
-          $.ajax({
-            method: "POST",
-            url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${sendUserID}`,
-            data: formData,
-            mimeType: "multipart/form-data",
-            processData: false,
-            contentType: false
-          }).done(function(res) {
+
+          if (res.avatar === null && dataToSendServer.avatar !== undefined) {
+            avatarUser = false;
+          } else if (
+            res.avatar !== null &&
+            dataToSendServer.avatar !== undefined
+          ) {
+            avatarUser = false;
+          } else if (
+            res.avatar !== null &&
+            dataToSendServer.avatar === undefined
+          ) {
+            avatarUser = true;
+          } else if (res.avatar !== null) {
+            avatarUser = true;
+          }
+
+          if (avatarUser === false) {
+            $.ajax({
+              method: "POST",
+              url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${sendUserID}`,
+              data: formData,
+              mimeType: "multipart/form-data",
+              processData: false,
+              contentType: false
+            })
+              .done(function(res) {
+                _renderModalEditOrCreateUser(modalID);
+              })
+              .fail(res => console.log("Unable to update avatar."));
+          } else {
             _renderModalEditOrCreateUser(modalID);
-          });
+          }
         })
         .fail(res => console.log("Unable to create user: ", res));
     }
 
     function editForm(user) {
+      console.log("Entro en edit");
       generalConstructor.construct("user-form");
       setTimeout(() => {
         $("div#data-column")
