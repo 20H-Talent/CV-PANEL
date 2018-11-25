@@ -91,12 +91,13 @@ const SearchFilter = (function() {
 
     //Experience
 
-    // if (filters["Experience"]) {
-    //   const experienceQuery = filters["Experience"];
-    //   filteredUsers = filteredUsers.filter(user =>
-    //     user["Experience"].includes(experienceQuery)
-    //   );
-    // }
+    if (filters["experience"]) {
+      console.log("filters experience: ", filters["experience"]);
+      const experienceQuery = filters["experience"];
+      filteredUsers = filteredUsers.filter(user =>
+        user["experience"].includes(experienceQuery)
+      );
+    }
 
     // Languages (idiomas)
     if (filters["languages"] && filters["languages"].length > 0) {

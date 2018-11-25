@@ -32,7 +32,7 @@ $("document").ready(function() {
       formSideBar();
       $("form#advanced-search").on("submit", function(e) {
         e.preventDefault();
-        const formInputs = $(this).find("input");
+        const formInputs = $(this).find("input, select");
         ApiMachine.request("/users", {
           method: "GET",
           successCallback: function(users) {

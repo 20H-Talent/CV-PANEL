@@ -570,6 +570,12 @@ ul div[class*="border-dark"] {
   opacity: 1;
 }
 
+form#advanced-search input,
+form#advanced-search select {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
 /* #age_user {
   height: 50px;
 } */
