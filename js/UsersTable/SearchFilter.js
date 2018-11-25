@@ -54,7 +54,8 @@ const SearchFilter = (function() {
     // }
 
     // Experience
-    if (filters["experience"]) {
+
+    if (filters["experience"] && filters["experience"] != undefined) {
       const experienceQuery = filters["experience"];
       filteredUsers = filteredUsers.filter(user => {
 
@@ -63,6 +64,7 @@ const SearchFilter = (function() {
         user["experience"].includes(experienceQuery);
       }
       );
+    }else {
     }
 
     // Skills are Frameworks, Languages.
