@@ -10,8 +10,8 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-     _createSearchBadges(filters);
-    let filteredUsers = _buildFilteredUsersArray(filters);
+    _createSearchBadges(filters);
+    let filteredUsers = _buildFilteredUsersArray(filters, users);
 
     return filteredUsers;
   }
@@ -22,8 +22,9 @@ const SearchFilter = (function() {
    * @param {Array of objects} elements
    * @return {Array} filteredUsers
    */
-  _buildFilteredUsersArray(filters) {
-     //Gender
+  function _buildFilteredUsersArray(filters, users) {
+    //Gender
+    let filteredUsers = users;
     if (filters["gender"]) {
       filteredUsers = filteredUsers.filter(
         user => user["gender"] === filters["gender"]
@@ -85,6 +86,7 @@ const SearchFilter = (function() {
         return skillsChecked;
       });
     }
+    return filteredUsers;
   }
 
   /**
@@ -149,37 +151,36 @@ const SearchFilter = (function() {
 
   function _appendFilterBadges(filters, badgesContainer) {
     badgesContainer.empty();
-    filters.forEach(function(element) {
+
+    const specialFilters = ["skills", "languages"];
+
+    for (let key in filters) {
       let badge = "";
-      if ($(element).attr("fieldName") != undefined) {
-        badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(
-            element
-          ).attr("id")}" fieldValue="${$(element).val()}">
-          ${$(element).attr("fieldName")} : <span>${$(element).attr(
-            "valueName"
-          )}</span>
-          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
-          </span>`
-        ).hide();
+      let valueInsideBadge = `${key.charAt(0).toUpperCase() + key.slice(1)}: `;
+
+      if (!specialFilters.includes(key)) {
+        valueInsideBadge += filters[key];
       } else {
-        badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(
-            element
-          ).attr("id")}" fieldValue="${$(element).val()}">
-          ${$(element).attr("name")} : <span>${$(element).val()}</span>
-          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
-          </span>`
-        ).hide();
+        const sourceData = JSON.parse(sessionStorage.getItem(key));
+        valueInsideBadge += filters[key]
+          .map(value => sourceData[value].label)
+          .join(",");
       }
+      badge = $(
+        `<span data-name=${key} data-values=${
+          filters[key]
+        } class="badge badge-pill badge-secondary filter mr-2">${valueInsideBadge}
+             <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
+          </span>`
+      ).hide();
 
       badgesContainer.append(badge);
       badge.show("slow");
-      badge.on("click", _deleteBagde);
-    });
+      badge.on("click", _deleteBadge);
+    }
   }
 
-  function _deleteBagde(badge) {
+  function _deleteBadge(badge) {
     var idFieldName = $(this).attr("idFieldName");
     var typeField = $("#" + idFieldName).attr("type");
     // var fieldValue = $(this).attr("fieldValue");
