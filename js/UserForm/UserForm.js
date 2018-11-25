@@ -177,7 +177,6 @@ const UserForm = (function() {
       let company = $("input[name=company]").val();
 
       let jobTitle = $("input[name=jobTitle]").val();
-      console.log("company/jobtitle: ", company, jobTitle);
 
       function _getSelectedElements(toSelect1, toSelect2, toSelect3) {
         let selectedLanguages = [];
@@ -342,7 +341,19 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
     }
 
     function editForm(user) {
-      console.log("Entro en edit");
+      // To set the container's h4 to editing the user name.
+      setTimeout(() => {
+        if ($("form#user-form").find("input[type=hidden]").length) {
+          $("#user-form-container")
+            .find(`h4[class='mb-3 text-center']`)
+            .html(
+              `<i class="fas fa-user-edit"></i> Editting user <span class='text-success'>${
+                user.name
+              }</span>`
+            );
+        }
+      }, 500);
+
       generalConstructor.construct("user-form");
       setTimeout(() => {
         $("div#data-column")

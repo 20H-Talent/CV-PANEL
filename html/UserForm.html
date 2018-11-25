@@ -3,10 +3,8 @@
     <div class="col ">
       <div class="mb-3 adduser text-center">
         <h4 class="mb-3 text-center">
-          <i class="fas fa-user-plus"></i>Add User /<i
-            class="fas fa-user-edit"
-          ></i>
-          Edit User
+          <i class="fas fa-user-plus"></i> Adding
+          <span class="text-success">New User</span>
         </h4>
       </div>
 
@@ -19,7 +17,7 @@
           <div class="col-sm-10">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing"
-                ><i class="fas asweome fa-user-tie"></i
+                ><i class="fas asweome fa-user"></i
               ></span>
               <input
                 type="text"
@@ -28,199 +26,12 @@
                 minlength="3"
                 maxlength="25"
                 pattern="[a-zA-Z\s  ñ]+"
+                placeholder="Rosa Louise McCauley "
                 required
               />
             </div>
           </div>
         </div>
-
-        <div class="form-group row has-success">
-          <label for="username" class="col-sm-2 col-form-label">Username</label>
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputfault"
-                ><i class="fas asweome fa-users"></i
-              ></span>
-              <input
-                lang="es-ES"
-                name="username"
-                pattern="[a-zA-Z0-9\s ñ]+"
-                minlength="3"
-                maxlength="25"
-                type="text"
-                class="form-control"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="form-group row has-success">
-          <label for="email" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="in-sizing-default"
-                ><i class="fas asweome fa-at"></i
-              ></span>
-              <input
-                lang="es-ES"
-                type="email"
-                name="email"
-                class="form-control form-control-success"
-                minlength="3"
-                maxlength="25"
-                placeholder="name@example.com"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row has-success">
-          <label for="telephone" class="col-sm-2 col-form-label"
-            >Telephone</label
-          >
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputizing-default"
-                ><i class="fas asweome fa-phone-square"></i
-              ></span>
-              <input
-                name="telephone"
-                type="tel"
-                class="form-control"
-                minlength="3"
-                maxlength="25"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row has-success">
-          <label for="street" class="col-sm-2 col-form-label">Street</label>
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text"
-                ><i class="fas asweome asweome-address fa-map-marker-alt"></i
-              ></span>
-              <input
-                lang="es-ES"
-                name="street"
-                type="text"
-                class="form-control"
-                minlength="3"
-                maxlength="25"
-                placeholder="1234 Main St"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row has-success">
-          <label for="country" class="col-sm-2 col-form-label">Country</label>
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroupdefault"
-                ><i class="fas asweome fa-globe-americas"></i
-              ></span>
-              <input
-                lang="es-ES"
-                name="country"
-                class="custom-select d-block w-100"
-                minlength="3"
-                maxlength="25"
-                pattern="[a-zA-Z\s ñ]+"
-                type="text"
-                placeholder="residence country"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row has-success">
-          <label for="city" class="col-sm-2 col-form-label">City</label>
-          <div class="col-sm-10">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputefault"
-                ><i class="fas asweome fa-city"></i
-              ></span>
-              <input
-                lang="es-ES"
-                name="city"
-                pattern="[a-zA-Z\s ñ]+"
-                class="custom-select d-block w-100"
-                minlength="3"
-                maxlength="25"
-                type="text"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row has-success">
-          <label for="zipcode" class="col-sm-2 col-form-label">Zip</label>
-          <div class="col-sm-6">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="input-group"
-                ><i class="fas asweome fa-envelope-open-text"></i
-              ></span>
-              <input
-                name="zipcode"
-                type="number"
-                class="form-control"
-                pattern="[a-zA-Z0-9\s]+"
-                minlength="3"
-                maxlength="15"
-                placeholder="90425"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="form-group row has-success" id="age-required">
-          <label for="birthdate" class="col-sm-2 col-form-label"
-            >Birthdate</label
-          >
-          <div class="col-sm-6">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="Group-s"
-                ><i class="fas asewome fa-birthday-cake"></i
-              ></span>
-
-              <input
-                name="birthdate"
-                minlength="1"
-                maxlength="3"
-                id="birthdate"
-                class="form-control"
-                type="date"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="form-group row has-success" id="exp-years">
-          <label for="experience" class="col-sm-2 col-form-label"
-            >Experience years</label
-          >
-          <div class="col-sm-6">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="Group-s"
-                ><i class="fas asweome fa-user-tie"></i
-              ></span>
-              <select id="experience">
-                <option value="- 1 year">- 1 year</option>
-                <option value="1 - 3 years">1 - 3 years</option>
-                <option value="3 - 5 years">3 - 5 years</option>
-                <option value="+ 5 years">+ 5 years</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
         <div class="form-group row has-success">
           <label class="col-sm-2 control-label gender">Gender</label>
           <div class="col-sm-10">
@@ -253,12 +64,184 @@
             </div>
           </div>
         </div>
+        <div class="form-group row has-success" id="age-required">
+          <label for="birthdate" class="col-sm-2 col-form-label"
+            >Birthdate</label
+          >
+          <div class="col-sm-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="Group-s"
+                ><i class="fas asweome fa-birthday-cake"></i
+              ></span>
+
+              <input
+                name="birthdate"
+                minlength="1"
+                maxlength="3"
+                id="birthdate"
+                class="form-control text-body"
+                type="date"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row has-success">
+          <label for="username" class="col-sm-2 col-form-label">Username</label>
+          <div class="col-sm-10">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputfault"
+                ><i class="fas asweome fa-user-tag"></i
+              ></span>
+              <input
+                lang="es-ES"
+                name="username"
+                pattern="[a-zA-Z0-9\s ñ]+"
+                minlength="3"
+                maxlength="25"
+                type="text"
+                class="form-control"
+                placeholder="Rosa Parks "
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row has-success">
+          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="in-sizing-default"
+                ><i class="fas asweome fa-at"></i
+              ></span>
+              <input
+                lang="es-ES"
+                type="email"
+                name="email"
+                class="form-control form-control-success"
+                minlength="3"
+                maxlength="40"
+                placeholder="rosa_parks@civilrights.com "
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row has-success">
+          <label for="telephone" class="col-sm-2 col-form-label"
+            >Telephone</label
+          >
+          <div class="col-sm-10">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputizing-default"
+                ><i class="fas asweome fa-phone-square"></i
+              ></span>
+              <input
+                name="telephone"
+                type="tel"
+                class="form-control"
+                minlength="3"
+                maxlength="25"
+                placeholder="241 020 0504 "
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row has-success">
+          <label for="street" class="col-sm-2 col-form-label">Street</label>
+          <div class="col-sm-10">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><i class="fas asweome asweome-address fa-map-marker-alt"></i
+              ></span>
+              <input
+                lang="es-ES"
+                name="street"
+                type="text"
+                class="form-control"
+                minlength="3"
+                maxlength="25"
+                placeholder="4584 Tuskegee St "
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row has-success">
+          <label for="city" class="col-sm-2 col-form-label">City</label>
+          <div class="col-sm-10">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputefault"
+                ><i class="fas asweome fa-city"></i
+              ></span>
+              <input
+                lang="es-ES"
+                name="city"
+                type="text"
+                pattern="[a-zA-Z\s ñ]+"
+                class="form-control"
+                minlength="3"
+                maxlength="25"
+                placeholder="Alabama "
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row has-success">
+          <label for="country" class="col-sm-2 col-form-label">Country</label>
+          <div class="col-sm-10">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupdefault"
+                ><i class="fas asweome fa-globe-americas"></i
+              ></span>
+              <input
+                lang="es-ES"
+                name="country"
+                class="form-control"
+                minlength="3"
+                maxlength="25"
+                pattern="[a-zA-Z\s ñ]+"
+                type="text"
+                placeholder="USA"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row has-success">
+          <label for="zipcode" class="col-sm-2 col-form-label">Zip</label>
+          <div class="col-sm-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-group"
+                ><i class="fas asweome fa-envelope-open-text"></i
+              ></span>
+              <input
+                name="zipcode"
+                type="number"
+                class="form-control"
+                pattern="[a-zA-Z0-9\s]+"
+                minlength="3"
+                maxlength="15"
+                placeholder="90425 "
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <hr class="mt-3 mb-3" />
         <div class="form-group row has-success">
           <label for="website" class="col-sm-2 col-form-label">Website</label>
           <div class="col-sm-10">
             <div class="input-group-prepend">
               <span class="input-group-text"
-                ><i class="fas awesome-desktop fa-desktop"></i
+                ><i class="fas asweome fa-desktop"></i
               ></span>
               <input
                 lang="es-ES"
@@ -266,8 +249,8 @@
                 type="text"
                 class="form-control"
                 minlength="3"
-                maxlength="25"
-                placeholder="www.enterprise.com"
+                maxlength="40"
+                placeholder="www.Rosa Parks for Civil Rights.com "
                 required
               />
             </div>
@@ -279,7 +262,7 @@
           <div class="col-sm-10">
             <div class="input-group-prepend">
               <span class="input-group-text"
-                ><i class="fas awesome-certificate fa-certificate"></i
+                ><i class="fas asweome fa-toolbox"></i
               ></span>
               <input
                 lang="es-ES"
@@ -289,7 +272,7 @@
                 class="form-control"
                 minlength="3"
                 maxlength="25"
-                placeholder="Apple Inc."
+                placeholder="Rosa Dressmaker S.R.L "
               />
             </div>
           </div>
@@ -299,7 +282,7 @@
           <div class="col-sm-10">
             <div class="input-group-prepend">
               <span class="input-group-text"
-                ><i class="far awesome-id-bagde fa-id-badge"></i
+                ><i class="fas asweome fa-user-graduate"></i
               ></span>
               <input
                 lang="es-ES"
@@ -309,8 +292,26 @@
                 class="form-control"
                 minlength="3"
                 maxlength="25"
-                placeholder="Full Stack"
+                placeholder="Dressmaker "
               />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row has-success" id="exp-years">
+          <label for="experience" class="col-sm-2 col-form-label"
+            >Experience years</label
+          >
+          <div class="col-sm-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="Group-s"
+                ><i class="fas asweome fa-user-tie"></i
+              ></span>
+              <select id="experience">
+                <option value="- 1 year">- 1 year</option>
+                <option value="1 - 3 years">1 - 3 years</option>
+                <option value="3 - 5 years">3 - 5 years</option>
+                <option value="+ 5 years">+ 5 years</option>
+              </select>
             </div>
           </div>
         </div>
