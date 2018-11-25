@@ -217,6 +217,7 @@ const Table = (function() {
       cardContainer.empty();
       mainTable.show();
       const tableBody = mainTable.find("tbody");
+      tableBody.empty();
       for (let user of users) {
         _appendRowData(tableBody, user);
       }
@@ -234,7 +235,7 @@ const Table = (function() {
         .hide()
         .find("tbody")
         .empty();
-
+      cardContainer.empty();
       for (let user of users) {
         _appendCardData(cardContainer, user);
       }
