@@ -84,7 +84,7 @@ const SearchFilter = (function() {
     if (filters["age"]) {
       filteredUsers = filteredUsers.filter(
         user =>
-          new Date(user["birthDate"]).getFullYear() >=
+          new Date(user["birthDate"]).getFullYear() <=
           new Date().getFullYear() - parseInt(filters["age"])
       );
     }
