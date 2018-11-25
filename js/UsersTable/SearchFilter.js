@@ -10,11 +10,52 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-    _createSearchBadges(filters);
+    _createSearchBadges(filters, users);
     let filteredUsers = _buildFilteredUsersArray(filters, users);
 
     return filteredUsers;
   }
+
+  /**
+   * Filter the inputs when the advanced search is used,
+   * only inputs that aren't empty or checked are allowed
+   * @function buildFilters
+   * @public
+   * @param {Array of jQuery objects} elements
+   * @return {object} filters
+   */
+  function _buildFilters(elements) {
+    const filters = { languages: [], skills: [] };
+    const filtered = elements
+      .filter((index, input) => {
+        const $input = $(input);
+        if (
+          $input.prop("type") === "radio" ||
+          $input.prop("type") === "checkbox"
+        ) {
+          return $input.prop("checked");
+        } else {
+          return $.trim($input.val()).length > 0;
+        }
+      })
+      .each((index, input) => {
+        const $input = $(input);
+        if ($(input).data("type")) {
+          filters[$(input).data("type")].push($input.val());
+        } else {
+          filters[$input.prop("name")] = $input.val();
+        }
+      });
+    if (filters["languages"].length === 0) {
+      delete filters["languages"];
+    }
+
+    if (filters["skills"].length === 0) {
+      delete filters["skills"];
+    }
+    return filters;
+  }
+
   /**
    * Return the users already filtered by filters object
    * @function buildFilteredUsersArray
@@ -90,53 +131,20 @@ const SearchFilter = (function() {
   }
 
   /**
-   * Filter the inputs when the advanced search is used,
-   * only inputs that aren't empty or checked are allowed
-   * @function buildFilters
-   * @public
-   * @param {Array of jQuery objects} elements
-   * @return {object} filters
-   */
-  function _buildFilters(elements) {
-    const filters = { languages: [], skills: [] };
-    const filtered = elements
-      .filter((index, input) => {
-        const $input = $(input);
-        if (
-          $input.prop("type") === "radio" ||
-          $input.prop("type") === "checkbox"
-        ) {
-          return $input.prop("checked");
-        } else {
-          return $.trim($input.val()).length > 0;
-        }
-      })
-      .each((index, input) => {
-        const $input = $(input);
-        if ($(input).data("type")) {
-          filters[$(input).data("type")].push($input.val());
-        } else {
-          filters[$input.prop("name")] = $input.val();
-        }
-      });
-    return filters;
-  }
-
-  /**
    * Create badge-pills to show the user input search values
    * @function _createSearchBadges
    * @private
    * @param {Object} filters
    */
-  function _createSearchBadges(filters) {
+  function _createSearchBadges(filters, users) {
     const filtersContainer = mainContainer.find(".filters");
     const badgesContainer = filtersContainer.children(".search-badges");
     filtersContainer.find("button").remove();
     _appendFilterBadges(filters, badgesContainer);
-    _createResetButton(filtersContainer, badgesContainer);
+    _createResetButton(filtersContainer, badgesContainer, users);
   }
 
-  function _createResetButton(filtersContainer, badgesContainer) {
+  function _createResetButton(filtersContainer, badgesContainer, users) {
     const resetButton = filtersContainer.append(
       `<button id="reset-btn" class="btn btn-sm btn-info">Cancel search</button>`
     );
@@ -145,7 +153,7 @@ const SearchFilter = (function() {
       .on("click", function(e) {
         badgesContainer.empty();
         $(this).remove();
-        usersTable.initUsers(null, window.innerWidth);
+        usersTable.initUsers(users);
       });
   }
 
@@ -170,7 +178,7 @@ const SearchFilter = (function() {
         `<span data-name=${key} data-values=${
           filters[key]
         } class="badge badge-pill badge-secondary filter mr-2">${valueInsideBadge}
-             <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
+             <button class="bg-transparent border-0 badge-delete"><i class="far text-light ml-2 fa-times-circle"></i></button>
           </span>`
       ).hide();
 
@@ -180,40 +188,33 @@ const SearchFilter = (function() {
     }
   }
 
-  function _deleteBadge(badge) {
-    var idFieldName = $(this).attr("idFieldName");
-    var typeField = $("#" + idFieldName).attr("type");
-    // var fieldValue = $(this).attr("fieldValue");
+  function _deleteBadge() {
+    const badge = $(this);
+    const dataName = badge.data("name");
+    const form = $("form#advanced-search");
 
-    switch (typeField) {
-      case "text":
-        $("#" + idFieldName).val("");
+    switch (dataName) {
+      case "name":
+      case "age":
+      case "experience":
+        form.find(`input[name=${dataName}]`).val("");
         break;
-
-      case "checkbox":
-        $("#" + idFieldName).prop("checked", false);
+      case "gender":
+        form.find(`input[name=${dataName}]`).prop("checked", false);
         break;
-
-      case "radio":
-        $("#" + idFieldName).prop("checked", false);
-        break;
-
-      case "range":
-        $("#" + idFieldName).val("");
-
-        if ($("#age-range").val("") != "") {
-          document.getElementById("age").innerHTML = "";
-        }
-        if ($("#exp-years").val("") != "") {
-          document.getElementById("range").innerHTML = "";
-        }
+      case "languages":
+      case "skills":
+        form
+          .find(`div#${dataName} input[type=checkbox]`)
+          .each((index, input) => {
+            $(input).prop("checked", false);
+          });
         break;
     }
 
     $(this).remove();
 
-    $("#submit_search").trigger("click");
-    //usersTable.initTable(null, window.innerWidth);
+    form.trigger("submit");
   }
 
   return {

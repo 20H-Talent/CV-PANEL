@@ -411,6 +411,11 @@ nav label {
   font-weight: normal;
 }
 
+.search-badges .badge.filter button.badge-delete {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 @media screen and (max-width: 428px) {
   #card-container {
     width: 100%;
