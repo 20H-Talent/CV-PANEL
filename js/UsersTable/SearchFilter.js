@@ -10,56 +10,57 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-    const filtersBadgets = _buildFiltersForBadgets(inputsData);
-    _createSearchBadges(filtersBadgets);
+    // const filtersBadgets = _buildFiltersForBadgets(inputsData);
+    // _createSearchBadges(filtersBadgets);
     let filteredUsers = users;
 
-    //FullName
-    if (filters["name"]) {
-      const firstnameQuery = filters["name"].toLowerCase();
-      filteredUsers = filteredUsers.filter(user =>
-        user["name"].toLowerCase().includes(firstnameQuery)
-      );
-    }
-    //Gender
-    if (filters["gender"]) {
-      filteredUsers = filteredUsers.filter(
-        user => user["gender"] === filters["gender"]
-      );
-    }
-
-    //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
-    // if(filters["age"]){
-    //   const ageQuery = filters["name"].toLowerCase();
+    console.log("FILTERS: ", filters);
+    // //FullName
+    // if (filters["name"]) {
+    //   const firstnameQuery = filters["name"].toLowerCase();
+    //   filteredUsers = filteredUsers.filter(user =>
+    //     user["name"].toLowerCase().includes(firstnameQuery)
+    //   );
+    // }
+    // //Gender
+    // if (filters["gender"]) {
     //   filteredUsers = filteredUsers.filter(
-    //     user =>
-    //       user["name"].toLowerCase().includes(firstnameQuery)
+    //     user => user["gender"] === filters["gender"]
     //   );
     // }
 
-    //Experience
+    // //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
+    // // if(filters["age"]){
+    // //   const ageQuery = filters["name"].toLowerCase();
+    // //   filteredUsers = filteredUsers.filter(
+    // //     user =>
+    // //       user["name"].toLowerCase().includes(firstnameQuery)
+    // //   );
+    // // }
 
-    if (filters["Experience"]) {
-      const experienceQuery = filters["Experience"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["Experience"].includes(experienceQuery)
-      );
-    }
-    // Languages (idiomas)
-    if (filters["languages"]) {
-      const skillsQuery = filters["languages"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["languages"].includes(skillsQuery)
-      );
-    }
+    // //Experience
 
-    // skills are Frameworks, Languages.
-    if (filters["skills"]) {
-      const skillsQuery = filters["skills"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["skills"].includes(skillsQuery)
-      );
-    }
+    // if (filters["Experience"]) {
+    //   const experienceQuery = filters["Experience"];
+    //   filteredUsers = filteredUsers.filter(user =>
+    //     user["Experience"].includes(experienceQuery)
+    //   );
+    // }
+    // // Languages (idiomas)
+    // if (filters["languages"]) {
+    //   const skillsQuery = filters["languages"];
+    //   filteredUsers = filteredUsers.filter(user =>
+    //     user["languages"].includes(skillsQuery)
+    //   );
+    // }
+
+    // // skills are Frameworks, Languages.
+    // if (filters["skills"]) {
+    //   const skillsQuery = filters["skills"];
+    //   filteredUsers = filteredUsers.filter(user =>
+    //     user["skills"].includes(skillsQuery)
+    //   );
+    // }
 
     return filteredUsers;
   }
@@ -73,7 +74,8 @@ const SearchFilter = (function() {
    * @return {object} filters
    */
   function _buildFilters(elements) {
-    const filters = {};
+    const filters = { languages: [], skills: [] };
+    console.log("ELEMENTS: ", elements);
     const filtered = elements
       .filter((index, input) => {
         const $input = $(input);
@@ -88,7 +90,11 @@ const SearchFilter = (function() {
       })
       .each((index, input) => {
         const $input = $(input);
-        filters[$input.prop("name")] = $input.val();
+        if ($(input).data("type")) {
+          filters[$(input).data("type")].push($input.val());
+        } else {
+          filters[$input.prop("name")] = $input.val();
+        }
       });
     return filters;
   }
@@ -136,7 +142,7 @@ const SearchFilter = (function() {
       .on("click", function(e) {
         badgesContainer.empty();
         $(this).remove();
-        usersTable.initTable(null, window.innerWidth);
+        usersTable.initUsers(null, window.innerWidth);
       });
   }
 
@@ -146,14 +152,20 @@ const SearchFilter = (function() {
       let badge = "";
       if ($(element).attr("fieldName") != undefined) {
         badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
-          ${$(element).attr("fieldName")} : <span>${$(element).attr("valueName")}</span>
+          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(
+            element
+          ).attr("id")}" fieldValue="${$(element).val()}">
+          ${$(element).attr("fieldName")} : <span>${$(element).attr(
+            "valueName"
+          )}</span>
           <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
           </span>`
         ).hide();
       } else {
         badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
+          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(
+            element
+          ).attr("id")}" fieldValue="${$(element).val()}">
           ${$(element).attr("name")} : <span>${$(element).val()}</span>
           <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
           </span>`

@@ -27,7 +27,7 @@ function renderLanguages(data) {
   for (let _id in data) {
     languagesContainer.append(
       `<div class="custom-control custom-checkbox col-5">
-          <input type="checkbox" fieldName="language" valueName="${
+          <input data-type="languages" type="checkbox" fieldName="language" valueName="${
             data[_id].label
           }" value="${_id}" name="${
         data[_id].label
@@ -48,7 +48,7 @@ function renderSkills(data) {
 
   for (let _id in data) {
     let divObjectSkill = `<div class="custom-control custom-checkbox mr-3">
-        <input type="checkbox" id="${_id}" class="custom-control-input" fieldName="${
+        <input data-type="skills" type="checkbox" id="${_id}" class="custom-control-input" fieldName="${
       data[_id].type
     }" valueName="${data[_id].label}" value=${_id}
         name="${data[_id].label}">
