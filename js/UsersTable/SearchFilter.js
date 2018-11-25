@@ -84,8 +84,8 @@ const SearchFilter = (function() {
     if (filters["age"]) {
       filteredUsers = filteredUsers.filter(
         user =>
-          new Date(user["birthDate"]).getFullYear() >
-          new Date().getFullYear - parseInt(filters["age"])
+          new Date(user["birthDate"]).getFullYear() >=
+          new Date().getFullYear() - parseInt(filters["age"])
       );
     }
 
@@ -139,7 +139,9 @@ const SearchFilter = (function() {
   function _createSearchBadges(filters, users) {
     const filtersContainer = mainContainer.find(".filters");
     const badgesContainer = filtersContainer.children(".search-badges");
-    filtersContainer.find("button").remove();
+    badgesContainer.empty();
+    filtersContainer.find("button#reset-btn").remove();
+
     _appendFilterBadges(filters, badgesContainer);
     _createResetButton(filtersContainer, badgesContainer, users);
   }
@@ -214,7 +216,13 @@ const SearchFilter = (function() {
 
     $(this).remove();
 
-    form.trigger("submit");
+    const filtersContainer = mainContainer.find(".filters");
+    const badgesContainer = filtersContainer.children(".search-badges");
+    if (badgesContainer.find("span").length === 0) {
+      $("#reset-btn").trigger("click");
+    } else {
+      form.trigger("submit");
+    }
   }
 
   return {
