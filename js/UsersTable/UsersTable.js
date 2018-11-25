@@ -126,11 +126,20 @@ const Table = (function() {
      */
     function initUsers(data, browserWidth = window.innerWidth) {
       let users = data;
+      _showOverlay(true);
       if (browserWidth > 768) {
         const tableBody = mainContainer.find("#users-table tbody");
         tableBody.empty();
         for (let user of users) {
           _appendRowData(tableBody, user);
+        }
+
+        if (tableBody.children("tr").length === 0) {
+          tableBody.append(`
+             <div class="alert alert-warning" role="alert">
+               <h6>No results found</h6>
+              </div>
+         `);
         }
       } else {
         mainContainer

@@ -37,7 +37,7 @@ $("document").ready(function() {
           method: "GET",
           successCallback: function(users) {
             const filteredUsers = SearchFilter.filterUsers(formInputs, users);
-            //usersTable.initUsers(filteredUsers);
+            usersTable.initUsers(filteredUsers);
           }
         });
       });
@@ -62,19 +62,8 @@ $("document").ready(function() {
     }
 
     // --------------- LATERAL RIGHT MENU ----------
-    let rangeAge = document.querySelector("#age-range");
     let age = document.querySelector("#age");
-    let rangeExp = document.querySelector("#exp-years");
     let experience = document.querySelector("#range");
-
-    // to set age of user next to input age-range
-    rangeAge.addEventListener("click", function(event) {
-      age.innerHTML = rangeAge.value;
-    });
-    // to set experience of user next to input exp-years
-    rangeExp.addEventListener("click", function(event) {
-      experience.innerHTML = rangeExp.value;
-    });
 
     let sidebarItems2 = document.querySelectorAll("#right-menu li");
     for (sidebarItem of sidebarItems2) {

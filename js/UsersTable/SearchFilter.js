@@ -10,35 +10,44 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-    // const filtersBadgets = _buildFiltersForBadgets(inputsData);
-    // _createSearchBadges(filtersBadgets);
-    let filteredUsers = users;
+     _createSearchBadges(filters);
+    let filteredUsers = _buildFilteredUsersArray(filters);
 
-    console.log("FILTERS: ", filters);
-    // //FullName
-    // if (filters["name"]) {
-    //   const firstnameQuery = filters["name"].toLowerCase();
-    //   filteredUsers = filteredUsers.filter(user =>
-    //     user["name"].toLowerCase().includes(firstnameQuery)
-    //   );
-    // }
-    // //Gender
-    // if (filters["gender"]) {
-    //   filteredUsers = filteredUsers.filter(
-    //     user => user["gender"] === filters["gender"]
-    //   );
-    // }
+    return filteredUsers;
+  }
+  /**
+   * Return the users already filtered by filters object
+   * @function buildFilteredUsersArray
+   * @private
+   * @param {Array of objects} elements
+   * @return {Array} filteredUsers
+   */
+  _buildFilteredUsersArray(filters) {
+     //Gender
+    if (filters["gender"]) {
+      filteredUsers = filteredUsers.filter(
+        user => user["gender"] === filters["gender"]
+      );
+    }
 
-    // //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
-    // // if(filters["age"]){
-    // //   const ageQuery = filters["name"].toLowerCase();
-    // //   filteredUsers = filteredUsers.filter(
-    // //     user =>
-    // //       user["name"].toLowerCase().includes(firstnameQuery)
-    // //   );
-    // // }
+    //FullName
+    if (filters["name"]) {
+      const firstnameQuery = filters["name"].toLowerCase();
+      filteredUsers = filteredUsers.filter(user =>
+        user["name"].toLowerCase().includes(firstnameQuery)
+      );
+    }
 
-    // //Experience
+    //Age
+    if (filters["age"]) {
+      filteredUsers = filteredUsers.filter(
+        user =>
+          new Date(user["birthDate"]).getFullYear() >
+          new Date().getFullYear - parseInt(filters["age"])
+      );
+    }
+
+    //Experience
 
     // if (filters["Experience"]) {
     //   const experienceQuery = filters["Experience"];
@@ -46,23 +55,36 @@ const SearchFilter = (function() {
     //     user["Experience"].includes(experienceQuery)
     //   );
     // }
-    // // Languages (idiomas)
-    // if (filters["languages"]) {
-    //   const skillsQuery = filters["languages"];
-    //   filteredUsers = filteredUsers.filter(user =>
-    //     user["languages"].includes(skillsQuery)
-    //   );
-    // }
 
-    // // skills are Frameworks, Languages.
-    // if (filters["skills"]) {
-    //   const skillsQuery = filters["skills"];
-    //   filteredUsers = filteredUsers.filter(user =>
-    //     user["skills"].includes(skillsQuery)
-    //   );
-    // }
+    // Languages (idiomas)
+    if (filters["languages"] && filters["languages"].length > 0) {
+      const languagesSelected = filters["languages"];
+      filteredUsers = filteredUsers.filter(user => {
+        let languagesChecked = true;
+        for (let language of user["languages"]) {
+          if (!languagesSelected.includes(language)) {
+            languagesChecked = false;
+            break;
+          }
+        }
+        return languagesChecked;
+      });
+    }
 
-    return filteredUsers;
+    // skills are Frameworks, Languages.
+    if (filters["skills"] && filters["skills"].length > 0) {
+      const skillsSelected = filters["skills"];
+      filteredUsers = filteredUsers.filter(user => {
+        let skillsChecked = true;
+        for (let skill of user["skills"]) {
+          if (!skillsSelected.includes(skill)) {
+            skillsChecked = false;
+            break;
+          }
+        }
+        return skillsChecked;
+      });
+    }
   }
 
   /**
@@ -75,7 +97,6 @@ const SearchFilter = (function() {
    */
   function _buildFilters(elements) {
     const filters = { languages: [], skills: [] };
-    console.log("ELEMENTS: ", elements);
     const filtered = elements
       .filter((index, input) => {
         const $input = $(input);
@@ -99,26 +120,6 @@ const SearchFilter = (function() {
     return filters;
   }
 
-  function _buildFiltersForBadgets(elements) {
-    const filters = [];
-    const filtered = elements
-      .filter((index, input) => {
-        const $input = $(input);
-        if (
-          $input.prop("type") === "radio" ||
-          $input.prop("type") === "checkbox"
-        ) {
-          return $input.prop("checked");
-        } else {
-          return $.trim($input.val()).length > 0;
-        }
-      })
-      .each((index, input) => {
-        const $input = $(input);
-        filters.push(input);
-      });
-    return filters;
-  }
   /**
    * Create badge-pills to show the user input search values
    * @function _createSearchBadges
