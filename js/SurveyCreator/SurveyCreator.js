@@ -720,26 +720,25 @@ const SurveyCreator = (function() {
               `<div style="position:absolute;" class="loading white">Loading&#8230;</div>`
             );
 
-          $.ajax({
-            url: "https://cv-mobile-api.herokuapp.com/api/surveys",
-            type: "POST",
-            crossDomain: true,
-            contentType: "application/json",
-            dataType: "json",
-            cache: true,
-            data: JSON.stringify(surveyApiData),
-            success: function(response) {
-              _activeToastMessage();
-            },
-            error: function(jqXHR, textStatus) {
-              _activeToastMessage(jqXHR.statusText);
-            },
-            complete: function(jqXHR, textStatus) {
-              submitButton
-                .css({ position: "static", height: "auto" })
-                .html(`Create Survey`);
+          ApiMachine.request(
+            "https://cv-mobile-api.herokuapp.com/api/surveys",
+            {
+              method: "POST",
+              plainData: JSON.stringify(surveyApiData),
+              successCallback: function(response) {
+                _activeToastMessage();
+                submitButton
+                  .css({ position: "static", height: "auto" })
+                  .html(`Create Survey`);
+              },
+              errorCallback: function(error) {
+                _activeToastMessage(error);
+                submitButton
+                  .css({ position: "static", height: "auto" })
+                  .html(`Create Survey`);
+              }
             }
-          });
+          );
         } else {
           $(".survey-container").animate({ scrollTop: 0 }, "slow");
         }

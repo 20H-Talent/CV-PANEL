@@ -262,8 +262,6 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
         // $("#list-users").trigger("click");
         $(`#user_${stringForId} button.btn-secondary`).on("click", function() {
           $(`#user_${stringForId}`).remove();
-          sessionStorage.removeItem("users-list");
-          location.reload(true);
           location.reload(true);
           // $("#list-users").trigger("click");
         });
@@ -271,8 +269,6 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
           $(`#user_${stringForId}`).remove();
         });
         $(`#user_${stringForId} button.btn-warning`).on("click", function() {
-          sessionStorage.removeItem("users-list");
-          location.reload(true);
           location.reload(true);
           //$("#list-users").trigger("click");
           $("#new-user").trigger("click");
@@ -282,62 +278,21 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
         .find("input[type=hidden]")
         .val();
 
-      $.ajax({
+      const file = new FormData();
+      file.append("img", dataToSendServer.avatar);
+
+      ApiMachine.request(`/users/${userID ? userID : ""}`, {
         method: userID ? "PUT" : "POST",
-        url: `https://cv-mobile-api.herokuapp.com/api/users/${
-          userID ? userID : ""
-        }`,
-        data: JSON.stringify(dataToSendServer.dataUserTxtPlain),
-        headers: {
-          "Content-Type": "application/json"
+        plainData: dataToSendServer.dataUserTxtPlain,
+        multipart: {
+          url: "files/upload/user",
+          file
+        },
+        successCallback: function(response) {
+          let modalID = userID ? "updated" : "created";
+          _renderModalEditOrCreateUser(modalID);
         }
-      })
-        .done(function(res) {
-          let formData = new FormData();
-          formData.append("img", dataToSendServer.avatar);
-
-          if (!userID) {
-            sendUserID = res._id;
-            modalID = "created";
-          } else {
-            sendUserID = userID;
-            modalID = "updated";
-          }
-
-          if (res.avatar === null && dataToSendServer.avatar !== undefined) {
-            avatarUser = false;
-          } else if (
-            res.avatar !== null &&
-            dataToSendServer.avatar !== undefined
-          ) {
-            avatarUser = false;
-          } else if (
-            res.avatar !== null &&
-            dataToSendServer.avatar === undefined
-          ) {
-            avatarUser = true;
-          } else if (res.avatar !== null) {
-            avatarUser = true;
-          }
-
-          if (avatarUser === false) {
-            $.ajax({
-              method: "POST",
-              url: `https://cv-mobile-api.herokuapp.com/api/files/upload/user/${sendUserID}`,
-              data: formData,
-              mimeType: "multipart/form-data",
-              processData: false,
-              contentType: false
-            })
-              .done(function(res) {
-                _renderModalEditOrCreateUser(modalID);
-              })
-              .fail(res => console.log("Unable to update avatar."));
-          } else {
-            _renderModalEditOrCreateUser(modalID);
-          }
-        })
-        .fail(res => console.log("Unable to create user: ", res));
+      });
     }
 
     function editForm(user) {
@@ -398,17 +353,30 @@ aria-labelledby="user_${stringForId}" aria-hidden="true">
         $(`input[value=${user.gender}]`).prop("checked", true);
 
         user["skills"].forEach(skill => {
-          $(`input[name='skills[]'][value=${skill}]`).prop("checked", true);
+          $(
+            `input[name='skills[]'][value=${
+              skill["_id"] ? skill["_id"] : skill
+            }]`
+          ).prop("checked", true);
         });
 
-        $("select#selLanguage")
-          .children("option")
-          .each((index, option) => {
-            if (user["languages"].includes($(option).val())) {
-              $(option).prop("selected", true);
-            }
-          });
+        user["languages"].forEach(lang => {
+          $("select#selLanguage")
+            .children(`option[value=${lang["_id"] ? lang["_id"] : lang}]`)
+            .prop("selected", true);
+        });
       }, 400);
+    }
+
+    function _collect(data, keyToCollect) {
+      const collectedObject = { data: {} };
+      data.forEach(item => {
+        const key = item[keyToCollect];
+        const itemCollected = {};
+        delete item[keyToCollect];
+        collectedObject["data"][key] = item;
+      });
+      return collectedObject;
     }
     return {
       construct,

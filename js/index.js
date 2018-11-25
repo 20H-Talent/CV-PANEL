@@ -1,13 +1,14 @@
 /**
  *  Function to load the content by ajax
  */
+const ApiMachine = ApiFactory("https://cv-mobile-api.herokuapp.com/api");
+
 $("document").ready(function() {
   $("#list-users").on("click", function() {
     loadRightMenu();
   });
 
   generalConstructor.construct("users-table");
-
   activateTooltips();
 
   function activateTooltips(container = null) {
@@ -227,23 +228,12 @@ $("document").ready(function() {
   let newUser = document.getElementById("new-user");
   let listCompanies = document.getElementById("list-companies");
   let surveyMenuItem = document.querySelector(".SurveyMenuItem");
-  let divNavBar = document.querySelector("#div-navbar");
-  let pdivNavBar = document.querySelector("#div-navbar p");
   let alertClose = document.querySelector(".alert-close");
   let enterpriseFormItem = document.querySelector("#btn-enterpriseAdd");
   let calendarItem = document.querySelector("#btn-calendar");
 
-  function closeNavbar() {
-    divNavBar.classList.replace("open", "close");
-  }
   listUsers.addEventListener("click", function(e) {
     generalConstructor.construct("users-table");
-    divNavBar.classList.replace("close", "open");
-    divNavBar.innerHTML = "";
-    divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
-  <i class="far fa-times-circle"></i>
-  </button>`;
-    divNavBar.innerHTML += `Se ha listado usuarios a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
   });
 
   newUser.addEventListener("click", function(e) {
@@ -284,14 +274,7 @@ buttonCreateUser.addEventListener("click", function() {
   if ($("#submit_search").length) {
     // use this if you are using id to check  // it exists
     let submitSearch = document.querySelector("#submit_search");
-    submitSearch.addEventListener("click", function() {
-      divNavBar.classList.replace("close", "open");
-      divNavBar.innerHTML = "";
-      divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
-    <i class="far fa-times-circle"></i>
-    </button>`;
-      divNavBar.innerHTML += `Se ha buscado usuario/s a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
-    });
+    submitSearch.addEventListener("click", function() {});
   } else {
     $("#search-btn").on("click", loadMain);
 

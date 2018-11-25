@@ -55,7 +55,7 @@ try {
         },
         "companies-table": { container: ".companies-table", constructor: companies },
         "enterprises-form": { container: "#alert-form-enterprises", constructor: enterpriseForm },
-        "calendar": { container: "#calendar", constructor: calendar }
+        "calendar": { container: "#calendar", constructor: calendar },
     });
 } catch (err) {
     alert(err.name + " " + err.message);

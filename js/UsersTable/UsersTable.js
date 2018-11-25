@@ -14,15 +14,28 @@ const Table = (function() {
   function init() {
     const mainContainer = $(".main-container");
 
-    let apiUsers = "https://cv-mobile-api.herokuapp.com/api/users";
-    let apiSkills = "https://cv-mobile-api.herokuapp.com/api/skills";
-    let apiLanguages = "https://cv-mobile-api.herokuapp.com/api/langs";
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
-        _setupSessionStorage(apiUsers, initTable);
-        _setupSessionStorage(apiSkills);
-        _setupSessionStorage(apiLanguages);
+        try {
+          _showOverlay(true);
+          ApiMachine.request("/users", {
+            method: "GET",
+            successCallback: initTable
+          });
+          ApiMachine.request("/skills", {
+            method: "GET",
+            successCallback: function(response) {},
+            storage: { key: "skills", collect: "_id" }
+          });
+          ApiMachine.request("/langs", {
+            method: "GET",
+            successCallback: function(response) {},
+            storage: { key: "languages", collect: "_id" }
+          });
+        } catch (err) {
+          return console.dir("An error happened: " + err);
+        }
       }).fail(function(err) {
         _showOverlay(false);
         throw new Error(err);
@@ -35,15 +48,24 @@ const Table = (function() {
      * @private
      */
     function _setupInternalEventListeners() {
-      $(window).on("resize", function(e) {
-        const width = this.innerWidth;
-        renderDataOnResize(null, width);
-      });
+      $(window)
+        .off("resize")
+        .on("resize", function(e) {
+          const width = this.innerWidth;
+          renderDataOnResize(width);
+        });
 
-      $("div.main-container")
-        .find("td.options")
-        .off("click")
-        .on("click", "button:not(.detail)", _optionButtonsEvent);
+      if (window.innerWidth > 868) {
+        $("div.main-container")
+          .find("td.options")
+          .off("click")
+          .on("click", "button:not(.detail)", _optionButtonsEvent);
+      } else {
+        $("div#card-container")
+          .find(".user-card .card-buttons")
+          .off("click")
+          .on("click", "button", _optionButtonsEvent);
+      }
 
       $("#userModal").on("show.bs.modal", renderDataOnModal);
     }
@@ -59,7 +81,7 @@ const Table = (function() {
       const button = $(event.currentTarget);
       const userID = button.data("id");
       if (button.hasClass("edit")) {
-        userForm.editForm(getUserByID(userID));
+        getUserByID(userID, userForm.editForm);
       } else {
         if (window.confirm("Are you sure to delete this user?")) {
           deleteUser(userID);
@@ -67,127 +89,48 @@ const Table = (function() {
       }
     }
 
-    /** Prepare sessionStorage that allow us save the data in client side to work with it
-     * @function _setupSessionStorage
-     * @private
-     * @param {String} url - The url from where we get the resources we need about users
-     * @param {function} callback - Callback that triggers when the response is ready
-     */
-    function _setupSessionStorage(url, callback) {
-      if (!callback) {
-        if (url.includes("langs")) {
-          if (!sessionStorage.getItem("languages-list")) {
-            apiRequest(url);
-          }
-        } else {
-          if (!sessionStorage.getItem("skills-list")) {
-            apiRequest(url);
-          }
-        }
-      } else {
-        if (!sessionStorage.getItem("users-list")) {
-          apiRequest(url);
-        } else {
-          callback(null, window.innerWidth);
-        }
-      }
-    }
-
-    /**Make the API Request that give the users data and handle the
-     * possible errors
-     * @function apiRequest
-     * @param {String} url
-     * @param {function} callback
-     */
-    function apiRequest(url) {
-      if (url.includes("langs")) {
-        $.getJSON(url, function(response) {
-          if (!response["error"]) {
-            sessionStorage.setItem("languages-list", JSON.stringify(response));
-          }
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
-      } else if (url.includes("skills")) {
-        $.getJSON(url, function(response) {
-          if (!response["error"]) {
-            sessionStorage.setItem("skills-list", JSON.stringify(response));
-          }
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
-      } else {
-        _showOverlay(true);
-        $.getJSON(url, function(response) {
-          if (!response["error"]) {
-            sessionStorage.setItem("users-list", JSON.stringify(response));
-          }
-        }).fail(function(err) {
-          _showOverlay(false);
-          throw new Error(err);
-        });
-      }
-    }
     function _renderLangsAndSkills(user) {
-      let sessionSkills = JSON.parse(sessionStorage.getItem("skills-list"));
-      let sessionLangs = JSON.parse(sessionStorage.getItem("languages-list"));
+      const skillsFromStorage = JSON.parse(sessionStorage.getItem("skills"));
+      const langsFromStorage = JSON.parse(sessionStorage.getItem("languages"));
+
       const data = {
         skills: [],
         languages: []
       };
-      Object.keys(user).map(function(key) {
-        if (key === "skills") {
-          data["skills"] = sessionSkills.map(function(sessionSkill) {
-            if (user[key].includes(sessionSkill._id)) {
-              if (window.innerWidth <= 867) {
-                return `<span class="badge badge-secondary mr-1">${
-                  sessionSkill.label
-                }</span>`;
-              } else {
-                return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
-                  sessionSkill.label
-                }.png" alt="${
-                  sessionSkill.label
-                }" width="48" height="48" title="${sessionSkill.label}" />`;
-              }
-            }
-          });
-        } else if (key === "languages") {
-          data["languages"] = sessionLangs.map(function(sessionLang) {
-            if (user[key].includes(sessionLang._id)) {
-              if (window.innerWidth <= 867) {
-                return `<span class="badge badge-secondary mr-1">${
-                  sessionLang.label
-                }</span>`;
-              } else {
-                return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
-                  sessionLang.label
-                }.png" alt="${
-                  sessionLang.label
-                }" width="48" height="48" title="${sessionLang.label}" />`;
-              }
-            }
-          });
-        }
+
+      Object.keys(data).forEach(key => {
+        data[key] = user[key].map(item => {
+          const sourceData = JSON.parse(sessionStorage.getItem(key));
+          const dataFromStorage = sourceData[item["_id"] ? item["_id"] : item];
+          if (window.innerWidth <= 867) {
+            return `<span class="badge badge-secondary mr-1">${
+              dataFromStorage.label
+            }</span>`;
+          } else {
+            return `<img class="mx-1 mt-2" src="../assets/images/${key}/${
+              dataFromStorage.label
+            }.png" alt="${
+              dataFromStorage.label
+            }" width="48" height="48" title="${dataFromStorage.label}" />`;
+          }
+        });
       });
-      data.skills = Array.from(new Set(data.skills));
-      data.languages = Array.from(new Set(data.languages));
 
       return data;
     }
+
     /** Display table with the users data when the instance is initialized
      * @function initTable
      * @public
      * @param {array} data - Array of JSON data
      */
-    function initTable(data, browserWidth) {
-      let users = data || JSON.parse(sessionStorage.getItem("users-list"));
+    function initTable(data, browserWidth = window.innerWidth) {
+      let users = data;
       if (browserWidth > 768) {
-        _showOverlay(true);
         const tableBody = mainContainer.find("#users-table tbody");
-        users.forEach(user => _appendRowData(tableBody, user));
+        for (let user of users) {
+          _appendRowData(tableBody, user);
+        }
       } else {
         mainContainer
           .find("#users-table")
@@ -195,7 +138,9 @@ const Table = (function() {
           .find("tbody")
           .empty();
         let cardContainer = mainContainer.find("div#card-container");
-        users.forEach(user => _appendCardData(cardContainer, user));
+        for (let user of users) {
+          _appendCardData(cardContainer, user);
+        }
       }
       _showOverlay(false);
       _setupInternalEventListeners();
@@ -229,50 +174,36 @@ const Table = (function() {
      * @public
      * @param {Number} width
      */
-    function renderDataOnResize(users = null, browserWidth, inputsData = []) {
+    function renderDataOnResize(browserWidth = window.innerWidth) {
       const mainTable = mainContainer.find("#users-table");
       const tableBody = mainTable.find("tbody");
       const cardContainer = mainContainer.find("div#card-container");
 
-      let usersData = users || JSON.parse(sessionStorage.getItem("users-list"));
+      if (browserWidth > 868 && tableBody.children("tr").length === 0) {
+        _showOverlay(true);
 
-      if (browserWidth > 868) {
-        if (inputsData.length > 0) {
-          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
-
-          tableBody.empty();
-          _showOverlay(true);
-
-          setTimeout(() => {
+        ApiMachine.request("/users", {
+          method: "GET",
+          successCallback: function(users) {
+            _renderTableOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
-            filteredUsers.forEach(user => _appendRowData(tableBody, user));
-          }, 1000);
-        }
+            _setupInternalEventListeners();
+          }
+        });
+      } else if (
+        browserWidth < 868 &&
+        cardContainer.children(".user-card").length === 0
+      ) {
+        _showOverlay(true);
 
-        if (tableBody.children("tr").length === 0 && inputsData.length === 0) {
-          _renderTableOnResize(mainTable, cardContainer, usersData);
-          _showOverlay(false);
-        }
-      } else if (browserWidth < 868) {
-        if (inputsData.length > 0) {
-          const filteredUsers = SearchFilter.filterUsers(inputsData, usersData);
-
-          cardContainer.empty();
-          _showOverlay(true);
-
-          setTimeout(() => {
+        ApiMachine.request("/users", {
+          method: "GET",
+          successCallback: function(users) {
+            _renderCardOnResize(mainTable, cardContainer, users);
             _showOverlay(false);
-            filteredUsers.forEach(user => _appendCardData(cardContainer, user));
-          }, 1000);
-        }
-
-        if (
-          cardContainer.children(".user-card").length === 0 &&
-          inputsData.length === 0
-        ) {
-          _renderCardOnResize(mainTable, cardContainer, usersData);
-          _showOverlay(false);
-        }
+            _setupInternalEventListeners();
+          }
+        });
       }
     }
     /**
@@ -286,7 +217,9 @@ const Table = (function() {
       cardContainer.empty();
       mainTable.show();
       const tableBody = mainTable.find("tbody");
-      users.forEach(user => _appendRowData(tableBody, user));
+      for (let user of users) {
+        _appendRowData(tableBody, user);
+      }
     }
 
     /**
@@ -301,7 +234,10 @@ const Table = (function() {
         .hide()
         .find("tbody")
         .empty();
-      users.forEach(user => _appendCardData(cardContainer, user));
+
+      for (let user of users) {
+        _appendCardData(cardContainer, user);
+      }
     }
 
     /**
@@ -363,7 +299,7 @@ const Table = (function() {
      */
     function _cardSkeleton(user) {
       let data = _renderLangsAndSkills(user);
-      return `<div class="card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
+      return `<div class="card user-card mt-3 ml-5 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
         user._id
       }>
       <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
@@ -386,7 +322,7 @@ const Table = (function() {
        </p>
      </div>
      <div class="card-footer text-right card-buttons">
-        <button type="button" class="btn btn-outline-primary btn-sm" data-id=${
+        <button type="button" class="btn btn-outline-primary btn-sm edit" data-id=${
           user._id
         }><i class="fas fa-user-edit"></i></button>
         <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
@@ -404,10 +340,17 @@ const Table = (function() {
      * @param {string} email || id
      * @return {object} User
      */
-    function getUserByID(value) {
-      return JSON.parse(sessionStorage.getItem("users-list")).find(
-        user => user._id === value
-      );
+    function getUserByID(id, externalCallback) {
+      try {
+        ApiMachine.request(`/users/${id}`, {
+          method: "GET",
+          successCallback: function(userFromAPI) {
+            externalCallback(userFromAPI);
+          }
+        });
+      } catch (err) {
+        return console.dir("An error happened: " + err);
+      }
     }
 
     /**
@@ -417,10 +360,16 @@ const Table = (function() {
      * @param {string} id
      */
     function deleteUser(id) {
-      let users = JSON.parse(sessionStorage.getItem("users-list"));
-      users = users.filter(user => user._id !== id);
-      sessionStorage.setItem("users-list", JSON.stringify(users));
-      _removeUserFromDOM(id);
+      try {
+        ApiMachine.request(`/users/${id}`, {
+          method: "DELETE",
+          successCallback: function(userFromAPI) {
+            _removeUserFromDOM(id);
+          }
+        });
+      } catch (err) {
+        return console.dir("An error happened: " + err);
+      }
     }
 
     /**
@@ -447,7 +396,7 @@ const Table = (function() {
 
       let overlayContainer = tableBody.length > 0 ? tableBody : cardContainer;
 
-      if (show) {
+      if (show && overlayContainer.find("div.loading").length === 0) {
         overlayContainer
           .css("position", "relative")
           .append(`<div class="loading">Loading&#8230;</div>`);
@@ -468,21 +417,31 @@ const Table = (function() {
     function renderDataOnModal(event) {
       const element = $(event.relatedTarget);
       const modal = $(this);
-      const user = getUserByID(element.data("id"));
 
-      const { avatar, username, name, birthDate, phone, address } = user;
+      ApiMachine.request(`/users/${element.data("id")}`, {
+        method: "GET",
+        successCallback: function(userFromAPI) {
+          const {
+            avatar,
+            username,
+            name,
+            birthDate,
+            phone,
+            address
+          } = userFromAPI;
+          const modalBody = modal.find(".modal-body");
 
-      const modalBody = modal.find(".modal-body");
+          modalBody.find("#infoUser span").remove();
 
-      modalBody.find("#infoUser span").remove();
+          modal.find(".modal-title").text(name + " ~ " + username);
+          modalBody.find("img").prop("src", avatar);
 
-      modal.find(".modal-title").text(name + " ~ " + username);
-      modalBody.find("img").prop("src", avatar);
-
-      _appendBirthday(modalBody, birthDate);
-      _appendPhones(modalBody, { phone });
-      _appendAddress(modalBody, address);
-      _appendTechSkills(modalBody, user);
+          _appendBirthday(modalBody, birthDate);
+          _appendPhones(modalBody, { phone });
+          _appendAddress(modalBody, address);
+          _appendTechSkills(modalBody, userFromAPI);
+        }
+      });
     }
 
     function _appendBirthday(container, birthDate) {
@@ -513,21 +472,16 @@ const Table = (function() {
     }
 
     function _appendTechSkills(container, user) {
-      ["skills", "languages"].map(key => {
-        let data = _renderLangsAndSkills(user);
+      let data = _renderLangsAndSkills(user);
+      container
+        .find(`#skillsInfo > .card-body`)
+        .empty()
+        .append(`${data["skills"].map(skillTag => skillTag).join("")}`);
 
-        if (key === "skills") {
-          container
-            .find(`#${key}Info > .card-body`)
-            .empty()
-            .append(`${data.skills.map(skillTag => skillTag).join("")}`);
-        } else if (key === "languages") {
-          container
-            .find(`#${key}Info > .card-body`)
-            .empty()
-            .append(`${data.languages.map(langTag => langTag).join("")}`);
-        }
-      });
+      container
+        .find(`#languagesInfo > .card-body`)
+        .empty()
+        .append(`${data["languages"].map(langTag => langTag).join("")}`);
     }
 
     return {
