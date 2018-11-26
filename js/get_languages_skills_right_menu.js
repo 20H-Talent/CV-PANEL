@@ -46,6 +46,7 @@ function renderSkills(data) {
   const frameworksColumn = skillsContainer.find('div[class*="col-12"]');
   const languagesColumn = skillsContainer.find('div[class*="col-5"]');
   const othersColumn = skillsContainer.find('div[class*="col-6"]');
+
   frameworksColumn.empty();
   languagesColumn.empty();
   othersColumn.empty();
