@@ -33,10 +33,15 @@ const CompaniesTable = (function() {
         .on("resize", function() {
           let browserWidth = this.innerWidth;
           let cardDiv = $("#card-container-company");
-          if (browserWidth > 868) {
+          if (
+            browserWidth > 868 &&
+            mainContainer.find("tbody#tableBody").children("tr").length === 0
+          ) {
             _renderCompaniesTable(companies);
           } else {
-            _renderCompaniesCards(companies);
+            if (cardDiv.find(".card-company").length === 0) {
+              _renderCompaniesCards(companies);
+            }
           }
         });
 
@@ -186,7 +191,80 @@ const CompaniesTable = (function() {
       tableBodyCompanies.empty("").append(tableBody);
     }
 
-    function _renderCompaniesCards(companies) {}
+    function _renderCompaniesCards(companies) {
+      $("#card-container-company").show();
+      $("#company-table").hide();
+
+      let mainContainerCompanies = $("#card-container-company");
+      let companyCard = "";
+
+      for (company in companies) {
+        companyCard += `
+          <div class="card card-company mt-3 shadow-lg p-3 ml-5 mr-2 mb-5 bg-white rounded"  data-id=${
+            company._id
+          }>
+           <div class="">
+             <div class="d-flex rounded  card-header   p-3">
+                <div class=""> <img class="card-img-top rounded-circle" src=${
+                  company.logo
+                } style="width:50px; alt="Card logo company"></div>
+                <div  class="col-lg-6">
+                   <h5 class="card-text  font-weight-bold text-dark">${
+                     company.name
+                   }</h5>
+                   <p  class="text-dark font-weight-bold ">${
+                     company.docType
+                   }</p>
+                   <p  class="text-dark font-weight-bold "> ${
+                     company.docNumber
+                   }</p>
+                </div>
+             </div>
+             <div class="">
+                <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8 mt-3">
+                   <p class="card-title col d-inline-flex font-weight-bold">Email</ins></p>
+                   <p class="card-text col-sm-6   text-right ldeep-purple"><ins>${
+                     company.email
+                   }</ins></p>
+                </div>
+                <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8  mt-3">
+                   <p class="card-subtitle font-weight-bold d-inline-flex col  ">Employees</p>
+                   <p class="card-text  text-right  col-sm-6 ldeep-purple"><ins>${
+                     company.employees
+                   }</ins></p>
+                </div>
+                <div class="d-inline-flex  col  mt-3">
+                   <p class="card-title col d-inline-flex  font-weight-bold ">Phone</p>
+                   <p class="card-text text-right  col-sm-8  ldeep-purple"><ins>${
+                     company.phone
+                   }</ins></p>
+                </div>
+                <div class="d-inline-flex  col  mt-3">
+                   <p class="card-text col d-inline-flex font-weight-bold mb-1">Website</p>
+                   <div class="mt-2 text-right  col-sm-6 social-net">${
+                     company.website
+                   }
+                   </div>
+                </div>
+             </div>
+
+          <div class="card-footer  header-card   col-sm-12 mt-2 border  text-right rounded">
+             <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
+             </button>
+             <button type="button" title="Delete company"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal"  data-id="${
+               company._id
+             }"  onclick="companies.modalDelete('${
+          company._id
+        }')"><i class="fas fa-trash-alt"></i></button></td>
+          </div>
+       </div>
+       </div>
+
+        `;
+      }
+
+      mainContainerCompanies.empty().append(companyCard);
+    }
 
     function _optionButtonsEvent(event) {
       const button = $(event.currentTarget);
@@ -289,50 +367,6 @@ var companies = CompaniesTable.getInstance();
 // function Companies() {
 //
 
-//     $.getJSON("https://cv-mobile-api.herokuapp.com/api/companies").done(
-//       function(data) {
-//         $.each(data, function(i, comp) {
-//           var company = new Company(
-//             comp._id,
-//             comp.name,
-//             comp.docType,
-//             comp.docNumber,
-//             comp.email,
-//             comp.website,
-//             comp.address,
-//             comp.socialUrls,
-//             comp.logo,
-//             comp.bio,
-//             comp.employees,
-//             comp.phone,
-//             comp.registeredDate,
-//             comp.jobOffers
-//           );
-//           companies.addCompany(company);
-//         });
-//         companies.renderCompaniesTable(companies.companies);
-//         $(window).on("resize", function() {
-//           let width = $(this).width();
-//           const companyContainer = $(".main-container-companies");
-//           const tableBodyCompanies = companyContainer.find(
-//             "#company-table tbody"
-//           );
-//           let cardDiv = $("#card-container-company");
-//           if (width > 868) {
-//             companies.renderCompaniesTable(companies.companies);
-//           } else {
-//             companies.renderCompanyCards();
-//           }
-//         });
-//       }
-//     );
-//   };
-//   this.addCompany = function(company) {
-//     this.companies.push(company);
-//   };
-//   this.removeAllCompanies = function() {
-//     this.companies = [];
-//   };
 //   this.renderCompaniesTable = function(filtredCompanies) {
 //     $("#card-container-company").hide();
 //     $("#company-table").show();
