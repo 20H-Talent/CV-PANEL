@@ -199,8 +199,10 @@ const SearchFilter = (function() {
     switch (dataName) {
       case "name":
       case "age":
-      case "experience":
         form.find(`input[name=${dataName}]`).val("");
+        break;
+      case "experience":
+        form.find(`select[name=${dataName}]`).val("");
         break;
       case "gender":
         form.find(`input[name=${dataName}]`).prop("checked", false);
