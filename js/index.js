@@ -42,45 +42,17 @@ $("document").ready(function() {
    */
 
   function formSideBar() {
-    // -------------  LATERAL LEFT MENU ----------
-    let sidebarItems = document.querySelectorAll("#left-menu li");
-    for (sidebarItem of sidebarItems) {
-      sidebarItem.addEventListener("click", function() {
-        let current = document.getElementsByClassName("sidebar-position");
-        current[0].className = current[0].className.replace(
-          "sidebar-position",
-          ""
-        );
-        this.className += " sidebar-position";
-      });
-    }
-
-    // --------------- LATERAL RIGHT MENU ----------
-    let rangeAge = document.querySelector("#age-range");
-    let age = document.querySelector("#age");
-    let rangeExp = document.querySelector("#exp-years");
-    let experience = document.querySelector("#range");
-
-    // to set age of user next to input age-range
-    rangeAge.addEventListener("click", function(event) {
-      age.innerHTML = rangeAge.value;
+    //BOTH LATERAL MENUS (RIGHT & LEFT) EVENT LISTENERS
+    ["left-menu", "right-menu"].forEach(function(menu) {
+      const sidebarItems = document.querySelectorAll(`#${menu} li`);
+      for (sidebarItem of sidebarItems) {
+        sidebarItem.addEventListener("click", function() {
+          let current = document.querySelector(".sidebar-position");
+          current.className = current.className.replace("sidebar-position", "");
+          this.className += " sidebar-position";
+        });
+      }
     });
-    // to set experience of user next to input exp-years
-    rangeExp.addEventListener("click", function(event) {
-      experience.innerHTML = rangeExp.value;
-    });
-
-    let sidebarItems2 = document.querySelectorAll("#right-menu li");
-    for (sidebarItem of sidebarItems2) {
-      sidebarItem.addEventListener("click", function() {
-        let current = document.getElementsByClassName("sidebar-position");
-        current[0].className = current[0].className.replace(
-          "sidebar-position",
-          ""
-        );
-        this.className += " sidebar-position";
-      });
-    }
   }
 
   /**************************************************************************
@@ -222,37 +194,42 @@ $("document").ready(function() {
   /********************************************
    * FUNCTIONS TO DISPLAY LAST CHANGE ON NAV
    ********************************************/
+  //Menu items data for the left menu
+  const menuItems = [
+    {
+      selector: "#list-users",
+      constructor: "users-table"
+    },
+    {
+      selector: "#new-user",
+      constructor: "user-form"
+    },
+    {
+      selector: "#list-companies",
+      constructor: "companies-table"
+    },
+    {
+      selector: ".SurveyMenuItem",
+      constructor: "survey-creator"
+    },
+    {
+      selector: "#btn-enterpriseAdd",
+      constructor: "enterprises-form"
+    },
+    {
+      selector: "#btn-calendar",
+      constructor: "calendar"
+    }
+  ];
 
-  // --- TO SEE LIST OF USERS ---
-  let listUsers = document.querySelector("#list-users");
-  let newUser = document.getElementById("new-user");
-  let listCompanies = document.getElementById("list-companies");
-  let surveyMenuItem = document.querySelector(".SurveyMenuItem");
+  for (menuData of menuItems) {
+    const { selector, constructor } = menuData;
+    document.querySelector(selector).addEventListener("click", function(event) {
+      generalConstructor.construct(constructor);
+    });
+  }
+
   let alertClose = document.querySelector(".alert-close");
-  let enterpriseFormItem = document.querySelector("#btn-enterpriseAdd");
-  let calendarItem = document.querySelector("#btn-calendar");
-
-  listUsers.addEventListener("click", function(e) {
-    generalConstructor.construct("users-table");
-  });
-
-  newUser.addEventListener("click", function(e) {
-    generalConstructor.construct("user-form");
-  });
-
-  surveyMenuItem.addEventListener("click", function(e) {
-    generalConstructor.construct("survey-creator");
-  });
-
-  listCompanies.addEventListener("click", function(e) {
-    generalConstructor.construct("companies-table");
-  });
-  enterpriseFormItem.addEventListener("click", function(e) {
-    generalConstructor.construct("enterprises-form");
-  });
-  calendarItem.addEventListener("click", function(e) {
-    generalConstructor.construct("calendar");
-  });
 
   // --- TO SEE CREATE USER ---
   /*
