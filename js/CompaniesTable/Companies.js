@@ -2,7 +2,7 @@ const CompaniesTable = (function() {
   let instance;
 
   function init() {
-    const companyContainer = $(".main-container-companies");
+    const mainContainer = $(".main-container");
 
     function construct(container) {
       $.get("../../html/CompaniesTable.html", function(htmlSkeleton) {
@@ -28,17 +28,83 @@ const CompaniesTable = (function() {
     }
 
     function setupInternalEventListeners() {
-      $(window).on("resize", function() {
-        let browserWidth = this.innerWidth;
+      $(window)
+        .off("resize")
+        .on("resize", function() {
+          let browserWidth = this.innerWidth;
+          let cardDiv = $("#card-container-company");
+          if (browserWidth > 868) {
+            _renderCompaniesTable(companies);
+          } else {
+            _renderCompaniesCards(companies);
+          }
+        });
 
-        const tableBodyCompanies = companyContainer.find(
-          "#company-table tbody"
-        );
-        let cardDiv = $("#card-container-company");
-        if (browserWidth > 868) {
-          _renderCompaniesTable(companies);
-        } else {
-          _renderCompaniesCards(companies);
+      $("#companyModal").on("show.bs.modal", _showPreviewInfo);
+    }
+
+    function _showPreviewInfo(event) {
+      const element = $(event.relatedTarget);
+      const modal = $(this);
+
+      ApiMachine.request(`/companies/${element.data("id")}`, {
+        method: "GET",
+        successCallback: function(company) {
+          const modalBody = modal.find(".modal-body");
+
+          modalBody.html(
+            `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
+              company._id
+            } >
+          <div class="card-header rounded  text-dark d-flex header-card flex-row align-items-center">
+             <img class="img-fluid mr-2 rounded-circle" src=${
+               company.logo
+             } width=120px height:50px  alt="test"/>
+             <div class="  ml-4 ">
+                <h5 class=" font-weight-bold modal-title">
+                   <p>${company.name}</p>
+                   <p  class="text-dark font-weight-bold ">${
+                     company.docType
+                   }</p>
+                   <p> ${company.docNumber}</p>
+                </h5>
+             </div>
+          </div>
+          <div class="text-dark">
+             <div class=" text-dark  mt-3 h5">
+                <h5 class=" rounded text-dark font-weight-bold ">Email</h5>
+                <h6><a class=" ldeep-purple " href="mailto${company.email}">${
+              company.email
+            }</a></h6>
+             </div>
+             <div class="text-dark  h5 ">
+                <h5 class="  text-dark rounded font-weight-bold">Bio</h5>
+                <h6 class=" ldeep-purple ">${company.bio}</h6>
+             </div>
+             <div class="text-dark  h5 ">
+                <h5 class="  text-dark rounded font-weight-bold">Website</h5>
+                <h6 class=" ldeep-purple ">${company.website}</h6>
+             </div>
+             <div  class="text-dark  h5 ">
+                <h5 class="  header-card text-dark rounded font-weight-bold">Phone</h5>
+                <h6 class=" ldeep-purple ">${company.phone}</h6>
+             </div>
+             <div class="text-dark  h5">
+                <h5 class="  header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
+                <h6 class=" ldeep-purple ">${company.employees}</h6>
+             </div>
+             <div class="text-dark  h5 ">
+                <h5 class=" header-card text-dark rounded font-weight-bold " >Address</h5>
+                <h6 class=" ldeep-purple ">${company.address.country} ~ ${
+              company.address.city
+            } ${company.address.street} / ${company.address.zipcode}
+                </h6>
+             </div>
+             <div class=" modal-footer">
+                <button type="button" class="btn  btn-ldeep-purple text-light" data-dismiss="modal">Close</button>
+             </div>
+          </div> `
+          );
         }
       });
     }
@@ -60,12 +126,15 @@ const CompaniesTable = (function() {
     }
 
     function _renderCompaniesTable(companies) {
+      const tableBodyCompanies = mainContainer.find("tbody#tableBody");
+
       $("#card-container-company").hide();
       $("#company-table").show();
+
       let tableBody = "";
 
       for (company of companies) {
-        tableBody += `<tr scope="row"  data-id=${company.id}>
+        tableBody += `<tr scope="row"  data-id=${company._id}>
           <td class="company-logo text-center"><img class="img rounded-circle text-center  align-middle" src=${
             company.logo
           } style="width:50px;"/></td>
@@ -81,33 +150,26 @@ const CompaniesTable = (function() {
           <td class="company-social text-center">
           <div class="container">
               <div class="row d-flex justify-content-around ">
-                  <div class=" social-net" id="networks${company.id}">
+                  <div class=" social-net" id="networks${company._id}">
                   ${_renderSocialNetworks(company.socialUrls)}
                   </div>
               </div>
           </div>
                   </td>
           <td class="options text-center">
-             <button  type="button" onclick="companies.showPreviewInfo('${
-               company.id
-             }');" data-toggle="modal" data-id=${
-          company.id
-        } data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
-             <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm"    class="btn btn-sm btn-outline-primary  edit-company"  onclick="companies.editCompany('${
-               company.id
-             }');" data-original-title=""  )><i class="fas fa-user-edit"></i>
+             <button type="button" data-toggle="modal" data-id=${
+               company._id
+             } data-target="#companyModal" title="View company" class="btn btn-sm btn-outline-success preview-company detail" data-toggle="modal"><i class="far fa-eye"></i> </button>
+             <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm" class="btn btn-sm btn-outline-primary  edit-company"  data-original-title=""><i class="fas fa-user-edit"></i>
              </button>
-             <button type="button" title="Delete company"  class="btn  btn-sm  btn-outline-danger deleteNow " data-id="${
-               company.id
-             }"  onclick="companies.modalDelete('${
-          company.id
-        }')"><i class="fas fa-trash-alt"></i></button>
+             <button type="button" title="Delete company"  class="btn btn-sm  btn-outline-danger deleteNow " data-id="${
+               company._id
+             }" ><i class="fas fa-trash-alt"></i></button>
           </td>
        </tr>`;
       }
 
-      $("#tableBody").html("");
-      $("#tableBody").append(tableBody);
+      tableBodyCompanies.empty("").append(tableBody);
     }
 
     function _renderCompaniesCards(companies) {}
@@ -130,62 +192,7 @@ const CompaniesTable = (function() {
 var companies = CompaniesTable.getInstance();
 
 // function Companies() {
-//   this.companies = [];
-
-//   this.construct = function(container) {
-//     $.get("../../html/CompaniesTable.html", htmlSkeleton => {
-//       container.empty().append(htmlSkeleton);
-
-//       ApiMachine.request("/companies", {
-//         method: "GET",
-//         successCallback: function(companies) {}
-//       });
-
-//       this.renderCompaniesTable(this.companies);
-//     }).fail(function(err) {
-//       throw new Error(err);
-//     });
-//   };
-
-//   this.renderCompaniesTable = function(companies) {
-//     $(window).on("resize", function() {
-//       let width = $(this).width();
-//       const companyContainer = $(".main-container-companies");
-//       const tableBodyCompanies = companyContainer.find("#company-table tbody");
-//       let cardDiv = $("#card-container-company");
-//       if (width > 868) {
-//         companies.renderCompaniesTable(companies.companies);
-//       } else {
-//         companies.renderCompanyCards();
-//       }
-//     });
-//   };
-
-//   this.getCompanyFromAPI = function() {
-//     ApiMachine.request("/companies", {
-//       method: "GET",
-//       successCallback: function(companies) {
-//         for (company in company) {
-//           var company = new Company(
-//             comp._id,
-//             comp.name,
-//             comp.docType,
-//             comp.docNumber,
-//             comp.email,
-//             comp.website,
-//             comp.address,
-//             comp.socialUrls,
-//             comp.logo,
-//             comp.bio,
-//             comp.employees,
-//             comp.phone,
-//             comp.registeredDate,
-//             comp.jobOffers
-//           );
-//           companies.addCompany(company);
-//         }
-//       }
-//     });
+//
 
 //     $.getJSON("https://cv-mobile-api.herokuapp.com/api/companies").done(
 //       function(data) {
