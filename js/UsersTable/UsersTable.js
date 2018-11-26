@@ -34,7 +34,7 @@ const Table = (function() {
             storage: { key: "languages", collect: "_id" }
           });
         } catch (err) {
-          return console.dir("An error happened: " + err);
+          return console.error("An error happened: ", err);
         }
       }).fail(function(err) {
         _showOverlay(false);
@@ -56,7 +56,7 @@ const Table = (function() {
         });
 
       if (window.innerWidth > 868) {
-        $("div.main-container")
+        mainContainer
           .find("td.options")
           .off("click")
           .on("click", "button:not(.detail)", _optionButtonsEvent);
@@ -350,7 +350,7 @@ const Table = (function() {
           }
         });
       } catch (err) {
-        return console.dir("An error happened: " + err);
+        return console.error("An error happened: ", err);
       }
     }
 
@@ -369,7 +369,7 @@ const Table = (function() {
           }
         });
       } catch (err) {
-        return console.dir("An error happened: " + err);
+        return console.error("An error happened: ", err);
       }
     }
 

@@ -40,6 +40,15 @@ const CompaniesTable = (function() {
           }
         });
 
+      if (window.innerWidth > 868) {
+        mainContainer
+          .find("td.options")
+          .off("click")
+          .on("click", "button:not(.detail)", _optionButtonsEvent);
+      } else {
+        //TODO - AÑADIR EVENTOS A LOS BOTONES DE LA TARJETA COMPAÑIA
+      }
+
       $("#companyModal").on("show.bs.modal", _showPreviewInfo);
     }
 
@@ -160,11 +169,16 @@ const CompaniesTable = (function() {
              <button type="button" data-toggle="modal" data-id=${
                company._id
              } data-target="#companyModal" title="View company" class="btn btn-sm btn-outline-success preview-company detail" data-toggle="modal"><i class="far fa-eye"></i> </button>
-             <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm" class="btn btn-sm btn-outline-primary  edit-company"  data-original-title=""><i class="fas fa-user-edit"></i>
-             </button>
-             <button type="button" title="Delete company"  class="btn btn-sm  btn-outline-danger deleteNow " data-id="${
+             <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm" class="btn btn-sm btn-outline-primary edit"  data-original-title="" data-id="${
                company._id
-             }" ><i class="fas fa-trash-alt"></i></button>
+             }">
+              <i class="fas fa-user-edit"></i>
+             </button>
+             <button type="button" title="Delete company" class="btn btn-sm btn-outline-danger delete" data-id="${
+               company._id
+             }">
+               <i class="fas fa-trash-alt"></i>
+             </button>
           </td>
        </tr>`;
       }
@@ -173,6 +187,87 @@ const CompaniesTable = (function() {
     }
 
     function _renderCompaniesCards(companies) {}
+
+    function _optionButtonsEvent(event) {
+      const button = $(event.currentTarget);
+      const companyID = button.data("id");
+      if (button.hasClass("edit")) {
+        editCompany(companyID);
+      } else {
+        if (window.confirm("Are you sure to delete this company?")) {
+          deleteCompany(companyID);
+        }
+      }
+    }
+
+    function editCompany(id) {
+      generalConstructor.construct("enterprises-form");
+      setTimeout(() => {
+        try {
+          ApiMachine.request(`/companies/${id}`, {
+            method: "GET",
+            successCallback: function(company) {
+              $("input[name=company-id]").val(id);
+              $("input[name=country]").val(company.address.country);
+              document.querySelector(
+                `input[value=${company.docType}]`
+              ).checked = true;
+              if (company.docType == "nif") {
+                $("input[name=docNumberNif]").val(company.docNumber);
+                $("#nif").show();
+                $("#cif").hide();
+              } else {
+                $("input[name=docNumberCif]").val(company.docNumber);
+                $("#cif").show();
+                $("#nif").hide();
+              }
+
+              $("input[name=platform]").val(company.socialUrls.platform);
+              $("input[name=url]").val(company.socialUrls.url);
+              $("input[name=street]").val(company.address.street);
+              $("input[name=city]").val(company.address.city);
+              $("input[name=zipcode]").val(company.address.zipcode);
+              $("input[name=name]").val(company.name);
+              $("input[name=employees]").val(company.employees);
+              $("input[name=email]").val(company.email);
+              $("input[name=website]").val(company.website);
+              $("textarea[name=bio]").val(company.bio);
+              $("input[name=socialUrls]").val(company.socialUrls.socialUrls);
+              $("input[name=phone]").val(company.phone);
+              //  var img = "<img src='" + company.logo + "'>";
+              // let logo = document.getElementById('logo').files[0];
+              //  $("#logo").html(img);
+            }
+          });
+        } catch (err) {
+          return console.error(
+            "An error happened during the edit request on companies: ",
+            err
+          );
+        }
+      }, 400);
+    }
+    function deleteCompany(id) {
+      try {
+        ApiMachine.request(`/companies/${id}`, {
+          method: "DELETE",
+          successCallback: function(companyFromAPI) {
+            _removeCompanyFromDOM(id);
+          }
+        });
+      } catch (err) {
+        return console.error("An error happened during delete request: ", err);
+      }
+    }
+
+    function removeCompanyFromDOM(id) {
+      const tableBody = mainContainer.find("tbody#tableBody");
+      if (tableBody.children("tr").length > 0) {
+        tableBody.find(`tr[data-id=${_id}]`).remove();
+      } else {
+        //TODO - BORRADO DE TARJETAS COMPAÑIA
+      }
+    }
 
     return {
       construct
