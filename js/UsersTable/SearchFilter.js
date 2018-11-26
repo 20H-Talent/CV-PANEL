@@ -14,7 +14,8 @@ const SearchFilter = (function() {
     _createSearchBadges(filtersBadgets);
     let filteredUsers = users; //recoge la lista de usuarios (todos los usuarios de la tabla) para filtrar.
 
-    // //FullName
+
+    // FullName
     if (filters["name"]) {
       const firstnameQuery = filters["name"].toLowerCase();
       filteredUsers = filteredUsers.filter(user =>
@@ -58,9 +59,13 @@ const SearchFilter = (function() {
     // Experience
     if (filters["experience"]) {
       const experienceQuery = filters["experience"];
-      filteredUsers = filteredUsers.filter(user => 
-        user["experience"].includes(experienceQuery)
-      );
+      filteredUsers = filteredUsers.filter(user => {
+        // console.log("dentro de exp: " , user["experience"], experienceQuery);
+        console.log("dentro de exp: ", filteredUsers[0]["experience"], filters["experience"]);
+        if (user["experience"] === experienceQuery){
+          return true;
+        }
+      });
     }
 
     // Languages (idiomas)
@@ -223,16 +228,6 @@ const SearchFilter = (function() {
       case "select":
         $("#" + idFieldName).val("");
       break;
-      // case "range":
-      //   $("#" + idFieldName).val("");
-
-      //   if ($("#age-range").val("") != "") {
-      //     document.getElementById("age").innerHTML = "";
-      //   }
-      //   if ($("#exp-years").val("") != "") {
-      //     document.getElementById("range").innerHTML = "";
-      //   }
-      //   break;
     }
 
     $(this).remove();
