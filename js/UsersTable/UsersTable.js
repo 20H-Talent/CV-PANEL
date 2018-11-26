@@ -126,7 +126,7 @@ const Table = (function() {
      */
     function initTable(data, browserWidth = window.innerWidth) {
       let users = data;
-      if (browserWidth > 768) {
+      if (browserWidth > 868) {
         const tableBody = mainContainer.find("#users-table tbody");
         for (let user of users) {
           _appendRowData(tableBody, user);
