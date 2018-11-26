@@ -21,10 +21,12 @@ const SearchFilter = (function() {
         user["name"].toLowerCase().includes(firstnameQuery)
       );
     }
+
     // Gender
     if (filters["gender"]) {
       filteredUsers = filteredUsers.filter(
-        user => user["gender"] === filters["gender"]
+        user =>
+          user["gender"] === filters["gender"]
       );
     }
 
@@ -54,57 +56,42 @@ const SearchFilter = (function() {
     // }
 
     // Experience
-
-    if (filters["experience"] && filters["experience"] != undefined) {
+    if (filters["experience"]) {
       const experienceQuery = filters["experience"];
-      filteredUsers = filteredUsers.filter(user => {
-
-        console.log(user,user["experience"], typeof user["experience"]);
-
-        user["experience"].includes(experienceQuery);
-      }
+      filteredUsers = filteredUsers.filter(user => 
+        user["experience"].includes(experienceQuery)
       );
-    }else {
     }
-
-    // Skills are Frameworks, Languages.
-
-    if (filters["skills"]) {
-      const skillsQuery = filters["skills"];
-      filteredUsers = filteredUsers.filter(user =>{
-        for(let i=0; i<=skillsQuery.length; i++) {
-          console.log(user,user["skills"], typeof user["skills"]);
-            user["skills"].includes( skillsQuery[i] );
-            let itemFilter =  user["skills"].includes( skillsQuery[i] );
-            if(!itemFilter){
-              return false;
-            }
-        }
-        console.log(user,user["skills"], typeof user["skills"]);
-        return true;
-      });
-    }
-
-
 
     // Languages (idiomas)
-    if (filters["languages"]) {
+     if (filters["languages"]) {
       const skillsQuery = filters["languages"];
       filteredUsers = filteredUsers.filter(user =>{
         for(let i=0; i<= skillsQuery.length; i++){
-          // console.log(user,user["languages"], typeof user["languages"]);
           user["languages"].includes(skillsQuery[i]);
           let languageItemFilter = user["languages"].includes(skillsQuery[i]);
             if(!languageItemFilter){
               return false;
             }
         }
-        console.log(user,user["languages"], typeof user["languages"]);
         return true;  
       });
     }
 
-
+    // Skills are Frameworks, Languages.
+    if (filters["skills"]) {
+      const skillsQuery = filters["skills"];
+      filteredUsers = filteredUsers.filter(user =>{
+        for(let i=0; i<=skillsQuery.length; i++) {
+            user["skills"].includes( skillsQuery[i] );
+            let itemFilter =  user["skills"].includes( skillsQuery[i] );
+            if(!itemFilter){
+              return false;
+            }
+        }
+        return true;
+      });
+    }
 
     return filteredUsers;
   }
