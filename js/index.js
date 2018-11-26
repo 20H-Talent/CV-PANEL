@@ -32,8 +32,14 @@ $("document").ready(function() {
       formSideBar();
       $("form#advanced-search").on("submit", function(e) {
         e.preventDefault();
-        const formInputs = $(this).find("input");
-        usersTable.renderDataOnResize(null, window.innerWidth, formInputs);
+        const formInputs = $(this).find("input, select");
+        ApiMachine.request("/users", {
+          method: "GET",
+          successCallback: function(users) {
+            const filteredUsers = SearchFilter.filterUsers(formInputs, users);
+            usersTable.initUsers(filteredUsers);
+          }
+        });
       });
     });
   }

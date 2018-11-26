@@ -10,56 +10,8 @@ const SearchFilter = (function() {
    */
   function filterUsers(inputsData, users) {
     const filters = _buildFilters(inputsData);
-    const filtersBadgets = _buildFiltersForBadgets(inputsData);
-    _createSearchBadges(filtersBadgets);
-    let filteredUsers = users;
-
-    //FullName
-    if (filters["name"]) {
-      const firstnameQuery = filters["name"].toLowerCase();
-      filteredUsers = filteredUsers.filter(user =>
-        user["name"].toLowerCase().includes(firstnameQuery)
-      );
-    }
-    //Gender
-    if (filters["gender"]) {
-      filteredUsers = filteredUsers.filter(
-        user => user["gender"] === filters["gender"]
-      );
-    }
-
-    //Age (ya no está en la API, ahora es una fecha de cumpleaños, hay que calcularla).
-    // if(filters["age"]){
-    //   const ageQuery = filters["name"].toLowerCase();
-    //   filteredUsers = filteredUsers.filter(
-    //     user =>
-    //       user["name"].toLowerCase().includes(firstnameQuery)
-    //   );
-    // }
-
-    //Experience
-
-    if (filters["Experience"]) {
-      const experienceQuery = filters["Experience"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["Experience"].includes(experienceQuery)
-      );
-    }
-    // Languages (idiomas)
-    if (filters["languages"]) {
-      const skillsQuery = filters["languages"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["languages"].includes(skillsQuery)
-      );
-    }
-
-    // skills are Frameworks, Languages.
-    if (filters["skills"]) {
-      const skillsQuery = filters["skills"];
-      filteredUsers = filteredUsers.filter(user =>
-        user["skills"].includes(skillsQuery)
-      );
-    }
+    _createSearchBadges(filters, users);
+    let filteredUsers = _buildFilteredUsersArray(filters, users);
 
     return filteredUsers;
   }
@@ -73,7 +25,7 @@ const SearchFilter = (function() {
    * @return {object} filters
    */
   function _buildFilters(elements) {
-    const filters = {};
+    const filters = { languages: [], skills: [] };
     const filtered = elements
       .filter((index, input) => {
         const $input = $(input);
@@ -88,46 +40,114 @@ const SearchFilter = (function() {
       })
       .each((index, input) => {
         const $input = $(input);
-        filters[$input.prop("name")] = $input.val();
+        if ($(input).data("type")) {
+          filters[$(input).data("type")].push($input.val());
+        } else {
+          filters[$input.prop("name")] = $input.val();
+        }
       });
+    if (filters["languages"].length === 0) {
+      delete filters["languages"];
+    }
+
+    if (filters["skills"].length === 0) {
+      delete filters["skills"];
+    }
     return filters;
   }
 
-  function _buildFiltersForBadgets(elements) {
-    const filters = [];
-    const filtered = elements
-      .filter((index, input) => {
-        const $input = $(input);
-        if (
-          $input.prop("type") === "radio" ||
-          $input.prop("type") === "checkbox"
-        ) {
-          return $input.prop("checked");
-        } else {
-          return $.trim($input.val()).length > 0;
+  /**
+   * Return the users already filtered by filters object
+   * @function buildFilteredUsersArray
+   * @private
+   * @param {Array of objects} elements
+   * @return {Array} filteredUsers
+   */
+  function _buildFilteredUsersArray(filters, users) {
+    //Gender
+    let filteredUsers = users;
+    if (filters["gender"]) {
+      filteredUsers = filteredUsers.filter(
+        user => user["gender"] === filters["gender"]
+      );
+    }
+
+    //FullName
+    if (filters["name"]) {
+      const firstnameQuery = filters["name"].toLowerCase();
+      filteredUsers = filteredUsers.filter(user =>
+        user["name"].toLowerCase().includes(firstnameQuery)
+      );
+    }
+
+    //Age
+    if (filters["age"]) {
+      filteredUsers = filteredUsers.filter(
+        user =>
+          new Date(user["birthDate"]).getFullYear() <=
+          new Date().getFullYear() - parseInt(filters["age"])
+      );
+    }
+
+    //Experience
+
+    if (filters["experience"]) {
+      console.log("filters experience: ", filters["experience"]);
+      const experienceQuery = filters["experience"];
+      filteredUsers = filteredUsers.filter(user =>
+        user["experience"].includes(experienceQuery)
+      );
+    }
+
+    // Languages (idiomas)
+    if (filters["languages"] && filters["languages"].length > 0) {
+      const languagesSelected = filters["languages"];
+      filteredUsers = filteredUsers.filter(user => {
+        let languagesChecked = true;
+        for (let language of user["languages"]) {
+          if (!languagesSelected.includes(language)) {
+            languagesChecked = false;
+            break;
+          }
         }
-      })
-      .each((index, input) => {
-        const $input = $(input);
-        filters.push(input);
+        return languagesChecked;
       });
-    return filters;
+    }
+
+    // skills are Frameworks, Languages.
+    if (filters["skills"] && filters["skills"].length > 0) {
+      const skillsSelected = filters["skills"];
+      filteredUsers = filteredUsers.filter(user => {
+        let skillsChecked = true;
+        for (let skill of user["skills"]) {
+          if (!skillsSelected.includes(skill)) {
+            skillsChecked = false;
+            break;
+          }
+        }
+        return skillsChecked;
+      });
+    }
+    return filteredUsers;
   }
+
   /**
    * Create badge-pills to show the user input search values
    * @function _createSearchBadges
    * @private
    * @param {Object} filters
    */
-  function _createSearchBadges(filters) {
+  function _createSearchBadges(filters, users) {
     const filtersContainer = mainContainer.find(".filters");
     const badgesContainer = filtersContainer.children(".search-badges");
-    filtersContainer.find("button").remove();
+    badgesContainer.empty();
+    filtersContainer.find("button#reset-btn").remove();
+
     _appendFilterBadges(filters, badgesContainer);
-    _createResetButton(filtersContainer, badgesContainer);
+    _createResetButton(filtersContainer, badgesContainer, users);
   }
 
-  function _createResetButton(filtersContainer, badgesContainer) {
+  function _createResetButton(filtersContainer, badgesContainer, users) {
     const resetButton = filtersContainer.append(
       `<button id="reset-btn" class="btn btn-sm btn-info">Cancel search</button>`
     );
@@ -136,70 +156,74 @@ const SearchFilter = (function() {
       .on("click", function(e) {
         badgesContainer.empty();
         $(this).remove();
-        usersTable.initTable(null, window.innerWidth);
+        usersTable.initUsers(users);
       });
   }
 
   function _appendFilterBadges(filters, badgesContainer) {
     badgesContainer.empty();
-    filters.forEach(function(element) {
+
+    const specialFilters = ["skills", "languages"];
+
+    for (let key in filters) {
       let badge = "";
-      if ($(element).attr("fieldName") != undefined) {
-        badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
-          ${$(element).attr("fieldName")} : <span>${$(element).attr("valueName")}</span>
-          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
-          </span>`
-        ).hide();
+      let valueInsideBadge = `${key.charAt(0).toUpperCase() + key.slice(1)}: `;
+
+      if (!specialFilters.includes(key)) {
+        valueInsideBadge += filters[key];
       } else {
-        badge = $(
-          `<span class="badge badge-pill badge-secondary filter mr-2" idFieldName="${$(element).attr("id")}" fieldValue="${$(element).val()}"> 
-          ${$(element).attr("name")} : <span>${$(element).val()}</span>
-          <button class="bg-transparent border-0 deletion"><i class="far text-light ml-2 fa-times-circle"></i></button>
-          </span>`
-        ).hide();
+        const sourceData = JSON.parse(sessionStorage.getItem(key));
+        valueInsideBadge += filters[key]
+          .map(value => sourceData[value].label)
+          .join(",");
       }
+      badge = $(
+        `<span data-name=${key} data-values=${
+          filters[key]
+        } class="badge badge-pill badge-secondary filter mr-2">${valueInsideBadge}
+             <button class="bg-transparent border-0 badge-delete"><i class="far text-light ml-2 fa-times-circle"></i></button>
+          </span>`
+      ).hide();
 
       badgesContainer.append(badge);
       badge.show("slow");
-      badge.on("click", _deleteBagde);
-    });
+      badge.on("click", _deleteBadge);
+    }
   }
 
-  function _deleteBagde(badge) {
-    var idFieldName = $(this).attr("idFieldName");
-    var typeField = $("#" + idFieldName).attr("type");
-    // var fieldValue = $(this).attr("fieldValue");
+  function _deleteBadge() {
+    const badge = $(this);
+    const dataName = badge.data("name");
+    const form = $("form#advanced-search");
 
-    switch (typeField) {
-      case "text":
-        $("#" + idFieldName).val("");
+    switch (dataName) {
+      case "name":
+      case "age":
+      case "experience":
+        form.find(`input[name=${dataName}]`).val("");
         break;
-
-      case "checkbox":
-        $("#" + idFieldName).prop("checked", false);
+      case "gender":
+        form.find(`input[name=${dataName}]`).prop("checked", false);
         break;
-
-      case "radio":
-        $("#" + idFieldName).prop("checked", false);
-        break;
-
-      case "range":
-        $("#" + idFieldName).val("");
-
-        if ($("#age-range").val("") != "") {
-          document.getElementById("age").innerHTML = "";
-        }
-        if ($("#exp-years").val("") != "") {
-          document.getElementById("range").innerHTML = "";
-        }
+      case "languages":
+      case "skills":
+        form
+          .find(`div#${dataName} input[type=checkbox]`)
+          .each((index, input) => {
+            $(input).prop("checked", false);
+          });
         break;
     }
 
     $(this).remove();
 
-    $("#submit_search").trigger("click");
-    //usersTable.initTable(null, window.innerWidth);
+    const filtersContainer = mainContainer.find(".filters");
+    const badgesContainer = filtersContainer.children(".search-badges");
+    if (badgesContainer.find("span").length === 0) {
+      $("#reset-btn").trigger("click");
+    } else {
+      form.trigger("submit");
+    }
   }
 
   return {

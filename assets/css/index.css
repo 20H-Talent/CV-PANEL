@@ -389,23 +389,31 @@ nav label {
 
 .filters {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-right: 0.5em;
+  flex-grow: 1;
 }
 
 .filters > .search-badges {
   padding: 1em 2em 0.5em 2em;
   font-size: 1.2em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .search-badges .badge.filter {
   padding: 0.5em 1em 0.5em 1em;
+  margin: 0.3em 0.1em;
 }
 
 .search-badges .badge.filter span {
   font-weight: normal;
+}
+
+.search-badges .badge.filter button.badge-delete {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 @media screen and (max-width: 428px) {
@@ -549,13 +557,23 @@ ul div[class*="border-dark"] {
 
 #age_user #age-range,
 #experience #exp-years {
-  width: 90%;
+  display: block;
+  width: 20%;
+  margin: 0 auto;
+  padding: 0.2em;
+  font-weight: bold;
 }
 
 #age_user #age,
 #experience #range {
   padding-top: 0;
   opacity: 1;
+}
+
+form#advanced-search input,
+form#advanced-search select {
+  font-weight: bold;
+  font-size: 0.9em;
 }
 
 /* #age_user {

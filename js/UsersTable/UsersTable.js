@@ -21,7 +21,7 @@ const Table = (function() {
           _showOverlay(true);
           ApiMachine.request("/users", {
             method: "GET",
-            successCallback: initTable
+            successCallback: initUsers
           });
           ApiMachine.request("/skills", {
             method: "GET",
@@ -119,17 +119,26 @@ const Table = (function() {
       return data;
     }
 
-    /** Display table with the users data when the instance is initialized
-     * @function initTable
+    /** Display users depending on the actual window size
+     * @function initUsers
      * @public
      * @param {array} data - Array of JSON data
      */
-    function initTable(data, browserWidth = window.innerWidth) {
+    function initUsers(data, browserWidth = window.innerWidth) {
       let users = data;
       if (browserWidth > 868) {
         const tableBody = mainContainer.find("#users-table tbody");
+        tableBody.empty();
         for (let user of users) {
           _appendRowData(tableBody, user);
+        }
+
+        if (tableBody.children("tr").length === 0) {
+          tableBody.append(`
+             <div class="alert alert-warning" role="alert">
+               <h6>No results found</h6>
+              </div>
+         `);
         }
       } else {
         mainContainer
@@ -138,6 +147,7 @@ const Table = (function() {
           .find("tbody")
           .empty();
         let cardContainer = mainContainer.find("div#card-container");
+        cardContainer.empty();
         for (let user of users) {
           _appendCardData(cardContainer, user);
         }
@@ -487,7 +497,7 @@ const Table = (function() {
 
     return {
       construct,
-      initTable,
+      initUsers,
       getUserByID,
       renderDataOnResize,
       renderDataOnModal,

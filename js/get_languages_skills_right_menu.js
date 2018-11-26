@@ -28,7 +28,7 @@ function renderLanguages(data) {
   for (let _id in data) {
     languagesContainer.append(
       `<div class="custom-control custom-checkbox col-5">
-          <input type="checkbox" fieldName="language" valueName="${
+          <input data-type="languages" type="checkbox" fieldName="language" valueName="${
             data[_id].label
           }" value="${_id}" name="${
         data[_id].label
