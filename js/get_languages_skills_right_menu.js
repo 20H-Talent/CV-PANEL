@@ -54,7 +54,7 @@ function renderSkills(data) {
   for (let _id in data) {
     let divObjectSkill = `
     <div class="custom-control custom-checkbox mr-3">
-          <input type="checkbox" id="${_id}" class="custom-control-input" fieldName="${
+          <input type="checkbox" data-type="skills" id="${_id}" class="custom-control-input" fieldName="${
       data[_id].type
     }" valueName="${data[_id].label}" value=${_id}
           name="${data[_id].label}">
