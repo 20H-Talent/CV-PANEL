@@ -34,7 +34,7 @@ const Table = (function() {
             storage: { key: "languages", collect: "_id" }
           });
         } catch (err) {
-          return console.dir("An error happened: " + err);
+          return console.error("An error happened: ", err);
         }
       }).fail(function(err) {
         _showOverlay(false);
@@ -126,7 +126,7 @@ const Table = (function() {
      */
     function initTable(data, browserWidth = window.innerWidth) {
       let users = data;
-      if (browserWidth > 768) {
+      if (browserWidth > 868) {
         const tableBody = mainContainer.find("#users-table tbody");
         for (let user of users) {
           _appendRowData(tableBody, user);
@@ -350,7 +350,7 @@ const Table = (function() {
           }
         });
       } catch (err) {
-        return console.dir("An error happened: " + err);
+        return console.error("An error happened: ", err);
       }
     }
 
@@ -369,7 +369,7 @@ const Table = (function() {
           }
         });
       } catch (err) {
-        return console.dir("An error happened: " + err);
+        return console.error("An error happened: ", err);
       }
     }
 
