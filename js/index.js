@@ -194,55 +194,44 @@ $("document").ready(function() {
   /********************************************
    * FUNCTIONS TO DISPLAY LAST CHANGE ON NAV
    ********************************************/
-  //Menu items data for the left menu
-  const menuItems = [
-    {
-      selector: "#list-users",
-      constructor: "users-table"
-    },
-    {
-      selector: "#new-user",
-      constructor: "user-form"
-    },
-    {
-      selector: "#list-companies",
-      constructor: "companies-table"
-    },
-    {
-      selector: ".SurveyMenuItem",
-      constructor: "survey-creator"
-    },
-    {
-      selector: "#btn-enterpriseAdd",
-      constructor: "enterprises-form"
-    },
-    {
-      selector: "#btn-calendar",
-      constructor: "calendar"
+  function createLeftMenuItemsConstructor() {
+    //Menu items data for the left menu
+    const menuItems = [
+      {
+        selector: "#list-users",
+        constructor: "users-table"
+      },
+      {
+        selector: "#new-user",
+        constructor: "user-form"
+      },
+      {
+        selector: "#list-companies",
+        constructor: "companies-table"
+      },
+      {
+        selector: ".SurveyMenuItem",
+        constructor: "survey-creator"
+      },
+      {
+        selector: "#btn-enterpriseAdd",
+        constructor: "enterprises-form"
+      },
+      {
+        selector: "#btn-calendar",
+        constructor: "calendar"
+      }
+    ];
+
+    for (menuData of menuItems) {
+      const { selector, constructor } = menuData;
+      document
+        .querySelector(selector)
+        .addEventListener("click", function(event) {
+          generalConstructor.construct(constructor);
+        });
     }
-  ];
-
-  for (menuData of menuItems) {
-    const { selector, constructor } = menuData;
-    document.querySelector(selector).addEventListener("click", function(event) {
-      generalConstructor.construct(constructor);
-    });
   }
-
-  let alertClose = document.querySelector(".alert-close");
-
-  // --- TO SEE CREATE USER ---
-  /*
-let buttonCreateUser = document.querySelector("#button-create-user");
-buttonCreateUser.addEventListener("click", function() {
-  divNavBar.classList.replace("close", "open");
-  divNavBar.innerHTML = "";
-  divNavBar.innerHTML += `<button onclick="closeNavbar()"  type="button" class="alert-close border-0 bg-transparent">
-  <i class="far fa-times-circle"></i>
-  </button>`;
-  divNavBar.innerHTML += `Se ha creado usuario a las: [${new Date().getHours()}:${new Date().getMinutes()} hours] .`;
-});*/
-  // --- TO SEE SEARCH OF USERS ---
 
   /*************************************************************************************
    * Load by ajax the sidebar form into the center column

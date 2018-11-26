@@ -5,58 +5,64 @@
  * @return {function} getInstance
  */
 const GeneralConstructor = (function() {
-    let instance;
-    let constructors;
+  let instance;
+  let constructors;
 
-    const targetContainer = $(".main-container #data-column");
+  const targetContainer = $(".main-container #data-column");
 
-    function init(classes) {
-        constructors = classes;
+  function init(classes) {
+    constructors = classes;
 
-        function construct(constructorKey) {
-            if (
-                constructors[constructorKey] &&
-                targetContainer.find(constructors[constructorKey]["container"])
-                .length === 0
-            ) {
-                constructors[constructorKey]["constructor"].construct(targetContainer);
-            }
-        }
-
-        return {
-            constructors,
-            construct
-        };
+    function construct(constructorKey) {
+      if (
+        constructors[constructorKey] &&
+        targetContainer.find(constructors[constructorKey]["container"])
+          .length === 0
+      ) {
+        constructors[constructorKey]["constructor"].construct(targetContainer);
+      }
     }
 
     return {
-        getInstance: function(classes) {
-            if (!instance && classes instanceof Object) {
-                instance = init(classes);
-            } else {
-                throw new Error(
-                    "GeneralConstructor receive a bad parameter: " + classes
-                );
-            }
-            return instance;
-        }
+      constructors,
+      construct
     };
+  }
+
+  return {
+    getInstance: function(classes) {
+      if (!instance && classes instanceof Object) {
+        instance = init(classes);
+      } else {
+        throw new Error(
+          "GeneralConstructor receive a bad parameter: " + classes
+        );
+      }
+      return instance;
+    }
+  };
 })();
 
 let generalConstructor;
 
 try {
-    generalConstructor = GeneralConstructor.getInstance({
-        "users-table": { container: "#users-table", constructor: usersTable },
-        "user-form": { container: "#user-form-container", constructor: userForm },
-        "survey-creator": {
-            container: ".survey-container",
-            constructor: surveyCreator
-        },
-        "companies-table": { container: ".companies-table", constructor: companies },
-        "enterprises-form": { container: "#alert-form-enterprises", constructor: enterpriseForm },
-        "calendar": { container: "#calendar", constructor: calendar },
-    });
+  generalConstructor = GeneralConstructor.getInstance({
+    "users-table": { container: "#users-table", constructor: usersTable },
+    "user-form": { container: "#user-form-container", constructor: userForm },
+    "survey-creator": {
+      container: ".survey-container",
+      constructor: surveyCreator
+    },
+    "companies-table": {
+      container: ".companies-table",
+      constructor: companies
+    },
+    "enterprises-form": {
+      container: "#alert-form-enterprises",
+      constructor: enterpriseForm
+    },
+    calendar: { container: "#calendar", constructor: calendar }
+  });
 } catch (err) {
-    alert(err.name + " " + err.message);
+  alert(err.name + " " + err.message);
 }
