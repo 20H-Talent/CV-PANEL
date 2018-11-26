@@ -7,6 +7,27 @@ function Companies() {
             companies.removeAllCompanies();
             companies.getCompanyFromAPI();
             this.renderCompaniesTable(this.companies);
+            $("#confirm-delete-card").on("show.bs.modal", function(event) {
+
+                let button = $(event.relatedTarget);
+                let companyId = button.data("id");
+                let modal = $(this);
+                modal.find(" button.delete-company").off("click").on("click", function() {
+                    //   $("#confirm-delete ").on("click", modalDelete(id));
+                    companies.removeCompanyFromDOM(companyId);
+                    const mainContainer = $("#companyTable");
+                    const tableBody = mainContainer.find("#company-table #tableBody");
+                    const cardCompany = mainContainer.find("#card-container-company");
+                    if (tableBody.children("tr").length > 0) {
+                        tableBody.find(`tr[data-id=${companyId}]`).remove();
+                    }
+                    if (cardCompany.children(".card").length > 0) {
+                        cardCompany.find(`.card-company[data-id=${companyId}]`).remove();
+                        //   window.location.replace("/index.html");
+                    }
+                })
+
+            })
         }).fail(function(err) {
             throw new Error(err);
         });
@@ -98,7 +119,7 @@ function Companies() {
       } data-target="#companyModal" title="View company"   class="btn  btn-sm  btn-outline-success preview-company" data-toggle="modal"><i class="far fa-eye"></i> </button>
              <button type="button" rel="tooltip" title="Edit company" id="editCompanyForm"    class="btn btn-sm btn-outline-primary  edit-company"  onclick="companies.editCompany('${ filtredCompanies[i].id}');" data-original-title=""  )><i class="fas fa-user-edit"></i>
              </button>
-             <button type="button" title="Delete company" onclick="companies.modalDelete('${filtredCompanies[i].id}')"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${
+             <button type="button" title="Delete company"   class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${
               filtredCompanies[i].id
             } data-target="#confirm-delete-card"><i class="fas fa-trash-alt"></i></button>
           </td>
@@ -303,22 +324,6 @@ function Companies() {
             .then(response => {
                 // setTimeout(function() { window.location.reload(); }, 2000);
             });
-    };
-    this.modalDelete = function(id) {
-        $("#confirm-delete-card").on("hidden.bs.modal", function() {
-            //   $("#confirm-delete ").on("click", modalDelete(id));
-            companies.removeCompanyFromDOM(id);
-            const mainContainer = $("#companyTable");
-            const tableBody = mainContainer.find("#company-table #tableBody");
-            const cardCompany = mainContainer.find("#card-container-company");
-            if (tableBody.children("tr").length > 0) {
-                tableBody.find(`tr[data-id=${id}]`).remove();
-            }
-            if (cardCompany.children(".card").length > 0) {
-                cardCompany.find(`.card-company[data-id=${id}]`).remove();
-                //   window.location.replace("/index.html");
-            }
-        })
     };
     this.inputsBadgesSearch = function() {
         let formCompanyes = $("#advanced-search-companies");
