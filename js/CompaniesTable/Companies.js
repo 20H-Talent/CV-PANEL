@@ -254,9 +254,16 @@ function Companies() {
         );
     };
     this.editCompany = function(id) {
+        var company = companies.getCompanyById(id);
         generalConstructor.construct("enterprises-form");
         setTimeout(() => {
-            var company = companies.getCompanyById(id);
+            if ($("form#alert-form-enterprises").find("input[type=hidden]").length) {
+                $("#alert-form-enterprises")
+                    .find(`h1[class='format-1']`)
+                    .html(
+                        `<i class="fas fa-user-edit"></i> Editing company <span class='text-success'>${company.name}</span>`
+                    );
+            }
             $("input[name=company-id]").val(id);
             $("input[name=country]").val(company.address.country);
             document.querySelector(`input[value=${company.docType}]`).checked = true;
