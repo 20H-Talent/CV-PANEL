@@ -254,9 +254,9 @@ function Companies() {
         );
     };
     this.editCompany = function(id) {
-        var company = companies.getCompanyById(id);
         generalConstructor.construct("enterprises-form");
         setTimeout(() => {
+            var company = companies.getCompanyById(id);
             if ($("form#alert-form-enterprises").find("input[type=hidden]").length) {
                 $("#alert-form-enterprises")
                     .find(`h1[class='format-1']`)
@@ -400,7 +400,6 @@ function Companies() {
         let inputCountry = $("#company-country")
             .val()
             .toLowerCase();
-        console.log('companies.companies :', companies.companies);
         var filteredCompanies = [];
         filteredCompanies = companies.companies.filter(company => {
             return company.name.toLowerCase().includes(inputCompanyName);

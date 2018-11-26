@@ -46,7 +46,7 @@ function locationTooltipsIncorrect(input) {
         $(input).tooltip({
             title: "Error. Please enter a valid format."
         });
-        //   $(input).tooltip("show");
+        // $(input).tooltip("show");
     });
 }
 
@@ -59,7 +59,7 @@ function locationTooltipsCorrect(input) {
         $(input).tooltip({
             title: "Correct!!"
         });
-        // $(input).tooltip("show");
+        //  $(input).tooltip("show");
     });
 }
 
@@ -67,15 +67,15 @@ function EnterprisesForm() {
     this.construct = function(container) {
         $.get("../../html/EnterprisesForm.html", function(htmlSkeleton) {
             container.empty().append(htmlSkeleton);
-            enterpriseForm.socialUrls();
+            //  enterpriseForm.socialUrls();
             //hinding the CIF input and showing the NIF input
             $("#rdoNif").on("click", function() {
-                $("#nif").show();
-                $("#cif").hide();
+                $("#nif").show().prop('required', true);
+                $("#cif").hide().removeAttr('required');
             });
             $("#rdoCif").on("click", function() {
-                $("#cif").show();
-                $("#nif").hide();
+                $("#cif").show().prop('required', true);
+                $("#nif").hide().removeAttr('required');
             });
             $("#enterprises-form-ajax").load(
                 "../html/EnterprisesForm.html",
@@ -93,12 +93,12 @@ function EnterprisesForm() {
     };
 }
 
-EnterprisesForm.prototype.socialUrls = function() {
-    $("input[name=socialUrls]").on("keypress", function(event) {
-        if (event.which === 13) {
-            var socialLIst = $(this).val();
-            // $(this).val("");
-            $("ul").append("<li  ><span><i class='fa fa-users mr-3'></i></span> " + socialLIst + "</li>")
-        }
-    });
-}
+// EnterprisesForm.prototype.socialUrls = function() {
+//     $("input[name=socialUrls]").on("keypress", function(event) {
+//         if (event.which === 13) {
+//             var socialLIst = $(this).val();
+//             // $(this).val("");
+//             $("ul").append("<li  ><span><i class='fa fa-users mr-3'></i></span> " + socialLIst + "</li>")
+//         }
+//     });
+// }
