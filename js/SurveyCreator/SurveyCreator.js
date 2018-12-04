@@ -561,12 +561,14 @@ const SurveyCreator = (function() {
 
             switch (element["type"]) {
               case "select":
+                console.log("elements in select: ", elements);
+
                 return `
                 <div class="form-group my-1">
-                   <h5>${element["title"]}</h5>
+                   <h5>${element["label"]}</h5>
                     <select class="form-control" name="${encodedInputName}">
                     ${element["values"].map(value => {
-                      return `<option>${value}</option>`;
+                      return `<option>${value["value"].trim()}</option>`;
                     })}
                     </select>
               </div>`;
@@ -574,8 +576,9 @@ const SurveyCreator = (function() {
 
               case "checkbox":
               case "radio":
+                console.log("elements in radio: ", elements);
                 return `
-              <h5>${element["title"]}</h5>
+              <h5>${element["label"]}</h5>
                 ${element["values"]
                   .map(value => {
                     return `
@@ -583,8 +586,10 @@ const SurveyCreator = (function() {
                     <label>
                       <input class="form-check-input" type="${
                         element["type"]
-                      }" value=${value.trim()} name="${encodedInputName}"/>
-                      ${value.trim()}
+                      }" value=${value[
+                      "value"
+                    ].trim()} name="${encodedInputName}"/>
+                      ${value["value"].trim()}
                     </label>
                     </div>`;
                   })
@@ -593,7 +598,7 @@ const SurveyCreator = (function() {
 
               case "date":
                 return `
-                  <h5>${element["title"]}</h5>
+                  <h5>${element["label"]}</h5>
                   <input class="form-control" type="${
                     element["type"]
                   }" value="${element["values"][0]}"/>
