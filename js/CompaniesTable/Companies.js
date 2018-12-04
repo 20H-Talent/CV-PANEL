@@ -98,22 +98,10 @@ function Companies() {
           }" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
              </a>${filtredCompanies[i].email}
           </td>
-          <td class="company-country">${
-            filtredCompanies[i].address.country
-          }</td>
-          <td class="company-social text-center">
-          <div class="container">
-              <div class="row d-flex justify-content-around ">
-                  <div class=" social-net" id="networks${
-                    filtredCompanies[i].id
-                  }">
-                  ${companies.renderSocialNetworks(
-                    filtredCompanies[i].socialUrls
-                  )}
-                  </div>
-              </div>
-          </div>
-                  </td>
+          <td class="company-country">${filtredCompanies[i].address.city}</td>
+          <td class="company-social text-center">${new Date(
+            filtredCompanies[i].registeredDate
+          ).toLocaleDateString()}</td>
           <td class="options text-center">
              <button  type="button" onclick="companies.showPreviewInfo('${
                filtredCompanies[i].id
