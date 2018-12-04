@@ -19,6 +19,14 @@ const GeneralConstructor = (function() {
         targetContainer.find(constructors[constructorKey]["container"])
           .length === 0
       ) {
+        if (
+          constructorKey === "users-table" ||
+          constructorKey === "survey-creator"
+        ) {
+          targetContainer.css("overflow-y", "hidden");
+        } else {
+          targetContainer.css("overflow-y", "auto");
+        }
         constructors[constructorKey]["constructor"].construct(targetContainer);
       }
     }

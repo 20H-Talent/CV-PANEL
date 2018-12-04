@@ -253,14 +253,10 @@ tbody td.user-city i {
   font-size: 1.1em;
 }
 
-#users-table.table-wrapper-scroll-y,
 .table-wrapper-scroll-y {
   display: block;
   max-height: 88vh;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-
-#users-table.table-wrapper-scroll-y {
   overflow-y: auto;
 }
 
