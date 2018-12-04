@@ -98,27 +98,14 @@ function Companies() {
           <td class="company-name-table">
              <p>${filtredCompanies[i].name}</p>
           </td>
-          <td class="company-email"> <a href="${
+          <td class="company-email"><a href="mailto:${
             filtredCompanies[i].email
-          }" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
-             </a>${filtredCompanies[i].email}
+          }" class="btn-email btn-xs mr-2">${filtredCompanies[i].email}</a>
           </td>
-          <td class="company-country">${
-            filtredCompanies[i].address.country
-          }</td>
-          <td class="company-social text-center">
-          <div class="container">
-              <div class="row d-flex justify-content-around ">
-                  <div class=" social-net" id="networks${
-                    filtredCompanies[i].id
-                  }">
-                  ${companies.renderSocialNetworks(
-                    filtredCompanies[i].socialUrls
-                  )}
-                  </div>
-              </div>
-          </div>
-                  </td>
+          <td class="company-country">${filtredCompanies[i].address.city}</td>
+          <td class="company-social text-center">${new Date(
+            filtredCompanies[i].registeredDate
+          ).toLocaleDateString()}</td>
           <td class="options text-center">
              <button  type="button" onclick="companies.showPreviewInfo('${
                filtredCompanies[i].id
@@ -193,28 +180,30 @@ function Companies() {
              </div>
              <div class="">
                 <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8 mt-3">
-                   <p class="card-title col d-inline-flex font-weight-bold">Email</ins></p>
-                   <p class="card-text col-sm-6   text-right ldeep-purple"><ins>${
+                   <p class="card-title col d-inline-flex font-weight-bold">Email</p>
+                   <p class="card-text col-sm-6   text-right ldeep-purple"><a href="mailto:${
                      this.companies[i].email
-                   }</ins></p>
+                   }">${this.companies[i].email}</a></p>
                 </div>
                 <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8  mt-3">
-                   <p class="card-subtitle font-weight-bold d-inline-flex col  ">Employees</p>
-                   <p class="card-text  text-right  col-sm-6 ldeep-purple"><ins>${
+                   <p class="card-subtitle font-weight-bold d-inline-flex col">Employees</p>
+                   <p class="card-text  text-right  col-sm-6 ldeep-purple">${
                      this.companies[i].employees
-                   }</ins></p>
+                   }</p>
                 </div>
-                <div class="d-inline-flex  col  mt-3">
+                <div class="d-inline-flex col mt-3">
                    <p class="card-title col d-inline-flex  font-weight-bold ">Phone</p>
-                   <p class="card-text text-right  col-sm-8  ldeep-purple"><ins>${
+                   <p class="card-text text-right col-sm-8  ldeep-purple"><a href="tel:${
                      this.companies[i].phone
-                   }</ins></p>
+                   }">${this.companies[i].phone}</a></p>
                 </div>
-                <div class="d-inline-flex  col  mt-3">
+                <div class="d-inline-flex col mt-3">
                    <p class="card-text col d-inline-flex font-weight-bold mb-1">Website</p>
-                   <div class="mt-2 text-right  col-sm-6 social-net">${
+                   <div class="text-right col-sm-6 social-net"><a href="https://${
                      this.companies[i].website
-                   }
+                   }" rel="noopener noreferrer nowfollow" target="_blank">${
+        this.companies[i].website
+      }</a>
                    </div>
                 </div>
              </div>
@@ -237,59 +226,61 @@ function Companies() {
   };
   this.showPreviewInfo = function(id) {
     var company = companies.getCompanyById(id);
-    $("#modal-company").html(
-      `<div class="shadow-lg p-3 col-lg col-sm  col-md  rounded"   data-id=${
-        company.id
-      } >
-          <div class="card-header rounded  text-dark d-flex header-card flex-row align-items-center">
-             <img class="img-fluid mr-2 rounded-circle" src=${
-               company.logo
-             } width=120px height:50px  alt="test"/>
-             <div class="  ml-4 ">
-                <h5 class=" font-weight-bold modal-title">
-                   <p>${company.name}</p>
-                   <p  class="text-dark font-weight-bold ">${
-                     company.docType
-                   }</p>
-                   <p> ${company.docNumber}</p>
-                </h5>
-             </div>
-          </div>
-          <div class="text-dark">
-             <div class=" text-dark  mt-3 h5">
-                <h5 class=" rounded text-dark font-weight-bold ">Email</h5>
-                <h6><a class=" ldeep-purple " href="mailto${company.email}">${
-        company.email
-      }</a></h6>
-             </div>
-             <div class="text-dark  h5 ">
-                <h5 class="  text-dark rounded font-weight-bold">Bio</h5>
-                <h6 class=" ldeep-purple ">${company.bio}</h6>
-             </div>
-             <div class="text-dark  h5 ">
-                <h5 class="  text-dark rounded font-weight-bold">Website</h5>
-                <h6 class=" ldeep-purple ">${company.website}</h6>
-             </div>
-             <div  class="text-dark  h5 ">
-                <h5 class="  header-card text-dark rounded font-weight-bold">Phone</h5>
-                <h6 class=" ldeep-purple ">${company.phone}</h6>
-             </div>
-             <div class="text-dark  h5">
-                <h5 class="  header-card text-dark rounded font-weight-bold ">Numbers of employees</h5>
-                <h6 class=" ldeep-purple ">${company.employees}</h6>
-             </div>
-             <div class="text-dark  h5 ">
-                <h5 class=" header-card text-dark rounded font-weight-bold " >Address</h5>
-                <h6 class=" ldeep-purple ">${company.address.country} ~ ${
-        company.address.city
-      } ${company.address.street} / ${company.address.zipcode}
-                </h6>
-             </div>
-             <div class=" modal-footer">
-                <button type="button" class="btn  btn-ldeep-purple text-light" data-dismiss="modal">Close</button>
-             </div>
-          </div> `
-    );
+
+    $("#modal-company")
+      .find(".modal-title")
+      .text(company.name + " ~ " + company.docNumber);
+
+    $("#modal-company").find(".modal-body")
+      .html(`<div class="d-flex justify-content-center w-100">
+    <img src='${
+      company.logo
+    }' class="img-fluid flex-grow-2 mr-2" alt="enterprise-logo" style="border-radius: 50%; width: auto; max-height: 146px"/>
+    <div class="flex-grow-1">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <i class="fas fa-mobile-alt mr-3"></i>
+          <span><a href="tel:${company.phone}">${company.phone}</a></span>
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-map-marked mr-2"></i>
+          <span class="ml-1">${company.address.zipcode} ${
+      company.address.street
+    } ~ ${company.address.city} / ${company.address.country}</span>
+        </li>
+        <li class="list-group-item">
+        <i class="fas fa-desktop mr-2"></i>
+        <span class="ml-1"><a href="https://${
+          company.website
+        }" rel="noopener noreferrer nowfollow" target="_blank">${
+      company.website
+    }</a></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="my-2 d-flex justify-content-around flex-column-sm w-100">
+    <div class="card w-50 border-0">
+        <div class="card-header text-center border"><h6 class='mb-0 text-primary'>Employees</h6></div>
+        <div class="card-body d-flex justify-content-around flex-wrap">${
+          company.employees
+        }</div>
+    </div>
+ 
+    <div class="card w-100 border-0">
+        <div class="card-header text-center border"><h6 class='mb-0 text-primary'>Bio</h6></div>
+        <div class="card-body d-flex justify-content-around flex-wrap">${
+          company.bio
+        }</div>
+    </div>
+    <div class="card w-50 border-0">
+        <div class="card-header text-center border"><h6 class='mb-0 text-primary'>Social Urls</h6></div>
+        <div class="card-body d-flex justify-content-around">${companies.renderSocialNetworks(
+          company.socialUrls
+        )}</div>
+    </div>
+  </div>`);
   };
   this.editCompany = function(id) {
     generalConstructor.construct("enterprises-form");

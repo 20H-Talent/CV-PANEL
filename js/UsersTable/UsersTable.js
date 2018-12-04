@@ -468,7 +468,9 @@ const Table = (function() {
         .children("i")
         .each((index, element) => {
           if ($(element).hasClass("fa-mobile-alt")) {
-            $(`<span>${phones.phone}</span>`).insertAfter($(element));
+            $(
+              `<span><a href="tel:${phones.phone}">${phones.phone}</a></span>`
+            ).insertAfter($(element));
           }
         });
     }
@@ -486,12 +488,12 @@ const Table = (function() {
     function _appendTechSkills(container, user) {
       let data = _renderLangsAndSkills(user);
       container
-        .find(`#skillsInfo > .card-body`)
+        .find(`#skillsInfo.card-body`)
         .empty()
         .append(`${data["skills"].map(skillTag => skillTag).join("")}`);
 
       container
-        .find(`#languagesInfo > .card-body`)
+        .find(`#languagesInfo.card-body`)
         .empty()
         .append(`${data["languages"].map(langTag => langTag).join("")}`);
     }

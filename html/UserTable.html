@@ -3,7 +3,7 @@
     <thead class="thead-dark">
       <tr>
         <th><i class="far fa-user-circle"></i><span> Avatar </span></th>
-        <th><i class="far fa-id-card"></i><span> Full name</span></th>
+        <th><i class="far fa-id-card"></i><span> Name</span></th>
         <th><i class="far fa-envelope"></i><span> Email</span></th>
         <th><i class="fas fa-city"></i><span> State - City</span></th>
         <th><i class="far fa-clock"></i><span> Registered</span></th>
@@ -13,4 +13,81 @@
     <tbody style="position: static;"></tbody>
   </table>
 </div>
-<div id="card-container" class="ml-5"></div>
+<div id="card-container" class=""></div>
+
+<div
+  class="modal fade"
+  id="userModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="userModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header header-modal">
+        <h5 class="modal-title text-light" id="userModalLabel"></h5>
+        <button
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true ">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center w-100">
+          <img
+            class="user-avatar img-fluid flex-grow-2 mr-2"
+            style="border-radius: 50%; width: auto; max-height: 146px"
+            alt="user-avatar"
+          />
+          <div id="infoUser" class="flex-grow-1">
+            <ul class="list-group">
+              <li class="list-group-item birthday">
+                <i class="fas fa-birthday-cake mr-3"></i>
+              </li>
+              <li class="list-group-item phones">
+                <i class="fas fa-mobile-alt mr-4"></i>
+              </li>
+              <li class="list-group-item address">
+                <i class="fas fa-map-marked mr-3"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="my-2 d-flex justify-content-around flex-column-sm w-100">
+          <div class="card w-100 border-0">
+            <div class="card-header text-center text-primary border">
+              <h6 class="mb-0">Languages</h6>
+            </div>
+            <div
+              id="languagesInfo"
+              class="card-body d-flex justify-content-around flex-wrap"
+            ></div>
+          </div>
+
+          <div class="card w-100 border-0">
+            <div class="card-header text-center text-primary border">
+              <h6 class="mb-0">Skills</h6>
+            </div>
+            <div
+              id="skillsInfo"
+              class="card-body d-flex justify-content-around flex-wrap"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-ldeep-purple text-light"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
