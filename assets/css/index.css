@@ -108,12 +108,7 @@ html {
   font-family: Source Sans Pro, Arial, serif;
 }
 
-#card-container > .user-card {
-  display: none;
-}
-
 /*Search button. Only display on mobile devices.*/
-
 #search-btn {
   display: none;
 }
@@ -446,12 +441,7 @@ nav label {
   #users-table {
     font-size: 0.7em;
   }
-  #card-container > .user-card {
-    display: block;
-    width: 28rem;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
-  }
+
   .user-card img {
     border-radius: 50%;
   }
@@ -613,12 +603,10 @@ body {
   padding-top: 4.5rem !important;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 868px) {
   #card-container > .user-card {
     display: block;
-    width: 28rem;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
+    width: 100%;
   }
   .user-card img {
     border-radius: 50%;
@@ -686,7 +674,9 @@ body {
   }
   #card-container > .user-card {
     display: block;
-    width: auto;
+    width: 100%;
+    max-width: 28rem;
+    margin-right: 0.5em;
     margin-bottom: 0.5em;
   }
   #data-column {
@@ -713,13 +703,6 @@ body {
   }
   #search-btn {
     display: inline-block;
-  }
-  #card-container > .user-card {
-    display: block;
-    width: 44.5rem;
-    margin-right: 0.5em;
-    margin-left: 3.5em;
-    margin-bottom: 0.5em;
   }
   .filters {
     display: none;
