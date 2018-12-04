@@ -23,7 +23,7 @@ function renderLanguagesAndSkills(event) {
 
 function renderLanguages(data) {
   const languagesContainer = $("form#advanced-search #languages");
-  languagesContainer.html(" ");
+  languagesContainer.find("*").not("h6");
 
   for (let _id in data) {
     languagesContainer.append(
@@ -43,13 +43,11 @@ function renderLanguages(data) {
 
 function renderSkills(data) {
   const skillsContainer = $("form#advanced-search #skills");
-  const frameworksColumn = skillsContainer.find('div[class*="col-12"]');
-  const languagesColumn = skillsContainer.find('div[class*="col-5"]');
-  const othersColumn = skillsContainer.find('div[class*="col-6"]');
+  const frameworksColumn = skillsContainer.find(`div.skills-frameworks`);
+  const languagesColumn = skillsContainer.find(`div.skills-languages`);
 
   frameworksColumn.empty();
   languagesColumn.empty();
-  othersColumn.empty();
 
   for (let _id in data) {
     let divObjectSkill = `
@@ -67,8 +65,6 @@ function renderSkills(data) {
       frameworksColumn.append(divObjectSkill);
     } else if (data[_id].type === "language") {
       languagesColumn.append(divObjectSkill);
-    } else {
-      othersColumn.append(divObjectSkill);
     }
   }
 }
