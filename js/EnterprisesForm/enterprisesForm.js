@@ -83,6 +83,7 @@ function EnterprisesForm() {
                 $("#cif").show().prop('required', true);
                 $("#nif").hide().removeAttr('required');
             });
+            $("#btn-url").on("click",addSocialNetworkURL);
             $("#enterprises-form-ajax").load(
                 "../html/EnterprisesForm.html",
                 function() {
@@ -90,6 +91,7 @@ function EnterprisesForm() {
                     $("#btn-enterprises").on("click", function(event) {
                         event.preventDefault();
                         verifyFormEnterprises();
+                        // addSocialNetworkURL();
                     });
                 }
             );
@@ -108,4 +110,44 @@ function EnterprisesForm() {
 //         }
 //     });
 // }
+
+
+/**
+ * Tenemos que controlar que hay una URL válida Y que haya una opción seleccionada.
+ * Si se cumplen ambas condiciones entonces añadimos a la ul una li con (label : url) 
+ * 
+ * Ejemplo Facebook: https://www.facebook.com/juanito
+ * 
+ */
+
+
+
+function addSocialNetworkURL(){
+
+    var urlAdded = document.getElementById("btn-url");//listener del botón.
+
+    var socialNetAdded = document.getElementById("platform").value;
+    var socialList = document.getElementById("socialUL"); // La lista donde voy a añadir los links seleccionados.
+
+console.log(socialNetAdded);
+
+    //Variables de control (else if).
+    // var linkFace = document.getElementById("facebook");
+    // var linkTwitter = document.getElementById("twitter");
+    // var linkInstagram = document.getElementById("instagram");
+    // var linkLinkedin = document.getElementById("linkedin");
+
+  $("#socialUL").append(`<li><a href= "https://www.${socialNetAdded}.com/">${socialNetAdded}</a></li>`);
+
+    // if(socialNetAdded === linkFace) {
+    //     socialList.append($("socialUL").append("<li><a href=" + "https://www.facebook.com/" + ">facebook</a></li>"));
+    // }else if(linkTwitter) {
+    //     socialList.append($("socialUL").append("<li><a href=" + "https://www.twitter.com/" + ">twitter</a></li>"));
+    // }else if (linkInstagram) {
+    //     socialList.append($("socialUL").append("<li><a href=" + "https://www.instagram.com/" + ">instagram</a></li>"));
+    // }else if(linkLinkedin){
+    //     socialList.append($("socialUL").append("<li><a href=" + "https://www.linkedin.com/" + ">linkedIn</a></li>"));
+    // }
+
+}
 
