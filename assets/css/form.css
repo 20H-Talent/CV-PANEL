@@ -53,6 +53,7 @@ input[type="email"],
 input[type="number"],
 input[type="tel"],
 input[type="address"],
+input[type="url"],
 textarea,
 select {
   background: rgb(255, 254, 254) !important;
@@ -204,9 +205,6 @@ button#languages {
   margin-left: 2em;
 }
 
-.mr-3{
-  display: none;
-}
 .enterprise-form {
   /* height: 100vh;
   overflow-y: auto;
@@ -236,12 +234,17 @@ button#languages {
   font-size: 1.2rem;
   /* font-weight: bolder; */
 }
-
+#bio {
+  width: 100%;
+}
 /****************************
  * Form Enterprises Desktop
  *****************************/
 
 @media (min-width: 768px) {
+  #platform {
+    margin-right: 1rem;
+  }
   #Div2 {
     margin-left: 0;
   }

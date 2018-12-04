@@ -16,15 +16,21 @@ function verifyFormEnterprises() {
     //Edit User
     let form = document.getElementById("alert-form-enterprises");
     let inputsForm = form.querySelectorAll(
-        "input[type=text],input[type=email],input[type=tel]"
+        "input[type=text],input[type=email],input[type=tel],input[type=url]"
     );
     var isValid = true;
     for (let i = 0; i < inputsForm.length; i++) {
         if (inputsForm[i].checkValidity() === true) {
-            inputsForm[i].className = "form-control form-control-width is-valid";
+            inputsForm[i].className = "form-control is-valid";
+            if(inputsForm[i].name === "url"){
+                inputsForm[i].className = "form-control col-md-4 is-valid";
+            }
             locationTooltipsCorrect(inputsForm[i]);
         } else {
-            inputsForm[i].className = "form-control form-control-width is-invalid";
+            inputsForm[i].className = "form-control is-invalid";
+            if(inputsForm[i].name === "url"){
+                inputsForm[i].className = "form-control col-md-4 is-invalid";
+            }
             locationTooltipsIncorrect(inputsForm[i]);
             isValid = false;
         }
@@ -102,3 +108,4 @@ function EnterprisesForm() {
 //         }
 //     });
 // }
+
