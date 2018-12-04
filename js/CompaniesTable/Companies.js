@@ -149,8 +149,13 @@ function Companies() {
     divCol.classList.add("text-center");
     let innerNetwork = "";
     for (let social in socialUrls) {
+      if (!socialUrls[social].url.includes("http")) {
+        socialUrls[social].url = "https://" + socialUrls[social].url;
+      }
       //innerNetwork += `<div>${socialUrls[social].url}/ ${socialUrls[social].platform}</div>`;
-      innerNetwork += `<a href="${socialUrls[social].url}" title="${
+      innerNetwork += `<a target="_blank" rel="noopener noreferrer" href="${
+        socialUrls[social].url
+      }" title="${
         socialUrls[social].platform
       }"><i style="z-index: 10;" class="fab ml-1 btn-${
         socialUrls[social].platform
