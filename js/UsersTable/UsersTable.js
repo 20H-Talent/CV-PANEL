@@ -17,6 +17,7 @@ const Table = (function() {
     function construct(container) {
       $.get("../../html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
+        $("container.find");
         try {
           _showOverlay(true);
           ApiMachine.request("/users", {

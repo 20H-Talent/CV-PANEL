@@ -256,8 +256,8 @@ tbody td.user-city i {
 .table-wrapper-scroll-y {
   display: block;
   max-height: 88vh;
-  overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
 }
 
 #userModal .modal-body {
