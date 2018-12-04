@@ -246,7 +246,7 @@ function Companies() {
   </div>
 
   <div class="my-2 d-flex justify-content-around flex-column-sm w-100 ">
-    <div class="card w-100 border-0">
+    <div class="card w-50 border-0">
         <div class="card-header text-center border"><h6 class='mb-0 text-primary'>Employees</h6></div>
         <div class="card-body card-body d-flex justify-content-around flex-wrap">${
           company.employees
@@ -258,6 +258,12 @@ function Companies() {
         <div class="card-body card-body d-flex justify-content-around flex-wrap">${
           company.bio
         }</div>
+    </div>
+    <div class="card w-50 border-0">
+        <div class="card-header text-center border"><h6 class='mb-0 text-primary'>Social Urls</h6></div>
+        <div class="card-body card-body d-flex justify-content-around">${companies.renderSocialNetworks(
+          company.socialUrls
+        )}</div>
     </div>
   </div>`);
   };
