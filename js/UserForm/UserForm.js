@@ -113,13 +113,16 @@ const UserForm = (function() {
     }
 
     function _formErrors(event) {
-      const alertErrors = $(event.target).find("#alertErrors");
-      //const form = userForm.find("form#user-form");
+      event.preventDefault();
+
+      const form = $(event.target);
+      const alertErrors = form.siblings("#alertErrors");
+
       alertErrors.empty().append(`
              <div class="col-lg-12">
                 <ul class="alert alert-danger alert-dismissible"></ul>
             </div>`);
-      const inputs = $(event.target).find("input");
+      const inputs = form.find("input");
       inputs.each((index, input) => {
         $(input).removeClass("is-valid is-invalid");
         if (input.checkValidity()) {

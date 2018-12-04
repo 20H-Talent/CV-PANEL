@@ -11,7 +11,12 @@
       <div id="alertErrors" class="alert fade show" role="alert"></div>
       <hr class="mb-4" />
       <hr class=" hr-2" />
-      <form id="user-form" method="POST" class="needs-validation col-md-12">
+      <form
+        id="user-form"
+        method="POST"
+        class="needs-validation col-md-12"
+        novalidate
+      >
         <div class="form-group row has-success">
           <label for="name" class="col-sm-2 col-form-label">Fullname</label>
           <div class="col-sm-10">
@@ -363,7 +368,7 @@
         <button
           id="create-user"
           class="btn checkout  btn-custom btn-lg btn-block"
-          type="button"
+          type="submit"
         >
           Save
         </button>
