@@ -93,10 +93,9 @@ function Companies() {
           <td class="company-name-table">
              <p>${filtredCompanies[i].name}</p>
           </td>
-          <td class="company-email"> <a href="${
+          <td class="company-email"><a href="mailto:${
             filtredCompanies[i].email
-          }" target="_blank" class=" btn-email btn-xs mr-2"><i class="fa fa-envelope"></i>
-             </a>${filtredCompanies[i].email}
+          }" class="btn-email btn-xs mr-2">${filtredCompanies[i].email}</a>
           </td>
           <td class="company-country">${filtredCompanies[i].address.city}</td>
           <td class="company-social text-center">${new Date(
@@ -132,12 +131,32 @@ function Companies() {
     divCol.classList.add("text-center");
     let innerNetwork = "";
     for (let social in socialUrls) {
-      //innerNetwork += `<div>${socialUrls[social].url}/ ${socialUrls[social].platform}</div>`;
-      innerNetwork += `<a href="${socialUrls[social].url}" title="${
-        socialUrls[social].platform
-      }"><i style="z-index: 10;" class="fab ml-1 btn-${
-        socialUrls[social].platform
-      }   fa-lg fa-${socialUrls[social].platform}"></i></a>`;
+      if (socialUrls[social].url) {
+        if (socialUrls[social].url.includes(".com/")) {
+          socialUrls[social].url =
+            "https://" +
+            socialUrls[social].platform +
+            new RegExp(".com/[A-Za-z0-9]+?.+").exec(socialUrls[social].url);
+        } else {
+          socialUrls[social].url =
+            "https://" +
+            socialUrls[social].platform +
+            "." +
+            new RegExp(".(eu|com|net|es)").exec(socialUrls[social].url);
+        }
+        //innerNetwork += `<div>${socialUrls[social].url}/ ${socialUrls[social].platform}</div>`;
+        // innerNetwork += `<a href="${socialUrls[social].url}" title="${
+        //   socialUrls[social].platform
+        // }" target="_blank" rel="noopener noreferrer"><i style="z-index: 10;" class="fab ml-1 btn-${
+        //   socialUrls[social].platform
+        // }   fa-lg fa-${socialUrls[social].platform}"></i></a>`;
+
+        innerNetwork += `<a href="${socialUrls[social].url}" title="${
+          socialUrls[social].platform
+        }" target="_blank" rel="noopener noreferrer nowfollow"><i style="z-index: 10;" class="fab ml-1 btn-${
+          socialUrls[social].platform
+        }   fa-lg fa-${socialUrls[social].platform}"></i></a>`;
+      }
     }
     divCol.innerHTML = innerNetwork;
     return divCol.innerHTML;
@@ -171,28 +190,30 @@ function Companies() {
              </div>
              <div class="">
                 <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8 mt-3">
-                   <p class="card-title col d-inline-flex font-weight-bold">Email</ins></p>
-                   <p class="card-text col-sm-6   text-right ldeep-purple"><ins>${
+                   <p class="card-title col d-inline-flex font-weight-bold">Email</p>
+                   <p class="card-text col-sm-6   text-right ldeep-purple"><a href="mailto:${
                      this.companies[i].email
-                   }</ins></p>
+                   }">${this.companies[i].email}</a></p>
                 </div>
                 <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8  mt-3">
-                   <p class="card-subtitle font-weight-bold d-inline-flex col  ">Employees</p>
-                   <p class="card-text  text-right  col-sm-6 ldeep-purple"><ins>${
+                   <p class="card-subtitle font-weight-bold d-inline-flex col">Employees</p>
+                   <p class="card-text  text-right  col-sm-6 ldeep-purple">${
                      this.companies[i].employees
-                   }</ins></p>
+                   }</p>
                 </div>
-                <div class="d-inline-flex  col  mt-3">
+                <div class="d-inline-flex col mt-3">
                    <p class="card-title col d-inline-flex  font-weight-bold ">Phone</p>
-                   <p class="card-text text-right  col-sm-8  ldeep-purple"><ins>${
+                   <p class="card-text text-right col-sm-8  ldeep-purple"><a href="tel:${
                      this.companies[i].phone
-                   }</ins></p>
+                   }">${this.companies[i].phone}</a></p>
                 </div>
-                <div class="d-inline-flex  col  mt-3">
+                <div class="d-inline-flex col mt-3">
                    <p class="card-text col d-inline-flex font-weight-bold mb-1">Website</p>
-                   <div class="mt-2 text-right  col-sm-6 social-net">${
+                   <div class="text-right col-sm-6 social-net"><a href="https://${
                      this.companies[i].website
-                   }
+                   }" rel="noopener noreferrer nowfollow" target="_blank">${
+        this.companies[i].website
+      }</a>
                    </div>
                 </div>
              </div>
@@ -229,7 +250,7 @@ function Companies() {
       <ul class="list-group">
         <li class="list-group-item">
           <i class="fas fa-mobile-alt mr-3"></i>
-          <span>${company.phone}</span>
+          <span><a href="tel:${company.phone}">${company.phone}</a></span>
         </li>
         <li class="list-group-item">
           <i class="fas fa-map-marked mr-2"></i>
@@ -239,7 +260,11 @@ function Companies() {
         </li>
         <li class="list-group-item">
         <i class="fas fa-desktop mr-2"></i>
-        <span class="ml-1">${company.website}</span>
+        <span class="ml-1"><a href="https://${
+          company.website
+        }" rel="noopener noreferrer nowfollow" target="_blank">${
+      company.website
+    }</a></span>
         </li>
       </ul>
     </div>
