@@ -318,21 +318,53 @@ const Table = (function() {
       <div class="col-4"> <img class="img-fluid  mr-2" style="border-radius: 50%" src=${
         user.avatar
       } alt="${user.name}"/></div>
-        <div class=" font-weight-bold col card-username">
+        <div class="font-weight-bold col card-username">
            <p>${user.name}</p>
-           <p>${user.username}</p>
+        </div>
+        <div class="d-flex flex-column">
+        <span><i class="fas asweome fa-phone-square mr-2"></i><a href="tel:${
+          user.phone
+        }" target="_blank rel="noopener noreferrer">${user.phone}</a></span>    
+        <span><i class="fas asweome fa-at mr-2"></i><a href="mailto:${
+          user.email
+        }" target="_blank rel="noopener noreferrer">${user.email}</a></span>    
+        <span><i class="fas asweome fa-desktop mr-2"></i><a href="${
+          user.website
+        }" target="_blank rel="noopener noreferrer">${user.website}</a></span>
         </div>
       </div>
-     <div class="card-body">
-     <div class=" font-weight-bold card-subtitle">Skills</div>
-      <p class="card-text">
-        ${data.skills.map(skillTag => skillTag).join("")}
-      </p>
-     <div class=" font-weight-bold card-subtitle">Languages</div>
-       <p class="card-text">
-       ${data.languages.map(langTag => langTag).join("")}
-       </p>
-     </div>
+
+    <div class="card-body d-flex justify-content-between">
+      <div class="d-flex flex-column">
+        <div class="font-weight-bold card-subtitle">Address</div>
+        <p class="card-text d-flex flex-column">
+        <span><i class="fas asweome fa-envelope-open-text mr-3"></i>${
+          user.address.zipcode
+        }</span>
+        <span><i class="fas asweome asweome-address fa-map-marker-alt mr-3"></i>${
+          user.address.street
+        }</span>
+        <span><i class="fas asweome fa-city mr-3"></i>${
+          user.address.city
+        }</span>
+        <span><i class="fas asweome fa-globe-americas mr-3"></i>${
+          user.address.country
+        }</span>
+        </p>
+      </div>
+
+      <div class="d-flex flex-column">
+        
+        <div class="font-weight-bold card-subtitle">Skills</div>
+        <p class="card-text">
+          ${data.skills.map(skillTag => skillTag).join("")}
+        </p>
+        <div class="font-weight-bold card-subtitle">Languages</div>
+        <p class="card-text">
+        ${data.languages.map(langTag => langTag).join("")}
+        </p>
+    </div>
+    </div>
      <div class="card-footer text-right card-buttons">
         <button type="button" class="btn btn-outline-primary btn-sm edit" data-id=${
           user._id
