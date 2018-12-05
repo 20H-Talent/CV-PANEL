@@ -25,7 +25,7 @@ $("document").ready(function() {
   $("body").on("load", loadRightMenu());
 
   function loadRightMenu() {
-    $.get("../html/right-menu.html").done(function(data) {
+    $.get("html/right-menu.html").done(function(data) {
       $("#right-menu-ajax")
         .empty()
         .append(data);
@@ -251,7 +251,7 @@ $("document").ready(function() {
     $("#search-btn").on("click", loadMain);
 
     function loadMain() {
-      $("#Div1").load("../html/right-menu.html", function(
+      $("#Div1").load("html/right-menu.html", function(
         responseText,
         textStatus,
         jqXHR

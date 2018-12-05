@@ -2,7 +2,7 @@ var companies = new Companies();
 
 function Companies() {
   this.construct = function(container) {
-    $.get("../../html/CompaniesTable.html", htmlSkeleton => {
+    $.get("html/CompaniesTable.html", htmlSkeleton => {
       container.empty().append(htmlSkeleton);
       companies.removeAllCompanies();
       companies.getCompanyFromAPI();
@@ -267,7 +267,7 @@ function Companies() {
           company.employees
         }</div>
     </div>
- 
+
     <div class="card w-100 border-0">
         <div class="card-header text-center border"><h6 class='mb-0 text-primary'>Bio</h6></div>
         <div class="card-body d-flex justify-content-around flex-wrap">${
