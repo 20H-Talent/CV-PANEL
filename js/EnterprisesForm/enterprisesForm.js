@@ -99,7 +99,6 @@ function EnterprisesForm() {
           $("#btn-enterprises").on("click", function(event) {
             event.preventDefault();
             verifyFormEnterprises();
-            // addSocialNetworkURL();
           });
         }
       );
@@ -115,6 +114,6 @@ function addSocialNetworkURL() {
   var socialList = document.getElementById("socialUL"); // La lista donde voy a añadir los links seleccionados.
 
   $("#socialUL").append(
-    `<li><a href= "https://www.${socialNetAdded}.com/">${socialNetAdded}</a></li>`
+    `<li><input class="form-control col-sm-12" style="margin-bottom:2rem" autofocus value= "https://www.${socialNetAdded}.com/"></li>`
   );
 }
