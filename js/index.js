@@ -9,6 +9,7 @@ $("document").ready(function() {
   });
 
   generalConstructor.construct("users-table");
+
   activateTooltips();
   createLeftMenuItemsConstructor();
   function activateTooltips(container = null) {

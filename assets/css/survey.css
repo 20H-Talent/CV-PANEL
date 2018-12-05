@@ -12,7 +12,7 @@
   font-size: 1.3em;
 }
 
-.survey-container .card-header {
+.survey-container .survey-card-header {
   background-color: #4d394b;
   color: white;
 }
@@ -186,36 +186,36 @@ span.form-error {
 
 @-webkit-keyframes expand {
   from {
-    min-width: 50px;
+    min-width: 30%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 
 @keyframes expand {
   from {
-    min-width: 50px;
+    min-width: 30%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 @-webkit-keyframes stay {
   from {
-    min-width: 350px;
+    min-width: 80%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 
 @keyframes stay {
   from {
-    min-width: 350px;
+    min-width: 80%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 @-webkit-keyframes shrink {
