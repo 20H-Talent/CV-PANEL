@@ -1,260 +1,363 @@
-<!-- Enterprise form to be load by ajax into index.html. -->
-
-<form id="alert-form-enterprises" novalidate class="container enterprise-form">
-  <h1 class="format-1">Add New company</h1>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="name">Enterprise's name</label>
-    <input
-      type="text"
-      name="name"
-      class="form-control form-control-width"
-      minlength="3"
-      maxlength="25"
-      pattern="[a-zA-Z\s]+"
-      id="name"
-      placeholder="Name"
-      value=""
-      data-toggle="tooltip"
-      data-placement="top"
-      required
-    />
+<div class="container col-md-10 form-style mt-5">
+  <div class="text-center border-title mb-3">
+    <h4 class="text-center">
+      <i class="fas fa-briefcase"></i> Adding
+      <span class="text-success"> New Company</span>
+    </h4>
   </div>
-  <div class="form-row d-flex col-md-12 container">
-    <div class="format-2">
-      <input type="hidden" name="company-id" id="company-id" />
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input "
-          type="radio"
-          checked="checked"
-          name="docType"
-          id="rdoCif"
-          value="cif"
-        />
-        <label class="form-check-label" for="CIF">CIF</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="docType"
-          id="rdoNif"
-          value="nif"
-        />
-        <label class="form-check-label" for="NIF">NIF</label>
+  <form
+    id="alert-form-enterprises"
+    novalidate
+    class="col-md-12 enterprise-form mt-5"
+  >
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-user-tie"></i
+          ></span>
+          <input
+            type="text"
+            name="name"
+            class="form-control "
+            minlength="3"
+            maxlength="25"
+            pattern="[a-zA-Z\s]+"
+            id="name"
+            placeholder="Good games inc. "
+            value=""
+            data-toggle="tooltip"
+            data-placement="top"
+            required
+          />
+        </div>
       </div>
     </div>
-    <input
-      class="form-control form-control-width "
-      id="cif"
-      pattern="^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])"
-      type="text"
-      name="docNumberCif"
-      class="form-control form-control-width"
-      placeholder="CIF"
-      value=""
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-    <input
-      class="form-control form-control-width "
-      autocomplete
-      id="nif"
-      pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))"
-      type="text"
-      name="docNumberNif"
-      class="form-control form-control-width"
-      placeholder="NIF"
-      value=""
-      data-toggle="tooltip"
-      data-placement="right"
-      style="display:none"
-    />
-  </div>
 
-  <!-- change inputs.Address -->
-  <div class="form-row col-md-12 country">
-    <label class="format-2" for="country">Country</label>
-    <input
-      lang="es-ES"
-      name="country"
-      type="text"
-      class="form-control form-control-width "
-      minlength="3"
-      maxlength="25"
-      pattern="[a-zA-Z\s]+"
-      id="country"
-      placeholder="Country"
-      data-toggle="tooltip"
-      data-placement="top"
-      required
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="city">City</label>
-    <input
-      lang="es-ES"
-      name="city"
-      type="text"
-      class="form-control form-control-width "
-      minlength="3"
-      maxlength="25"
-      pattern="[a-zA-Z\s]+"
-      id="city"
-      placeholder="City"
-      value=""
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="street">Street</label>
-    <input
-      lang="es-ES"
-      name="street"
-      type="text"
-      class="form-control form-control-width "
-      minlength="3"
-      maxlength="60"
-      pattern="[a-zA-Z0-9\s]+"
-      id="street"
-      placeholder="1234 Antigua"
-      value=""
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="zipcode">Zip</label>
-    <input
-      name="zipcode"
-      type="text"
-      class="form-control form-control-width "
-      minlength="3"
-      maxlength="5"
-      pattern="[0-9\s]+"
-      id="zipcode"
-      placeholder="35004"
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="phone">Phone</label>
-    <input
-      name="phone"
-      type="tel"
-      class="form-control form-control-width "
-      minlength="9"
-      maxlength="13"
-      pattern="[0-9\s]+"
-      id="phone"
-      placeholder="+0034 928 556677"
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="email">Email</label>
-    <input
-      lang="es-ES"
-      type="email"
-      name="email"
-      class="form-control form-control-width "
-      minlength="3"
-      maxlength="25"
-      id="email"
-      placeholder="Email"
-      data-toggle="tooltip"
-      data-placement="top"
-      required
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="employees">Workers Number</label>
-    <input
-      name="employees"
-      type="text"
-      class="form-control form-control-width "
-      minlength="1"
-      maxlength="5"
-      pattern="[0-9\s]+"
-      id="employees"
-      placeholder="Number of workers in the company"
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="website">Website</label>
-    <input
-      lang="es-ES"
-      name="website"
-      type="text"
-      class="form-control form-control-width "
-      minlength="3"
-      maxlength="25"
-      pattern="[a-zA-Z0-9.,]+$"
-      placeholder="www.google.com"
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
-  <div class="form-row col-md-12">
-    <label class="format-2" for="socialUrls">Social Networks</label>
+    <div class="form-group row">
+      <!-- <label class="col-sm-2 control-label gender">CIF/NIF</label> -->
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <input type="hidden" name="company-id" id="company-id" />
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input "
+              type="radio"
+              checked="checked"
+              name="docType"
+              id="rdoCif"
+              value="cif"
+            />
+            <label class="form-check-label" for="rdoCif">CIF</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="docType"
+              id="rdoNif"
+              value="nif"
+            />
+            <label class="form-check-label" for="rdoNif">NIF</label>
+          </div>
+          <span class="input-group-text"
+            ><i class="fas asweome far fa-id-card"></i
+          ></span>
 
-    <select name="platform" id="platform" class="form-control  col-md-3">
-      <option id="facebook" value="facebook">Facebook</option>
-      <option id="twitter" value="twitter">Twitter</option>
-      <option id="instagram" value="instagram">Instagram</option>
-      <option id="linkedin" value="linkedin">LinkedIn</option>
-      <option id="othersocilanet" value="others">Others</option>
-    </select>
-    <button id="btn-url" type="button" class="btn-custom-3">Add SocialNetwork</button>
-  </div>
+          <input
+            class="form-control  "
+            id="cif"
+            pattern="^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])"
+            type="text"
+            name="docNumberCif"
+            class="form-control "
+            placeholder="J6624397C "
+            value=""
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+          <input
+            class="form-control  "
+            autocomplete
+            id="nif"
+            pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))"
+            type="text"
+            name="docNumberNif"
+            class="form-control "
+            placeholder="22476375Q "
+            value=""
+            data-toggle="tooltip"
+            data-placement="right"
+            style="display:none"
+          />
+        </div>
+      </div>
+    </div>
 
-  <div class="form-row col-md-12">
-    <label class="format-2" for="socialUrls"></label>
-    <ul id="socialUL" class=""></ul>
-  </div>
+    <div class="form-group row">
+      <label for="country" class="col-sm-2 col-form-label">Country</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-globe-americas"></i
+          ></span>
+          <input
+            lang="es-ES"
+            name="country"
+            type="text"
+            class="form-control "
+            minlength="3"
+            maxlength="25"
+            pattern="[a-zA-Z\s]+"
+            id="country"
+            placeholder="USA "
+            data-toggle="tooltip"
+            data-placement="top"
+            required
+          />
+        </div>
+      </div>
+    </div>
 
-  <div class="form-row col-md-12">
-    <label class="format-2" for="logoURL">Logo</label>
-    <input
-      name="logoURL"
-      type="file"
-      class="form-control-file format-3"
-      id="logoURL"
-      data-toggle="tooltip"
-      data-placement="top"
-    />
-  </div>
+    <div class="form-group row">
+      <label for="city" class="col-sm-2 col-form-label">City</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-city"></i
+          ></span>
+          <input
+            lang="es-ES"
+            name="city"
+            type="text"
+            class="form-control"
+            minlength="3"
+            maxlength="25"
+            pattern="[a-zA-Z\s]+"
+            id="city"
+            placeholder="Misuri "
+            value=""
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+        </div>
+      </div>
+    </div>
 
-  <p class="format-2 form-row col-md-12" for="bio">Bio</p>
-  <div class="form-row col-md-12">
-    <textarea
-      name="bio"
-      type="text"
-      cols="30"
-      rows="5"
-      pattern="[a-zA-Z0-9\s]+"
-      id="bio"
-      placeholder=" Optional"
-      data-toggle="tooltip"
-      data-placement="top"
-    ></textarea>
-  </div>
+    <div class="form-group row">
+      <label for="street" class="col-sm-2 col-form-label">Street</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome asweome-address fa-map-marker-alt"></i
+          ></span>
+          <input
+            lang="es-ES"
+            name="street"
+            type="text"
+            class="form-control"
+            minlength="3"
+            maxlength="60"
+            pattern="[a-zA-Z0-9\s]+"
+            id="street"
+            placeholder="822 Grimstone Dr, Chesterfield "
+            value=""
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+        </div>
+      </div>
+    </div>
 
-  <div class="form-row col-md-12">
+    <div class="form-group row">
+      <label for="zipcode" class="col-sm-2 col-form-label">Zipcode</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-envelope-open-text"></i
+          ></span>
+          <input
+            name="zipcode"
+            type="text"
+            class="form-control"
+            minlength="3"
+            maxlength="5"
+            pattern="[0-9\s]+"
+            id="zipcode"
+            placeholder="MO 63017 "
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-phone-square"></i
+          ></span>
+          <input
+            name="phone"
+            type="tel"
+            class="form-control"
+            minlength="9"
+            maxlength="13"
+            pattern="[0-9\s]+"
+            id="phone"
+            placeholder="+1 636-532-3202 "
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-at"></i
+          ></span>
+          <input
+            lang="es-ES"
+            type="email"
+            name="email"
+            class="form-control"
+            minlength="3"
+            maxlength="25"
+            id="email"
+            placeholder="good_games@contact.com "
+            data-toggle="tooltip"
+            data-placement="top"
+            required
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="employees" class="col-sm-2 col-form-label">Employees</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-user-graduate"></i
+          ></span>
+          <input
+            name="employees"
+            type="text"
+            class="form-control"
+            minlength="1"
+            maxlength="5"
+            pattern="[0-9\s]+"
+            id="employees"
+            placeholder="430 workers "
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="website" class="col-sm-2 col-form-label">Website</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-desktop"></i
+          ></span>
+          <input
+            id="website"
+            lang="es-ES"
+            name="website"
+            type="text"
+            class="form-control"
+            minlength="3"
+            maxlength="25"
+            pattern="[a-zA-Z0-9.,]+$"
+            placeholder="www.GoodGames-Chesterfield.com "
+            data-toggle="tooltip"
+            data-placement="top"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="platform" class="col-sm-2 col-form-label"
+        >Social Networks</label
+      >
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="fas asweome fa-users"></i>
+          </span>
+          <select name="platform" id="platform" class="form-control  col-md-3">
+            <option id="facebook" value="facebook">Facebook</option>
+            <option id="twitter" value="twitter">Twitter</option>
+            <option id="instagram" value="instagram">Instagram</option>
+            <option id="linkedin" value="linkedin">LinkedIn</option>
+            <option id="othersocilanet" value="others">Others</option>
+          </select>
+          <button id="btn-url" type="button" class="btn-custom-3">
+            Add SocialNetwork
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-row col-md-12">
+      <label class="format-2" for="socialUrls"></label>
+      <ul id="socialUL" class=""></ul>
+    </div>
+
+    <div class="form-group row">
+      <label for="bio" class="col-sm-2 col-form-label">Biography</label>
+      <div class="col-sm-10">
+        <div class="input-group-prepend">
+          <textarea
+            name="bio"
+            type="text"
+            cols="30"
+            rows="5"
+            pattern="[a-zA-Z0-9\s]+"
+            id="bio"
+            placeholder="This company focuses on teaching people in game programming. Our teachers are highly qualified."
+            data-toggle="tooltip"
+            data-placement="top"
+            class="text-justify p-3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row langsel">
+      <div class="col">
+        <label for="logoURL"><strong>Upload logo picture</strong></label>
+        <input
+          name="logoURL"
+          type="file"
+          class="form-control-file fileupload"
+          id="logoURL"
+          data-toggle="tooltip"
+          data-placement="top"
+        />
+      </div>
+    </div>
+
     <button
       id="btn-enterprises"
       type="submit"
-      class="btn-lg  btn-custom-2 btn-block"
+      class="btn checkout btn-custom btn-lg btn-block"
     >
       Save
     </button>
-  </div>
-</form>
-<footer class="my-5 pt-5 text-muted text-center text-small">
+  </form>
+</div>
+
+<footer class="my-5 pt-5 text-muted text-center text-small form-style">
   <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>
 </footer>

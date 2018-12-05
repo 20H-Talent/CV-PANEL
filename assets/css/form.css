@@ -1,12 +1,15 @@
-#user-form-container {
-  overflow-y: auto;
-  overflow-x: hidden;
+.form-style {
+  /* overflow-y: auto;
+  overflow-x: hidden; */
   background-size: cover;
   font-family: "Crete Round", sans-serif;
   color: black;
-  max-height: 87.8vh;
+  /* max-height: 87.8vh; */
 }
-
+.border-title {
+  border-bottom: 1px solid #4d3983;
+  padding-bottom: 3%;
+}
 /* #socialUL {} */
 
 #gender-required {
@@ -61,7 +64,7 @@ select {
   border-radius: 0.25rem;
   background-color: #ffffff !important;
   color: #0a0a0a;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 input::placeholder {
@@ -227,7 +230,7 @@ button#languages {
   margin-top: 0;
   margin-bottom: 1rem;
   background-color: #4d394b;
-  color:white;
+  color: white;
 }
 
 .format-2 {
