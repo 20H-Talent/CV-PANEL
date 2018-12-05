@@ -25,7 +25,7 @@ const SurveyCreator = (function() {
      * @param {jQuery object} container - The central container which represents the central column
      */
     function construct(container) {
-      $.get("../../html/SurveyCreator.html", function(htmlSkeleton) {
+      $.get("html/SurveyCreator.html", function(htmlSkeleton) {
         surveyContainer = container.empty().append(htmlSkeleton);
         _setupInternalEventListeners(surveyContainer);
       }).fail(function(err) {

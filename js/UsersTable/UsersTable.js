@@ -15,7 +15,7 @@ const Table = (function() {
     const mainContainer = $(".main-container");
 
     function construct(container) {
-      $.get("../../html/UserTable.html", function(htmlSkeleton) {
+      $.get("html/UserTable.html", function(htmlSkeleton) {
         container.empty().append(htmlSkeleton);
         $("container.find");
         try {

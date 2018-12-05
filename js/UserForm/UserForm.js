@@ -5,7 +5,7 @@ const UserForm = (function() {
     let userForm;
 
     function construct(container) {
-      $.get("../../html/UserForm.html", function(htmlSkeleton) {
+      $.get("html/UserForm.html", function(htmlSkeleton) {
         userForm = container
           .empty()
           .append(htmlSkeleton)

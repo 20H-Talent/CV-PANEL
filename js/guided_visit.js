@@ -79,7 +79,7 @@ function checkTimesVisitedPage() {
   function _loadGuidedVisit() {
     // ------- Load the modal welcome ---------
     return new Promise((resolve, reject) => {
-      $.get("../html/guided_visit.html", dataModal => {
+      $.get("html/guided_visit.html", dataModal => {
         dataModal;
       })
         .done(dataModal => {
