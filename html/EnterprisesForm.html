@@ -1,12 +1,14 @@
-<!-- Enterprise form to be load by ajax into index.html. -->
-<!-- <div class="col p-0"> -->
-<div class="container col-md-10 form-style">
-  <!-- <div class="col"> -->
-  <h1 class="format-1">Adding New company</h1>
+<div class="container col-md-10 form-style mt-5">
+  <div class="text-center border-title mb-3">
+    <h4 class="text-center">
+      <i class="fas fa-briefcase"></i> Adding
+      <span class="text-success"> New Company</span>
+    </h4>
+  </div>
   <form
     id="alert-form-enterprises"
     novalidate
-    class="col-md-12 enterprise-form"
+    class="col-md-12 enterprise-form mt-5"
   >
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -307,29 +309,15 @@
         </div>
       </div>
     </div>
+    <div class="form-row col-md-12">
+      <label class="format-2" for="socialUrls"></label>
+      <ul id="socialUL" class=""></ul>
+    </div>
 
-    <!--
-      <div class="form-group row">
-        <label for="SocialUL" class="col-sm-2 col-form-label">So</label>
-        <div class="col-sm-10">
-          <div class="input-group-prepend">
-            <span class="input-group-text"
-              ><i class="fas asweome fa-user"></i
-            ></span>
-            <ul id="socialUL" class=""></ul>
-          </div>
-        </div>
-      </div>
-    -->
     <div class="form-group row">
       <label for="bio" class="col-sm-2 col-form-label">Biography</label>
       <div class="col-sm-10">
         <div class="input-group-prepend">
-          <!--
-            <span class="input-group-text"
-              ><i class="fas asweome fa-title-alt"></i
-            ></span>
-          -->
           <textarea
             name="bio"
             type="text"
@@ -369,8 +357,6 @@
     </button>
   </form>
 </div>
-<!-- </div> -->
-<!-- </div> -->
 
 <footer class="my-5 pt-5 text-muted text-center text-small form-style">
   <p class="mb-1">&copy;2018-2019 Curriculum Connections</p>

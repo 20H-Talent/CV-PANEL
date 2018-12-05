@@ -6,7 +6,10 @@
   color: black;
   /* max-height: 87.8vh; */
 }
-
+.border-title {
+  border-bottom: 1px solid #4d3983;
+  padding-bottom: 3%;
+}
 /* #socialUL {} */
 
 #gender-required {
