@@ -92,16 +92,13 @@ function EnterprisesForm() {
           .removeAttr("required");
       });
       $("#btn-url").on("click", addSocialNetworkURL);
-      $("#enterprises-form-ajax").load(
-        "../html/EnterprisesForm.html",
-        function() {
-          //Listener Button, form enterprises.
-          $("#btn-enterprises").on("click", function(event) {
-            event.preventDefault();
-            verifyFormEnterprises();
-          });
-        }
-      );
+      $("#enterprises-form-ajax").load("html/EnterprisesForm.html", function() {
+        //Listener Button, form enterprises.
+        $("#btn-enterprises").on("click", function(event) {
+          event.preventDefault();
+          verifyFormEnterprises();
+        });
+      });
     }).fail(function(err) {
       throw new Error(err);
     });
