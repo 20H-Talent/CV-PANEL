@@ -1,11 +1,20 @@
 .survey-container {
   width: 100%;
-  font-family: Roboto, Arial, serif;
+  font-family: Source Sans Pro, Arial, serif;
   height: 89vh;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
+}
+
+.survey-container label {
+  font-size: 1.3em;
+}
+
+.survey-container .survey-card-header {
+  background-color: #4d394b;
+  color: white;
 }
 
 .survey-container .table-responsive {
@@ -177,36 +186,36 @@ span.form-error {
 
 @-webkit-keyframes expand {
   from {
-    min-width: 50px;
+    min-width: 30%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 
 @keyframes expand {
   from {
-    min-width: 50px;
+    min-width: 30%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 @-webkit-keyframes stay {
   from {
-    min-width: 350px;
+    min-width: 80%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 
 @keyframes stay {
   from {
-    min-width: 350px;
+    min-width: 80%;
   }
   to {
-    min-width: 350px;
+    min-width: 80%;
   }
 }
 @-webkit-keyframes shrink {
