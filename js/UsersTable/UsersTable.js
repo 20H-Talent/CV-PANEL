@@ -314,7 +314,7 @@ const Table = (function() {
       return `<div class="card user-card mt-3 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
         user._id
       }>
-      <div class=" d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
+      <div class="d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
       <div class="col-4"> <img class="img-fluid  mr-2" style="border-radius: 50%" src=${
         user.avatar
       } alt="${user.name}"/></div>
