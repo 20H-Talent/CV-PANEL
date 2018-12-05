@@ -158,69 +158,73 @@ function Companies() {
     let companyCard = "";
     for (var i = 0; i < this.companies.length; i++) {
       companyCard += `
-          <div class="card card-company mt-3 shadow-lg p-3 ml-5 mr-2 mb-5 bg-white rounded"  data-id=${
+          <div class="card user-card mt-3 shadow-lg p-3 mb-5 bg-white rounded" data-id=${
             this.companies[i].id
           }>
-           <div class="">
-             <div class="d-flex rounded  card-header   p-3">
-                <div class=""> <img class="card-img-top rounded-circle" src=${
-                  this.companies[i].logo
-                } style="width:50px; alt="Card logo company"></div>
-                <div  class="col-lg-6">
-                   <h5 class="card-text  font-weight-bold text-dark">${
-                     this.companies[i].name
-                   }</h5>
-                   <p  class="text-dark font-weight-bold ">${
-                     this.companies[i].docType
-                   }</p>
-                   <p  class="text-dark font-weight-bold "> ${
-                     this.companies[i].docNumber
-                   }</p>
-                </div>
-             </div>
-             <div class="">
-                <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8 mt-3">
-                   <p class="card-title col d-inline-flex font-weight-bold">Email</p>
-                   <p class="card-text col-sm-6   text-right ldeep-purple"><a href="mailto:${
-                     this.companies[i].email
-                   }">${this.companies[i].email}</a></p>
-                </div>
-                <div class="d-inline-flex col-12 .col-sm-6 .col-lg-8  mt-3">
-                   <p class="card-subtitle font-weight-bold d-inline-flex col">Employees</p>
-                   <p class="card-text  text-right  col-sm-6 ldeep-purple">${
-                     this.companies[i].employees
-                   }</p>
-                </div>
-                <div class="d-inline-flex col mt-3">
-                   <p class="card-title col d-inline-flex  font-weight-bold ">Phone</p>
-                   <p class="card-text text-right col-sm-8  ldeep-purple"><a href="tel:${
-                     this.companies[i].phone
-                   }">${this.companies[i].phone}</a></p>
-                </div>
-                <div class="d-inline-flex col mt-3">
-                   <p class="card-text col d-inline-flex font-weight-bold mb-1">Website</p>
-                   <div class="text-right col-sm-6 social-net"><a href="https://${
-                     this.companies[i].website
-                   }" rel="noopener noreferrer nowfollow" target="_blank">${
+          <div class="d-flex card-header text-dark header-card shadow-sm  col-sm-12 border  rounded ">
+          <div class="col-4"> <img class="img-fluid  mr-2" style="border-radius: 50%" src=${
+            this.companies[i].logo
+          } alt="${this.companies[i].name}"/></div>
+            <div class="font-weight-bold col card-username">
+               <p class="mb-2">${this.companies[i].name}</p>
+               <p>${this.companies[i].docType} : ${
+        this.companies[i].docNumber
+      }</p>
+            </div>
+            <div class="d-flex flex-column">
+            <span><i class="fas asweome fa-phone-square mr-2"></i><a href="tel:${
+              this.companies[i].phone
+            }" target="_blank rel="noopener noreferrer">${
+        this.companies[i].phone
+      }</a></span>    
+            <span><i class="fas asweome fa-at mr-2"></i><a href="mailto:${
+              this.companies[i].email
+            }" target="_blank rel="noopener noreferrer">${
+        this.companies[i].email
+      }</a></span>    
+            <span><i class="fas asweome fa-desktop mr-2"></i><a href="${
+              this.companies[i].website
+            }" target="_blank rel="noopener noreferrer">${
         this.companies[i].website
-      }</a>
-                   </div>
-                </div>
-             </div>
-
-          <div class="card-footer  header-card   col-sm-12 mt-2 border  text-right rounded">
-             <button type="button" rel="tooltip" title="Edit company"    class="btn btn-sm btn-outline-primary  edit-company " data-original-title="" title=""><i class="fas fa-user-edit"></i>
-             </button>
-             <button type="button" title="Delete company" onclick="companies.modalDelete('${
-               this.companies[i].id
-             }')"  class="btn  remove-company  btn-sm  btn-outline-danger "  data-toggle="modal" data-id=${
-        this.companies[i].id
-      } data-target="#confirm-delete-card"><i class="fas fa-trash-alt"></i></button>
+      }</a></span>
+            </div>
           </div>
-       </div>
-       </div>
-
-        `;
+    
+        <div class="card-body d-flex justify-content-between">
+          <div class="d-flex flex-column">
+            <div class="font-weight-bold card-subtitle">Address</div>
+            <p class="card-text d-flex flex-column">
+            <span><i class="fas asweome fa-envelope-open-text mr-3"></i>${
+              this.companies[i].address.zipcode
+            }</span>
+            <span><i class="fas asweome asweome-address fa-map-marker-alt mr-3"></i>${
+              this.companies[i].address.street
+            }</span>
+            <span><i class="fas asweome fa-city mr-3"></i>${
+              this.companies[i].address.city
+            }</span>
+            <span><i class="fas asweome fa-globe-americas mr-3"></i>${
+              this.companies[i].address.country
+            }</span>
+            </p>
+          </div>
+    
+          <div class="d-flex flex-column">
+            <div class="font-weight-bold card-subtitle">Social Urls</div>
+            <p class="card-text">
+            ${companies.renderSocialNetworks(this.companies[i].socialUrls)}
+            </p>
+        </div>
+        </div>
+         <div class="card-footer text-right card-buttons">
+            <button type="button" class="btn btn-outline-primary btn-sm edit" data-id=${
+              this.companies[i]._id
+            }><i class="fas fa-user-edit"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm delete" data-id=${
+              this.companies[i]._id
+            }><i class="far fa-trash-alt"></i></button>
+         </div>
+       </div>`;
     }
     mainContainerCompanies.empty().html(companyCard);
   };

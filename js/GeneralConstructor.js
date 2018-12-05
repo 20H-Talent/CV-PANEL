@@ -20,7 +20,7 @@ const GeneralConstructor = (function() {
           .length === 0
       ) {
         if (
-          constructorKey === "users-table" ||
+          (constructorKey === "users-table" && window.innerWidth > 868) ||
           constructorKey === "survey-creator"
         ) {
           targetContainer.css("overflow-y", "hidden");
